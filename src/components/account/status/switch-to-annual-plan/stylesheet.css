@@ -1,0 +1,172 @@
+.navbar {
+  box-shadow: none;
+}
+
+/* #account.switch-to-annual-plan, */
+#account .switch-to-annual-plan-container {
+  background: rgb(11, 23, 51);
+  background: linear-gradient(
+    180deg,
+    rgba(11, 23, 51, 1) 0%,
+    rgba(11, 37, 89, 1) 80%,
+    rgba(19, 79, 117, 1) 100%
+  );
+  height: 100vh;
+  width: 100vw;
+  font-family: futura-pt, sans-serif;
+  position: fixed;
+  top: 75px;
+  left: 0;
+}
+#account .switch-to-annual-plan-container::before {
+  content: "";
+  flex: 1;
+}
+#account .switch-to-annual-plan-container::after {
+  content: "";
+  flex: 3;
+}
+
+/* #account.switch-to-annual-plan h1, */
+#account .switch-to-annual-plan-container h1 {
+  color: #fff;
+  font-weight: 300;
+  font-size: 4rem;
+  line-height: 5rem;
+  letter-spacing: 0.5px;
+}
+
+/* #account.switch-to-annual-plan p, */
+#account .switch-to-annual-plan-container p {
+  color: #fff;
+  font-weight: 300;
+  font-size: 1.5rem;
+  line-height: 3rem;
+}
+
+/* #account .switch-to-annual-plan-container, */
+#account .switch-to-annual-plan-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+}
+
+#account .switch-to-annual-plan-container #billing-container {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  width: 40rem;
+}
+
+/* #account .switch-to-annual-plan-container #confirm-billing {
+  text-align: left;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+#account .switch-to-annual-plan-container #confirm-billing h4 {
+  font-size: 1.25rem;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+#account .switch-to-annual-plan-container #confirm-billing #billing-info {
+  background: #464646;
+  border-radius: 3px;
+  text-align: left;
+  padding: 1.5rem 2rem;
+  position: relative;
+  width: 40rem;
+}
+
+#account .switch-to-annual-plan-container #confirm-billing #billing-info a {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  color: #fff;
+  text-decoration: underline;
+}
+
+#account
+  .switch-to-annual-plan-container
+  #confirm-billing
+  #billing-info
+  .cc-number {
+  padding-bottom: 1rem;
+} */
+
+/* #account .switch-to-annual-plan-container button, */
+#account .switch-to-annual-plan-container button {
+  /* flex: 1 1 0px; */
+  width: 20rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  text-transform: initial;
+  font-size: 1.4rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.5px;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  background: #3a8788;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1),
+    inset 0px 4px 4px rgba(255, 255, 255, 0.09);
+}
+
+/* #account .switch-to-annual-plan-container button.keep-annual-plan, */
+#account .switch-to-annual-plan-container button.keep-annual-plan {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1),
+    inset 0px 4px 4px rgba(255, 255, 255, 0.09);
+}
+/* #account .switch-to-annual-plan-container button.switch-to-annual-plan, */
+#account .switch-to-annual-plan-container button.switch-to-annual-plan {
+  background: transparent;
+  border: 1px solid #fff;
+  box-sizing: border-box;
+  box-shadow: inset 0px 4px 4px rgba(255, 255, 255, 0.09);
+  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+#promocode-container {
+  width: 40rem;
+  margin-bottom: 15px;
+}
+/* #promocode-container label {
+  font-weight: 400;
+  display: block;
+}
+#promocode-container label a {
+  color: #fff;
+}
+#promocode-container label span {
+  font-size: 1rem;
+}
+#promocode-container #promocode-field {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+#promocode-container #promocode-field input {
+  width: 20rem;
+  border-radius: 3px;
+}
+#promocode-container #promocode-field .buttons button {
+  margin-left: 1rem;
+} */
+
+#account .switch-to-annual-plan-container .legal-notice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+}
+
+#account .switch-to-annual-plan-container .legal-notice p {
+  color: #b4b4b4;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  opacity: 0.8;
+  /* padding: 0 3rem; */
+}

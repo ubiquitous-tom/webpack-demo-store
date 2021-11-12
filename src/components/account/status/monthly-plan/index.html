@@ -1,0 +1,26 @@
+<div id="monthly-plan" class="row">
+  {{!log this level='error'}}
+  <div class="col-md-8">
+    <h1 class="formhead">Plans</h1>
+  </div>
+  <div class="col-md-8 banner">
+    <p>
+      Your Monthly Plan renews on {{ renewalDate }}. ({{ Customer.CurrSymbol
+      }}{{ Membership.SubscriptionAmount }}/month)
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="upgrade-to-annual">
+      <h2>Get 12 Months for the Price of 10</h2>
+      <p>
+        <sup class="symbol">{{ Customer.CurrSymbol }}</sup>
+        <span class="price">{{ annualStripPlan.SubscriptionAmount }}</span>
+        <sup>/</sup>
+        <sub class="period">yr.</sub>
+      </p>
+      <button type="submit" class="switch-to-annual">Upgrade to Annual</button>
+    </div>
+  </div>
+</div>

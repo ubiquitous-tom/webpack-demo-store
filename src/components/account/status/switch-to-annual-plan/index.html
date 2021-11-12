@@ -1,0 +1,32 @@
+<div class="switch-to-annual-plan-container">
+  {{log this level='error'}}
+  <div class="row">
+    <h1>Get 12 Months for the Price of 10</h1>
+    <p>
+      You will be billed {{ Customer.CurrSymbol }}{{
+      annualStripPlan.SubscriptionAmount }} for the Annual Plan on
+      08/25/2021.<br />
+      Cancel anytime.
+    </p>
+  </div>
+
+  <div id="billing-container">
+    <div id="confirm-billing"></div>
+
+    <div id="stripe-form"></div>
+
+    <div id="promocode-container"></div>
+
+    <button type="submit" class="confirm-upgrade">Confirm Upgrade</button>
+
+    <div class="legal-notice">
+      <p>
+        By clicking the “Confirm Upgrade” button above, you agree that you will
+        be charged $59.99 to your payment method on a recurring basis until you
+        cancel. Your membership will renew at the then current price. To cancel,
+        go to your Account and click “Cancel Membership” on the Membership tab.
+        There are no refunds or credits for partial or unused months.
+      </p>
+    </div>
+  </div>
+</div>

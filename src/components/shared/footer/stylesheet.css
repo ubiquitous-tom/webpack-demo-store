@@ -1,0 +1,25 @@
+/* FOOTER */
+footer {display: flex;flex-direction: column;padding: 20px 0;color: #fff;}
+/* Remove BS 3 clearfix hack */
+footer:after,
+footer:before {content: none !important;}
+footer .copyright,
+footer .terms-condition,
+footer .lang-select {padding: 5px 0;}
+footer .copyright {order: 3;}
+footer .terms-condition {order: 2;}
+footer .lang-select {order: 1;}
+footer p {color: white;margin:0;font-size: 14px;}
+#atvLocale {background: #fff;color: #555555;margin-left: 15px;border-radius: 4px;}
+footer ul {padding: 0;margin: 0;list-style: none;}
+footer li {padding: 5px 0;}
+footer a {color:white;font-size: 13px;font-weight: 300;}
+footer a:hover {color:#d3d2cf}
+
+@media all and (min-width: 992px) {
+  footer {flex-direction: row;justify-content: space-between;}
+  footer .copyright {order: 1;}
+  footer .terms-condition {order: 3;}
+  footer .lang-select {order: 2;}
+  footer li {display: inline-block;padding: 0;margin-right: 10px;}
+}

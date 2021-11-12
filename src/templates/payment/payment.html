@@ -1,0 +1,79 @@
+<h3 class="formhead"><atv:il8n var="CREDIT-CARD-INFO"/> <div class="help-form"><atv:il8n var="ALL-FIELDS-REQ"/></div></h3>
+
+<div class="control-group">
+  <label for="NameOnAccount" class="control-label"><atv:il8n var="NAME-ON-CARD"/><span class="req">*</span><span class="help-input"><atv:il8n var="ENTER-NAME"/></span>
+  </label>
+  <div class="controls">
+    <input type="text" placeholder=""  class="input-block-level required" name="NameOnAccount" id="billingFieldNameOnAccount" maxlength="30">
+    <span class="help-block hidden"></span>
+  </div>
+</div>
+
+
+<div class="control-group">
+  <label for="NumberType" class="control-label"><atv:il8n var="CARD-TYPE"/><span class="req">*</span></label>
+  <div id="billingFieldNumberType" class="controls cc-logos">
+    <label class="radio">
+      <input type="radio" name="NumberType" id="VISA" value="VISA" checked="">
+      <img src="/img/cc-visa.png" alt="Visa">
+    </label>
+    <label class="radio">
+      <input type="radio" name="NumberType" id="MASTER_CARD" value="MASTER_CARD">
+      <img src="/img/cc-mastercard.png" alt="MasterCard">
+    </label>
+    <label class="radio">
+      <input type="radio" name="NumberType" id="DISCOVER" value="DISCOVER">
+      <img src="/img/cc-discover.png" alt="Discover">
+    </label>
+    <label class="radio">
+      <input type="radio" name="NumberType" id="AMEX" value="AMEX">
+      <img src="/img/cc-ae.png" alt="American Express">
+    </label>
+  </div>
+  <span class="help-block hidden"></span>
+</div>
+
+
+<div class="control-group">
+  <label for="Number" class="control-label"><atv:il8n var="CREDIT-CARD-NUMBER"/><span class="req">*</span><span class="help-input"><atv:il8n var="WITHOUT-SPACE-HYPH"/>, e.g. 1234123412341234</span></label>
+  <div class="controls">
+    <input type="text" placeholder="" class="input-block-level required" name="Number" id="billingFieldNumber">
+    <span class="help-block hidden"></span>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="col-md-6">
+
+    <div class="control-group">
+      <label for="" class="control-label"><atv:il8n var="CARD-EXPIRATION"/><span class="req">*</span></label>
+      <div class="controls">
+        <select class="col-md-12 required" name="ExpirationMonth" id="billingFieldExpirationMonth">
+          <option value="">- <atv:il8n var="MONTH"/> -</option>
+          <\% _.each(payment.months, function(month) { %>
+          <option value="<\%= month.value %>"><\%= month.display %></option>
+          <\% }) %>
+        </select><br>
+        <select class="col-md-12 required" name="ExpirationYear" id="billingFieldExpirationYear">
+          <option value="">- <atv:il8n var="YEAR"/> -</option>
+          <\% _.each(payment.years, function(year) { %>
+          <option value="<\%= year.value %>"><\%= year.display %></option>
+          <\% }) %>
+        </select>
+        <span class="help-block hidden"></span>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label for="SecurityCode" class="control-label"><atv:il8n var="CARD-VERIFICATION-NUMBER"/><span class="req">*</span></label>
+      <div class="controls">
+        <input type="text" placeholder="" class="input-block-level required" name="SecurityCode" id="billingFieldSecurityCode" value="">
+        <span class="help-block hidden"></span>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-md-6">
+    <img src="img/verify-help.png" class="verify-help">
+  </div>
+</div>

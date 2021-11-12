@@ -1,0 +1,18 @@
+<div class="account-nav">
+  <ul class="nav nav-tabs nav-stacked">
+      <li id="accountStatusNav"><a href="#"><i class="icon-chevron-right"></i>  <atv:il8n var="ACCOUNT-STATUS"/></a></li>
+    <\% if (customer.webPaymentEdit) { %>
+      <li id="editEmailNav"><a href="#"><i class="icon-chevron-right"></i>  <atv:il8n var="CHANGE-EMAIL"/></a></li>
+    <\% } %>
+      <li id="editPasswordNav"><a href="#"><i class="icon-chevron-right"></i>  <atv:il8n var="CHANGE-PASSWORD"/></a></li>
+    <\% if (customer.webPaymentEdit) { %>
+      <\% if (customer.StripeEnabled) { %>
+        <li id="stunningNav"><a href="updatecard.html?stripe_id=<\%= customer.StripeCustomerID %>"><i class="icon-chevron-right"></i>  <atv:il8n var="UPDATE-BILLING-INFORMATION"/></a></li>
+      <\% } %>
+      <\% if (user.Subscription.Status !== 'CANCELLED') { %>
+        <li id="cancelMembershipNav"><a href="#"><i class="icon-chevron-right"></i>  <atv:il8n var="CANCEL-MEMBERSHIP"/></a></li>
+      <\% } %>
+      <li id="applyPromoCodeNav"><a href="#"><i class="icon-chevron-right"></i>  <atv:il8n var="REDEEM-GIFT"/></a></li>
+    <\% } %>
+  </ul>
+</div>

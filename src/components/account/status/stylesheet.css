@@ -1,0 +1,147 @@
+/* ACCOUNT TEMPLATE */
+.account-wrap {
+  float: none;
+  margin-bottom: 50px;
+}
+#account {
+  padding: 40px 0 60px;
+  background: #fff none repeat scroll 0 0;
+}
+#account h1 {
+  color: #0b1733;
+  font-family: futura-pt, sans-serif;
+  font-size: 1.8rem;
+  /* font-weight: 400; */
+  line-height: 3.7rem;
+  margin-bottom: 0;
+  /* margin-top: 15px; */
+}
+#account p {
+  color: #0b1733;
+  font-family: futura-pt, sans-serif;
+  font-size: 13.5px;
+  line-height: 23px;
+  margin-bottom: 15px;
+  margin-top: 5px;
+}
+#account input {
+  /*border: 1px solid #c0c0c0;*/
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  padding: 6px;
+  width: 100%;
+  -webkit-appearance: none;
+  border-radius: 0px;
+}
+#account .radio input[type="radio"],
+.radio-inline input[type="radio"],
+.checkbox input[type="checkbox"],
+.checkbox-inline input[type="checkbox"] {
+  margin-left: 55px;
+  position: absolute;
+  -webkit-appearance: checkbox;
+}
+#account button {
+  background: #0b98b8 none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 0;
+  color: #fff;
+  font-size: 10px;
+  /* font-weight: 600; */
+  letter-spacing: 0.08em;
+  margin: 5px auto 0;
+  padding: 9px 13px;
+  text-shadow: none;
+  text-transform: uppercase;
+}
+#account label {
+  /*color: #444444;*/
+  font-size: 12.5px;
+  /* font-weight: 400; */
+  margin-top: 10px;
+  text-align: left;
+}
+#account .formhead {
+  /* border-bottom: 1px solid #eee; */
+  color: #0b1733;
+  font-family: futura-pt, sans-serif;
+  font-weight: 300;
+  font-size: 13.5px;
+  /* margin-bottom: 15px; */
+  /* padding: 0 0 10px; */
+  position: relative;
+  /* text-align: left; */
+}
+
+.switch-to-monthly {
+  color: #615c5c;
+  font-size: 1.6rem;
+  line-height: 4rem;
+  text-decoration: underline !important;
+}
+
+/* ACORN REBRANDING 2019-08-15 */
+#account button {
+  background: #008989;
+}
+#account button:hover {
+  background: #0b1733;
+}
+
+@media (min-width: 375px) {
+  #account h1 {
+    font-size: 20px;
+    line-height: 37px;
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  /* ACCOUNT TEMPLATE */
+  .account-wrap {
+    float: right;
+    margin-bottom: 0px;
+  }
+  #account {
+    padding: 80px 0 100px;
+  }
+  #account h1 {
+    font-size: 3.25rem;
+    /* margin-bottom: 15px; */
+  }
+  #account p {
+    font-size: 1.6rem;
+    line-height: 2.9rem;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  #account label {
+    font-size: 14px;
+    margin-top: 15px;
+  }
+  #account button {
+    font-size: 11.5px;
+  }
+  #account .formhead {
+    /* border-bottom: 1px solid #d0d0d0; */
+    font-size: 3.25rem;
+    /* margin-bottom: 15px; */
+    /* padding: 0 0 6px; */
+    position: relative;
+    text-align: left;
+  }
+  #account .radio input[type="radio"],
+  .radio-inline input[type="radio"],
+  .checkbox input[type="checkbox"],
+  .checkbox-inline input[type="checkbox"] {
+    margin-left: 40px;
+    position: absolute;
+  }
+}
+
+@media all and (min-width: 950px) {
+  #account .tabs {
+    max-width: 285px;
+  }
+}

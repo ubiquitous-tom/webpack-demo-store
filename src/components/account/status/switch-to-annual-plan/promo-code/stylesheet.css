@@ -1,0 +1,23 @@
+#promocode-container label {
+  font-weight: 400;
+  display: block;
+}
+#promocode-container label a {
+  color: #fff;
+}
+#promocode-container label span {
+  font-size: 1rem;
+}
+#promocode-container #promocode-field {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+#promocode-container #promocode-field input {
+  width: 20rem;
+  border-radius: 3px;
+}
+#promocode-container #promocode-field .buttons button {
+  margin-left: 1rem;
+}

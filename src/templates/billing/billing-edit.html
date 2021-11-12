@@ -1,0 +1,35 @@
+<h1><atv:il8n var="EDIT-BILLING"/></h1>
+<p><atv:il8n var="PLEASE-NOTE"/></p>
+
+<h3 class="formhead"><atv:il8n var="BILLING-ADDRESS"/> <div class="help-form">* <atv:il8n var="INDICATE-REQUIRED-FIELDS"/></div></h3>
+
+<form id="billingInformationForm" class="form-billing-update form-processing">
+
+  <div id="billingAddress"></div>
+
+  <div id="paymentMethod"></div>
+
+  <div id="updateBillingAlert" class="alert" style="display: none"></div>
+
+  <p><button type="submit" id="updateBillingSubmit" class="btn btn-primary"><atv:il8n var="UPDATE-BILLING-INFORMATION"/></button></p>
+
+</form>
+
+<div id="updateBillingModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="updateBillingLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <span aria-hidden>&times;</span>
+        </button>
+        <h4 id="confirm-cancel-label" class="modal-title"><atv:il8n var="UPDATE-BILLING-INFORMATION"/></h4>
+      </div>
+      <div class="modal-body">
+        <p id="updateBillingStatus"></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary btn-confirmation" data-dismiss="modal"><atv:il8n var="OKAY"/></button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+.upgrade-to-annual {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(232.33deg, #0b2659 43.73%, #0b1733 87.54%);
+  border: 2px solid #0b2659;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.15);
+  color: #fff;
+  padding: 0 0 2rem;
+}
+
+.upgrade-to-annual h2 {
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: futura-pt, sans-serif;
+  font-size: 3.25rem;
+  line-height: 3.9rem;
+  font-weight: 300;
+}
+
+.upgrade-to-annual p span {
+  color: #fff;
+}
+
+.upgrade-to-annual sup {
+  color: #fff;
+  font-size: 3.3rem;
+  font-weight: 300;
+  top: -0.15em;
+  right: 0.1em;
+}
+
+.upgrade-to-annual p sup.symbol {
+  color: #fff;
+  font-size: 2.3rem;
+  line-height: 2rem;
+  font-weight: 500;
+  top: -0.8em;
+  right: -0.25em;
+}
+
+.upgrade-to-annual p span.price {
+  font-size: 5rem;
+  line-height: 2rem;
+  font-weight: 500;
+}
+
+.upgrade-to-annual p sub.period {
+  color: #fff;
+  font-size: 2.5rem;
+  line-height: 2rem;
+  font-weight: 500;
+  top: 0em;
+  right: 0.25em;
+}
+
+.upgrade-to-annual button {
+  text-transform: initial !important;
+  padding: 1.4rem 6rem !important;
+  font-size: 1.25rem !important;
+  font-weight: 500;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25) !important;
+}

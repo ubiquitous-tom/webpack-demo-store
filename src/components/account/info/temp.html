@@ -1,0 +1,29 @@
+<div class="row-fluid">
+  <div class="col-md-8">
+    <div class="field-wrap clearfix">
+      <div class="field-label pull-left">Name</div>
+      <div id="customerNameField" class="field-value pull-left"><%= customer.Name %></div>
+    </div>
+
+    <div class="field-wrap clearfix">
+      <div class="field-label pull-left">Email</div>
+      <div id="customerEmailField" class="field-value pull-left"><%= customer.Email %></div>
+    </div>
+
+    <div class="field-wrap clearfix">
+      <div class="field-label pull-left">Join Date</div>
+      <div id="customerJoinDateField" class="field-value pull-left"><%= customer.JoinDate %></div>
+    </div>
+
+    <% if (customer.AcornonlineID) { %>
+    <div class="field-wrap clearfix">
+      <div class="field-label pull-left">Free Shipping ID</div>
+      <div id="customerJoinDateField" class="field-value pull-left"><%= customer.AcornonlineID %></div>
+    </div>
+    <% } %>
+
+  </div>
+  <div class="col-md-4">
+    <!--<a href="/account.jsp" class="btn btn-block"><i class="icon-edit"></i> Edit Account</a>-->
+  </div>
+</div>

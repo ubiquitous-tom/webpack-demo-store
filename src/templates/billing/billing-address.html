@@ -1,0 +1,25 @@
+<div class="control-group">
+  <label for="name" class="control-label"><atv:il8n var="NAME"/><span class="req">*</span></label>
+  <div class="controls">
+    <input type="text" value="<\%= address.Name %>" class="input-block-level required" name="name" id="billingFieldName" maxlength="30">
+  </div>
+</div>
+
+<div class="control-group">
+  <label for="billingcountry" class="control-label"><atv:il8n var="COUNTRY"/><span class="req">*</span></label>
+  <div class="controls">
+    <select class="required col-md-12" name="billingFieldCountry" id="billingFieldCountry">
+      <option value="">- <atv:il8n var="COUNTRY"/> -</option>
+      <\% _.each(address.countries, function(country) { %>
+      <option value="<\%= country.abbr %>" <\%= country.abbr === address.Country ? 'selected' : '' %>><\%= country.name %></option>
+      <\% }) %>
+    </select>
+  </div>
+</div>
+
+<div class="control-group">
+  <label for="billingzip" class="control-label"><atv:il8n var="ZIP"/><span class="req">*</span></label>
+  <div class="controls">
+    <input type="text" value="<\%= address.PostalCode %>" class="input-block-level required" name="billingzip" id="billingFieldZip" maxlength="10">
+  </div>
+</div>

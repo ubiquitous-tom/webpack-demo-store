@@ -1,0 +1,52 @@
+<h1>Promo Code or Gift Code</h1>
+
+<form id="applyCodeForm" class="form-apply-code form-processing">
+  <div class="form-group">
+    <label for="EnterPromoCode" class="control-label">
+      Code
+      <span class="req">*</span>
+    </label>
+    <input
+      type="text"
+      class="form-control"
+      name="EnterPromoCode"
+      id="EnterPromoCode"
+      maxlength="30"
+      pattern="^[a-zA-Z0-9]+$"
+      required
+      value="30pctoff"
+    />
+  </div>
+
+  <div id="applyCodeAlert" class="alert" style="display: none"></div>
+
+  <button type="submit" class="btn btn-primary">APPLY CODE</button>
+</form>
+
+<div
+  id="applyCodeModal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="applyCodeLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden>&times;</span>
+        </button>
+        <h4 class="modal-title">APPLY CODE</h4>
+      </div>
+      <div class="modal-body">
+        <p id="applyCodeStatus"></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary btn-confirmation" data-dismiss="modal">
+          OKAY
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
