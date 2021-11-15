@@ -11,6 +11,7 @@ const logout = require('./logout')
 const plansChange = require('./plansChange')
 const plansAvailable = require('./plansAvailable')
 const stripeDefaultCard = require('./stripedefaultcard')
+const currentMembership = require('./currentmembership')
 
 
 router.get('/hello', function (req, res) {
@@ -23,6 +24,7 @@ router.get('/stripekey', stripeKey)
 router.get('/lang', lang)
 router.get('/acorn/plans/available', plansAvailable)
 router.get('/stripedefaultcard', stripeDefaultCard)
+router.get('/currentmembership', currentMembership)
 router.get('/logout', logout)
 
 router.post('/applypromo', applyPromo)

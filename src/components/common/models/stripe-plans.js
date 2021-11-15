@@ -119,7 +119,7 @@ class StripePlans extends Model {
     // console.log(stripePlan)
     const annualStripePlan = _.findWhere(stripePlan, type)
     // console.log(annualStripePlan)
-    this.set('annualStripPlan', annualStripePlan)
+    this.set('annualStripePlan', annualStripePlan)
   }
 
   getMonthlyStripePlan() {

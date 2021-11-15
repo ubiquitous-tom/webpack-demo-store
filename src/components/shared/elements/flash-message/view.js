@@ -23,7 +23,7 @@ class FlashMessage extends View {
       message: 'hello',
       type: 'bg-primary',
     })
-    this.dispatcher.bind('showFlashMessage', this.render, this)
+    this.dispatcher.once('showFlashMessage', this.render, this)
     // console.log(this.model.attributes)
   }
 

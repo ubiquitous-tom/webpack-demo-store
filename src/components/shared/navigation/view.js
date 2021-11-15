@@ -43,6 +43,12 @@ class Navigation extends View {
     // this.$el.html(this.template())
     // this.setActive(this.$el)
 
+    // A hack to get default navigation to work
+    if (!$('ul li').hasClass('active')) {
+      let hash = !_.isEmpty(window.location.hash) ? window.location.hash : '#accountStatus'
+      $(hash + 'Nav').addClass('active')
+    }
+
     return this
   }
 

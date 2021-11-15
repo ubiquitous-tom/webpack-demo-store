@@ -35,11 +35,11 @@ class SwitchToAnnualPlan extends View {
     console.log('SwitchToAnnualPlan intialize')
     // console.log(options.model)
     this.model = new SwitchToAnnualPlanModel(options.model.attributes)
-    this.confirmBilling = new ConfirmBilling({ parent: this.model })
-    this.promoCode = new PromoCode({ parent: this.model })
+    this.confirmBilling = new ConfirmBilling({ switchToAnnualPlanModel: this.model })
+    this.promoCode = new PromoCode({ switchToAnnualPlanModel: this.model })
     console.log(this)
-    // this.render()
-    this.listenTo(this.model, 'sync', this.render)
+    this.render()
+    // this.listenTo(this.model, 'sync', this.render)
   }
 
   render() {
@@ -47,12 +47,14 @@ class SwitchToAnnualPlan extends View {
     // console.log(this.$el[0])
     // console.log(this.template())
     const template = Handlebars.compile(this.template())
-    // console.log(this.model.attributes)
+    console.log(this.model.attributes)
     const html = template(this.model.attributes)
+    // console.log(html)
     // this.$el.html(this.template())
+    // console.log(this.template())
     this.$el.append(html)
 
-    this.confirmBilling.render()
+    // this.confirmBilling.render()
     this.promoCode.render()
     // this.addBackground()
     this.hideFooter()

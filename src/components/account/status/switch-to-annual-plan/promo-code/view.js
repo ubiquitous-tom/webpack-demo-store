@@ -17,15 +17,17 @@ class PromoCode extends View {
   get events() {
     return {
       'click a.promocode-toggle': 'promocodeToggle',
-      'click button[type="reset"]': 'reset',
-      'click button[type="submit"]': 'submit',
+      'click #promocode-field button[type="reset"]': 'reset',
+      'click #promocode-field button[type="submit"]': 'submit',
     }
   }
 
   initialize(options) {
     console.log('Promocode initialize')
     // console.log(this, options.parent)
-    this.model = options.parent
+    this.model = options.switchToAnnualPlanModel
+    // this.render()
+    // this.listenTo(this.model, 'change', this.render)
   }
 
   render() {
@@ -34,13 +36,14 @@ class PromoCode extends View {
     // console.log(this.$el.find('.switch-to-annual-plan-container')[0])
     // console.log(this.$el.find('#promocode-container')[0])
     const html = this.template(this.model.attributes)
-    console.log(html)
+    // console.log(html)
     this.$el.find('#promocode-container').append(html)
+    // this.$el.html(html)
   }
 
   promocodeToggle(e) {
     e.preventDefault()
-    console.log('toggle')
+    // console.log('toggle')
     // console.log(this.$el[0])
     this.$el.find('#promocode-field').slideToggle()
     this.$el.find('.promocode-toggle span').toggleClass('glyphicon-menu-down').toggleClass('glyphicon-menu-right');

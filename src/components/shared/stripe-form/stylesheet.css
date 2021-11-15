@@ -7,12 +7,12 @@
   width: 40rem;
 }
 
-#account .switch-to-annual-plan-container #stripe-form .form-group {
+#account .switch-to-annual-plan-container #stripe-form {
   margin: 0 0 2rem;
   font-size: 1.25rem;
   font-weight: 400;
 }
-#account .switch-to-annual-plan-container #stripe-form .form-group label {
+#account .switch-to-annual-plan-container #stripe-form label {
   display: block;
   font-size: 1.25rem;
   font-weight: 400;
@@ -20,16 +20,12 @@
   text-align: left;
 }
 
-#account .switch-to-annual-plan-container #stripe-form .form-group .controls {
-  margin-top: 0.5rem;
-}
-
 #account .switch-to-annual-plan-container #stripe-form .card-field {
   /* width: 40rem; */
   height: 3.3rem;
   background: #fff;
   border-radius: 3px;
-  padding: 0 0.5rem;
+  padding: 0.7rem 0.5rem;
 }
 
 #account .switch-to-annual-plan-container #stripe-form .card-field input {

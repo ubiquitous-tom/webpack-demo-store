@@ -28,17 +28,14 @@ import Workspace from 'routers/router'
 
 // new ATVLocale()
 // new InitializeApp()
-new ATVModel()
-new Workspace()
 
 $(function () {
+  new ATVModel()
+  new Workspace()
   console.log('main entry')
-  const header = new Header()
-  // header.render()
-  const footer = new Footer()
-  // footer.render()
   const navigation = new Navigation()
-  // navigation.render()
+  const header = new Header()
+  const footer = new Footer()
+  Backbone.history.start()
 })
 
-Backbone.history.start()
