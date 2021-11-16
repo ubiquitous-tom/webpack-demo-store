@@ -5,42 +5,31 @@ import ATVModel from 'common/model'
 
 class MonthlyPlanModel extends ATVModel {
 
-  // get defaults() {
-  //   return {
-  //     localStorageIDs: [
-  //       'atv-stripeplans',
-  //       'atv-initializeapp',
-  //       'atv-plans-available',
-  //     ],
-  //   }
-  // }
-
-  get url() {
-    console.log('MonthlyPlanModel getStorageContent')
-    const customerID = this.get('Customer').StripeCustomerID
-    console.log(customerID)
-    const url = 'https://api.stripe.com/v1/customers/' + customerID
-    return url
+  get defaults() {
+    return {
+      localStorageIDs: [
+        'atv-stripeplans',
+        // 'atv-initializeapp',
+        // 'atv-plans-available',
+      ],
+    }
   }
 
   initialize() {
     console.log('MonthlyPlanModel initialize')
     console.log(this)
-    // console.log(this, options)
-    // this.set(options.accountStatus)
-    // console.log(this, options)
-    // _.each(this.get('localStorageIDs'), (localStorageID, key, collection) => {
-    //   this.localStorage = new LocalStorage(localStorageID)
-    //   const store = getLocalStorage(this)
-    //   // console.log(store)
-    //   if (!_.isEmpty(store.records)) {
-    //     const data = this.getStorageContent(localStorageID)
-    //     // console.log(data)
-    //     this.set(data)
-    //   } else {
-    //     // go back to signin
-    //   }
-    // })
+    _.each(this.get('localStorageIDs'), (localStorageID, key, collection) => {
+      this.localStorage = new LocalStorage(localStorageID)
+      const store = getLocalStorage(this)
+      // console.log(store)
+      if (!_.isEmpty(store.records)) {
+        const data = this.getStorageContent(localStorageID)
+        // console.log(data)
+        this.set(data)
+      } else {
+        // go back to signin
+      }
+    })
 
     // this.getMonthlyToAnnualUpgradeInfo()
     this.getRenewalDate()
@@ -83,9 +72,8 @@ class MonthlyPlanModel extends ATVModel {
 
   getRenewalDate() {
     console.log('MonthlyPlan getRenewal')
-    // console.log(this)
-    let date = new Date(this.get('Membership').NextBillingDateAsLong)
-    let renewalDate = this.formatDate(date)
+    const date = new Date(this.get('Membership').NextBillingDateAsLong)
+    const renewalDate = this.formatDate(date)
     // console.log(renewalDate)
     this.set('renewalDate', renewalDate)
   }

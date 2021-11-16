@@ -12,8 +12,12 @@ import AccountStatusModel from './model'
 
 class AccountStatus extends View {
 
+  get el() {
+    return 'section'
+  }
+
   get template() {
-    console.log('AccountStatus template')
+    // console.log('AccountStatus template')
     return _.template(template)
   }
 
@@ -24,22 +28,26 @@ class AccountStatus extends View {
     }
   }
 
-  initialize() {
+  initialize(options) {
     console.log('AccountStatus initialize')
-    this.currentPlan = 'annual'
-    // this.currentPlan = 'monthly'
-    this.model = new AccountStatusModel()
+    // console.log(this.model.attributes)
+    this.model = new AccountStatusModel(this.model.attributes)
+    console.log(this.model.get('Subscription'))
     this.subscription = this.model.get('Subscription')
     // this.membership = this.model.get('Membership')
     // this.getCurrentPlan()
-    console.log(this.subscription)
-    // this.listenTo(this, 'change update', this.getCurrentTemplate)
+    // console.log(this.subscription)
+    // this.listenTo(this.model, 'change', this.getCurrentTemplate())
+    this.listenTo(this.model, 'sync', this.render)
+    // this.getCurrentTemplate()
+    // this.render()
   }
 
   render() {
     console.log('AccountStatus render')
-    this.$el.html(this.template())
-    console.log(this.model.attributes)
+    // console.log(this.$el[0], this.$el.find('#accountStatusView')[0])
+    this.$el.find('#accountStatusView').html(this.template())
+    // console.log(this.model.attributes)
     this.getCurrentTemplate()
   }
 

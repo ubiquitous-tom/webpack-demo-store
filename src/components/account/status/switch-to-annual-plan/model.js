@@ -2,44 +2,42 @@ import { Model } from 'backbone'
 import _ from 'underscore'
 import Dispatcher from 'common/dispatcher'
 import FlashMessage from 'shared/elements/flash-message/view'
+import PlansChange from 'common/models/plans-change'
 
 class SwitchToAnnualPlanModel extends Model {
 
-  get url() {
-    return '/currentmembership'
-  }
 
-  initialize(options) {
+  initialize() {
     console.log('SwitchToAnnualPlanModel initialize')
-    // console.log(this, options)
+    console.log(this)
 
-    this.set('service', 'acorn')
+    // this.set('service', 'acorn')
     this.dispatcher = new Dispatcher()
     this.flashMessage = new FlashMessage({ dispatcher: this.dispatcher })
 
-    const params = {
-      CustomerID: this.get('Customer').CustomerID,
-    }
-    console.log(this, params, $.param(params))
-    this.fetch({
-      dataType: 'json',
-      ajaxSync: true,
-      wait: true,
-      data: $.param(params)
-    })
+    // const params = {
+    //   CustomerID: this.get('Customer').CustomerID,
+    // }
+    // console.log(this, params, $.param(params))
+    // this.fetch({
+    //   dataType: 'json',
+    //   ajaxSync: true,
+    //   wait: true,
+    //   data: $.param(params)
+    // })
     this.getMonthlyToAnnualUpgradeInfo()
   }
 
-  parse(resp) {
-    console.log('SwitchToAnnualPlanModel parse')
-    console.log(resp)
-    if (!_.isEmpty(resp)) {
-      this.set('currentMembership', resp)
-    }
-    console.log(this.get('currentMembership'))
+  // parse(resp) {
+  //   console.log('SwitchToAnnualPlanModel parse')
+  //   console.log(resp)
+  //   if (!_.isEmpty(resp)) {
+  //     this.set('currentMembership', resp)
+  //   }
+  //   console.log(this.get('currentMembership'))
 
-    return resp
-  }
+  //   return resp
+  // }
 
   getMonthlyToAnnualUpgradeInfo() {
     console.log('SwitchToAnnualPlanModel getMonthlyToAnnualUpgrade')
@@ -74,35 +72,38 @@ class SwitchToAnnualPlanModel extends Model {
   confirmUpgrade() {
     console.log('SwitchToAnnualPlanModel confirmUpgrade')
     this.loadingStart()
+    const plansChange = new PlansChange()
     const attributes = {
-      service: 'acorn',
       from: this.get('currentUpgradePlan').from_stripe_plan_id,
       to: this.get('currentUpgradePlan').to_stripe_plan_id,
       promocode: this.has('promoCode') ? this.get('promoCode').promocode : '',
-      StripeMembershipID: this.get('currentMembership').StripeMembershipID,
-      CustomerID: this.get('currentMembership').CustomerID,
-      StripeCardToken: this.get('currentBillingInfo').StripeCustomerID,
     }
     const options = {
       dataType: 'json',
       ajaxSync: true,
+      method: 'POST',
       wait: true,
+      headers: {
+        StripeMembershipID: this.get('currentMembership').StripeMembershipID,
+        CustomerID: this.get('currentMembership').CustomerID,
+        StripeCardToken: this.get('currentBillingInfo').StripeCustomerID,
+      },
       success: this.success,
       error: this.error,
     }
     console.log(attributes, options)
-    // this.save(attributes, options)
-    console.log(this)
-    this.success()
+    plansChange.save(attributes, options)
+    // console.log(this)
+    // this.success()
   }
 
   // zeroPad(num, places) {
   //   return String(num).padStart(places, '0')
   // }
 
-  success() {
+  success(model, resp, options) {
     console.log('SwitchToAnnualPlanModel success')
-    // console.log(model, resp, options)
+    console.log(model, resp, options)
     const annualPricing = this.get('annualStripePlan').CurrSymbol + this.get('annualStripePlan').SubscriptionAmount
     let perMonthPricing = (Math.floor((this.get('annualStripePlan').SubscriptionAmount / 12) * 100) / 100).toFixed(2)
     perMonthPricing = this.get('annualStripePlan').CurrSymbol + perMonthPricing

@@ -1,35 +1,41 @@
 <div class="row-fluid">
+  {{log this level='error'}}
   <div class="col-md-8">
-    <% if (paymentMethod.Canceled) { %>
+    {{#if PaymentMethod.Canceled}}
+
     <div class="field-wrap clearfix">
-      <div class="field-label pull-left"><atv:il8n var="PAYMENT-METHOD"/></div>
-      <div id="paymentMethodField" class="field-value pull-left"><atv:il8n var="CARD-NOT-CHARGED"/></div>
+      <div class="field-label pull-left">PAYMENT-METHOD</div>
+      <div id="paymentMethodField" class="field-value pull-left">
+        CARD-NOT-CHARGED
+      </div>
     </div>
-    <% } else { %>
 
-      <div style="display:none"><% paymentMethod.Store = paymentMethod.Store%></div>
+    {{else}}
 
-      <% if (paymentMethod.Store && paymentMethod.Store == 'RECORDEDBOOKS') { %>
-        <p><atv:il8n var="FREE-SEVEN-DAYS"/></p>
-        <p><atv:il8n var="SIGNUP-FULL-MEMBERSHIP"/></p>
-        <!-- form action="//store-<%= window.location.href.indexOf('dev') > -1  ? 'dev3.' : (window.location.href.indexOf('qa') > -1  ? 'qa.' : '') %>acorn.tv/#membership">
+    <div style="display: none">
+      {{ PaymentMethod.Store = PaymentMethod.Store }}
+    </div>
+
+    {{#if PaymentMethod.Store}}>
+
+    <p>FREE-SEVEN-DAYS</p>
+    <p>SIGNUP-FULL-MEMBERSHIP</p>
+    <!--form action="//store-{{ window.location.href.indexOf('dev') > -1  ? 'dev3.' : (window.location.href.indexOf('qa') > -1  ? 'qa.' : '')}}acorn.tv/#membership">
           <p style="text-align:center;margin-top:2em">
-            <button type="submit" class="btn btn-primary"><atv:il8n var="SIGN-UP"/></button>
+            <button type="submit" class="btn btn-primary">SIGN-UP</button>
           </p>
-        </form -->
-      <% } else { %>
+        </!--form>-->
+    {{else}} {{#if PaymentMethod.webPaymentEdit}}
 
-        <% if (paymentMethod && !paymentMethod.webPaymentEdit) { %>
-        <div class="field-wrap clearfix">
-          <div class="field-label pull-left">Payment Method</div>
-          <div id="paymentMethodField" class="field-value pull-left">
-            <atv:il8n var="FREE-SEVEN-DAYS-DEVICE"/> <atv:il8n var="PLEASE-LOG-IN"/> <%= paymentMethod.Device %> <atv:il8n var="MANAGE-BILLING"/>
-          </div>
-        </div>
-        <% } %>
+    <div class="field-wrap clearfix">
+      <div class="field-label pull-left">Payment Method</div>
+      <div id="paymentMethodField" class="field-value pull-left">
+        <atv:il8n var="FREE-SEVEN-DAYS-DEVICE" />
+        <atv:il8n var="PLEASE-LOG-IN" /> {{ PaymentMethod.Device }}
+        <atv:il8n var="MANAGE-BILLING" />
+      </div>
+    </div>
 
-      <% } %>
-
-    <% } %>
+    {{/if}} {{/if}} {{/if}}
   </div>
 </div>

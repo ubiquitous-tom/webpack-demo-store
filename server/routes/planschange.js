@@ -4,8 +4,8 @@ const plansChange = function (req, res) {
   // const cookie = req.params.sessionID
   console.log('Express Router plansChange')
   // console.log(req.params)
-  // console.log(req)
-  // console.log(res)
+  console.log(req.headers)
+  // console.log(res.headers)
 
   const atvSessionCookie = req.cookies['ATVSessionCookie']
   console.log('Express Router plansChange ATVSessionCookie', atvSessionCookie);
@@ -18,11 +18,9 @@ const plansChange = function (req, res) {
     headers: {
       // 'Cookie': `ATVSessionCookie=${atvSessionCookie}`
       'Content-Type': 'application/json',
-      'to': '4b8cc7be-a4a8-11e8-bf79-0a1697e042ca',
-      'from': '4b7c3f49-a4a8-11e8-bf79-0a1697e042ca',
-      'StripeMembershipID': 'sub_JjHoMLRyjyiDAn',
-      'CustomerID': 'acorn-cus_KOTPnIAZdNqTst',
-      'StripeCardToken': '',
+      'StripeMembershipID': req.headers['stripemembershipid'],
+      'CustomerID': req.headers['customerid'],
+      'StripeCardToken': req.headers['stripecardtoken'],
     },
   }
 

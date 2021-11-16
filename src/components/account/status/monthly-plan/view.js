@@ -10,6 +10,10 @@ import SwitchToAnnualPlan from '../switch-to-annual-plan'
 
 class MonthlyPlan extends View {
 
+  get el() {
+    return 'section'
+  }
+
   get template() {
     return _.template(template)
   }
@@ -20,9 +24,9 @@ class MonthlyPlan extends View {
     }
   }
 
-  initialize() {
+  initialize(options) {
     console.log('MonthlyPlan initialize')
-    this.setElement('section')
+    console.log(this, options)
     // this.model = new AccountStatusModel()
     this.model = new MonthlyPlanModel(this.model.attributes)
     // this.getRenewalDate()
@@ -34,28 +38,24 @@ class MonthlyPlan extends View {
     console.log('MonthlyPlan render')
     const template = Handlebars.compile(this.template())
     // console.log(template)
-    const html = template(this.model.attributes)
-    // console.log(html)
+    const data = {
+      renewalDate: this.model.get('renewalDate'),
+      currSymbol: this.model.get('Customer').CurrSymbol,
+      subscriptionAmount: this.model.get('Membership').SubscriptionAmount,
+      annualSubscriptionAmount: this.model.get('annualStripePlan').SubscriptionAmount,
+    }
+    const html = template(data)
     this.$el.find('.current-plan').html(html)
     // this.$el.html(this.template)
 
     return this
   }
 
-  getRenewalDate() {
-    console.log('MonthlyPlan getRenewal')
-    // console.log(this)
-    let date = new Date(this.model.get('Membership').NextBillingDateAsLong)
-    let renewalDate = this.formatDate(date)
-    // console.log(renewalDate)
-    this.model.set('renewalDate', renewalDate)
-  }
-
   switchToAnnual(e) {
     e.preventDefault()
     console.log('switch to annual plan')
     // console.log(this.switchToAnnualPlan)
-    this.switchToAnnualPlan = new SwitchToAnnualPlan({ model: this.model })
+    this.switchToAnnualPlan = new SwitchToAnnualPlan({ monthlyPlan: this.model })
     // this.switchToAnnualPlan.render()
   }
 }

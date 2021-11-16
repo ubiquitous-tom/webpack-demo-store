@@ -26,10 +26,11 @@ class ConfirmBilling extends View {
   initialize(options) {
     console.log('ConfirmBilling initialize')
     console.log(this, options.switchToAnnualPlanModel)
+    this.options = options
     // this.model = options.switchToAnnualPlanModel
     // const stripeCustomerID = options.switchToAnnualPlanModel.get('Customer').StripeCustomerID
     // this.model = new ConfirmBillingModel({ stripeCustomerID: stripeCustomerID })
-    this.model = new ConfirmBillingModel({ switchToAnnualPlanModel: options.switchToAnnualPlanModel })
+    this.model = new ConfirmBillingModel(options.switchToAnnualPlanModel.attributes)
     console.log(this.model)
 
     // this.stripeForm = new StripeForm({ parentView: this })
@@ -46,38 +47,21 @@ class ConfirmBilling extends View {
     // console.log(this.model.attributes)
     // console.log(this.model.get('stripeCardInfo'))
 
-    const newCurrentBillingInfo = this.model.get('currentBillingInfo')
-    console.log(this, this.model.get('currentBillingInfo'))
-
+    this.getCurrentBillingInfo()
     if (this.model.has('newStripeCardInfo')) {
       this.model.updateCurrentBillingInfo()
     }
 
-    const ccLast4 = this.model.has('newStripeCardInfo')
-      ? this.model.get('newStripeCardInfo').last4
-      : this.model.get('stripeCardInfo').last4
-    const ccNameOnCard = this.model.has('newStripeCardInfo')
-      ? this.model.get('newStripeCardInfo').name
-      : this.model.get('stripeCardInfo').name
-    const ccExpiration = this.model.get('fullCardExpiry')
-
-
-
-    console.log(this.model)
-    const cardInfo = {
-      ccLast4: ccLast4,
-      ccNameOnCard: ccNameOnCard,
-      ccExpiration: ccExpiration,
-    }
-    console.log(cardInfo)
-    const html = this.template(cardInfo)
+    const data = this.getTemplateData()
+    console.log(data)
+    const html = this.template(data)
     // console.log(html)
-
     this.$el.find('#confirm-billing').empty().append(html)
     // this.$el.html(html)
   }
 
   editCreditCard(e) {
+    console.log('ConfirmBilling editCreditCard')
     e.preventDefault()
     // console.log(this.$el[0])
     // console.log(this.$el.find('#confirm-billing')[0])
@@ -86,21 +70,33 @@ class ConfirmBilling extends View {
     this.stripeForm.render()
   }
 
-  // getCurrentBillingInfo() {
-  //   const currentBillingInfo = {
-  //     name: options.switchToAnnualPlanModel.get('Customer').Name,
-  //     // email: options.switchToAnnualPlanModel.get('Customer').Email,
-  //     // last4: ...
-  //     zipcode: options.switchToAnnualPlanModel.get('BillingAddress').PostalCode,
-  //     country: options.switchToAnnualPlanModel.get('BillingAddress').Country,
-  //     StripeCustomerID: options.switchToAnnualPlanModel.get('Customer').StripeCustomerID
-  //   }
-  //   this.model.set('currentBillingInfo', currentBillingInfo)
-  // }
+  getCurrentBillingInfo() {
+    console.log('ConfirmBilling getCurrentBillingInfo')
+    const currentBillingInfo = this.model.get('currentBillingInfo')
+    // console.log(this, currentBillingInfo)
+    this.options.switchToAnnualPlanModel.set('currentBillingInfo', currentBillingInfo)
+  }
 
-  // updateCurrentBillingInfo() {
+  updateCurrentBillingInfo() {
+    console.log('ConfirmBilling updateCurrentBillingInfo')
+  }
 
-  // }
+  getTemplateData() {
+    console.log('ConfirmBilling getTemplateData')
+    const ccLast4 = this.model.has('newStripeCardInfo')
+      ? this.model.get('newStripeCardInfo').last4
+      : this.model.get('stripeCardInfo').last4
+    const ccNameOnCard = this.model.has('newStripeCardInfo')
+      ? this.model.get('newStripeCardInfo').name
+      : this.model.get('stripeCardInfo').name
+    const ccExpiration = this.model.get('fullCardExpiry')
+    // console.log(this.model)
+    return {
+      ccLast4: ccLast4,
+      ccNameOnCard: ccNameOnCard,
+      ccExpiration: ccExpiration,
+    }
+  }
 }
 
 export default ConfirmBilling

@@ -15,10 +15,6 @@ class SwitchToAnnualPlan extends View {
     return '#account'
   }
 
-  // get id() {
-  //   return 'switch-to-annual-plan'
-  // }
-
   get template() {
     return _.template(template)
   }
@@ -33,8 +29,8 @@ class SwitchToAnnualPlan extends View {
 
   initialize(options) {
     console.log('SwitchToAnnualPlan intialize')
-    // console.log(options.model)
-    this.model = new SwitchToAnnualPlanModel(options.model.attributes)
+    // console.log(options.monthlyPlan)
+    this.model = new SwitchToAnnualPlanModel(options.monthlyPlan.attributes)
     this.confirmBilling = new ConfirmBilling({ switchToAnnualPlanModel: this.model })
     this.promoCode = new PromoCode({ switchToAnnualPlanModel: this.model })
     console.log(this)
@@ -47,7 +43,7 @@ class SwitchToAnnualPlan extends View {
     // console.log(this.$el[0])
     // console.log(this.template())
     const template = Handlebars.compile(this.template())
-    console.log(this.model.attributes)
+    // console.log(this.model.attributes)
     const html = template(this.model.attributes)
     // console.log(html)
     // this.$el.html(this.template())

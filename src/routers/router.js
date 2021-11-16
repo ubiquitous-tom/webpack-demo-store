@@ -57,7 +57,7 @@ class Workspace extends Router {
   accountStatus() {
     console.log('Router loads accountStatus')
     const accountHome = new AccountHome()
-    accountHome.render()
+    // accountHome.render()
   }
 
   logout() {

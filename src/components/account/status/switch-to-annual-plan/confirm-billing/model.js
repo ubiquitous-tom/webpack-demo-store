@@ -7,23 +7,18 @@ class ConfirmBillingModel extends Model {
     return '/stripedefaultcard?country=US'
   }
 
-  initialize(options) {
+  initialize() {
     console.log('ConfirmBillingModel initialize')
-    // // console.log(this)
-    // // console.log(options)
-    // console.log(options.parentModel)
-    // // this.model = options.parentModel
-    // this.model = options.parentModel
+    console.log(this)
+
+
     // console.log(this.model)
     // const stripeCustomerID = this.model.get('Customer').StripeCustomerID
 
     // const stripeCustomerID = options.stripeCustomerID
-    console.log(options)
-    this.switchToAnnualPlanModel = options.switchToAnnualPlanModel
-    console.log(this.switchToAnnualPlanModel)
     this.getCurrentBillingInfo()
 
-    const stripeCustomerID = this.switchToAnnualPlanModel.get('Customer').StripeCustomerID
+    const stripeCustomerID = this.get('Customer').StripeCustomerID
     console.log(stripeCustomerID)
     this.fetch({
       ajaxSync: true,
@@ -63,15 +58,15 @@ class ConfirmBillingModel extends Model {
   getCurrentBillingInfo() {
     console.log('ConfirmBillingModel getCurrentBillingInfo')
     const currentBillingInfo = {
-      name: this.switchToAnnualPlanModel.get('Customer').Name,
-      // email: this.switchToAnnualPlanModel.get('Customer').Email,
+      name: this.get('Customer').Name,
+      // email: this.get('Customer').Email,
       // last4: ...
-      zipcode: this.switchToAnnualPlanModel.get('BillingAddress').PostalCode,
-      country: this.switchToAnnualPlanModel.get('BillingAddress').Country,
-      StripeCustomerID: this.switchToAnnualPlanModel.get('Customer').StripeCustomerID
+      zipcode: this.get('BillingAddress').PostalCode,
+      country: this.get('BillingAddress').Country,
+      StripeCustomerID: this.get('Customer').StripeCustomerID
     }
     console.log(currentBillingInfo)
-    this.switchToAnnualPlanModel.set('currentBillingInfo', currentBillingInfo)
+    this.set('currentBillingInfo', currentBillingInfo)
   }
 
   updateCurrentBillingInfo() {
@@ -84,7 +79,7 @@ class ConfirmBillingModel extends Model {
       country: this.get('newStripeCardInfo').country,
       stripeCustomerID: this.get('newStripeCardInfo').token
     }
-    this.switchToAnnualPlanModel.set('currentBillingInfo', currentBillingInfo)
+    this.set('currentBillingInfo', currentBillingInfo)
   }
 }
 

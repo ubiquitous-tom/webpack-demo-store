@@ -7,6 +7,7 @@ import InitializeApp from './models/initializedapp'
 import PlansAvailable from './models/plans-available'
 import StripeKey from './models/stripe-key'
 import StripePlans from './models/stripe-plans'
+import CurrentMembership from './models/currentmembership'
 
 class ATVModel extends Model {
 
@@ -23,9 +24,11 @@ class ATVModel extends Model {
     this.plansAvailable = new PlansAvailable()
     this.stripePlans = new StripePlans()
     this.initializeApp = new InitializeApp()
+    this.currentMembership = new CurrentMembership(this.initializeApp.attributes)
   }
 
   getStorageContent(localStorageID) {
+    console.log('ATVModel getStorageContent')
     this.localStorageID = _.isEmpty(localStorageID) ? this.get('localStorageID') : localStorageID
     const id = this.localStorage._getItem(this.localStorageID)
     // console.log(id)
