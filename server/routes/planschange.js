@@ -11,9 +11,10 @@ const plansChange = function (req, res) {
   console.log('Express Router plansChange ATVSessionCookie', atvSessionCookie);
 
   const postData = JSON.stringify(req.body)
+  const queryString = new URLSearchParams(req.body).toString()
   const options = {
     host: 'account-dev3.acorn.tv',
-    path: '/acorn/plans/change',
+    path: `/acorn/plans/change?${queryString}`,
     method: 'POST',
     headers: {
       // 'Cookie': `ATVSessionCookie=${atvSessionCookie}`
@@ -24,7 +25,7 @@ const plansChange = function (req, res) {
     },
   }
 
-  console.log(postData)
+  console.log(queryString, postData)
   console.log(options)
 
   let httpsReq = https.request(options, (resp) => {
@@ -71,7 +72,7 @@ const plansChange = function (req, res) {
     res.status(statusCode).send(e.message)
   })
 
-  httpsReq.write(postData)
+  // httpsReq.write(postData)
   httpsReq.end()
 }
 

@@ -15,25 +15,38 @@ class AccountHomeModel extends ATVModel {
     return '/currentmembership'
   }
 
-  initialize() {
+  // preinitialize(attributes) {
+  //   console.log('AccountHomeModel preinitialize')
+  //   console.log(this, attributes)
+  // }
+
+  initialize(attributes) {
     console.log('AccountHomeModel initialize')
-    console.log(this.get('localStorageID'))
-    this.localStorage = new LocalStorage(this.get('localStorageID'))
-    console.log(this)
-    const storage = getLocalStorage(this)
-    if (!_.isEmpty(storage.records)) {
-      console.log('AccountHomeModel initialize NOT isEmpty')
-      const data = this.getStorageContent(this.get('localStorageID'))
-      this.set(data)
-      console.log(this)
-    } else {
-      // got back to login
-    }
+    // console.log(this.get('localStorageID'))
+    // this.localStorage = new LocalStorage(this.get('localStorageID'))
+    console.log(this, attributes)
+    // const storage = getLocalStorage(this)
+    // if (!_.isEmpty(storage.records)) {
+    //   console.log('AccountHomeModel initialize NOT isEmpty')
+    //   const data = this.getStorageContent(this.get('localStorageID'))
+    //   this.set(data)
+    //   console.log(this)
+    // } else {
+    //   // got back to login
+    // }
+    // this.on('change', function (stuff) {
+    //   console.log(stuff)
+    //   debugger
+    // })
+    // this.on('sync', function (stuff) {
+    //   console.log(stuff)
+    //   debugger
+    // })
 
     const params = {
       CustomerID: this.get('Customer').CustomerID,
     }
-    console.log(this, params, $.param(params))
+    // console.log(this, params, $.param(params))
     this.fetch({
       dataType: 'json',
       ajaxSync: true,

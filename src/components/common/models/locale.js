@@ -3,8 +3,9 @@ import _ from 'underscore'
 import docCookies from 'doc-cookies'
 import { LocalStorage } from 'backbone.localstorage'
 import { getLocalStorage } from 'backbone.localstorage/src/utils'
+import ATVModel from 'common/model'
 
-class ATVLocale extends Model {
+class ATVLocale extends ATVModel {
 
   get defaults() {
     return {
@@ -26,11 +27,13 @@ class ATVLocale extends Model {
     const storage = getLocalStorage(this)
     // console.log(storage)
     if (_.isEmpty(storage.records)) {
+      console.log('ATVLocale initialize fetch')
       this.fetch({
         ajaxSync: true
       })
     } else {
-      this.updateModel()
+      console.log('ATVLocale initialize updateModel')
+      this.updateModel(this.get('localStorageID'), this)
     }
     this.getLocale()
   }
@@ -39,7 +42,7 @@ class ATVLocale extends Model {
     console.log('ATVLocale Model parse')
     console.log(response)
     if (!_.isEmpty(this.localStorage.findAll())) {
-      this.getStorageContent()
+      this.getStorageContent(this.get('localStorageID'))
     } else {
       if (!_.isEmpty(response[0])) {
         console.log('ATVLocale Model parse noEmpty')
@@ -91,25 +94,25 @@ class ATVLocale extends Model {
     // console.log(this.attributes)
   }
 
-  getStorageContent() {
-    const id = this.localStorage._getItem(this.get('localStorageID'))
-    // console.log(id)
-    const name = this.localStorage._itemName(id)
-    // console.log(name)
-    const item = this.localStorage._getItem(name)
-    // console.log(item)
-    const storage = this.localStorage.serializer.deserialize(item)
-    // console.log(storage)
+  // getStorageContent() {
+  //   const id = this.localStorage._getItem(this.get('localStorageID'))
+  //   // console.log(id)
+  //   const name = this.localStorage._itemName(id)
+  //   // console.log(name)
+  //   const item = this.localStorage._getItem(name)
+  //   // console.log(item)
+  //   const storage = this.localStorage.serializer.deserialize(item)
+  //   // console.log(storage)
 
-    return storage
-  }
+  //   return storage
+  // }
 
-  updateModel() {
-    console.log('ATVLocale updateModel')
-    const storage = this.getStorageContent()
-    // console.log(storage)
-    this.set(storage)
-  }
+  // updateModel() {
+  //   console.log('ATVLocale updateModel')
+  //   const storage = this.getStorageContent()
+  //   // console.log(storage)
+  //   this.set(storage)
+  // }
 }
 
 export default ATVLocale

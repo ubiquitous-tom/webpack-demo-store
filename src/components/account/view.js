@@ -27,7 +27,8 @@ class AccountHome extends View {
 
   initialize() {
     console.log('AccountHome initialize')
-    this.model = new AccountHomeModel()
+    console.log(this.model.attributes)
+    this.model = new AccountHomeModel(this.model.attributes)
     // console.log(this.model)
     // this.render()
     this.listenTo(this.model, 'sync', this.render)

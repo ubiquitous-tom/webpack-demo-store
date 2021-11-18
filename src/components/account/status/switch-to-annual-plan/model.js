@@ -81,7 +81,6 @@ class SwitchToAnnualPlanModel extends Model {
     const options = {
       dataType: 'json',
       ajaxSync: true,
-      method: 'POST',
       wait: true,
       headers: {
         StripeMembershipID: this.get('currentMembership').StripeMembershipID,
@@ -122,7 +121,7 @@ class SwitchToAnnualPlanModel extends Model {
     resp
       .then(
         (response) => {
-          console.log(response.responseJSON)
+          console.log(response.responseJSON, responseText)
           if (!_.isEmpty(response.responseJSON)) {
             this.set('message', response.responseJSON.message)
           }

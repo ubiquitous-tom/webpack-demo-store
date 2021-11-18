@@ -2,7 +2,7 @@ const https = require('https')
 
 const initializeApp = function (req, res) {
   console.log('Express Router initializeApp')
-  console.log(req.params)
+  // console.log(req.params)
   // console.log(req)
   // console.log(res)
 

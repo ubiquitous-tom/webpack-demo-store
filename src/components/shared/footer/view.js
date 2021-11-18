@@ -32,27 +32,14 @@ class Footer extends View {
 
   initialize() {
     console.log('Footer initialize')
-    // this.model = new ATVLocale()
     this.model = new FooterModel()
-    // console.log(this.model)
-    // this.model.fetch()
-    //   .done((resp) => {
-    //     console.log('Footer initialize done')
-    //     // console.log(resp)
-    //     this.render()
-    //   })
-    // this.listenTo(this.model, 'change', this.render)
-    // this.setElement($('footer'))
-    // this.getCurrentYear()
-    this.render()
-  }
 
-  // getCurrentYear() {
-  //   const footerModel = new FooterModel()
-  //   // console.log(footerModel.get('currentYear'))
-  //   footerModel.get('currentYear')
-  //   this.model.set('currentYear', footerModel.get('currentYear'))
-  // }
+    // render for sync
+    this.listenTo(this.model, 'change', this.render)
+    // render for localStorage
+    this.render()
+
+  }
 
   updatelanguage(e) {
     console.log(e)
@@ -61,12 +48,6 @@ class Footer extends View {
   }
 
   isSelected() {
-    // Handlebars.registerHelper('isSelected', (value, options) => {
-    //   console.log(value, options)
-    //   if (options.fn(this).indexOf(value)>= 1) {
-    //     return 'selected'
-    //   }
-    // })
     Handlebars.registerHelper('option', function (value, currentSelection) {
       // console.log(value, currentSelection, this.toString(), this)
       var selected = value.toLowerCase() === currentSelection ? 'selected' : '';
@@ -76,7 +57,6 @@ class Footer extends View {
 
   render() {
     console.log('Footer render')
-    // console.log(this.model.toJSON())
     this.isSelected()
 
     const template = Handlebars.compile(this.template)

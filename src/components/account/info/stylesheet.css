@@ -1,6 +1,6 @@
 .account-info {
   color: #0b1733;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   line-height: 3.5rem;
   margin-bottom: 3rem;
 }
@@ -11,6 +11,9 @@
   font-size: 4rem;
   line-height: 2rem !important;
   margin-bottom: 2rem !important;
+}
+.account-info .info {
+  font-weight: 500;
 }
 .cancel-membership a {
   color: #3a8788;

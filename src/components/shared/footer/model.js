@@ -13,19 +13,19 @@ class FooterModel extends ATVModel {
   }
 
   initialize() {
-    console.log('Footer Model')
+    console.log('FooterModel initialize')
     const locale = new ATVLocale()
     // console.log(locale.attributes)
-    this.set(locale.attributes)
 
-    // console.log(this)
-    // this.listenTo(this.locale, 'sync', this.merge)
-    // this.locale.fetch()
-    // .done((resp) => {
-    //   console.log('Footer initialize done')
-    //   console.log(resp)
-    //   // this.render()
-    // })
+    locale.on('sync', (model) => {
+      console.log('FooterModel ATVLocal sync')
+      // console.log(model)
+      this.set(model.attributes)
+    })
+
+    if (!_.isEmpty(locale.attributes.languages)) {
+      this.set(locale.attributes)
+    }
   }
 }
 

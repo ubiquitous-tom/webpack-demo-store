@@ -2,7 +2,7 @@ const https = require('https')
 
 const plansAvailable = function (req, res) {
   console.log('Express Router plansAvailable')
-  console.log(req.params)
+  // console.log(req.params)
   // console.log(req)
   // console.log(res)
 

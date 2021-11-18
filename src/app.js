@@ -5,37 +5,32 @@ import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 // import 'fancybox/dist/css/jquery.fancybox.css'
 
-// import '@stripe/stripe-js';
-// import { loadStripe } from '@stripe/stripe-js'
-
-// const stripe = Stripe.loadStripe('pk_live_Riw8CYEIjVsr54nzgGIOvzKL');
-// window.stripe = stripe
-// console.log(stripe)
-// console.log(Stripe('pk_live_Riw8CYEIjVsr54nzgGIOvzKL'))
-
 import './app.css'
 
-// import './components/common/template'
-import './components/common/handlebars'
+// import 'common/template'
+import 'common/handlebars'
 // import { tagName, template, on } from 'common/decorators'
-import ATVModel from './components/common/model'
-
-import Header from './components/shared/header'
-import Footer from './components/shared/footer'
-import Navigation from './components/shared/navigation'
-
+import InitializeApp from 'common/models/initializedapp'
 import Workspace from 'routers/router'
+import ATVModel from 'common/model'
 
-// new ATVLocale()
-// new InitializeApp()
+import Header from 'shared/header'
+import Footer from 'shared/footer'
+import Navigation from 'shared/navigation'
 
 $(function () {
-  new ATVModel()
-  new Workspace()
-  console.log('main entry')
-  const navigation = new Navigation()
-  const header = new Header()
-  const footer = new Footer()
-  Backbone.history.start()
+  const initializeApp = new InitializeApp()
+  initializeApp.on('sync', (model) => {
+    // console.log(model)
+    // console.log(model.attributes)
+    new ATVModel(model.attribute)
+    new Workspace({ model: model })
+
+    console.log('main entry')
+    const navigation = new Navigation({ model: model })
+    const header = new Header({ model: model })
+    const footer = new Footer()
+    Backbone.history.start()
+  })
 })
 

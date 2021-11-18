@@ -3,11 +3,11 @@ import _ from 'underscore'
 // import { LocalStorage } from 'backbone.localstorage'
 
 // import ATVLocale from './locale'
-import InitializeApp from './models/initializedapp'
+// import InitializeApp from './models/initializedapp'
 import PlansAvailable from './models/plans-available'
 import StripeKey from './models/stripe-key'
 import StripePlans from './models/stripe-plans'
-import CurrentMembership from './models/currentmembership'
+// import CurrentMembership from './models/currentmembership'
 
 class ATVModel extends Model {
 
@@ -19,12 +19,13 @@ class ATVModel extends Model {
 
   initialize() {
     console.log('ATVModel initialize')
+    console.log(this)
     // this.locale = new ATVLocale()
     this.stripeKey = new StripeKey()
     this.plansAvailable = new PlansAvailable()
     this.stripePlans = new StripePlans()
-    this.initializeApp = new InitializeApp()
-    this.currentMembership = new CurrentMembership(this.initializeApp.attributes)
+    // this.initializeApp = new InitializeApp()
+    // this.currentMembership = new CurrentMembership(this.initializeApp.attributes)
   }
 
   getStorageContent(localStorageID) {
@@ -42,11 +43,15 @@ class ATVModel extends Model {
     return storage
   }
 
-  updateModel() {
-    console.log('ATVLocale updateModel')
-    const storage = this.getStorageContent()
+  updateModel(localStorageID, context) {
+    console.log('ATVModel updateModel')
+    context = !_.isEmpty(context) ? context : this
+    context.localStorageID = _.isEmpty(localStorageID) ? context.get('localStorageID') : localStorageID
+    // console.log(context.localStorageID)
+    const storage = this.getStorageContent(context.localStorageID)
     console.log(storage)
-    this.set(storage)
+    // console.log(context)
+    context.set(storage)
   }
 }
 

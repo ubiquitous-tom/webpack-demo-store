@@ -18,12 +18,12 @@
 .navbar-nav > li > a {
   padding-top: 27px;
   font-family: futura-pt, sans-serif;
-  /* letter-spacing: 0.17em; */
+  letter-spacing: 0;
   font-weight: 400;
   font-style: normal;
   display: inline-block;
   text-transform: uppercase;
-  font-size: 23px;
+  font-size: 1.5rem;
   color: #fff;
 }
 .nav > li > a:hover {
@@ -51,7 +51,7 @@
 }
 .navbar-right-ul {
   float: right;
-  width: 110px;
+  width: 150px;
   margin-top: 0px;
 }
 .navbar-toggle .icon-bar {
@@ -148,6 +148,7 @@
   padding: 18px 15px;
   text-align: left;
   text-transform: uppercase;
+  list-style: none;
 }
 .drop-select li:hover {
   background: #191919 none repeat scroll 0 0;
@@ -259,5 +260,87 @@
 @media (min-width: 1300px) {
   #store-link {
     display: block;
+  }
+}
+
+@media (max-width: 1150px) {
+  /* NAVBAR */
+  .navbar-toggle .icon-bar {
+    background: #fff none repeat scroll 0 0;
+  }
+  .navbar-header {
+    float: none;
+  }
+  .nav > li {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    margin-bottom: 8px;
+    padding-left: 15px;
+    padding-top: 8px;
+    border-top: thin solid #141414;
+  }
+  .navbar-collapse {
+    border-top: none;
+    background: #0b0b0b none repeat scroll 0 0;
+  }
+  .navbar-collapse.collapse {
+    display: none !important;
+  }
+  .navbar-nav {
+    float: none !important;
+    margin: 0 -15px;
+  }
+  .navbar-nav > li {
+    float: none;
+  }
+  .navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .navbar-text {
+    float: none;
+    margin: 15px 0;
+  }
+  .navbar-collapse.collapse.in {
+    display: block !important;
+  }
+  .navbar-fixed-top .navbar-collapse,
+  .navbar-fixed-bottom .navbar-collapse {
+    max-height: none;
+  }
+
+  /* NAVBAR-SLIDEOUT */
+  .collapsing {
+    overflow: hidden !important;
+  }
+  .side-collapse-container {
+    width: 100%;
+    position: relative;
+    left: 0;
+    transition: left 0.4s;
+  }
+  .side-collapse-container.out {
+    right: 320px;
+  }
+  .side-collapse {
+    top: 60px;
+    bottom: 0;
+    left: 0px;
+    width: 290px;
+    position: fixed;
+    overflow: hidden;
+    transition: width 0.4s;
+  }
+  .side-collapse.in {
+    width: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  /* NAVBAR-SLIDEOUT */
+  .side-collapse {
+    top: 51px;
+    right: -15px;
   }
 }

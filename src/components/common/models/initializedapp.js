@@ -39,13 +39,13 @@ class InitializeApp extends Model {
       return data
     }
     // console.log(data)
-    const customer = !_.isEmpty(_.pick(data, 'Customer')) ? _.pick(data, 'Customer').Customer : {}
-    const session = !_.isEmpty(_.pick(data, 'Session')) ? _.pick(data, 'Session').Session : {}
+    // const customer = !_.isEmpty(_.pick(data, 'Customer')) ? _.pick(data, 'Customer').Customer : {}
+    // const session = !_.isEmpty(_.pick(data, 'Session')) ? _.pick(data, 'Session').Session : {}
 
     this.set(data)
     this.set({
-      customer: customer,
-      session: session,
+      // customer: customer,
+      // session: session,
       environment: 'dev3.',//this.environment(),
       signinEnv: this.signinEnv(),
       storeEnv: this.storeEnv(),
@@ -55,7 +55,7 @@ class InitializeApp extends Model {
     if (!_.isEmpty(storage.records)) {
       this.getStorageContent()
     } else {
-      this.sync('create', this)
+      // this.sync('create', this)
       // console.log(this.localStorage.findAll())
     }
 

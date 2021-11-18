@@ -1,16 +1,20 @@
 /* ACCOUNT TEMPLATE */
-.account-wrap {
+/* .account-wrap {
   float: none;
-  margin-bottom: 50px;
+  margin: 5rem 0;
+} */
+#account .tabs {
+  margin-bottom: 5rem;
 }
 #account {
-  padding: 40px 0 60px;
+  margin-top: 56px;
+  padding: 20px 0 60px;
   background: #fff none repeat scroll 0 0;
 }
 #account h1 {
   color: #0b1733;
   font-family: futura-pt, sans-serif;
-  font-size: 1.8rem;
+  font-size: 3.5rem;
   /* font-weight: 400; */
   line-height: 3.7rem;
   margin-bottom: 0;
@@ -19,8 +23,8 @@
 #account p {
   color: #0b1733;
   font-family: futura-pt, sans-serif;
-  font-size: 13.5px;
-  line-height: 23px;
+  font-size: 1.75rem;
+  line-height: 2.9rem;
   margin-bottom: 15px;
   margin-top: 5px;
 }
@@ -67,7 +71,7 @@
   color: #0b1733;
   font-family: futura-pt, sans-serif;
   font-weight: 300;
-  font-size: 13.5px;
+  font-size: 3.5rem;
   /* margin-bottom: 15px; */
   /* padding: 0 0 10px; */
   position: relative;
@@ -91,19 +95,20 @@
 
 @media (min-width: 375px) {
   #account h1 {
-    font-size: 20px;
+    /* font-size: 20px;
     line-height: 37px;
-    margin-bottom: 0;
+    margin-bottom: 0; */
   }
 }
 
 @media (min-width: 768px) {
   /* ACCOUNT TEMPLATE */
-  .account-wrap {
+  /* .account-wrap {
     float: right;
-    margin-bottom: 0px;
-  }
+    margin: 0;
+  } */
   #account {
+    margin-top: 0;
     padding: 80px 0 100px;
   }
   #account h1 {
@@ -111,8 +116,6 @@
     /* margin-bottom: 15px; */
   }
   #account p {
-    font-size: 1.6rem;
-    line-height: 2.9rem;
     margin-bottom: 10px;
     margin-top: 10px;
   }
@@ -140,8 +143,8 @@
   }
 }
 
-@media all and (min-width: 950px) {
+/* @media all and (min-width: 950px) {
   #account .tabs {
     max-width: 285px;
   }
-}
+} */

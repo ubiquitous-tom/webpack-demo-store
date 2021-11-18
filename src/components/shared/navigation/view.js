@@ -28,7 +28,7 @@ class Navigation extends View {
     // this.activeNav = 'applyPromoCode'
     this.resetActive()
     this.router = new Router()
-    this.model = new NavigationModel()
+    // this.model = new NavigationModel()
 
     // this.listenTo(this.model, 'change', this.setActive)
     this.render()
@@ -36,7 +36,6 @@ class Navigation extends View {
 
   render() {
     console.log('Navigation render')
-
     const template = Handlebars.compile(this.template())
     const html = template(this.model.attributes)
     this.$el.html(html)

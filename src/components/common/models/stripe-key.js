@@ -19,7 +19,7 @@ class StripeKey extends Model {
     this.localStorage = new LocalStorage(this.get('localStorageID'))
     // console.log(this.localStorage)
     const store = getLocalStorage(this)
-    console.log(store)
+    // console.log(store)
     if (_.isEmpty(store.records)) {
       console.log('StripeKey initialize fetch')
       this.fetch({

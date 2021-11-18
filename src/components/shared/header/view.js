@@ -21,8 +21,23 @@ class Header extends View {
 
   initialize() {
     console.log("Header initialize")
-    this.model = new HeaderModel()
+    // this.model = new HeaderModel()
     this.render()
+  }
+
+  render() {
+    // https://gist.github.com/kyleondata/3440492
+    // const template = Handlebars.compile(this.template)
+    // console.log(this.model.attributes)
+    const html = this.template(this.model.attributes)
+    // console.log(html)
+    this.$el.html(html)
+
+    // this.$el.html(this.template(this.model.attributes))
+
+    this.activateNavigation()
+
+    return this
   }
 
   activateNavigation() {
@@ -60,20 +75,6 @@ class Header extends View {
         }
       })
     })
-  }
-
-  render() {
-    // https://gist.github.com/kyleondata/3440492
-    // const template = Handlebars.compile(this.template)
-    const html = this.template(this.model.attributes)
-    // console.log(html)
-    this.$el.html(html)
-
-    // this.$el.html(this.template(this.model.attributes))
-
-    this.activateNavigation()
-
-    return this
   }
 }
 

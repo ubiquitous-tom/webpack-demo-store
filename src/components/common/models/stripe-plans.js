@@ -6,6 +6,7 @@ class StripePlans extends Model {
 
   get defaults() {
     return {
+      localStorageID: 'atv-stripeplans',
       stripePlans: [{
         "VatAmount": 0,
         "CurrSymbol": "$",
@@ -57,8 +58,7 @@ class StripePlans extends Model {
 
   initialize() {
     console.log('StripePlans initialize')
-    this.localStorageID = 'atv-stripeplans'
-    this.localStorage = new LocalStorage(this.localStorageID)
+    this.localStorage = new LocalStorage(this.get('localStorageID'))
     // console.log(this.localStorage)
     const storage = getLocalStorage(this)
     // console.log(storage)
@@ -150,7 +150,7 @@ class StripePlans extends Model {
 
   getStorageContent() {
     console.log('StripePlans getStorageContent')
-    const id = this.localStorage._getItem(this.localStorageID)
+    const id = this.localStorage._getItem(this.get('localStorageID'))
     // console.log(id)
     if (_.isEmpty(id)) {
       console.log('StripePlans getStorageContent isEmpty')

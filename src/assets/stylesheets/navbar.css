@@ -8,9 +8,9 @@
   background: #161616;
   border: none;
   height: 56px;
-  box-shadow: 0 0 10px -5px #050505;
-  -moz-box-shadow: 0 0 10px -5px #000000;
-  -webkit-box-shadow: 0 0 10px -5px #050505;
+  box-shadow: 0px 0px 10px -5px #050505;
+  -moz-box-shadow: 0px 0px 10px -5px #000000;
+  -webkit-box-shadow: 0px 0px 10px -5px #050505;
 }
 .navbar-nav {
   padding: 0px 0px 0px 20px;

@@ -5,17 +5,16 @@
   </div>
   <div class="col-md-8">
     <p>
-      Your Annual Plan renews on {{ renewalDate }}. ({{ Customer.CurrSymbol }}{{
-      Membership.SubscriptionAmount }}/yr)<br />
-      That's only {{ Customer.CurrSymbol }}{{ annualPerMonthPricing }}.mo!
+      Your Annual Plan renews on {{ renewalDate }}. ({{ currSymbol }}{{
+      subscriptionAmount }}/yr)<br />
+      That's only {{ currSymbol }}{{ annualPerMonthPricing }}/mo!
     </p>
   </div>
 </div>
 <div class="row">
   <div class="col-md-8">
-    <a href="#" class="switch-to-monthly"
-      >Switch to Monthly Plan ({{ Customer.CurrSymbol }}{{
-      monthlyStripPlan.SubscriptionAmount }}/mo)</a
-    >
+    <a href="#" class="switch-to-monthly">
+      Switch to Monthly Plan ({{ currSymbol }}{{ monthlySubscriptionAmount}}/mo)
+    </a>
   </div>
 </div>

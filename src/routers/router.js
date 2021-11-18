@@ -34,19 +34,11 @@ class Workspace extends Router {
   //   }
   // }
 
-  initialize() {
-    // this.navigation = new Navigation()
+  initialize(options) {
     console.log('Router initialize')
+    this.model = options.model
     // router.trigger('route', name, args);
     // Backbone.history.trigger('route', router, name, args);
-
-    // this.on('route', this.setActive)
-  }
-
-  setActive(name, args) {
-    console.log('Router setActive')
-    console.log(name, args)
-    $(`#${name}Nav`).addClass('active')
   }
 
   goToLogin() {
@@ -56,8 +48,7 @@ class Workspace extends Router {
 
   accountStatus() {
     console.log('Router loads accountStatus')
-    const accountHome = new AccountHome()
-    // accountHome.render()
+    const accountHome = new AccountHome({ model: this.model })
   }
 
   logout() {
