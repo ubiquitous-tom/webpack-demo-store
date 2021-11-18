@@ -102,6 +102,7 @@ class SwitchToAnnualPlanModel extends Model {
 
   success(model, resp, options) {
     console.log('SwitchToAnnualPlanModel success')
+    debugger
     console.log(model, resp, options)
     const annualPricing = this.get('annualStripePlan').CurrSymbol + this.get('annualStripePlan').SubscriptionAmount
     let perMonthPricing = (Math.floor((this.get('annualStripePlan').SubscriptionAmount / 12) * 100) / 100).toFixed(2)

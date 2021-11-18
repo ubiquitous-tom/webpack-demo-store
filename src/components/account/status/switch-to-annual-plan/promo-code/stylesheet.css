@@ -15,7 +15,7 @@
   align-items: center;
 }
 #promocode-container #promocode-field input {
-  width: 20rem;
+  /* width: 20rem; */
   border-radius: 3px;
 }
 #promocode-container #promocode-field .buttons button {

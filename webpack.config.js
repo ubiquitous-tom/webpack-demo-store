@@ -151,14 +151,14 @@ module.exports = {
         ],
       },
       {
-        test: /\.less$/,
+        test: /\.less$/i,
         loaders: ['style-loader', 'css-loder', 'less-loader'],
       },
       {
         test: /\.s[ac]ss$/i,
         // include: path.resolve(__dirname, 'src'),
         use: [
-          MiniCssExtractPlugin.loader,
+          // MiniCssExtractPlugin.loader,
           {
             loader: 'style-loader', // inject CSS to page
           },

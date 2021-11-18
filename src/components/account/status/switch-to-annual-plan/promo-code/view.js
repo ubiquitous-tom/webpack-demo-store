@@ -17,7 +17,7 @@ class PromoCode extends View {
   get events() {
     return {
       'click a.promocode-toggle': 'promocodeToggle',
-      'click #promocode-field button[type="reset"]': 'reset',
+      // 'click #promocode-field button[type="reset"]': 'reset',
       'click #promocode-field button[type="submit"]': 'submit',
     }
   }
@@ -45,8 +45,8 @@ class PromoCode extends View {
     e.preventDefault()
     // console.log('toggle')
     // console.log(this.$el[0])
-    this.$el.find('#promocode-field').slideToggle()
-    this.$el.find('.promocode-toggle span').toggleClass('glyphicon-menu-down').toggleClass('glyphicon-menu-right');
+    // this.$el.find('#promocode-field').slideToggle()
+    // this.$el.find('.promocode-toggle span').toggleClass('glyphicon-menu-down').toggleClass('glyphicon-menu-right');
   }
 
   reset(e) {
