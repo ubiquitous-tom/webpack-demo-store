@@ -1,7 +1,7 @@
 import { View } from 'backbone'
 import _ from 'underscore'
 
-import './stylesheet.css'
+import './stylesheet.scss'
 import template from './temp-new.html'
 import Handlebars from 'handlebars'
 import AccountInfoModel from './model'

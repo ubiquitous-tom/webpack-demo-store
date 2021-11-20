@@ -4,6 +4,7 @@ import _ from 'underscore'
 import './stylesheet.css'
 import template from './index.hbs'
 
+import Dispatcher from 'common/dispatcher'
 import StripeForm from 'shared/stripe-form'
 import ConfirmBillingModel from './model'
 
@@ -30,6 +31,7 @@ class ConfirmBilling extends View {
     // this.model = options.switchToAnnualPlanModel
     // const stripeCustomerID = options.switchToAnnualPlanModel.get('Customer').StripeCustomerID
     // this.model = new ConfirmBillingModel({ stripeCustomerID: stripeCustomerID })
+    this.dispatcher = new Dispatcher()
     this.model = new ConfirmBillingModel(options.switchToAnnualPlanModel.attributes)
     console.log(this.model)
 

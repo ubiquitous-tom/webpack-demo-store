@@ -77,7 +77,8 @@ class ConfirmBillingModel extends Model {
       last4: this.get('newStripeCardInfo').last4,
       zipcode: this.get('newStripeCardInfo').zipcode,
       country: this.get('newStripeCardInfo').country,
-      stripeCustomerID: this.get('newStripeCardInfo').token
+      StripeCustomerID: this.get('Customer').StripeCustomerID,
+      StripeCardToken: this.get('newStripeCardInfo').token
     }
     this.set('currentBillingInfo', currentBillingInfo)
   }

@@ -2,9 +2,13 @@ import { View } from 'backbone'
 import _ from 'underscore'
 import Handlebars from 'handlebars'
 
-import './stylesheet.css'
+// import './stylesheet.css'
+import './stylesheet.scss'
 import template from './index.html'
+
 // import StripeForm from 'shared/stripe-form'
+// import Dispatcher from 'common/dispatcher'
+
 import SwitchToAnnualPlanModel from './model'
 import ConfirmBilling from './confirm-billing'
 import PromoCode from './promo-code/view'
@@ -30,12 +34,29 @@ class SwitchToAnnualPlan extends View {
   initialize(options) {
     console.log('SwitchToAnnualPlan intialize')
     // console.log(options.monthlyPlan)
+    // this.dispatcher = new Dispatcher()
     this.model = new SwitchToAnnualPlanModel(options.monthlyPlan.attributes)
     this.confirmBilling = new ConfirmBilling({ switchToAnnualPlanModel: this.model })
     this.promoCode = new PromoCode({ switchToAnnualPlanModel: this.model })
     console.log(this)
     this.render()
     // this.listenTo(this.model, 'sync', this.render)
+
+    // this.model.on('change:success', function (model, stuff, woo) {
+    //   console.log(model, stuff, woo)
+    //   console.log(this)
+    //   debugger
+    //   this.$el.find('.switch-to-annual-plan-container').remove()
+    //   this.showFooter()
+    // })
+
+    this.listenTo(this.model, 'change:upgradeToAnnualSuccess', (model, stuff, woo) => {
+      console.log(model, stuff, woo)
+      console.log(this)
+      debugger
+      this.$el.find('.switch-to-annual-plan-container').remove()
+      this.showFooter()
+    })
   }
 
   render() {
@@ -82,8 +103,10 @@ class SwitchToAnnualPlan extends View {
     console.log('SwitchToAnnualPlan confirmUpgrade')
     // this.removeBackground()
     this.model.confirmUpgrade()
-    this.$el.find('.switch-to-annual-plan-container').remove()
-    this.showFooter()
+
+    // check on success first then do this
+    // this.$el.find('.switch-to-annual-plan-container').remove()
+    // this.showFooter()
   }
 
   updateCard() {

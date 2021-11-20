@@ -48,13 +48,9 @@ class AccountStatus extends View {
     if (this.subscription.Monthly) {
       console.log('AccountStatus monthlyPlan render')
       this.monthlyPlan = new MonthlyPlan({ model: this.model })
-      // this.switchToAnnualPlan = new SwitchToAnnualPlan({ model: this.model })
-      // this.monthlyPlan.render()
     } else {
       console.log('AccountStatus annualPlan render')
       this.annualPlan = new AnnualPlan({ model: this.model })
-      // this.switchToMonthlyPlan = new SwitchToMonthlyPlan({ model: this.model })
-      // this.annualPlan.render()
     }
   }
 }

@@ -9,6 +9,8 @@ import StripeKey from './models/stripe-key'
 import StripePlans from './models/stripe-plans'
 // import CurrentMembership from './models/currentmembership'
 
+import Dispatcher from './dispatcher'
+
 class ATVModel extends Model {
 
   get defaults() {
@@ -20,6 +22,8 @@ class ATVModel extends Model {
   initialize() {
     console.log('ATVModel initialize')
     console.log(this)
+
+    this.dispatcher = new Dispatcher()
     // this.locale = new ATVLocale()
     this.stripeKey = new StripeKey()
     this.plansAvailable = new PlansAvailable()

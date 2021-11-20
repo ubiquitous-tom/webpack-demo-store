@@ -2,7 +2,7 @@ import { View } from 'backbone'
 import _ from 'underscore'
 import Handlebars from 'handlebars'
 
-import './stylesheet.css'
+import './stylesheet.scss'
 import template from './index.html'
 import AnnualPlanModel from './model'
 import SwitchToMonthlyPlan from '../switch-to-monthly-plan'

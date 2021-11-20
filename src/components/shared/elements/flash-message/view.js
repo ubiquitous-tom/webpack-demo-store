@@ -37,8 +37,9 @@ class FlashMessage extends View {
     // console.log(html)
     // console.log(this.$el[0])
     this.$el.before(
+      // html
       $(html)
-        .delay(3000)
+        .delay(10000)
         .slideUp(800, () => {
           $('.flash-message').remove()
         })
