@@ -1,0 +1,81 @@
+.navbar {
+  box-shadow: none;
+}
+
+#account .switch-to-monthly-plan-container {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+
+  background: rgb(11, 23, 51);
+  background: linear-gradient(
+    180deg,
+    rgba(11, 23, 51, 1) 0%,
+    rgba(11, 37, 89, 1) 80%,
+    rgba(19, 79, 117, 1) 100%
+  );
+  height: 100vh;
+  width: 100vw;
+  font-family: futura-pt, sans-serif;
+  position: fixed;
+  top: 75px;
+  left: 0;
+
+  &::before {
+    content: "";
+    flex: 1;
+  }
+  &::after {
+    content: "";
+    flex: 3;
+  }
+
+  h1 {
+    color: #fff;
+    font-weight: 300;
+    font-size: 4rem;
+    line-height: 5rem;
+    letter-spacing: 0.5px;
+  }
+
+  p {
+    color: #fff;
+    font-weight: 300;
+    font-size: 2rem;
+    line-height: 4rem;
+  }
+
+  button {
+    width: 15%;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    text-transform: initial;
+    font-size: 1.75rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.5px;
+    height: 47px;
+
+    &.keep-annual-plan {
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1),
+        inset 0px 4px 4px rgba(255, 255, 255, 0.09);
+    }
+
+    &.switch-to-monthly-plan {
+      background: transparent;
+      border: 1px solid #fff;
+      box-sizing: border-box;
+      box-shadow: inset 0px 4px 4px rgba(255, 255, 255, 0.09);
+      filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.1));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      svg {
+        width: 60px;
+      }
+    }
+  }
+}
