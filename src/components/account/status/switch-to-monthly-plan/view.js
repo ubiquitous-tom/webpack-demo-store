@@ -6,6 +6,7 @@ import './stylesheet.scss'
 import loader from './loader.svg'
 import template from './index.html'
 import SwitchToMonthlyPlanModel from './model'
+import FlashMessage from 'shared/elements/flash-message/view'
 
 class SwitchToMonthlyPlan extends View {
 
@@ -24,25 +25,23 @@ class SwitchToMonthlyPlan extends View {
     }
   }
 
-  initialize() {
+  initialize(options) {
     console.log('SwitchToMonthlyPlan intialize')
     console.log(this, this.model.attributes)
+    this.dispatcher = options.dispatcher
+    this.flashMessage = new FlashMessage({ dispatcher: this.dispatcher })
     this.model = new SwitchToMonthlyPlanModel(this.model.attributes)
     // this.render()
 
-    // this.model.on('change:success', function (model, stuff, woo) {
-    //   console.log(model, stuff, woo)
-    //   debugger
-    //   this.$el.find('.switch-to-monthly-plan-container').remove()
-    //   this.showFooter()
-    // })
-
-    this.listenTo(this.model, 'change:downgradeToMonthlySuccess', (model, stuff, woo) => {
-      console.log(model, stuff, woo)
+    this.listenTo(this.model, 'change:downgradeToMonthlySuccess', (model, value, options) => {
+      console.log(model, value, options)
       console.log(this)
       debugger
       this.$el.find('.switch-to-monthly-plan-container').remove()
       this.showFooter()
+      // this.dispatcher.trigger('subscription:updated', this)
+      this.dispatcher.trigger('flashMessage:set', this.model.get('flashMessage').message, this.model.get('flashMessage').type)
+      this.dispatcher.trigger('downgradeToMonthly:success', this)
     })
   }
 

@@ -7,6 +7,7 @@ import template from './index.hbs'
 import Dispatcher from 'common/dispatcher'
 import StripeForm from 'shared/stripe-form'
 import ConfirmBillingModel from './model'
+// import ATVView from 'common/view'
 
 class ConfirmBilling extends View {
 
@@ -31,7 +32,8 @@ class ConfirmBilling extends View {
     // this.model = options.switchToAnnualPlanModel
     // const stripeCustomerID = options.switchToAnnualPlanModel.get('Customer').StripeCustomerID
     // this.model = new ConfirmBillingModel({ stripeCustomerID: stripeCustomerID })
-    this.dispatcher = new Dispatcher()
+    console.log(options.dispatcher)
+    this.dispatcher = options.dispatcher
     this.model = new ConfirmBillingModel(options.switchToAnnualPlanModel.attributes)
     console.log(this.model)
 
@@ -49,10 +51,10 @@ class ConfirmBilling extends View {
     // console.log(this.model.attributes)
     // console.log(this.model.get('stripeCardInfo'))
 
-    this.getCurrentBillingInfo()
     if (this.model.has('newStripeCardInfo')) {
       this.model.updateCurrentBillingInfo()
     }
+    this.getConfirmCurrentBillingInfo()
 
     const data = this.getTemplateData()
     console.log(data)
@@ -60,11 +62,14 @@ class ConfirmBilling extends View {
     // console.log(html)
     this.$el.find('#confirm-billing').empty().append(html)
     // this.$el.html(html)
+
+    this.dispatcher.trigger('promoCode:show', this)
   }
 
   editCreditCard(e) {
     console.log('ConfirmBilling editCreditCard')
     e.preventDefault()
+    this.dispatcher.trigger('promoCode:hide', this)
     // console.log(this.$el[0])
     // console.log(this.$el.find('#confirm-billing')[0])
     this.$el.find('#confirm-billing').empty()
@@ -72,15 +77,11 @@ class ConfirmBilling extends View {
     this.stripeForm.render()
   }
 
-  getCurrentBillingInfo() {
-    console.log('ConfirmBilling getCurrentBillingInfo')
+  getConfirmCurrentBillingInfo() {
+    console.log('ConfirmBilling getConfirmCurrentBillingInfo')
     const currentBillingInfo = this.model.get('currentBillingInfo')
     // console.log(this, currentBillingInfo)
     this.options.switchToAnnualPlanModel.set('currentBillingInfo', currentBillingInfo)
-  }
-
-  updateCurrentBillingInfo() {
-    console.log('ConfirmBilling updateCurrentBillingInfo')
   }
 
   getTemplateData() {

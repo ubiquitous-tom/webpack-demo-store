@@ -68,6 +68,12 @@
     background: #3a8788;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1),
       inset 0px 4px 4px rgba(255, 255, 255, 0.09);
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
     &.keep-annual-plan {
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1),
         inset 0px 4px 4px rgba(255, 255, 255, 0.09);

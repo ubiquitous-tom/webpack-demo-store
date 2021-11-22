@@ -17,18 +17,19 @@ class InitializeApp extends Model {
     return '/initializeapp?AppVersion=' + this.get('appVersion')
   }
 
-  initialize() {
+  initialize(options) {
     console.log('InitializeApp initialize')
+    console.log(this)
+    this.dispatcher = options.dispatcher
     this.localStorage = new LocalStorage(this.get('localStorageID'))
     // console.log(this.localStorage)
     const store = getLocalStorage(this)
     // console.log(store)
     if (_.isEmpty(store.records)) {
-      console.log('InitializeApp initialize fetch')
-      this.fetch({
-        ajaxSync: true
-      })
+      this.fetchInitializeApp()
     }
+
+    // this.dispatcher.on('subscription:updated', this.subscriptionUpdated, this)
   }
 
   parse(response) {
@@ -62,6 +63,13 @@ class InitializeApp extends Model {
     return data
   }
 
+  fetchInitializeApp() {
+    console.log('InitializeApp fetchInitializeApp')
+    this.fetch({
+      ajaxSync: true
+    })
+  }
+
   environment() {
     return window.location.href.indexOf('dev') > -1
       ? 'dev3.'
@@ -88,6 +96,13 @@ class InitializeApp extends Model {
     console.log(storage)
 
     return storage
+  }
+
+  subscriptionUpdated(model) {
+    console.log('InitializeApp subscriptionUpdated')
+    console.log(this, model)
+    debugger
+    this.fetchInitializeApp()
   }
 }
 

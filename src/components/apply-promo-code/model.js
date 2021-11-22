@@ -123,7 +123,7 @@ class ApplyPromoCodeModel extends Model {
       message: resp.message,
     })
     // this.showFlashMessage(model, resp, options)
-    this.dispatcher.trigger('showFlashMessage', this.get('message'), this.get('type'))
+    this.dispatcher.trigger('flashMessage:show', this.get('message'), this.get('type'))
   }
 
   error(model, resp, options) {
@@ -154,7 +154,7 @@ class ApplyPromoCodeModel extends Model {
       .always(() => {
         console.log(this.get('message'), this.get('type'))
         // console.log(this.dispatcher)
-        this.dispatcher.trigger('showFlashMessage', this.get('message'), this.get('type'))
+        this.dispatcher.trigger('flashMessage:show', this.get('message'), this.get('type'))
       })
   }
 

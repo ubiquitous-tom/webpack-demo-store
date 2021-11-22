@@ -8,8 +8,9 @@ import PlansAvailable from './models/plans-available'
 import StripeKey from './models/stripe-key'
 import StripePlans from './models/stripe-plans'
 // import CurrentMembership from './models/currentmembership'
+import FlashMessage from 'shared/elements/flash-message'
 
-import Dispatcher from './dispatcher'
+// import Dispatcher from './dispatcher'
 
 class ATVModel extends Model {
 
@@ -19,17 +20,27 @@ class ATVModel extends Model {
     }
   }
 
-  initialize() {
+  initialize(attributes, options) {
     console.log('ATVModel initialize')
-    console.log(this)
-
-    this.dispatcher = new Dispatcher()
+    // console.log(this)
+    this.dispatcher = options.dispatcher
     // this.locale = new ATVLocale()
     this.stripeKey = new StripeKey()
     this.plansAvailable = new PlansAvailable()
     this.stripePlans = new StripePlans()
+
+    this.flashMessage = new FlashMessage({ dispatcher: this.dispatcher })
+    this.flashMessage.getStorageContent()
+    if (this.flashMessage.model.has('id')) {
+      // console.log(this.flashMessage.model.get('message'), this.flashMessage.model.get('type'))
+      this.dispatcher.trigger('flashMessage:show', this.flashMessage.model.get('message'), this.flashMessage.model.get('type'))
+    }
     // this.initializeApp = new InitializeApp()
     // this.currentMembership = new CurrentMembership(this.initializeApp.attributes)
+  }
+
+  getDispatcher() {
+    return this.dispatcher
   }
 
   getStorageContent(localStorageID) {

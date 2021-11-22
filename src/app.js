@@ -18,19 +18,27 @@ import ATVModel from 'common/model'
 import Header from 'shared/header'
 import Footer from 'shared/footer'
 import Navigation from 'shared/navigation'
+import Dispatcher from 'common/dispatcher'
+import ATVView from './components/common/view'
 
 $(function () {
-  const initializeApp = new InitializeApp()
+  let dispatcher = new Dispatcher()
+  const initializeApp = new InitializeApp({ dispatcher: dispatcher })
   initializeApp.on('sync', (model) => {
+    console.log('dispatcher', dispatcher)
     // console.log(model)
     // console.log(model.attributes)
-    new ATVModel(model.attribute)
-    new Workspace({ model: model })
+    const atvModel = new ATVModel(model.attributes, { dispatcher: dispatcher })
+    // console.log(atvModel, atvModel.model)
+    // const atvView = new ATVView({ model: atvModel, dispatcher: dispatcher })
+    const atvView = new ATVView({ dispatcher: dispatcher })
+    new Workspace({ model: model, dispatcher: dispatcher })
 
     console.log('main entry')
     const navigation = new Navigation({ model: model })
     const header = new Header({ model: model })
     const footer = new Footer()
+
     Backbone.history.start()
   })
 })

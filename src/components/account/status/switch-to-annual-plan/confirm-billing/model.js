@@ -10,12 +10,7 @@ class ConfirmBillingModel extends Model {
   initialize() {
     console.log('ConfirmBillingModel initialize')
     console.log(this)
-
-
     // console.log(this.model)
-    // const stripeCustomerID = this.model.get('Customer').StripeCustomerID
-
-    // const stripeCustomerID = options.stripeCustomerID
     this.getCurrentBillingInfo()
 
     const stripeCustomerID = this.get('Customer').StripeCustomerID
@@ -63,6 +58,7 @@ class ConfirmBillingModel extends Model {
       // last4: ...
       zipcode: this.get('BillingAddress').PostalCode,
       country: this.get('BillingAddress').Country,
+      customerID: this.get('currentMembership').CustomerID,
       StripeCustomerID: this.get('Customer').StripeCustomerID
     }
     console.log(currentBillingInfo)
@@ -71,16 +67,18 @@ class ConfirmBillingModel extends Model {
 
   updateCurrentBillingInfo() {
     console.log('ConfirmBillingModel updateCurrentBillingInfo')
+    console.log(this, this.get('newStripeCardInfo'))
     const currentBillingInfo = {
       name: this.get('newStripeCardInfo').name,
       // email: this.switchToAnnualPlanModel.get('Customer').Email,
       last4: this.get('newStripeCardInfo').last4,
-      zipcode: this.get('newStripeCardInfo').zipcode,
-      country: this.get('newStripeCardInfo').country,
-      StripeCustomerID: this.get('Customer').StripeCustomerID,
+      zipcode: this.get('newStripeCardInfo').address_zip,
+      country: this.get('newStripeCardInfo').address_country,
+      customerID: this.get('currentMembership').CustomerID,
       StripeCardToken: this.get('newStripeCardInfo').token
     }
     this.set('currentBillingInfo', currentBillingInfo)
+    this.getCardExpiry()
   }
 }
 

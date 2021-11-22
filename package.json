@@ -53,6 +53,7 @@
     "@popperjs/core": "^2.10.2",
     "@stripe/stripe-js": "^1.21.0",
     "backbone": "^1.4.0",
+    "backbone.browserStorage": "^0.0.5",
     "backbone.localstorage": "^2.1.0",
     "bootstrap": "^3",
     "core-js": "^3.19.0",

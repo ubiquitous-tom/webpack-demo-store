@@ -1,11 +1,9 @@
 import { View } from 'backbone'
 import _ from 'underscore'
-// import '@stripe/stripe-js'
-// import { loadStripe } from '@stripe/stripe-js'
-import Dispatcher from '../../common/dispatcher'
 
-import './stylesheet.css'
+import './stylesheet.scss'
 import template from './index.html'
+// import Dispatcher from 'common/dispatcher'
 
 class StripeForm extends View {
 
@@ -26,7 +24,7 @@ class StripeForm extends View {
 
   initialize(options) {
     console.log('StripeForm initialize')
-    this.dispatcher = new Dispatcher()
+    // this.dispatcher = new Dispatcher()
     console.log(this)
     console.log(options)
     this.parentView = options.parentView
@@ -38,14 +36,10 @@ class StripeForm extends View {
         iconColor: '#dddddd',
         color: '#464646',
         fontFamily: 'futura-pt, sans-serif',
-        fontWeight: 300,
-        // lineHeight: '2.25rem',
+        fontWeight: 400,
         fontSize: '16px',
         fontSmoothing: 'antialiased',
-        // padding: '10px',
-        // height: '31px',
         '::placeholder': {
-          // padding: '20px',
           color: '#999',
         },
       },
@@ -57,7 +51,6 @@ class StripeForm extends View {
         iconColor: '#a94442',
         color: '#a94442',
         fontWeight: 400,
-        // border: '#a94442',
       },
     }
 
@@ -91,11 +84,6 @@ class StripeForm extends View {
     this.cardCvc = this.elements.create('cardCvc', {
       style: elementStyles
     })
-    // this.cardCvc.on('change', (f, a) => {
-    //   console.log(f, a)
-    //   console.log(f.value)
-    // })
-
     // console.log(this)
   }
 
@@ -103,10 +91,7 @@ class StripeForm extends View {
     console.log('StripeForm render')
     // console.log(this.$el[0])
     // console.log(this.$el.find('#stripe-form')[0])
-    // console.log(this.$el.find('.switch-to-annual-plan-container')[0])
     // console.log(this.template())
-    // this.setElement('#stripe-form')
-    // this.setElement('.switch-to-annual-plan-container')
     const template = this.template()
 
     this.$el.find('#stripe-form').html(template)
@@ -127,16 +112,11 @@ class StripeForm extends View {
 
   submit(e) {
     console.log('StripeForm submit')
-    console.log(e, $(e.currentTarget))
-    // console.log(this.stripe, this.elements)
-    // console.log(this.cardNumber)
-    // console.log(this.cardExpiry)
-    // console.log(this.cardCvc)
+    e.preventDefault()
+    // console.log(e, $(e.currentTarget))
     // console.log(this.$el.find('#stripe-form #nameoncard').val())
     // console.log(this.$el.find('#stripe-form #card-zipcode').val())
     // console.log(this.parentView.model.model.get('BillingAddress'))
-    // console.log(this.cardCvc.on)
-    // this.parentView.updateCard()
     console.log(this.parentView.model)
     const data = {
       name: this.$el.find('#stripe-form #nameoncard').val(),
@@ -147,9 +127,10 @@ class StripeForm extends View {
       .then((result) => {
         if (result.token) {
           const stripeCustomerID = result.token.id
-          const updatedStripCard = _.extend(data, { token: stripeCustomerID })
-          console.log(updatedStripCard)
-          this.parentView.model.set('newStripeCardInfo', updatedStripCard)
+          const stripeCard = result.token.card
+          const updatedStripeCard = _.extend(stripeCard, { token: stripeCustomerID })
+          console.log(updatedStripeCard)
+          this.parentView.model.set('newStripeCardInfo', updatedStripeCard)
           console.log(this, this.parentView)
           this.$el.find('#stripe-form').empty()
           this.parentView.render()
@@ -157,13 +138,13 @@ class StripeForm extends View {
       })
   }
 
-  disableInputs() {
-    this.$el.find('input').setAttribute('disabled', true)
-  }
+  // disableInputs() {
+  //   this.$el.find('input').setAttribute('disabled', true)
+  // }
 
-  enableInputs() {
-    this.$el.find('input').setAttribute('disabled', false)
-  }
+  // enableInputs() {
+  //   this.$el.find('input').setAttribute('disabled', false)
+  // }
 }
 
 export default StripeForm

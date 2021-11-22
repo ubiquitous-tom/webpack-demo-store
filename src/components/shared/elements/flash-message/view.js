@@ -1,8 +1,9 @@
-import { Model, View } from 'backbone'
+import { View } from 'backbone'
 import _ from 'underscore'
 
 import './stylesheet.css'
 import template from './index.hbs'
+import FlashMessageModel from './model'
 
 class FlashMessage extends View {
 
@@ -18,12 +19,13 @@ class FlashMessage extends View {
     console.log('FlashMessage initialize')
     // console.log(options.dispatcher)
     this.dispatcher = options.dispatcher
-    this.model = new Model()
+    this.model = new FlashMessageModel()
     this.model.set({
       message: 'hello',
       type: 'bg-primary',
     })
-    this.dispatcher.once('showFlashMessage', this.render, this)
+    this.dispatcher.once('flashMessage:show', this.render, this)
+    this.dispatcher.once('flashMessage:set', this.setSessionStorage, this)
     // console.log(this.model.attributes)
   }
 
@@ -45,7 +47,14 @@ class FlashMessage extends View {
         })
     )
 
+    this.model.removeFlashMessage()
+
     return this
+  }
+
+  setSessionStorage(message, type) {
+    console.log('FlashMessage setSessionStorage')
+    this.model.addFlashMessage(message, type)
   }
 
   setInfo(message, type) {
@@ -57,6 +66,10 @@ class FlashMessage extends View {
       'message': this.message,
       'type': this.type
     })
+  }
+
+  getStorageContent() {
+    this.model.getStorageContent()
   }
 }
 

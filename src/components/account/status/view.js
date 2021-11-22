@@ -6,6 +6,8 @@ import template from './temp-new.html'
 import MonthlyPlan from './monthly-plan'
 import AnnualPlan from './annual-plan'
 import AccountStatusModel from './model'
+// import Dispatcher from 'common/dispatcher'
+// import ATVView from 'common/view'
 
 class AccountStatus extends View {
 
@@ -19,11 +21,9 @@ class AccountStatus extends View {
 
   initialize(options) {
     console.log('AccountStatus initialize')
+    this.dispatcher = options.dispatcher
     // console.log(this.model.attributes)
     this.model = new AccountStatusModel(this.model.attributes)
-    // console.log(this.model.get('Subscription'))
-    this.subscription = this.model.get('Subscription')
-    // console.log(this.subscription)
     this.listenTo(this.model, 'sync', this.render)
   }
 
@@ -31,26 +31,25 @@ class AccountStatus extends View {
     console.log('AccountStatus render')
     // console.log(this.$el[0], this.$el.find('#accountStatusView')[0])
     this.$el.find('#accountStatusView').html(this.template())
-    // console.log(this.model.attributes)
+
     this.getCurrentTemplate()
+
+    return this
   }
 
   getCurrentTemplate() {
     console.log('AccountStatus getCurrentTemplate')
-    console.log(this.subscription)
-    // console.log(this.template(data))
-    // console.log(this.$el.find('.current-plan')[0])
-
-    if (_.isEmpty(this.subscription)) {
+    // console.log(this.model.has('Subscription'), this.model.get('Subscription'))
+    if (!this.model.has('Subscription')) {
       return
     }
 
-    if (this.subscription.Monthly) {
+    if (this.model.get('Subscription').Monthly) {
       console.log('AccountStatus monthlyPlan render')
-      this.monthlyPlan = new MonthlyPlan({ model: this.model })
+      this.monthlyPlan = new MonthlyPlan({ model: this.model, dispatcher: this.dispatcher })
     } else {
       console.log('AccountStatus annualPlan render')
-      this.annualPlan = new AnnualPlan({ model: this.model })
+      this.annualPlan = new AnnualPlan({ model: this.model, dispatcher: this.dispatcher })
     }
   }
 }

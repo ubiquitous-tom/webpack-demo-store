@@ -1,4 +1,4 @@
-import { Router } from 'backbone'
+import { History, Router } from 'backbone'
 import _ from 'underscore'
 
 // import Navigation from '../components/shared/navigation/view'
@@ -20,6 +20,7 @@ class Workspace extends Router {
       'renewMembership': 'renewMembership',
       'buyMembership': 'buyMembership',
       'applyPromoCode': 'applyPromoCode',
+      'refresh': 'refresh',
       'logout': 'logout',
       '*path': 'home',
     }
@@ -37,8 +38,17 @@ class Workspace extends Router {
   initialize(options) {
     console.log('Router initialize')
     this.model = options.model
+    this.dispatcher = options.dispatcher
+    this.history = new History()
     // router.trigger('route', name, args);
     // Backbone.history.trigger('route', router, name, args);
+
+    this.dispatcher.on({
+      'upgradeToAnnual:success': this.subscriptionUpdatedSuccess,
+      'upgradeToAnnual:error': this.subscriptionUpdatedError,
+      'downgradeToMonthly:success': this.subscriptionUpdatedSuccess,
+      'downgradeToMonthly:error': this.subscriptionUpdatedError,
+    }, this)
   }
 
   goToLogin() {
@@ -48,7 +58,7 @@ class Workspace extends Router {
 
   accountStatus() {
     console.log('Router loads accountStatus')
-    const accountHome = new AccountHome({ model: this.model })
+    const accountHome = new AccountHome({ model: this.model, dispatcher: this.dispatcher })
   }
 
   logout() {
@@ -87,8 +97,38 @@ class Workspace extends Router {
     const applyPromocode = new ApplyPromoCode()
   }
 
+  refresh() {
+    History.loadUrl()
+    return false
+  }
+
   home() {
     this.navigate('accountStatus', true)
+  }
+
+  subscriptionUpdatedSuccess(model) {
+    console.log('Router subscriptionUpdatedSuccess')
+    console.log(this, model)
+    debugger
+    // this.navigate('accountStatus', { trigger: true, replace: true })
+    // let newFragment = Backbone.history.getFragment($(this).attr('href'));
+    // if (Backbone.history.fragment == newFragment) {
+    //   // need to null out Backbone.history.fragement because
+    //   // navigate method will ignore when it is the same as newFragment
+    //   Backbone.history.fragment = null;
+    //   Backbone.history.navigate(newFragment, true);
+    // }
+    // this.accountStatus()
+    window.location.reload()
+  }
+
+  subscriptionUpdatedError(model) {
+    console.log('Router subscriptionUpdatedError')
+    console.log(this, model)
+    debugger
+    // this.navigate('accountStatus', { trigger: true, replace: true })
+    // this.accountStatus()
+    window.location.reload()
   }
 }
 

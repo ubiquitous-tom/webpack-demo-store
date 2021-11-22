@@ -34,14 +34,6 @@ class AccountHomeModel extends ATVModel {
     // } else {
     //   // got back to login
     // }
-    // this.on('change', function (stuff) {
-    //   console.log(stuff)
-    //   debugger
-    // })
-    // this.on('sync', function (stuff) {
-    //   console.log(stuff)
-    //   debugger
-    // })
 
     const params = {
       CustomerID: this.get('Customer').CustomerID,

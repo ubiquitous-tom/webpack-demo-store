@@ -3,6 +3,7 @@ import _ from 'underscore'
 
 import './stylesheet.css'
 import template from './index.hbs'
+// import ATVView from 'common/view'
 
 class PromoCode extends View {
 
@@ -24,10 +25,18 @@ class PromoCode extends View {
 
   initialize(options) {
     console.log('Promocode initialize')
-    // console.log(this, options.parent)
+    console.log(this, options.parent)
+    console.log(options.dispatcher)
+    this.dispatcher = options.dispatcher
     this.model = options.switchToAnnualPlanModel
     // this.render()
     // this.listenTo(this.model, 'change', this.render)
+    this.dispatcher.on('promoCode:add', (stuff) => {
+      console.log(stuff)
+      debugger
+    }, this)
+    this.dispatcher.on('promoCode:hide', this.hidePromoCode, this)
+    this.dispatcher.on('promoCode:show', this.showPromoCode, this)
   }
 
   render() {
@@ -59,6 +68,18 @@ class PromoCode extends View {
     console.log('Promocode submit')
     e.preventDefault()
     console.log(e)
+  }
+
+  hidePromoCode(model) {
+    console.log(this, model)
+    console.log(this.$el[0], this.$el.find('#promocode-container')[0])
+    this.$el.find('#promocode-container').hide()
+  }
+
+  showPromoCode(model) {
+    console.log(this, model)
+    console.log(this.$el[0], this.$el.find('#promocode-container')[0])
+    this.$el.find('#promocode-container').show()
   }
 }
 

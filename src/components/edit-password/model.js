@@ -85,7 +85,7 @@ class EditPasswordModel extends Model {
       message: 'Password is Changed',
     })
     // this.showFlashMessage(model, resp, options)
-    this.dispatcher.trigger('showFlashMessage', 'Password is Changed', 'success')
+    this.dispatcher.trigger('flashMessage:show', 'Password is Changed', 'success')
   }
 
   error(model, resp, options) {
@@ -117,7 +117,7 @@ class EditPasswordModel extends Model {
       .always(() => {
         console.log(this.get('message'), this.get('type'))
         // console.log(this.dispatcher)
-        this.dispatcher.trigger('showFlashMessage', this.get('message'), this.get('type'))
+        this.dispatcher.trigger('flashMessage:show', this.get('message'), this.get('type'))
       })
   }
 

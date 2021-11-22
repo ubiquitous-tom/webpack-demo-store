@@ -1,7 +1,7 @@
 import _ from 'underscore'
 import ATVModel from 'common/model'
-import Dispatcher from 'common/dispatcher'
-import FlashMessage from 'shared/elements/flash-message/view'
+// import Dispatcher from 'common/dispatcher'
+// import FlashMessage from 'shared/elements/flash-message/view'
 import PlansChange from 'common/models/plans-change'
 
 class SwitchToMonthlyPlanModel extends ATVModel {
@@ -10,8 +10,8 @@ class SwitchToMonthlyPlanModel extends ATVModel {
     console.log('SwitchToMonthlyPlanModel initialize')
     console.log(this)
 
-    this.dispatcher = new Dispatcher()
-    this.flashMessage = new FlashMessage({ dispatcher: this.dispatcher })
+    // this.dispatcher = new Dispatcher()
+    // this.flashMessage = new FlashMessage({ dispatcher: this.dispatcher })
 
     this.getAnnualToMonthlyDowngradeInfo()
   }
@@ -48,9 +48,6 @@ class SwitchToMonthlyPlanModel extends ATVModel {
         ? this.get('currentBillingInfo').StripeCardToken
         : '',
     }
-    // if (this.has('currentBillingInfo').StripeCardToken) {
-    //   header.StripeCardToken = this.get('currentBillingInfo').StripeCardToken
-    // }
 
     const attributes = {
       from: this.get('currentDowngradePlan').from_stripe_plan_id,
@@ -85,64 +82,53 @@ class SwitchToMonthlyPlanModel extends ATVModel {
       }
     })
     // this.showFlashMessage(model, resp, options)
-    this.dispatcher.trigger('showFlashMessage', this.get('flashMessage').message, this.get('flashMessage').type)
-
+    // this.dispatcher.trigger('flashMessage:show', this.get('flashMessage').message, this.get('flashMessage').type)
   }
 
   error(model, resp, options) {
     console.log('SwitchToMonthlyPlanModel error')
+    console.log(model, resp, options)
     console.log(this)
     debugger
-    console.log(model, resp, options)
-    this.set({
-      downgradeToMonthlySuccess: false,
-      flashMessage: {
-        type: 'error',
-      }
-    })
+    let message = ''
     resp
       .then(
         (response) => {
           debugger
           console.log(response.responseJSON, responseText)
           if (!_.isEmpty(response.responseJSON)) {
-            this.set({
-              flashMessage: {
-                'message': response.responseJSON.message,
-              }
-            })
+            // this.set({flashMessage: {'message': response.responseJSON.message}})
+            message = response.responseJSON.message
           }
           if (!_.isEmpty(response.responseText)) {
-            this.set({
-              flashMessage: {
-                'message': response.responseText,
-              }
-            })
+            // this.set({flashMessage: {'message': response.responseText}})
+            message = response.responseText
           }
         },
         (error) => {
           debugger
           console.log(error.responseJSON, responseText)
           if (!_.isEmpty(response.responseJSON)) {
-            this.set({
-              flashMessage: {
-                'message': response.responseJSON.message,
-              }
-            })
+            // this.set({flashMessage: {'message': response.responseJSON.message}})
+            message = response.responseJSON.message
           }
           if (!_.isEmpty(response.responseText)) {
-            this.set({
-              flashMessage: {
-                'message': response.responseText,
-              }
-            })
+            // this.set({flashMessage: {'message': response.responseText}})
+            message = response.responseText
           }
         })
       .always(() => {
         debugger
+        this.set({
+          downgradeToMonthlySuccess: false,
+          flashMessage: {
+            type: 'error',
+            message: message
+          }
+        })
         console.log(this.get('flashMessage').message, this.get('flashMessage').type)
-        // console.log(this.dispatcher)
-        this.dispatcher.trigger('showFlashMessage', this.get('flashMessage').message, this.get('flashMessage').type)
+        // this.dispatcher.trigger('downgradeToMonthly:error', this)
+        // this.dispatcher.trigger('flashMessage:show', this.get('flashMessage').message, this.get('flashMessage').type)
       })
   }
 }

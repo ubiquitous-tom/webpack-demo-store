@@ -24,11 +24,10 @@ class AnnualPlan extends View {
     }
   }
 
-  initialize() {
+  initialize(options) {
     console.log('AnnualPlan initialize')
     console.log(this)
-    // this.model = this.attributes
-    // this.setElement('section')
+    this.dispatcher = options.dispatcher
     this.model = new AnnualPlanModel(this.model.attributes)
     // console.log(this.model)
     // console.log(this.model.attributes)
@@ -38,7 +37,6 @@ class AnnualPlan extends View {
   render() {
     console.log('AnnualPlan render')
     const template = Handlebars.compile(this.template())
-    // console.log(template)
     console.log(this.model.attributes)
     const data = {
       renewalDate: this.model.get('renewalDate'),
@@ -61,7 +59,7 @@ class AnnualPlan extends View {
     e.preventDefault()
     console.log('AnnualPlan switchToMonthly')
     // console.log(this.switchToMonthlyPlan)
-    this.switchToMonthlyPlan = new SwitchToMonthlyPlan({ model: this.model })
+    this.switchToMonthlyPlan = new SwitchToMonthlyPlan({ model: this.model, dispatcher: this.dispatcher })
     this.switchToMonthlyPlan.render()
   }
 
