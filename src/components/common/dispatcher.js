@@ -6,7 +6,14 @@ class Dispatcher {
   constructor() {
     console.log('Dispatcher constructor')
     _.extend(this, Events);
-    // console.log(this)
+  }
+
+  testAsyncMethod(data) {
+    this.trigger('tomtom', data);
+  }
+
+  onFlashMessage(eventType, message, messageType) {
+    this.trigger(`flashMessage:${eventType}`, message, messageType)
   }
 }
 

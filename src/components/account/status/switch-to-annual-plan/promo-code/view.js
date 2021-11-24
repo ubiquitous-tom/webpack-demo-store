@@ -25,18 +25,12 @@ class PromoCode extends View {
 
   initialize(options) {
     console.log('Promocode initialize')
-    console.log(this, options.parent)
-    console.log(options.dispatcher)
-    this.dispatcher = options.dispatcher
-    this.model = options.switchToAnnualPlanModel
+    console.log(this, options)
+    this.switchToAnnualPlan = options.switchToAnnualPlan
+    this.confirmBilling = this.switchToAnnualPlan.confirmBilling
+    this.model = this.switchToAnnualPlan.model
     // this.render()
     // this.listenTo(this.model, 'change', this.render)
-    this.dispatcher.on('promoCode:add', (stuff) => {
-      console.log(stuff)
-      debugger
-    }, this)
-    this.dispatcher.on('promoCode:hide', this.hidePromoCode, this)
-    this.dispatcher.on('promoCode:show', this.showPromoCode, this)
   }
 
   render() {
@@ -70,16 +64,26 @@ class PromoCode extends View {
     console.log(e)
   }
 
-  hidePromoCode(model) {
-    console.log(this, model)
-    console.log(this.$el[0], this.$el.find('#promocode-container')[0])
-    this.$el.find('#promocode-container').hide()
+  promoCodeFieldDisplay(model, value, options) {
+    console.log('Promocode promoCodeFieldDisplay')
+    // console.log(model, value, options)
+    if (value) {
+      this.showPromoCode(model)
+    } else {
+      this.hidePromoCode(model)
+    }
   }
 
   showPromoCode(model) {
-    console.log(this, model)
-    console.log(this.$el[0], this.$el.find('#promocode-container')[0])
+    // console.log(this, model)
+    // console.log(this.$el[0], this.$el.find('#promocode-container')[0])
     this.$el.find('#promocode-container').show()
+  }
+
+  hidePromoCode(model) {
+    // console.log(this, model)
+    // console.log(this.$el[0], this.$el.find('#promocode-container')[0])
+    this.$el.find('#promocode-container').hide()
   }
 }
 

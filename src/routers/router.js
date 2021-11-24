@@ -72,12 +72,12 @@ class Workspace extends Router {
 
   editEmail() {
     console.log('Router loads editEmail')
-    const editEmail = new EditEmail()
+    const editEmail = new EditEmail({ model: this.model })
   }
 
   editPassword() {
     console.log('Router loads editPassword')
-    const editPassword = new EditPassword()
+    const editPassword = new EditPassword({ model: this.model })
   }
 
   cancelMembership() {
@@ -94,7 +94,7 @@ class Workspace extends Router {
 
   applyPromoCode() {
     console.log('Router loads applyPromoCode')
-    const applyPromocode = new ApplyPromoCode()
+    const applyPromocode = new ApplyPromoCode({ model: this.model })
   }
 
   refresh() {

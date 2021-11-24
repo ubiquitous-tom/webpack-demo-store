@@ -1,5 +1,5 @@
 import { View } from 'backbone'
-import _ from 'underscore'
+import _, { times } from 'underscore'
 import Handlebars from 'handlebars'
 
 import './stylesheet.scss'
@@ -30,12 +30,15 @@ class SwitchToAnnualPlan extends View {
     console.log('SwitchToAnnualPlan intialize')
     // console.log(options.monthlyPlan)
     this.dispatcher = options.dispatcher
-    this.flashMessage = new FlashMessage({ dispatcher: this.dispatcher })
+    this.flashMessage = new FlashMessage()
     this.model = new SwitchToAnnualPlanModel(options.monthlyPlan.attributes)
-    this.confirmBilling = new ConfirmBilling({ switchToAnnualPlanModel: this.model, dispatcher: this.dispatcher })
-    this.promoCode = new PromoCode({ switchToAnnualPlanModel: this.model, dispatcher: this.dispatcher })
+    this.confirmBilling = new ConfirmBilling({ switchToAnnualPlan: this })
+    this.promoCode = new PromoCode({ switchToAnnualPlan: this })
     console.log(this)
     this.render()
+
+
+    this.model.set('promoCodeFieldDisplay', true)
 
     this.listenTo(this.model, 'change:upgradeToAnnualSuccess', (model, value, options) => {
       console.log(model, value, options)
@@ -44,12 +47,14 @@ class SwitchToAnnualPlan extends View {
       this.$el.find('.switch-to-annual-plan-container').remove()
       this.showFooter()
       // this.dispatcher.trigger('subscription:updated', this)
-      this.dispatcher.trigger('flashMessage:set', this.model.get('flashMessage').message, this.model.get('flashMessage').type)
+      this.flashMessage.onFlashMessageSet(this.model.get('flashMessage').message, this.model.get('flashMessage').type)
       this.dispatcher.trigger('upgradeToAnnual:success', this)
     })
 
-    this.dispatcher.on('promoCode:hide', this.disableSubmit, this)
-    this.dispatcher.on('promoCode:show', this.enableSubmit, this)
+    this.listenTo(this.model, 'change:promoCodeFieldDisplay', (model, value, options) => {
+      this.submitButtonDisplay(model, value, options)
+      this.promoCode.promoCodeFieldDisplay(model, value, options)
+    })
   }
 
   render() {
@@ -73,17 +78,22 @@ class SwitchToAnnualPlan extends View {
     this.model.confirmUpgrade()
   }
 
+  submitButtonDisplay(model, value, options) {
+    if (value) {
+      this.enableSubmit(model)
+    } else {
+      this.disableSubmit(model)
+    }
+  }
+
   enableSubmit(model) {
     console.log('SwitchToAnnualPlan enabledSubmit')
     // console.log(this.$el.find('.confirm-upgrade').prop('disabled'))
-    if (this.$el.find('.confirm-upgrade').prop('disabled')) {
-      this.$el.find('.confirm-upgrade').prop('disabled', false)
-    }
+    this.$el.find('.confirm-upgrade').prop('disabled', false)
   }
 
   disableSubmit(model) {
     console.log('SwitchToAnnualPlan disableSubmit')
-    // console.log(this, model)
     // console.log(this.$el[0], this.$el.find('.confirm-upgrade')[0])
     this.$el.find('.confirm-upgrade').prop('disabled', true)
   }

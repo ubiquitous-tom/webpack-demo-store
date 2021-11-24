@@ -29,7 +29,7 @@ class SwitchToMonthlyPlan extends View {
     console.log('SwitchToMonthlyPlan intialize')
     console.log(this, this.model.attributes)
     this.dispatcher = options.dispatcher
-    this.flashMessage = new FlashMessage({ dispatcher: this.dispatcher })
+    this.flashMessage = new FlashMessage()
     this.model = new SwitchToMonthlyPlanModel(this.model.attributes)
     // this.render()
 
@@ -40,7 +40,7 @@ class SwitchToMonthlyPlan extends View {
       this.$el.find('.switch-to-monthly-plan-container').remove()
       this.showFooter()
       // this.dispatcher.trigger('subscription:updated', this)
-      this.dispatcher.trigger('flashMessage:set', this.model.get('flashMessage').message, this.model.get('flashMessage').type)
+      this.flashMessage.onFlashMessageSet(this.model.get('flashMessage').message, this.model.get('flashMessage').type)
       this.dispatcher.trigger('downgradeToMonthly:success', this)
     })
   }
@@ -69,10 +69,6 @@ class SwitchToMonthlyPlan extends View {
     console.log('SwitchToMonthlyPlan switchToMonthly')
     e.preventDefault()
     this.model.switchToMonthly()
-
-    // check on success first then do this
-    // this.$el.find('.switch-to-monthly-plan-container').remove()
-    // this.showFooter()
   }
 
   showFooter() {

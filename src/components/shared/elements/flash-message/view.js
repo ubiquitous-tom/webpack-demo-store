@@ -15,18 +15,13 @@ class FlashMessage extends View {
     return template
   }
 
-  initialize(options) {
+  initialize() {
     console.log('FlashMessage initialize')
-    // console.log(options.dispatcher)
-    this.dispatcher = options.dispatcher
     this.model = new FlashMessageModel()
     this.model.set({
       message: 'hello',
       type: 'bg-primary',
     })
-    this.dispatcher.once('flashMessage:show', this.render, this)
-    this.dispatcher.once('flashMessage:set', this.setSessionStorage, this)
-    // console.log(this.model.attributes)
   }
 
   render(message, type) {
@@ -52,11 +47,6 @@ class FlashMessage extends View {
     return this
   }
 
-  setSessionStorage(message, type) {
-    console.log('FlashMessage setSessionStorage')
-    this.model.addFlashMessage(message, type)
-  }
-
   setInfo(message, type) {
     console.log('FlashMessage setInfo')
     // console.log(message, type)
@@ -68,8 +58,14 @@ class FlashMessage extends View {
     })
   }
 
-  getStorageContent() {
-    this.model.getStorageContent()
+  onFlashMessageShow(message, type) {
+    console.log('FlashMessage onFlashMessageShow')
+    this.render(message, type)
+  }
+
+  onFlashMessageSet(message, type) {
+    console.log('FlashMessage onFlashMessageSet')
+    this.model.addFlashMessage(message, type)
   }
 }
 

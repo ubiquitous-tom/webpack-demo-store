@@ -43,10 +43,11 @@ class FlashMessageModel extends Model {
           message: flashMessage.message,
           type: flashMessage.type,
         })
+        return true
       })
     }
 
-    return null
+    return false
   }
 }
 

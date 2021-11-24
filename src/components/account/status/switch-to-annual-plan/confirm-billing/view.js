@@ -4,10 +4,8 @@ import _ from 'underscore'
 import './stylesheet.css'
 import template from './index.hbs'
 
-import Dispatcher from 'common/dispatcher'
 import StripeForm from 'shared/stripe-form'
 import ConfirmBillingModel from './model'
-// import ATVView from 'common/view'
 
 class ConfirmBilling extends View {
 
@@ -27,18 +25,11 @@ class ConfirmBilling extends View {
 
   initialize(options) {
     console.log('ConfirmBilling initialize')
-    console.log(this, options.switchToAnnualPlanModel)
-    this.options = options
-    // this.model = options.switchToAnnualPlanModel
-    // const stripeCustomerID = options.switchToAnnualPlanModel.get('Customer').StripeCustomerID
-    // this.model = new ConfirmBillingModel({ stripeCustomerID: stripeCustomerID })
-    console.log(options.dispatcher)
-    this.dispatcher = options.dispatcher
-    this.model = new ConfirmBillingModel(options.switchToAnnualPlanModel.attributes)
+    console.log(this, options.switchToAnnualPlan)
+    this.switchToAnnualPlan = options.switchToAnnualPlan
+    this.model = new ConfirmBillingModel(this.switchToAnnualPlan.model.attributes)
     console.log(this.model)
 
-    // this.stripeForm = new StripeForm({ parentView: this })
-    // console.log(this.stripeForm)
     this.listenTo(this.model, 'sync', this.render)
   }
 
@@ -47,9 +38,7 @@ class ConfirmBilling extends View {
     // console.log(this.$el[0])
     // console.log(this.$el.find('.switch-to-annual-plan-container')[0])
     // console.log(this.$el.find('#confirm-billing')[0])
-    // console.log(this.model.attributes.stripeCardInfo)
     // console.log(this.model.attributes)
-    // console.log(this.model.get('stripeCardInfo'))
 
     if (this.model.has('newStripeCardInfo')) {
       this.model.updateCurrentBillingInfo()
@@ -57,19 +46,19 @@ class ConfirmBilling extends View {
     this.getConfirmCurrentBillingInfo()
 
     const data = this.getTemplateData()
-    console.log(data)
+    // console.log(data)
     const html = this.template(data)
     // console.log(html)
     this.$el.find('#confirm-billing').empty().append(html)
     // this.$el.html(html)
 
-    this.dispatcher.trigger('promoCode:show', this)
+    this.switchToAnnualPlan.model.set('promoCodeFieldDisplay', true)
   }
 
   editCreditCard(e) {
     console.log('ConfirmBilling editCreditCard')
     e.preventDefault()
-    this.dispatcher.trigger('promoCode:hide', this)
+    this.switchToAnnualPlan.model.set('promoCodeFieldDisplay', false)
     // console.log(this.$el[0])
     // console.log(this.$el.find('#confirm-billing')[0])
     this.$el.find('#confirm-billing').empty()
@@ -81,7 +70,7 @@ class ConfirmBilling extends View {
     console.log('ConfirmBilling getConfirmCurrentBillingInfo')
     const currentBillingInfo = this.model.get('currentBillingInfo')
     // console.log(this, currentBillingInfo)
-    this.options.switchToAnnualPlanModel.set('currentBillingInfo', currentBillingInfo)
+    this.switchToAnnualPlan.model.set('currentBillingInfo', currentBillingInfo)
   }
 
   getTemplateData() {

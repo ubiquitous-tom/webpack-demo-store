@@ -28,10 +28,10 @@ $(function () {
     console.log('dispatcher', dispatcher)
     // console.log(model)
     // console.log(model.attributes)
-    const atvModel = new ATVModel(model.attributes, { dispatcher: dispatcher })
+    const atvModel = new ATVModel(model.attributes)
     // console.log(atvModel, atvModel.model)
     // const atvView = new ATVView({ model: atvModel, dispatcher: dispatcher })
-    const atvView = new ATVView({ dispatcher: dispatcher })
+    const atvView = new ATVView()
     new Workspace({ model: model, dispatcher: dispatcher })
 
     console.log('main entry')
