@@ -2,7 +2,7 @@ import { Model } from 'backbone'
 import _ from 'underscore'
 // import { LocalStorage } from 'backbone.localstorage'
 // import { getLocalStorage } from 'backbone.localstorage/src/utils'
-// import FlashMessage from '../shared/elements/flash-message/view'
+// import FlashMessage from '../shared/elements/flash-message'
 
 class ApplyPromoCodeModel extends Model {
 

@@ -2,7 +2,7 @@
 /* @import "./assets/stylesheets/futura-pt.css"; */
 @import url("https://use.typekit.net/how3tbq.css");
 
-@import "./assets/stylesheets/base.css";
+@import "./assets/stylesheets/base.scss";
 @import "./assets/stylesheets/layout.css";
 /* @import './assets/stylesheets/home.css'; */
 /* @import './assets/stylesheets/navbar.css'; */

@@ -1,0 +1,42 @@
+#promocode-container {
+  label {
+    font-weight: 400;
+    display: block;
+    a {
+      color: #fff;
+    }
+    span {
+      font-size: 1rem;
+    }
+  }
+  #promocode-field {
+    .form-group {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      input {
+        /* width: 20rem; */
+        border-radius: 3px;
+      }
+      .buttons {
+        button {
+          margin-left: 1rem;
+        }
+      }
+      &.has-error {
+        input {
+          color: #a94442;
+        }
+      }
+    }
+  }
+  .promocode-applied-success {
+    color: #34b731;
+    font-weight: 700;
+    text-align: left;
+    i {
+      margin-right: 1rem;
+    }
+  }
+}

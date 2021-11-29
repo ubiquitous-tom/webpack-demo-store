@@ -14,7 +14,7 @@
   width: 100vw;
   font-family: futura-pt, sans-serif;
   position: fixed;
-  top: 75px;
+  top: 56px;
   left: 0;
 
   display: flex;
@@ -46,6 +46,10 @@
     font-weight: 300;
     font-size: 1.5rem;
     line-height: 3rem;
+    .applied-success {
+      font-weight: 700;
+      color: #34b731;
+    }
   }
 
   #billing-container {
@@ -103,6 +107,20 @@
 }
 
 #promocode-container {
-  width: 40rem;
+  width: 100%;
   margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+  #account .switch-to-annual-plan-container {
+    #confirm-billing #billing-info {
+      max-width: 30rem;
+    }
+    .legal-notice {
+      max-width: 30rem;
+    }
+  }
+  #promocode-container {
+    max-width: 30rem;
+  }
 }

@@ -1,11 +1,13 @@
 <div class="switch-to-annual-plan-container">
   {{log this level='error'}}
-  <div class="row">
+  <div class="row row-no-gutters">
     <h1>Get 12 Months for the Price of 10</h1>
-    <p>
-      You will be billed {{ Customer.CurrSymbol }}{{
-      annualStripePlan.SubscriptionAmount }} for the Annual Plan on
-      08/25/2021.<br />
+    <p class="annual-plan-message">
+      You will be billed
+      <span class="{{ isPromoApplied }}">
+        {{ currSymbol }}{{ annualSubscriptionAmount }}
+      </span>
+      for the Annual Plan on 08/25/2021.<br />
       Cancel anytime.
     </p>
   </div>

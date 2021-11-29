@@ -1,6 +1,12 @@
-$icon-font-path: "bootstrap-sass/assets/fonts/bootstrap/";
-@import "bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
-@import "bootstrap-sass/assets/stylesheets/bootstrap";
-@import "./src/assets/stylesheets/futura-pt.scss";
-@import "./src/assets/stylesheets/main.scss";
-@import "./src/assets/stylesheets/rebranding.scss";
+@import url("https://use.typekit.net/how3tbq.css");
+
+// $icon-font-path: "bootstrap-sass/assets/fonts/bootstrap/";
+// @import "bootstrap-sass/assets/stylesheets/_bootstrap-sprockets.scss";
+// @import "bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import "bootstrap/dist/css/bootstrap.css";
+
+@import "./assets/stylesheets/base.scss";
+@import "./assets/stylesheets/layout.scss";
+// @import "./src/assets/stylesheets/futura-pt.scss";
+// @import "./src/assets/stylesheets/main.scss";
+// @import "./src/assets/stylesheets/rebranding.scss";

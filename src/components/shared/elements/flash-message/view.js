@@ -1,7 +1,7 @@
 import { View } from 'backbone'
 import _ from 'underscore'
 
-import './stylesheet.css'
+import './stylesheet.scss'
 import template from './index.hbs'
 import FlashMessageModel from './model'
 
@@ -13,6 +13,12 @@ class FlashMessage extends View {
 
   get template() {
     return template
+  }
+
+  get events() {
+    return {
+      'click .flash-message': 'closeFlashMessage',
+    }
   }
 
   initialize() {
@@ -33,18 +39,38 @@ class FlashMessage extends View {
     const html = this.template(this.model.attributes)
     // console.log(html)
     // console.log(this.$el[0])
+
+    // const htmlWithDelaySlideUp = $(html)
+    //   .delay(10000)
+    //   .slideUp(800, () => {
+    //     $('.flash-message').remove()
+    //   })
+
+    const closeButton = $('<i/>')
+      .addClass('glyphicon glyphicon-remove-sign')
+      .on('click', this.closeFlashMessage)
+    const htmlWithCloseButton = $(html).append(closeButton)
+
     this.$el.before(
       // html
-      $(html)
-        .delay(10000)
-        .slideUp(800, () => {
-          $('.flash-message').remove()
-        })
+      // htmlWithDelaySlideUp
+      htmlWithCloseButton
     )
 
-    this.model.removeFlashMessage()
+    // this.model.removeFlashMessage()
 
     return this
+  }
+
+  closeFlashMessage(e) {
+    console.log('FlashMessage closeFlashMessage')
+    e.preventDefault()
+    console.log(e)
+    $(e.target)
+      .parent('.flash-message')
+      .slideUp(600, () => {
+        $('.flash-message').remove()
+      })
   }
 
   setInfo(message, type) {

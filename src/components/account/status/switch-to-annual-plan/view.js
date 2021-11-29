@@ -8,7 +8,7 @@ import template from './index.html'
 import SwitchToAnnualPlanModel from './model'
 import ConfirmBilling from './confirm-billing'
 import PromoCode from './promo-code/view'
-import FlashMessage from 'shared/elements/flash-message/view'
+import FlashMessage from 'shared/elements/flash-message'
 
 class SwitchToAnnualPlan extends View {
 
@@ -51,6 +51,7 @@ class SwitchToAnnualPlan extends View {
       this.dispatcher.trigger('upgradeToAnnual:success', this)
     })
 
+    // Trigger Show/Hide promo code form in PromoCode View
     this.listenTo(this.model, 'change:promoCodeFieldDisplay', (model, value, options) => {
       this.submitButtonDisplay(model, value, options)
       this.promoCode.promoCodeFieldDisplay(model, value, options)
@@ -63,7 +64,14 @@ class SwitchToAnnualPlan extends View {
     // console.log(this.template())
     const template = Handlebars.compile(this.template())
     // console.log(this.model.attributes)
-    const html = template(this.model.attributes)
+    const data = {
+      isPromoApplied: this.model.get('isPromoApplied') ? 'applied-success' : '',
+      currSymbol: this.model.get('Customer').CurrSymbol,
+      annualSubscriptionAmount: this.model.has('promoAppliedAmount')
+        ? this.model.get('promoAppliedAmount')
+        : this.model.get('annualStripePlan').SubscriptionAmount,
+    }
+    const html = template(data)
     // console.log(html)
     this.$el.append(html)
 

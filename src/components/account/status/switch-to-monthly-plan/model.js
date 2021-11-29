@@ -1,7 +1,7 @@
 import _ from 'underscore'
 import ATVModel from 'common/model'
 // import Dispatcher from 'common/dispatcher'
-// import FlashMessage from 'shared/elements/flash-message/view'
+// import FlashMessage from 'shared/elements/flash-message'
 import PlansChange from 'common/models/plans-change'
 
 class SwitchToMonthlyPlanModel extends ATVModel {
@@ -95,7 +95,7 @@ class SwitchToMonthlyPlanModel extends ATVModel {
       .then(
         (response) => {
           debugger
-          console.log(response.responseJSON, responseText)
+          console.log(response.responseJSON, response.responseText)
           if (!_.isEmpty(response.responseJSON)) {
             // this.set({flashMessage: {'message': response.responseJSON.message}})
             message = response.responseJSON.message
@@ -107,14 +107,14 @@ class SwitchToMonthlyPlanModel extends ATVModel {
         },
         (error) => {
           debugger
-          console.log(error.responseJSON, responseText)
-          if (!_.isEmpty(response.responseJSON)) {
-            // this.set({flashMessage: {'message': response.responseJSON.message}})
-            message = response.responseJSON.message
+          console.log(error.responseJSON, error.responseText)
+          if (!_.isEmpty(error.responseJSON)) {
+            // this.set({flashMessage: {'message': error.responseJSON.error}})
+            message = error.responseJSON.error
           }
-          if (!_.isEmpty(response.responseText)) {
-            // this.set({flashMessage: {'message': response.responseText}})
-            message = response.responseText
+          if (!_.isEmpty(error.responseText)) {
+            // this.set({flashMessage: {'message': error.responseText}})
+            message = error.responseText
           }
         })
       .always(() => {

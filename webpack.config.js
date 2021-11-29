@@ -1,5 +1,6 @@
 const path = require('path')
-const webpack = require('webpack')
+const { ProvidePlugin, EnvironmentPlugin, } = require('webpack')
+const DotenvWebpack = require('dotenv-webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ESLintWebpackPlugin = require('eslint-webpack-plugin')
@@ -84,6 +85,11 @@ module.exports = {
     // },
   },
   plugins: [
+    new DotenvWebpack({
+      // path: './.env',
+      safe: true,
+      systemvars: true,
+    }),
     new HtmlWebpackPlugin({
       title: 'Acorn TV',
       filename: 'index.html',
@@ -97,23 +103,32 @@ module.exports = {
     }),
     // new ESLintWebpackPlugin(),
     new CleanWebpackPlugin({
+      verbose: true,
       dry: false,
-      cleanOnceBeforeBuildPatterns: ['!index.html'],
+      cleanOnceBeforeBuildPatterns: [
+        '!index.html'
+      ],
     }),
-    new webpack.ProvidePlugin({
+    new ProvidePlugin({
       jQuery: 'jquery',
       $: 'jquery',
       // jquery: 'jquery',
       // _: 'underscore',
       // Backbone: 'backbone',
     }),
+    // new EnvironmentPlugin({
+
+    // }),
+    // new webpack.DefinePlugin({
+    //   'process.env': JSON.stringify(process.env)
+    // }),
+
     new CopyWebpackPlugin({
       patterns: [
         // { from: 'src/assets/fonts', to: 'font' },
         { from: 'src/assets/images', to: 'img' },
       ],
     }),
-    // new webpack.HotModuleReplacementPlugin()
   ],
   module: {
     rules: [
@@ -121,7 +136,12 @@ module.exports = {
         test: /\.js$/i,
         exclude: /node_modules/,
         use: [
-          'babel-loader',
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+            },
+          }
         ],
       },
       {
@@ -176,7 +196,7 @@ module.exports = {
               postcssOptions: {
                 plugins: [
                   'postcss-preset-env',
-                  // 'autoprefixer',
+                  'autoprefixer',
                 ]
               }
             }
@@ -233,7 +253,6 @@ module.exports = {
       {
         test: /\.(hbs)$/i,
         use: [
-          // 'html-loader',
           'handlebars-loader',
         ],
       },

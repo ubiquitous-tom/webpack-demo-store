@@ -3,7 +3,7 @@ import _ from 'underscore'
 
 import template from './temp.html'
 import EditPasswordModel from './model'
-import FlashMessage from '../shared/elements/flash-message/view'
+import FlashMessage from '../shared/elements/flash-message'
 
 class EditPassword extends View {
 

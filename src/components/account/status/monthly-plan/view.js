@@ -44,7 +44,6 @@ class MonthlyPlan extends View {
       currSymbol: this.model.get('Customer').CurrSymbol,
       subscriptionAmount: this.model.get('Membership').SubscriptionAmount,
       annualSubscriptionAmount: this.model.get('annualStripePlan').SubscriptionAmount,
-      promoCodeInfo: this.getPromoCodeInfo(),
     }
     const html = template(data)
     this.$el.find('.current-plan').html(html)
@@ -59,12 +58,6 @@ class MonthlyPlan extends View {
     // console.log(this.switchToAnnualPlan)
     this.switchToAnnualPlan = new SwitchToAnnualPlan({ monthlyPlan: this.model, dispatcher: this.dispatcher })
     // this.switchToAnnualPlan.render()
-  }
-
-  getPromoCodeInfo() {
-    if (this.model.get('Subscription').Promo) {
-      return `<br>with promo code - ${this.model.get('Membership').PromoCode}`
-    }
   }
 }
 

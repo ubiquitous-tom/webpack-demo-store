@@ -6,7 +6,7 @@ import './stylesheet.scss'
 import loader from './loader.svg'
 import template from './index.html'
 import SwitchToMonthlyPlanModel from './model'
-import FlashMessage from 'shared/elements/flash-message/view'
+import FlashMessage from 'shared/elements/flash-message'
 
 class SwitchToMonthlyPlan extends View {
 

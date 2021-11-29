@@ -1,10 +1,16 @@
 import _ from 'underscore'
 // import Dispatcher from 'common/dispatcher'
-// import FlashMessage from 'shared/elements/flash-message/view'
+// import FlashMessage from 'shared/elements/flash-message'
 import PlansChange from 'common/models/plans-change'
 import ATVModel from 'common/model'
 
 class SwitchToAnnualPlanModel extends ATVModel {
+
+  get defaults() {
+    return {
+      isPromoApplied: false
+    }
+  }
 
   initialize() {
     console.log('SwitchToAnnualPlanModel initialize')
@@ -53,7 +59,7 @@ class SwitchToAnnualPlanModel extends ATVModel {
     const attributes = {
       from: this.get('currentUpgradePlan').from_stripe_plan_id,
       to: this.get('currentUpgradePlan').to_stripe_plan_id,
-      promocode: this.has('promoCode') ? this.get('promoCode').promocode : '',
+      promocode: this.has('promoCode') ? this.get('promoCode') : '',
     }
     const options = {
       context: this,
@@ -65,7 +71,7 @@ class SwitchToAnnualPlanModel extends ATVModel {
       error: this.error,
     }
     console.log(attributes, options)
-    plansChange.save(attributes, options)
+    // plansChange.save(attributes, options)
     // console.log(this)
     // this.success()
   }
@@ -98,7 +104,7 @@ class SwitchToAnnualPlanModel extends ATVModel {
     resp
       .then(
         (response) => {
-          console.log(response.responseJSON, responseText)
+          console.log(response.responseJSON, response.responseText)
           if (!_.isEmpty(response.responseJSON)) {
             // this.set({flashMessage: {'message': response.responseJSON.message}})
             message = response.responseJSON.message
@@ -109,14 +115,14 @@ class SwitchToAnnualPlanModel extends ATVModel {
           }
         },
         (error) => {
-          console.log(error.responseJSON)
-          if (!_.isEmpty(response.responseJSON)) {
-            // this.set({flashMessage: {'message': response.responseJSON.message}})
-            message = response.responseJSON.message
+          console.log(error.responseJSON, error.responseText)
+          if (!_.isEmpty(error.responseJSON)) {
+            // this.set({flashMessage: {'message': error.responseJSON.error}})
+            message = error.responseJSON.error
           }
-          if (!_.isEmpty(response.responseText)) {
-            // this.set({ flashMessage: { 'message': response.responseText } })
-            message = response.responseText
+          if (!_.isEmpty(error.responseText)) {
+            // this.set({ flashMessage: { 'message': error.responseText } })
+            message = error.responseText
           }
         })
       .always(() => {
