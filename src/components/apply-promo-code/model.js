@@ -101,6 +101,10 @@ class ApplyPromoCodeModel extends Model {
   success(model, resp, options) {
     console.log('ApplyPromoCodeModel success')
     console.log(model, resp, options)
+
+    // If `TrialEnabled` is `false`, it is a gift code
+    // Or
+    // If `TrialEnabled` is `null` and the `MembershipTerm` is `12` and `MembershipTermType` is `MONTH`, it is a gift code
     model.set({
       applyPromoCodeSuccess: true,
       type: 'success',

@@ -69,7 +69,7 @@ class EditPasswordModel extends Model {
       error: this.error
     }
     console.log(attributes, options)
-    // this.save(attributes, options)
+    this.save(attributes, options)
   }
 
   success(model, resp, options) {

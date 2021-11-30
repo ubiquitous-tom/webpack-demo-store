@@ -21,6 +21,10 @@ import Navigation from 'shared/navigation'
 import Dispatcher from 'common/dispatcher'
 import ATVView from './components/common/view'
 
+console.log(`Looks like we are in ${process.env.NODE_ENV} mode!`);
+console.log(`${process.env.RLJE_API_ENVIRONMENT}api.rlje.net`)
+console.log(`account${process.env.API_ENVIRONMENT}.acorn.tv`)
+
 $(function () {
   let dispatcher = new Dispatcher()
   const initializeApp = new InitializeApp({ dispatcher: dispatcher })

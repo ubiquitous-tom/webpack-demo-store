@@ -41,7 +41,7 @@ class AnnualPlan extends View {
     const data = {
       renewalDate: this.model.get('renewalDate'),
       currSymbol: this.model.get('Customer').CurrSymbol,
-      subscriptionAmount: this.model.get('Membership').SubscriptionAmount,
+      subscriptionAmount: this.getCurrentNetAmount(),
       annualPerMonthPricing: this.model.get('annualPerMonthPricing'),
       monthlySubscriptionAmount: this.model.get('monthlyStripPlan').SubscriptionAmount,
       tagline: this.getTagline(),
@@ -62,6 +62,14 @@ class AnnualPlan extends View {
     // console.log(this.switchToMonthlyPlan)
     this.switchToMonthlyPlan = new SwitchToMonthlyPlan({ model: this.model, dispatcher: this.dispatcher })
     this.switchToMonthlyPlan.render()
+  }
+
+  getCurrentNetAmount() {
+    return this.model.get('Membership').NetAmount
+      ? this.model.get('Membership').NetAmount
+      : this.model.get('Membership').NextBillingAmount
+        ? this.model.get('Membership').NextBillingAmount
+        : this.getCurrentNetAmount()
   }
 
   getTagline() {

@@ -8,7 +8,8 @@
     "watch": "webpack --watch",
     "start": "webpack serve --open",
     "server": "nodemon --watch server --watch src server.js",
-    "build": "webpack"
+    "build": "webpack --node-env production",
+    "build:dev": "webpack"
   },
   "keywords": [],
   "author": "",
@@ -48,7 +49,8 @@
     "webpack-cli": "^4",
     "webpack-dev-middleware": "^5.2.1",
     "webpack-dev-server": "^4.3.1",
-    "webpack-hot-middleware": "^2.25.1"
+    "webpack-hot-middleware": "^2.25.1",
+    "webpack-merge": "^5.8.0"
   },
   "dependencies": {
     "@popperjs/core": "^2.10.2",
