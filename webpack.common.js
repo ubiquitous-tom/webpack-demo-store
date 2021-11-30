@@ -13,7 +13,7 @@ const atvRoutes = require('./server/routes')
 
 module.exports = function (env, argv) {
   return {
-    mode: env.production ? 'production' : 'development',
+    mode: 'development',
     entry: {
       index: './src/app.js',
       // another: './src/another-module.js',
@@ -42,7 +42,7 @@ module.exports = function (env, argv) {
         chunks: 'all',
       },
     },
-    devtool: env.production ? 'source-map' : 'eval-cheap-module-source-map',
+    devtool: 'eval-cheap-module-source-map',
     devServer: {
       static: './dist',
       hot: true,
@@ -123,9 +123,8 @@ module.exports = function (env, argv) {
         },
         {
           test: /\.css$/i,
-          // include: path.resolve(__dirname, 'src'),
           use: [
-            env.production ? MiniCssExtractPlugin.loader : 'style-loader',
+            'style-loader',
             'css-loader',
             {
               loader: 'postcss-loader',
@@ -151,20 +150,12 @@ module.exports = function (env, argv) {
         },
         {
           test: /\.s[ac]ss$/i,
-          // include: path.resolve(__dirname, 'src'),
           use: [
-            env.production ? MiniCssExtractPlugin.loader : { loader: 'style-loader', /* inject CSS to page */ },
+            { loader: 'style-loader' },
+            { loader: 'css-loader' },
             {
-              loader: 'css-loader', // translates CSS into CommonJS modules
-            },
-            {
-              loader: 'postcss-loader', // Run postcss actions
+              loader: 'postcss-loader',
               options: {
-                // plugins: function () { // postcss plugins, can be exported to postcss.config.js
-                //   return [
-                //     require('autoprefixer')
-                //   ]
-                // }
                 postcssOptions: {
                   plugins: [
                     'postcss-preset-env',
@@ -173,39 +164,18 @@ module.exports = function (env, argv) {
                 }
               }
             },
-            {
-              loader: 'sass-loader' // compiles Sass to CSS
-            }
+            { loader: 'sass-loader' }
           ]
         },
         {
           test: /\.(png|svg|jpg|gif)$/i,
-          // include: [
-          //   path.resolve(__dirname, 'src'),
-          // ],
           use: [
             'file-loader',
-            // {
-            //   loader: 'url-loader',
-            //   options: {
-            //       limit: 8192 // in bytes
-            //   },
-            // },
           ],
         },
         {
           test: /\.(woff|woff2|eot|ttf|otf|svg)$/i,
-          // include: [
-          //   path.resolve(__dirname, 'src'),
-          // ],
           use: [
-            // {
-            //   loader: 'file-loader',
-            //   options: {
-            //     name: '[name].[ext]',
-            //     outputPath: 'fonts/'
-            //   },
-            // }
             {
               loader: 'url-loader',
               options: {
@@ -214,10 +184,8 @@ module.exports = function (env, argv) {
             },
           ],
         },
-        // { test: /bootstrap\/dist\/js\/umd\//, loader: 'imports?jQuery=jquery' }
         {
           test: /\.(htm|html)$/i,
-          // include: path.resolve(__dirname, 'src'),
           use: [
             'html-loader',
           ],

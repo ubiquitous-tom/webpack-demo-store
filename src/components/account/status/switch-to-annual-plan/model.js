@@ -71,7 +71,7 @@ class SwitchToAnnualPlanModel extends ATVModel {
       error: this.error,
     }
     console.log(attributes, options)
-    // plansChange.save(attributes, options)
+    plansChange.save(attributes, options)
     // console.log(this)
     // this.success()
   }
