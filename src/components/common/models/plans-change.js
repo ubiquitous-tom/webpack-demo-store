@@ -3,7 +3,7 @@ import { Model } from 'backbone'
 class PlansChange extends Model {
 
   get url() {
-    return 'acorn/plans/change'
+    return '/acorn/plans/change'
   }
 
   initialize() {
