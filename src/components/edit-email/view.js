@@ -38,6 +38,24 @@ class EditEmail extends View {
       debugger
       this.flashMessage.onFlashMessageShow(this.model.get('message'), this.model.get('type'))
     })
+
+    this.model.on('invalid', (model, value, options) => {
+      console.log('EditEmail initialize on invalid')
+      // console.log(model, value, options)
+      // console.log(this.$el[0])
+      // console.log(this.$el.find('#changeEmailForm .form-group')[0])
+      debugger
+      this.$el.find('#changeEmailForm .form-group').addClass('has-error')
+    })
+
+    this.model.on('error', (model, value, options) => {
+      console.log('EditEmail initialize on error')
+      // console.log(model, value, options)
+      // console.log(this.$el[0])
+      // console.log(this.$el.find('#changeEmailForm .form-group')[0])
+      debugger
+      this.$el.find('#changeEmailForm .form-group').addClass('has-error')
+    })
   }
 
   render() {

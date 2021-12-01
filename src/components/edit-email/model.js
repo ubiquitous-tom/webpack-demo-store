@@ -23,17 +23,17 @@ class EditEmailModel extends Model {
     console.log(attrs)
     // console.log(options)
 
-    if (_.isEmpty(attrs.Credentials.Password)) {
+    if (_.isEmpty(attrs.NewEmail)) {
       console.log('please enter the email')
       return 'please enter the email'
     }
 
-    if (_.isEmpty(attrs.Credentials.ConfirmPassword)) {
+    if (_.isEmpty(attrs.ConfirmedEmail)) {
       console.log('please confirm the email')
       return 'please confirm the email'
     }
 
-    if (attrs.Credentials.Password !== attrs.Credentials.ConfirmPassword) {
+    if (attrs.NewEmail !== attrs.ConfirmedEmail) {
       console.log('email do not match')
       return 'email do not match'
     }
@@ -64,7 +64,7 @@ class EditEmailModel extends Model {
       error: this.error
     }
     console.log(attributes, options)
-    // this.save(attributes, options)
+    this.save(attributes, options)
   }
 
   success(model, resp, options) {

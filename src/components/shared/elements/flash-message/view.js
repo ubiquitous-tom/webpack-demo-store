@@ -57,7 +57,7 @@ class FlashMessage extends View {
       htmlWithCloseButton
     )
 
-    // this.model.removeFlashMessage()
+    this.model.removeFlashMessage()
 
     return this
   }
