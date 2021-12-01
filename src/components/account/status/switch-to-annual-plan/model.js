@@ -28,7 +28,6 @@ class SwitchToAnnualPlanModel extends ATVModel {
     const from_frequency = 'monthly'
     const to_frequency = 'annual'
     const plansAvailable = this.get('plansAvailable')
-    // console.log(plansAvailable)
     _.each(plansAvailable, (plan, key, collection) => {
       // console.log(plan.type)
       if (plan.type === type) {
@@ -72,8 +71,6 @@ class SwitchToAnnualPlanModel extends ATVModel {
     }
     console.log(attributes, options)
     plansChange.save(attributes, options)
-    // console.log(this)
-    // this.success()
   }
 
   success(model, resp, options) {
@@ -92,8 +89,6 @@ class SwitchToAnnualPlanModel extends ATVModel {
         message: message,
       }
     })
-    // this.showFlashMessage(model, resp, options)
-    // this.dispatcher.trigger('flashMessage:show', this.get('flashMessage').message, this.get('flashMessage').type)
   }
 
   error(model, resp, options) {
@@ -106,23 +101,13 @@ class SwitchToAnnualPlanModel extends ATVModel {
         (response) => {
           console.log(response.responseJSON, response.responseText)
           if (!_.isEmpty(response.responseJSON)) {
-            // this.set({flashMessage: {'message': response.responseJSON.message}})
             message = response.responseJSON.message
-          }
-          if (!_.isEmpty(response.responseText)) {
-            // this.set({flashMessage: {'message': response.responseText}})
-            message = response.responseText
           }
         },
         (error) => {
           console.log(error.responseJSON, error.responseText)
           if (!_.isEmpty(error.responseJSON)) {
-            // this.set({flashMessage: {'message': error.responseJSON.error}})
             message = error.responseJSON.error
-          }
-          if (!_.isEmpty(error.responseText)) {
-            // this.set({ flashMessage: { 'message': error.responseText } })
-            message = error.responseText
           }
         })
       .always(() => {
@@ -135,7 +120,6 @@ class SwitchToAnnualPlanModel extends ATVModel {
         })
         console.log(this.get('flashMessage').message, this.get('flashMessage').type)
         // this.dispatcher.trigger('upgradeToAnnual:error', this)
-        // this.dispatcher.trigger('flashMessage:show', this.get('flashMessage').message, this.get('flashMessage').type)
       })
   }
 
