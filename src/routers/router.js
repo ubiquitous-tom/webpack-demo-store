@@ -6,7 +6,7 @@ import AccountHome from '../components/account'
 import EditEmail from '../components/edit-email'
 import EditPassword from '../components/edit-password'
 import ApplyPromoCode from '../components/apply-promo-code'
-import Logout from '../components/common/logout'
+import Logout from '../components/shared/elements/logout'
 
 class Workspace extends Router {
 
