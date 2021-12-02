@@ -79,10 +79,10 @@ class InitializeApp extends Model {
   }
 
   signinEnv() {
-    return window.location.hostname.replace('account', 'signup')
+    return `${window.location.protocol}//${window.location.hostname.replace('account', 'signup')}`
   }
   storeEnv() {
-    return window.location.hostname.replace('account', 'store')
+    return `${window.location.protocol}//${window.location.hostname.replace('account', 'store')}`
   }
 
   getStorageContent() {

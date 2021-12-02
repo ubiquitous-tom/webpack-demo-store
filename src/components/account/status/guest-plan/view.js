@@ -57,7 +57,7 @@ class GuestPlan extends View {
 
   startFreeTrial(e) {
     e.preventDefault()
-    const startFreeTrialURL = `${this.model.get('signinEnv')}/trailsignup.jsp?OperationalScenario=STORE`
+    const startFreeTrialURL = `${this.model.get('signinEnv')}/trialsignup.jsp?OperationalScenario=STORE`
     console.log(startFreeTrialURL)
     window.location.assign(startFreeTrialURL)
   }
