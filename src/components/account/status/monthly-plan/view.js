@@ -7,6 +7,7 @@ import template from './index.html'
 import MonthlyPlanModel from './model'
 // import AccountStatusModel from '../model'
 import SwitchToAnnualPlan from '../switch-to-annual-plan'
+import FlashMessage from 'shared/elements/flash-message'
 
 class MonthlyPlan extends View {
 
@@ -72,13 +73,27 @@ class MonthlyPlan extends View {
   getTagline() {
     if (this.model.get('Subscription').Promo) {
       return this.getPromoCodeInfo()
-    } else {
-      return ''
     }
+
+    if (this.model.get('Subscription').Trial) {
+      return this.getTrialInfo()
+    }
+
+    return ''
   }
 
   getPromoCodeInfo() {
     return `with promo code - ${this.model.get('Membership').PromoCode}`
+  }
+
+  getTrialInfo() {
+    const message = `Your free trial starts now and ends on ${this.model.get('trialEndDate')}`
+    const type = `success`
+
+    this.flashMessage = new FlashMessage()
+    this.flashMessage.onFlashMessageShow(message, type)
+
+    return `after your free trial ends.`
   }
 }
 

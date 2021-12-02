@@ -4,6 +4,7 @@ import _ from 'underscore'
 import './stylesheet.scss'
 import template from './index.hbs'
 import GuestPlanModel from './model'
+import FlashMessage from 'shared/elements/flash-message'
 
 class GuestPlan extends View {
 
@@ -24,6 +25,7 @@ class GuestPlan extends View {
   initialize() {
     console.log('GuestPlan initialize')
     console.log(this)
+    this.flashMessage = new FlashMessage()
     this.model = new GuestPlanModel(this.model.attributes)
     // console.log(this.model)
     // console.log(this.model.attributes)
@@ -41,17 +43,24 @@ class GuestPlan extends View {
     }
     const html = this.template(data)
     this.$el.find('.current-plan').html(html)
-    // this.$el.html(this.template)
+
+    this.startFreeTrialBanner()
 
     return this
   }
 
-  startFreeTrial(e) {
-    e.preventDefault()
-    const startFreeTrialURL = `${this.model.get('signinEnv')}/signin.jsp?OperationalScenario=STORE`
-    console.log(startFreeTrialURL)
+  startFreeTrialBanner() {
+    const message = `Start streaming now! Try 7 Days Free`
+    const type = `success`
+    this.flashMessage.onFlashMessageShow(message, type)
   }
 
+  startFreeTrial(e) {
+    e.preventDefault()
+    const startFreeTrialURL = `${this.model.get('signinEnv')}/trailsignup.jsp?OperationalScenario=STORE`
+    console.log(startFreeTrialURL)
+    window.location.assign(startFreeTrialURL)
+  }
 }
 
 export default GuestPlan

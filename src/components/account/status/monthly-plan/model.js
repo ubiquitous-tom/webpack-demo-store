@@ -33,6 +33,7 @@ class MonthlyPlanModel extends ATVModel {
 
     // this.getMonthlyToAnnualUpgradeInfo()
     this.getRenewalDate()
+    this.getTrialEndDate()
   }
 
   getStorageContent(localStorageID) {
@@ -76,6 +77,26 @@ class MonthlyPlanModel extends ATVModel {
     const renewalDate = this.formatDate(date)
     // console.log(renewalDate)
     this.set('renewalDate', renewalDate)
+  }
+
+  getTrialEndDate() {
+    if (this.get('Subscription').Trial) {
+      const trialDays = this.get('monthlyStripePlan').TrialDays
+      const joinDate = this.get('Customer').JoinDate
+      let date = joinDate.split('/')
+      let f = new Date(date[2], date[0] - 1, date[1])
+      // console.log(joinDate)
+      // console.log(f.toString())
+      let trialEndDate = f.setDate(f.getDate() + trialDays)
+      // console.log(trialEndDate)
+
+      const d = new Date(0)
+      d.setUTCMilliseconds(trialEndDate)
+      console.log(d)
+      const trialEnddateOjb = this.formatDate(d)
+      // console.log(trialEnddateOjb)
+      this.set('trialEndDate', trialEnddateOjb)
+    }
   }
 
   formatDate(d) {

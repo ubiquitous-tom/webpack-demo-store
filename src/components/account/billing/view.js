@@ -33,7 +33,7 @@ class BillingInfo extends View {
     // console.log(template)
     const html = this.template(this.model.attributes)
     // console.log(html)
-    console.log(this.$el[0], this.$el.find('#billingInfoView')[0])
+    // console.log(this.$el[0], this.$el.find('#billingInfoView')[0])
     this.$el.find('#billingInfoView').html(html)
     // this.$el.html(this.template(data))
   }

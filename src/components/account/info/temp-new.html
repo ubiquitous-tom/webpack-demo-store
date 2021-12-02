@@ -9,14 +9,18 @@
       <div class="col-lg-3 col-xs-4">Email:</div>
       <div class="col-lg-9 col-xs-8 info">{{ Customer.Email }}</div>
     </div>
+    {{#unless Subscription.NoSubscription}}
     <div class="row">
       <div class="col-lg-3 col-xs-4">Joined on:</div>
       <div class="col-lg-9 col-xs-8 info">{{ Customer.JoinDate }}</div>
     </div>
+    {{/unless}}
   </div>
 </div>
+{{#unless Subscription.NoSubscription}}
 <div class="row cancel-membership">
   <div class="col-md-8">
     <a href="#" class="href">Cancel Membership</a>
   </div>
 </div>
+{{/unless}}

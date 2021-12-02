@@ -68,11 +68,11 @@ class AccountHomeModel extends ATVModel {
     console.log('AccountHomeModel success')
     console.log(model, resp, options)
     // debugger
-    this.set({
+    model.set({
       currentMembershipSuccess: true,
       currentMembership: resp,
     })
-    console.log(this)
+    console.log(model)
   }
 
   error(model, resp, options) {
@@ -95,7 +95,7 @@ class AccountHomeModel extends ATVModel {
           }
         })
       .always(() => {
-        this.set({
+        model.set({
           currentMembershipSuccess: false,
         })
       })
