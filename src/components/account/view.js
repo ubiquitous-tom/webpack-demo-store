@@ -33,7 +33,7 @@ class AccountHome extends View {
     this.model = new AccountHomeModel(this.model.attributes)
     // console.log(this.model)
     // this.render()
-    this.listenTo(this.model, 'sync', this.render)
+    this.listenTo(this.model, 'sync error', this.render)
     // this.listenTo(this.model, 'change', this.render)
   }
 

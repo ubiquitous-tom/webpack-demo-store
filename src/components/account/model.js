@@ -43,23 +43,62 @@ class AccountHomeModel extends ATVModel {
       dataType: 'json',
       ajaxSync: true,
       wait: true,
-      data: $.param(params)
+      data: $.param(params),
+      success: this.success,
+      error: this.error,
     })
   }
 
   parse(resp) {
     console.log('AccountHomeModel parse')
     console.log(resp)
-    if (!_.isEmpty(resp)) {
-      console.log('AccountHomeModel parse NOT isEmpty')
-      this.set('currentMembership', resp)
-      console.log(this)
-      // this.sync('read', this)
-    } else {
-      // something's wrong
-    }
+    // if (!_.isEmpty(resp)) {
+    //   console.log('AccountHomeModel parse NOT isEmpty')
+    //   this.set('currentMembership', resp)
+    //   console.log(this)
+    //   // this.sync('read', this)
+    // } else {
+    //   // something's wrong
+    // }
 
-    return resp
+    // return resp
+  }
+
+  success(model, resp, options) {
+    console.log('AccountHomeModel success')
+    console.log(model, resp, options)
+    // debugger
+    this.set({
+      currentMembershipSuccess: true,
+      currentMembership: resp,
+    })
+    console.log(this)
+  }
+
+  error(model, resp, options) {
+    console.log('AccountHomeModel error')
+    console.log(model, resp, options)
+    // debugger
+    let message = ''
+    resp
+      .then(
+        (response) => {
+          console.log(response.responseJSON, response.responseText)
+          if (!_.isEmpty(response.responseJSON)) {
+            message = response.responseJSON.message
+          }
+        },
+        (error) => {
+          console.log(error.responseJSON, error.responseText)
+          if (!_.isEmpty(error.responseJSON)) {
+            message = error.responseJSON.error
+          }
+        })
+      .always(() => {
+        this.set({
+          currentMembershipSuccess: false,
+        })
+      })
   }
 
 }

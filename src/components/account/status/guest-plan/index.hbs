@@ -1,0 +1,30 @@
+<div id="guest-plan" class="row">
+  {{!log this level='error'}}
+  <div class="col-md-8">
+    <h1 class="formhead">Plans</h1>
+  </div>
+  {{!-- <div class="col-md-8 banner">
+    <p>
+      Your Monthly Plan renews on {{ renewalDate }}. ({{ currSymbol }}{{
+      subscriptionAmount }}/mo)<br />
+      {{ tagline }}
+    </p>
+  </div> --}}
+</div>
+<div class="row">
+  <div class="col-lg-6 col-sm-9">
+    <div class="upgrade-to-annual">
+      <h2>Plans starting at</h2>
+      <p>
+        <sup class="symbol">{{currSymbol}}</sup>
+        <span class="price">{{monthlySubscriptionAmount}}</span>
+        <sup>/</sup>
+        <sub class="period">mo.</sub>
+      </p>
+      <button type="submit" class="start-free-trial">
+        Try
+        {{trialDays}}
+        Days Free</button>
+    </div>
+  </div>
+</div>

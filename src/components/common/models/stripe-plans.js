@@ -71,7 +71,7 @@ class StripePlans extends Model {
       console.log('StripePlans initialize updateModel')
       this.updateModel()
     }
-    this.getStorageContent()
+    // this.getStorageContent()
 
     // this.listenTo(this, 'change', this.getAnnualStripePlan)
     // this.listenTo(this, 'change', this.getMonthlyStripePlan)
@@ -104,7 +104,7 @@ class StripePlans extends Model {
       this.sync('create', this)
     }
     console.log(this)
-    return response
+    // return response
   }
 
 
@@ -133,7 +133,7 @@ class StripePlans extends Model {
     // console.log(stripePlan)
     const monthlyStripePlan = _.findWhere(stripePlan, type)
     // console.log(monthlyStripePlan)
-    this.set('monthlyStripPlan', monthlyStripePlan)
+    this.set('monthlyStripePlan', monthlyStripePlan)
   }
 
   environment() {

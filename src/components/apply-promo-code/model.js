@@ -102,9 +102,12 @@ class ApplyPromoCodeModel extends Model {
     console.log('ApplyPromoCodeModel success')
     console.log(model, resp, options)
 
+    let message = resp.message //Your Promotion Code has been applied!
     // If `TrialEnabled` is `false`, it is a gift code
     // Or
     // If `TrialEnabled` is `null` and the `MembershipTerm` is `12` and `MembershipTermType` is `MONTH`, it is a gift code
+    let promoMessagePrefix = `Promo applied!`
+    let promoMessageSuffix = `Your account has been updated`
     model.set({
       applyPromoCodeSuccess: true,
       type: 'success',

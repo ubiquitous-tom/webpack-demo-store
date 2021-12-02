@@ -43,7 +43,7 @@ class AccountStatusModel extends ATVModel {
       this.sync('read', this)
     }
     console.log(this)
-    return response
+    // return response
   }
 
   // checkStorages() {

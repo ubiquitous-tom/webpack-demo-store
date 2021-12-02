@@ -6,6 +6,7 @@ import template from './temp-new.html'
 import MonthlyPlan from './monthly-plan'
 import AnnualPlan from './annual-plan'
 import AccountStatusModel from './model'
+import GuestPlan from './guest-plan'
 // import Dispatcher from 'common/dispatcher'
 // import ATVView from 'common/view'
 
@@ -47,9 +48,16 @@ class AccountStatus extends View {
     if (this.model.get('Subscription').Monthly) {
       console.log('AccountStatus monthlyPlan render')
       this.monthlyPlan = new MonthlyPlan({ model: this.model, dispatcher: this.dispatcher })
-    } else {
+    }
+
+    if (this.model.get('Subscription').Annual) {
       console.log('AccountStatus annualPlan render')
       this.annualPlan = new AnnualPlan({ model: this.model, dispatcher: this.dispatcher })
+    }
+
+    if (this.model.get('Subscription').NoSubscription) {
+      console.log('AccountStatus guestPlan render')
+      this.guestPlan = new GuestPlan({ model: this.model, dispatcher: this.dispatcher })
     }
   }
 }

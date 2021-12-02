@@ -43,7 +43,7 @@ class AnnualPlan extends View {
       currSymbol: this.model.get('Customer').CurrSymbol,
       subscriptionAmount: this.getCurrentNetAmount(),
       annualPerMonthPricing: this.model.get('annualPerMonthPricing'),
-      monthlySubscriptionAmount: this.model.get('monthlyStripPlan').SubscriptionAmount,
+      monthlySubscriptionAmount: this.model.get('monthlyStripePlan').SubscriptionAmount,
       tagline: this.getTagline(),
     }
     const html = template(data)
