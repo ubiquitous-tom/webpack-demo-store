@@ -58,9 +58,10 @@ class SwitchToAnnualPlanModel extends ATVModel {
     const attributes = {
       from: this.get('currentUpgradePlan').from_stripe_plan_id,
       to: this.get('currentUpgradePlan').to_stripe_plan_id,
-      promocode: this.has('promoCode') ? this.get('promoCode') : '',
+      promo_code: this.has('promoCode') ? this.get('promoCode') : '',
     }
     const options = {
+      url: [plansChange.url, $.param(attributes)].join('?'),
       context: this,
       dataType: 'json',
       ajaxSync: true,

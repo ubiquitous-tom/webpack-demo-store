@@ -52,9 +52,10 @@ class SwitchToMonthlyPlanModel extends ATVModel {
     const attributes = {
       from: this.get('currentDowngradePlan').from_stripe_plan_id,
       to: this.get('currentDowngradePlan').to_stripe_plan_id,
-      // promocode: this.has('promoCode') ? this.get('promoCode').promocode : '',
+      // promo_code: this.has('promoCode') ? this.get('promoCode').promocode : '',
     }
     const options = {
+      url: [plansChange.url, $.param(attributes)].join('?'),
       context: this,
       dataType: 'json',
       ajaxSync: true,
