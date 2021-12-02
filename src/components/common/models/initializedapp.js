@@ -45,7 +45,7 @@ class InitializeApp extends Model {
 
     // If this is a brand new account never been created then go to signup
     if (!this.has('Customer')) {
-      const signinURL = `${this.get('signinEnv')}/signup.jsp?OperationalScenario=STORE`
+      const signinURL = `${this.get('signinEnv')}/signin.jsp?OperationalScenario=STORE`
       window.location.assign(signinURL)
     }
 
