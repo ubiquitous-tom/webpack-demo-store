@@ -17,10 +17,9 @@ class InitializeApp extends Model {
     return '/initializeapp?AppVersion=' + this.get('appVersion')
   }
 
-  initialize(options) {
+  initialize() {
     console.log('InitializeApp initialize')
     console.log(this)
-    this.dispatcher = options.dispatcher
     this.localStorage = new LocalStorage(this.get('localStorageID'))
     // console.log(this.localStorage)
     const store = getLocalStorage(this)
@@ -28,8 +27,6 @@ class InitializeApp extends Model {
     if (_.isEmpty(store.records)) {
       this.fetchInitializeApp()
     }
-
-    // this.dispatcher.on('subscription:updated', this.subscriptionUpdated, this)
   }
 
   parse(response) {
@@ -39,18 +36,18 @@ class InitializeApp extends Model {
     if (_.isEmpty(data)) {
       return data
     }
-    // console.log(data)
-    // const customer = !_.isEmpty(_.pick(data, 'Customer')) ? _.pick(data, 'Customer').Customer : {}
-    // const session = !_.isEmpty(_.pick(data, 'Session')) ? _.pick(data, 'Session').Session : {}
-
     this.set(data)
     this.set({
-      // customer: customer,
-      // session: session,
       environment: 'dev3.',//this.environment(),
       signinEnv: this.signinEnv(),
       storeEnv: this.storeEnv(),
     })
+
+    // If this is a brand new account never been created then go to signup
+    if (!this.has('Customer')) {
+      const signinURL = `${this.get('signinEnv')}/signup.jsp?OperationalScenario=STORE`
+      window.location.assign(signinURL)
+    }
 
     const storage = getLocalStorage(this)
     if (!_.isEmpty(storage.records)) {

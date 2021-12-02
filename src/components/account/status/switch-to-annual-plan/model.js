@@ -1,6 +1,4 @@
 import _ from 'underscore'
-// import Dispatcher from 'common/dispatcher'
-// import FlashMessage from 'shared/elements/flash-message'
 import PlansChange from 'common/models/plans-change'
 import ATVModel from 'common/model'
 
@@ -15,9 +13,6 @@ class SwitchToAnnualPlanModel extends ATVModel {
   initialize() {
     console.log('SwitchToAnnualPlanModel initialize')
     console.log(this)
-
-    // this.dispatcher = new Dispatcher()
-    // this.flashMessage = new FlashMessage({ dispatcher: this.dispatcher })
 
     this.getMonthlyToAnnualUpgradeInfo()
   }
@@ -120,7 +115,6 @@ class SwitchToAnnualPlanModel extends ATVModel {
           }
         })
         console.log(this.get('flashMessage').message, this.get('flashMessage').type)
-        // this.dispatcher.trigger('upgradeToAnnual:error', this)
       })
   }
 

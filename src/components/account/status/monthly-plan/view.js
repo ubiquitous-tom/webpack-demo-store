@@ -28,8 +28,6 @@ class MonthlyPlan extends View {
   initialize(options) {
     console.log('MonthlyPlan initialize')
     console.log(this, options)
-    // this.model = new AccountStatusModel()
-    this.dispatcher = options.dispatcher
     this.model = new MonthlyPlanModel(this.model.attributes)
     // this.getRenewalDate()
     console.log(this)
@@ -58,7 +56,7 @@ class MonthlyPlan extends View {
     e.preventDefault()
     console.log('switch to annual plan')
     // console.log(this.switchToAnnualPlan)
-    this.switchToAnnualPlan = new SwitchToAnnualPlan({ monthlyPlan: this.model, dispatcher: this.dispatcher })
+    this.switchToAnnualPlan = new SwitchToAnnualPlan({ monthlyPlan: this.model })
     // this.switchToAnnualPlan.render()
   }
 

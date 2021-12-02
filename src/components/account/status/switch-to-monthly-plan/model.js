@@ -1,7 +1,5 @@
 import _ from 'underscore'
 import ATVModel from 'common/model'
-// import Dispatcher from 'common/dispatcher'
-// import FlashMessage from 'shared/elements/flash-message'
 import PlansChange from 'common/models/plans-change'
 
 class SwitchToMonthlyPlanModel extends ATVModel {
@@ -9,9 +7,6 @@ class SwitchToMonthlyPlanModel extends ATVModel {
   initialize() {
     console.log('SwitchToMonthlyPlanModel initialize')
     console.log(this)
-
-    // this.dispatcher = new Dispatcher()
-    // this.flashMessage = new FlashMessage({ dispatcher: this.dispatcher })
 
     this.getAnnualToMonthlyDowngradeInfo()
   }
@@ -82,8 +77,6 @@ class SwitchToMonthlyPlanModel extends ATVModel {
         message: message,
       }
     })
-    // this.showFlashMessage(model, resp, options)
-    // this.dispatcher.trigger('flashMessage:show', this.get('flashMessage').message, this.get('flashMessage').type)
   }
 
   error(model, resp, options) {
@@ -128,8 +121,6 @@ class SwitchToMonthlyPlanModel extends ATVModel {
           }
         })
         console.log(this.get('flashMessage').message, this.get('flashMessage').type)
-        // this.dispatcher.trigger('downgradeToMonthly:error', this)
-        // this.dispatcher.trigger('flashMessage:show', this.get('flashMessage').message, this.get('flashMessage').type)
       })
   }
 }

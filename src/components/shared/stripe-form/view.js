@@ -3,7 +3,6 @@ import _ from 'underscore'
 
 import './stylesheet.scss'
 import template from './index.html'
-// import Dispatcher from 'common/dispatcher'
 
 class StripeForm extends View {
 
@@ -24,7 +23,6 @@ class StripeForm extends View {
 
   initialize(options) {
     console.log('StripeForm initialize')
-    // this.dispatcher = new Dispatcher()
     console.log(this)
     console.log(options)
     this.parentView = options.parentView
@@ -89,9 +87,6 @@ class StripeForm extends View {
 
   render() {
     console.log('StripeForm render')
-    // console.log(this.$el[0])
-    // console.log(this.$el.find('#stripe-form')[0])
-    // console.log(this.template())
     const template = this.template()
 
     this.$el.find('#stripe-form').html(template)
@@ -113,10 +108,6 @@ class StripeForm extends View {
   submit(e) {
     console.log('StripeForm submit')
     e.preventDefault()
-    // console.log(e, $(e.currentTarget))
-    // console.log(this.$el.find('#stripe-form #nameoncard').val())
-    // console.log(this.$el.find('#stripe-form #card-zipcode').val())
-    // console.log(this.parentView.model.model.get('BillingAddress'))
     console.log(this.parentView.model)
     const data = {
       name: this.$el.find('#stripe-form #nameoncard').val(),
@@ -137,14 +128,6 @@ class StripeForm extends View {
         }
       })
   }
-
-  // disableInputs() {
-  //   this.$el.find('input').setAttribute('disabled', true)
-  // }
-
-  // enableInputs() {
-  //   this.$el.find('input').setAttribute('disabled', false)
-  // }
 }
 
 export default StripeForm

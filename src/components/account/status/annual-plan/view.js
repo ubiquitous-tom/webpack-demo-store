@@ -27,7 +27,6 @@ class AnnualPlan extends View {
   initialize(options) {
     console.log('AnnualPlan initialize')
     console.log(this)
-    this.dispatcher = options.dispatcher
     this.model = new AnnualPlanModel(this.model.attributes)
     // console.log(this.model)
     // console.log(this.model.attributes)
@@ -60,7 +59,7 @@ class AnnualPlan extends View {
     e.preventDefault()
     console.log('AnnualPlan switchToMonthly')
     // console.log(this.switchToMonthlyPlan)
-    this.switchToMonthlyPlan = new SwitchToMonthlyPlan({ model: this.model, dispatcher: this.dispatcher })
+    this.switchToMonthlyPlan = new SwitchToMonthlyPlan({ model: this.model })
     this.switchToMonthlyPlan.render()
   }
 

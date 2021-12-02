@@ -29,7 +29,6 @@ class SwitchToAnnualPlan extends View {
   initialize(options) {
     console.log('SwitchToAnnualPlan intialize')
     // console.log(options.monthlyPlan)
-    this.dispatcher = options.dispatcher
     this.flashMessage = new FlashMessage()
     this.model = new SwitchToAnnualPlanModel(options.monthlyPlan.attributes)
     this.confirmBilling = new ConfirmBilling({ switchToAnnualPlan: this })
@@ -46,9 +45,8 @@ class SwitchToAnnualPlan extends View {
       debugger
       this.$el.find('.switch-to-annual-plan-container').remove()
       this.showFooter()
-      // this.dispatcher.trigger('subscription:updated', this)
+
       this.flashMessage.onFlashMessageSet(this.model.get('flashMessage').message, this.model.get('flashMessage').type)
-      this.dispatcher.trigger('upgradeToAnnual:success', this)
     })
 
     // Trigger Show/Hide promo code form in PromoCode View

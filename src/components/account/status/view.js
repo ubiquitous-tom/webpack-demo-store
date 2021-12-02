@@ -7,7 +7,6 @@ import MonthlyPlan from './monthly-plan'
 import AnnualPlan from './annual-plan'
 import AccountStatusModel from './model'
 import GuestPlan from './guest-plan'
-// import Dispatcher from 'common/dispatcher'
 // import ATVView from 'common/view'
 
 class AccountStatus extends View {
@@ -22,7 +21,6 @@ class AccountStatus extends View {
 
   initialize(options) {
     console.log('AccountStatus initialize')
-    this.dispatcher = options.dispatcher
     // console.log(this.model.attributes)
     this.model = new AccountStatusModel(this.model.attributes)
     this.listenTo(this.model, 'sync', this.render)
@@ -47,17 +45,17 @@ class AccountStatus extends View {
 
     if (this.model.get('Subscription').Monthly) {
       console.log('AccountStatus monthlyPlan render')
-      this.monthlyPlan = new MonthlyPlan({ model: this.model, dispatcher: this.dispatcher })
+      this.monthlyPlan = new MonthlyPlan({ model: this.model })
     }
 
     if (this.model.get('Subscription').Annual) {
       console.log('AccountStatus annualPlan render')
-      this.annualPlan = new AnnualPlan({ model: this.model, dispatcher: this.dispatcher })
+      this.annualPlan = new AnnualPlan({ model: this.model })
     }
 
     if (this.model.get('Subscription').NoSubscription) {
       console.log('AccountStatus guestPlan render')
-      this.guestPlan = new GuestPlan({ model: this.model, dispatcher: this.dispatcher })
+      this.guestPlan = new GuestPlan({ model: this.model })
     }
   }
 }

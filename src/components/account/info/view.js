@@ -17,6 +17,12 @@ class AccountInfo extends View {
     return _.template(template)
   }
 
+  get events() {
+    return {
+      'click .cancel-membership a': 'cancelMembership',
+    }
+  }
+
   initialize() {
     console.log('AccountInfo initialize')
     // console.log(this.model.attributes)
@@ -38,6 +44,24 @@ class AccountInfo extends View {
     this.$el.find('#accountInfoView').html(html)
 
     return this
+  }
+
+  cancelMembership(e) {
+    console.log('AccountInfo cancelMembership')
+    e.preventDefault()
+    const env = this.environment()
+    const cancelMembershipURL = `https://${env}acorn.tv/account/cancel`
+    window.location.assign(cancelMembershipURL)
+  }
+
+  environment() {
+    const env = window.location.hostname.indexOf('dev') > -1
+      ? 'dev3.'
+      : window.location.hostname.indexOf('qa') > -1
+        ? 'qa.'
+        : ''
+    // console.log(env)
+    return 'dev3.' //env
   }
 }
 

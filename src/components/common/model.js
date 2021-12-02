@@ -10,8 +10,6 @@ import StripePlans from './models/stripe-plans'
 // import CurrentMembership from './models/currentmembership'
 import FlashMessage from 'shared/elements/flash-message'
 
-// import Dispatcher from './dispatcher'
-
 class ATVModel extends Model {
 
   get defaults() {

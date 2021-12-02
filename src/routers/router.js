@@ -6,6 +6,7 @@ import AccountHome from '../components/account'
 import EditEmail from '../components/edit-email'
 import EditPassword from '../components/edit-password'
 import ApplyPromoCode from '../components/apply-promo-code'
+import UpdateCard from '../components/updatecard/view'
 import Logout from '../components/shared/elements/logout'
 
 class Workspace extends Router {
@@ -20,6 +21,7 @@ class Workspace extends Router {
       'renewMembership': 'renewMembership',
       'buyMembership': 'buyMembership',
       'applyPromoCode': 'applyPromoCode',
+      'updatecard': 'updateCard',
       'refresh': 'refresh',
       'logout': 'logout',
       '*path': 'home',
@@ -38,17 +40,9 @@ class Workspace extends Router {
   initialize(options) {
     console.log('Router initialize')
     this.model = options.model
-    this.dispatcher = options.dispatcher
     this.history = new History()
     // router.trigger('route', name, args);
     // Backbone.history.trigger('route', router, name, args);
-
-    this.dispatcher.on({
-      'upgradeToAnnual:success': this.subscriptionUpdatedSuccess,
-      'upgradeToAnnual:error': this.subscriptionUpdatedError,
-      'downgradeToMonthly:success': this.subscriptionUpdatedSuccess,
-      'downgradeToMonthly:error': this.subscriptionUpdatedError,
-    }, this)
   }
 
   goToLogin() {
@@ -58,7 +52,7 @@ class Workspace extends Router {
 
   accountStatus() {
     console.log('Router loads accountStatus')
-    const accountHome = new AccountHome({ model: this.model, dispatcher: this.dispatcher })
+    const accountHome = new AccountHome({ model: this.model })
   }
 
   logout() {
@@ -95,6 +89,11 @@ class Workspace extends Router {
   applyPromoCode() {
     console.log('Router loads applyPromoCode')
     const applyPromocode = new ApplyPromoCode({ model: this.model })
+  }
+
+  updateCard() {
+    console.log('Router loads updateCard')
+    const updateCard = new UpdateCard({ model: this.model })
   }
 
   refresh() {
