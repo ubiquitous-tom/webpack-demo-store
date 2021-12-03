@@ -44,9 +44,9 @@ class UpdateCard extends View {
   goToMembership(e) {
     console.log('UpdateCard goToMembership')
     e.preventDefault()
+    this.$el.find('#stunning').remove()
+    this.showFooter()
     window.location.assign('#accountStatus')
-    // this.$el.find('#stunning').remove()
-    // this.showFooter()
 
   }
 

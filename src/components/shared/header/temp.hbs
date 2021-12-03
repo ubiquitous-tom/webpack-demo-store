@@ -15,36 +15,30 @@
         </div>
 
         <ul class="drop-select closed" style="display:none;">
-          <a href="//{{environment}}acorn.tv/browse/recentlywatched/">
-            <li>RECENTLY WATCHED</li>
-          </a>
-          <a href="//{{environment}}acorn.tv/browse/yourwatchlist/">
-            <li>MY WATCHLIST</li>
-          </a>
-          <a href="#accountStatus">
-            <li>MANAGEACCOUNT</li>
-          </a>
-          <a href="#editPassword">
-            <li>CHANGE PASSWORD</li>
-          </a>
+          <li>
+            <a href="//{{environment}}acorn.tv/browse/recentlywatched/">
+              RECENTLY WATCHED
+            </a>
+          </li>
+          <li>
+            <a href="//{{environment}}acorn.tv/browse/yourwatchlist/">
+              MY WATCHLIST
+            </a>
+          </li>
+          <li><a href="#accountStatus">MANAGE ACCOUNT</a></li>
+          <li><a href="#editPassword">CHANGE PASSWORD</a></li>
           {{#if Customer.webPaymentEdit}}
             {{#if Customer.StripeEnabled}}
-              <a href="updatecard.html?stripe_id={{Customer.StripeCustomerID}}">
-                <li>UPDATE BILLING INFORMATION</li>
-              </a>
+              <li><a href="#updatecard">UPDATE BILLING INFORMATION</a></li>
             {{/if}}
-            <a href="#editEmail">
-              <li>CHANGE EMAIL</li>
-            </a>
+            <li><a href="#editEmail">CHANGE EMAIL</a></li>
           {{/if}}
           {{#if Session.LoggedIn}}
-            <a href="#logout">
-              <li>LOG OUT</li>
-            </a>
+            <li><a href="#logout">LOG OUT</a></li>
           {{else}}
-            <a href="{{signinEnv}}/signin.jsp?OperationalScenario=STORE">
-              <li>SIGN IN</li>
-            </a>
+            <li><a
+                href="{{signinEnv}}/signin.jsp?OperationalScenario=STORE"
+              >SIGN IN</a></li>
           {{/if}}
         </ul>
       </li>

@@ -153,6 +153,9 @@
 .drop-select li:hover {
   background: #191919 none repeat scroll 0 0;
 }
+.drop-select li a {
+  color: #fff;
+}
 .navbar-right-ul.accountUser {
   /* max-width: 155px; */
 }
