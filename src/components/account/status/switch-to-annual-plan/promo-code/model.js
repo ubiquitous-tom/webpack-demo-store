@@ -69,21 +69,23 @@ class PromoCodeModel extends ATVModel {
     console.log(this)
     debugger
     let message = ''
+    /* eslint function-paren-newline: 0 */
     resp
-      .done((response) => {
-        debugger
-        console.log(response.responseJSON, response.responseText)
-        if (!_.isEmpty(response.responseJSON)) {
-          message = response.responseJSON.message
-        }
-      })
-      .fail((error) => {
-        debugger
-        console.log(error.responseJSON, error.responseText)
-        if (!_.isEmpty(error.responseJSON)) {
-          message = error.responseJSON.error
-        }
-      })
+      .then(
+        (response) => {
+          debugger
+          console.log(response.responseJSON, response.responseText)
+          if (!_.isEmpty(response.responseJSON)) {
+            message = response.responseJSON.message
+          }
+        },
+        (error) => {
+          debugger
+          console.log(error.responseJSON, error.responseText)
+          if (!_.isEmpty(error.responseJSON)) {
+            message = error.responseJSON.error
+          }
+        })
       .always(() => {
         debugger
         model.set({

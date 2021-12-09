@@ -86,27 +86,29 @@ class EditPasswordModel extends Model {
   error(model, resp, options) {
     console.log('EditPasswordModel error')
     console.log(model, resp, options)
+    /* eslint function-paren-newline: 0 */
     resp
-      .done((response) => {
-        console.log(response.responseJSON)
-        if (!_.isEmpty(response.responseJSON)) {
-          model.set({
-            editPasswordSuccess: false,
-            type: 'error',
-            message: response.responseJSON.Changed,
-          })
-        }
-      })
-      .fail((error) => {
-        console.log(error.responseJSON)
-        if (!_.isEmpty(error.responseJSON)) {
-          model.set({
-            editPasswordSuccess: false,
-            type: 'error',
-            message: error.responseJSON.error,
-          })
-        }
-      })
+      .then(
+        (response) => {
+          console.log(response.responseJSON)
+          if (!_.isEmpty(response.responseJSON)) {
+            model.set({
+              editPasswordSuccess: false,
+              type: 'error',
+              message: response.responseJSON.Changed,
+            })
+          }
+        },
+        (error) => {
+          console.log(error.responseJSON)
+          if (!_.isEmpty(error.responseJSON)) {
+            model.set({
+              editPasswordSuccess: false,
+              type: 'error',
+              message: error.responseJSON.error,
+            })
+          }
+        })
       .always(() => {
         console.log(model.get('message'), model.get('type'))
       })

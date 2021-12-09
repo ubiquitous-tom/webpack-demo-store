@@ -92,19 +92,21 @@ class SwitchToAnnualPlanModel extends ATVModel {
     console.log(model, resp, options)
     debugger
     let message = ''
+    /* eslint function-paren-newline: 0 */
     resp
-      .done((response) => {
-        console.log(response.responseJSON, response.responseText)
-        if (!_.isEmpty(response.responseJSON)) {
-          message = response.responseJSON.message
-        }
-      })
-      .fail((error) => {
-        console.log(error.responseJSON, error.responseText)
-        if (!_.isEmpty(error.responseJSON)) {
-          message = error.responseJSON.error
-        }
-      })
+      .then(
+        (response) => {
+          console.log(response.responseJSON, response.responseText)
+          if (!_.isEmpty(response.responseJSON)) {
+            message = response.responseJSON.message
+          }
+        },
+        (error) => {
+          console.log(error.responseJSON, error.responseText)
+          if (!_.isEmpty(error.responseJSON)) {
+            message = error.responseJSON.error
+          }
+        })
       .always(() => {
         model.set({
           upgradeToAnnualSuccess: false,

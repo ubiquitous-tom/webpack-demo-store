@@ -36,6 +36,7 @@ const plansAvailable = function (req, res) {
       console.error(error.message);
       // Consume response data to free up memory
       resp.resume();
+      res.status(statusCode).send(error.message)
       return;
     }
 

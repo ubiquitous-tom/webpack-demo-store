@@ -85,31 +85,33 @@ class SwitchToMonthlyPlanModel extends ATVModel {
     console.log(this)
     debugger
     let message = ''
+    /* eslint function-paren-newline: 0 */
     resp
-      .done((response) => {
-        debugger
-        console.log(response.responseJSON, response.responseText)
-        if (!_.isEmpty(response.responseJSON)) {
-          // this.set({flashMessage: {'message': response.responseJSON.message}})
-          message = response.responseJSON.message
-        }
-        if (!_.isEmpty(response.responseText)) {
-          // this.set({flashMessage: {'message': response.responseText}})
-          message = response.responseText
-        }
-      })
-      .fail((error) => {
-        debugger
-        console.log(error.responseJSON, error.responseText)
-        if (!_.isEmpty(error.responseJSON)) {
-          // this.set({flashMessage: {'message': error.responseJSON.error}})
-          message = error.responseJSON.error
-        }
-        if (!_.isEmpty(error.responseText)) {
-          // this.set({flashMessage: {'message': error.responseText}})
-          message = error.responseText
-        }
-      })
+      .then(
+        (response) => {
+          debugger
+          console.log(response.responseJSON, response.responseText)
+          if (!_.isEmpty(response.responseJSON)) {
+            // this.set({flashMessage: {'message': response.responseJSON.message}})
+            message = response.responseJSON.message
+          }
+          if (!_.isEmpty(response.responseText)) {
+            // this.set({flashMessage: {'message': response.responseText}})
+            message = response.responseText
+          }
+        },
+        (error) => {
+          debugger
+          console.log(error.responseJSON, error.responseText)
+          if (!_.isEmpty(error.responseJSON)) {
+            // this.set({flashMessage: {'message': error.responseJSON.error}})
+            message = error.responseJSON.error
+          }
+          if (!_.isEmpty(error.responseText)) {
+            // this.set({flashMessage: {'message': error.responseText}})
+            message = error.responseText
+          }
+        })
       .always(() => {
         debugger
         this.set({
