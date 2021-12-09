@@ -2,7 +2,6 @@ import { Model } from 'backbone'
 import _ from 'underscore'
 
 class EditPasswordModel extends Model {
-
   get url() {
     return '/changepassword'
   }
@@ -19,6 +18,8 @@ class EditPasswordModel extends Model {
     // this.on('error', this.error)
   }
 
+  /* eslint consistent-return: 0 */
+  /* eslint no-unused-vars: 0 */
   validate(attrs, options) {
     console.log('EditPasswordModel validate')
     console.log(attrs)
@@ -59,14 +60,14 @@ class EditPasswordModel extends Model {
       Credentials: {
         Password: params[0].value,
         ConfirmPassword: params[1].value,
-      }
+      },
     }
     const options = {
       dataType: 'json',
       ajaxSync: true,
       wait: true,
       success: this.success,
-      error: this.error
+      error: this.error,
     }
     console.log(attributes, options)
     this.save(attributes, options)
@@ -86,28 +87,27 @@ class EditPasswordModel extends Model {
     console.log('EditPasswordModel error')
     console.log(model, resp, options)
     resp
-      .then(
-        (response) => {
-          console.log(response.responseJSON)
-          if (!_.isEmpty(response.responseJSON)) {
-            model.set({
-              editPasswordSuccess: false,
-              type: 'error',
-              message: response.responseJSON.Changed,
-            })
-          }
-        },
-        (error) => {
-          console.log(error.responseJSON)
-          if (!_.isEmpty(error.responseJSON)) {
-            model.set({
-              editPasswordSuccess: false,
-              type: 'error',
-              message: error.responseJSON.error,
-            })
-          }
-        })
-      .always(() => {
+      .then((response) => {
+        console.log(response.responseJSON)
+        if (!_.isEmpty(response.responseJSON)) {
+          model.set({
+            editPasswordSuccess: false,
+            type: 'error',
+            message: response.responseJSON.Changed,
+          })
+        }
+      })
+      .catch((error) => {
+        console.log(error.responseJSON)
+        if (!_.isEmpty(error.responseJSON)) {
+          model.set({
+            editPasswordSuccess: false,
+            type: 'error',
+            message: error.responseJSON.error,
+          })
+        }
+      })
+      .finally(() => {
         console.log(model.get('message'), model.get('type'))
       })
   }

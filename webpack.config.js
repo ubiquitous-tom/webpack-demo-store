@@ -78,7 +78,7 @@ module.exports = function (env, argv) {
         chunkFilename: '[id].css',
         ignoreOrder: false,
       }),
-      // new ESLintWebpackPlugin(),
+      new ESLintWebpackPlugin(),
       new CleanWebpackPlugin({
         verbose: true,
         dry: false,

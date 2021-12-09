@@ -1,14 +1,13 @@
 import { View } from 'backbone'
-import _ from 'underscore'
+// import _ from 'underscore'
 
 import './stylesheet.css'
+import StripeForm from 'shared/stripe-form'
 import template from './index.hbs'
 
-import StripeForm from 'shared/stripe-form'
 import ConfirmBillingModel from './model'
 
 class ConfirmBilling extends View {
-
   get el() {
     return '#account'
   }
@@ -84,9 +83,9 @@ class ConfirmBilling extends View {
     const ccExpiration = this.model.get('fullCardExpiry')
     // console.log(this.model)
     return {
-      ccLast4: ccLast4,
-      ccNameOnCard: ccNameOnCard,
-      ccExpiration: ccExpiration,
+      ccLast4,
+      ccNameOnCard,
+      ccExpiration,
     }
   }
 }

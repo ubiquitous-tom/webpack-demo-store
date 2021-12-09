@@ -2,7 +2,6 @@ import { Model } from 'backbone'
 import _ from 'underscore'
 
 class EditEmailModel extends Model {
-
   get url() {
     return '/changeemail'
   }
@@ -18,6 +17,8 @@ class EditEmailModel extends Model {
     // this.on('error', this.error)
   }
 
+  /* eslint consistent-return: 0 */
+  /* eslint no-unused-vars: 0 */
   validate(attrs, options) {
     console.log('EditEmailModel validate')
     console.log(attrs)
@@ -61,7 +62,7 @@ class EditEmailModel extends Model {
       ajaxSync: true,
       wait: true,
       success: this.success,
-      error: this.error
+      error: this.error,
     }
     console.log(attributes, options)
     this.save(attributes, options)
@@ -81,28 +82,27 @@ class EditEmailModel extends Model {
     console.log('EditEmailModel error')
     console.log(model, resp, options)
     resp
-      .then(
-        (response) => {
-          console.log(response.responseJSON)
-          if (!_.isEmpty(response.responseJSON)) {
-            model.set({
-              editEmailSuccess: false,
-              type: 'error',
-              message: response.responseJSON.Changed,
-            })
-          }
-        },
-        (error) => {
-          console.log(error.responseJSON)
-          if (!_.isEmpty(error.responseJSON)) {
-            model.set({
-              editEmailSuccess: false,
-              type: 'error',
-              message: error.responseJSON.error,
-            })
-          }
-        })
-      .always(() => {
+      .then((response) => {
+        console.log(response.responseJSON)
+        if (!_.isEmpty(response.responseJSON)) {
+          model.set({
+            editEmailSuccess: false,
+            type: 'error',
+            message: response.responseJSON.Changed,
+          })
+        }
+      })
+      .catch((error) => {
+        console.log(error.responseJSON)
+        if (!_.isEmpty(error.responseJSON)) {
+          model.set({
+            editEmailSuccess: false,
+            type: 'error',
+            message: error.responseJSON.error,
+          })
+        }
+      })
+      .finally(() => {
         console.log(model.get('message'), model.get('type'))
       })
   }

@@ -1,22 +1,22 @@
 import { View } from 'backbone'
-import _ from 'underscore'
-import Handlebars from 'handlebars'
+// import _ from 'underscore'
+// import Handlebars from 'handlebars'
+
+import FlashMessage from 'shared/elements/flash-message'
+import SwitchToAnnualPlan from '../switch-to-annual-plan'
 
 import './stylesheet.scss'
-import template from './index.html'
+import template from './index.hbs'
 import MonthlyPlanModel from './model'
 // import AccountStatusModel from '../model'
-import SwitchToAnnualPlan from '../switch-to-annual-plan'
-import FlashMessage from 'shared/elements/flash-message'
 
 class MonthlyPlan extends View {
-
   get el() {
     return 'section'
   }
 
   get template() {
-    return _.template(template)
+    return template
   }
 
   get events() {
@@ -36,16 +36,17 @@ class MonthlyPlan extends View {
 
   render() {
     console.log('MonthlyPlan render')
-    const template = Handlebars.compile(this.template())
+    // const template = Handlebars.compile(this.template())
     // console.log(template)
     const data = {
       renewalDate: this.model.get('renewalDate'),
       currSymbol: this.model.get('Customer').CurrSymbol,
       subscriptionAmount: this.getCurrentNetAmount(),
-      annualSubscriptionAmount: this.model.get('annualStripePlan').SubscriptionAmount,
+      annualSubscriptionAmount:
+        this.model.get('annualStripePlan').SubscriptionAmount,
       tagline: this.getTagline(),
     }
-    const html = template(data)
+    const html = this.template(data)
     this.$el.find('.current-plan').html(html)
     // this.$el.html(this.template)
 
@@ -56,16 +57,25 @@ class MonthlyPlan extends View {
     e.preventDefault()
     console.log('switch to annual plan')
     // console.log(this.switchToAnnualPlan)
-    this.switchToAnnualPlan = new SwitchToAnnualPlan({ monthlyPlan: this.model })
+    this.switchToAnnualPlan = new SwitchToAnnualPlan({
+      monthlyPlan: this.model,
+    })
     // this.switchToAnnualPlan.render()
   }
 
   getCurrentNetAmount() {
-    return this.model.get('Membership').NetAmount
-      ? this.model.get('Membership').NetAmount
-      : this.model.get('Membership').NextBillingAmount
-        ? this.model.get('Membership').NextBillingAmount
-        : this.model.get('Membership').SubscriptionAmount
+    if (this.model.get('Membership').NetAmount) {
+      return this.model.get('Membership').NetAmount
+    }
+    if (this.model.get('Membership').NextBillingAmount) {
+      return this.model.get('Membership').NextBillingAmount
+    }
+    return this.model.get('Membership').SubscriptionAmount
+    // return this.model.get('Membership').NetAmount
+    //   ? this.model.get('Membership').NetAmount
+    //   : this.model.get('Membership').NextBillingAmount
+    //     ? this.model.get('Membership').NextBillingAmount
+    //     : this.model.get('Membership').SubscriptionAmount
   }
 
   getTagline() {
@@ -86,12 +96,12 @@ class MonthlyPlan extends View {
 
   getTrialInfo() {
     const message = `Your free trial starts now and ends on ${this.model.get('trialEndDate')}`
-    const type = `success`
+    const type = 'success'
 
     this.flashMessage = new FlashMessage()
     this.flashMessage.onFlashMessageShow(message, type)
 
-    return `after your free trial ends.`
+    return 'after your free trial ends.'
   }
 }
 

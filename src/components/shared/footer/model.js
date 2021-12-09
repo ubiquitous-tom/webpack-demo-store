@@ -1,14 +1,12 @@
-import { Model } from 'backbone'
 import _ from 'underscore'
 
 import ATVLocale from 'common/models/locale'
 import ATVModel from 'common/model'
 
 class FooterModel extends ATVModel {
-
   get defaults() {
     return {
-      currentYear: new Date().getFullYear()
+      currentYear: new Date().getFullYear(),
     }
   }
 

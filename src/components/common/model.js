@@ -4,21 +4,20 @@ import _ from 'underscore'
 
 // import ATVLocale from './locale'
 // import InitializeApp from './models/initializedapp'
+import FlashMessage from 'shared/elements/flash-message'
 import PlansAvailable from './models/plans-available'
 import StripeKey from './models/stripe-key'
 import StripePlans from './models/stripe-plans'
 // import CurrentMembership from './models/currentmembership'
-import FlashMessage from 'shared/elements/flash-message'
 
 class ATVModel extends Model {
-
   get defaults() {
     return {
-      localStorageID: 'atv-initializeapp'
+      localStorageID: 'atv-initializeapp',
     }
   }
 
-  initialize(attributes, options) {
+  initialize() {
     console.log('ATVModel initialize')
     // console.log(this)
     // this.locale = new ATVLocale()
@@ -53,6 +52,7 @@ class ATVModel extends Model {
 
   updateModel(localStorageID, context) {
     console.log('ATVModel updateModel')
+    /* eslint no-param-reassign: 0 */
     context = !_.isEmpty(context) ? context : this
     context.localStorageID = _.isEmpty(localStorageID) ? context.get('localStorageID') : localStorageID
     // console.log(context.localStorageID)

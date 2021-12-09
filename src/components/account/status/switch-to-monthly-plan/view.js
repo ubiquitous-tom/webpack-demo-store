@@ -1,21 +1,20 @@
 import { View } from 'backbone'
-import _ from 'underscore'
+// import _ from 'underscore'
 
 // import './stylesheet.css'
 import './stylesheet.scss'
-import loader from './loader.svg'
-import template from './index.html'
-import SwitchToMonthlyPlanModel from './model'
 import FlashMessage from 'shared/elements/flash-message'
+// import loader from './loader.svg'
+import template from './index.hbs'
+import SwitchToMonthlyPlanModel from './model'
 
 class SwitchToMonthlyPlan extends View {
-
   get el() {
     return '#account'
   }
 
   get template() {
-    return _.template(template)
+    return template
   }
 
   get events() {
@@ -25,7 +24,7 @@ class SwitchToMonthlyPlan extends View {
     }
   }
 
-  initialize(options) {
+  initialize() {
     console.log('SwitchToMonthlyPlan intialize')
     console.log(this, this.model.attributes)
     this.flashMessage = new FlashMessage()
@@ -39,7 +38,7 @@ class SwitchToMonthlyPlan extends View {
       this.$el.find('.switch-to-monthly-plan-container').remove()
       this.showFooter()
 
-      this.flashMessage.onFlashMessageSet(this.model.get('flashMessage').message, this.model.get('flashMessage').type)
+      this.flashMessage.onFlashMessageSet(this.model.get('flashMessage').message, this.model.get('flashMessage').type, true)
     })
   }
 

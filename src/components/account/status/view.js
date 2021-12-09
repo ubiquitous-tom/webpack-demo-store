@@ -10,7 +10,6 @@ import GuestPlan from './guest-plan'
 // import ATVView from 'common/view'
 
 class AccountStatus extends View {
-
   get el() {
     return 'section'
   }
@@ -19,7 +18,7 @@ class AccountStatus extends View {
     return _.template(template)
   }
 
-  initialize(options) {
+  initialize() {
     console.log('AccountStatus initialize')
     // console.log(this.model.attributes)
     this.model = new AccountStatusModel(this.model.attributes)

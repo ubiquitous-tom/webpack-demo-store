@@ -1,21 +1,19 @@
 import { View } from 'backbone'
-import _ from 'underscore'
-import Handlebars from 'handlebars'
+// import _ from 'underscore'
+// import Handlebars from 'handlebars'
 
 import './stylesheet.scss'
-import template from './index.html'
+import template from './index.hbs'
 import AnnualPlanModel from './model'
 import SwitchToMonthlyPlan from '../switch-to-monthly-plan'
 
 class AnnualPlan extends View {
-
   get el() {
     return 'section'
   }
 
   get template() {
-    // return template
-    return _.template(template)
+    return template
   }
 
   get events() {
@@ -24,7 +22,7 @@ class AnnualPlan extends View {
     }
   }
 
-  initialize(options) {
+  initialize() {
     console.log('AnnualPlan initialize')
     console.log(this)
     this.model = new AnnualPlanModel(this.model.attributes)
@@ -35,7 +33,7 @@ class AnnualPlan extends View {
 
   render() {
     console.log('AnnualPlan render')
-    const template = Handlebars.compile(this.template())
+    // const template = Handlebars.compile(this.template())
     console.log(this.model.attributes)
     const data = {
       renewalDate: this.model.get('renewalDate'),
@@ -45,7 +43,7 @@ class AnnualPlan extends View {
       monthlySubscriptionAmount: this.model.get('monthlyStripePlan').SubscriptionAmount,
       tagline: this.getTagline(),
     }
-    const html = template(data)
+    const html = this.template(data)
     // console.log(html)
     // console.log(this.$el.find('.current-plan'))
     this.$el.find('.current-plan').html(html)
@@ -64,19 +62,26 @@ class AnnualPlan extends View {
   }
 
   getCurrentNetAmount() {
-    return this.model.get('Membership').NetAmount
-      ? this.model.get('Membership').NetAmount
-      : this.model.get('Membership').NextBillingAmount
-        ? this.model.get('Membership').NextBillingAmount
-        : this.getCurrentNetAmount()
+    if (this.model.get('Membership').NetAmount) {
+      return this.model.get('Membership').NetAmount
+    }
+    if (this.model.get('Membership').NextBillingAmount) {
+      return this.model.get('Membership').NextBillingAmount
+    }
+    return this.model.get('Membership').SubscriptionAmount
+
+    // return this.model.get('Membership').NetAmount
+    //   ? this.model.get('Membership').NetAmount
+    //   : this.model.get('Membership').NextBillingAmount
+    //     ? this.model.get('Membership').NextBillingAmount
+    //     : this.getCurrentNetAmount()
   }
 
   getTagline() {
     if (this.model.get('Subscription').Promo) {
       return this.getPromoCodeInfo()
-    } else {
-      return this.getAnnualDiscount()
     }
+    return this.getAnnualDiscount()
   }
 
   getPromoCodeInfo() {

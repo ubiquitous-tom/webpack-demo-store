@@ -10,7 +10,6 @@ import AccountInfo from './info'
 import BillingInfo from './billing'
 
 class AccountHome extends View {
-
   get el() {
     return 'section'
   }
@@ -21,11 +20,11 @@ class AccountHome extends View {
 
   get events() {
     return {
-      'click a': 'navigate'
+      'click a': 'navigate',
     }
   }
 
-  initialize(options) {
+  initialize() {
     console.log('AccountHome initialize')
     console.log(this.model.attributes)
     this.model = new AccountHomeModel(this.model.attributes)

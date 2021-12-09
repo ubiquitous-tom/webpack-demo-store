@@ -4,21 +4,21 @@ import _ from 'underscore'
 import BrowserStorage from 'backbone.browserStorage'
 
 class FlashMessageModel extends Model {
-
   get defaults() {
     return {
-      sessionStorageID: 'atv-flashmessage'
+      sessionStorageID: 'atv-flashmessage',
     }
   }
 
   initialize() {
+    /* eslint new-cap: 0 */
     this.sessionStorage = new BrowserStorage.session(this.get('sessionStorageID'))
   }
 
   addFlashMessage(message, type) {
     this.set({
-      message: message,
-      type: type,
+      message,
+      type,
     })
     this.sessionStorage.create(this)
   }
@@ -29,7 +29,9 @@ class FlashMessageModel extends Model {
         this.set('id', record)
         console.log(this.sessionStorage.find(this))
         // this.sessionStorage.destroy(this)
+        /* eslint no-underscore-dangle: 0 */
         this.sessionStorage._clear()
+        return collection
       })
     }
   }
@@ -43,7 +45,7 @@ class FlashMessageModel extends Model {
           message: flashMessage.message,
           type: flashMessage.type,
         })
-        return true
+        return collection
       })
     }
 

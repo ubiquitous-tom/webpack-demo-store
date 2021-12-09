@@ -3,57 +3,55 @@ import _ from 'underscore'
 import { getLocalStorage } from 'backbone.localstorage/src/utils'
 
 class StripePlans extends Model {
-
   get defaults() {
     return {
       localStorageID: 'atv-stripeplans',
       stripePlans: [{
-        "VatAmount": 0,
-        "CurrSymbol": "$",
-        "PlanID": "ATV_MON_599",
-        "Vat": false,
-        "StripePlanID": "4b7c3f49-a4a8-11e8-bf79-0a1697e042ca",
-        "StripeSettingsID": "c8461883-90e7-11e8-a3d2-122f31084d08",
-        "Term": 30,
-        "TrialDays": 7,
-        "CurrencyDesc": "USD",
-        "TermType": "DAY",
-        "CurrencyName": "Dollars",
-        "OrgID": "ACORN",
-        "SubscriptionAmount": 5.99,
-        "DefaultPlan": true,
-        "TaxInclusive": false,
-        "CurrHtmlSymbol": "&#36;"
+        VatAmount: 0,
+        CurrSymbol: '$',
+        PlanID: 'ATV_MON_599',
+        Vat: false,
+        StripePlanID: '4b7c3f49-a4a8-11e8-bf79-0a1697e042ca',
+        StripeSettingsID: 'c8461883-90e7-11e8-a3d2-122f31084d08',
+        Term: 30,
+        TrialDays: 7,
+        CurrencyDesc: 'USD',
+        TermType: 'DAY',
+        CurrencyName: 'Dollars',
+        OrgID: 'ACORN',
+        SubscriptionAmount: 5.99,
+        DefaultPlan: true,
+        TaxInclusive: false,
+        CurrHtmlSymbol: '&#36;',
       },
       {
-        "VatAmount": 0,
-        "CurrSymbol": "$",
-        "PlanID": "ATV_ANN_5999",
-        "Vat": false,
-        "StripePlanID": "4b8cc7be-a4a8-11e8-bf79-0a1697e042ca",
-        "StripeSettingsID": "c8461883-90e7-11e8-a3d2-122f31084d08",
-        "Term": 12,
-        "TrialDays": 7,
-        "CurrencyDesc": "USD",
-        "TermType": "MONTH",
-        "CurrencyName": "Dollars",
-        "OrgID": "ACORN",
-        "SubscriptionAmount": 59.99,
-        "DefaultPlan": true,
-        "TaxInclusive": false,
-        "CurrHtmlSymbol": "&#36;"
-      },
-      ],
-      country: "US",
-      lang: "en",
+        VatAmount: 0,
+        CurrSymbol: '$',
+        PlanID: 'ATV_ANN_5999',
+        Vat: false,
+        StripePlanID: '4b8cc7be-a4a8-11e8-bf79-0a1697e042ca',
+        StripeSettingsID: 'c8461883-90e7-11e8-a3d2-122f31084d08',
+        Term: 12,
+        TrialDays: 7,
+        CurrencyDesc: 'USD',
+        TermType: 'MONTH',
+        CurrencyName: 'Dollars',
+        OrgID: 'ACORN',
+        SubscriptionAmount: 59.99,
+        DefaultPlan: true,
+        TaxInclusive: false,
+        CurrHtmlSymbol: '&#36;',
+      }],
+      country: 'US',
+      lang: 'en',
     }
   }
 
   get url() {
     console.log('StripePlans url')
-    const env = this.environment();
+    const env = this.environment()
     console.log(env)
-    return 'https://' + env + 'api.rlje.net/acorn/countrystripeplans'
+    return `https://${env}api.rlje.net/acorn/countrystripeplans`
   }
 
   initialize() {
@@ -65,7 +63,7 @@ class StripePlans extends Model {
     if (_.isEmpty(storage.records)) {
       console.log('StripePlans initialize fetch')
       this.fetch({
-        ajaxSync: true
+        ajaxSync: true,
       })
     } else {
       console.log('StripePlans initialize updateModel')
@@ -88,9 +86,9 @@ class StripePlans extends Model {
       console.log(stripePlansObj, countryObj, langObj)
       this.set(response)
       this.set({
-        'stripePlans': stripePlansObj.StripePlans,
-        'country': countryObj.Country,
-        'lang': langObj.Lang,
+        stripePlans: stripePlansObj.StripePlans,
+        country: countryObj.Country,
+        lang: langObj.Lang,
       })
       // console.log(this.get('langs'))
       // console.log(this.get('translation'))
@@ -107,12 +105,11 @@ class StripePlans extends Model {
     // return response
   }
 
-
   getAnnualStripePlan() {
     console.log('StripePlans getAnnualStripePlan')
     const type = {
       Term: 12,
-      TermType: 'MONTH'
+      TermType: 'MONTH',
     }
     // console.log(this.attributes)
     const stripePlan = _.result(this.attributes, 'StripePlans')
@@ -126,7 +123,7 @@ class StripePlans extends Model {
     console.log('StripePlans getMonthlyStripePlan')
     const type = {
       Term: 30,
-      TermType: 'DAY'
+      TermType: 'DAY',
     }
     // console.log(this.attributes)
     const stripePlan = _.result(this.attributes, 'StripePlans')
@@ -139,13 +136,16 @@ class StripePlans extends Model {
   environment() {
     // console.log(window.location.hostname)
     // console.log(window.location.hostname.indexOf('dev') > -1)
-    const env = window.location.hostname.indexOf('dev') > -1
-      ? 'dev3-'
-      : window.location.hostname.indexOf('qa') > -1
-        ? 'qa-'
-        : ''
+    let env = ''
+    if (window.location.hostname.indexOf('dev') > -1) {
+      env = 'dev3-'
+    }
+    if (window.location.hostname.indexOf('qa') > -1) {
+      env = 'qa-'
+    }
     // console.log(env)
-    return 'dev3-' //env
+    env = 'dev3-'
+    return env
   }
 
   getStorageContent() {

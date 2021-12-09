@@ -1,25 +1,24 @@
 import { View } from 'backbone'
-import _ from 'underscore'
+// import _ from 'underscore'
 
-import template from './temp.html'
-import ApplyPromoCodeModel from './model'
 import FlashMessage from '../shared/elements/flash-message'
+import template from './index.hbs'
+import ApplyPromoCodeModel from './model'
 
 class ApplyPromoCode extends View {
-
   get el() {
     return 'section'
   }
 
   get template() {
-    return _.template(template)
+    return template
   }
 
   get events() {
     return {
       'input #EnterPromoCode': 'validatePromoCode',
       // 'input #EnterPromoCode': 'toUpperCase',
-      'submit #applyCodeForm': 'applyCode'
+      'submit #applyCodeForm': 'applyCode',
     }
   }
 
@@ -31,6 +30,7 @@ class ApplyPromoCode extends View {
     this.model = new ApplyPromoCodeModel()
     this.render()
 
+    /* eslint no-shadow: 0 */
     this.listenTo(this.model, 'change:applyPromoCodeSuccess', (model, value, options) => {
       console.log(model, value, options)
       debugger
@@ -68,7 +68,7 @@ class ApplyPromoCode extends View {
 
   toUpperCase(e) {
     // console.log(e)
-    let input = e.target.value.toUpperCase()
+    const input = e.target.value.toUpperCase()
     // console.log(input)
     // console.log(this.$el.find(e.currentTarget)[0])
     this.$el.find(e.currentTarget).val(input)

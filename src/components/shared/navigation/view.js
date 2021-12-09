@@ -1,25 +1,23 @@
 import { Router, View } from 'backbone'
 import _ from 'underscore'
-import Handlebars from 'handlebars'
+// import Handlebars from 'handlebars'
 
 import './stylesheet.css'
-import template from './temp-new.html'
-import NavigationModel from './model'
+import template from './index.hbs'
+// import NavigationModel from './model'
 
 class Navigation extends View {
-
   get el() {
     return 'nav'
   }
 
   get template() {
-    // return template
-    return _.template(template)
+    return template
   }
 
   get events() {
     return {
-      'click a': 'navigate'
+      'click a': 'navigate',
     }
   }
 
@@ -36,16 +34,16 @@ class Navigation extends View {
 
   render() {
     console.log('Navigation render')
-    const template = Handlebars.compile(this.template())
-    const html = template(this.model.attributes)
+    // const template = Handlebars.compile(this.template())
+    const html = this.template(this.model.attributes)
     this.$el.html(html)
     // this.$el.html(this.template())
     // this.setActive(this.$el)
 
     // A hack to get default navigation to work
     if (!$('ul li').hasClass('active')) {
-      let hash = !_.isEmpty(window.location.hash) ? window.location.hash : '#accountStatus'
-      $(hash + 'Nav').addClass('active')
+      const hash = !_.isEmpty(window.location.hash) ? window.location.hash : '#accountStatus'
+      $(`${hash}Nav`).addClass('active')
     }
 
     return this

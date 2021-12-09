@@ -1,11 +1,9 @@
-import { Model } from 'backbone'
 import _ from 'underscore'
-import { LocalStorage } from 'backbone'
-import { getLocalStorage } from 'backbone.localstorage/src/utils'
+// import { LocalStorage } from 'backbone'
+// import { getLocalStorage } from 'backbone.localstorage/src/utils'
 import ATVModel from 'common/model'
 
 class AccountStatusModel extends ATVModel {
-
   // get defaults() {
   //   return {
   //     localStorageIDs: [

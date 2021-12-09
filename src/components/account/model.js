@@ -1,10 +1,9 @@
 import _ from 'underscore'
-import ATVModel from 'common/model';
-import { LocalStorage } from 'backbone';
-import { getLocalStorage } from 'backbone.localstorage/src/utils';
+import ATVModel from 'common/model'
+// import { LocalStorage } from 'backbone'
+// import { getLocalStorage } from 'backbone.localstorage/src/utils'
 
 class AccountHomeModel extends ATVModel {
-
   get default() {
     return {
       localStorageID: 'atv-initializeapp',
@@ -81,26 +80,25 @@ class AccountHomeModel extends ATVModel {
     // debugger
     let message = ''
     resp
-      .then(
-        (response) => {
-          console.log(response.responseJSON, response.responseText)
-          if (!_.isEmpty(response.responseJSON)) {
-            message = response.responseJSON.message
-          }
-        },
-        (error) => {
-          console.log(error.responseJSON, error.responseText)
-          if (!_.isEmpty(error.responseJSON)) {
-            message = error.responseJSON.error
-          }
-        })
-      .always(() => {
+      .then((response) => {
+        console.log(response.responseJSON, response.responseText)
+        if (!_.isEmpty(response.responseJSON)) {
+          message = response.responseJSON.message
+        }
+      })
+      .catch((error) => {
+        console.log(error.responseJSON, error.responseText)
+        if (!_.isEmpty(error.responseJSON)) {
+          message = error.responseJSON.error
+        }
+      })
+      .finally(() => {
         model.set({
           currentMembershipSuccess: false,
+          message,
         })
       })
   }
-
 }
 
 export default AccountHomeModel

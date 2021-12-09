@@ -1,10 +1,7 @@
 import { View } from 'backbone'
-import _ from 'underscore'
-
 import template from './temp.hbs'
-import Handlebars from 'handlebars'
-class BillingInfo extends View {
 
+class BillingInfo extends View {
   get el() {
     return 'section'
   }

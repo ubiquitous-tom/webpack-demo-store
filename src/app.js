@@ -20,26 +20,24 @@ import Footer from 'shared/footer'
 import Navigation from 'shared/navigation'
 import ATVView from './components/common/view'
 
-console.log(`Looks like we are in ${process.env.NODE_ENV} mode!`);
+console.log(`Looks like we are in ${process.env.NODE_ENV} mode!`)
 console.log(`${process.env.RLJE_API_ENVIRONMENT}api.rlje.net`)
 console.log(`account${process.env.API_ENVIRONMENT}.acorn.tv`)
 
-$(function () {
+$(() => {
   const initializeApp = new InitializeApp()
   initializeApp.on('sync', (model) => {
-    // console.log(model)
-    // console.log(model.attributes)
-    const atvModel = new ATVModel(model.attributes)
-    // console.log(atvModel, atvModel.model)
-    const atvView = new ATVView()
-    new Workspace({ model: model })
+    console.log(model)
+    console.log(model.attributes)
+    new ATVModel(model.attributes)
+    new ATVView()
+    new Workspace({ model })
 
     console.log('main entry')
-    const navigation = new Navigation({ model: model })
-    const header = new Header({ model: model })
-    const footer = new Footer()
+    new Navigation({ model })
+    new Header({ model })
+    new Footer()
 
     Backbone.history.start()
   })
 })
-

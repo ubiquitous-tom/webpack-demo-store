@@ -1,10 +1,9 @@
-import { Model, LocalStorage } from 'backbone'
-import _ from 'underscore'
-import { getLocalStorage } from 'backbone.localstorage/src/utils'
+// import { Model, LocalStorage } from 'backbone'
+// import _ from 'underscore'
+// import { getLocalStorage } from 'backbone.localstorage/src/utils'
 import ATVModel from 'common/model'
 
 class AccountInfoModel extends ATVModel {
-
   // get defaults() {
   //   return {
   //     localStorageID: 'atv-initializeapp',
@@ -66,7 +65,7 @@ class AccountInfoModel extends ATVModel {
       ajaxSync: true,
       wait: true,
       method: 'GET',
-      data: $.param(params)
+      data: $.param(params),
     })
   }
 

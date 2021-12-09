@@ -4,7 +4,6 @@ import './stylesheet.scss'
 import template from './index.hbs'
 
 class UpdateCard extends View {
-
   get el() {
     return '#account'
   }
@@ -15,7 +14,7 @@ class UpdateCard extends View {
 
   get events() {
     return {
-      'click button.go-to-membership': 'goToMembership'
+      'click button.go-to-membership': 'goToMembership',
     }
   }
 
@@ -28,10 +27,10 @@ class UpdateCard extends View {
 
   render() {
     console.log('UpdateCard render')
-    const ckey = '1742pkulzsyysulfkngkfulcd';
+    const ckey = '1742pkulzsyysulfkngkfulcd'
     const stripeCustomerID = this.model.get('Customer').StripeCustomerID
     const data = {
-      src: `https://payments.stunning.co/payment_update/${ckey}/${stripeCustomerID}`
+      src: `https://payments.stunning.co/payment_update/${ckey}/${stripeCustomerID}`,
     }
     const html = this.template(data)
     this.$el.append(html)
@@ -47,7 +46,6 @@ class UpdateCard extends View {
     this.$el.find('#stunning').remove()
     this.showFooter()
     window.location.assign('#accountStatus')
-
   }
 
   showFooter() {

@@ -1,20 +1,18 @@
 import { View } from 'backbone'
-import _ from 'underscore'
+// import _ from 'underscore'
+// import Handlebars from 'handlebars'
 
 import './stylesheet.scss'
-import template from './temp-new.html'
-import Handlebars from 'handlebars'
+import template from './index.hbs'
 import AccountInfoModel from './model'
 
 class AccountInfo extends View {
-
   get el() {
     return 'section'
   }
 
   get template() {
-    // return template
-    return _.template(template)
+    return template
   }
 
   get events() {
@@ -37,9 +35,9 @@ class AccountInfo extends View {
     // console.log(this.options.model)
     // this.options.model.set('currentMembership', this.model.get('currentMembership'))
     // console.log(this.$el[0])
-    const template = Handlebars.compile(this.template())
+    // const template = Handlebars.compile(this.template())
     // console.log(this.model.attributes)
-    const html = template(this.model.attributes)
+    const html = this.template(this.model.attributes)
     // console.log(html)
     this.$el.find('#accountInfoView').html(html)
 
@@ -55,13 +53,11 @@ class AccountInfo extends View {
   }
 
   environment() {
-    const env = window.location.hostname.indexOf('dev') > -1
-      ? 'dev3.'
-      : window.location.hostname.indexOf('qa') > -1
-        ? 'qa.'
-        : ''
+    let env = window.location.hostname.indexOf('dev') > -1 ? 'dev3.' : ''
+    env = window.location.hostname.indexOf('qa') > -1 ? 'qa.' : ''
     // console.log(env)
-    return 'dev3.' //env
+    env = 'dev3.'
+    return env
   }
 }
 

@@ -1,13 +1,12 @@
-import { Model } from 'backbone'
+import { Model, LocalStorage } from 'backbone'
 import _ from 'underscore'
 // import docCookies from 'doc-cookies'
-import { LocalStorage } from 'backbone'
 import { getLocalStorage } from 'backbone.localstorage/src/utils'
 
 class HeaderModel extends Model {
   get defaults() {
     return {
-      localStorageID: 'atv-initializeapp'
+      localStorageID: 'atv-initializeapp',
     }
   }
 
@@ -23,7 +22,6 @@ class HeaderModel extends Model {
     } else {
       // go to login
     }
-
   }
 
   getStorageContent() {

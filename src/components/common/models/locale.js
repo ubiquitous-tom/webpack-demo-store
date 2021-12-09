@@ -1,12 +1,10 @@
-import { Model } from 'backbone'
 import _ from 'underscore'
 import docCookies from 'doc-cookies'
-import { LocalStorage } from 'backbone.localstorage'
+import { LocalStorage } from 'backbone'
 import { getLocalStorage } from 'backbone.localstorage/src/utils'
 import ATVModel from 'common/model'
 
 class ATVLocale extends ATVModel {
-
   get defaults() {
     return {
       localStorageID: 'atv-locale',
@@ -18,7 +16,7 @@ class ATVLocale extends ATVModel {
     console.log('ATVLocale url')
     const env = this.environment()
     console.log(env)
-    return 'https://app.rlje.net/' + env + 'i18n/api/lang.json'
+    return `https://app.rlje.net/${env}i18n/api/lang.json`
   }
 
   initialize() {
@@ -29,7 +27,7 @@ class ATVLocale extends ATVModel {
     if (_.isEmpty(storage.records)) {
       console.log('ATVLocale initialize fetch')
       this.fetch({
-        ajaxSync: true
+        ajaxSync: true,
       })
     } else {
       console.log('ATVLocale initialize updateModel')
@@ -43,26 +41,24 @@ class ATVLocale extends ATVModel {
     console.log(response)
     if (!_.isEmpty(this.localStorage.findAll())) {
       this.getStorageContent(this.get('localStorageID'))
-    } else {
-      if (!_.isEmpty(response[0])) {
-        console.log('ATVLocale Model parse noEmpty')
-        const langObj = _.pick(response[0], 'languages')
-        const trObj = _.pick(response[0], 'tr')
-        // console.log(langObj, trObj)
-        this.set(response[0])
-        this.set({
-          'languages': langObj.languages,
-          'translation': trObj.tr,
-        })
-        // console.log(this.get('languages'))
-        // console.log(this.get('translation'))
-        // _.each(this.get('langs'), (value, key, list) => {
-        //   console.log(value, key)
-        // })
+    } else if (!_.isEmpty(response[0])) {
+      console.log('ATVLocale Model parse noEmpty')
+      const langObj = _.pick(response[0], 'languages')
+      const trObj = _.pick(response[0], 'tr')
+      // console.log(langObj, trObj)
+      this.set(response[0])
+      this.set({
+        languages: this.removeLanguage(langObj.languages, 'uk'),
+        translation: trObj.tr,
+      })
+      // console.log(this.get('languages'))
+      // console.log(this.get('translation'))
+      // _.each(this.get('langs'), (value, key, list) => {
+      //   console.log(value, key)
+      // })
 
-        this.sync('create', this)
-        // console.log(this.localStorage.findAll())
-      }
+      this.sync('create', this)
+      // console.log(this.localStorage.findAll())
     }
     // Where the magic happens.
     return response[0]
@@ -71,13 +67,16 @@ class ATVLocale extends ATVModel {
   environment() {
     // console.log(window.location.hostname)
     // console.log(window.location.hostname.indexOf('dev') > -1)
-    const env = window.location.hostname.indexOf('dev') > -1
-      ? 'dev/'
-      : window.location.hostname.indexOf('qa') > -1
-        ? 'qa/'
-        : ''
+    let env = ''
+    if (window.location.hostname.indexOf('dev') > -1) {
+      env = 'dev/'
+    }
+    if (window.location.hostname.indexOf('qa') > -1) {
+      env = 'qa/'
+    }
+    env = 'dev/'
     // console.log(env)
-    return 'dev/' //env
+    return env
   }
 
   getLocale() {
@@ -92,6 +91,10 @@ class ATVLocale extends ATVModel {
       console.log('HeaderATVLocaleodel getLocale DOES NOT have ATVLocale')
     }
     // console.log(this.attributes)
+  }
+
+  removeLanguage(languages, omitLanguage) {
+    return _.omit(languages, omitLanguage)
   }
 
   // getStorageContent() {

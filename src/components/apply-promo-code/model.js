@@ -5,7 +5,6 @@ import _ from 'underscore'
 // import FlashMessage from '../shared/elements/flash-message'
 
 class ApplyPromoCodeModel extends Model {
-
   // get defaults() {
   //   return {
   //     localStorageID: 'atv-initializeapp',
@@ -27,6 +26,8 @@ class ApplyPromoCodeModel extends Model {
     // this.on('error', this.error)
   }
 
+  /* eslint consistent-return: 0 */
+  /* eslint no-unused-vars: 0 */
   validate(attrs, options) {
     // console.log('ApplyPromoCodeModel validate')
     // console.log(attrs)
@@ -37,7 +38,7 @@ class ApplyPromoCodeModel extends Model {
       return 'Please make sure there are no illegal characters (including spaces) in the promo code.'
     }
 
-    const regexp = /^[a-zA-Z0-9-_]+$/;
+    const regexp = /^[a-zA-Z0-9-_]+$/
     if (attrs.PromoCode.Code.search(regexp) === -1) {
       console.log('Only Alphanumeric characters. Space is not allowed.')
       return 'Only Alphanumeric characters. Space is not allowed.'
@@ -84,15 +85,15 @@ class ApplyPromoCodeModel extends Model {
         SessionID: sessionID,
       },
       PromoCode: {
-        Code: code
-      }
+        Code: code,
+      },
     }
     const options = {
       dataType: 'json',
       ajaxSync: true,
       wait: true,
       success: this.success,
-      error: this.error
+      error: this.error,
     }
     console.log(attributes, options)
     this.save(attributes, options)
@@ -102,16 +103,17 @@ class ApplyPromoCodeModel extends Model {
     console.log('ApplyPromoCodeModel success')
     console.log(model, resp, options)
 
-    let message = resp.message //Your Promotion Code has been applied!
+    const { message } = resp // Your Promotion Code has been applied!
     // If `TrialEnabled` is `false`, it is a gift code
     // Or
-    // If `TrialEnabled` is `null` and the `MembershipTerm` is `12` and `MembershipTermType` is `MONTH`, it is a gift code
-    let promoMessagePrefix = `Promo applied!`
-    let promoMessageSuffix = `Your account has been updated`
+    // If `TrialEnabled` is `null` and the `MembershipTerm` is `12`
+    // and `MembershipTermType` is`MONTH`, it is a gift code
+    const promoMessagePrefix = 'Promo applied!'
+    const promoMessageSuffix = 'Your account has been updated'
     model.set({
       applyPromoCodeSuccess: true,
       type: 'success',
-      message: resp.message,
+      message,
     })
   }
 
@@ -119,28 +121,27 @@ class ApplyPromoCodeModel extends Model {
     console.log('ApplyPromoCodeModel error')
     console.log(model, resp, options)
     resp
-      .then(
-        (response) => {
-          console.log(response.responseJSON)
-          if (!_.isEmpty(response.responseJSON)) {
-            model.set({
-              applyPromoCodeSuccess: false,
-              type: 'error',
-              message: response.responseJSON.message
-            })
-          }
-        },
-        (error) => {
-          console.log(error.responseJSON)
-          if (!_.isEmpty(error.responseJSON)) {
-            model.set({
-              applyPromoCodeSuccess: false,
-              type: 'error',
-              message: error.responseJSON.error
-            })
-          }
-        })
-      .always(() => {
+      .then((response) => {
+        console.log(response.responseJSON)
+        if (!_.isEmpty(response.responseJSON)) {
+          model.set({
+            applyPromoCodeSuccess: false,
+            type: 'error',
+            message: response.responseJSON.message,
+          })
+        }
+      })
+      .catch((error) => {
+        console.log(error.responseJSON)
+        if (!_.isEmpty(error.responseJSON)) {
+          model.set({
+            applyPromoCodeSuccess: false,
+            type: 'error',
+            message: error.responseJSON.error,
+          })
+        }
+      })
+      .finally(() => {
         console.log(model.get('message'), model.get('type'))
         model.loadingStop()
       })

@@ -1,27 +1,26 @@
 import { View } from 'backbone'
-import _ from 'underscore'
+// import _ from 'underscore'
 
-import template from './temp.html'
+import template from './index.hbs'
 import EditEmailModel from './model'
 import FlashMessage from '../shared/elements/flash-message'
 
 class EditEmail extends View {
-
   get el() {
     return 'section'
   }
 
   get template() {
-    return _.template(template)
+    return template
   }
 
   get events() {
     return {
       'input #Email': 'validateEmail',
       'blur #Email': 'validateEmail',
-      'input #ConfirmEmail': 'validateEmail',//'validateConfirmEmail',
-      'blur #ConfirmEmail': 'validateEmail',//'validateConfirmEmail',
-      'submit #changeEmailForm': 'verifySameEmail',//'changeEmail'
+      'input #ConfirmEmail': 'validateEmail', // 'validateConfirmEmail',
+      'blur #ConfirmEmail': 'validateEmail', // 'validateConfirmEmail',
+      'submit #changeEmailForm': 'verifySameEmail', // 'changeEmail'
     }
   }
 
@@ -33,6 +32,8 @@ class EditEmail extends View {
     this.model = new EditEmailModel()
     this.render()
 
+    /* eslint no-shadow: 0 */
+    /* eslint no-unused-vars: 0 */
     this.listenTo(this.model, 'change:editEmailSuccess', (model, value, options) => {
       console.log(model, value, options)
       debugger
@@ -75,12 +76,10 @@ class EditEmail extends View {
       e.target.parentElement.classList.add('has-error')
       // e.target.setCustomValidity(polyglot.t('EMAIL-IS-REQUIRED'))
       e.target.setCustomValidity('Email is required')
-    } else {
-      if (e.target.validity.tooShort) {
-        e.target.parentElement.classList.add('has-error')
-        // e.target.setCustomValidity(polyglot.t('ENTER-AN-EMAIL'))
-        e.target.setCustomValidity('Please enter an email')
-      }
+    } else if (e.target.validity.tooShort) {
+      e.target.parentElement.classList.add('has-error')
+      // e.target.setCustomValidity(polyglot.t('ENTER-AN-EMAIL'))
+      e.target.setCustomValidity('Please enter an email')
     }
   }
 
@@ -101,6 +100,7 @@ class EditEmail extends View {
         e.target.setCustomValidity('Please enter an email')
       }
 
+      /* eslint eqeqeq: 0 */
       if (this.$el.find('#Password').val() != e.target.value) {
         // this.$el.find('#Password')[0].setCustomValidity((polyglot.t('EMAILS-DONT-MATCH')))
         this.$el.find('#Password')[0].setCustomValidity('The emails do not match')

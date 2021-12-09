@@ -1,23 +1,22 @@
 import { View } from 'backbone'
-import _, { times } from 'underscore'
+import _ from 'underscore'
 import Handlebars from 'handlebars'
+import FlashMessage from 'shared/elements/flash-message'
 
 import './stylesheet.scss'
-import template from './index.html'
+import template from './index.hbs'
 
 import SwitchToAnnualPlanModel from './model'
 import ConfirmBilling from './confirm-billing'
 import PromoCode from './promo-code/view'
-import FlashMessage from 'shared/elements/flash-message'
 
 class SwitchToAnnualPlan extends View {
-
   get el() {
     return '#account'
   }
 
   get template() {
-    return _.template(template)
+    return template
   }
 
   get events() {
@@ -36,9 +35,9 @@ class SwitchToAnnualPlan extends View {
     console.log(this)
     this.render()
 
-
     this.model.set('promoCodeFieldDisplay', true)
 
+    /* eslint no-shadow: 0 */
     this.listenTo(this.model, 'change:upgradeToAnnualSuccess', (model, value, options) => {
       console.log(model, value, options)
       console.log(this)
@@ -46,10 +45,11 @@ class SwitchToAnnualPlan extends View {
       this.$el.find('.switch-to-annual-plan-container').remove()
       this.showFooter()
 
-      this.flashMessage.onFlashMessageSet(this.model.get('flashMessage').message, this.model.get('flashMessage').type)
+      this.flashMessage.onFlashMessageSet(this.model.get('flashMessage').message, this.model.get('flashMessage').type, true)
     })
 
     // Trigger Show/Hide promo code form in PromoCode View
+    /* eslint no-unused-vars: 0 */
     this.listenTo(this.model, 'change:promoCodeFieldDisplay', (model, value, options) => {
       this.submitButtonDisplay(model, value, options)
       this.promoCode.promoCodeFieldDisplay(model, value, options)
@@ -60,7 +60,7 @@ class SwitchToAnnualPlan extends View {
     console.log('SwitchToAnnualPlan render')
     // console.log(this.$el[0])
     // console.log(this.template())
-    const template = Handlebars.compile(this.template())
+    // const template = Handlebars.compile(this.template())
     // console.log(this.model.attributes)
     const data = {
       isPromoApplied: this.model.get('isPromoApplied') ? 'applied-success' : '',
@@ -69,7 +69,7 @@ class SwitchToAnnualPlan extends View {
         ? this.model.get('promoAppliedAmount')
         : this.model.get('annualStripePlan').SubscriptionAmount,
     }
-    const html = template(data)
+    const html = this.template(data)
     // console.log(html)
     this.$el.append(html)
 

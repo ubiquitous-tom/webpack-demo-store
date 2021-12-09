@@ -1,13 +1,12 @@
 import { View } from 'backbone'
-import _ from 'underscore'
+// import _ from 'underscore'
 
+import FlashMessage from 'shared/elements/flash-message'
 import './stylesheet.scss'
 import template from './index.hbs'
 import GuestPlanModel from './model'
-import FlashMessage from 'shared/elements/flash-message'
 
 class GuestPlan extends View {
-
   get el() {
     return 'section'
   }
@@ -38,7 +37,8 @@ class GuestPlan extends View {
     console.log(this.model.attributes)
     const data = {
       currSymbol: this.model.get('monthlyStripePlan').CurrSymbol,
-      monthlySubscriptionAmount: this.model.get('monthlyStripePlan').SubscriptionAmount,
+      monthlySubscriptionAmount:
+        this.model.get('monthlyStripePlan').SubscriptionAmount,
       trialDays: this.model.get('monthlyStripePlan').TrialDays,
     }
     const html = this.template(data)
@@ -50,8 +50,8 @@ class GuestPlan extends View {
   }
 
   startFreeTrialBanner() {
-    const message = `Start streaming now! Try 7 Days Free`
-    const type = `success`
+    const message = 'Start streaming now! Try 7 Days Free'
+    const type = 'success'
     this.flashMessage.onFlashMessageShow(message, type)
   }
 
