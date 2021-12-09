@@ -18,7 +18,7 @@ import ATVModel from 'common/model'
 import Header from 'shared/header'
 import Footer from 'shared/footer'
 import Navigation from 'shared/navigation'
-import ATVView from './components/common/view'
+import ATVView from 'common/view'
 
 console.log(`Looks like we are in ${process.env.NODE_ENV} mode!`)
 console.log(`${process.env.RLJE_API_ENVIRONMENT}api.rlje.net`)

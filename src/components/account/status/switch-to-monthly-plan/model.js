@@ -86,7 +86,7 @@ class SwitchToMonthlyPlanModel extends ATVModel {
     debugger
     let message = ''
     resp
-      .then((response) => {
+      .done((response) => {
         debugger
         console.log(response.responseJSON, response.responseText)
         if (!_.isEmpty(response.responseJSON)) {
@@ -98,7 +98,7 @@ class SwitchToMonthlyPlanModel extends ATVModel {
           message = response.responseText
         }
       })
-      .catch((error) => {
+      .fail((error) => {
         debugger
         console.log(error.responseJSON, error.responseText)
         if (!_.isEmpty(error.responseJSON)) {
@@ -110,7 +110,7 @@ class SwitchToMonthlyPlanModel extends ATVModel {
           message = error.responseText
         }
       })
-      .finally(() => {
+      .always(() => {
         debugger
         this.set({
           downgradeToMonthlySuccess: false,

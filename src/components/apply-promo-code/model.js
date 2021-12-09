@@ -121,7 +121,7 @@ class ApplyPromoCodeModel extends Model {
     console.log('ApplyPromoCodeModel error')
     console.log(model, resp, options)
     resp
-      .then((response) => {
+      .done((response) => {
         console.log(response.responseJSON)
         if (!_.isEmpty(response.responseJSON)) {
           model.set({
@@ -131,7 +131,7 @@ class ApplyPromoCodeModel extends Model {
           })
         }
       })
-      .catch((error) => {
+      .fail((error) => {
         console.log(error.responseJSON)
         if (!_.isEmpty(error.responseJSON)) {
           model.set({
@@ -141,7 +141,7 @@ class ApplyPromoCodeModel extends Model {
           })
         }
       })
-      .finally(() => {
+      .always(() => {
         console.log(model.get('message'), model.get('type'))
         model.loadingStop()
       })

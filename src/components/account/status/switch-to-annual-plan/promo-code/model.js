@@ -70,21 +70,21 @@ class PromoCodeModel extends ATVModel {
     debugger
     let message = ''
     resp
-      .then((response) => {
+      .done((response) => {
         debugger
         console.log(response.responseJSON, response.responseText)
         if (!_.isEmpty(response.responseJSON)) {
           message = response.responseJSON.message
         }
       })
-      .catch((error) => {
+      .fail((error) => {
         debugger
         console.log(error.responseJSON, error.responseText)
         if (!_.isEmpty(error.responseJSON)) {
           message = error.responseJSON.error
         }
       })
-      .finally(() => {
+      .always(() => {
         debugger
         model.set({
           promoCodeSuccess: false,

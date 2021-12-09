@@ -93,27 +93,27 @@ class SwitchToAnnualPlanModel extends ATVModel {
     debugger
     let message = ''
     resp
-      .then((response) => {
+      .done((response) => {
         console.log(response.responseJSON, response.responseText)
         if (!_.isEmpty(response.responseJSON)) {
           message = response.responseJSON.message
         }
       })
-      .catch((error) => {
+      .fail((error) => {
         console.log(error.responseJSON, error.responseText)
         if (!_.isEmpty(error.responseJSON)) {
           message = error.responseJSON.error
         }
       })
-      .finally(() => {
-        this.set({
+      .always(() => {
+        model.set({
           upgradeToAnnualSuccess: false,
           flashMessage: {
             type: 'error',
             message,
           },
         })
-        console.log(this.get('flashMessage').message, this.get('flashMessage').type)
+        console.log(model.get('flashMessage').message, model.get('flashMessage').type)
       })
   }
 
