@@ -22,7 +22,8 @@ class AccountStatus extends View {
     console.log('AccountStatus initialize')
     // console.log(this.model.attributes)
     this.model = new AccountStatusModel(this.model.attributes)
-    this.listenTo(this.model, 'sync', this.render)
+    // this.listenTo(this.model, 'change:plansAvailableSuccess', this.render)
+    this.render()
   }
 
   render() {

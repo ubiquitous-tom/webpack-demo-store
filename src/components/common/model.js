@@ -5,6 +5,7 @@ import _ from 'underscore'
 // import ATVLocale from './locale'
 // import InitializeApp from './models/initializedapp'
 import FlashMessage from 'shared/elements/flash-message'
+import StorageExpiry from './models/storage-expiry'
 import PlansAvailable from './models/plans-available'
 import StripeKey from './models/stripe-key'
 import StripePlans from './models/stripe-plans'
@@ -21,6 +22,7 @@ class ATVModel extends Model {
     console.log('ATVModel initialize')
     // console.log(this)
     // this.locale = new ATVLocale()
+    this.storageExpiry = new StorageExpiry()
     this.stripeKey = new StripeKey()
     this.plansAvailable = new PlansAvailable()
     this.stripePlans = new StripePlans()

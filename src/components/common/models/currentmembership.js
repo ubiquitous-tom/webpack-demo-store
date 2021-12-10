@@ -41,7 +41,7 @@ class CurrentMembership extends Model {
     if (!_.isEmpty(resp)) {
       console.log('CurrentMembership parse NOT isEmpty')
       this.set(resp)
-      this.sync('read', this)
+      // this.sync('read', this)
     } else {
       // something's wrong
     }

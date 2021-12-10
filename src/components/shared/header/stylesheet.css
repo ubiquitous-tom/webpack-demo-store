@@ -145,7 +145,7 @@
   font-size: 11px;
   font-weight: normal;
   letter-spacing: 0.1em;
-  padding: 18px 15px;
+  /* padding: 18px 15px; */
   text-align: left;
   text-transform: uppercase;
   list-style: none;
@@ -155,6 +155,8 @@
 }
 .drop-select li a {
   color: #fff;
+  padding: 25px 30px;
+  display: inline-block;
 }
 .navbar-right-ul.accountUser {
   /* max-width: 155px; */
@@ -243,7 +245,7 @@
   }
   .drop-select li {
     font-size: 12.5px;
-    padding: 25px 30px;
+    /* padding: 25px 30px; */
   }
 }
 
