@@ -15,6 +15,7 @@ class MonthlyPlanModel extends ATVModel {
       const data = this.getStorageContent('atv-stripeplans')
       // console.log(data)
       this.set(data)
+      this.getTrialEndDate()
     } else {
       this.stripePlans = new StripePlans()
       this.stripePlans.on('change:stripePlans', (model, value) => {
@@ -39,7 +40,6 @@ class MonthlyPlanModel extends ATVModel {
 
     // this.getMonthlyToAnnualUpgradeInfo()
     this.getRenewalDate()
-    this.getTrialEndDate()
   }
 
   getStorageContent(localStorageID) {
