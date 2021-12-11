@@ -20,19 +20,19 @@ class AnnualPlanModel extends ATVModel {
       this.stripePlans.on('change:stripePlans', (model, value) => {
         console.log(model, value)
         this.set('stripePlans', value)
-        debugger
+        // debugger
       })
 
       this.stripePlans.on('change:annualStripePlan', (model, value) => {
         console.log(model, value)
         this.set('annualStripePlan', value)
-        debugger
+        // debugger
       })
 
       this.stripePlans.on('change:monthlyStripePlan', (model, value) => {
         console.log(model, value)
         this.set('monthlyStripePlan', value)
-        debugger
+        // debugger
       })
     }
 

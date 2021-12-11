@@ -15,7 +15,7 @@ class MonthlyPlanModel extends ATVModel {
       const data = this.getStorageContent('atv-stripeplans')
       // console.log(data)
       this.set(data)
-      this.getTrialEndDate()
+      // this.getTrialEndDate()
     } else {
       this.stripePlans = new StripePlans()
       this.stripePlans.on('change:stripePlans', (model, value) => {
@@ -34,7 +34,7 @@ class MonthlyPlanModel extends ATVModel {
         console.log(model, value)
         this.set('monthlyStripePlan', value)
         // debugger
-        this.getTrialEndDate()
+        // this.getTrialEndDate()
       })
     }
 
@@ -85,25 +85,25 @@ class MonthlyPlanModel extends ATVModel {
     this.set('renewalDate', renewalDate)
   }
 
-  getTrialEndDate() {
-    if (this.get('Subscription').Trial) {
-      const trialDays = this.get('monthlyStripePlan').TrialDays
-      const joinDate = this.get('Customer').JoinDate
-      const date = joinDate.split('/')
-      const f = new Date(date[2], date[0] - 1, date[1])
-      // console.log(joinDate)
-      // console.log(f.toString())
-      const trialEndDate = f.setDate(f.getDate() + trialDays)
-      // console.log(trialEndDate)
+  // getTrialEndDate() {
+  //   if (this.get('Subscription').Trial) {
+  //     const trialDays = this.get('monthlyStripePlan').TrialDays
+  //     const joinDate = this.get('Customer').JoinDate
+  //     const date = joinDate.split('/')
+  //     const f = new Date(date[2], date[0] - 1, date[1])
+  //     // console.log(joinDate)
+  //     // console.log(f.toString())
+  //     const trialEndDate = f.setDate(f.getDate() + trialDays)
+  //     // console.log(trialEndDate)
 
-      const d = new Date(0)
-      d.setUTCMilliseconds(trialEndDate)
-      console.log(d)
-      const trialEnddateOjb = this.formatDate(d)
-      // console.log(trialEnddateOjb)
-      this.set('trialEndDate', trialEnddateOjb)
-    }
-  }
+  //     const d = new Date(0)
+  //     d.setUTCMilliseconds(trialEndDate)
+  //     console.log(d)
+  //     const trialEnddateOjb = this.formatDate(d)
+  //     // console.log(trialEnddateOjb)
+  //     this.set('trialEndDate', trialEnddateOjb)
+  //   }
+  // }
 
   formatDate(d) {
     // get the month

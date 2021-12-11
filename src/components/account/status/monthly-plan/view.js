@@ -42,7 +42,7 @@ class MonthlyPlan extends View {
     //   debugger
     //   this.render()
     // })
-    this.listenTo(this.model, 'change:annualStripePlan', this.render)
+    this.listenTo(this.model, 'change:monthlyStripePlan', this.render)
   }
 
   render() {
@@ -105,13 +105,32 @@ class MonthlyPlan extends View {
   }
 
   getTrialInfo() {
-    const message = `Your free trial starts now and ends on ${this.model.get('trialEndDate')}`
+    const message = `Your free trial starts now and ends on ${this.getTrialEndDate()}`
     const type = 'success'
 
     this.flashMessage = new FlashMessage()
     this.flashMessage.onFlashMessageShow(message, type)
 
     return 'after your free trial ends.'
+  }
+
+  getTrialEndDate() {
+    const trialDays = this.model.get('monthlyStripePlan').TrialDays
+    const joinDate = this.model.get('Customer').JoinDate
+    const date = joinDate.split('/')
+    const f = new Date(date[2], date[0] - 1, date[1])
+    // console.log(joinDate)
+    // console.log(f.toString())
+    const trialEndDate = f.setDate(f.getDate() + trialDays)
+    // console.log(trialEndDate)
+
+    const d = new Date(0)
+    d.setUTCMilliseconds(trialEndDate)
+    console.log(d)
+    const trialEnddateOjb = this.model.formatDate(d)
+    // console.log(trialEnddateOjb)
+    // this.set('trialEndDate', trialEnddateOjb)
+    return trialEnddateOjb
   }
 }
 
