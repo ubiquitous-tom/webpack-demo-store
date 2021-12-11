@@ -28,7 +28,11 @@ class GuestPlan extends View {
     this.model = new GuestPlanModel(this.model.attributes)
     // console.log(this.model)
     // console.log(this.model.attributes)
-    this.render()
+    if (this.model.has('monthlyStripePlan')) {
+      this.render()
+    }
+
+    this.listenTo(this.model, 'change:monthlyStripePlan', this.render)
   }
 
   render() {
@@ -37,8 +41,7 @@ class GuestPlan extends View {
     console.log(this.model.attributes)
     const data = {
       currSymbol: this.model.get('monthlyStripePlan').CurrSymbol,
-      monthlySubscriptionAmount:
-        this.model.get('monthlyStripePlan').SubscriptionAmount,
+      monthlySubscriptionAmount: this.model.get('monthlyStripePlan').SubscriptionAmount,
       trialDays: this.model.get('monthlyStripePlan').TrialDays,
     }
     const html = this.template(data)

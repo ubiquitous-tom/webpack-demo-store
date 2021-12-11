@@ -8,7 +8,7 @@ import FlashMessage from 'shared/elements/flash-message'
 import StorageExpiry from './models/storage-expiry'
 import PlansAvailable from './models/plans-available'
 import StripeKey from './models/stripe-key'
-import StripePlans from './models/stripe-plans'
+// import StripePlans from './models/stripe-plans'
 // import CurrentMembership from './models/currentmembership'
 
 class ATVModel extends Model {
@@ -25,7 +25,7 @@ class ATVModel extends Model {
     this.storageExpiry = new StorageExpiry()
     this.stripeKey = new StripeKey()
     this.plansAvailable = new PlansAvailable()
-    this.stripePlans = new StripePlans()
+    // this.stripePlans = new StripePlans()
 
     this.flashMessage = new FlashMessage()
     this.flashMessage.model.getStorageContent()

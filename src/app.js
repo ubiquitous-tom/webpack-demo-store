@@ -29,7 +29,7 @@ $(() => {
   initializeApp.on('sync', (model) => {
     console.log(model)
     console.log(model.attributes)
-    new ATVModel(model.attributes)
+    new ATVModel()
     new ATVView()
     new Workspace({ model })
 

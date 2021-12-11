@@ -2,53 +2,45 @@ import { LocalStorage } from 'backbone'
 import _ from 'underscore'
 import { getLocalStorage } from 'backbone.localstorage/src/utils'
 import ATVModel from 'common/model'
+import StripePlans from 'common/models/stripe-plans'
 
 class AnnualPlanModel extends ATVModel {
-  get defaults() {
-    return {
-      localStorageIDs: [
-        'atv-stripeplans',
-        // 'atv-initializeapp',
-        // 'atv-plans-available',
-      ],
-    }
-  }
-
   initialize() {
     console.log('AnnualPlanModel initialize')
     console.log(this)
-    _.each(this.get('localStorageIDs'), (localStorageID) => {
-      this.localStorage = new LocalStorage(localStorageID)
-      const store = getLocalStorage(this)
-      // console.log(store)
-      if (!_.isEmpty(store.records)) {
-        const data = this.getStorageContent(localStorageID)
-        // console.log(data)
-        this.set(data)
-      } else {
-        // go back to signin
-      }
-    })
+    this.localStorage = new LocalStorage('atv-stripeplans')
+    const store = getLocalStorage(this)
+    // console.log(store)
+    if (!_.isEmpty(store.records)) {
+      const data = this.getStorageContent('atv-stripeplans')
+      // console.log(data)
+      this.set(data)
+    } else {
+      this.stripePlans = new StripePlans()
+      this.stripePlans.on('change:stripePlans', (model, value) => {
+        console.log(model, value)
+        this.set('stripePlans', value)
+        debugger
+      })
+
+      this.stripePlans.on('change:annualStripePlan', (model, value) => {
+        console.log(model, value)
+        this.set('annualStripePlan', value)
+        debugger
+      })
+
+      this.stripePlans.on('change:monthlyStripePlan', (model, value) => {
+        console.log(model, value)
+        this.set('monthlyStripePlan', value)
+        debugger
+      })
+    }
 
     this.set({
       renewalDate: this.getRenewalDate(),
       annualPerMonthPricing: this.annualPerMonthPricing(),
     })
   }
-
-  // getStorageContent() {
-  //   console.log('AnnualPlanModel getStorageContent')
-  //   const id = this.localStorage._getItem(this.get('localStorageID'))
-  //   // console.log(id)
-  //   const name = this.localStorage._itemName(id)
-  //   console.log(name)
-  //   const item = this.localStorage._getItem(name)
-  //   // console.log(item)
-  //   const storage = this.localStorage.serializer.deserialize(item)
-  //   console.log(storage)
-
-  //   return storage
-  // }
 
   getMonthlyToAnnualUpgradeInfo() {
     console.log('AnnualPlanModel getMonthlyToAnnualUpgrade')

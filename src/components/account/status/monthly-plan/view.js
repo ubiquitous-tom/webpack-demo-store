@@ -31,7 +31,18 @@ class MonthlyPlan extends View {
     this.model = new MonthlyPlanModel(this.model.attributes)
     // this.getRenewalDate()
     console.log(this)
-    this.render()
+
+    if (this.model.has('annualStripePlan')) {
+      this.render()
+    }
+
+    // this.listenTo(this.model, 'change:annualStripePlan', (model, value) => {
+    //   console.log('MonthlyPlan initialize')
+    //   console.log(model, value)
+    //   debugger
+    //   this.render()
+    // })
+    this.listenTo(this.model, 'change:annualStripePlan', this.render)
   }
 
   render() {
