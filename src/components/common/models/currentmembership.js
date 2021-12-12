@@ -3,13 +3,6 @@ import _ from 'underscore'
 import { getLocalStorage } from 'backbone.localstorage/src/utils'
 
 class CurrentMembership extends Model {
-
-  // get defaults() {
-  //   return {
-  //     localStorageID: 'atv-currentmembership',
-  //   }
-  // }
-
   get url() {
     return '/currentmembership'
   }

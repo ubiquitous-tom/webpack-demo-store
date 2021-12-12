@@ -3,6 +3,7 @@ import { View } from 'backbone'
 
 import FlashMessage from 'shared/elements/flash-message'
 import './stylesheet.scss'
+import placeholder from './placeholder.hbs'
 import template from './index.hbs'
 import GuestPlanModel from './model'
 
@@ -30,6 +31,8 @@ class GuestPlan extends View {
     // console.log(this.model.attributes)
     if (this.model.has('monthlyStripePlan')) {
       this.render()
+    } else {
+      this.contentPlaceholder()
     }
 
     this.listenTo(this.model, 'change:monthlyStripePlan', this.render)
@@ -50,6 +53,10 @@ class GuestPlan extends View {
     this.startFreeTrialBanner()
 
     return this
+  }
+
+  contentPlaceholder() {
+    this.$el.find('.current-plan').html(placeholder)
   }
 
   startFreeTrialBanner() {

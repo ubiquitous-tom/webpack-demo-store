@@ -6,6 +6,7 @@ import FlashMessage from 'shared/elements/flash-message'
 import SwitchToAnnualPlan from '../switch-to-annual-plan'
 
 import './stylesheet.scss'
+import placeholder from './placeholder.hbs'
 import template from './index.hbs'
 import MonthlyPlanModel from './model'
 // import AccountStatusModel from '../model'
@@ -34,6 +35,8 @@ class MonthlyPlan extends View {
 
     if (this.model.has('annualStripePlan')) {
       this.render()
+    } else {
+      this.contentPlaceholder()
     }
 
     // this.listenTo(this.model, 'change:annualStripePlan', (model, value) => {
@@ -61,6 +64,10 @@ class MonthlyPlan extends View {
     // this.$el.html(this.template)
 
     return this
+  }
+
+  contentPlaceholder() {
+    this.$el.find('.current-plan').html(placeholder)
   }
 
   switchToAnnual(e) {

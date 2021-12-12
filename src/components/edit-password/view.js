@@ -1,6 +1,7 @@
 import { View } from 'backbone'
 import _ from 'underscore'
 
+import SubmitLoader from 'shared/elements/submit-loader/'
 import FlashMessage from 'shared/elements/flash-message'
 import template from './index.hbs'
 import EditPasswordModel from './model'
@@ -28,6 +29,7 @@ class EditPassword extends View {
     console.log('EditPassword initialize')
     this.sessionID = options.model.attributes.Session.SessionID
 
+    this.submitLoader = new SubmitLoader()
     this.flashMessage = new FlashMessage()
     this.model = new EditPasswordModel()
     this.render()
@@ -36,6 +38,7 @@ class EditPassword extends View {
     this.listenTo(this.model, 'change:editPasswordSuccess', (model, value, options) => {
       console.log(model, value, options)
       this.flashMessage.onFlashMessageShow(this.model.get('message'), this.model.get('type'))
+      this.loadingStop(model, value, options)
     })
   }
 
@@ -98,6 +101,7 @@ class EditPassword extends View {
     // const params = $(e.currentTarget).serialize()
     const params = $(e.currentTarget).serializeArray()
     // console.log(params)
+    this.loadingStart()
     this.model.changePassword(params, this.sessionID)
   }
 
@@ -132,6 +136,20 @@ class EditPassword extends View {
     } else {
       this.changePassword(e)
     }
+  }
+
+  loadingStart() {
+    console.log('EditPassword loadingStart')
+    this.$el.find('#changePasswordForm input').prop('disabled', true)
+    this.submitLoader.loadingStart(this.$el.find('#changePasswordForm button'))
+  }
+
+  loadingStop(model, xhr, options) {
+    console.log('EditPassword loadingStop')
+    console.log(model, xhr, options)
+    console.log(this)
+    this.$el.find('#changePasswordForm input').val('').prop('disabled', false)
+    this.submitLoader.loadingStop(this.$el.find('#changePasswordForm button'))
   }
 }
 

@@ -1,4 +1,5 @@
 import { View } from 'backbone'
+import _ from 'underscore'
 
 import './stylesheet.scss'
 import template from './index.hbs'
@@ -37,7 +38,13 @@ class UpdateCard extends View {
 
     this.hideFooter()
 
+    _.delay(this.goBack, 3000, this)
+
     return this
+  }
+
+  goBack(context) {
+    context.$el.find('button.go-to-membership').removeClass('hidden')
   }
 
   goToMembership(e) {
@@ -46,6 +53,7 @@ class UpdateCard extends View {
     this.$el.find('#stunning').remove()
     this.showFooter()
     window.location.assign('#accountStatus')
+    window.location.reload()
   }
 
   showFooter() {

@@ -12,7 +12,6 @@ class EditEmailModel extends Model {
     // console.log(this)
     // this.listenTo(this, 'change', this.render)
 
-    this.on('request', this.loadingStop)
     // this.on('sync', this.success)
     // this.on('error', this.error)
   }
@@ -51,7 +50,6 @@ class EditEmailModel extends Model {
   changeEmail(params, defaultEmail) {
     console.log('EditEmailModel changeEmail')
     console.log(params)
-    this.loadingStart()
     const attributes = {
       NewEmail: params[0].value,
       CurrentEmail: defaultEmail,
@@ -107,14 +105,6 @@ class EditEmailModel extends Model {
       .always(() => {
         console.log(model.get('message'), model.get('type'))
       })
-  }
-
-  loadingStart() {
-    console.log('EditEmailModel loadingStart')
-  }
-
-  loadingStop(model, xhr, options) {
-    console.log('EditEmailModel loadingStop')
   }
 }
 

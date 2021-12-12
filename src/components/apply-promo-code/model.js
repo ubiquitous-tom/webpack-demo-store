@@ -21,7 +21,6 @@ class ApplyPromoCodeModel extends Model {
     // this.sync = this.mySync
     // this.listenTo(this, 'change', this.render)
     this.model = new Model()
-    this.on('request', this.loadingStop)
     // this.on('sync', this.success)
     // this.on('error', this.error)
   }
@@ -78,7 +77,6 @@ class ApplyPromoCodeModel extends Model {
 
   applyCode(code, sessionID) {
     console.log('ApplyPromoCodeModel applyCode')
-    this.loadingStart()
     console.log(this)
     const attributes = {
       Session: {
@@ -145,16 +143,7 @@ class ApplyPromoCodeModel extends Model {
         })
       .always(() => {
         console.log(model.get('message'), model.get('type'))
-        model.loadingStop()
       })
-  }
-
-  loadingStart() {
-    console.log('ApplyPromoCodeModel loadingStart')
-  }
-
-  loadingStop() {
-    console.log('ApplyPromoCodeModel loadingStop')
   }
 
   // getStorageContent() {

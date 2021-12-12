@@ -3,6 +3,7 @@ import { View } from 'backbone'
 // import Handlebars from 'handlebars'
 
 import './stylesheet.scss'
+import placeholder from './placeholder.hbs'
 import template from './index.hbs'
 import AnnualPlanModel from './model'
 import SwitchToMonthlyPlan from '../switch-to-monthly-plan'
@@ -30,6 +31,8 @@ class AnnualPlan extends View {
     // console.log(this.model.attributes)
     if (this.model.has('monthlyStripePlan')) {
       this.render()
+    } else {
+      this.contentPlaceholder()
     }
 
     this.listenTo(this.model, 'change:monthlyStripePlan', this.render)
@@ -55,6 +58,11 @@ class AnnualPlan extends View {
     // this.$el.html(html)
     // this.$el.html(this.template(this.model.attributes))
     return this
+  }
+
+  contentPlaceholder() {
+    console.log('AnnualPlan contentPlaceholder')
+    this.$el.find('.current-plan').html(placeholder)
   }
 
   switchToMonthly(e) {

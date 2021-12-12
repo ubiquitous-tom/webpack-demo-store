@@ -13,7 +13,6 @@ class EditPasswordModel extends Model {
     // console.log(this)
     // this.listenTo(this, 'change', this.render)
 
-    this.on('request', this.loadingStop)
     // this.on('sync', this.success)
     // this.on('error', this.error)
   }
@@ -52,7 +51,6 @@ class EditPasswordModel extends Model {
   changePassword(params, sessionID) {
     console.log('EditPasswordModel changePassword')
     console.log(params)
-    this.loadingStart()
     const attributes = {
       Session: {
         SessionID: sessionID,
@@ -112,14 +110,6 @@ class EditPasswordModel extends Model {
       .always(() => {
         console.log(model.get('message'), model.get('type'))
       })
-  }
-
-  loadingStart() {
-    console.log('EditPasswordModel loadingStart')
-  }
-
-  loadingStop(model, xhr, options) {
-    console.log('EditPasswordModel loadingStop')
   }
 }
 

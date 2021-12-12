@@ -179,33 +179,12 @@ module.exports = function (env, argv) {
           ]
         },
         {
-          test: /\.(png|svg|jpg|gif)$/i,
+          test: /\.(png|svg|jpg|gif|woff|woff2|eot|ttf|otf)$/i,
           // include: [
           //   path.resolve(__dirname, 'src'),
           // ],
           use: [
-            'file-loader',
-            // {
-            //   loader: 'url-loader',
-            //   options: {
-            //       limit: 8192 // in bytes
-            //   },
-            // },
-          ],
-        },
-        {
-          test: /\.(woff|woff2|eot|ttf|otf|svg)$/i,
-          // include: [
-          //   path.resolve(__dirname, 'src'),
-          // ],
-          use: [
-            // {
-            //   loader: 'file-loader',
-            //   options: {
-            //     name: '[name].[ext]',
-            //     outputPath: 'fonts/'
-            //   },
-            // }
+            // 'file-loader',
             {
               loader: 'url-loader',
               options: {
@@ -214,6 +193,27 @@ module.exports = function (env, argv) {
             },
           ],
         },
+        // {
+        //   test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        //   // include: [
+        //   //   path.resolve(__dirname, 'src'),
+        //   // ],
+        //   use: [
+        //     // {
+        //     //   loader: 'file-loader',
+        //     //   options: {
+        //     //     name: '[name].[ext]',
+        //     //     outputPath: 'fonts/'
+        //     //   },
+        //     // }
+        //     {
+        //       loader: 'url-loader',
+        //       options: {
+        //         limit: 8192 // in bytes
+        //       },
+        //     },
+        //   ],
+        // },
         // { test: /bootstrap\/dist\/js\/umd\//, loader: 'imports?jQuery=jquery' }
         {
           test: /\.(htm|html)$/i,

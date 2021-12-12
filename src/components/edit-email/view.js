@@ -1,9 +1,9 @@
 import { View } from 'backbone'
 // import _ from 'underscore'
-
+import SubmitLoader from 'shared/elements/submit-loader/view'
+import FlashMessage from 'shared/elements/flash-message'
 import template from './index.hbs'
 import EditEmailModel from './model'
-import FlashMessage from '../shared/elements/flash-message'
 
 class EditEmail extends View {
   get el() {
@@ -28,6 +28,7 @@ class EditEmail extends View {
     console.log('EditEmail initialize')
     this.defaultEmail = options.model.attributes.Customer.Email
 
+    this.submitLoader = new SubmitLoader()
     this.flashMessage = new FlashMessage()
     this.model = new EditEmailModel()
     this.render()
@@ -38,6 +39,7 @@ class EditEmail extends View {
       console.log(model, value, options)
       debugger
       this.flashMessage.onFlashMessageShow(this.model.get('message'), this.model.get('type'))
+      this.loadingStop(model, value, options)
     })
 
     this.model.on('invalid', (model, value, options) => {
@@ -150,7 +152,20 @@ class EditEmail extends View {
     // const params = $(e.currentTarget).serialize()
     const params = $(e.currentTarget).serializeArray()
     // console.log(params)
+    this.loadingStart()
     this.model.changeEmail(params, this.defaultEmail)
+  }
+
+  loadingStart() {
+    this.$el.find('#changeEmailForm input').prop('disabled', true)
+    this.submitLoader.loadingStart(this.$el.find('#changeEmailForm button'))
+  }
+
+  loadingStop(model, value, options) {
+    console.log(model, value, options)
+    console.log(this)
+    this.$el.find('#changeEmailForm input').val('').prop('disabled', false)
+    this.submitLoader.loadingStop(this.$el.find('#changeEmailForm button'))
   }
 }
 

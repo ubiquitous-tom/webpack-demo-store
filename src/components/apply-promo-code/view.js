@@ -1,7 +1,7 @@
 import { View } from 'backbone'
 // import _ from 'underscore'
-
-import FlashMessage from '../shared/elements/flash-message'
+import SubmitLoader from 'shared/elements/submit-loader/view'
+import FlashMessage from 'shared/elements/flash-message'
 import template from './index.hbs'
 import ApplyPromoCodeModel from './model'
 
@@ -26,6 +26,7 @@ class ApplyPromoCode extends View {
     console.log('ApplyPromoCode initialize')
     this.sessionID = options.model.attributes.Session.SessionID
 
+    this.submitLoader = new SubmitLoader()
     this.flashMessage = new FlashMessage()
     this.model = new ApplyPromoCodeModel()
     this.render()
@@ -35,6 +36,7 @@ class ApplyPromoCode extends View {
       console.log(model, value, options)
       debugger
       this.flashMessage.onFlashMessageShow(this.model.get('message'), this.model.get('type'))
+      this.loadingStop(model, value, options)
     })
   }
 
@@ -79,7 +81,22 @@ class ApplyPromoCode extends View {
     console.log('ApplyPromoCode applyCode')
     const code = e.target[0].value
     // const code = this.$el.find('#EnterPromoCode').val()
+    this.loadingStart()
     this.model.applyCode(code, this.sessionID)
+  }
+
+  loadingStart() {
+    console.log('ApplyPromoCode loadingStart')
+    this.$el.find('#applyCodeForm input').prop('disabled', true)
+    this.submitLoader.loadingStart(this.$el.find('#applyCodeForm button'))
+  }
+
+  loadingStop(model, value, options) {
+    console.log('ApplyPromoCode loadingStop')
+    console.log(model, value, options)
+    console.log(this)
+    this.$el.find('#applyCodeForm input').val('').prop('disabled', false)
+    this.submitLoader.loadingStop(this.$el.find('#applyCodeForm button'))
   }
 }
 

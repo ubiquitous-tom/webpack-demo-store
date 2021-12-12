@@ -1,9 +1,8 @@
 import { View } from 'backbone'
 // import _ from 'underscore'
-
-// import './stylesheet.css'
-import './stylesheet.scss'
+import SubmitLoader from 'shared/elements/submit-loader'
 import FlashMessage from 'shared/elements/flash-message'
+import './stylesheet.scss'
 // import loader from './loader.svg'
 import template from './index.hbs'
 import SwitchToMonthlyPlanModel from './model'
@@ -27,6 +26,7 @@ class SwitchToMonthlyPlan extends View {
   initialize() {
     console.log('SwitchToMonthlyPlan intialize')
     console.log(this, this.model.attributes)
+    this.submitLoader = new SubmitLoader()
     this.flashMessage = new FlashMessage()
     this.model = new SwitchToMonthlyPlanModel(this.model.attributes)
     // this.render()
@@ -35,6 +35,7 @@ class SwitchToMonthlyPlan extends View {
       console.log(model, value, options)
       console.log(this)
       debugger
+      this.loadingStop(model, value, options)
       this.$el.find('.switch-to-monthly-plan-container').remove()
       this.showFooter()
 
@@ -65,6 +66,7 @@ class SwitchToMonthlyPlan extends View {
   switchToMonthly(e) {
     console.log('SwitchToMonthlyPlan switchToMonthly')
     e.preventDefault()
+    this.loadingStart()
     this.model.switchToMonthly()
   }
 
@@ -74,6 +76,17 @@ class SwitchToMonthlyPlan extends View {
 
   hideFooter() {
     $('footer').hide()
+  }
+
+  loadingStart() {
+    this.$el.find('.switch-to-monthly-plan-container button[type="reset"]').prop('disabled', true)
+    this.submitLoader.loadingStart(this.$el.find('.switch-to-monthly-plan-container button[type="submit"]'))
+  }
+
+  loadingStop(model, value, options) {
+    console.log(model, value, options)
+    this.$el.find('.switch-to-monthly-plan-container button[type="reset"]').prop('disabled', false)
+    this.submitLoader.loadingStop(this.$el.find('.switch-to-monthly-plan-container button[type="submit"]'))
   }
 }
 
