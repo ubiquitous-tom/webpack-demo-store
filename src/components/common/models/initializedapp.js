@@ -38,8 +38,8 @@ class InitializeApp extends Model {
     this.set(data)
     this.set({
       environment: 'dev3.', // this.environment(),
-      signinEnv: this.signinEnv,
-      storeEnv: this.storeEnv,
+      signinEnv: this.signinEnv(),
+      storeEnv: this.storeEnv(),
     })
 
     // If this is a brand new account never been created then go to signup
