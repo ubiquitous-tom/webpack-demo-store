@@ -1,8 +1,10 @@
 import { View } from 'backbone'
 import _ from 'underscore'
 
+import SubmitLoader from 'shared/elements/submit-loader'
 import './stylesheet.scss'
 import template from './index.hbs'
+import StripeFormModel from './model'
 
 class StripeForm extends View {
   get el() {
@@ -22,12 +24,18 @@ class StripeForm extends View {
 
   initialize(options) {
     console.log('StripeForm initialize')
-    console.log(this)
-    console.log(options)
+    // console.log(this)
+    // console.log(options)
+    this.submitLoader = new SubmitLoader()
     this.parentView = options.parentView
-    console.log(this.parentView)
+    // console.log(this.parentView)
+    this.model = new StripeFormModel()
     // console.log(Stripe)
 
+    this.listenTo(this.model, 'change:stripeKey', this.initializeStripeForm)
+  }
+
+  initializeStripeForm() {
     const elementStyles = {
       base: {
         iconColor: '#dddddd',
@@ -53,7 +61,8 @@ class StripeForm extends View {
 
     // this.stripe = loadStripe('pk_live_Riw8CYEIjVsr54nzgGIOvzKL')
     /* eslint no-undef: 0 */
-    this.stripe = Stripe('pk_test_lJqmZftGTxLatArjHLxHumTC')
+    // this.stripe = Stripe('pk_test_lJqmZftGTxLatArjHLxHumTC')
+    this.stripe = Stripe(this.model.get('stripeKey'))
 
     console.log(this.stripe)
     /* eslint max-len: 0 */
@@ -83,12 +92,13 @@ class StripeForm extends View {
     this.cardCvc = this.elements.create('cardCvc', {
       style: elementStyles,
     })
-    // console.log(this)
+    console.log(this)
+    this.render()
   }
 
   render() {
     console.log('StripeForm render')
-    this.$el.find('#stripe-form').html(this.template())
+    // this.$el.find('#stripe-form').html(this.template())
 
     this.cardNumber.mount('#card-number')
     this.cardExpiry.mount('#card-expiry')
@@ -96,6 +106,11 @@ class StripeForm extends View {
     console.log(this)
 
     return this
+  }
+
+  contentPlaceholder() {
+    console.log('StripeForm contentPlaceholder')
+    this.$el.find('#stripe-form').html(this.template())
   }
 
   /* eslint no-unused-vars: 0 */
@@ -109,6 +124,7 @@ class StripeForm extends View {
     console.log('StripeForm submit')
     e.preventDefault()
     console.log(this.parentView.model)
+    this.loadingStart()
     const data = {
       name: this.$el.find('#stripe-form #nameoncard').val(),
       address_zip: this.$el.find('#stripe-form #card-zipcode').val(),
@@ -122,11 +138,24 @@ class StripeForm extends View {
           const updatedStripeCard = _.extend(stripeCard, { token: stripeCustomerID })
           console.log(updatedStripeCard)
           this.parentView.model.set('newStripeCardInfo', updatedStripeCard)
-          console.log(this, this.parentView)
+          // console.log(this, this.parentView)
+          this.loadingStop()
           this.$el.find('#stripe-form').empty()
           this.parentView.render()
         }
       })
+  }
+
+  loadingStart() {
+    this.$el.find('#stripe-form input').prop('disabled', true)
+    this.$el.find('#stripe-form button[type="reset"]').prop('disabled', true)
+    this.submitLoader.loadingStart(this.$el.find('#stripe-form button[type="submit"]'))
+  }
+
+  loadingStop() {
+    this.$el.find('#stripe-form input').val('').prop('disabled', false)
+    this.$el.find('#stripe-form button[type="reset"]').prop('disabled', false)
+    this.submitLoader.loadingStop(this.$el.find('#stripe-form button[type="submit"]'))
   }
 }
 

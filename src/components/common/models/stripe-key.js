@@ -34,7 +34,7 @@ class StripeKey extends Model {
     if (!_.isEmpty(resp)) {
       console.log('StripeKey parse NOT isEmpty')
       this.set(resp)
-      this.sync('create', this)
+      // this.sync('create', this)
     } else {
       // something's wrong
     }

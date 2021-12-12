@@ -62,7 +62,8 @@ class ConfirmBilling extends View {
     // console.log(this.$el.find('#confirm-billing')[0])
     this.$el.find('#confirm-billing').empty()
     this.stripeForm = new StripeForm({ parentView: this })
-    this.stripeForm.render()
+    // this.stripeForm.render()
+    this.stripeForm.contentPlaceholder()
   }
 
   getConfirmCurrentBillingInfo() {

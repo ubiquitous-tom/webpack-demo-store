@@ -7,7 +7,7 @@ import _ from 'underscore'
 import FlashMessage from 'shared/elements/flash-message'
 import StorageExpiry from './models/storage-expiry'
 import PlansAvailable from './models/plans-available'
-import StripeKey from './models/stripe-key'
+// import StripeKey from './models/stripe-key'
 // import StripePlans from './models/stripe-plans'
 // import CurrentMembership from './models/currentmembership'
 
@@ -23,7 +23,7 @@ class ATVModel extends Model {
     // console.log(this)
     // this.locale = new ATVLocale()
     this.storageExpiry = new StorageExpiry()
-    this.stripeKey = new StripeKey()
+    // this.stripeKey = new StripeKey()
     this.plansAvailable = new PlansAvailable()
     // this.stripePlans = new StripePlans()
 

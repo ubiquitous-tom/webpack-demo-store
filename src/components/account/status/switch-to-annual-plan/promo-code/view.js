@@ -2,6 +2,7 @@ import { View } from 'backbone'
 import _ from 'underscore'
 
 import './stylesheet.scss'
+import SubmitLoader from 'shared/elements/submit-loader'
 import FlashMessage from 'shared/elements/flash-message'
 import template from './index.hbs'
 import PromoCodeModel from './model'
@@ -33,6 +34,7 @@ class PromoCode extends View {
     this.confirmBilling = this.switchToAnnualPlan.confirmBilling
     // this.model = this.switchToAnnualPlan.model
     this.model = new PromoCodeModel()
+    this.submitLoader = new SubmitLoader()
     this.flashMessage = new FlashMessage()
     // this.listenTo(this.model, 'change', this.render)
     // this.render()
@@ -43,6 +45,7 @@ class PromoCode extends View {
       console.log(this)
       debugger
       model.unset('promoCodeSuccess', { silent: true })
+      this.loadingStop()
       if (value) {
         this.updatePromoMessage(model, value, options)
       } else {
@@ -116,6 +119,7 @@ class PromoCode extends View {
     console.log('Promocode submit')
     e.preventDefault()
     console.log(e)
+    this.loadingStart()
     const promoCode = this.$el.find('input#promocode').val()
     this.model.submit(promoCode)
   }
@@ -160,6 +164,16 @@ class PromoCode extends View {
           .append(message)
       )
       .show()
+  }
+
+  loadingStart() {
+    this.$el.find('#promocode-container input').prop('disabled', true)
+    this.submitLoader.loadingStart(this.$el.find('#promocode-container button[type="submit"]'))
+  }
+
+  loadingStop() {
+    this.$el.find('#promocode-container input').prop('disabled', false)
+    this.submitLoader.loadingStop(this.$el.find('#promocode-container button[type="submit"]'))
   }
 }
 
