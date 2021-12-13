@@ -116,7 +116,8 @@ module.exports = function (env, argv) {
       //     { from: 'src/assets/images/atvlogo.png', to: 'img' },
       //   ],
       // }),
-      new WebpackManifestPlugin(),
+      // // https://stackoverflow.com/questions/44232366/how-do-i-build-a-json-file-with-webpack/54700817
+      // new WebpackManifestPlugin(),
     ],
     module: {
       rules: [
