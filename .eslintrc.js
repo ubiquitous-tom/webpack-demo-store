@@ -33,13 +33,13 @@ module.exports = {
   ignorePatterns: ["node_modules/"],
   rules: {
     "semi": ["error", "never"],
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    'no-debugger': 0,//process.env.NODE_ENV === 'production' ? 2 : 0,
     // 'import/no-unresolved': ['error', { commonjs: true, caseSensitive: true }],
     // 'import/extensions': ['error', 'ignorePackages', {
     //   js: 'never',
     //   jsx: 'never'
     // }],
-    "no-console": process.env.NODE_ENV === 'production' ? 2 : 0,
+    "no-console": 0,//process.env.NODE_ENV === 'production' ? 2 : 0,
     // "no-restricted-syntax": [
     //   "error",
     //   {

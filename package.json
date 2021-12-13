@@ -57,6 +57,8 @@
     "resolve-url-loader": "^4.0.0",
     "sass-loader": "^10",
     "style-loader": "2",
+    "terser-webpack-plugin": "^4",
+    "uglify-js": "^3.14.4",
     "url-loader": "^4.1.1",
     "webpack": "4",
     "webpack-bundle-analyzer": "^4.5.0",

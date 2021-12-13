@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ESLintWebpackPlugin = require('eslint-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const TerserWebpackPlugin = require('terser-webpack-plugin')
 const cookieParser = require('cookie-parser')
 // const bodyParser = require('body-parser')
 const express = require('express')
@@ -16,7 +17,6 @@ module.exports = function (env, argv) {
     mode: env.production ? 'production' : 'development',
     entry: {
       index: './src/app.js',
-      // another: './src/another-module.js',
     },
     output: {
       filename: '[name].[hash].js',
@@ -37,12 +37,7 @@ module.exports = function (env, argv) {
         templates: path.resolve(__dirname, './src/templates'),
       },
     },
-    optimization: {
-      splitChunks: {
-        chunks: 'all',
-      },
-    },
-    devtool: env.production ? 'source-map' : 'eval-cheap-module-source-map',
+    devtool: env.production ? 'source-map' : 'inline-source-map',// 'eval-cheap-module-source-map',
     devServer: {
       static: './dist',
       hot: true,
@@ -68,10 +63,26 @@ module.exports = function (env, argv) {
         systemvars: true,
       }),
       new HtmlWebpackPlugin({
-        title: 'Acorn TV',
+        // title: 'Acorn TV',
         filename: 'index.html',
         template: './public/temp.html',
         favicon: './src/assets/images/favicon.ico',
+        minify: {
+          collapseWhitespace: true,
+          minifyCSS: true,
+          minifyJS: true,
+        }
+      }),
+      new HtmlWebpackPlugin({
+        // title: 'Acorn TV',
+        filename: 'index.jsp',
+        template: './public/temp.html',
+        favicon: './src/assets/images/favicon.ico',
+        minify: {
+          collapseWhitespace: true,
+          minifyCSS: true,
+          minifyJS: true,
+        }
       }),
       new MiniCssExtractPlugin({
         filename: '[name].[hash].css',
@@ -80,11 +91,11 @@ module.exports = function (env, argv) {
       }),
       new ESLintWebpackPlugin(),
       new CleanWebpackPlugin({
-        verbose: true,
-        dry: false,
-        cleanOnceBeforeBuildPatterns: [
-          '!index.html'
-        ],
+        // verbose: true,
+        // dry: false,
+        // cleanOnceBeforeBuildPatterns: [
+        //   '!index.html'
+        // ],
       }),
       new ProvidePlugin({
         jQuery: 'jquery',
@@ -103,7 +114,8 @@ module.exports = function (env, argv) {
       new CopyWebpackPlugin({
         patterns: [
           // { from: 'src/assets/fonts', to: 'font' },
-          { from: 'src/assets/images', to: 'img' },
+          // { from: 'src/assets/images', to: 'img' },
+          { from: 'src/assets/images/atvlogo.png', to: 'img' },
         ],
       }),
     ],
@@ -132,31 +144,21 @@ module.exports = function (env, argv) {
               options: {
                 postcssOptions: {
                   plugins: [
-                    [
-                      'postcss-preset-env',
-                      {
-                        // Options
-                      },
-                    ],
-                    'autoprefixer'
+                    'postcss-preset-env',
+                    'autoprefixer',
                   ],
                 },
               },
             },
           ],
         },
-        {
-          test: /\.less$/i,
-          loaders: ['style-loader', 'css-loder', 'less-loader'],
-        },
+        { test: /\.less$/i, loaders: ['style-loader', 'css-loder', 'less-loader'] },
         {
           test: /\.s[ac]ss$/i,
           // include: path.resolve(__dirname, 'src'),
           use: [
             env.production ? MiniCssExtractPlugin.loader : { loader: 'style-loader', /* inject CSS to page */ },
-            {
-              loader: 'css-loader', // translates CSS into CommonJS modules
-            },
+            { loader: 'css-loader', /* translates CSS into CommonJS modules */ },
             {
               loader: 'postcss-loader', // Run postcss actions
               options: {
@@ -173,61 +175,44 @@ module.exports = function (env, argv) {
                 }
               }
             },
-            {
-              loader: 'sass-loader' // compiles Sass to CSS
-            }
+            { loader: 'sass-loader' /* compiles Sass to CSS */ }
           ]
         },
         {
-          test: /\.(png|svg|jpg|gif|woff|woff2|eot|ttf|otf)$/i,
+          test: /\.(png|svg|jpg|gif)$/i,
+          use: [
+            //   {
+            //     loader: 'file-loader',
+            //     options: {
+            //       name: '[path][name].[ext]',
+            //       context: path.resolve(__dirname, 'src/'),
+            //       outputPath: 'dist/',
+            //       publicPath: '../',
+            //       useRelativePaths: true
+            //     }
+            //   },
+            { loader: 'url-loader', options: { limit: 8192 /* in bytes */ } },
+          ],
+        },
+        {
+          test: /\.(woff|woff2|eot|ttf|otf)$/i,
           // include: [
           //   path.resolve(__dirname, 'src'),
           // ],
           use: [
-            // 'file-loader',
-            {
-              loader: 'url-loader',
-              options: {
-                limit: 8192 // in bytes
-              },
-            },
+            // {
+            //   loader: 'file-loader',
+            //   options: {
+            //     name: '[name].[ext]',
+            //     outputPath: 'fonts/'
+            //   },
+            // }
+            { loader: 'url-loader', options: { limit: 8192 /* in bytes */ } },
           ],
         },
-        // {
-        //   test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        //   // include: [
-        //   //   path.resolve(__dirname, 'src'),
-        //   // ],
-        //   use: [
-        //     // {
-        //     //   loader: 'file-loader',
-        //     //   options: {
-        //     //     name: '[name].[ext]',
-        //     //     outputPath: 'fonts/'
-        //     //   },
-        //     // }
-        //     {
-        //       loader: 'url-loader',
-        //       options: {
-        //         limit: 8192 // in bytes
-        //       },
-        //     },
-        //   ],
-        // },
         // { test: /bootstrap\/dist\/js\/umd\//, loader: 'imports?jQuery=jquery' }
-        {
-          test: /\.(htm|html)$/i,
-          // include: path.resolve(__dirname, 'src'),
-          use: [
-            'html-loader',
-          ],
-        },
-        {
-          test: /\.(hbs)$/i,
-          use: [
-            'handlebars-loader',
-          ],
-        },
+        { test: /\.(htm|html)$/i, use: ['html-loader'] },
+        { test: /\.(hbs)$/i, use: ['handlebars-loader'] },
       ],
     },
     optimization: {
@@ -241,6 +226,16 @@ module.exports = function (env, argv) {
           },
         },
       },
+      minimize: true,
+      minimizer: [
+        new TerserWebpackPlugin({
+          minify: TerserWebpackPlugin.uglifyJsMinify,
+          terserOptions: {
+            drop_console: env.production ? true : false,
+            drop_debugger: env.production ? true : false,
+          }
+        })
+      ]
     },
   }
 }
