@@ -1,8 +1,8 @@
 import { View } from 'backbone'
 // import _ from 'underscore'
-
-import './stylesheet.css'
-import template from './temp.hbs'
+import atvlogo from '../../../assets/images/atvlogo.png'
+import './stylesheet.scss'
+import template from './index.hbs'
 // import template from './temp-test.html'
 // import HeaderModel from './model'
 
@@ -21,6 +21,7 @@ class Header extends View {
   initialize() {
     console.log('Header initialize')
     // this.model = new HeaderModel()
+    this.model.set('atvlogo', atvlogo)
     this.render()
   }
 

@@ -7,6 +7,7 @@ const ESLintWebpackPlugin = require('eslint-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TerserWebpackPlugin = require('terser-webpack-plugin')
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 const cookieParser = require('cookie-parser')
 // const bodyParser = require('body-parser')
 const express = require('express')
@@ -37,7 +38,7 @@ module.exports = function (env, argv) {
         templates: path.resolve(__dirname, './src/templates'),
       },
     },
-    devtool: env.production ? 'source-map' : 'inline-source-map',// 'eval-cheap-module-source-map',
+    devtool: env.production ? 'source-map' : 'cheap-module-eval-source-map',
     devServer: {
       static: './dist',
       hot: true,
@@ -91,11 +92,8 @@ module.exports = function (env, argv) {
       }),
       new ESLintWebpackPlugin(),
       new CleanWebpackPlugin({
-        // verbose: true,
-        // dry: false,
-        // cleanOnceBeforeBuildPatterns: [
-        //   '!index.html'
-        // ],
+        verbose: true,
+        cleanOnceBeforeBuildPatterns: ['**/*', '!manifest.json'],
       }),
       new ProvidePlugin({
         jQuery: 'jquery',
@@ -111,13 +109,14 @@ module.exports = function (env, argv) {
       //   'process.env': JSON.stringify(process.env)
       // }),
 
-      new CopyWebpackPlugin({
-        patterns: [
-          // { from: 'src/assets/fonts', to: 'font' },
-          // { from: 'src/assets/images', to: 'img' },
-          { from: 'src/assets/images/atvlogo.png', to: 'img' },
-        ],
-      }),
+      // new CopyWebpackPlugin({
+      //   patterns: [
+      //     // { from: 'src/assets/fonts', to: 'font' },
+      //     // { from: 'src/assets/images', to: 'img' },
+      //     { from: 'src/assets/images/atvlogo.png', to: 'img' },
+      //   ],
+      // }),
+      new WebpackManifestPlugin(),
     ],
     module: {
       rules: [
@@ -181,32 +180,12 @@ module.exports = function (env, argv) {
         {
           test: /\.(png|svg|jpg|gif)$/i,
           use: [
-            //   {
-            //     loader: 'file-loader',
-            //     options: {
-            //       name: '[path][name].[ext]',
-            //       context: path.resolve(__dirname, 'src/'),
-            //       outputPath: 'dist/',
-            //       publicPath: '../',
-            //       useRelativePaths: true
-            //     }
-            //   },
             { loader: 'url-loader', options: { limit: 8192 /* in bytes */ } },
           ],
         },
         {
           test: /\.(woff|woff2|eot|ttf|otf)$/i,
-          // include: [
-          //   path.resolve(__dirname, 'src'),
-          // ],
           use: [
-            // {
-            //   loader: 'file-loader',
-            //   options: {
-            //     name: '[name].[ext]',
-            //     outputPath: 'fonts/'
-            //   },
-            // }
             { loader: 'url-loader', options: { limit: 8192 /* in bytes */ } },
           ],
         },
@@ -226,16 +205,17 @@ module.exports = function (env, argv) {
           },
         },
       },
-      minimize: true,
-      minimizer: [
-        new TerserWebpackPlugin({
-          minify: TerserWebpackPlugin.uglifyJsMinify,
-          terserOptions: {
-            drop_console: env.production ? true : false,
-            drop_debugger: env.production ? true : false,
-          }
-        })
-      ]
+      // // production only
+      // minimize: true,
+      // minimizer: [
+      //   new TerserWebpackPlugin({
+      //     minify: TerserWebpackPlugin.uglifyJsMinify,
+      //     terserOptions: {
+      //       drop_console: env.production ? true : false,
+      //       drop_debugger: env.production ? true : false,
+      //     }
+      //   })
+      // ]
     },
   }
 }
