@@ -1,8 +1,8 @@
 import { View } from 'backbone'
 // import _ from 'underscore'
 
-import './stylesheet.css'
-import template from './temp.hbs'
+import './stylesheet.scss'
+import template from './index.hbs'
 // import template from './temp-test.html'
 // import HeaderModel from './model'
 

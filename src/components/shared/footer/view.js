@@ -1,6 +1,5 @@
 import { View } from 'backbone'
 // https://github.com/handlebars-lang/handlebars.js/issues/1553
-// import Handlebars from 'handlebars'
 import * as Handlebars from 'handlebars/runtime'
 import Polyglot from 'node-polyglot'
 
@@ -52,14 +51,10 @@ class Footer extends View {
     console.log('Footer render')
     this.isSelected()
 
-    // const template = Handlebars.compile(this.template)
-    // console.log(template)
     // console.log(this.model.attributes)
     const html = this.template(this.model.attributes)
     // console.log(html)
     this.$el.html(html)
-
-    // this.$el.html(this.template(this.model.attributes))
 
     return this
   }
