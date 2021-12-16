@@ -10,6 +10,7 @@ import './app.scss'
 // import 'common/template'
 // import { tagName, template, on } from 'common/decorators'
 
+import StorageExpiry from 'components/common/models/storage-expiry'
 import ATVLocale from 'components/common/models/locale'
 import ATVView from 'common/view'
 import InitializeApp from 'common/models/initializedapp'
@@ -27,6 +28,7 @@ console.log(`${process.env.RLJE_API_ENVIRONMENT}api.rlje.net`)
 console.log(`account${process.env.API_ENVIRONMENT}.acorn.tv`)
 
 $(() => {
+  new StorageExpiry()
   const atvLocale = new ATVLocale()
   // console.log(atvLocale)
   atvLocale.on('sync', (localeModel) => {

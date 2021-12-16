@@ -2,7 +2,6 @@ import { Model } from 'backbone'
 import _ from 'underscore'
 
 import FlashMessage from 'shared/elements/flash-message'
-import StorageExpiry from './models/storage-expiry'
 import PlansAvailable from './models/plans-available'
 
 class ATVModel extends Model {
@@ -15,7 +14,6 @@ class ATVModel extends Model {
   initialize() {
     console.log('ATVModel initialize')
     // console.log(this)
-    this.storageExpiry = new StorageExpiry()
     this.plansAvailable = new PlansAvailable()
 
     this.flashMessage = new FlashMessage()

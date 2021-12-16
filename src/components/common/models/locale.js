@@ -30,7 +30,6 @@ class ATVLocale extends Model {
     console.log('ATVLocale initialize fetch')
     this.fetch({
       ajaxSync: true,
-      wait: true,
     })
     // } else {
     //   console.log('ATVLocale initialize updateModel')
@@ -46,17 +45,23 @@ class ATVLocale extends Model {
     // } else
     if (!_.isEmpty(response[0])) {
       console.log('ATVLocale Model parse noEmpty')
-      const langObj = _.pick(response[0], 'languages')
+      // const langObj = _.pick(response[0], 'languages')
       // const trObj = _.pick(response[0], 'tr')
       // console.log(langObj, trObj)
-      this.set(response[0])
-      this.set({
-        languages: _.omit(langObj.languages, 'uk'),
-        // translation: trObj.tr,
-      })
-      this.sync('create', this)
-    }
+      // this.set({
+      //   languages: _.omit(langObj.languages, 'uk'),
+      //   tr: trObj.tr,
+      // })
+      const { languages, tr } = response[0]
+      const data = {
+        languages: _.omit(languages, 'uk'),
+        tr,
+      }
+      this.set(data)
 
+      this.sync('create', this)
+      return data
+    }
     return response[0]
   }
 
