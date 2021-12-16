@@ -1,34 +1,38 @@
-<div class='account-nav'>
-  <ul class='nav nav-tabs nav-stacked'>
-    <li id='accountStatusNav'>
-      <a href='#accounStatus'>
-        <i class='icon-chevron-right'></i>
-        MEMBERSHIP
+<div class="account-nav">
+  <ul class="nav nav-tabs nav-stacked">
+    <li id="accountStatusNav">
+      <a href="#accounStatus">
+        <i class="icon-chevron-right"></i>
+        {{t "MEMBERSHIP"}}
       </a>
     </li>
-    <li id='editEmailNav'>
-      <a href='#editEmail'>
-        <i class='icon-chevron-right'></i>
-        CHANGE EMAIL
+    <li id="editEmailNav">
+      <a href="#editEmail">
+        <i class="icon-chevron-right"></i>
+        {{t "CHANGE-EMAIL"}}
       </a>
     </li>
-    <li id='editPasswordNav'>
-      <a href='#editPassword'>
-        <i class='icon-chevron-right'></i>
-        CHANGE PASSWORD
+    <li id="editPasswordNav">
+      <a href="#editPassword">
+        <i class="icon-chevron-right"></i>
+        {{t "CHANGE-PASSWORD"}}
       </a>
     </li>
-    <li id='stunningNav'>
-      <a href='#updatecard'>
-        <i class='icon-chevron-right'></i>
-        UPDATE BILLING INFO
-      </a>
-    </li>
-    <li id='applyPromoCodeNav'>
-      <a href='#applyPromoCode'>
-        <i class='icon-chevron-right'></i>
-        Promo Code or Gift Code
-      </a>
-    </li>
+    {{#if Customer.webPaymentEdit}}
+      {{#if Customer.StripeEnabled}}
+        <li id="stunningNav">
+          <a href="#updatecard">
+            <i class="icon-chevron-right"></i>
+            {{t "UPDATE-BILLING-INFO"}}
+          </a>
+        </li>
+        <li id="applyPromoCodeNav">
+          <a href="#applyPromoCode">
+            <i class="icon-chevron-right"></i>
+            {{t "REDEEM-GIFT"}}
+          </a>
+        </li>
+      {{/if}}
+    {{/if}}
   </ul>
 </div>

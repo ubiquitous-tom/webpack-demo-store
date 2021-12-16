@@ -8,38 +8,26 @@ class EditPasswordModel extends Model {
 
   initialize() {
     console.log('EditPasswordModel initialize')
-
     this.model = new Model()
-    // console.log(this)
-    // this.listenTo(this, 'change', this.render)
-
-    // this.on('sync', this.success)
-    // this.on('error', this.error)
   }
 
   /* eslint consistent-return: 0 */
   /* eslint no-unused-vars: 0 */
   validate(attrs, options) {
-    console.log('EditPasswordModel validate')
-    console.log(attrs)
-    // console.log(options)
-
     if (_.isEmpty(attrs.Credentials.Password)) {
       console.log('please enter the password')
-      return 'please enter the password'
+      return 'CHANGING-YOUR-PASSWORD'
     }
 
     if (_.isEmpty(attrs.Credentials.ConfirmPassword)) {
       console.log('please confirm the password')
-      return 'please confirm the password'
+      return 'CHANGING-YOUR-PASSWORD'
     }
 
     if (attrs.Credentials.Password !== attrs.Credentials.ConfirmPassword) {
       console.log('password do not match')
-      return 'password do not match'
+      return 'PASSWORDS-DONT-MATCH'
     }
-
-    console.log('EditPasswordModel validate end')
   }
 
   parse(response) {
@@ -77,7 +65,7 @@ class EditPasswordModel extends Model {
     model.set({
       editPasswordSuccess: true,
       type: 'success',
-      message: 'Password is Changed',
+      message: 'PASSWORD-CHANGED',
     })
   }
 
@@ -107,9 +95,6 @@ class EditPasswordModel extends Model {
             })
           }
         })
-      .always(() => {
-        console.log(model.get('message'), model.get('type'))
-      })
   }
 }
 

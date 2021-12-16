@@ -1,9 +1,8 @@
 import { View } from 'backbone'
 // import _ from 'underscore'
-import atvlogo from '../../../assets/images/atvlogo.png'
+import atvlogo from 'img/atvlogo.png'
 import './stylesheet.scss'
 import template from './index.hbs'
-// import template from './temp-test.html'
 // import HeaderModel from './model'
 
 class Header extends View {
@@ -28,7 +27,8 @@ class Header extends View {
   render() {
     // https://gist.github.com/kyleondata/3440492
     // const template = Handlebars.compile(this.template)
-    // console.log(this.model.attributes)
+    console.log(this.model.attributes)
+    // debugger
     const html = this.template(this.model.attributes)
     // console.log(html)
     this.$el.html(html)

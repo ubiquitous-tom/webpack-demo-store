@@ -35,7 +35,6 @@ module.exports = function (env, argv) {
         routers: path.resolve(__dirname, './src/routers'),
         models: path.resolve(__dirname, './src/models'),
         views: path.resolve(__dirname, './src/views '),
-        templates: path.resolve(__dirname, './src/templates'),
       },
     },
     devtool: env.production ? 'source-map' : 'cheap-module-eval-source-map',
@@ -102,6 +101,7 @@ module.exports = function (env, argv) {
         // _: 'underscore',
         // Backbone: 'backbone',
       }),
+
       // new EnvironmentPlugin({
 
       // }),
@@ -116,6 +116,7 @@ module.exports = function (env, argv) {
       //     { from: 'src/assets/images/atvlogo.png', to: 'img' },
       //   ],
       // }),
+
       // // https://stackoverflow.com/questions/44232366/how-do-i-build-a-json-file-with-webpack/54700817
       // new WebpackManifestPlugin(),
     ],

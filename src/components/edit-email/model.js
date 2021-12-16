@@ -9,11 +9,6 @@ class EditEmailModel extends Model {
   initialize() {
     console.log('EditEmailModel initialize')
     this.model = new Model()
-    // console.log(this)
-    // this.listenTo(this, 'change', this.render)
-
-    // this.on('sync', this.success)
-    // this.on('error', this.error)
   }
 
   /* eslint consistent-return: 0 */
@@ -25,20 +20,18 @@ class EditEmailModel extends Model {
 
     if (_.isEmpty(attrs.NewEmail)) {
       console.log('please enter the email')
-      return 'please enter the email'
+      return 'EMAIL-IS-REQUIRED'
     }
 
     if (_.isEmpty(attrs.ConfirmedEmail)) {
       console.log('please confirm the email')
-      return 'please confirm the email'
+      return 'EMAIL-IS-REQUIRED'
     }
 
     if (attrs.NewEmail !== attrs.ConfirmedEmail) {
       console.log('email do not match')
-      return 'email do not match'
+      return 'EMAILS-DONT-MATCH'
     }
-
-    console.log('EditEmailModel validate end')
   }
 
   parse(response) {
@@ -72,7 +65,7 @@ class EditEmailModel extends Model {
     model.set({
       editEmailSuccess: true,
       type: 'success',
-      message: 'Email is Changed',
+      message: 'EMAIL-CHANGED',
     })
   }
 
@@ -102,9 +95,6 @@ class EditEmailModel extends Model {
             })
           }
         })
-      .always(() => {
-        console.log(model.get('message'), model.get('type'))
-      })
   }
 }
 

@@ -1,15 +1,9 @@
 import { Model } from 'backbone'
 import _ from 'underscore'
-// import { LocalStorage } from 'backbone.localstorage'
 
-// import ATVLocale from './locale'
-// import InitializeApp from './models/initializedapp'
 import FlashMessage from 'shared/elements/flash-message'
 import StorageExpiry from './models/storage-expiry'
 import PlansAvailable from './models/plans-available'
-// import StripeKey from './models/stripe-key'
-// import StripePlans from './models/stripe-plans'
-// import CurrentMembership from './models/currentmembership'
 
 class ATVModel extends Model {
   get defaults() {
@@ -21,11 +15,8 @@ class ATVModel extends Model {
   initialize() {
     console.log('ATVModel initialize')
     // console.log(this)
-    // this.locale = new ATVLocale()
     this.storageExpiry = new StorageExpiry()
-    // this.stripeKey = new StripeKey()
     this.plansAvailable = new PlansAvailable()
-    // this.stripePlans = new StripePlans()
 
     this.flashMessage = new FlashMessage()
     this.flashMessage.model.getStorageContent()
@@ -33,8 +24,6 @@ class ATVModel extends Model {
       // console.log(this.flashMessage.model.get('message'), this.flashMessage.model.get('type'))
       this.flashMessage.onFlashMessageShow(this.flashMessage.model.get('message'), this.flashMessage.model.get('type'))
     }
-    // this.initializeApp = new InitializeApp()
-    // this.currentMembership = new CurrentMembership(this.initializeApp.attributes)
   }
 
   getStorageContent(localStorageID) {
