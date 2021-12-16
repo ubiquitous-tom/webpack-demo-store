@@ -48,7 +48,7 @@ class I18n extends Model {
   tHelper() {
     Handlebars.registerHelper('t', (translationKey, options) => {
       console.log(translationKey, options)
-      console.log(this, this.polyglot)
+      // console.log(this, this.polyglot)
       // this.currentLocale = options.lookupProperty(options.data.root, 'currentLanguage') || 'en'
       // debugger
       // const translated = this.polyglot.has(`${translationKey}.content.${this.currentLocale}`)

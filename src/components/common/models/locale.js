@@ -10,6 +10,10 @@ class ATVLocale extends Model {
     }
   }
 
+  // get urlRoot() {
+  //   return 'lang.json'
+  // }
+
   get url() {
     console.log('ATVLocale url')
     const env = this.environment()

@@ -1,26 +1,26 @@
-<div class='row'>
-  <div class='col-md-8 account-info'>
-    <h1>Account Info</h1>
-    <div class='row'>
-      <div class='col-lg-3 col-xs-4'>Name:</div>
-      <div class='col-lg-9 col-xs-8 info'>{{Customer.Name}}</div>
+<div class="row">
+  <div class="col-md-8 account-info">
+    <h1>{{t "ACCOUNT-INFO"}}</h1>
+    <div class="row">
+      <div class="col-lg-3 col-xs-4">{{t "NAME"}}:</div>
+      <div class="col-lg-9 col-xs-8 info">{{Customer.Name}}</div>
     </div>
-    <div class='row'>
-      <div class='col-lg-3 col-xs-4'>Email:</div>
-      <div class='col-lg-9 col-xs-8 info'>{{Customer.Email}}</div>
+    <div class="row">
+      <div class="col-lg-3 col-xs-4">{{t "EMAIL"}}:</div>
+      <div class="col-lg-9 col-xs-8 info">{{Customer.Email}}</div>
     </div>
     {{#unless Subscription.NoSubscription}}
-      <div class='row'>
-        <div class='col-lg-3 col-xs-4'>Joined on:</div>
-        <div class='col-lg-9 col-xs-8 info'>{{Customer.JoinDate}}</div>
+      <div class="row">
+        <div class="col-lg-3 col-xs-4">{{t "JOIN-DATE"}}:</div>
+        <div class="col-lg-9 col-xs-8 info">{{Customer.JoinDate}}</div>
       </div>
     {{/unless}}
   </div>
 </div>
 {{#unless Subscription.NoSubscription}}
-  <div class='row cancel-membership'>
-    <div class='col-md-8'>
-      <a href='#'>Cancel Membership</a>
+  <div class="row cancel-membership">
+    <div class="col-md-8">
+      <a href="#">{{t "CANCEL-MEMBERSHIP"}}</a>
     </div>
   </div>
 {{/unless}}

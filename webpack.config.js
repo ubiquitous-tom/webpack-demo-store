@@ -9,9 +9,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TerserWebpackPlugin = require('terser-webpack-plugin')
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 const cookieParser = require('cookie-parser')
-// const bodyParser = require('body-parser')
 const express = require('express')
 const atvRoutes = require('./server/routes')
+const lang = require('./server/routes/lang')
 
 module.exports = function (env, argv) {
   return {
@@ -65,7 +65,7 @@ module.exports = function (env, argv) {
       new HtmlWebpackPlugin({
         // title: 'Acorn TV',
         filename: 'index.html',
-        template: './public/temp.html',
+        template: './public/index.html',
         favicon: './src/assets/images/favicon.ico',
         minify: {
           collapseWhitespace: true,
@@ -76,7 +76,7 @@ module.exports = function (env, argv) {
       new HtmlWebpackPlugin({
         // title: 'Acorn TV',
         filename: 'index.jsp',
-        template: './public/temp.html',
+        template: './public/index.html',
         favicon: './src/assets/images/favicon.ico',
         minify: {
           collapseWhitespace: true,
@@ -113,7 +113,8 @@ module.exports = function (env, argv) {
       //   patterns: [
       //     // { from: 'src/assets/fonts', to: 'font' },
       //     // { from: 'src/assets/images', to: 'img' },
-      //     { from: 'src/assets/images/atvlogo.png', to: 'img' },
+      //     // { from: 'src/assets/images/atvlogo.png', to: 'img' },
+      //     // { from: 'public/lang.json', to: 'lang.json' }
       //   ],
       // }),
 
