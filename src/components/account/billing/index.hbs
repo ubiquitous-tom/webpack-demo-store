@@ -1,0 +1,37 @@
+<div class="row-fluid">
+  {{!log this level="error"}}
+  <div class="col-md-8">
+    {{#if PaymentMethod.Canceled}}
+      <div class="field-wrap clearfix">
+        <div class="field-label pull-left">{{t "PAYMENT-METHOD"}}</div>
+        <div id="paymentMethodField" class="field-value pull-left">
+          {{t "CARD-NOT-CHARGED"}}
+        </div>
+      </div>
+    {{else}}
+      <div style="display: none">
+        paymentMethod.Store =
+        {{PaymentMethod.Store}}
+      </div>
+
+      {{#if PaymentMethod.Store}}
+        {{#if isRecordedBook}}
+          <p>{{t "FREE-SEVEN-DAYS"}}</p>
+          <p>{{t "SIGNUP-FULL-MEMBERSHIP"}}</p>
+        {{/if}}
+      {{else}}
+        {{#if PaymentMethod.webPaymentEdit}}
+          <div class="field-wrap clearfix">
+            <div class="field-label pull-left">{{t "PAYMENT-METHOD"}}</div>
+            <div id="paymentMethodField" class="field-value pull-left">
+              {{t "FREE-SEVEN-DAYS-DEVICE"}}
+              {{t "PLEASE-LOG-IN"}}
+              {{PaymentMethod.Device}}
+              {{t "MANAGE-BILLING"}}
+            </div>
+          </div>
+        {{/if}}
+      {{/if}}
+    {{/if}}
+  </div>
+</div>
