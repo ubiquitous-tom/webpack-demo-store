@@ -97,15 +97,16 @@ class MonthlyPlan extends View {
   }
 
   getTagline() {
+    const taglines = []
     if (this.model.get('Subscription').Promo) {
-      return this.getPromoCodeInfo()
+      taglines.push(this.getPromoCodeInfo())
     }
 
     if (this.model.get('Subscription').Trial) {
-      return this.getTrialInfo()
+      taglines.push(this.getTrialInfo())
     }
 
-    return ''
+    return taglines.join('<br>')
   }
 
   getPromoCodeInfo() {

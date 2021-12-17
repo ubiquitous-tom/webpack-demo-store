@@ -109,14 +109,14 @@ module.exports = function (env, argv) {
       //   'process.env': JSON.stringify(process.env)
       // }),
 
-      new CopyWebpackPlugin({
-        patterns: [
-          // { from: 'src/assets/fonts', to: 'font' },
-          // { from: 'src/assets/images', to: 'img' },
-          // { from: 'src/assets/images/atvlogo.png', to: 'img' },
-          { from: 'public/lang.json', to: 'lang.json' },
-        ],
-      }),
+      // new CopyWebpackPlugin({
+      //   patterns: [
+      //     // { from: 'src/assets/fonts', to: 'font' },
+      //     // { from: 'src/assets/images', to: 'img' },
+      //     // { from: 'src/assets/images/atvlogo.png', to: 'img' },
+      //     { from: 'public/lang.json', to: 'lang.json' },
+      //   ],
+      // }),
 
       // // https://stackoverflow.com/questions/44232366/how-do-i-build-a-json-file-with-webpack/54700817
       // new WebpackManifestPlugin(),

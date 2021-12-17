@@ -10,16 +10,16 @@ class ATVLocale extends Model {
     }
   }
 
-  get urlRoot() {
-    return 'lang.json'
-  }
-
-  // get url() {
-  //   console.log('ATVLocale url')
-  //   const env = this.environment()
-  //   console.log(env)
-  //   return `https://app.rlje.net/${env}i18n/api/lang.json`
+  // get urlRoot() {
+  //   return 'lang.json'
   // }
+
+  get url() {
+    console.log('ATVLocale url')
+    const env = this.environment()
+    console.log(env)
+    return `https://app.rlje.net/${env}i18n/api/lang.json`
+  }
 
   initialize() {
     console.log('ATVLocale initialize')
