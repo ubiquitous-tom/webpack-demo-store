@@ -49,6 +49,7 @@ class SwitchToMonthlyPlan extends View {
     // console.log(this.template())
     console.log(this.model.attributes)
     // this.$el.html(this.template())
+    this.model.set('nextBillingDate', this.model.get('Membership').NextBillingDate)
     this.$el.append(this.template(this.model.attributes))
 
     this.hideFooter()

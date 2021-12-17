@@ -47,8 +47,9 @@ class I18n extends Model {
 
   tHelper() {
     Handlebars.registerHelper('t', (translationKey, options) => {
-      console.log(translationKey, options)
+      // console.log(translationKey, options)
       // console.log(this, this.polyglot)
+      const interpolationOptions = options.data.root
       // this.currentLocale = options.lookupProperty(options.data.root, 'currentLanguage') || 'en'
       // debugger
       // const translated = this.polyglot.has(`${translationKey}.content.${this.currentLocale}`)
@@ -56,13 +57,13 @@ class I18n extends Model {
       //   : translationKey
       // console.log(translated)
       // return translated
-      return this.t(translationKey)
+      return this.t(translationKey, interpolationOptions)
     })
   }
 
-  t(translationKey) {
+  t(translationKey, interpolationOptions) {
     return this.polyglot.has(`${translationKey}.content.${this.currentLocale}`)
-      ? this.polyglot.t(`${translationKey}.content.${this.currentLocale}`)
+      ? this.polyglot.t(`${translationKey}.content.${this.currentLocale}`, interpolationOptions)
       : translationKey
   }
 }

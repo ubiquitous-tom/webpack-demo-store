@@ -1,20 +1,20 @@
-<div id='guest-plan' class='row'>
+<div id="guest-plan" class="row">
   {{!log this level='error'}}
-  <div class='col-md-8'>
-    <h1 class='formhead'>Plans</h1>
+  <div class="col-md-8">
+    <h1 class="formhead">{{t "PLANS"}}</h1>
   </div>
 </div>
-<div class='row'>
-  <div class='col-lg-6 col-sm-9'>
-    <div class='upgrade-to-annual'>
+<div class="row">
+  <div class="col-lg-6 col-sm-9">
+    <div class="upgrade-to-annual">
       <h2>Plans starting at</h2>
       <p>
-        <sup class='symbol'>{{currSymbol}}</sup>
-        <span class='price'>{{monthlySubscriptionAmount}}</span>
+        <sup class="symbol">{{currSymbol}}</sup>
+        <span class="price">{{monthlySubscriptionAmount}}</span>
         <sup>/</sup>
-        <sub class='period'>mo.</sub>
+        <sub class="period">{{t "MO"}}.</sub>
       </p>
-      <button type='submit' class='start-free-trial btn'>
+      <button type="submit" class="start-free-trial btn">
         Try
         {{trialDays}}
         Days Free</button>

@@ -60,9 +60,6 @@ class SwitchToAnnualPlan extends View {
 
   render() {
     console.log('SwitchToAnnualPlan render')
-    // console.log(this.$el[0])
-    // console.log(this.template())
-    // const template = Handlebars.compile(this.template())
     // console.log(this.model.attributes)
     const data = {
       isPromoApplied: this.model.get('isPromoApplied') ? 'applied-success' : '',
@@ -70,6 +67,7 @@ class SwitchToAnnualPlan extends View {
       annualSubscriptionAmount: this.model.has('promoAppliedAmount')
         ? this.model.get('promoAppliedAmount')
         : this.model.get('annualStripePlan').SubscriptionAmount,
+      nextBillingDate: this.model.get('Membership').NextBillingDate,
     }
     const html = this.template(data)
     // console.log(html)

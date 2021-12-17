@@ -142,6 +142,9 @@ class StripeForm extends View {
           this.loadingStop()
           this.$el.find('#stripe-form').empty()
           this.parentView.render()
+        } else {
+          console.log(result)
+          this.loadingStop()
         }
       })
   }

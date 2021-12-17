@@ -4814,12 +4814,244 @@
           "uk": "Plans"
         }
       },
+      "MONTHLY-PLAN-RENEWS-ON-DATE-PRICE": {
+        "type": "text",
+        "content": {
+          "en": "Your Monthly Plan renews on %{renewalDate}. (%{currSymbol}%{subscriptionAmount}/mo)",
+          "es": "Su Plan Mensual se renueva el %{renewalDate}. (%{currSymbol}%{subscriptionAmount}/mes)",
+          "uk": "Your Monthly Plan renews on %{renewalDate}. (%{currSymbol}%{subscriptionAmount}/mo)"
+        }
+      },
+      "WITH-PROMO-CODE-OFF": {
+        "type": "text",
+        "content": {
+          "en": "with promo code - %{promoCode}",
+          "es": "Con código de promoción - %{promoCode}",
+          "uk": "with promo code - %{promoCode}"
+        }
+      },
+      "PROMO-APPLIED-ACCOUNT-UPDATED": {
+        "type": "text",
+        "content": {
+          "en": "Promo applied! Your account has been updated below.",
+          "es": "¡Promoción aplicada! Su cuenta se ha actualizado a continuación.",
+          "uk": "Promo applied! Your account has been updated below."
+        }
+      },
+      "ANNUAL-PLAN-GIFT-EXPIRES-ON-DATE-PRICE": {
+        "type": "text",
+        "content": {
+          "en": "Your Annual Plan Gift expires on xx/xx/xx ($48.00/yr)",
+          "es": "Su regalo del plan anual vence el xx/xx/xx ($48.00/año)",
+          "uk": "Your Annual Plan Gift expires on xx/xx/xx ($48.00/yr)"
+        }
+      },
+      "GIFT-CARD-APPLIED": {
+        "type": "text",
+        "content": {
+          "en": "Gift Card applied! Your account has been updated below.",
+          "es": "¡Tarjeta de regalo aplicada! Su cuenta se ha actualizado a continuación.",
+          "uk": "Gift Card applied! Your account has been updated below."
+        }
+      },
+      "YOUR-PLAN-RENEWS-ON-DATE-PRICE": {
+        "type": "text",
+        "content": {
+          "en": "Your %{planType} Plan renews on %{nextBillingDate}. (%{currSymbol}%{amount}/%{termType}),",
+          "es": "Su plan {tipo de plan} se renueva el %{nextBillingDate}. (%{currSymbol}%{amount}/%{termType}),",
+          "uk": "Your %{planType} Plan renews on %{nextBillingDate}. (%{currSymbol}%{amount}/%{termType}),"
+        }
+      },
+      "AFTER-FREE-TRIAL-ENDS": {
+        "type": "text",
+        "content": {
+          "en": "after your free trial ends.",
+          "es": "Después de que finalice la prueba gratuita.",
+          "uk": "after your free trial ends."
+        }
+      },
+      "12-MONTHS-FOR-PRICE-OF-10": {
+        "type": "text",
+        "content": {
+          "en": "Get 12 Months for the Price of 10",
+          "es": "Obtenga 12 meses por el precio de 10 meses",
+          "uk": "Get 12 Months for the Price of 10"
+        }
+      },
       "UPGRADE-TO-ANNUAL": {
         "type": "text",
         "content": {
           "en": "Upgrade to Annual",
           "es": "Actualizar a Anual",
           "uk": "Upgrade to Annual"
+        }
+      },
+      "ACCOUNT-INFO": {
+        "type": "text",
+        "content": {
+          "en": "Account Info",
+          "es": "Informacion De Cuenta",
+          "uk": "Account Info"
+        }
+      },
+      "JOINED-ON": {
+        "type": "text",
+        "content": {
+          "en": "Joined on",
+          "es": "Cuando te uniste",
+          "uk": "Joined on"
+        }
+      },
+      "MEMBERSHIP-VIA": {
+        "type": "text",
+        "content": {
+          "en": "Membership via",
+          "es": "Membresía a través de",
+          "uk": "Membership via"
+        }
+      },
+      "YOU-WILL-BE-BILLED-ANNUAL-PRICE-DATE": {
+        "type": "text",
+        "content": {
+          "en": "You will be billed <span class=\"%{isPromoApplied}\">%{currSymbol}%{annualSubscriptionAmount}</span> for the Annual Plan on %{nextBillingDate}.<br>Cancel anytime.",
+          "es": "Se le facturará <span class=\"%{isPromoApplied}\">%{currSymbol}%{annualSubscriptionAmount}</span> por el plan anual el %{nextBillingDate}. Cancela en cualquier momento.",
+          "uk": "You will be billed <span class=\"%{isPromoApplied}\">%{currSymbol}%{annualSubscriptionAmount}</span> for the Annual Plan on %{nextBillingDate}.<br>Cancel anytime."
+        }
+      },
+      "CONFIRM-YOUR-BILLING-INFO": {
+        "type": "text",
+        "content": {
+          "en": "CONFIRM YOUR BILLING INFO",
+          "es": "CONFIRME SU INFORMACIÓN DE FACTURACIÓN",
+          "uk": "CONFIRM YOUR BILLING INFO"
+        }
+      },
+      "PROMO-CODE": {
+        "type": "text",
+        "content": {
+          "en": "Promo Code",
+          "es": "Código promocional",
+          "uk": "Promo Code"
+        }
+      },
+      "CONFIRM-UPGRADE": {
+        "type": "text",
+        "content": {
+          "en": "Confirm Upgrade",
+          "es": "Confirmar actualización",
+          "uk": "Confirm Upgrade"
+        }
+      },
+      "LEGAL-CONSENT-INFORMATION-UPGRADE-PRICE": {
+        "type": "text",
+        "content": {
+          "en": "By clicking the \"Confirm Upgrade\" button above, you agree that you will be charged <span>%{currSymbol}%{annualSubscriptionAmount}</span> to your payment method on a recurring basis until you cancel. Your membership will renew at the then current price.  To cancel, go to your Account and click \"Cancel Membership\" on the Membership tab. There are no refunds or credits for partial or unused months.",
+          "es": "Cuando hace clic en el botón \"Confirmar actualización\" de arriba, acepta que se le cobrarán <span>%{currSymbol}%{annualSubscriptionAmount}</span> a su método de pago de forma recurrente hasta que cancele. Su membresía se renovará a este precio actual. Para cancelar, vaya a su cuenta y haga clic en \"Cancelar membresía\" en la pestaña Membresía. No hay reembolsos ni créditos por meses parciales o no utilizados.",
+          "uk": "By clicking the \"Confirm Upgrade\" button above, you agree that you will be charged <span>%{currSymbol}%{annualSubscriptionAmount}</span> to your payment method on a recurring basis until you cancel. Your membership will renew at the then current price.  To cancel, go to your Account and click \"Cancel Membership\" on the Membership tab. There are no refunds or credits for partial or unused months."
+        }
+      },
+      "UPGRADED-TO-ANNUAL-BILLED-DATE-PRICE": {
+        "type": "text",
+        "content": {
+          "en": "You’e upgraded to the Annual Plan. You will be billed %{annualPricing} on %{currentPeriodEnd}. That’s only ${perMonthPricing}/mo!",
+          "es": "Se actualizó al plan Anual. Se le facturará %{annualPricing} el %{currentPeriodEnd}. ¡Eso es solo ${perMonthPricing}/mes!",
+          "uk": "You’ve upgraded to the Annual Plan. You will be billed %{annualPricing} on %{currentPeriodEnd}. That’s only ${perMonthPricing}/mo!"
+        }
+      },
+      "ANNUAL-PLAN-RENEWS-ON-DATE-PRICE": {
+        "type": "text",
+        "content": {
+          "en": "Your Annual Plan renews on %{renewalDate}. (%{currSymbol}%{subscriptionAmount}/yr)",
+          "es": "Su plan anual se renueva el %{renewalDate}. (%{currSymbol}%{subscriptionAmount}/año)",
+          "uk": "Your Annual Plan renews on %{renewalDate}. (%{currSymbol}%{subscriptionAmount}/yr)"
+        }
+      },
+      "THATS-ONLY-PRICE": {
+        "type": "text",
+        "content": {
+          "en": "That’s only %{currSymbol}%{amount}/mo!",
+          "es": "¡Eso es solo %{currSymbol}%{amount}/mes!",
+          "uk": "That’s only %{currSymbol}%{amount}/mo!"
+        }
+      },
+      "SWITCH-TO-MONTHLY-PRICE": {
+        "type": "text",
+        "content": {
+          "en": "Switch to Monthly Plan (%{currSymbol}%{subscriptionAmount}/mo)",
+          "es": "Cambiar al plan mensual (%{currSymbol}%{subscriptionAmount}/mes)",
+          "uk": "Switch to Monthly Plan (%{currSymbol}%{subscriptionAmount}/mo)"
+        }
+      },
+      "SWITCHED-TO-MONTHLY-DATE": {
+        "type": "text",
+        "content": {
+          "en": "You’ve switched to the Monthly Plan. Monthly billing will start after your Annual Plan ends on %{currentPeriodEnd}.",
+          "es": "Ha cambiado al plan Mensual. La facturación mensual comenzará después de que finalice su plan Anual el %{currentPeriodEnd}.",
+          "uk": "You’ve switched to the Monthly Plan. Monthly billing will start after your Annual Plan ends on %{currentPeriodEnd}."
+        }
+      },
+      "SURE-SWITCH-TO-MONTHLY": {
+        "type": "text",
+        "content": {
+          "en": "Are you sure you want to switch to a Monthly Plan?",
+          "es": "¿Estás seguro de que quieres cambiar a un plan mensual?",
+          "uk": "Are you sure you want to switch to a Monthly Plan?"
+        }
+      },
+      "MONTHLY-BILLING-ON-DATE": {
+        "type": "text",
+        "content": {
+          "en": "Monthly billing will start after your Annual Plan ends on %{nextBillingDate}.",
+          "es": "La facturación Mensual comenzará después de que finalice su plan anual el %{nextBillingDate}.",
+          "uk": "Monthly billing will start after your Annual Plan ends on %{nextBillingDate}."
+        }
+      },
+      "NO-LONGER-BE-SAVING": {
+        "type": "text",
+        "content": {
+          "en": "You will no longer be saving 20% off your subscription.",
+          "es": "Ya no ahorrará un 20% de descuento en su suscripción.",
+          "uk": "You will no longer be saving 20% off your subscription."
+        }
+      },
+      "KEEP-ANNUAL-PLAN": {
+        "type": "text",
+        "content": {
+          "en": "Keep Annual Plan",
+          "es": "Mantener El Plan Anual",
+          "uk": "Keep Annual Plan"
+        }
+      },
+      "SWITCH-TO-MONTHLY": {
+        "type": "text",
+        "content": {
+          "en": "Switch to Monthly",
+          "es": "Cambiar a Mensual",
+          "uk": "Switch to Monthly"
+        }
+      },
+      "YR": {
+        "type": "text",
+        "content": {
+          "en": "yr",
+          "es": "año",
+          "uk": "yr"
+        }
+      },
+      "MO": {
+        "type": "text",
+        "content": {
+          "en": "mo",
+          "es": "mes",
+          "uk": "mo"
+        }
+      },
+      "EDIT": {
+        "type": "text",
+        "content": {
+          "en": "Edit",
+          "es": "Edita",
+          "uk": "Edit"
         }
       }
     }

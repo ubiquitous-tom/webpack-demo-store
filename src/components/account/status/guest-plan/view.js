@@ -60,7 +60,7 @@ class GuestPlan extends View {
   }
 
   startFreeTrialBanner() {
-    const message = 'Start streaming now! Try 7 Days Free'
+    const message = `Start streaming now! Try ${this.model.get('monthlyStripePlan').TrialDays} Days Free`
     const type = 'success'
     this.flashMessage.onFlashMessageShow(message, type)
   }

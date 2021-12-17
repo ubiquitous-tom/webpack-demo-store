@@ -16,8 +16,9 @@ class AccountStatus extends View {
     return template
   }
 
-  initialize() {
+  initialize(options) {
     console.log('AccountStatus initialize')
+    this.i18n = options.i18n
     this.model = new AccountStatusModel(this.model.attributes)
     this.render()
   }
@@ -39,17 +40,17 @@ class AccountStatus extends View {
 
     if (this.model.get('Subscription').Monthly) {
       console.log('AccountStatus monthlyPlan render')
-      this.monthlyPlan = new MonthlyPlan({ model: this.model })
+      this.monthlyPlan = new MonthlyPlan({ model: this.model, i18n: this.i18n })
     }
 
     if (this.model.get('Subscription').Annual) {
       console.log('AccountStatus annualPlan render')
-      this.annualPlan = new AnnualPlan({ model: this.model })
+      this.annualPlan = new AnnualPlan({ model: this.model, i18n: this.i18n })
     }
 
     if (this.model.get('Subscription').NoSubscription) {
       console.log('AccountStatus guestPlan render')
-      this.guestPlan = new GuestPlan({ model: this.model })
+      this.guestPlan = new GuestPlan({ model: this.model, i18n: this.i18n })
     }
   }
 }

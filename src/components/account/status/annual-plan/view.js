@@ -23,9 +23,10 @@ class AnnualPlan extends View {
     }
   }
 
-  initialize() {
+  initialize(options) {
     console.log('AnnualPlan initialize')
     console.log(this)
+    this.i18n = options.i18n
     this.model = new AnnualPlanModel(this.model.attributes)
     // console.log(this.model)
     // console.log(this.model.attributes)
@@ -97,11 +98,19 @@ class AnnualPlan extends View {
   }
 
   getPromoCodeInfo() {
-    return `with promo code - ${this.model.get('Membership').PromoCode}`
+    // return `with promo code - ${this.model.get('Membership').PromoCode}`
+    return this.i18n.t('WITH-PROMO-CODE-OFF', { promoCode: this.model.get('Membership').PromoCode })
   }
 
   getAnnualDiscount() {
-    return `That's only ${this.model.get('Customer').CurrSymbol} ${this.model.get('annualPerMonthPricing')}/mo!`
+    // return `
+    // That's only ${this.model.get('Customer').CurrSymbol}
+    // ${this.model.get('annualPerMonthPricing')}/mo!
+    // `
+    return this.i18n.t('THATS-ONLY-PRICE', {
+      currSymbol: this.model.get('Customer').CurrSymbol,
+      amount: this.model.get('annualPerMonthPricing'),
+    })
   }
 }
 
