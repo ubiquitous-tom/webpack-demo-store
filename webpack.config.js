@@ -1,19 +1,20 @@
 const path = require('path')
-const { ProvidePlugin, EnvironmentPlugin, } = require('webpack')
+const { ProvidePlugin } = require('webpack')
+// const {EnvironmentPlugin } = require('webpack')
 const DotenvWebpack = require('dotenv-webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ESLintWebpackPlugin = require('eslint-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+// const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const TerserWebpackPlugin = require('terser-webpack-plugin')
-const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
+// const TerserWebpackPlugin = require('terser-webpack-plugin')
+// const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 const cookieParser = require('cookie-parser')
 const express = require('express')
 const atvRoutes = require('./server/routes')
-const lang = require('./server/routes/lang')
+// const lang = require('./server/routes/lang')
 
-module.exports = function (env, argv) {
+module.exports = function (env) {
   return {
     mode: env.production ? 'production' : 'development',
     entry: {
@@ -44,14 +45,14 @@ module.exports = function (env, argv) {
       compress: true,
       host: 'localhost',
       port: 3000,
-      onBeforeSetupMiddleware: function (devServer) {
+      onBeforeSetupMiddleware: (devServer) => {
         if (!devServer) {
           throw new Error('webpack-dev-server is not defined')
         }
         devServer.app.use(cookieParser())
         devServer.app.use(express.json())
         devServer.app.use(express.urlencoded({
-          extended: true
+          extended: true,
         }))
         devServer.app.use('/', atvRoutes)
       },
@@ -71,7 +72,7 @@ module.exports = function (env, argv) {
           collapseWhitespace: true,
           minifyCSS: true,
           minifyJS: true,
-        }
+        },
       }),
       new HtmlWebpackPlugin({
         // title: 'Acorn TV',
@@ -82,7 +83,7 @@ module.exports = function (env, argv) {
           collapseWhitespace: true,
           minifyCSS: true,
           minifyJS: true,
-        }
+        },
       }),
       new MiniCssExtractPlugin({
         filename: '[name].[hash].css',
@@ -132,7 +133,7 @@ module.exports = function (env, argv) {
               options: {
                 presets: ['@babel/preset-env'],
               },
-            }
+            },
           ],
         },
         {
@@ -159,8 +160,8 @@ module.exports = function (env, argv) {
           test: /\.s[ac]ss$/i,
           // include: path.resolve(__dirname, 'src'),
           use: [
-            env.production ? MiniCssExtractPlugin.loader : { loader: 'style-loader', /* inject CSS to page */ },
-            { loader: 'css-loader', /* translates CSS into CommonJS modules */ },
+            env.production ? MiniCssExtractPlugin.loader : { loader: 'style-loader' /* inject CSS to page */ },
+            { loader: 'css-loader' /* translates CSS into CommonJS modules */ },
             {
               loader: 'postcss-loader', // Run postcss actions
               options: {
@@ -173,12 +174,12 @@ module.exports = function (env, argv) {
                   plugins: [
                     'postcss-preset-env',
                     'autoprefixer',
-                  ]
-                }
-              }
+                  ],
+                },
+              },
             },
-            { loader: 'sass-loader' /* compiles Sass to CSS */ }
-          ]
+            { loader: 'sass-loader' /* compiles Sass to CSS */ },
+          ],
         },
         {
           test: /\.(png|svg|jpg|gif)$/i,
