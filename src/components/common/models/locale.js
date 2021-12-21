@@ -7,6 +7,7 @@ class ATVLocale extends Model {
   get defaults() {
     return {
       localStorageID: 'atv-locale',
+      localeLoaded: false,
     }
   }
 

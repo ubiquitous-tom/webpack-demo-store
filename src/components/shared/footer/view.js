@@ -2,6 +2,7 @@ import { View } from 'backbone'
 // https://github.com/handlebars-lang/handlebars.js/issues/1553
 import * as Handlebars from 'handlebars/runtime'
 import docCookies from 'doc-cookies'
+import BackBoneContext from 'common/contexts/backbone-context'
 import './stylesheet.scss'
 import template from './index.hbs'
 import FooterModel from './model'
@@ -23,6 +24,7 @@ class Footer extends View {
 
   initialize(options) {
     console.log('Footer initialize')
+    this.context = new BackBoneContext()
     this.i18n = options.i18n
     this.model = new FooterModel(this.model.attributes)
 
@@ -30,6 +32,8 @@ class Footer extends View {
     // this.listenTo(this.model, 'change', this.render)
 
     // render for localStorage
+    console.log(this.context)
+    // debugger
     this.render()
   }
 
