@@ -3,10 +3,9 @@ import PlansChange from 'common/models/plans-change'
 import ATVModel from 'common/model'
 
 class SwitchToAnnualPlanModel extends ATVModel {
-
   get defaults() {
     return {
-      isPromoApplied: false
+      isPromoApplied: false,
     }
   }
 
@@ -20,14 +19,14 @@ class SwitchToAnnualPlanModel extends ATVModel {
   getMonthlyToAnnualUpgradeInfo() {
     console.log('SwitchToAnnualPlanModel getMonthlyToAnnualUpgrade')
     const type = 'upgrade'
-    const from_frequency = 'monthly'
-    const to_frequency = 'annual'
+    const fromFrequency = 'monthly'
+    const toFrequency = 'annual'
     const plansAvailable = this.get('plansAvailable')
     _.each(plansAvailable, (plan, key, collection) => {
       // console.log(plan.type)
       if (plan.type === type) {
         // console.log(plan.from_frequency, plan.to_frequency)
-        if (plan.from_frequency === from_frequency && plan.to_frequency === to_frequency) {
+        if (plan.from_frequency === fromFrequency && plan.to_frequency === toFrequency) {
           console.log(plan)
           this.set('currentUpgradePlan', plan)
           console.log(this)
@@ -35,6 +34,7 @@ class SwitchToAnnualPlanModel extends ATVModel {
           return plan
         }
       }
+      return collection
     })
   }
 
@@ -42,7 +42,7 @@ class SwitchToAnnualPlanModel extends ATVModel {
     console.log('SwitchToAnnualPlanModel confirmUpgrade')
     this.loadingStart()
     const plansChange = new PlansChange()
-    let headers = {
+    const headers = {
       StripeMembershipID: this.get('currentMembership').StripeMembershipID,
       CustomerID: this.get('currentMembership').CustomerID,
       StripeCardToken: (this.has('currentBillingInfo') && this.get('currentBillingInfo').StripeCardToken)
@@ -61,7 +61,7 @@ class SwitchToAnnualPlanModel extends ATVModel {
       dataType: 'json',
       ajaxSync: true,
       wait: true,
-      headers: headers,
+      headers,
       success: this.success,
       error: this.error,
     }
@@ -74,16 +74,17 @@ class SwitchToAnnualPlanModel extends ATVModel {
     console.log(model, resp, options)
     debugger
     const annualPricing = this.get('annualStripePlan').CurrSymbol + this.get('annualStripePlan').SubscriptionAmount
-    const currentPeriodEnd = new Date(resp.current_period_end * 1000).toLocaleDateString("en-US")
+    const currentPeriodEnd = new Date(resp.current_period_end * 1000).toLocaleDateString('en-US')
     const pricing = (Math.floor((this.get('annualStripePlan').SubscriptionAmount / 12) * 100) / 100).toFixed(2)
     const perMonthPricing = this.get('annualStripePlan').CurrSymbol + pricing
-    let message = `You've upgraded to the Annual Plan. You will be billed ${annualPricing} on ${currentPeriodEnd}. That's only ${perMonthPricing}/mo!`
+    // TODO: translation `UPGRADED-TO-ANNUAL-BILLED-DATE-PRICE`
+    const message = `You've upgraded to the Annual Plan. You will be billed ${annualPricing} on ${currentPeriodEnd}. That's only ${perMonthPricing}/mo!`
     this.set({
       upgradeToAnnualSuccess: true,
       flashMessage: {
         type: 'success',
-        message: message,
-      }
+        message,
+      },
     })
   }
 
@@ -92,6 +93,7 @@ class SwitchToAnnualPlanModel extends ATVModel {
     console.log(model, resp, options)
     debugger
     let message = ''
+    /* eslint function-paren-newline: 0 */
     resp
       .then(
         (response) => {
@@ -107,14 +109,14 @@ class SwitchToAnnualPlanModel extends ATVModel {
           }
         })
       .always(() => {
-        this.set({
+        model.set({
           upgradeToAnnualSuccess: false,
           flashMessage: {
             type: 'error',
-            message: message
-          }
+            message,
+          },
         })
-        console.log(this.get('flashMessage').message, this.get('flashMessage').type)
+        console.log(model.get('flashMessage').message, model.get('flashMessage').type)
       })
   }
 
@@ -122,7 +124,7 @@ class SwitchToAnnualPlanModel extends ATVModel {
     console.log('ApplyPromoCodeModel loadingStart')
   }
 
-  loadingStop(model, xhr, options) {
+  loadingStop() {
     console.log('ApplyPromoCodeModel loadingStop')
   }
 }

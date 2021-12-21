@@ -1,60 +1,69 @@
 import { View } from 'backbone'
-import _ from 'underscore'
-
-import template from './temp.html'
+// import _ from 'underscore'
+import SubmitLoader from 'shared/elements/submit-loader/view'
+import FlashMessage from 'shared/elements/flash-message'
+import template from './index.hbs'
 import EditEmailModel from './model'
-import FlashMessage from '../shared/elements/flash-message'
 
 class EditEmail extends View {
-
   get el() {
     return 'section'
   }
 
   get template() {
-    return _.template(template)
+    return template
   }
 
   get events() {
     return {
       'input #Email': 'validateEmail',
       'blur #Email': 'validateEmail',
-      'input #ConfirmEmail': 'validateEmail',//'validateConfirmEmail',
-      'blur #ConfirmEmail': 'validateEmail',//'validateConfirmEmail',
-      'submit #changeEmailForm': 'verifySameEmail',//'changeEmail'
+      'input #ConfirmEmail': 'validateEmail', // 'validateConfirmEmail',
+      'blur #ConfirmEmail': 'validateEmail', // 'validateConfirmEmail',
+      'submit #changeEmailForm': 'verifySameEmail', // 'changeEmail'
     }
   }
 
   initialize(options) {
     console.log('EditEmail initialize')
     this.defaultEmail = options.model.attributes.Customer.Email
+    this.i18n = options.i18n
 
+    this.submitLoader = new SubmitLoader()
     this.flashMessage = new FlashMessage()
     this.model = new EditEmailModel()
     this.render()
 
+    /* eslint no-shadow: 0 */
+    /* eslint no-unused-vars: 0 */
     this.listenTo(this.model, 'change:editEmailSuccess', (model, value, options) => {
       console.log(model, value, options)
+      let message = this.i18n.t('ERROR')
+      if (value) {
+        message = this.i18n.t('EMAIL-CHANGED')
+      }
       debugger
-      this.flashMessage.onFlashMessageShow(this.model.get('message'), this.model.get('type'))
+      this.flashMessage.onFlashMessageShow(message, model.get('type'))
+      this.loadingStop(model, value, options)
     })
 
-    this.model.on('invalid', (model, value, options) => {
+    this.model.on('invalid', (model, error, options) => {
       console.log('EditEmail initialize on invalid')
-      // console.log(model, value, options)
-      // console.log(this.$el[0])
-      // console.log(this.$el.find('#changeEmailForm .form-group')[0])
+      console.log(model, error, options)
+      const message = this.i18n.t(error)
       debugger
       this.$el.find('#changeEmailForm .form-group').addClass('has-error')
+      this.flashMessage.onFlashMessageShow(message, 'error')
+      this.loadingStop(model, error, options)
     })
 
-    this.model.on('error', (model, value, options) => {
-      console.log('EditEmail initialize on error')
-      // console.log(model, value, options)
-      // console.log(this.$el[0])
-      // console.log(this.$el.find('#changeEmailForm .form-group')[0])
+    this.listenTo(this.model, 'error', (model, xhr, options) => {
+      console.log(model, xhr, options)
+      const message = this.i18n.t('ERROR')
       debugger
       this.$el.find('#changeEmailForm .form-group').addClass('has-error')
+      this.flashMessage.onFlashMessageShow(message, 'error')
+      this.loadingStop(model, xhr, options)
     })
   }
 
@@ -73,14 +82,10 @@ class EditEmail extends View {
     // Check for errors.
     if (e.target.validity.valueMissing) {
       e.target.parentElement.classList.add('has-error')
-      // e.target.setCustomValidity(polyglot.t('EMAIL-IS-REQUIRED'))
-      e.target.setCustomValidity('Email is required')
-    } else {
-      if (e.target.validity.tooShort) {
-        e.target.parentElement.classList.add('has-error')
-        // e.target.setCustomValidity(polyglot.t('ENTER-AN-EMAIL'))
-        e.target.setCustomValidity('Please enter an email')
-      }
+      e.target.setCustomValidity(this.i18n.t('EMAIL-IS-REQUIRED'))
+    } else if (e.target.validity.typeMismatch) {
+      e.target.parentElement.classList.add('has-error')
+      e.target.setCustomValidity(this.i18n.t('ENTER-AN-EMAIL'))
     }
   }
 
@@ -92,21 +97,18 @@ class EditEmail extends View {
     // Check for errors.
     if (e.target.validity.valueMissing) {
       e.target.parentElement.classList.add('has-error')
-      // e.target.setCustomValidity(polyglot.t('EMAIL-IS-REQUIRED'))
-      e.target.setCustomValidity('Email is required')
+      e.target.setCustomValidity(this.i18n.t('EMAIL-IS-REQUIRED'))
     } else {
-      if (e.target.validity.tooShort) {
+      if (e.target.validity.typeMismatch) {
         e.target.parentElement.classList.add('has-error')
-        // e.target.setCustomValidity(polyglot.t('ENTER-AN-EMAIL'))
-        e.target.setCustomValidity('Please enter an email')
+        e.target.setCustomValidity(this.i18n.t('ENTER-AN-EMAIL'))
       }
 
+      /* eslint eqeqeq: 0 */
       if (this.$el.find('#Password').val() != e.target.value) {
-        // this.$el.find('#Password')[0].setCustomValidity((polyglot.t('EMAILS-DONT-MATCH')))
-        this.$el.find('#Password')[0].setCustomValidity('The emails do not match')
+        this.$el.find('#Password')[0].setCustomValidity((this.i18n.t('EMAILS-DONT-MATCH')))
         this.$el.find('#Password')[0].parentElement.classList.add('has-error')
-        // e.target.setCustomValidity((polyglot.t('EMAILS-DONT-MATCH')))
-        e.target.setCustomValidity('The emails do not match')
+        e.target.setCustomValidity((this.i18n.t('EMAILS-DONT-MATCH')))
         e.target.parentElement.classList.add('has-error')
       }
     }
@@ -133,11 +135,9 @@ class EditEmail extends View {
     confirmPassword.setCustomValidity('')
 
     if (password.value !== confirmPassword.value) {
-      // password.setCustomValidity((polyglot.t('EMAILS-DONT-MATCH')))
-      password.setCustomValidity('The emails do not match')
+      password.setCustomValidity((this.i18n.t('EMAILS-DONT-MATCH')))
       password.parentElement.classList.add('has-error')
-      // confirmPassword.setCustomValidity((polyglot.t('EMAILS-DONT-MATCH')))
-      confirmPassword.setCustomValidity('The emails do not match')
+      confirmPassword.setCustomValidity((this.i18n.t('EMAILS-DONT-MATCH')))
       confirmPassword.parentElement.classList.add('has-error')
     } else {
       this.changeEmail(e)
@@ -147,10 +147,21 @@ class EditEmail extends View {
   changeEmail(e) {
     e.preventDefault()
     console.log('EditEmail changeEmail')
-    // const params = $(e.currentTarget).serialize()
     const params = $(e.currentTarget).serializeArray()
-    // console.log(params)
+    this.loadingStart()
     this.model.changeEmail(params, this.defaultEmail)
+  }
+
+  loadingStart() {
+    this.$el.find('#changeEmailForm input').prop('disabled', true)
+    this.submitLoader.loadingStart(this.$el.find('#changeEmailForm button'))
+  }
+
+  loadingStop(model, value, options) {
+    console.log(model, value, options)
+    console.log(this)
+    this.$el.find('#changeEmailForm input').val('').prop('disabled', false)
+    this.submitLoader.loadingStop(this.$el.find('#changeEmailForm button'))
   }
 }
 

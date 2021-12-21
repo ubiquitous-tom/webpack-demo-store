@@ -3,7 +3,6 @@ import ATVModel from 'common/model'
 import PlansChange from 'common/models/plans-change'
 
 class SwitchToMonthlyPlanModel extends ATVModel {
-
   initialize() {
     console.log('SwitchToMonthlyPlanModel initialize')
     console.log(this)
@@ -14,15 +13,15 @@ class SwitchToMonthlyPlanModel extends ATVModel {
   getAnnualToMonthlyDowngradeInfo() {
     console.log('SwitchToMonthlyPlanModel getAnnualToMonthlyDowngradeInfo')
     const type = 'downgrade'
-    const from_frequency = 'annual'
-    const to_frequency = 'monthly'
+    const fromFrequency = 'annual'
+    const toFrequency = 'monthly'
     const plansAvailable = this.get('plansAvailable')
     // console.log(plansAvailable)
     _.each(plansAvailable, (plan, key, collection) => {
       // console.log(plan.type)
       if (plan.type === type) {
         // console.log(plan.from_frequency, plan.to_frequency)
-        if (plan.from_frequency === from_frequency && plan.to_frequency === to_frequency) {
+        if (plan.from_frequency === fromFrequency && plan.to_frequency === toFrequency) {
           console.log(plan)
           this.set('currentDowngradePlan', plan)
           console.log(this)
@@ -30,13 +29,14 @@ class SwitchToMonthlyPlanModel extends ATVModel {
           return plan
         }
       }
+      return collection
     })
   }
 
   switchToMonthly() {
     console.log('SwitchToMonthlyPlanModel switchToMonthly')
     const plansChange = new PlansChange()
-    let headers = {
+    const headers = {
       StripeMembershipID: this.get('currentMembership').StripeMembershipID,
       CustomerID: this.get('currentMembership').CustomerID,
       StripeCardToken: this.has('currentBillingInfo').StripeCardToken
@@ -55,7 +55,7 @@ class SwitchToMonthlyPlanModel extends ATVModel {
       dataType: 'json',
       ajaxSync: true,
       wait: true,
-      headers: headers,
+      headers,
       success: this.success,
       error: this.error,
     }
@@ -68,14 +68,15 @@ class SwitchToMonthlyPlanModel extends ATVModel {
     console.log(this)
     debugger
     console.log(model, resp, options)
-    const currentPeriodEnd = new Date(resp.current_period_end * 1000).toLocaleDateString("en-US")
+    const currentPeriodEnd = new Date(resp.current_period_end * 1000).toLocaleDateString('en-US')
+    // TODO: translation `SWITCHED-TO-MONTHLY-DATE`
     const message = `You've switched to Monthly Plan. Monthly billing will start after your Annual Plan ends on ${currentPeriodEnd}.`
     this.set({
       downgradeToMonthlySuccess: true,
       flashMessage: {
         type: 'success',
-        message: message,
-      }
+        message,
+      },
     })
   }
 
@@ -85,6 +86,7 @@ class SwitchToMonthlyPlanModel extends ATVModel {
     console.log(this)
     debugger
     let message = ''
+    /* eslint function-paren-newline: 0 */
     resp
       .then(
         (response) => {
@@ -117,8 +119,8 @@ class SwitchToMonthlyPlanModel extends ATVModel {
           downgradeToMonthlySuccess: false,
           flashMessage: {
             type: 'error',
-            message: message
-          }
+            message,
+          },
         })
         console.log(this.get('flashMessage').message, this.get('flashMessage').type)
       })

@@ -1,13 +1,13 @@
 import { View } from 'backbone'
-import _ from 'underscore'
+// import _ from 'underscore'
 
+import FlashMessage from 'shared/elements/flash-message'
 import './stylesheet.scss'
+import placeholder from './placeholder.hbs'
 import template from './index.hbs'
 import GuestPlanModel from './model'
-import FlashMessage from 'shared/elements/flash-message'
 
 class GuestPlan extends View {
-
   get el() {
     return 'section'
   }
@@ -29,7 +29,13 @@ class GuestPlan extends View {
     this.model = new GuestPlanModel(this.model.attributes)
     // console.log(this.model)
     // console.log(this.model.attributes)
-    this.render()
+    if (this.model.has('monthlyStripePlan')) {
+      this.render()
+    } else {
+      this.contentPlaceholder()
+    }
+
+    this.listenTo(this.model, 'change:monthlyStripePlan', this.render)
   }
 
   render() {
@@ -49,9 +55,13 @@ class GuestPlan extends View {
     return this
   }
 
+  contentPlaceholder() {
+    this.$el.find('.current-plan').html(placeholder)
+  }
+
   startFreeTrialBanner() {
-    const message = `Start streaming now! Try 7 Days Free`
-    const type = `success`
+    const message = `Start streaming now! Try ${this.model.get('monthlyStripePlan').TrialDays} Days Free`
+    const type = 'success'
     this.flashMessage.onFlashMessageShow(message, type)
   }
 

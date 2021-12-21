@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Acorn TV</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
-    <link rel="shortcut icon" href="img/favicon.ico" />
-
-    <!-- OneTrust Cookie Consent -->
-    <%@ include file="onetrust.jsp" %>
+    <!-- OneTrust Cookies Consent Notice start -->
+    <script type="text/javascript" src="https://cdn.cookielaw.org/consent/3468fb8f-06a6-4518-89d0-5c471524b0dd/OtAutoBlock.js"></script>
+    <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"  type="text/javascript" charset="UTF-8" data-domain-script="3468fb8f-06a6-4518-89d0-5c471524b0dd"></script>
+    <script type="text/javascript">
+    function OptanonWrapper() { }
+    </script>
+    <!-- OneTrust Cookies Consent Notice end -->
 
     <!-- Braze Tracking -->
     <script type="text/javascript">
@@ -26,18 +25,44 @@
     </script>
 
     <!-- Salesforce Tracking code -->
-    <%@ include file="krux.jsp" %>
-
-    <script>var cloudFrontCountryHeader = '<%= cloudFrontCountryHeader %>';</script>
-    <script>var isAllowedGifting = '<%= isAllowedGifting %>';</script>
-
-    <script class="localStrings" type="application/json">
-      <atv:localStrings />
+    <script class="kxct" data-id="trphemxeo" data-timing="async" data-version="3.0" type="text/javascript">
+      window.Krux||((Krux=function(){Krux.q.push(arguments)}).q=[]);
+      (function(){
+        var k=document.createElement('script');k.type='text/javascript';k.async=true;
+        k.src=(location.protocol==='https:'?'https:':'http:')+'//cdn.krxd.net/controltag/trphemxeo.js';
+        var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(k,s);
+      }());
     </script>
-  </head>
+    <!-- END Salesforce DMP ControlTag -->
 
-  <body class="home" data-grid-framework="bf" data-grid-color="red" data-grid-opacity="0.3" data-grid-zindex="10" data-grid-nbcols="12">
+    <script>
+      Krux('ns:amcnetworks', 'consent:set', {
+        dc: true,
+        al: true,
+        tg: true,
+        cd: true,
+        sh: true,
+        re: true
+      }, function(errors, body) {
+        if (errors) {
+          console.error(errors);
+        } else {
+          console.log('Successfully set consent flags.');
+        }
+      });
+    </script>
+    <script src="https://js.stripe.com/v3"></script>
+  </head>
+  <body>
     <header></header>
+    <article id="account">
+      <div class="container">
+        <div class="row">
+          <nav class="col-lg-3 col-sm-4 col-xs-12 tabs"></nav>
+          <section class="col-lg-9 col-sm-8 col-xs-12 account-wrap"></section>
+        </div>
+      </div>
+    </article>
     <footer class="container"></footer>
   </body>
 </html>

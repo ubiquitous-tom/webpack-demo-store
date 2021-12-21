@@ -1,3 +1,3 @@
-import ConfirmBilling from "./view";
+import ConfirmBilling from './view'
 
 export default ConfirmBilling

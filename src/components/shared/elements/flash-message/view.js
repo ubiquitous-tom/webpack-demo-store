@@ -1,12 +1,11 @@
 import { View } from 'backbone'
 import _ from 'underscore'
 
+import FlashMessageModel from './model'
 import './stylesheet.scss'
 import template from './index.hbs'
-import FlashMessageModel from './model'
 
 class FlashMessage extends View {
-
   get el() {
     return '#account'
   }
@@ -51,6 +50,7 @@ class FlashMessage extends View {
       .on('click', this.closeFlashMessage)
     const htmlWithCloseButton = $(html).append(closeButton)
 
+    /* eslint comma-dangle: 0 */
     this.$el.before(
       // html
       // htmlWithDelaySlideUp
@@ -79,8 +79,8 @@ class FlashMessage extends View {
     this.message = (!_.isEmpty(message)) ? message : this.message
     this.type = (!_.isEmpty(type)) ? type : this.type
     this.model.set({
-      'message': this.message,
-      'type': this.type
+      message: this.message,
+      type: this.type
     })
   }
 
@@ -89,9 +89,12 @@ class FlashMessage extends View {
     this.render(message, type)
   }
 
-  onFlashMessageSet(message, type) {
+  onFlashMessageSet(message, type, isReload = false) {
     console.log('FlashMessage onFlashMessageSet')
     this.model.addFlashMessage(message, type)
+    if (isReload) {
+      window.location.reload()
+    }
   }
 }
 

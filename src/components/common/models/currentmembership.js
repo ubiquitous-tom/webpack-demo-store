@@ -3,13 +3,6 @@ import _ from 'underscore'
 import { getLocalStorage } from 'backbone.localstorage/src/utils'
 
 class CurrentMembership extends Model {
-
-  // get defaults() {
-  //   return {
-  //     localStorageID: 'atv-currentmembership',
-  //   }
-  // }
-
   get url() {
     return '/currentmembership'
   }
@@ -41,7 +34,7 @@ class CurrentMembership extends Model {
     if (!_.isEmpty(resp)) {
       console.log('CurrentMembership parse NOT isEmpty')
       this.set(resp)
-      this.sync('read', this)
+      // this.sync('read', this)
     } else {
       // something's wrong
     }

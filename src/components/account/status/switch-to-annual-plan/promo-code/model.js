@@ -2,7 +2,6 @@ import ATVModel from 'common/model'
 import _ from 'underscore'
 
 class PromoCodeModel extends ATVModel {
-
   get url() {
     const env = this.environment()
     return `https://${env}api.rlje.net/promo`
@@ -17,6 +16,7 @@ class PromoCodeModel extends ATVModel {
     console.log(resp)
   }
 
+  /* eslint consistent-return: 0 */
   validate(attributes, options) {
     console.log('PromoCodeModel validate')
     console.log(attributes, options)
@@ -59,7 +59,7 @@ class PromoCodeModel extends ATVModel {
       flashMessage: {
         type: 'success',
         message: `PROMO APPLIED - ${resp.Name}`,
-      }
+      },
     })
   }
 
@@ -69,6 +69,7 @@ class PromoCodeModel extends ATVModel {
     console.log(this)
     debugger
     let message = ''
+    /* eslint function-paren-newline: 0 */
     resp
       .then(
         (response) => {
@@ -91,21 +92,24 @@ class PromoCodeModel extends ATVModel {
           promoCodeSuccess: false,
           flashMessage: {
             type: 'error',
-            message: message
-          }
+            message,
+          },
         })
         console.log(model.get('flashMessage').message, model.get('flashMessage').type)
       })
   }
 
   environment() {
-    const env = window.location.hostname.indexOf('dev') > -1
-      ? 'dev3-'
-      : window.location.hostname.indexOf('qa') > -1
-        ? 'qa-'
-        : ''
+    let env = ''
+    if (window.location.hostname.indexOf('dev') > -1) {
+      env = 'dev3-'
+    }
+    if (window.location.hostname.indexOf('qa') > -1) {
+      env = 'qa-'
+    }
     // console.log(env)
-    return 'dev3-' //env
+    env = 'dev3-'
+    return env
   }
 }
 

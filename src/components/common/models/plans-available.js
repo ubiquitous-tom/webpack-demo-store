@@ -3,43 +3,41 @@ import _ from 'underscore'
 import { getLocalStorage } from 'backbone.localstorage/src/utils'
 
 class PlansAvailable extends Model {
-
   get defaults() {
     return {
       data: [{
         from_id: 58,
-        to_frequency: "annual",
-        from_frequency: "monthly",
-        to_name: "ATV_ANN_5999",
-        from_stripe_plan_id: "4b7c3f49-a4a8-11e8-bf79-0a1697e042ca",
+        to_frequency: 'annual',
+        from_frequency: 'monthly',
+        to_name: 'ATV_ANN_5999',
+        from_stripe_plan_id: '4b7c3f49-a4a8-11e8-bf79-0a1697e042ca',
         to_id: 59,
-        from_name: "ATV_MON_599",
-        type: "upgrade",
-        to_stripe_plan_id: "4b8cc7be-a4a8-11e8-bf79-0a1697e042ca"
+        from_name: 'ATV_MON_599',
+        type: 'upgrade',
+        to_stripe_plan_id: '4b8cc7be-a4a8-11e8-bf79-0a1697e042ca',
       },
       {
         from_id: 1,
-        to_frequency: "monthly",
-        from_frequency: "monthly",
-        to_name: "ATV-MON",
-        from_stripe_plan_id: "14909524-ecc8-4d02-80e2-796935357696",
+        to_frequency: 'monthly',
+        from_frequency: 'monthly',
+        to_name: 'ATV-MON',
+        from_stripe_plan_id: '14909524-ecc8-4d02-80e2-796935357696',
         to_id: 2,
-        from_name: "ATV-MON-GBP",
-        type: "upgrade",
-        to_stripe_plan_id: "1e189de4-7efd-11e9-b6ec-0a1697e042ca"
+        from_name: 'ATV-MON-GBP',
+        type: 'upgrade',
+        to_stripe_plan_id: '1e189de4-7efd-11e9-b6ec-0a1697e042ca',
       },
       {
         from_id: 1,
-        to_frequency: "monthly",
-        from_frequency: "monthly",
-        to_name: "ATV-MON-GBP",
-        from_stripe_plan_id: "14909524-ecc8-4d02-80e2-796935357696",
+        to_frequency: 'monthly',
+        from_frequency: 'monthly',
+        to_name: 'ATV-MON-GBP',
+        from_stripe_plan_id: '14909524-ecc8-4d02-80e2-796935357696',
         to_id: 1,
-        from_name: "ATV-MON-GBP",
-        type: "upgrade",
-        to_stripe_plan_id: "14909524-ecc8-4d02-80e2-796935357696"
-      }
-      ]
+        from_name: 'ATV-MON-GBP',
+        type: 'upgrade',
+        to_stripe_plan_id: '14909524-ecc8-4d02-80e2-796935357696',
+      }],
     }
   }
 
@@ -58,7 +56,7 @@ class PlansAvailable extends Model {
     if (_.isEmpty(storage.records)) {
       console.log('PlansAvailable initialize fetch')
       this.fetch({
-        ajaxSync: true
+        ajaxSync: true,
       })
     } else {
       console.log('PlansAvailable initialize updateModel')

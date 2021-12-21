@@ -15,6 +15,7 @@
     font-size: 3.25rem;
     line-height: 3.9rem;
     font-weight: 300;
+    margin-top: 0;
   }
   p {
     span {
@@ -52,7 +53,7 @@
 }
 
 #account .upgrade-to-annual button {
-  text-transform: initial;
+  text-transform: uppercase;
   padding: 1rem 4rem;
   font-size: 1.75rem;
   font-weight: 500;

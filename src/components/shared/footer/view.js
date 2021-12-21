@@ -1,74 +1,64 @@
 import { View } from 'backbone'
-import _ from 'underscore'
-import Handlebars from 'handlebars'
-
-// import './stylesheet.css'
+// https://github.com/handlebars-lang/handlebars.js/issues/1553
+import * as Handlebars from 'handlebars/runtime'
+import docCookies from 'doc-cookies'
 import './stylesheet.scss'
-import template from './temp.html'
+import template from './index.hbs'
 import FooterModel from './model'
-// import ATVLocale from 'common/models/locale'
 
 class Footer extends View {
-
-  // get defaults() {
-  //   return {
-  //     currentYear: new Date().getFullYear()
-  //   }
-  // }
-
   get el() {
     return 'footer'
   }
 
   get events() {
     return {
-      'change #atvLocale': 'updateLanguage'
+      'change #atvLocale': 'updateLanguage',
     }
   }
 
   get template() {
     return template
-    // return _.template(template)
   }
 
-  initialize() {
+  initialize(options) {
     console.log('Footer initialize')
-    this.model = new FooterModel()
+    this.i18n = options.i18n
+    this.model = new FooterModel(this.model.attributes)
 
     // render for sync
-    this.listenTo(this.model, 'change', this.render)
+    // this.listenTo(this.model, 'change', this.render)
+
     // render for localStorage
     this.render()
-
-  }
-
-  updatelanguage(e) {
-    console.log(e)
-    console.log(this.model())
-    this.trigger('changeLang', e.target.value)
-  }
-
-  isSelected() {
-    Handlebars.registerHelper('option', function (value, currentSelection) {
-      // console.log(value, currentSelection, this.toString(), this)
-      var selected = value.toLowerCase() === currentSelection ? 'selected' : '';
-      return '<option value="' + value + '" ' + selected + '>' + this + '</option>';
-    });
   }
 
   render() {
     console.log('Footer render')
     this.isSelected()
-
-    const template = Handlebars.compile(this.template)
-    // console.log(template)
-    const html = template(this.model.attributes)
+    console.log(this.model.attributes)
+    const html = this.template(this.model.attributes)
     // console.log(html)
     this.$el.html(html)
 
-    // this.$el.html(this.template(this.model.attributes))
-
     return this
+  }
+
+  updateLanguage(e) {
+    console.log(e)
+    console.log(this.model.attributes, e.target.value)
+    const currentLocale = e.target.value
+    docCookies.setItem('ATVLocale', currentLocale)
+    this.model.set('currentLanguage', currentLocale || 'en')
+    window.location.reload()
+  }
+
+  isSelected() {
+    Handlebars.registerHelper('option', (value, currentSelection, context) => {
+      // console.log(value, currentSelection, context.toString(), context)
+      const selected = value.toLowerCase() === currentSelection ? 'selected' : ''
+      return `<option value="${value}" ${selected}>${context}</option>`
+    })
   }
 }
 

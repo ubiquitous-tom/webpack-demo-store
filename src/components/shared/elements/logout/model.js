@@ -3,7 +3,6 @@ import { LocalStorage } from 'backbone'
 import ATVModel from 'common/model'
 
 class LogoutModel extends ATVModel {
-
   get defaults() {
     return {
       localStorageIDs: [
@@ -11,8 +10,8 @@ class LogoutModel extends ATVModel {
         'atv-stripekey',
         'atv-stripeplans',
         'atv-locale',
-        'atv-plans-available'
-      ]
+        'atv-plans-available',
+      ],
     }
   }
 
@@ -46,9 +45,11 @@ class LogoutModel extends ATVModel {
         this.localStorage = new LocalStorage(localStorageID)
         if (!_.isEmpty(this.localStorage.records)) {
           this.set('id', this.localStorage.records[0])
+          /* eslint no-underscore-dangle: 0 */
           this.localStorage._clear()
           return true
         }
+        return collection
       }, this)
     }
 

@@ -1,10 +1,10 @@
 import { Model } from 'backbone'
 import _ from 'underscore'
 import { LocalStorage } from 'backbone.localstorage'
-import { getLocalStorage } from 'backbone.localstorage/src/utils';
+import { getLocalStorage } from 'backbone.localstorage/src/utils'
+import docCookies from 'doc-cookies'
 
 class InitializeApp extends Model {
-
   get defaults() {
     return {
       appVersion: 'ATV2.0.0',
@@ -12,9 +12,9 @@ class InitializeApp extends Model {
     }
   }
 
-  url() {
+  get url() {
     console.log('InitializeApp url')
-    return '/initializeapp?AppVersion=' + this.get('appVersion')
+    return `/initializeapp?AppVersion=${this.get('appVersion')}`
   }
 
   initialize() {
@@ -38,9 +38,10 @@ class InitializeApp extends Model {
     }
     this.set(data)
     this.set({
-      environment: 'dev3.',//this.environment(),
+      environment: this.environment(),
       signinEnv: this.signinEnv(),
       storeEnv: this.storeEnv(),
+      currentLanguage: docCookies.getItem('ATVLocale') || 'en',
     })
 
     // If this is a brand new account never been created then go to signup
@@ -63,21 +64,26 @@ class InitializeApp extends Model {
   fetchInitializeApp() {
     console.log('InitializeApp fetchInitializeApp')
     this.fetch({
-      ajaxSync: true
+      ajaxSync: true,
     })
   }
 
   environment() {
-    return window.location.href.indexOf('dev') > -1
-      ? 'dev3.'
-      : window.location.href.indexOf('qa') > -1
-        ? 'qa.'
-        : ''
+    let env = ''
+    if (window.location.href.indexOf('dev') > -1) {
+      env = 'dev3.'
+    }
+    if (window.location.href.indexOf('qa') > -1) {
+      env = 'qa.'
+    }
+    env = 'dev3.'
+    return env
   }
 
   signinEnv() {
     return `${window.location.protocol}//${window.location.hostname.replace('account', 'signup')}`
   }
+
   storeEnv() {
     return `${window.location.protocol}//${window.location.hostname.replace('account', 'store')}`
   }

@@ -1,0 +1,23 @@
+<h1>{{t "REDEEM-GIFT"}}</h1>
+
+<form id="applyCodeForm" class="form-apply-code form-processing">
+  <div class="form-group">
+    <label for="EnterPromoCode" class="control-label">
+      {{t "CODE"}}
+      <span class="req">*</span>
+    </label>
+    <input
+      type="text"
+      class="form-control"
+      name="EnterPromoCode"
+      id="EnterPromoCode"
+      maxlength="30"
+      pattern="^[a-zA-Z0-9]+$"
+      required
+    />
+  </div>
+
+  <div id="applyCodeAlert" class="alert" style="display: none"></div>
+
+  <button type="submit" class="btn btn-primary">{{t "APPLY-CODE"}}</button>
+</form>

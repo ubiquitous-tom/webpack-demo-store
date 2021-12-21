@@ -1,15 +1,16 @@
-import { Model, LocalStorage } from 'backbone'
+import { Model } from 'backbone'
 import _ from 'underscore'
+import { LocalStorage } from 'backbone.localstorage'
 import { getLocalStorage } from 'backbone.localstorage/src/utils'
 
 class StripeKey extends Model {
-
   get defaults() {
     return {
       localStorageID: 'atv-stripekey',
     }
   }
 
+  /* eslint class-methods-use-this: 0 */
   get url() {
     return '/stripekey'
   }
@@ -23,7 +24,7 @@ class StripeKey extends Model {
     if (_.isEmpty(store.records)) {
       console.log('StripeKey initialize fetch')
       this.fetch({
-        ajaxSync: true
+        ajaxSync: true,
       })
     }
   }
@@ -33,7 +34,7 @@ class StripeKey extends Model {
     if (!_.isEmpty(resp)) {
       console.log('StripeKey parse NOT isEmpty')
       this.set(resp)
-      this.sync('create', this)
+      // this.sync('create', this)
     } else {
       // something's wrong
     }

@@ -2,7 +2,6 @@ import { Model } from 'backbone'
 import _ from 'underscore'
 
 class ConfirmBillingModel extends Model {
-
   get url() {
     return '/stripedefaultcard?country=US'
   }
@@ -19,7 +18,7 @@ class ConfirmBillingModel extends Model {
       ajaxSync: true,
       headers: {
         StripeCustomerId: stripeCustomerID,
-      }
+      },
     })
   }
 
@@ -43,7 +42,7 @@ class ConfirmBillingModel extends Model {
     console.log(stripeCardInfo.last4, stripeCardInfo.exp_month, stripeCardInfo.exp_year)
     const cardExpiry = [this.zeroPad(stripeCardInfo.exp_month, 2), stripeCardInfo.exp_year].join('/')
     console.log(cardExpiry)
-    this.set({ 'fullCardExpiry': cardExpiry })
+    this.set({ fullCardExpiry: cardExpiry })
   }
 
   zeroPad(num, places) {
@@ -59,7 +58,7 @@ class ConfirmBillingModel extends Model {
       zipcode: this.get('BillingAddress').PostalCode,
       country: this.get('BillingAddress').Country,
       customerID: this.get('currentMembership').CustomerID,
-      StripeCustomerID: this.get('Customer').StripeCustomerID
+      StripeCustomerID: this.get('Customer').StripeCustomerID,
     }
     console.log(currentBillingInfo)
     this.set('currentBillingInfo', currentBillingInfo)
@@ -75,7 +74,7 @@ class ConfirmBillingModel extends Model {
       zipcode: this.get('newStripeCardInfo').address_zip,
       country: this.get('newStripeCardInfo').address_country,
       customerID: this.get('currentMembership').CustomerID,
-      StripeCardToken: this.get('newStripeCardInfo').token
+      StripeCardToken: this.get('newStripeCardInfo').token,
     }
     this.set('currentBillingInfo', currentBillingInfo)
     this.getCardExpiry()

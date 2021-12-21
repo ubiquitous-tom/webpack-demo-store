@@ -1,3 +1,3 @@
 import Footer from './view'
 
-export default Footer 
+export default Footer
