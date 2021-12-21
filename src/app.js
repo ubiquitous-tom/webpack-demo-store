@@ -10,6 +10,7 @@ import './app.scss'
 // import 'common/template'
 // import { tagName, template, on } from 'common/decorators'
 
+import BackBoneContext from 'components/common/contexts/backbone-context'
 import StorageExpiry from 'components/common/models/storage-expiry'
 import ATVLocale from 'components/common/models/locale'
 import ATVView from 'common/view'
@@ -32,6 +33,8 @@ $(() => {
   const atvLocale = new ATVLocale()
   // console.log(atvLocale)
   atvLocale.on('sync', (localeModel) => {
+    const localeContext = new BackBoneContext()
+    localeContext.setContext(localeModel)
     // console.log(localeModel, localeModel.attributes.tr)
     const i18n = new I18n(localeModel.attributes.tr)
     const initializeApp = new InitializeApp()
