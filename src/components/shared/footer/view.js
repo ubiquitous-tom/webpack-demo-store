@@ -1,9 +1,7 @@
 import { View } from 'backbone'
 // https://github.com/handlebars-lang/handlebars.js/issues/1553
-// import Handlebars from 'handlebars'
 import * as Handlebars from 'handlebars/runtime'
-import Polyglot from 'node-polyglot'
-
+import docCookies from 'doc-cookies'
 import './stylesheet.scss'
 import template from './index.hbs'
 import FooterModel from './model'
@@ -23,21 +21,36 @@ class Footer extends View {
     return template
   }
 
-  initialize() {
+  initialize(options) {
     console.log('Footer initialize')
-    this.polyglot = new Polyglot()
-    this.model = new FooterModel()
+    this.i18n = options.i18n
+    this.model = new FooterModel(this.model.attributes)
 
     // render for sync
-    this.listenTo(this.model, 'change', this.render)
+    // this.listenTo(this.model, 'change', this.render)
+
     // render for localStorage
     this.render()
   }
 
-  updatelanguage(e) {
+  render() {
+    console.log('Footer render')
+    this.isSelected()
+    console.log(this.model.attributes)
+    const html = this.template(this.model.attributes)
+    // console.log(html)
+    this.$el.html(html)
+
+    return this
+  }
+
+  updateLanguage(e) {
     console.log(e)
-    console.log(this.model())
-    this.trigger('changeLang', e.target.value)
+    console.log(this.model.attributes, e.target.value)
+    const currentLocale = e.target.value
+    docCookies.setItem('ATVLocale', currentLocale)
+    this.model.set('currentLanguage', currentLocale || 'en')
+    window.location.reload()
   }
 
   isSelected() {
@@ -46,22 +59,6 @@ class Footer extends View {
       const selected = value.toLowerCase() === currentSelection ? 'selected' : ''
       return `<option value="${value}" ${selected}>${context}</option>`
     })
-  }
-
-  render() {
-    console.log('Footer render')
-    this.isSelected()
-
-    // const template = Handlebars.compile(this.template)
-    // console.log(template)
-    // console.log(this.model.attributes)
-    const html = this.template(this.model.attributes)
-    // console.log(html)
-    this.$el.html(html)
-
-    // this.$el.html(this.template(this.model.attributes))
-
-    return this
   }
 }
 

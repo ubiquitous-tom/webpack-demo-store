@@ -1,20 +1,19 @@
-<div id='annual-plan' class='row'>
+<div id="annual-plan" class="row">
   {{!log this level="error"}}
-  <div class='col-md-8'>
-    <h1 class='formhead'>Plans</h1>
+  <div class="col-md-8">
+    <h1 class="formhead">{{t "PLANS"}}</h1>
   </div>
-  <div class='col-md-8'>
+  <div class="col-md-8">
     <p>
-      Your Annual Plan renews on
-      {{renewalDate}}. ({{currSymbol}}{{subscriptionAmount}}/yr)<br />
-      {{tagline}}
+      {{t "ANNUAL-PLAN-RENEWS-ON-DATE-PRICE"}}<br />
+      {{{tagline}}}
     </p>
   </div>
 </div>
-<div class='row'>
-  <div class='col-md-8'>
-    <a href='#' class='switch-to-monthly'>
-      Switch to Monthly Plan ({{currSymbol}}{{monthlySubscriptionAmount}}/mo)
+<div class="row">
+  <div class="col-md-8">
+    <a href="#" class="switch-to-monthly">
+      {{t "SWITCH-TO-MONTHLY-PRICE"}}
     </a>
   </div>
 </div>

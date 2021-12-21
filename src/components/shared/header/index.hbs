@@ -4,7 +4,9 @@
     <ul class="navbar-right-ul accountUser">
       <li class="navbar-right">
         <div class="menuOptions" id="menuOptions">
-          <span class="accountOptions hidden-xs hidden-sm">my acorn tv</span>
+          <span class="accountOptions hidden-xs hidden-sm">
+            {{t "MY-ACORN-TV"}}
+          </span>
           <span id="clicker">
             <img
               class="accountIcon"
@@ -17,38 +19,42 @@
         <ul class="drop-select closed" style="display:none;">
           <li>
             <a href="//{{environment}}acorn.tv/browse/recentlywatched/">
-              RECENTLY WATCHED
+              {{t "RECENTLY-WATCHED"}}
             </a>
           </li>
           <li>
             <a href="//{{environment}}acorn.tv/browse/yourwatchlist/">
-              MY WATCHLIST
+              {{t "MY-WATCHLIST"}}
             </a>
           </li>
-          <li><a href="#accountStatus">MANAGE ACCOUNT</a></li>
-          <li><a href="#editPassword">CHANGE PASSWORD</a></li>
+          <li><a href="#accountStatus">{{t "MANAGE-ACCOUNT"}}</a></li>
+          <li><a href="#editPassword">{{t "CHANGE-PASSWORD"}}</a></li>
           {{#if Customer.webPaymentEdit}}
             {{#if Customer.StripeEnabled}}
-              <li><a href="#updatecard">UPDATE BILLING INFORMATION</a></li>
+              <li>
+                <a href="#updatecard">
+                  {{t "UPDATE-BILLING-INFORMATION"}}
+                </a>
+              </li>
             {{/if}}
-            <li><a href="#editEmail">CHANGE EMAIL</a></li>
+            <li><a href="#editEmail">{{t "CHANGE-EMAIL"}}</a></li>
           {{/if}}
           {{#if Session.LoggedIn}}
-            <li><a href="#logout">LOG OUT</a></li>
+            <li><a href="#logout">{{t "LOG-OUT"}}</a></li>
           {{else}}
-            <li><a
-                href="{{signinEnv}}/signin.jsp?OperationalScenario=STORE"
-              >SIGN IN</a></li>
+            <li>
+              <a href="{{signinEnv}}/signin.jsp?OperationalScenario=STORE">
+                {{t "SIGN-IN"}}
+              </a>
+            </li>
           {{/if}}
         </ul>
       </li>
     </ul>
 
     <div class="navbar-header">
-      <a href="//{{environment}}acorn.tv/"><img
-          src="/img/atvlogo.png"
-          class="atv-logo"
-        /></a>
+      <a href="//{{environment}}acorn.tv/">
+        <img src="{{atvlogo}}" class="atv-logo" /></a>
       <button
         data-toggle="collapse-side"
         data-target=".side-collapse"
@@ -66,18 +72,16 @@
 
     <div class="navbar-collapse side-collapse in">
       <ul class="nav navbar-nav">
-        <li><a href="//{{environment}}acorn.tv/">HOME</a></li>
-        <li><a href="//{{environment}}acorn.tv/browse">BROWSE</a></li>
-        <li><a href="//{{environment}}acorn.tv/schedule">SCHEDULE</a></li>
-        <li><a href="//support.acorn.tv">HELP</a></li>
-        <li><a
-            id="store-link"
-            href="//{{storeEnv}}"
-            style="color:#fff;display:block;"
-          >STORE</a>
+        <li><a href="//{{environment}}acorn.tv/">{{t "HOME"}}</a></li>
+        <li><a href="//{{environment}}acorn.tv/browse">{{t "BROWSE"}}</a></li>
+        <li>
+          <a href="//{{environment}}acorn.tv/schedule">
+            {{t "SCHEDULE"}}
+          </a>
         </li>
+        <li><a href="//support.acorn.tv">{{t "HELP"}}</a></li>
+        <li><a id="store-link" href="//{{storeEnv}}">{{t "STORE"}}</a></li>
       </ul>
     </div>
   </div>
 </div>
-<div id="jqueryScript"></div>

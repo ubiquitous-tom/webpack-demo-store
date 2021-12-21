@@ -1,12 +1,13 @@
 import { View } from 'backbone'
 // import _ from 'underscore'
 // import Handlebars from 'handlebars'
+import FlashMessage from 'shared/elements/flash-message'
+import SwitchToMonthlyPlan from '../switch-to-monthly-plan'
 
 import './stylesheet.scss'
 import placeholder from './placeholder.hbs'
 import template from './index.hbs'
 import AnnualPlanModel from './model'
-import SwitchToMonthlyPlan from '../switch-to-monthly-plan'
 
 class AnnualPlan extends View {
   get el() {
@@ -23,9 +24,10 @@ class AnnualPlan extends View {
     }
   }
 
-  initialize() {
+  initialize(options) {
     console.log('AnnualPlan initialize')
     console.log(this)
+    this.i18n = options.i18n
     this.model = new AnnualPlanModel(this.model.attributes)
     // console.log(this.model)
     // console.log(this.model.attributes)
@@ -90,18 +92,63 @@ class AnnualPlan extends View {
   }
 
   getTagline() {
+    const taglines = []
     if (this.model.get('Subscription').Promo) {
-      return this.getPromoCodeInfo()
+      taglines.push(this.getPromoCodeInfo())
     }
-    return this.getAnnualDiscount()
+
+    if (this.model.get('Subscription').Trial) {
+      taglines.push(this.getTrialInfo())
+    }
+
+    taglines.push(this.getAnnualDiscount())
+    return taglines.join('<br>')
   }
 
   getPromoCodeInfo() {
-    return `with promo code - ${this.model.get('Membership').PromoCode}`
+    // return `with promo code - ${this.model.get('Membership').PromoCode}`
+    return this.i18n.t('WITH-PROMO-CODE-OFF', { promoCode: this.model.get('Membership').PromoCode })
+  }
+
+  getTrialInfo() {
+    const message = `Your free trial starts now and ends on ${this.getTrialEndDate()}`
+    const type = 'success'
+
+    this.flashMessage = new FlashMessage()
+    this.flashMessage.onFlashMessageShow(message, type)
+
+    // return 'after your free trial ends.'
+    return this.i18n.t('AFTER-FREE-TRIAL-ENDS')
+  }
+
+  getTrialEndDate() {
+    const trialDays = this.model.get('monthlyStripePlan').TrialDays
+    const joinDate = this.model.get('Customer').JoinDate
+    const date = joinDate.split('/')
+    const f = new Date(date[2], date[0] - 1, date[1])
+    // console.log(joinDate)
+    // console.log(f.toString())
+    const trialEndDate = f.setDate(f.getDate() + trialDays)
+    // console.log(trialEndDate)
+
+    const d = new Date(0)
+    d.setUTCMilliseconds(trialEndDate)
+    console.log(d)
+    const trialEnddateOjb = this.model.formatDate(d)
+    // console.log(trialEnddateOjb)
+    // this.set('trialEndDate', trialEnddateOjb)
+    return trialEnddateOjb
   }
 
   getAnnualDiscount() {
-    return `That's only ${this.model.get('Customer').CurrSymbol} ${this.model.get('annualPerMonthPricing')}/mo!`
+    // return `
+    // That's only ${this.model.get('Customer').CurrSymbol}
+    // ${this.model.get('annualPerMonthPricing')}/mo!
+    // `
+    return this.i18n.t('THATS-ONLY-PRICE', {
+      currSymbol: this.model.get('Customer').CurrSymbol,
+      amount: this.model.get('annualPerMonthPricing'),
+    })
   }
 }
 

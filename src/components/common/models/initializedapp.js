@@ -2,6 +2,7 @@ import { Model } from 'backbone'
 import _ from 'underscore'
 import { LocalStorage } from 'backbone.localstorage'
 import { getLocalStorage } from 'backbone.localstorage/src/utils'
+import docCookies from 'doc-cookies'
 
 class InitializeApp extends Model {
   get defaults() {
@@ -37,9 +38,10 @@ class InitializeApp extends Model {
     }
     this.set(data)
     this.set({
-      environment: 'dev3.', // this.environment(),
+      environment: this.environment(),
       signinEnv: this.signinEnv(),
       storeEnv: this.storeEnv(),
+      currentLanguage: docCookies.getItem('ATVLocale') || 'en',
     })
 
     // If this is a brand new account never been created then go to signup
@@ -74,6 +76,7 @@ class InitializeApp extends Model {
     if (window.location.href.indexOf('qa') > -1) {
       env = 'qa.'
     }
+    env = 'dev3.'
     return env
   }
 

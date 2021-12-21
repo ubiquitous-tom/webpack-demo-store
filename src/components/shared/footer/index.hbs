@@ -1,30 +1,30 @@
 <div class="copyright">
 {{!log this level="error"}}
-  <p>&copy; {{ currentYear }} RLJ Entertainment, Inc. All Rights Reserved</p>
+  <p>&copy; {{ currentYear }} RLJ Entertainment, Inc. {{t 'ALL-RIGHTS-SHORT'}}</p>
 </div>
 <div class="terms-condition">
   <ul>
     <li>
-      <a class="open-dialog fancybox.iframe" href="https://app.rlje.net/terms/acorn/en.html">
-      Terms and Conditions </a>
+      <a class="open-dialog fancybox.iframe" href="https://app.rlje.net/terms/acorn/{{ currentLanguage }}.html">
+      {{t 'TERMS-AND-CONDITIONS'}} </a>
     </li>
     <li>
-      <a class="open-dialog fancybox.iframe" href="https://app.rlje.net/privacy/acorn/en.html">
-      Privacy Policy </a>
+      <a class="open-dialog fancybox.iframe" href="https://app.rlje.net/privacy/acorn/{{ currentLanguage }}.html">
+      {{t 'PRIVACY-POLICY-UPPER'}} </a>
     </li>
     <li>
-      <a class="open-dialog fancybox.iframe" href="https://app.rlje.net/cookie-policy/acorn/en.html">
-      Cookie Policy</a>
+      <a class="open-dialog fancybox.iframe" href="https://app.rlje.net/cookie-policy/acorn/{{ currentLanguage }}.html">
+      {{t 'COOKIE-POLICY'}}</a>
     </li>
     <li>
-      <a class="open-dialog fancybox.iframe" href="https://app.rlje.net/caption-policy/en.html">
-      Captioning Policy</a>
+      <a class="open-dialog fancybox.iframe" href="https://app.rlje.net/caption-policy/{{ currentLanguage }}.html">
+      {{t 'CAPTIONING-POLICY-UPPER'}} </a>
     </li>
   </ul>
 </div>
 
 <div class="lang-select">
-  <label class="atv-locale" for="atvLocale">language:</label>
+  <label class="atv-locale" for="atvLocale">{{t 'Language' }}:</label>
   <select name="atv_locale" id="atvLocale">
     {{#each languages}}
     {{{option @key ../currentLanguage this}}}

@@ -69,6 +69,7 @@ class SwitchToMonthlyPlanModel extends ATVModel {
     debugger
     console.log(model, resp, options)
     const currentPeriodEnd = new Date(resp.current_period_end * 1000).toLocaleDateString('en-US')
+    // TODO: translation `SWITCHED-TO-MONTHLY-DATE`
     const message = `You've switched to Monthly Plan. Monthly billing will start after your Annual Plan ends on ${currentPeriodEnd}.`
     this.set({
       downgradeToMonthlySuccess: true,

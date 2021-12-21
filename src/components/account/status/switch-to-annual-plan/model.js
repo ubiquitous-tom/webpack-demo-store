@@ -77,6 +77,7 @@ class SwitchToAnnualPlanModel extends ATVModel {
     const currentPeriodEnd = new Date(resp.current_period_end * 1000).toLocaleDateString('en-US')
     const pricing = (Math.floor((this.get('annualStripePlan').SubscriptionAmount / 12) * 100) / 100).toFixed(2)
     const perMonthPricing = this.get('annualStripePlan').CurrSymbol + pricing
+    // TODO: translation `UPGRADED-TO-ANNUAL-BILLED-DATE-PRICE`
     const message = `You've upgraded to the Annual Plan. You will be billed ${annualPricing} on ${currentPeriodEnd}. That's only ${perMonthPricing}/mo!`
     this.set({
       upgradeToAnnualSuccess: true,

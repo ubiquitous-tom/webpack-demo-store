@@ -2,37 +2,34 @@
   {{!log this level="error"}}
   <div class="col-md-8">
     {{#if PaymentMethod.Canceled}}
-
       <div class="field-wrap clearfix">
-        <div class="field-label pull-left">PAYMENT-METHOD</div>
+        <div class="field-label pull-left">{{t "PAYMENT-METHOD"}}</div>
         <div id="paymentMethodField" class="field-value pull-left">
-          CARD-NOT-CHARGED
+          {{t "CARD-NOT-CHARGED"}}
         </div>
       </div>
-
     {{else}}
-
       <div style="display: none">
+        paymentMethod.Store =
         {{PaymentMethod.Store}}
       </div>
 
       {{#if PaymentMethod.Store}}
-
-        <p>FREE-SEVEN-DAYS</p>
-        <p>SIGNUP-FULL-MEMBERSHIP</p>
+        {{#if isRecordedBook}}
+          <p>{{t "FREE-SEVEN-DAYS"}}</p>
+          <p>{{t "SIGNUP-FULL-MEMBERSHIP"}}</p>
+        {{/if}}
       {{else}}
         {{#if PaymentMethod.webPaymentEdit}}
-
           <div class="field-wrap clearfix">
-            <div class="field-label pull-left">Payment Method</div>
+            <div class="field-label pull-left">{{t "PAYMENT-METHOD"}}</div>
             <div id="paymentMethodField" class="field-value pull-left">
-              <atv:il8n var="FREE-SEVEN-DAYS-DEVICE"></atv:il8n>
-              <atv:il8n var="PLEASE-LOG-IN"></atv:il8n>
+              {{t "FREE-SEVEN-DAYS-DEVICE"}}
+              {{t "PLEASE-LOG-IN"}}
               {{PaymentMethod.Device}}
-              <atv:il8n var="MANAGE-BILLING"></atv:il8n>
+              {{t "MANAGE-BILLING"}}
             </div>
           </div>
-
         {{/if}}
       {{/if}}
     {{/if}}

@@ -1,46 +1,36 @@
-<div class='switch-to-annual-plan-container'>
-  {{log this level='error'}}
-  <div class='row row-no-gutters'>
-    <h1>Get 12 Months for the Price of 10</h1>
-    <p class='annual-plan-message'>
-      You will be billed
-      <span class='{{isPromoApplied}}'>
-        {{currSymbol}}{{annualSubscriptionAmount}}
-      </span>
-      for the Annual Plan on XX/XX/XXXX.<br />
-      Cancel anytime.
+<div class="switch-to-annual-plan-container">
+  {{log this level="error"}}
+  <div class="row row-no-gutters">
+    <h1>{{t "12-MONTHS-FOR-PRICE-OF-10"}}</h1>
+    <p class="annual-plan-message">
+      {{{t "YOU-WILL-BE-BILLED-ANNUAL-PRICE-DATE"}}}
     </p>
   </div>
 
-  <div id='billing-container'>
-    <div id='confirm-billing'>
-      <h4>Confirm your billing info</h4>
-      <div id='billing-info'>
-        <div class='item'>
-          <div class='content'>
-            <div class='super-short-title pull-right'></div>
-            <div class='super-title'></div>
-            <div class='super-title'></div>
-            <div class='super-title'></div>
+  <div id="billing-container">
+    <div id="confirm-billing">
+      <h4>{{t "CONFIRM-YOUR-BILLING-INFO"}}</h4>
+      <div id="billing-info">
+        <div class="item">
+          <div class="content">
+            <div class="super-short-title pull-right"></div>
+            <div class="super-title"></div>
+            <div class="super-title"></div>
+            <div class="super-title"></div>
           </div>
         </div>
       </div>
     </div>
 
-    <div id='stripe-form'></div>
+    <div id="stripe-form"></div>
 
-    <div id='promocode-container'></div>
+    <div id="promocode-container"></div>
 
-    <button type='submit' class='confirm-upgrade btn'>Confirm Upgrade</button>
+    <button type="submit" class="confirm-upgrade btn">
+      {{t "CONFIRM-UPGRADE"}}</button>
 
-    <div class='legal-notice'>
-      <p>
-        By clicking the "Confirm Upgrade" button above, you agree that you will
-        be charged $59.99 to your payment method on a recurring basis until you
-        cancel. Your membership will renew at the then current price. To cancel,
-        go to your Account and click “Cancel Membership” on the Membership tab.
-        There are no refunds or credits for partial or unused months.
-      </p>
+    <div class="legal-notice">
+      <p>{{{t "LEGAL-CONSENT-INFORMATION-UPGRADE-PRICE"}}}</p>
     </div>
   </div>
 </div>

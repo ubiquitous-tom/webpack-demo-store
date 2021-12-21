@@ -39,6 +39,7 @@ class Workspace extends Router {
   initialize(options) {
     console.log('Router initialize')
     this.model = options.model
+    this.i18n = options.i18n
     this.history = new History()
     // router.trigger('route', name, args);
     // Backbone.history.trigger('route', router, name, args);
@@ -51,7 +52,7 @@ class Workspace extends Router {
 
   accountStatus() {
     console.log('Router loads accountStatus')
-    new AccountHome({ model: this.model })
+    new AccountHome({ model: this.model, i18n: this.i18n })
   }
 
   logout() {
@@ -65,12 +66,12 @@ class Workspace extends Router {
 
   editEmail() {
     console.log('Router loads editEmail')
-    new EditEmail({ model: this.model })
+    new EditEmail({ model: this.model, i18n: this.i18n })
   }
 
   editPassword() {
     console.log('Router loads editPassword')
-    new EditPassword({ model: this.model })
+    new EditPassword({ model: this.model, i18n: this.i18n })
   }
 
   cancelMembership() {
@@ -87,7 +88,7 @@ class Workspace extends Router {
 
   applyPromoCode() {
     console.log('Router loads applyPromoCode')
-    new ApplyPromoCode({ model: this.model })
+    new ApplyPromoCode({ model: this.model, i18n: this.i18n })
   }
 
   updateCard() {

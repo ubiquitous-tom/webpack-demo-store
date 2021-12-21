@@ -1,6 +1,6 @@
 /* NAVBAR */
 .atv-logo {
-  width: 154px;
+  width: 145px;
   margin-top: 16px;
   margin-left: 11px;
 }
@@ -240,7 +240,7 @@
     width: 190px;
   }
   .drop-select {
-    left: -15px;
+    /* left: -15px; */
     top: 26px;
   }
   .drop-select li {
@@ -275,6 +275,7 @@
   }
   .navbar-header {
     float: none;
+    position: fixed;
   }
   .nav > li {
     display: inline-block;

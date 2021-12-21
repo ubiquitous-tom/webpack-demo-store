@@ -1,8 +1,7 @@
 import { View } from 'backbone'
-import _ from 'underscore'
 
-import './stylesheet.css'
-import template from './temp-new.html'
+import './stylesheet.scss'
+import template from './index.hbs'
 
 import AccountHomeModel from './model'
 import AccountStatus from './status'
@@ -15,7 +14,7 @@ class AccountHome extends View {
   }
 
   get template() {
-    return _.template(template)
+    return template
   }
 
   get events() {
@@ -24,9 +23,10 @@ class AccountHome extends View {
     }
   }
 
-  initialize() {
+  initialize(options) {
     console.log('AccountHome initialize')
     console.log(this.model.attributes)
+    this.i18n = options.i18n
     this.model = new AccountHomeModel(this.model.attributes)
     // console.log(this.model)
     // this.render()
@@ -36,13 +36,12 @@ class AccountHome extends View {
 
   render() {
     console.log('AccountHome render')
-    // console.log(this.$el[0])
     this.$el.html(this.template())
 
     // Initialize late in order for all the element to be added to the main dom
-    this.accountStatus = new AccountStatus({ model: this.model })
-    this.accountInfo = new AccountInfo({ model: this.model })
-    this.billingInfo = new BillingInfo({ model: this.model })
+    this.accountStatus = new AccountStatus({ model: this.model, i18n: this.i18n })
+    this.accountInfo = new AccountInfo({ model: this.model, i18n: this.i18n })
+    this.billingInfo = new BillingInfo({ model: this.model, i18n: this.i18n })
 
     return this
   }

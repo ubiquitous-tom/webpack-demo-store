@@ -1,27 +1,28 @@
-<div id='monthly-plan' class='row'>
+<div id="monthly-plan" class="row">
   {{!log this level='error'}}
-  <div class='col-md-8'>
-    <h1 class='formhead'>Plans</h1>
+  <div class="col-md-8">
+    <h1 class="formhead">{{t "PLANS"}}</h1>
   </div>
-  <div class='col-md-8 banner'>
+  <div class="col-md-8 banner">
     <p>
-      Your Monthly Plan renews on
-      {{renewalDate}}. ({{currSymbol}}{{subscriptionAmount}}/mo)<br />
-      {{tagline}}
+      {{t "MONTHLY-PLAN-RENEWS-ON-DATE-PRICE"}}<br />
+      {{{tagline}}}
     </p>
   </div>
 </div>
-<div class='row'>
-  <div class='col-lg-6 col-sm-9'>
-    <div class='upgrade-to-annual'>
-      <h2>Get 12 Months for the Price of 10</h2>
+<div class="row">
+  <div class="col-lg-6 col-sm-9">
+    <div class="upgrade-to-annual">
+      <h2>{{t "12-MONTHS-FOR-PRICE-OF-10"}}</h2>
       <p>
-        <sup class='symbol'>{{currSymbol}}</sup>
-        <span class='price'>{{annualSubscriptionAmount}}</span>
+        <sup class="symbol">{{currSymbol}}</sup>
+        <span class="price">{{annualSubscriptionAmount}}</span>
         <sup>/</sup>
-        <sub class='period'>yr.</sub>
+        <sub class="period">{{t "YR"}}.</sub>
       </p>
-      <button type='submit' class='switch-to-annual btn'>Upgrade to Annual</button>
+      <button type="submit" class="switch-to-annual btn">
+        {{t "UPGRADE-TO-ANNUAL"}}
+      </button>
     </div>
   </div>
 </div>

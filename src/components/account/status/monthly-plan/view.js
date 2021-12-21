@@ -29,6 +29,7 @@ class MonthlyPlan extends View {
   initialize(options) {
     console.log('MonthlyPlan initialize')
     console.log(this, options)
+    this.i18n = options.i18n
     this.model = new MonthlyPlanModel(this.model.attributes)
     // this.getRenewalDate()
     console.log(this)
@@ -96,19 +97,21 @@ class MonthlyPlan extends View {
   }
 
   getTagline() {
+    const taglines = []
     if (this.model.get('Subscription').Promo) {
-      return this.getPromoCodeInfo()
+      taglines.push(this.getPromoCodeInfo())
     }
 
     if (this.model.get('Subscription').Trial) {
-      return this.getTrialInfo()
+      taglines.push(this.getTrialInfo())
     }
 
-    return ''
+    return taglines.join('<br>')
   }
 
   getPromoCodeInfo() {
-    return `with promo code - ${this.model.get('Membership').PromoCode}`
+    // return `with promo code - ${this.model.get('Membership').PromoCode}`
+    return this.i18n.t('WITH-PROMO-CODE-OFF', { promoCode: this.model.get('Membership').PromoCode })
   }
 
   getTrialInfo() {
@@ -118,7 +121,8 @@ class MonthlyPlan extends View {
     this.flashMessage = new FlashMessage()
     this.flashMessage.onFlashMessageShow(message, type)
 
-    return 'after your free trial ends.'
+    // return 'after your free trial ends.'
+    return this.i18n.t('AFTER-FREE-TRIAL-ENDS')
   }
 
   getTrialEndDate() {

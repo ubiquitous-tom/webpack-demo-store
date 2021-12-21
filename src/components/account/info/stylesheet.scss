@@ -1,7 +1,7 @@
 .account-info {
   color: #0b1733;
   font-size: 1.75rem;
-  line-height: 3.5rem;
+  line-height: 1;
   margin-bottom: 3rem;
   h1 {
     color: #0b1733;
@@ -11,8 +11,13 @@
     line-height: 2rem !important;
     margin-bottom: 2rem !important;
   }
-  .info {
-    font-weight: 500;
+  .row {
+    & > div {
+      padding-bottom: 1.75rem;
+    }
+    .info {
+      font-weight: 500;
+    }
   }
 }
 .cancel-membership a {

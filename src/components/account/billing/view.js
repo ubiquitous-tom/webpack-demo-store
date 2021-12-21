@@ -1,5 +1,5 @@
 import { View } from 'backbone'
-import template from './temp.hbs'
+import template from './index.hbs'
 
 class BillingInfo extends View {
   get el() {
@@ -7,32 +7,24 @@ class BillingInfo extends View {
   }
 
   get template() {
-    // return _.template(template)
     return template
   }
 
   initialize() {
     console.log('BillingInfo initialize')
-    // console.log(this, options)
+    const isRecordedBook = (
+      this.model.has('PaymentMethod')
+      && this.model.get('PaymentMethod').Store === 'RECORDEDBOOKS'
+    )
+    this.model.set({ isRecordedBook })
     this.render()
   }
 
   render() {
     console.log('BillingInfo render')
-    // const data = {
-    //   paymentMethod: {
-    //     webPaymentEdit: true
-    //   }
-    // }
-    console.log(this.model.attributes)
-    // debugger
-    // const template = Handlebars.compile(this.template())
-    // console.log(template)
+    // console.log(this.model.attributes)
     const html = this.template(this.model.attributes)
-    // console.log(html)
-    // console.log(this.$el[0], this.$el.find('#billingInfoView')[0])
     this.$el.find('#billingInfoView').html(html)
-    // this.$el.html(this.template(data))
   }
 }
 
