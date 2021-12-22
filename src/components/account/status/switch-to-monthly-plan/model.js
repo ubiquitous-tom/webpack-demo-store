@@ -47,7 +47,6 @@ class SwitchToMonthlyPlanModel extends ATVModel {
     const attributes = {
       from: this.get('currentDowngradePlan').from_stripe_plan_id,
       to: this.get('currentDowngradePlan').to_stripe_plan_id,
-      // promo_code: this.has('promoCode') ? this.get('promoCode').promocode : '',
     }
     const options = {
       url: [plansChange.url, $.param(attributes)].join('?'),
@@ -69,13 +68,18 @@ class SwitchToMonthlyPlanModel extends ATVModel {
     debugger
     console.log(model, resp, options)
     const currentPeriodEnd = new Date(resp.current_period_end * 1000).toLocaleDateString('en-US')
-    // TODO: translation `SWITCHED-TO-MONTHLY-DATE`
-    const message = `You've switched to Monthly Plan. Monthly billing will start after your Annual Plan ends on ${currentPeriodEnd}.`
+    // const message = `
+    // You've switched to Monthly Plan. Monthly billing will start after your Annual Plan ends on
+    //  ${currentPeriodEnd}.
+    // `
     this.set({
       downgradeToMonthlySuccess: true,
       flashMessage: {
         type: 'success',
-        message,
+        message: 'SWITCHED-TO-MONTHLY-DATE',
+        interpolationOptions: {
+          currentPeriodEnd,
+        },
       },
     })
   }
@@ -93,11 +97,9 @@ class SwitchToMonthlyPlanModel extends ATVModel {
           debugger
           console.log(response.responseJSON, response.responseText)
           if (!_.isEmpty(response.responseJSON)) {
-            // this.set({flashMessage: {'message': response.responseJSON.message}})
             message = response.responseJSON.message
           }
           if (!_.isEmpty(response.responseText)) {
-            // this.set({flashMessage: {'message': response.responseText}})
             message = response.responseText
           }
         },
@@ -105,11 +107,9 @@ class SwitchToMonthlyPlanModel extends ATVModel {
           debugger
           console.log(error.responseJSON, error.responseText)
           if (!_.isEmpty(error.responseJSON)) {
-            // this.set({flashMessage: {'message': error.responseJSON.error}})
             message = error.responseJSON.error
           }
           if (!_.isEmpty(error.responseText)) {
-            // this.set({flashMessage: {'message': error.responseText}})
             message = error.responseText
           }
         })
@@ -120,6 +120,7 @@ class SwitchToMonthlyPlanModel extends ATVModel {
           flashMessage: {
             type: 'error',
             message,
+            interpolationOptions: {},
           },
         })
         console.log(this.get('flashMessage').message, this.get('flashMessage').type)

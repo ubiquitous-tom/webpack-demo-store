@@ -4961,9 +4961,9 @@
       "UPGRADED-TO-ANNUAL-BILLED-DATE-PRICE": {
         "type": "text",
         "content": {
-          "en": "You\u2019ve upgraded to the Annual Plan. You will be billed %{annualPricing} on %{currentPeriodEnd}. That\u2019s only ${perMonthPricing}\/mo!",
-          "es": "Se actualiz\u00f3 al plan Anual. Se le facturar\u00e1 %{annualPricing} el %{currentPeriodEnd}. \u00a1Eso es solo ${perMonthPricing}\/mes!",
-          "uk": "You\u2019e upgraded to the Annual Plan. You will be billed %{annualPricing} on %{currentPeriodEnd}. That\u2019s only ${perMonthPricing}\/mo!"
+          "en": "You\u2019ve upgraded to the Annual Plan. You will be billed %{annualPricing} on %{currentPeriodEnd}. That\u2019s only %{perMonthPricing}\/mo!",
+          "es": "Se actualiz\u00f3 al plan Anual. Se le facturar\u00e1 %{annualPricing} el %{currentPeriodEnd}. \u00a1Eso es solo %{perMonthPricing}\/mes!",
+          "uk": "You\u2019e upgraded to the Annual Plan. You will be billed %{annualPricing} on %{currentPeriodEnd}. That\u2019s only %{perMonthPricing}\/mo!"
         }
       },
       "ANNUAL-PLAN-RENEWS-ON-DATE-PRICE": {
@@ -5145,9 +5145,9 @@
       "FREE-TRIAL-START-NOW-DATE": {
         "type": "text",
         "content": {
-          "en": "Your free trial starts now and ends on xx\/xx\/xx ",
-          "es": "Su prueba gratuita comienza ahora y finaliza el xx \/ xx \/ xx",
-          "uk": "Your free trial starts now and ends on xx\/xx\/xx "
+          "en": "Your free trial starts now and ends on %{trialEndDate} ",
+          "es": "Su prueba gratuita comienza ahora y finaliza el %{trialEndDate}",
+          "uk": "Your free trial starts now and ends on %{trialEndDate}"
         }
       }
     }

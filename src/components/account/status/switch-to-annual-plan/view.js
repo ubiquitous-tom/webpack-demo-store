@@ -47,8 +47,13 @@ class SwitchToAnnualPlan extends View {
       this.loadingStop()
       this.$el.find('.switch-to-annual-plan-container').remove()
       this.showFooter()
-
-      this.flashMessage.onFlashMessageSet(this.model.get('flashMessage').message, this.model.get('flashMessage').type, true)
+      let { message } = model.get('flashMessage')
+      const { interpolationOptions, type } = model.get('flashMessage')
+      if (value) {
+        message = this.i18n.t(message, interpolationOptions)
+      }
+      debugger
+      this.flashMessage.onFlashMessageSet(message, type, true)
     })
 
     // Trigger Show/Hide promo code form in PromoCode View
@@ -96,13 +101,11 @@ class SwitchToAnnualPlan extends View {
 
   enableSubmit() {
     console.log('SwitchToAnnualPlan enabledSubmit')
-    // console.log(this.$el.find('.confirm-upgrade').prop('disabled'))
     this.$el.find('.confirm-upgrade').prop('disabled', false)
   }
 
   disableSubmit() {
     console.log('SwitchToAnnualPlan disableSubmit')
-    // console.log(this.$el[0], this.$el.find('.confirm-upgrade')[0])
     this.$el.find('.confirm-upgrade').prop('disabled', true)
   }
 

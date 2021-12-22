@@ -97,6 +97,7 @@ class PromoCodeModel extends ATVModel {
           flashMessage: {
             type: 'error',
             message,
+            interpolationOptions: {},
           },
         })
         console.log(model.get('flashMessage').message, model.get('flashMessage').type)

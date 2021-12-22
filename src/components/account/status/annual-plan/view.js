@@ -71,7 +71,7 @@ class AnnualPlan extends View {
     e.preventDefault()
     console.log('AnnualPlan switchToMonthly')
     // console.log(this.switchToMonthlyPlan)
-    this.switchToMonthlyPlan = new SwitchToMonthlyPlan({ model: this.model })
+    this.switchToMonthlyPlan = new SwitchToMonthlyPlan({ model: this.model, i18n: this.i18n })
     this.switchToMonthlyPlan.render()
   }
 

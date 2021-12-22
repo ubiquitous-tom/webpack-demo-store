@@ -54,7 +54,7 @@ class MonthlyPlan extends View {
     // const template = Handlebars.compile(this.template())
     // console.log(template)
     const data = {
-      renewalDate: this.model.get('renewalDate'),
+      renewalDate: this.getRenewalDate(),
       currSymbol: this.model.get('Customer').CurrSymbol,
       subscriptionAmount: this.getCurrentNetAmount(),
       annualSubscriptionAmount: this.model.get('annualStripePlan').SubscriptionAmount,
@@ -80,6 +80,10 @@ class MonthlyPlan extends View {
       i18n: this.i18n,
     })
     // this.switchToAnnualPlan.render()
+  }
+
+  getRenewalDate() {
+    return this.model.getRenewalDate()
   }
 
   getCurrentNetAmount() {

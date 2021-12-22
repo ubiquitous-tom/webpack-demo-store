@@ -50,7 +50,7 @@ class PromoCode extends View {
       if (value) {
         this.updatePromoMessage(model, value, options)
       } else {
-        this.flashMessage.onFlashMessageShow(this.model.get('flashMessage').message, this.model.get('flashMessage').type)
+        this.flashMessage.onFlashMessageShow(model.get('flashMessage').message, model.get('flashMessage').type)
       }
     })
 

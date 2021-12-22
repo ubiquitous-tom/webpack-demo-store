@@ -1,9 +1,7 @@
 import { View } from 'backbone'
-// import _ from 'underscore'
 import SubmitLoader from 'shared/elements/submit-loader'
 import FlashMessage from 'shared/elements/flash-message'
 import './stylesheet.scss'
-// import loader from './loader.svg'
 import template from './index.hbs'
 import SwitchToMonthlyPlanModel from './model'
 
@@ -23,14 +21,15 @@ class SwitchToMonthlyPlan extends View {
     }
   }
 
-  initialize() {
+  initialize(options) {
     console.log('SwitchToMonthlyPlan intialize')
     console.log(this, this.model.attributes)
     this.submitLoader = new SubmitLoader()
     this.flashMessage = new FlashMessage()
+    this.i18n = options.i18n
     this.model = new SwitchToMonthlyPlanModel(this.model.attributes)
-    // this.render()
 
+    /* eslint no-shadow: 0 */
     this.listenTo(this.model, 'change:downgradeToMonthlySuccess', (model, value, options) => {
       console.log(model, value, options)
       console.log(this)
@@ -39,17 +38,21 @@ class SwitchToMonthlyPlan extends View {
       this.$el.find('.switch-to-monthly-plan-container').remove()
       this.showFooter()
 
-      this.flashMessage.onFlashMessageSet(this.model.get('flashMessage').message, this.model.get('flashMessage').type, true)
+      let { message } = model.get('flashMessage')
+      const { interpolationOptions, type } = model.get('flashMessage')
+      if (value) {
+        message = this.i18n.t(message, interpolationOptions)
+      }
+      debugger
+      this.flashMessage.onFlashMessageSet(message, type, true)
     })
   }
 
   render() {
     console.log('SwitchToMonthlyPlan render')
-    // console.log(this.$el[0])
-    // console.log(this.template())
-    console.log(this.model.attributes)
-    // this.$el.html(this.template())
+    // console.log(this.model.attributes)
     this.model.set('nextBillingDate', this.model.get('Membership').NextBillingDate)
+
     this.$el.append(this.template(this.model.attributes))
 
     this.hideFooter()
