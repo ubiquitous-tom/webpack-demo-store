@@ -1,0 +1,22 @@
+<div id="annual-plan" class="row">
+  {{!log this level="error"}}
+  <div class="col-md-8">
+    <h1 class="formhead">{{t "PLANS"}}</h1>
+  </div>
+  <div class="col-md-8">
+    <p>
+      Your
+      {{planType}}
+      Plan was cancelled on
+      {{cancelledDate}}. ({{currSymbol}}{{subscriptionAmount}}/yr)<br />
+      {{{tagline}}}
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <button type="button" id="restartMembership" class="btn btn-primary">
+      Restart Membership
+    </button>
+  </div>
+</div>

@@ -2,6 +2,7 @@ import { View } from 'backbone'
 
 import './stylesheet.scss'
 import template from './index.hbs'
+import reducedTemplate from './reduced.hbs'
 
 class AccountInfo extends View {
   get el() {
@@ -9,7 +10,7 @@ class AccountInfo extends View {
   }
 
   get template() {
-    return template
+    return this.getMembershipType()
   }
 
   get events() {
@@ -37,6 +38,14 @@ class AccountInfo extends View {
     const env = this.environment()
     const cancelMembershipURL = `https://${env}acorn.tv/account/cancel`
     window.location.assign(cancelMembershipURL)
+  }
+
+  getMembershipType() {
+    if (this.model.get('Subscription').NoSubscription || this.model.get('Subscription').Canceled) {
+      return reducedTemplate
+    }
+
+    return template
   }
 
   environment() {

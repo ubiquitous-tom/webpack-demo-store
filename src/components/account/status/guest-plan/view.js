@@ -22,10 +22,11 @@ class GuestPlan extends View {
     }
   }
 
-  initialize() {
+  initialize(options) {
     console.log('GuestPlan initialize')
     console.log(this)
     this.flashMessage = new FlashMessage()
+    this.i18n = options.i18n
     this.model = new GuestPlanModel(this.model.attributes)
     // console.log(this.model)
     // console.log(this.model.attributes)
@@ -60,7 +61,12 @@ class GuestPlan extends View {
   }
 
   startFreeTrialBanner() {
-    const message = `Start streaming now! Try ${this.model.get('monthlyStripePlan').TrialDays} Days Free`
+    // const message = `
+    // Start streaming now! Try ${this.model.get('monthlyStripePlan').TrialDays} Days Free
+    // `
+    const message = this.i18n.t('START-STREAMING-NOW-TRY-NUMBERS-DAY-FREE', {
+      trialDays: this.model.get('monthlyStripePlan').TrialDays,
+    })
     const type = 'success'
     this.flashMessage.onFlashMessageShow(message, type)
   }

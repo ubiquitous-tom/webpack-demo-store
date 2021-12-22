@@ -77,6 +77,7 @@ class MonthlyPlan extends View {
     // console.log(this.switchToAnnualPlan)
     this.switchToAnnualPlan = new SwitchToAnnualPlan({
       monthlyPlan: this.model,
+      i18n: this.i18n,
     })
     // this.switchToAnnualPlan.render()
   }
@@ -115,7 +116,10 @@ class MonthlyPlan extends View {
   }
 
   getTrialInfo() {
-    const message = `Your free trial starts now and ends on ${this.getTrialEndDate()}`
+    // const message = `Your free trial starts now and ends on ${this.getTrialEndDate()}`
+    const message = this.i18n.t('FREE-TRIAL-START-NOW-DATE', {
+      trialEndDate: this.getTrialEndDate(),
+    })
     const type = 'success'
 
     this.flashMessage = new FlashMessage()

@@ -23,7 +23,14 @@
       background: #fff;
       border-radius: 3px;
       padding: 0.7rem 0.5rem;
-
+      .StripeElement {
+        &.StripeElement--complete {
+          background-color: #caf5ca;
+        }
+        &.StripeElement--invalid {
+          background-color: #f9e1e1;
+        }
+      }
       input {
         background-color: transparent;
         border: none;
@@ -88,6 +95,24 @@
 
 .item {
   flex-flow: row nowrap;
+  &.has-success {
+    input {
+      color: #3c763d;
+      // background-color: #caf5ca;
+      &::placeholder {
+        color: #3c763d;
+      }
+    }
+  }
+  &.has-error {
+    input {
+      color: #a94442;
+      // background-color: #f9e1e1;
+      &::placeholder {
+        color: #a94442;
+      }
+    }
+  }
 }
 
 .inline-item {
@@ -98,4 +123,22 @@
 
 .subitem {
   width: 31.5%;
+  &.has-success {
+    input {
+      color: #3c763d;
+      // background-color: #caf5ca;
+      &::placeholder {
+        color: #3c763d;
+      }
+    }
+  }
+  &.has-error {
+    input {
+      color: #a94442;
+      // background-color: #f9e1e1;
+      &::placeholder {
+        color: #a94442;
+      }
+    }
+  }
 }

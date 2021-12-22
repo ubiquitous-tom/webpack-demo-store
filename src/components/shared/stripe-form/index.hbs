@@ -1,35 +1,35 @@
 <div class="group">
   <div class="item">
-    <label>{{t "NAME-ON-CARD"}}</label>
+    <label class="control-label">{{t "NAME-ON-CARD"}}</label>
     <input
       type="text"
       class="form-control"
       id="nameoncard"
       name="nameoncard"
-      placeholder="Full Name"
+      placeholder="{{t 'FULL-NAME'}}"
     />
   </div>
   <div class="item">
-    <label>{{t "CREDIT-CARD-NUMBER"}}</label>
+    <label class="control-label">{{t "CREDIT-CARD-NUMBER"}}</label>
     <div id="card-number" class="card-field"></div>
   </div>
   <div class="inline-item">
     <div class="subitem">
-      <label>{{t "EXPIRATION"}}</label>
+      <label class="control-label">{{t "EXPIRATION"}}</label>
       <div id="card-expiry" class="card-field"></div>
     </div>
     <div class="subitem">
-      <label>{{t "CVC"}}</label>
+      <label class="control-label">{{t "CVC"}}</label>
       <div id="card-cvc" class="card-field"></div>
     </div>
     <div class="subitem">
-      <label>{{t "ZIP"}}</label>
+      <label class="control-label">{{t "ZIP-CODE"}}</label>
       <input
         type="text"
         class="form-control"
         id="card-zipcode"
         name="card-zipcode"
-        placeholder="{{t 'ZIP'}}"
+        placeholder="{{t 'ZIP-CODE'}}"
       />
     </div>
   </div>

@@ -45,7 +45,7 @@ class AnnualPlan extends View {
     // const template = Handlebars.compile(this.template())
     console.log(this.model.attributes)
     const data = {
-      renewalDate: this.model.get('renewalDate'),
+      renewalDate: this.getRenewalDate(),
       currSymbol: this.model.get('Customer').CurrSymbol,
       subscriptionAmount: this.getCurrentNetAmount(),
       annualPerMonthPricing: this.model.get('annualPerMonthPricing'),
@@ -73,6 +73,10 @@ class AnnualPlan extends View {
     // console.log(this.switchToMonthlyPlan)
     this.switchToMonthlyPlan = new SwitchToMonthlyPlan({ model: this.model })
     this.switchToMonthlyPlan.render()
+  }
+
+  getRenewalDate() {
+    return this.model.getRenewalDate()
   }
 
   getCurrentNetAmount() {
@@ -111,7 +115,10 @@ class AnnualPlan extends View {
   }
 
   getTrialInfo() {
-    const message = `Your free trial starts now and ends on ${this.getTrialEndDate()}`
+    // const message = `Your free trial starts now and ends on ${this.getTrialEndDate()}`
+    const message = this.i18n.t('FREE-TRIAL-START-NOW-DATE', {
+      trialEndDate: this.getTrialEndDate(),
+    })
     const type = 'success'
 
     this.flashMessage = new FlashMessage()

@@ -37,7 +37,7 @@ class AnnualPlanModel extends ATVModel {
     }
 
     this.set({
-      renewalDate: this.getRenewalDate(),
+      // renewalDate: this.getRenewalDate(),
       annualPerMonthPricing: this.annualPerMonthPricing(),
     })
   }

@@ -58,7 +58,11 @@ class PromoCodeModel extends ATVModel {
       promoAppliedAmount: resp.StripePercentOff,
       flashMessage: {
         type: 'success',
-        message: `PROMO APPLIED - ${resp.Name}`,
+        // message: `PROMO APPLIED - ${resp.Name}`,
+        message: 'PROMO-APPLIED-OFF',
+        interpolationOptions: {
+          promoCode: resp.Name,
+        },
       },
     })
   }
