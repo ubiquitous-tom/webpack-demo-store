@@ -37,10 +37,12 @@ class CanceledPlan extends View {
   render() {
     console.log('CanceledPlan render')
     const data = {
+      annual: this.model.get('Subscription').Annual,
       planType: this.getPlanType(),
       cancelledDate: this.model.get('Membership').CancelDate,
       currSymbol: this.model.get('Customer').CurrSymbol,
       subscriptionAmount: this.getCurrentNetAmount(),
+      termType: this.getTermType(),
       annualPerMonthPricing: this.model.get('annualPerMonthPricing'),
       monthlySubscriptionAmount: this.model.get('monthlyStripePlan').SubscriptionAmount,
       tagline: this.getTagline(),
@@ -76,11 +78,16 @@ class CanceledPlan extends View {
   }
 
   getTagline() {
-    return `you can stream until ${this.model.get('Membership').ExpirationDate}.`
+    // return `you can stream until ${this.model.get('Membership').ExpirationDate}.`
+    return this.i18n.t('YOU-CAN-STREAM-UNTIL-DATE', { expirationDate: this.model.get('Membership').ExpirationDate })
   }
 
   getPlanType() {
-    return (this.model.get('Subscription').Annual) ? 'Annual' : 'Monthly'
+    return (this.model.get('Subscription').Annual) ? this.i18n.t('ANNUAL') : this.i18n.t('MONTHLY')
+  }
+
+  getTermType() {
+    return (this.model.get('Subscription').Annual) ? this.i18n.t('YR') : this.i18n.t('MO')
   }
 }
 

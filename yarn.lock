@@ -6000,6 +6000,11 @@ node-gyp@^7.1.0:
     tar "^6.0.2"
     which "^2.0.2"
 
+node-json-minify@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/node-json-minify/-/node-json-minify-3.0.0.tgz#c1f9db6b4cc9d7b1300ae36e2dfe5cb0adf8068e"
+  integrity sha512-BH1dWvkrbrqoRjlxF17VCXa3W3UpynDPo8DRbbk7TiTyScbYPXJc4FSqEyS98trl1EYJ32+zA/WdE0dTPs7+yw==
+
 node-libs-browser@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/node-libs-browser/-/node-libs-browser-2.2.1.tgz#b64f513d18338625f90346d27b0d235e631f6425"

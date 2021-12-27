@@ -5149,6 +5149,46 @@
           "es": "Su prueba gratuita comienza ahora y finaliza el %{trialEndDate}",
           "uk": "Your free trial starts now and ends on %{trialEndDate}"
         }
+      },
+      "ANNUAL-WAS-CANCELED-DATE-PRICE": {
+        "type": "text",
+        "content": {
+          "en": "Your Annual Plan was cancelled on %{cancelledDate}. (%{currSymbol}%{subscriptionAmount}\/yr)",
+          "es": "Su suscripci\u00f3n anual se cancel\u00f3 el %{cancelledDate}. (%{currSymbol}%{subscriptionAmount}\/a\u00f1o)",
+          "uk": "Your Annual Plan was cancelled on %{cancelledDate}. (%{currSymbol}%{subscriptionAmount}\/yr)"
+        }
+      },
+      "MONTHLY-WAS-CANCELED-DATE-PRICE": {
+        "type": "text",
+        "content": {
+          "en": "Your Monthly Plan was cancelled on %{cancelledDate}. (%{currSymbol}%{subscriptionAmount}\/yr)",
+          "es": "Su suscripci\u00f3n mensual se cancel\u00f3 el %{cancelledDate}. (%{currSymbol}%{subscriptionAmount}\/mes)",
+          "uk": "Your Monthly Plan was cancelled on %{cancelledDate}. (%{currSymbol}%{subscriptionAmount}\/mo)"
+        }
+      },
+      "PLAN-TYPE-WAS-CANCELED-DATE-PRICE": {
+        "type": "text",
+        "content": {
+          "en": "Your %{planType} Plan was cancelled on %{cancelledDate}. (%{currSymbol}%{subscriptionAmount}\/%{termType}),",
+          "es": "Su suscripci\u00f3n %{planType} se cancel\u00f3 el %{cancelledDate}. (%{currSymbol}%{subscriptionAmount}\/%{termType})",
+          "uk": "Your %{planType} Plan was cancelled on %{cancelledDate}. (%{currSymbol}%{subscriptionAmount}\/%{termType}),"
+        }
+      },
+      "YOU-CAN-STREAM-UNTIL-DATE": {
+        "type": "text",
+        "content": {
+          "en": "you can stream until %{expirationDate}.",
+          "es": "Puedes transmitir hasta el %{expirationDate}.",
+          "uk": "you can stream until %{expirationDate}."
+        }
+      },
+      "RESTART-MEMBERSHIP": {
+        "type": "text",
+        "content": {
+          "en": "Restart Membership",
+          "es": "Reiniciar la membres\u00eda",
+          "uk": "Restart Membership"
+        }
       }
     }
   }

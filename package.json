@@ -5,11 +5,11 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "webpack --watch",
-    "start": "webpack serve --open",
+    "watch": "webpack --watch --config webpack.dev.js",
+    "start": "webpack serve --open --config webpack.dev.js",
     "server": "nodemon --watch server --watch src server.js",
-    "build": "webpack --node-env production",
-    "build:dev": "webpack"
+    "build": "webpack --config webpack.prod.js --node-env production",
+    "build:dev": "webpack --config webpack.dev.js"
   },
   "keywords": [],
   "author": "",
@@ -48,6 +48,7 @@
     "html-webpack-plugin": "^4",
     "i18n-extract": "^0.6.7",
     "mini-css-extract-plugin": "^1",
+    "node-json-minify": "^3.0.0",
     "node-sass": "^6.0.1",
     "nodemon": "^2.0.14",
     "postcss": "^8.3.9",

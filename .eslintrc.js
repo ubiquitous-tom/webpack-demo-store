@@ -32,6 +32,7 @@ module.exports = {
   plugins: ['import', 'backbone'],
   ignorePatterns: ['node_modules/'],
   rules: {
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     semi: ['error', 'never'],
     'no-debugger': 0, // process.env.NODE_ENV === 'production' ? 2 : 0,
     // 'import/no-unresolved': ['error', { commonjs: true, caseSensitive: true }],
