@@ -77,13 +77,21 @@ class SwitchToAnnualPlanModel extends ATVModel {
     const currentPeriodEnd = new Date(resp.current_period_end * 1000).toLocaleDateString('en-US')
     const pricing = (Math.floor((this.get('annualStripePlan').SubscriptionAmount / 12) * 100) / 100).toFixed(2)
     const perMonthPricing = this.get('annualStripePlan').CurrSymbol + pricing
-    // TODO: translation `UPGRADED-TO-ANNUAL-BILLED-DATE-PRICE`
-    const message = `You've upgraded to the Annual Plan. You will be billed ${annualPricing} on ${currentPeriodEnd}. That's only ${perMonthPricing}/mo!`
+    // const message = `
+    // You've upgraded to the Annual Plan. You will be billed ${annualPricing}
+    //  on ${currentPeriodEnd}.
+    //  That's only ${perMonthPricing}/mo!
+    // `
     this.set({
       upgradeToAnnualSuccess: true,
       flashMessage: {
         type: 'success',
-        message,
+        message: 'UPGRADED-TO-ANNUAL-BILLED-DATE-PRICE',
+        interpolationOptions: {
+          annualPricing,
+          currentPeriodEnd,
+          perMonthPricing,
+        },
       },
     })
   }
@@ -114,6 +122,7 @@ class SwitchToAnnualPlanModel extends ATVModel {
           flashMessage: {
             type: 'error',
             message,
+            interpolationOptions: {},
           },
         })
         console.log(model.get('flashMessage').message, model.get('flashMessage').type)

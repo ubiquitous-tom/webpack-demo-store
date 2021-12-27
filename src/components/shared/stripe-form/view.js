@@ -17,6 +17,10 @@ class StripeForm extends View {
 
   get events() {
     return {
+      'input input#nameoncard': 'validateInput',
+      'blur input#nameoncard': 'validateBlur',
+      'input input#card-zipcode': 'validateInput',
+      'blur input#card-zipcode': 'validateBlur',
       'click #stripe-form button[type="reset"]': 'reset',
       'click #stripe-form button[type="submit"]': 'submit',
     }
@@ -24,13 +28,11 @@ class StripeForm extends View {
 
   initialize(options) {
     console.log('StripeForm initialize')
-    // console.log(this)
     // console.log(options)
     this.submitLoader = new SubmitLoader()
     this.parentView = options.parentView
     // console.log(this.parentView)
     this.model = new StripeFormModel()
-    // console.log(Stripe)
 
     this.listenTo(this.model, 'change:stripeKey', this.initializeStripeForm)
   }
@@ -56,12 +58,19 @@ class StripeForm extends View {
         iconColor: '#a94442',
         color: '#a94442',
         fontWeight: 400,
+        '::placeholder': {
+          color: '#a94442',
+        },
       },
     }
 
-    // this.stripe = loadStripe('pk_live_Riw8CYEIjVsr54nzgGIOvzKL')
+    const elementClasses = {
+      focus: 'focused',
+      empty: 'empty',
+      invalid: 'invalid',
+    }
+
     /* eslint no-undef: 0 */
-    // this.stripe = Stripe('pk_test_lJqmZftGTxLatArjHLxHumTC')
     this.stripe = Stripe(this.model.get('stripeKey'))
 
     console.log(this.stripe)
@@ -83,27 +92,55 @@ class StripeForm extends View {
 
     this.cardNumber = this.elements.create('cardNumber', {
       style: elementStyles,
+      elementClasses,
     })
+      .on('change', (event) => {
+        if (event.complete) {
+          this.$el.find('#card-number').parent('.item').addClass('has-success')
+        } else if (!_.isEmpty(event.error)) {
+          this.$el.find('#card-number').parent('.item').addClass('has-error')
+        } else {
+          this.$el.find('#card-number').parent('.item').removeClass('has-success has-error')
+        }
+      })
 
     this.cardExpiry = this.elements.create('cardExpiry', {
       style: elementStyles,
+      elementClasses,
     })
+      .on('change', (event) => {
+        if (event.complete) {
+          this.$el.find('#card-expiry').parent('.subitem').addClass('has-success')
+        } else if (!_.isEmpty(event.error)) {
+          this.$el.find('#card-expiry').parent('.subitem').addClass('has-error')
+        } else {
+          this.$el.find('#card-expiry').parent('.subitem').removeClass('has-success has-error')
+        }
+      })
 
     this.cardCvc = this.elements.create('cardCvc', {
       style: elementStyles,
+      elementClasses,
     })
-    console.log(this)
+      .on('change', (event) => {
+        if (event.complete) {
+          this.$el.find('#card-cvc').parent('.subitem').addClass('has-success')
+        } else if (!_.isEmpty(event.error)) {
+          this.$el.find('#card-cvc').parent('.subitem').addClass('has-error')
+        } else {
+          this.$el.find('#card-cvc').parent('.subitem').removeClass('has-success has-error')
+        }
+      })
+
     this.render()
   }
 
   render() {
     console.log('StripeForm render')
-    // this.$el.find('#stripe-form').html(this.template())
 
     this.cardNumber.mount('#card-number')
     this.cardExpiry.mount('#card-expiry')
     this.cardCvc.mount('#card-cvc')
-    console.log(this)
 
     return this
   }
@@ -125,6 +162,12 @@ class StripeForm extends View {
     e.preventDefault()
     console.log(this.parentView.model)
     this.loadingStart()
+    if (this.validateSubmit()) {
+      this.generateToken()
+    }
+  }
+
+  generateToken() {
     const data = {
       name: this.$el.find('#stripe-form #nameoncard').val(),
       address_zip: this.$el.find('#stripe-form #card-zipcode').val(),
@@ -147,6 +190,48 @@ class StripeForm extends View {
           this.loadingStop()
         }
       })
+  }
+
+  validateInput() {
+    if (_.isEmpty(this.$el.find('input#nameoncard').val())) {
+      this.$el.find('input#nameoncard').parent('.item').addClass('has-error')
+    } else {
+      this.$el.find('input#nameoncard').parent('.item').removeClass('has-error')
+    }
+
+    if (_.isEmpty(this.$el.find('input#card-zipcode').val())) {
+      this.$el.find('input#card-zipcode').parent('.subitem').addClass('has-error')
+    } else {
+      this.$el.find('input#card-zipcode').parent('.subitem').removeClass('has-error')
+    }
+  }
+
+  validateBlur() {
+    if (
+      !_.isEmpty(this.$el.find('input#nameoncard').val())
+      && !this.$el.find('input#nameoncard').parent('.item').hasClass('has-error')
+    ) {
+      this.$el.find('input#nameoncard').parent('.item').addClass('has-success')
+    }
+
+    if (
+      !_.isEmpty(this.$el.find('input#card-zipcode').val())
+      && !this.$el.find('input#card-zipcode').parent('.subitem').hasClass('has-error')
+    ) {
+      this.$el.find('input#card-zipcode').parent('.subitem').addClass('has-success')
+    }
+  }
+
+  validateSubmit() {
+    this.validateInput()
+    if (
+      !_.isEmpty(this.$el.find('input#nameoncard').val())
+      && !_.isEmpty(this.$el.find('input#card-zipcode').val())
+    ) {
+      return true
+    }
+    this.loadingStop()
+    return false
   }
 
   loadingStart() {

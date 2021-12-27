@@ -5,11 +5,11 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "webpack --watch",
-    "start": "webpack serve --open",
+    "watch": "webpack --watch --config webpack.dev.js",
+    "start": "webpack serve --open --config webpack.dev.js",
     "server": "nodemon --watch server --watch src server.js",
-    "build": "webpack --node-env production",
-    "build:dev": "webpack"
+    "build": "webpack --config webpack.prod.js --node-env production",
+    "build:dev": "webpack --config webpack.dev.js"
   },
   "keywords": [],
   "author": "",
@@ -48,6 +48,7 @@
     "html-webpack-plugin": "^4",
     "i18n-extract": "^0.6.7",
     "mini-css-extract-plugin": "^1",
+    "node-json-minify": "^3.0.0",
     "node-sass": "^6.0.1",
     "nodemon": "^2.0.14",
     "postcss": "^8.3.9",
@@ -60,9 +61,9 @@
     "terser-webpack-plugin": "^4",
     "uglify-js": "^3.14.4",
     "url-loader": "^4.1.1",
-    "webpack": "4",
+    "webpack": "^4.46.0",
     "webpack-bundle-analyzer": "^4.5.0",
-    "webpack-cli": "^4",
+    "webpack-cli": "^4.9.0",
     "webpack-dev-middleware": "^5.2.1",
     "webpack-dev-server": "^4.3.1",
     "webpack-hot-middleware": "^2.25.1",
@@ -70,6 +71,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "@fancyapps/ui": "^4.0.12",
     "@popperjs/core": "^2.10.2",
     "@stripe/stripe-js": "^1.21.0",
     "backbone": "^1.4.0",
@@ -79,7 +81,6 @@
     "core-js": "^3.19.0",
     "doc-cookies": "^1.1.0",
     "dotenv": "^10.0.0",
-    "fancybox": "^2",
     "handlebars": "^4.7.7",
     "jquery": "^3.6.0",
     "node-polyglot": "^2",

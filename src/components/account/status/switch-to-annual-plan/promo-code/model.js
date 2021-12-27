@@ -58,7 +58,11 @@ class PromoCodeModel extends ATVModel {
       promoAppliedAmount: resp.StripePercentOff,
       flashMessage: {
         type: 'success',
-        message: `PROMO APPLIED - ${resp.Name}`,
+        // message: `PROMO APPLIED - ${resp.Name}`,
+        message: 'PROMO-APPLIED-OFF',
+        interpolationOptions: {
+          promoCode: resp.Name,
+        },
       },
     })
   }
@@ -93,6 +97,7 @@ class PromoCodeModel extends ATVModel {
           flashMessage: {
             type: 'error',
             message,
+            interpolationOptions: {},
           },
         })
         console.log(model.get('flashMessage').message, model.get('flashMessage').type)
@@ -107,8 +112,10 @@ class PromoCodeModel extends ATVModel {
     if (window.location.hostname.indexOf('qa') > -1) {
       env = 'qa-'
     }
+    if (process.env.NODE_ENV === 'development') {
+      env = process.env.RLJE_API_ENVIRONMENT
+    }
     // console.log(env)
-    env = 'dev3-'
     return env
   }
 }

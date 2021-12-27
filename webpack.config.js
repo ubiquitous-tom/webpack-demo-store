@@ -5,10 +5,11 @@ const DotenvWebpack = require('dotenv-webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ESLintWebpackPlugin = require('eslint-webpack-plugin')
-// const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 // const TerserWebpackPlugin = require('terser-webpack-plugin')
 // const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
+const NodeJsonMinify = require('node-json-minify')
 const cookieParser = require('cookie-parser')
 const express = require('express')
 const atvRoutes = require('./server/routes')
@@ -34,8 +35,8 @@ module.exports = function (env) {
         shared: path.resolve(__dirname, './src/components/shared'),
         components: path.resolve(__dirname, './src/components'),
         routers: path.resolve(__dirname, './src/routers'),
-        models: path.resolve(__dirname, './src/models'),
-        views: path.resolve(__dirname, './src/views '),
+        // models: path.resolve(__dirname, './src/models'),
+        // views: path.resolve(__dirname, './src/views'),
       },
     },
     devtool: env.production ? 'source-map' : 'cheap-module-eval-source-map',
@@ -110,14 +111,19 @@ module.exports = function (env) {
       //   'process.env': JSON.stringify(process.env)
       // }),
 
-      // new CopyWebpackPlugin({
-      //   patterns: [
-      //     // { from: 'src/assets/fonts', to: 'font' },
-      //     // { from: 'src/assets/images', to: 'img' },
-      //     // { from: 'src/assets/images/atvlogo.png', to: 'img' },
-      //     { from: 'public/lang.json', to: 'lang.json' },
-      //   ],
-      // }),
+      new CopyWebpackPlugin({
+        patterns: [
+          // { from: 'src/assets/fonts', to: 'font' },
+          // { from: 'src/assets/images', to: 'img' },
+          // { from: 'src/assets/images/atvlogo.png', to: 'img' },
+          // { from: 'public/lang.json', to: 'lang.json' },
+          {
+            from: 'public/lang.json',
+            transform: (content) => (NodeJsonMinify(content.toString())),
+            to: 'lang.json',
+          },
+        ],
+      }),
 
       // // https://stackoverflow.com/questions/44232366/how-do-i-build-a-json-file-with-webpack/54700817
       // new WebpackManifestPlugin(),

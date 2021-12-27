@@ -2,6 +2,7 @@ import { View } from 'backbone'
 
 import './stylesheet.scss'
 import template from './index.hbs'
+import reducedTemplate from './reduced.hbs'
 
 class AccountInfo extends View {
   get el() {
@@ -9,7 +10,7 @@ class AccountInfo extends View {
   }
 
   get template() {
-    return template
+    return this.getMembershipType()
   }
 
   get events() {
@@ -39,11 +40,26 @@ class AccountInfo extends View {
     window.location.assign(cancelMembershipURL)
   }
 
+  getMembershipType() {
+    if (this.model.get('Subscription').NoSubscription || this.model.get('Subscription').Canceled) {
+      return reducedTemplate
+    }
+
+    return template
+  }
+
   environment() {
-    let env = window.location.hostname.indexOf('dev') > -1 ? 'dev3.' : ''
-    env = window.location.hostname.indexOf('qa') > -1 ? 'qa.' : ''
+    let env = ''
+    if (window.location.hostname.indexOf('dev') > -1) {
+      env = 'dev3.'
+    }
+    if (window.location.hostname.indexOf('qa') > -1) {
+      env = 'qa.'
+    }
+    if (process.env.NODE_ENV === 'development') {
+      env = process.env.ENVIRONMENT
+    }
     // console.log(env)
-    env = 'dev3.'
     return env
   }
 }

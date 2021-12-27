@@ -70,13 +70,15 @@ class InitializeApp extends Model {
 
   environment() {
     let env = ''
-    if (window.location.href.indexOf('dev') > -1) {
+    if (window.location.hostname.indexOf('dev') > -1) {
       env = 'dev3.'
     }
-    if (window.location.href.indexOf('qa') > -1) {
+    if (window.location.hostname.indexOf('qa') > -1) {
       env = 'qa.'
     }
-    env = 'dev3.'
+    if (process.env.NODE_ENV === 'development') {
+      env = process.env.ENVIRONMENT
+    }
     return env
   }
 

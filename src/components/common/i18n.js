@@ -1,5 +1,4 @@
 import { Model } from 'backbone'
-// import _ from 'underscore'
 import EventEmitter from 'events'
 import * as Handlebars from 'handlebars/runtime'
 import docCookies from 'doc-cookies'

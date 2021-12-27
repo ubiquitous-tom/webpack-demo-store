@@ -30,6 +30,7 @@ class PromoCode extends View {
   initialize(options) {
     console.log('Promocode initialize')
     console.log(this, options)
+    this.i18n = options.i18n
     this.switchToAnnualPlan = options.switchToAnnualPlan
     this.confirmBilling = this.switchToAnnualPlan.confirmBilling
     // this.model = this.switchToAnnualPlan.model
@@ -49,7 +50,7 @@ class PromoCode extends View {
       if (value) {
         this.updatePromoMessage(model, value, options)
       } else {
-        this.flashMessage.onFlashMessageShow(this.model.get('flashMessage').message, this.model.get('flashMessage').type)
+        this.flashMessage.onFlashMessageShow(model.get('flashMessage').message, model.get('flashMessage').type)
       }
     })
 
@@ -153,7 +154,7 @@ class PromoCode extends View {
     debugger
     const promoCodeAppliedSuccess = $('<div>').addClass('promocode-applied-success')
     const i = $('<i>').addClass('glyphicon glyphicon-ok')
-    const { message } = model.get('flashMessage')
+    const message = this.i18n.t(model.get('flashMessage').message, model.get('flashMessage').interpolationOptions)
 
     const container = this.$el.find('#promocode-container')
     /* eslint comma-dangle: 0 */
