@@ -7,7 +7,7 @@ class StorageExpiry extends Model {
   get defaults() {
     return {
       localStorageID: 'atv-storage-expiry',
-      ttl: 300, // 1 hour
+      ttl: 1800, // 30 mins
       localStorageIDs: [
         'atv-locale',
         'atv-stripekey',
