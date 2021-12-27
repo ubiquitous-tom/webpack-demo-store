@@ -1,6 +1,6 @@
 const express = require('express')
-const router = express.Router()
 
+const router = express.Router()
 const initializeApp = require('./initializeapp')
 const applyPromo = require('./applypromo')
 const changePassword = require('./changepassword')
@@ -8,13 +8,12 @@ const changeEmail = require('./changeemail')
 const stripeKey = require('./stripekey')
 const lang = require('./lang')
 const logout = require('./logout')
-const plansChange = require('./plansChange')
-const plansAvailable = require('./plansAvailable')
+const plansChange = require('./planschange')
+const plansAvailable = require('./plansavailable')
 const stripeDefaultCard = require('./stripedefaultcard')
 const currentMembership = require('./currentmembership')
 
-
-router.get('/hello', function (req, res) {
+router.get('/hello', (req, res) => {
   // res.json({ custom: 'response' });
   res.status(200).send('Hello World!')
 })
@@ -31,6 +30,5 @@ router.post('/applypromo', applyPromo)
 router.post('/changepassword', changePassword)
 router.post('/changeemail', changeEmail)
 router.post('/acorn/plans/change', plansChange)
-
 
 module.exports = router

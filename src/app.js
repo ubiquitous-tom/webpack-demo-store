@@ -1,7 +1,7 @@
 import Backbone from 'backbone'
 // import $ from 'jquery'
 import 'bootstrap'
-// import 'fancybox'
+import 'fancybox'
 // import 'bootstrap/dist/css/bootstrap.css'
 // import 'fancybox/dist/css/jquery.fancybox.css'
 

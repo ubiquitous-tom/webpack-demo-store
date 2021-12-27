@@ -53,7 +53,7 @@ module.exports = {
         extensions: ['.js', '.jsx', '.hbs'],
       },
       webpack: {
-        config: 'webpack.config.js',
+        config: process.env.NODE_ENV === 'production' ? 'webpack.prod.js' : 'webpack.dev.js',
         env: {
           NODE_ENV: process.env.NODE_ENV === 'production' ?? 'development',
           production: process.env.NODE_ENV === 'production' ? 2 : 0,
