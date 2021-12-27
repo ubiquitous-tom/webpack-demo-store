@@ -1,6 +1,6 @@
 import { View } from 'backbone'
 
-import './stylesheet.css'
+import './stylesheet.scss'
 import template from './index.hbs'
 import MonthlyPlan from './monthly-plan'
 import AnnualPlan from './annual-plan'

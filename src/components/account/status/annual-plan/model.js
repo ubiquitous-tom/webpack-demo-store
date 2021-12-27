@@ -67,7 +67,7 @@ class AnnualPlanModel extends ATVModel {
     console.log('AnnualPlanModel getRenewal')
     const date = new Date(this.get('Membership').NextBillingDateAsLong)
     const renewalDate = this.formatDate(date)
-    console.log(renewalDate)
+    // console.log(renewalDate)
     // this.model.set('renewalDate', renewalDate)
     return renewalDate
   }

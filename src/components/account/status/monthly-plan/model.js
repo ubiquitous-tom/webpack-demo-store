@@ -82,7 +82,8 @@ class MonthlyPlanModel extends ATVModel {
     const date = new Date(this.get('Membership').NextBillingDateAsLong)
     const renewalDate = this.formatDate(date)
     // console.log(renewalDate)
-    this.set('renewalDate', renewalDate)
+    // this.set('renewalDate', renewalDate)
+    return renewalDate
   }
 
   // getTrialEndDate() {
