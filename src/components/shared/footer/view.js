@@ -2,7 +2,9 @@ import { View } from 'backbone'
 // https://github.com/handlebars-lang/handlebars.js/issues/1553
 import * as Handlebars from 'handlebars/runtime'
 import docCookies from 'doc-cookies'
+import { Fancybox } from '@fancyapps/ui'
 import BackBoneContext from 'common/contexts/backbone-context'
+import '@fancyapps/ui/dist/fancybox.css'
 import './stylesheet.scss'
 import template from './index.hbs'
 import FooterModel from './model'
@@ -15,6 +17,7 @@ class Footer extends View {
   get events() {
     return {
       'change #atvLocale': 'updateLanguage',
+      'click .open-dialog': 'openDialog',
     }
   }
 
@@ -27,6 +30,9 @@ class Footer extends View {
     this.context = new BackBoneContext()
     this.i18n = options.i18n
     this.model = new FooterModel(this.model.attributes)
+
+    // Initialize footer popup
+    Fancybox.bind('[data-fancybox]')
 
     // render for sync
     // this.listenTo(this.model, 'change', this.render)
@@ -55,6 +61,23 @@ class Footer extends View {
     docCookies.setItem('ATVLocale', currentLocale)
     this.model.set('currentLanguage', currentLocale || 'en')
     window.location.reload()
+  }
+
+  openDialog(e) {
+    e.preventDefault()
+    console.log(e.currentTarget)
+    console.log($(e.currentTarget))
+    $(e.currentTarget).on('shown.bs.modal', () => {
+      const link = $(e.currentTarget).attr('href')
+      console.log(link)
+      // correct here use 'shown.bs.modal' event which comes in bootstrap3
+      // $(e.currentTarget).find('iframe').attr('src', 'http://www.google.com')
+      const iframe = $('<iframe>').attr({ src: link })
+      $('body').append(iframe)
+    })
+    $('.open-dialog').on('shown.bs.modal', () => {
+      $('.open-dialog').find('iframe').attr('src', 'http://www.google.com')
+    })
   }
 
   isSelected() {

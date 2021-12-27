@@ -37,8 +37,7 @@ class AccountInfo extends View {
     e.preventDefault()
     const env = this.environment()
     const cancelMembershipURL = `https://${env}acorn.tv/account/cancel`
-    console.log(cancelMembershipURL)
-    // window.location.assign(cancelMembershipURL)
+    window.location.assign(cancelMembershipURL)
   }
 
   getMembershipType() {
@@ -50,10 +49,17 @@ class AccountInfo extends View {
   }
 
   environment() {
-    let env = window.location.hostname.indexOf('dev') > -1 ? 'dev3.' : ''
-    env = window.location.hostname.indexOf('qa') > -1 ? 'qa.' : ''
-    env = (process.env.NODE_ENV === 'development') ? process.env.ENVIRONMENT : env
-    console.log(env)
+    let env = ''
+    if (window.location.hostname.indexOf('dev') > -1) {
+      env = 'dev3.'
+    }
+    if (window.location.hostname.indexOf('qa') > -1) {
+      env = 'qa.'
+    }
+    if (process.env.NODE_ENV === 'development') {
+      env = process.env.ENVIRONMENT
+    }
+    // console.log(env)
     return env
   }
 }

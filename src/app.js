@@ -1,10 +1,5 @@
 import Backbone from 'backbone'
-// import $ from 'jquery'
 import 'bootstrap'
-import 'fancybox'
-// import 'bootstrap/dist/css/bootstrap.css'
-// import 'fancybox/dist/css/jquery.fancybox.css'
-
 import './app.scss'
 
 // import 'common/template'
@@ -22,7 +17,6 @@ import Header from 'shared/header'
 import Footer from 'shared/footer'
 import Navigation from 'shared/navigation'
 import I18n from 'components/common/i18n'
-// import Translation from 'components/common/models/translation'
 
 console.log(`Looks like we are in ${process.env.NODE_ENV} mode!`)
 console.log(`${process.env.RLJE_API_ENVIRONMENT}api.rlje.net`)

@@ -65,6 +65,7 @@ module.exports = {
       jQuery: 'jquery',
       $: 'jquery',
       // jquery: 'jquery',
+      // 'window.jQuery': 'jquery',
       // _: 'underscore',
       // Backbone: 'backbone',
     }),

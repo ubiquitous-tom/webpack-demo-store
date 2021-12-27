@@ -71,6 +71,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "@fancyapps/ui": "^4.0.12",
     "@popperjs/core": "^2.10.2",
     "@stripe/stripe-js": "^1.21.0",
     "backbone": "^1.4.0",
@@ -80,7 +81,6 @@
     "core-js": "^3.19.0",
     "doc-cookies": "^1.1.0",
     "dotenv": "^10.0.0",
-    "fancybox": "^2",
     "handlebars": "^4.7.7",
     "jquery": "^3.6.0",
     "node-polyglot": "^2",

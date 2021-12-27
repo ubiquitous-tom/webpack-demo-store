@@ -112,8 +112,10 @@ class PromoCodeModel extends ATVModel {
     if (window.location.hostname.indexOf('qa') > -1) {
       env = 'qa-'
     }
+    if (process.env.NODE_ENV === 'development') {
+      env = process.env.RLJE_API_ENVIRONMENT
+    }
     // console.log(env)
-    env = 'dev3-'
     return env
   }
 }

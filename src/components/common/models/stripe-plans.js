@@ -134,8 +134,6 @@ class StripePlans extends Model {
   }
 
   environment() {
-    // console.log(window.location.hostname)
-    // console.log(window.location.hostname.indexOf('dev') > -1)
     let env = ''
     if (window.location.hostname.indexOf('dev') > -1) {
       env = 'dev3-'
@@ -143,8 +141,10 @@ class StripePlans extends Model {
     if (window.location.hostname.indexOf('qa') > -1) {
       env = 'qa-'
     }
+    if (process.env.NODE_ENV === 'development') {
+      env = process.env.RLJE_API_ENVIRONMENT
+    }
     // console.log(env)
-    env = 'dev3-'
     return env
   }
 
