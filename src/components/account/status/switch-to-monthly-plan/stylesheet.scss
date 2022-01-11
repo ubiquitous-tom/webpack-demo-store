@@ -19,10 +19,12 @@
   );
   height: 100vh;
   width: 100vw;
-  font-family: futura-pt, sans-serif;
+  // font-family: futura-pt, sans-serif;
+  font-family: "Oxygen", sans-serif;
   position: fixed;
   top: 56px;
   left: 0;
+  z-index: 105;
 
   &::before {
     content: "";
@@ -43,6 +45,7 @@
 
   p {
     color: #fff;
+    font-family: "Oxygen", sans-serif;
     font-weight: 300;
     font-size: 2rem;
     line-height: 4rem;
@@ -53,7 +56,8 @@
     padding: 1.5rem;
     margin-top: 2rem;
     margin-bottom: 0.5rem;
-    text-transform: initial;
+    // text-transform: initial;
+    font-family: "Source Sans Pro", sans-serif;
     font-size: 1.75rem;
     line-height: 1.5rem;
     letter-spacing: 0.5px;

@@ -17,13 +17,14 @@
 }
 .navbar-nav > li > a {
   padding-top: 27px;
-  font-family: futura-pt, sans-serif;
-  letter-spacing: 0;
-  font-weight: 400;
+  // font-family: futura-pt, sans-serif;
+  font-family: "Oxygen", sans-serif;
+  letter-spacing: 1px;
+  font-weight: 700;
   font-style: normal;
   display: inline-block;
   text-transform: uppercase;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: #fff;
 }
 .nav > li > a:hover {
@@ -62,9 +63,10 @@
 .log-in {
   color: #fff;
   display: inline-block;
-  font-family: futura-pt, sans-serif;
+  // font-family: futura-pt, sans-serif;
+  font-family: "Oxygen", sans-serif;
   font-size: 10.3px;
-  font-weight: normal;
+  font-weight: 400;
   letter-spacing: 0.17em;
   margin-top: 20px;
   text-transform: uppercase;
@@ -74,9 +76,10 @@
 .free-month {
   color: #fff;
   display: inline-block;
-  font-family: futura-pt, sans-serif;
+  // font-family: futura-pt, sans-serif;
+  font-family: "Oxygen", sans-serif;
   font-size: 13.8px;
-  font-weight: normal;
+  font-weight: 400;
   letter-spacing: 0.17em;
   margin-top: 15px;
   text-transform: uppercase;
@@ -112,9 +115,10 @@
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-family: futura-pt, sans-serif;
+  // font-family: futura-pt, sans-serif;
+  font-family: "Oxygen", sans-serif;
   font-size: 11px;
-  font-weight: normal;
+  font-weight: 700;
   letter-spacing: 0.05em;
   padding: 19px 15px;
   text-transform: uppercase;
@@ -141,9 +145,10 @@
 }
 .drop-select li {
   color: #fff;
-  font-family: futura-pt, sans-serif;
+  // font-family: futura-pt, sans-serif;
+  font-family: "Oxygen", sans-serif;
   font-size: 11px;
-  font-weight: normal;
+  font-weight: 700;
   letter-spacing: 0.1em;
   /* padding: 18px 15px; */
   text-align: left;

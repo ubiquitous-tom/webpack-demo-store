@@ -7,14 +7,17 @@
   background: #fff none repeat scroll 0 0;
   h1 {
     color: #0b1733;
-    font-family: futura-pt, sans-serif;
+    // font-family: futura-pt, sans-serif;
+    font-family: "Oxygen", sans-serif;
+    font-weight: 400;
     font-size: 3.5rem;
     line-height: 3.7rem;
     margin-bottom: 0;
   }
   p {
     color: #0b1733;
-    font-family: futura-pt, sans-serif;
+    // font-family: futura-pt, sans-serif;
+    font-family: "Source Sans Pro", sans-serif;
     font-size: 1.75rem;
     line-height: 2.9rem;
     margin-bottom: 15px;
@@ -59,8 +62,9 @@
   }
   .formhead {
     color: #0b1733;
-    font-family: futura-pt, sans-serif;
-    font-weight: 300;
+    // font-family: futura-pt, sans-serif;
+    font-family: "Oxygen", sans-serif;
+    font-weight: 400;
     font-size: 3.5rem;
     position: relative;
   }

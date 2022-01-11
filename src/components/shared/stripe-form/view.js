@@ -42,9 +42,10 @@ class StripeForm extends View {
       base: {
         iconColor: '#dddddd',
         color: '#464646',
-        fontFamily: 'futura-pt, sans-serif',
+        // fontFamily: 'futura-pt, sans-serif',
+        fontFamily: 'Oxygen, sans-serif',
         fontWeight: 400,
-        fontSize: '16px',
+        fontSize: '15px',
         fontSmoothing: 'antialiased',
         '::placeholder': {
           color: '#999',
