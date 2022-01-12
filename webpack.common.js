@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ESLintWebpackPlugin = require('eslint-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-// const TerserWebpackPlugin = require('terser-webpack-plugin')
+const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin')
 // const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 const NodeJsonMinify = require('node-json-minify')
 
@@ -86,6 +86,7 @@ module.exports = {
       ],
     }),
 
+    new CssMinimizerWebpackPlugin(),
     // // https://stackoverflow.com/questions/44232366/how-do-i-build-a-json-file-with-webpack/54700817
     // new WebpackManifestPlugin(),
   ],
@@ -132,16 +133,5 @@ module.exports = {
         },
       },
     },
-    // // production only
-    // minimize: true,
-    // minimizer: [
-    //   new TerserWebpackPlugin({
-    //     minify: TerserWebpackPlugin.uglifyJsMinify,
-    //     terserOptions: {
-    //       drop_console: env.production ? true : false,
-    //       drop_debugger: env.production ? true : false,
-    //     }
-    //   })
-    // ]
   },
 }
