@@ -68,10 +68,12 @@ module.exports = merge(common, {
     minimize: true,
     minimizer: [
       new TerserWebpackPlugin({
-        minify: TerserWebpackPlugin.uglifyJsMinify,
+        // minify: TerserWebpackPlugin.uglifyJsMinify,
         terserOptions: {
-          drop_console: true,
-          drop_debugger: true,
+          compress: {
+            drop_console: true,
+            drop_debugger: true,
+          },
         },
       }),
     ],

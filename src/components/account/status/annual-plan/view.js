@@ -46,7 +46,7 @@ class AnnualPlan extends View {
     console.log(this.model.attributes)
     const data = {
       renewalDate: this.getRenewalDate(),
-      currSymbol: this.model.get('Customer').CurrSymbol,
+      currSymbol: this.model.get('annualStripePlan').CurrSymbol,
       subscriptionAmount: this.getCurrentNetAmount(),
       annualPerMonthPricing: this.model.get('annualPerMonthPricing'),
       monthlySubscriptionAmount: this.model.get('monthlyStripePlan').SubscriptionAmount,
@@ -153,7 +153,7 @@ class AnnualPlan extends View {
     // ${this.model.get('annualPerMonthPricing')}/mo!
     // `
     return this.i18n.t('THATS-ONLY-PRICE', {
-      currSymbol: this.model.get('Customer').CurrSymbol,
+      currSymbol: this.model.get('annualStripePlan').CurrSymbol,
       amount: this.model.get('annualPerMonthPricing'),
     })
   }

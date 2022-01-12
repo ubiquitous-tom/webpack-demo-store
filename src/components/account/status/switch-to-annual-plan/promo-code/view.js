@@ -59,7 +59,7 @@ class PromoCode extends View {
       const subscriptionAmount = this.switchToAnnualPlan.model.get('annualStripePlan').SubscriptionAmount
       const discountedPrice = subscriptionAmount - ((value * subscriptionAmount) / 100)
       const promoAppliedAmount = (Math.floor(discountedPrice * 100) / 100).toFixed(2)
-      const pricing = this.switchToAnnualPlan.model.get('Customer').CurrSymbol + promoAppliedAmount
+      const pricing = this.switchToAnnualPlan.model.get('annualStripePlan').CurrSymbol + promoAppliedAmount
       this.$el.find('.annual-plan-message span').addClass('applied-success').html(pricing)
       this.$el.find('#billing-container .legal-notice span').html(pricing)
     })

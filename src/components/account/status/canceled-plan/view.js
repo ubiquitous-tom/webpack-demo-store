@@ -40,7 +40,7 @@ class CanceledPlan extends View {
       annual: this.model.get('Subscription').Annual,
       planType: this.getPlanType(),
       cancelledDate: this.model.get('Membership').CancelDate,
-      currSymbol: this.model.get('Customer').CurrSymbol,
+      currSymbol: this.model.get('monthlyStripePlan').CurrSymbol,
       subscriptionAmount: this.getCurrentNetAmount(),
       termType: this.getTermType(),
       annualPerMonthPricing: this.model.get('annualPerMonthPricing'),

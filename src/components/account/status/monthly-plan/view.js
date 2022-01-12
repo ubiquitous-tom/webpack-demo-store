@@ -55,7 +55,7 @@ class MonthlyPlan extends View {
     // console.log(template)
     const data = {
       renewalDate: this.getRenewalDate(),
-      currSymbol: this.model.get('Customer').CurrSymbol,
+      currSymbol: this.model.get('monthlyStripePlan').CurrSymbol,
       subscriptionAmount: this.getCurrentNetAmount(),
       annualSubscriptionAmount: this.model.get('annualStripePlan').SubscriptionAmount,
       tagline: this.getTagline(),

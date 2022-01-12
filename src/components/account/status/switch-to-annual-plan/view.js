@@ -69,7 +69,7 @@ class SwitchToAnnualPlan extends View {
     // console.log(this.model.attributes)
     const data = {
       isPromoApplied: this.model.get('isPromoApplied') ? 'applied-success' : '',
-      currSymbol: this.model.get('Customer').CurrSymbol,
+      currSymbol: this.model.get('annualStripePlan').CurrSymbol,
       annualSubscriptionAmount: this.model.has('promoAppliedAmount')
         ? this.model.get('promoAppliedAmount')
         : this.model.get('annualStripePlan').SubscriptionAmount,
