@@ -45,7 +45,7 @@ class GuestPlan extends View {
     console.log(this.model.attributes)
     const data = {
       currSymbol: this.model.get('monthlyStripePlan').CurrSymbol,
-      monthlySubscriptionAmount: this.model.get('monthlyStripePlan').SubscriptionAmount,
+      monthlySubscriptionAmount: this.model.annualPerMonthPricing(),
       trialDays: this.model.get('monthlyStripePlan').TrialDays,
     }
     const html = this.template(data)
