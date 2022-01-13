@@ -96,8 +96,10 @@ class AnnualPlan extends View {
   }
 
   getTagline() {
+    let isPromoApplied = false
     const taglines = []
     if (this.model.get('Subscription').Promo) {
+      isPromoApplied = true
       taglines.push(this.getPromoCodeInfo())
     }
 
@@ -105,7 +107,9 @@ class AnnualPlan extends View {
       taglines.push(this.getTrialInfo())
     }
 
-    taglines.push(this.getAnnualDiscount())
+    if (!isPromoApplied) {
+      taglines.push(this.getAnnualDiscount())
+    }
     return taglines.join('<br>')
   }
 
