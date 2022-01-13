@@ -1,6 +1,7 @@
 import { View } from 'backbone'
 
 import './stylesheet.scss'
+import FlashMessage from 'shared/elements/flash-message'
 import placeholder from './placeholder.hbs'
 import template from './index.hbs'
 import AnnualPlanModel from '../annual-plan/model'
@@ -23,6 +24,7 @@ class CanceledPlan extends View {
 
   initialize(options) {
     console.log('CanceledPlan initialize')
+    this.flashMessage = new FlashMessage()
     this.i18n = options.i18n
     this.model = new AnnualPlanModel(this.model.attributes)
     if (this.model.has('monthlyStripePlan')) {
@@ -49,6 +51,8 @@ class CanceledPlan extends View {
     }
     const html = this.template(data)
     this.$el.find('.current-plan').html(html)
+
+    this.restartNowBanner()
 
     return this
   }
@@ -87,6 +91,16 @@ class CanceledPlan extends View {
 
   getTermType() {
     return (this.model.get('Subscription').Annual) ? this.i18n.t('YR') : this.i18n.t('MO')
+  }
+
+  restartNowBanner() {
+    // const message = this.i18n.t('PLAN-TYPE-WAS-CANCELED-DATE-RESTART-NOW', {
+    //   cancelledDate: this.model.get('Membership').CancelDate,
+    // })
+    const message = `Your membership was cancelled on ${this.model.get('Membership').CancelDate}. RESTART NOW`
+    const type = 'error'
+
+    this.flashMessage.onFlashMessageShow(message, type)
   }
 }
 
