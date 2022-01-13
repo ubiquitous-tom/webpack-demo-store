@@ -5174,6 +5174,14 @@
           "uk": "Your %{planType} Plan was cancelled on %{cancelledDate}. (%{currSymbol}%{subscriptionAmount}\/%{termType}),"
         }
       },
+      "PLAN-TYPE-WAS-CANCELED-DATE-RESTART-NOW": {
+        "type": "text",
+        "content": {
+          "en": "Your membership was cancelled on %{cancelledDate}. RESTART NOW",
+          "es": "Su membres\u00eda fue cancelada el %{cancelledDate}. REINICIAR AHORA",
+          "uk": "Your membership was cancelled on %{cancelledDate}. RESTART NOW"
+        }
+      },
       "YOU-CAN-STREAM-UNTIL-DATE": {
         "type": "text",
         "content": {

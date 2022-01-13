@@ -94,10 +94,9 @@ class CanceledPlan extends View {
   }
 
   restartNowBanner() {
-    // const message = this.i18n.t('PLAN-TYPE-WAS-CANCELED-DATE-RESTART-NOW', {
-    //   cancelledDate: this.model.get('Membership').CancelDate,
-    // })
-    const message = `Your membership was cancelled on ${this.model.get('Membership').CancelDate}. RESTART NOW`
+    const message = this.i18n.t('PLAN-TYPE-WAS-CANCELED-DATE-RESTART-NOW', {
+      cancelledDate: this.model.get('Membership').CancelDate,
+    })
     const type = 'error'
 
     this.flashMessage.onFlashMessageShow(message, type)
