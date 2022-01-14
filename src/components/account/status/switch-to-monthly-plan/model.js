@@ -12,6 +12,7 @@ class SwitchToMonthlyPlanModel extends ATVModel {
 
   getAnnualToMonthlyDowngradeInfo() {
     console.log('SwitchToMonthlyPlanModel getAnnualToMonthlyDowngradeInfo')
+    const countryCode = this.get('BillingAddress').Country
     const type = 'downgrade'
     const fromFrequency = 'annual'
     const toFrequency = 'monthly'
@@ -21,7 +22,11 @@ class SwitchToMonthlyPlanModel extends ATVModel {
       // console.log(plan.type)
       if (plan.type === type) {
         // console.log(plan.from_frequency, plan.to_frequency)
-        if (plan.from_frequency === fromFrequency && plan.to_frequency === toFrequency) {
+        if (
+          plan.from_frequency === fromFrequency
+          && plan.to_frequency === toFrequency
+          && plan.country_code === countryCode
+        ) {
           console.log(plan)
           this.set('currentDowngradePlan', plan)
           console.log(this)

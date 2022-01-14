@@ -18,6 +18,7 @@ class SwitchToAnnualPlanModel extends ATVModel {
 
   getMonthlyToAnnualUpgradeInfo() {
     console.log('SwitchToAnnualPlanModel getMonthlyToAnnualUpgrade')
+    const countryCode = this.get('BillingAddress').Country
     const type = 'upgrade'
     const fromFrequency = 'monthly'
     const toFrequency = 'annual'
@@ -26,7 +27,11 @@ class SwitchToAnnualPlanModel extends ATVModel {
       // console.log(plan.type)
       if (plan.type === type) {
         // console.log(plan.from_frequency, plan.to_frequency)
-        if (plan.from_frequency === fromFrequency && plan.to_frequency === toFrequency) {
+        if (
+          plan.from_frequency === fromFrequency
+          && plan.to_frequency === toFrequency
+          && plan.country_code === countryCode
+        ) {
           console.log(plan)
           this.set('currentUpgradePlan', plan)
           console.log(this)
