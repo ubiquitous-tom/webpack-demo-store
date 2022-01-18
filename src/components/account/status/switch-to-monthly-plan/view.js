@@ -37,14 +37,15 @@ class SwitchToMonthlyPlan extends View {
       this.loadingStop(model, value, options)
       this.$el.find('.switch-to-monthly-plan-container').remove()
       this.showFooter()
-
       let { message } = model.get('flashMessage')
       const { interpolationOptions, type } = model.get('flashMessage')
-      if (value) {
-        message = this.i18n.t(message, interpolationOptions)
-      }
+      message = this.i18n.t(message, interpolationOptions)
       debugger
-      this.flashMessage.onFlashMessageSet(message, type, true)
+      if (value) {
+        this.flashMessage.onFlashMessageSet(message, type, true)
+      } else {
+        this.flashMessage.onFlashMessageShow(message, type)
+      }
     })
   }
 

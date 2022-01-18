@@ -49,11 +49,13 @@ class SwitchToAnnualPlan extends View {
       this.showFooter()
       let { message } = model.get('flashMessage')
       const { interpolationOptions, type } = model.get('flashMessage')
-      if (value) {
-        message = this.i18n.t(message, interpolationOptions)
-      }
+      message = this.i18n.t(message, interpolationOptions)
       debugger
-      this.flashMessage.onFlashMessageSet(message, type, true)
+      if (value) {
+        this.flashMessage.onFlashMessageSet(message, type, true)
+      } else {
+        this.flashMessage.onFlashMessageShow(message, type)
+      }
     })
 
     // Trigger Show/Hide promo code form in PromoCode View

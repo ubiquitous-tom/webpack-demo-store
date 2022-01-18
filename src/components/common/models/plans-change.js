@@ -7,6 +7,13 @@ class PlansChange extends Model {
 
   initialize() {
     console.log('PlansChange initialize')
+
+    // this.on('error', (model, resp, options) => {
+    //   console.log(model, resp, options)
+    //   debugger
+    //   console.log(options.context)
+    //   options.context.trigger('error', model, resp, options)
+    // })
   }
 
   parse(resp) {

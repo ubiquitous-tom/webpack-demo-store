@@ -120,9 +120,12 @@ class SwitchToAnnualPlanModel extends ATVModel {
           if (!_.isEmpty(error.responseJSON)) {
             message = error.responseJSON.error
           }
+          if (!_.isEmpty(error.responseText)) {
+            message = error.statusText
+          }
         })
       .always(() => {
-        model.set({
+        options.context.set({
           upgradeToAnnualSuccess: false,
           flashMessage: {
             type: 'error',
