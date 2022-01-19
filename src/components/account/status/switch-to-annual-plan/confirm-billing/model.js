@@ -56,7 +56,7 @@ class ConfirmBillingModel extends Model {
       // email: this.get('Customer').Email,
       // last4: ...
       zipcode: this.get('BillingAddress').PostalCode,
-      country: this.get('BillingAddress').Country,
+      country: this.get('BillingAddress').StripeCountryCode || this.get('BillingAddress').Country,
       customerID: this.get('currentMembership').CustomerID,
       StripeCustomerID: this.get('Customer').StripeCustomerID,
     }

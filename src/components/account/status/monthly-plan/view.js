@@ -59,6 +59,8 @@ class MonthlyPlan extends View {
       subscriptionAmount: this.getCurrentNetAmount(),
       annualSubscriptionAmount: this.model.get('annualStripePlan').SubscriptionAmount,
       tagline: this.getTagline(),
+      // TODO: `isUS` for initial launch. Remove in phase 2.
+      isUS: (this.model.get('stripePlansCountry') === 'US'),
     }
     const html = this.template(data)
     this.$el.find('.current-plan').html(html)

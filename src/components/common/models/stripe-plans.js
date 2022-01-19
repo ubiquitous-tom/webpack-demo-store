@@ -1,6 +1,7 @@
-import { Model, LocalStorage } from 'backbone'
+import { Model } from 'backbone'
+// import { LocalStorage } from 'backbone'
 import _ from 'underscore'
-import { getLocalStorage } from 'backbone.localstorage/src/utils'
+// import { getLocalStorage } from 'backbone.localstorage/src/utils'
 
 class StripePlans extends Model {
   get defaults() {
@@ -42,8 +43,8 @@ class StripePlans extends Model {
         TaxInclusive: false,
         CurrHtmlSymbol: '&#36;',
       }],
-      country: 'US',
-      lang: 'en',
+      stripePlansCountry: 'US',
+      stripePlansLang: 'en',
     }
   }
 
@@ -56,19 +57,19 @@ class StripePlans extends Model {
 
   initialize() {
     console.log('StripePlans initialize')
-    this.localStorage = new LocalStorage(this.get('localStorageID'))
-    // console.log(this.localStorage)
-    const storage = getLocalStorage(this)
-    // console.log(storage)
-    if (_.isEmpty(storage.records)) {
-      console.log('StripePlans initialize fetch')
-      this.fetch({
-        ajaxSync: true,
-      })
-    } else {
-      console.log('StripePlans initialize updateModel')
-      this.updateModel()
-    }
+    // this.localStorage = new LocalStorage(this.get('localStorageID'))
+    // // console.log(this.localStorage)
+    // const storage = getLocalStorage(this)
+    // // console.log(storage)
+    // if (_.isEmpty(storage.records)) {
+    console.log('StripePlans initialize fetch')
+    this.fetch({
+      ajaxSync: true,
+    })
+    // } else {
+    //   console.log('StripePlans initialize updateModel')
+    //   this.updateModel()
+    // }
     // this.getStorageContent()
 
     // this.listenTo(this, 'change', this.getAnnualStripePlan)
@@ -87,8 +88,8 @@ class StripePlans extends Model {
       this.set(response)
       this.set({
         stripePlans: stripePlansObj.StripePlans,
-        country: countryObj.Country,
-        lang: langObj.Lang,
+        stripePlansCountry: countryObj.Country,
+        stripePlansLang: langObj.Lang,
       })
       // console.log(this.get('langs'))
       // console.log(this.get('translation'))
@@ -99,7 +100,7 @@ class StripePlans extends Model {
       this.getAnnualStripePlan()
       this.getMonthlyStripePlan()
 
-      this.sync('create', this)
+      // this.sync('create', this)
     }
     console.log(this)
     // return response

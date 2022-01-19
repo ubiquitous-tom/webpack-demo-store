@@ -10,19 +10,22 @@
     </p>
   </div>
 </div>
-<div class="row">
-  <div class="col-lg-6 col-sm-9">
-    <div class="upgrade-to-annual">
-      <h2>{{t "12-MONTHS-FOR-PRICE-OF-10"}}</h2>
-      <p>
-        <sup class="symbol">{{currSymbol}}</sup>
-        <span class="price">{{annualSubscriptionAmount}}</span>
-        <sup>/</sup>
-        <sub class="period">{{t "YR"}}.</sub>
-      </p>
-      <button type="submit" class="switch-to-annual btn">
-        {{t "UPGRADE-TO-ANNUAL"}}
-      </button>
+{{! TODO: `isUS` for initial launch. Remove in phase 2. }}
+{{#if isUS}}
+  <div class="row">
+    <div class="col-lg-6 col-sm-9">
+      <div class="upgrade-to-annual">
+        <h2>{{t "12-MONTHS-FOR-PRICE-OF-10"}}</h2>
+        <p>
+          <sup class="symbol">{{currSymbol}}</sup>
+          <span class="price">{{annualSubscriptionAmount}}</span>
+          <sup>/</sup>
+          <sub class="period">{{t "YR"}}.</sub>
+        </p>
+        <button type="submit" class="switch-to-annual btn">
+          {{t "UPGRADE-TO-ANNUAL"}}
+        </button>
+      </div>
     </div>
   </div>
-</div>
+{{/if}}

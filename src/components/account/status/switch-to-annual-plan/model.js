@@ -18,7 +18,7 @@ class SwitchToAnnualPlanModel extends ATVModel {
 
   getMonthlyToAnnualUpgradeInfo() {
     console.log('SwitchToAnnualPlanModel getMonthlyToAnnualUpgrade')
-    const countryCode = this.get('BillingAddress').Country
+    const countryCode = this.get('BillingAddress').StripeCountryCode || this.get('BillingAddress').Country
     const type = 'upgrade'
     const fromFrequency = 'monthly'
     const toFrequency = 'annual'
@@ -121,7 +121,9 @@ class SwitchToAnnualPlanModel extends ATVModel {
             message = error.responseJSON.error
           }
           if (!_.isEmpty(error.responseText)) {
-            message = error.statusText
+            // TODO: Remove in phase 2. Update to use error message from Stripe API.
+            message = 'Sorry, we are unable to process your payment right now. Please contact support@acorn.tv for help.'
+            // message = error.statusText
           }
         })
       .always(() => {

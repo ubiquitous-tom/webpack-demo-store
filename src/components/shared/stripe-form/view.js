@@ -2,6 +2,7 @@ import { View } from 'backbone'
 import _ from 'underscore'
 
 import SubmitLoader from 'shared/elements/submit-loader'
+import FlashMessage from 'shared/elements/flash-message'
 import './stylesheet.scss'
 import template from './index.hbs'
 import StripeFormModel from './model'
@@ -30,11 +31,34 @@ class StripeForm extends View {
     console.log('StripeForm initialize')
     // console.log(options)
     this.submitLoader = new SubmitLoader()
+    this.flashMessage = new FlashMessage()
+    this.i18n = options.i18n
     this.parentView = options.parentView
     // console.log(this.parentView)
     this.model = new StripeFormModel()
+    this.model.set({
+      country: this.parentView.model.get('BillingAddress').StripeCountryCode,
+      stripeCustomerId: this.parentView.model.get('Customer').StripeCustomerID,
+      customerId: this.parentView.model.get('Customer').CustomerID,
+    })
 
     this.listenTo(this.model, 'change:stripeKey', this.initializeStripeForm)
+
+    /* eslint no-shadow:0 */
+    this.listenTo(this.model, 'change:addNewStripeCardSuccess', (model, value, options) => {
+      console.log(model, value, options)
+      debugger
+      this.loadingStop()
+      this.$el.find('#stripe-form').empty()
+      this.parentView.render()
+      let { message } = model.get('flashMessage')
+      const { interpolationOptions, type } = model.get('flashMessage')
+      message = this.i18n.t(message, interpolationOptions)
+      debugger
+      if (!value) {
+        this.flashMessage.onFlashMessageShow(message, type)
+      }
+    })
   }
 
   initializeStripeForm() {
@@ -178,20 +202,25 @@ class StripeForm extends View {
     this.stripe.createToken(this.cardNumber, data)
       .then((result) => {
         if (result.token) {
-          const stripeCustomerID = result.token.id
+          const stripeCardTokenID = result.token.id
           const stripeCard = result.token.card
-          const updatedStripeCard = _.extend(stripeCard, { token: stripeCustomerID })
+          const updatedStripeCard = _.extend(stripeCard, { token: stripeCardTokenID })
           console.log(updatedStripeCard)
           this.parentView.model.set('newStripeCardInfo', updatedStripeCard)
           // console.log(this, this.parentView)
-          this.loadingStop()
-          this.$el.find('#stripe-form').empty()
-          this.parentView.render()
+          // this.loadingStop()
+          // this.$el.find('#stripe-form').empty()
+          // this.parentView.render()
+          this.addNewStripeCard(stripeCardTokenID)
         } else {
           console.log(result)
           this.loadingStop()
         }
       })
+  }
+
+  addNewStripeCard(stripeCardTokenID) {
+    this.model.addNewStripeCard(stripeCardTokenID)
   }
 
   validateInput() {

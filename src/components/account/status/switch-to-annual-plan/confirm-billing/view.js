@@ -25,6 +25,7 @@ class ConfirmBilling extends View {
   initialize(options) {
     console.log('ConfirmBilling initialize')
     console.log(this, options.switchToAnnualPlan)
+    this.i18n = options.i18n
     this.switchToAnnualPlan = options.switchToAnnualPlan
     this.model = new ConfirmBillingModel(this.switchToAnnualPlan.model.attributes)
     console.log(this.model)
@@ -61,7 +62,7 @@ class ConfirmBilling extends View {
     // console.log(this.$el[0])
     // console.log(this.$el.find('#confirm-billing')[0])
     this.$el.find('#confirm-billing').empty()
-    this.stripeForm = new StripeForm({ parentView: this })
+    this.stripeForm = new StripeForm({ parentView: this, i18n: this.i18n })
     // this.stripeForm.render()
     this.stripeForm.contentPlaceholder()
   }
