@@ -7,7 +7,7 @@ const plansChange = (req, res) => {
   // const cookie = req.params.sessionID
   console.log('Express Router plansChange')
   // console.log(req.params)
-  console.log(req.headers)
+  // console.log(req.headers)
   // console.log(res.headers)
 
   const atvSessionCookie = req.cookies.ATVSessionCookie

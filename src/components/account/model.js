@@ -1,5 +1,5 @@
 import _ from 'underscore'
-import ATVModel from 'common/model'
+import ATVModel from 'core/model'
 
 class AccountHomeModel extends ATVModel {
   get default() {

@@ -1,8 +1,8 @@
 // import { LocalStorage } from 'backbone'
 // import _ from 'underscore'
 // import { getLocalStorage } from 'backbone.localstorage/src/utils'
-import ATVModel from 'common/model'
-import StripePlans from 'common/models/stripe-plans'
+import ATVModel from 'core/model'
+import StripePlans from 'core/models/stripe-plans'
 
 class GuestPlanModel extends ATVModel {
   initialize() {

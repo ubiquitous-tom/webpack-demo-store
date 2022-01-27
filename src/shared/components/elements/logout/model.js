@@ -1,6 +1,6 @@
 import _ from 'underscore'
 import { LocalStorage } from 'backbone'
-import ATVModel from 'common/model'
+import ATVModel from 'core/model'
 
 class LogoutModel extends ATVModel {
   get defaults() {

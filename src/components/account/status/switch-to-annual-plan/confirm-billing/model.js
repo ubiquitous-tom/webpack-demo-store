@@ -3,7 +3,8 @@ import _ from 'underscore'
 
 class ConfirmBillingModel extends Model {
   get url() {
-    return '/stripedefaultcard?country=US'
+    const country = this.get('stripePlansCountry') || 'US'
+    return `/stripedefaultcard?country=${country}`
   }
 
   initialize() {

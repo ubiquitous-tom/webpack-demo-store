@@ -24,8 +24,8 @@ module.exports = {
       // add as many aliases as you like!
       img: path.resolve(__dirname, './src/assets/images'),
       // font: path.resolve(__dirname, './src/assets/fonts'),
-      common: path.resolve(__dirname, './src/components/common'),
-      shared: path.resolve(__dirname, './src/components/shared'),
+      core: path.resolve(__dirname, './src/core'),
+      shared: path.resolve(__dirname, './src/shared/components'),
       components: path.resolve(__dirname, './src/components'),
       routers: path.resolve(__dirname, './src/routers'),
     },

@@ -1,4 +1,4 @@
-import ATVModel from 'common/model'
+import ATVModel from 'core/model'
 import _ from 'underscore'
 
 class PromoCodeModel extends ATVModel {

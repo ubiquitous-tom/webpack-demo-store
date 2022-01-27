@@ -5,7 +5,7 @@ dotenv.config()
 
 const stripeCard = (req, res) => {
   console.log('Express Router stripeCard')
-  console.log(req.headers)
+  // console.log(req.headers)
 
   const atvSessionCookie = req.cookies.ATVSessionCookie
   console.log('Express Router stripeCard ATVSessionCookie', atvSessionCookie)

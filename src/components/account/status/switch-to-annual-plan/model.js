@@ -1,6 +1,6 @@
 import _ from 'underscore'
-import PlansChange from 'common/models/plans-change'
-import ATVModel from 'common/model'
+import PlansChange from 'core/models/plans-change'
+import ATVModel from 'core/model'
 
 class SwitchToAnnualPlanModel extends ATVModel {
   get defaults() {

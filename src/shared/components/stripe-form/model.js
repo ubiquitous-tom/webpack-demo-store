@@ -1,5 +1,5 @@
 import { Model } from 'backbone'
-import StripeKey from 'common/models/stripe-key'
+import StripeKey from 'core/models/stripe-key'
 
 class StripeFormModel extends Model {
   get url() {

@@ -1,4 +1,4 @@
-import ATVModel from 'common/model'
+import ATVModel from 'core/model'
 
 class AccountInfoModel extends ATVModel {
   initialize() {

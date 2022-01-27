@@ -1,4 +1,5 @@
 const https = require('https')
+const url = require('url')
 const dotenv = require('dotenv')
 
 dotenv.config()
@@ -6,23 +7,28 @@ dotenv.config()
 const stripeDefaultCard = (req, res) => {
   console.log('Express Router stripeDefaultCard')
   console.log(req.params)
-  // console.log(req)
+  // console.log(req.url)
   // console.log(res)
 
   const atvSessionCookie = req.cookies.ATVSessionCookie
   console.log('Express Router stripeDefaultCard ATVSessionCookie', atvSessionCookie)
 
-  console.log(req.headers)
+  const { query } = url.parse(req.url, true)
+  // console.log(query)
+  const queryString = Object.keys(query)
+    .map((key) => `${key}=${query[key]}`)
+    .join('&')
+  // console.log(req.headers)
   const stripeCustomerId = req.headers.stripecustomerid
   const options = {
     host: `account${process.env.API_ENVIRONMENT}.acorn.tv`,
-    path: '/stripedefaultcard?country=US',
+    path: `/stripedefaultcard?${queryString}`,
     headers: {
       Cookie: `ATVSessionCookie=${atvSessionCookie}`,
       StripeCustomerId: stripeCustomerId,
     },
   }
-  console.log(stripeCustomerId, options)
+  console.log(stripeCustomerId, queryString, options)
 
   https.get(options, (resp) => {
     // console.log(resp)

@@ -1,7 +1,7 @@
 import _ from 'underscore'
 import { LocalStorage } from 'backbone'
 import { getLocalStorage } from 'backbone.localstorage/src/utils'
-import ATVModel from 'common/model'
+import ATVModel from 'core/model'
 
 class NavigationModel extends ATVModel {
   initialize() {

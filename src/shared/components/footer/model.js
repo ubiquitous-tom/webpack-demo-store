@@ -1,7 +1,7 @@
 // import _ from 'underscore'
 import docCookies from 'doc-cookies'
-// import ATVLocale from 'common/models/locale'
-import ATVModel from 'common/model'
+// import ATVLocale from 'core/models/locale'
+import ATVModel from 'core/model'
 
 class FooterModel extends ATVModel {
   get defaults() {

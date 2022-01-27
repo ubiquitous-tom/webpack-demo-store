@@ -6,7 +6,7 @@ import SubmitLoader from 'shared/elements/submit-loader'
 import FlashMessage from 'shared/elements/flash-message'
 import template from './index.hbs'
 import PromoCodeModel from './model'
-// import ATVView from 'common/view'
+// import ATVView from 'core/view'
 
 class PromoCode extends View {
   get el() {

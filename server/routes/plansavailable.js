@@ -1,4 +1,5 @@
 const https = require('https')
+const url = require('url')
 const dotenv = require('dotenv')
 
 dotenv.config()
@@ -6,19 +7,25 @@ dotenv.config()
 const plansAvailable = (req, res) => {
   console.log('Express Router plansAvailable')
   // console.log(req.params)
-  // console.log(req)
+  // console.log(req.url)
   // console.log(res)
 
   const atvSessionCookie = req.cookies.ATVSessionCookie
   console.log('Express Router plansAvailable ATVSessionCookie', atvSessionCookie)
 
+  const { query } = url.parse(req.url, true)
+  // console.log(query)
+  const queryString = Object.keys(query)
+    .map((key) => `${key}=${query[key]}`)
+    .join('&')
   const options = {
     host: `account${process.env.API_ENVIRONMENT}.acorn.tv`,
-    path: '/acorn/plans/available?platform=stripe',
+    path: `/acorn/plans/available?${queryString}`,
     // headers: {
     //   'Cookie': `ATVSessionCookie=${atvSessionCookie}`
     // },
   }
+  console.log(queryString, options)
 
   https.get(options, (resp) => {
     // console.log(resp)

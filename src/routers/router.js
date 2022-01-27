@@ -1,14 +1,13 @@
 import { History, Router } from 'backbone'
 import _ from 'underscore'
-import BackBoneContext from '../components/common/contexts/backbone-context'
+import BackBoneContext from 'core/contexts/backbone-context'
+import Logout from 'shared/elements/logout'
 
-// import Navigation from '../components/shared/navigation/view'
-import AccountHome from '../components/account'
-import EditEmail from '../components/edit-email'
-import EditPassword from '../components/edit-password'
-import ApplyPromoCode from '../components/apply-promo-code'
-import UpdateCard from '../components/updatecard/view'
-import Logout from '../components/shared/elements/logout'
+import AccountHome from 'components/account'
+import EditEmail from 'components/edit-email'
+import EditPassword from 'components/edit-password'
+import ApplyPromoCode from 'components/apply-promo-code'
+import UpdateCard from 'components/updatecard/view'
 
 class Workspace extends Router {
   get routes() {
@@ -24,7 +23,7 @@ class Workspace extends Router {
       updatecard: 'updateCard',
       refresh: 'refresh',
       logout: 'logout',
-      '*path': 'accountStatus',
+      '*path': 'home',
     }
   }
 
@@ -40,15 +39,13 @@ class Workspace extends Router {
 
   execute(callback, args, name) {
     console.log('Router execute', callback, args, name)
-    // $('ul.nav li').removeClass('active')
-    // $('#' + name + 'Nav').
-
     this.setActiveSidebar()
     this.ga.logPageView(name)
 
     if (callback) {
       callback.apply(this, args)
     }
+    return false
   }
 
   goToLogin() {

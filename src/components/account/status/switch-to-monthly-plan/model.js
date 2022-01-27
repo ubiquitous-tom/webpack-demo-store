@@ -1,6 +1,6 @@
 import _ from 'underscore'
-import ATVModel from 'common/model'
-import PlansChange from 'common/models/plans-change'
+import ATVModel from 'core/model'
+import PlansChange from 'core/models/plans-change'
 
 class SwitchToMonthlyPlanModel extends ATVModel {
   initialize() {

@@ -1,7 +1,7 @@
 import { View } from 'backbone'
 import SubmitLoader from 'shared/elements/submit-loader/view'
 import FlashMessage from 'shared/elements/flash-message'
-// import ATVView from 'common/view'
+// import ATVView from 'core/view'
 import template from './index.hbs'
 import ApplyPromoCodeModel from './model'
 
