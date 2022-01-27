@@ -1,5 +1,5 @@
 const globalContext = {
-  context: [],
+  context: {},
 }
 
 export default globalContext

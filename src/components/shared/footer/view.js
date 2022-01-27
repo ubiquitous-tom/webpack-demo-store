@@ -3,7 +3,7 @@ import { View } from 'backbone'
 import * as Handlebars from 'handlebars/runtime'
 import docCookies from 'doc-cookies'
 import { Fancybox } from '@fancyapps/ui'
-import BackBoneContext from 'common/contexts/backbone-context'
+// import BackBoneContext from 'common/contexts/backbone-context'
 import '@fancyapps/ui/dist/fancybox.css'
 import './stylesheet.scss'
 import template from './index.hbs'
@@ -27,7 +27,7 @@ class Footer extends View {
 
   initialize(options) {
     console.log('Footer initialize')
-    this.context = new BackBoneContext()
+    // this.context = new BackBoneContext()
     this.i18n = options.i18n
     this.model = new FooterModel(this.model.attributes)
 
@@ -38,7 +38,7 @@ class Footer extends View {
     // this.listenTo(this.model, 'change', this.render)
 
     // render for localStorage
-    console.log(this.context)
+    // console.log('context', this.context)
     // debugger
     this.render()
   }

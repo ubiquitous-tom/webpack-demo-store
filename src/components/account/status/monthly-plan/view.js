@@ -2,6 +2,7 @@ import { View } from 'backbone'
 // import _ from 'underscore'
 // import Handlebars from 'handlebars'
 
+import BackBoneContext from 'common/contexts/backbone-context'
 import FlashMessage from 'shared/elements/flash-message'
 import SwitchToAnnualPlan from '../switch-to-annual-plan'
 
@@ -29,6 +30,8 @@ class MonthlyPlan extends View {
   initialize(options) {
     console.log('MonthlyPlan initialize')
     console.log(this, options)
+    this.context = new BackBoneContext()
+    this.ga = this.context.getContext('ga')
     this.i18n = options.i18n
     this.model = new MonthlyPlanModel(this.model.attributes)
     // this.getRenewalDate()
@@ -77,6 +80,13 @@ class MonthlyPlan extends View {
     e.preventDefault()
     console.log('switch to annual plan')
     // console.log(this.switchToAnnualPlan)
+    // const gaValue = {
+    //   planType: 'Annual',
+    //   userStatus: 'monthly',
+    //   isTrial: this.model.get('Subscription').Trial,
+    //   nextBillingDate: this.model.get('Membership').NextBillingDate,
+    // }
+    // this.ga.logEvent('Upgrade', 'click', 'Plan Selected', gaValue)
     this.switchToAnnualPlan = new SwitchToAnnualPlan({
       monthlyPlan: this.model,
       i18n: this.i18n,

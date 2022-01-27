@@ -1,5 +1,6 @@
 import { History, Router } from 'backbone'
-// import _ from 'underscore'
+import _ from 'underscore'
+import BackBoneContext from '../components/common/contexts/backbone-context'
 
 // import Navigation from '../components/shared/navigation/view'
 import AccountHome from '../components/account'
@@ -23,26 +24,31 @@ class Workspace extends Router {
       updatecard: 'updateCard',
       refresh: 'refresh',
       logout: 'logout',
-      '*path': 'home',
+      '*path': 'accountStatus',
     }
   }
-
-  // execute(callback, args, name) {
-  //   console.log('Workspace', callback, args, name)
-  //   // $('ul.nav li').removeClass('active')
-  //   // $('#' + name + 'Nav').addClass('active')
-  //   if (callback) {
-  //     callback.apply(this, args)
-  //   }
-  // }
 
   initialize(options) {
     console.log('Router initialize')
     this.model = options.model
     this.i18n = options.i18n
     this.history = new History()
-    // router.trigger('route', name, args);
+    this.context = new BackBoneContext()
+    this.ga = this.context.getContext('ga')
     // Backbone.history.trigger('route', router, name, args);
+  }
+
+  execute(callback, args, name) {
+    console.log('Router execute', callback, args, name)
+    // $('ul.nav li').removeClass('active')
+    // $('#' + name + 'Nav').
+
+    this.setActiveSidebar()
+    this.ga.logPageView(name)
+
+    if (callback) {
+      callback.apply(this, args)
+    }
   }
 
   goToLogin() {
@@ -103,6 +109,14 @@ class Workspace extends Router {
 
   home() {
     this.navigate('accountStatus', true)
+  }
+
+  setActiveSidebar() {
+    // A hack to get default navigation to work
+    if (!$('ul li').hasClass('active')) {
+      const hash = !_.isEmpty(window.location.hash) ? window.location.hash : '#accountStatus'
+      $(`${hash}Nav`).addClass('active')
+    }
   }
 
   subscriptionUpdatedSuccess(model) {

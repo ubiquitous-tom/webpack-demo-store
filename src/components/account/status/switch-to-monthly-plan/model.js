@@ -95,6 +95,7 @@ class SwitchToMonthlyPlanModel extends ATVModel {
     debugger
     let message = ''
     /* eslint function-paren-newline: 0 */
+    /* eslint consistent-return: 0 */
     resp
       .then(
         (response) => {
@@ -110,9 +111,11 @@ class SwitchToMonthlyPlanModel extends ATVModel {
           console.log(error.responseJSON, error.responseText)
           if (!_.isEmpty(error.responseJSON)) {
             message = error.responseJSON.error
+            return message
           }
           if (!_.isEmpty(error.responseText)) {
             message = error.responseText
+            return message
           }
         })
       .always(() => {
