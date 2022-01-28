@@ -195,8 +195,8 @@ class StripeForm extends View {
   }
 
   generateToken() {
-    // let gaAction = 'Success'
-    // let gaLabel = 'Success'
+    let gaAction = 'Success'
+    let gaLabel = 'Success'
     const data = {
       name: this.$el.find('#stripe-form #nameoncard').val(),
       address_zip: this.$el.find('#stripe-form #card-zipcode').val(),
@@ -217,11 +217,11 @@ class StripeForm extends View {
           // this.addNewStripeCard(stripeCardTokenID)
         } else {
           console.log(result)
-          // gaAction = 'Failed'
-          // gaLabel = result.error
+          gaAction = 'Failed'
+          gaLabel = result.error
           this.loadingStop()
         }
-        // this.triggerGA(gaAction, gaLabel)
+        this.triggerGA(gaAction, gaLabel)
       })
   }
 

@@ -1,4 +1,5 @@
 import { View } from 'backbone'
+import BackBoneContext from 'core/contexts/backbone-context'
 import SubmitLoader from 'shared/elements/submit-loader'
 import FlashMessage from 'shared/elements/flash-message'
 import './stylesheet.scss'
@@ -29,6 +30,10 @@ class SwitchToMonthlyPlan extends View {
     this.i18n = options.i18n
     this.model = new SwitchToMonthlyPlanModel(this.model.attributes)
 
+    this.ga = new BackBoneContext()
+    this.ga = this.context.getContext('ga')
+    this.ga.logEvent('Downgrade Started', 'Click', 'Downgrade')
+
     /* eslint no-shadow: 0 */
     this.listenTo(this.model, 'change:downgradeToMonthlySuccess', (model, value, options) => {
       console.log(model, value, options)
@@ -41,11 +46,14 @@ class SwitchToMonthlyPlan extends View {
       const { interpolationOptions, type } = model.get('flashMessage')
       message = this.i18n.t(message, interpolationOptions)
       debugger
+      let gaLabel = 'Success'
       if (value) {
         this.flashMessage.onFlashMessageSet(message, type, true)
       } else {
+        gaLabel = message
         this.flashMessage.onFlashMessageShow(message, type)
       }
+      this.ga.logEvent('Subscription Changed', 'Upgrade', gaLabel)
     })
   }
 

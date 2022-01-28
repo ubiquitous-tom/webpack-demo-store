@@ -38,9 +38,22 @@ class SwitchToAnnualPlan extends View {
     console.log(this)
     this.render()
 
-    this.triggerGA()
+    this.context = new BackBoneContext()
+    this.ga = this.context.getContext('ga')
+    this.ga.logEvent('Upgrade Started', 'Click', 'Upgrade')
 
     this.model.set('promoCodeFieldDisplay', true)
+
+    /* eslint no-shadow: 0 */
+    this.listenTo(this.model, 'change:upgradeToAnnualWithPromoCode', (model, value, options) => {
+      console.log(model, value, options)
+      console.log(this)
+      debugger
+      const gaPromoCode = model.model.has('promoCode') ? model.model.get('promoCode') : ''
+      if (!_.isEmpty(gaPromoCode)) {
+        this.ga.logEvent('Subscription Changed', 'Upgrade', gaPromoCode)
+      }
+    })
 
     /* eslint no-shadow: 0 */
     this.listenTo(this.model, 'change:upgradeToAnnualSuccess', (model, value, options) => {
@@ -54,11 +67,14 @@ class SwitchToAnnualPlan extends View {
       const { interpolationOptions, type } = model.get('flashMessage')
       message = this.i18n.t(message, interpolationOptions)
       debugger
+      let gaLabel = 'Success'
       if (value) {
         this.flashMessage.onFlashMessageSet(message, type, true)
       } else {
+        gaLabel = message
         this.flashMessage.onFlashMessageShow(message, type)
       }
+      this.ga.logEvent('Subscription Changed', 'Upgrade', gaLabel)
     })
 
     // Trigger Show/Hide promo code form in PromoCode View
@@ -130,15 +146,6 @@ class SwitchToAnnualPlan extends View {
   loadingStop() {
     this.enableSubmit()
     this.submitLoader.loadingStop(this.$el.find('.confirm-upgrade'))
-  }
-
-  triggerGA() {
-    const gaCategory = 'Upgrade Started'
-    const gaAction = 'Click'
-    const gaLabel = 'Upgrade'
-    this.context = new BackBoneContext()
-    this.ga = this.context.getContext('ga')
-    this.ga.logEvent(gaCategory, gaAction, gaLabel)
   }
 }
 
