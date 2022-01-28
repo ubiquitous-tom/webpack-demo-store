@@ -5,20 +5,19 @@ import './app.scss'
 // import 'core/template'
 // import { tagName, template, on } from 'core/decorators'
 
-// import BackBoneContext from 'core/contexts/backbone-context'
 import StorageExpiry from 'core/models/storage-expiry'
 import ATVLocale from 'core/models/locale'
 import ATVView from 'core/view'
 import InitializeApp from 'core/models/initializedapp'
 import Workspace from 'routers/router'
 import ATVModel from 'core/model'
+import I18n from 'core/i18n'
+import GoogleAnalyticsContext from 'core/contexts/google-analytics-context'
+import LocaleContext from 'core/contexts/locale-context'
 
 import Header from 'shared/header'
 import Footer from 'shared/footer'
 import Navigation from 'shared/navigation'
-import I18n from 'core/i18n'
-import GoogleAnalyticsContext from 'core/contexts/google-analytics-context'
-import LocaleContext from 'core/contexts/locale-context'
 
 console.log(`Looks like we are in ${process.env.NODE_ENV} mode!`)
 console.log(`${process.env.RLJE_API_ENVIRONMENT}api.rlje.net`)

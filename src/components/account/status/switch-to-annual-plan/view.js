@@ -1,5 +1,6 @@
 import { View } from 'backbone'
 import _ from 'underscore'
+import BackBoneContext from 'core/contexts/backbone-context'
 import SubmitLoader from 'shared/elements/submit-loader'
 import FlashMessage from 'shared/elements/flash-message'
 
@@ -36,6 +37,8 @@ class SwitchToAnnualPlan extends View {
     this.promoCode = new PromoCode({ switchToAnnualPlan: this, i18n: this.i18n })
     console.log(this)
     this.render()
+
+    this.triggerGA()
 
     this.model.set('promoCodeFieldDisplay', true)
 
@@ -127,6 +130,15 @@ class SwitchToAnnualPlan extends View {
   loadingStop() {
     this.enableSubmit()
     this.submitLoader.loadingStop(this.$el.find('.confirm-upgrade'))
+  }
+
+  triggerGA() {
+    const gaCategory = 'Upgrade Started'
+    const gaAction = 'Click'
+    const gaLabel = 'Upgrade'
+    this.context = new BackBoneContext()
+    this.ga = this.context.getContext('ga')
+    this.ga.logEvent(gaCategory, gaAction, gaLabel)
   }
 }
 

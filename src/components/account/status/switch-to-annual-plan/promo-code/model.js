@@ -81,14 +81,26 @@ class PromoCodeModel extends ATVModel {
           console.log(response.responseJSON, response.responseText)
           if (!_.isEmpty(response.responseJSON)) {
             message = response.responseJSON.message
+            return message
           }
+          if (!_.isEmpty(response.responseText)) {
+            message = response.responseText
+            return message
+          }
+          return message
         },
         (error) => {
           debugger
           console.log(error.responseJSON, error.responseText)
           if (!_.isEmpty(error.responseJSON)) {
             message = error.responseJSON.error
+            return message
           }
+          if (!_.isEmpty(error.responseText)) {
+            message = error.responseText
+            return message
+          }
+          return message
         })
       .always(() => {
         debugger

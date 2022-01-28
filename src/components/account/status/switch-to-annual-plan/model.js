@@ -113,18 +113,27 @@ class SwitchToAnnualPlanModel extends ATVModel {
           console.log(response.responseJSON, response.responseText)
           if (!_.isEmpty(response.responseJSON)) {
             message = response.responseJSON.message
+            return message
           }
+          if (!_.isEmpty(response.responseText)) {
+            message = response.responseText
+            return message
+          }
+          return message
         },
         (error) => {
           console.log(error.responseJSON, error.responseText)
           if (!_.isEmpty(error.responseJSON)) {
             message = error.responseJSON.error
+            return message
           }
           if (!_.isEmpty(error.responseText)) {
             // TODO: Remove in phase 2. Update to use error message from Stripe API.
             message = 'Sorry, we are unable to process your payment right now. Please contact support@acorn.tv for help.'
             // message = error.statusText
+            return message
           }
+          return message
         })
       .always(() => {
         options.context.set({

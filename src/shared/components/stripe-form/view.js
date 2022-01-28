@@ -1,6 +1,7 @@
 import { View } from 'backbone'
 import _ from 'underscore'
 
+import BackBoneContext from 'core/contexts/backbone-context'
 import SubmitLoader from 'shared/elements/submit-loader'
 import FlashMessage from 'shared/elements/flash-message'
 import './stylesheet.scss'
@@ -194,6 +195,8 @@ class StripeForm extends View {
   }
 
   generateToken() {
+    // let gaAction = 'Success'
+    // let gaLabel = 'Success'
     const data = {
       name: this.$el.find('#stripe-form #nameoncard').val(),
       address_zip: this.$el.find('#stripe-form #card-zipcode').val(),
@@ -214,8 +217,11 @@ class StripeForm extends View {
           // this.addNewStripeCard(stripeCardTokenID)
         } else {
           console.log(result)
+          // gaAction = 'Failed'
+          // gaLabel = result.error
           this.loadingStop()
         }
+        // this.triggerGA(gaAction, gaLabel)
       })
   }
 
@@ -275,6 +281,13 @@ class StripeForm extends View {
     this.$el.find('#stripe-form input').val('').prop('disabled', false)
     this.$el.find('#stripe-form button[type="reset"]').prop('disabled', false)
     this.submitLoader.loadingStop(this.$el.find('#stripe-form button[type="submit"]'))
+  }
+
+  triggerGA(gaAction, gaLabel) {
+    const gaCategory = 'Update Billing Information'
+    this.context = new BackBoneContext()
+    this.ga = this.context.getContext('ga')
+    this.ga.logEvent(gaCategory, gaAction, gaLabel)
   }
 }
 

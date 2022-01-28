@@ -15,14 +15,18 @@ class GoogleAnalytics extends Model {
 
   /* eslint eqeqeq: 0 */
   /* eslint no-undef: 0 */
-  logEvent(category, action, label, value) {
+  logEvent(category, action, label, value = null) {
     // // Google Analytics (w/o Google Tag Manager)
     // if (typeof _gaq != 'undefined') {
     //   _gaq.push(['_trackEvent', category, action, label, value])
     // }
     // Universal Analytics (w/o Google Tag Manager)
     if (typeof ga != 'undefined') {
-      ga('send', 'event', category, action, label, JSON.stringify(value))
+      if (value !== null) {
+        ga('send', 'event', category, action, label, value)
+      } else {
+        ga('send', 'event', category, action, label)
+      }
     }
   }
 

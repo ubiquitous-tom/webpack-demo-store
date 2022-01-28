@@ -1,4 +1,4 @@
-import { View } from 'backbone'
+import { Router, View } from 'backbone'
 // import _ from 'underscore'
 import atvlogo from 'img/atvlogo.png'
 import './stylesheet.scss'
@@ -20,6 +20,7 @@ class Header extends View {
   initialize() {
     console.log('Header initialize')
     // this.model = new HeaderModel()
+    this.router = new Router()
     this.model.set('atvlogo', atvlogo)
     this.render()
   }

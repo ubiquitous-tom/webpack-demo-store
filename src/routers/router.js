@@ -45,7 +45,6 @@ class Workspace extends Router {
     if (callback) {
       callback.apply(this, args)
     }
-    return false
   }
 
   goToLogin() {
