@@ -46,14 +46,17 @@ class SwitchToMonthlyPlan extends View {
       const { interpolationOptions, type } = model.get('flashMessage')
       message = this.i18n.t(message, interpolationOptions)
       debugger
+      const gaCategory = 'Subscription Changed'
+      const gaAction = 'Downgrade'
       let gaLabel = 'Success'
       if (value) {
+        this.ga.logEvent(gaCategory, gaAction, gaLabel)
         this.flashMessage.onFlashMessageSet(message, type, true)
       } else {
         gaLabel = message
+        this.ga.logEvent(gaCategory, gaAction, gaLabel)
         this.flashMessage.onFlashMessageShow(message, type)
       }
-      this.ga.logEvent('Subscription Changed', 'Upgrade', gaLabel)
     })
   }
 

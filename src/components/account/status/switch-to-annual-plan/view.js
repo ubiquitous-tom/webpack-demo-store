@@ -49,7 +49,7 @@ class SwitchToAnnualPlan extends View {
       console.log(model, value, options)
       console.log(this)
       debugger
-      const gaPromoCode = model.model.has('promoCode') ? model.model.get('promoCode') : ''
+      const gaPromoCode = model.has('promoCode') ? model.get('promoCode') : ''
       if (!_.isEmpty(gaPromoCode)) {
         this.ga.logEvent('Subscription Changed', 'Upgrade', gaPromoCode)
       }
@@ -67,14 +67,17 @@ class SwitchToAnnualPlan extends View {
       const { interpolationOptions, type } = model.get('flashMessage')
       message = this.i18n.t(message, interpolationOptions)
       debugger
+      const gaCategory = 'Subscription Changed'
+      const gaAction = 'Upgrade'
       let gaLabel = 'Success'
       if (value) {
+        this.ga.logEvent(gaCategory, gaAction, gaLabel)
         this.flashMessage.onFlashMessageSet(message, type, true)
       } else {
         gaLabel = message
+        this.ga.logEvent(gaCategory, gaAction, gaLabel)
         this.flashMessage.onFlashMessageShow(message, type)
       }
-      this.ga.logEvent('Subscription Changed', 'Upgrade', gaLabel)
     })
 
     // Trigger Show/Hide promo code form in PromoCode View
