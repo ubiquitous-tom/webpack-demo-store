@@ -73,7 +73,7 @@ class AccountStatusModel extends ATVModel {
       })
       // this.getMonthlyToAnnualUpgrade()
 
-      this.sync('create', this)
+      // this.sync('create', this)
     }
     console.log(this)
     return response
