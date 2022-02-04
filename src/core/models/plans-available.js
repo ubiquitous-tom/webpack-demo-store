@@ -6,6 +6,7 @@ class PlansAvailable extends Model {
   get defaults() {
     return {
       data: [{
+        country_code: 'US',
         from_id: 58,
         to_frequency: 'annual',
         from_frequency: 'monthly',
@@ -17,26 +18,16 @@ class PlansAvailable extends Model {
         to_stripe_plan_id: '4b8cc7be-a4a8-11e8-bf79-0a1697e042ca',
       },
       {
-        from_id: 1,
+        country_code: 'US',
+        from_id: 59,
         to_frequency: 'monthly',
-        from_frequency: 'monthly',
-        to_name: 'ATV-MON',
-        from_stripe_plan_id: '14909524-ecc8-4d02-80e2-796935357696',
-        to_id: 2,
-        from_name: 'ATV-MON-GBP',
-        type: 'upgrade',
-        to_stripe_plan_id: '1e189de4-7efd-11e9-b6ec-0a1697e042ca',
-      },
-      {
-        from_id: 1,
-        to_frequency: 'monthly',
-        from_frequency: 'monthly',
-        to_name: 'ATV-MON-GBP',
-        from_stripe_plan_id: '14909524-ecc8-4d02-80e2-796935357696',
-        to_id: 1,
-        from_name: 'ATV-MON-GBP',
-        type: 'upgrade',
-        to_stripe_plan_id: '14909524-ecc8-4d02-80e2-796935357696',
+        from_frequency: 'annual',
+        to_name: 'ATV_MON_599',
+        from_stripe_plan_id: '4b8cc7be-a4a8-11e8-bf79-0a1697e042ca',
+        to_id: 58,
+        from_name: 'ATV_ANN_5999',
+        type: 'downgrade',
+        to_stripe_plan_id: '4b7c3f49-a4a8-11e8-bf79-0a1697e042ca',
       }],
     }
   }
@@ -72,9 +63,11 @@ class PlansAvailable extends Model {
     console.log(response)
     if (!_.isEmpty(response)) {
       console.log('PlansAvailable parse noEmpty')
-      const data = _.pick(response, 'data')
+      const { data } = response // _.pick(response, 'data')
       console.log(data)
-      this.set('plansAvailable', data.data)
+      this.set({
+        plansAvailable: data,
+      })
       // this.getMonthlyToAnnualUpgrade()
 
       this.sync('create', this)

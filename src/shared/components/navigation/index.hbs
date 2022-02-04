@@ -6,12 +6,14 @@
         {{t "MEMBERSHIP-NEW"}}
       </a>
     </li>
-    <li id="editEmailNav">
-      <a href="#editEmail">
-        <i class="icon-chevron-right"></i>
-        {{t "CHANGE-EMAIL"}}
-      </a>
-    </li>
+    {{#if Customer.webPaymentEdit}}
+      <li id="editEmailNav">
+        <a href="#editEmail">
+          <i class="icon-chevron-right"></i>
+          {{t "CHANGE-EMAIL"}}
+        </a>
+      </li>
+    {{/if}}
     <li id="editPasswordNav">
       <a href="#editPassword">
         <i class="icon-chevron-right"></i>

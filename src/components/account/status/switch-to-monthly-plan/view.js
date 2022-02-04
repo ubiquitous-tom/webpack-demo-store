@@ -30,7 +30,7 @@ class SwitchToMonthlyPlan extends View {
     this.i18n = options.i18n
     this.model = new SwitchToMonthlyPlanModel(this.model.attributes)
 
-    this.ga = new BackBoneContext()
+    this.context = new BackBoneContext()
     this.ga = this.context.getContext('ga')
     this.ga.logEvent('Downgrade Started', 'Click', 'Downgrade')
 
@@ -75,6 +75,7 @@ class SwitchToMonthlyPlan extends View {
   keepAnnualPlan(e) {
     console.log('SwitchToMonthlyPlan keepAnnualPlan')
     e.preventDefault()
+    this.ga.logEvent('Downgrade Started', 'Click', 'Downgrade Canceled')
     this.$el.find('.switch-to-monthly-plan-container').remove()
     this.showFooter()
   }

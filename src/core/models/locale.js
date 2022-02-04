@@ -60,7 +60,7 @@ class ATVLocale extends Model {
       }
       this.set(data)
 
-      this.sync('create', this)
+      // this.sync('create', this)
       return data
     }
     return response[0]
