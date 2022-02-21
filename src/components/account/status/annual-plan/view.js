@@ -37,7 +37,10 @@ class AnnualPlan extends View {
       this.contentPlaceholder()
     }
 
-    this.listenTo(this.model, 'change:monthlyStripePlan', this.render)
+    this.listenTo(this.model, 'change:monthlyStripePlan', () => {
+      this.model.annualPerMonthPricing()
+      this.render()
+    })
   }
 
   render() {
@@ -135,8 +138,8 @@ class AnnualPlan extends View {
   getTrialEndDate() {
     const trialDays = this.model.get('monthlyStripePlan').TrialDays
     const joinDate = this.model.get('Customer').JoinDate
-    const date = joinDate.split('/')
-    const f = new Date(date[2], date[0] - 1, date[1])
+    // const date = joinDate.split('/')
+    const f = new Date(joinDate) // new Date(date[2], date[0] - 1, date[1])
     // console.log(joinDate)
     // console.log(f.toString())
     const trialEndDate = f.setDate(f.getDate() + trialDays)
@@ -145,7 +148,14 @@ class AnnualPlan extends View {
     const d = new Date(0)
     d.setUTCMilliseconds(trialEndDate)
     console.log(d)
-    const trialEnddateOjb = this.model.formatDate(d)
+    const trialEnddateOjb = new Intl.DateTimeFormat(
+      `${this.model.get('stripePlansLang')}-${this.model.get('stripePlansCountry')}`,
+      {
+        year: '2-digit',
+        month: '2-digit',
+        day: '2-digit',
+      },
+    ).format(d) // this.model.formatDate(d)
     // console.log(trialEnddateOjb)
     // this.set('trialEndDate', trialEnddateOjb)
     return trialEnddateOjb

@@ -42,9 +42,9 @@ class GuestPlanModel extends ATVModel {
 
   annualPerMonthPricing() {
     console.log('GuestPlanModel getMonthlyPricing')
-    const pricing = (
-      Math.floor((this.get('annualStripePlan').SubscriptionAmount / 12) * 100) / 100
-    ).toFixed(2)
+    const pricing = (this.get('stripePlansCountry') === 'US')
+      ? (Math.floor((this.get('annualStripePlan').SubscriptionAmount / 12) * 100) / 100).toFixed(2)
+      : this.get('monthlyStripePlan').SubscriptionAmount
     console.log(pricing)
     // this.model.set('annualPerMonthPricing', pricing)
     return pricing

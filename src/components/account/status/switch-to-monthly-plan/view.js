@@ -63,7 +63,11 @@ class SwitchToMonthlyPlan extends View {
   render() {
     console.log('SwitchToMonthlyPlan render')
     // console.log(this.model.attributes)
-    this.model.set('nextBillingDate', this.model.get('Membership').NextBillingDate)
+    let nextBillingDate = this.model.get('Membership').NextBillingDate || this.model.get('Membership').ExpirationDate
+    nextBillingDate = (this.model.get('stripePlansCountry') === 'US')
+      ? nextBillingDate
+      : this.getLocalizedDate(nextBillingDate)
+    this.model.set({ nextBillingDate })
 
     this.$el.append(this.template(this.model.attributes))
 
@@ -104,6 +108,20 @@ class SwitchToMonthlyPlan extends View {
     console.log(model, value, options)
     this.$el.find('.switch-to-monthly-plan-container button[type="reset"]').prop('disabled', false)
     this.submitLoader.loadingStop(this.$el.find('.switch-to-monthly-plan-container button[type="submit"]'))
+  }
+
+  getLocalizedDate(mmddyy) {
+    const mmddyyObj = Date.parse(mmddyy)
+    const d = new Date(0)
+    d.setUTCMilliseconds(mmddyyObj)
+    return new Intl.DateTimeFormat(
+      `${this.model.get('stripePlansLang')}-${this.model.get('stripePlansCountry')}`,
+      {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      },
+    ).format(d) // this.model.formatDate(d)
   }
 }
 

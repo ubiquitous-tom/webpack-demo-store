@@ -97,7 +97,7 @@ class SwitchToAnnualPlan extends View {
       annualSubscriptionAmount: this.model.has('promoAppliedAmount')
         ? this.model.get('promoAppliedAmount')
         : this.model.get('annualStripePlan').SubscriptionAmount,
-      nextBillingDate: this.model.get('Membership').NextBillingDate,
+      nextBillingDate: this.getLocalizedDate(this.model.get('Membership').NextBillingDate),
     }
     const html = this.template(data)
     // console.log(html)
@@ -149,6 +149,20 @@ class SwitchToAnnualPlan extends View {
   loadingStop() {
     this.enableSubmit()
     this.submitLoader.loadingStop(this.$el.find('.confirm-upgrade'))
+  }
+
+  getLocalizedDate(mmddyy) {
+    const mmddyyObj = Date.parse(mmddyy)
+    const d = new Date(0)
+    d.setUTCMilliseconds(mmddyyObj)
+    return new Intl.DateTimeFormat(
+      `${this.model.get('stripePlansLang')}-${this.model.get('stripePlansCountry')}`,
+      {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      },
+    ).format(d) // this.model.formatDate(d)
   }
 }
 

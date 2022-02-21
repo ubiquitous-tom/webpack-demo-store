@@ -72,7 +72,15 @@ class SwitchToMonthlyPlanModel extends ATVModel {
     console.log(this)
     debugger
     console.log(model, resp, options)
-    const currentPeriodEnd = new Date(resp.current_period_end * 1000).toLocaleDateString('en-US')
+    const currentPeriodEnd = new Date(resp.current_period_end * 1000)
+      .toLocaleDateString(
+        `${this.model.get('stripePlansLang')}-${this.model.get('stripePlansCountry')}`,
+        {
+          year: '2-digit',
+          month: '2-digit',
+          day: '2-digit',
+        },
+      )
     // const message = `
     // You've switched to Monthly Plan. Monthly billing will start after your Annual Plan ends on
     //  ${currentPeriodEnd}.

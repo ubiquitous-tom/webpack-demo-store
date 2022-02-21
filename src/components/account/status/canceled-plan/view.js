@@ -41,7 +41,7 @@ class CanceledPlan extends View {
     const data = {
       annual: this.model.get('Subscription').Annual,
       planType: this.getPlanType(),
-      cancelledDate: this.model.get('Membership').CancelDate,
+      cancelledDate: this.getLocalizedDate(this.model.get('Membership').CancelDate), // this.model.get('Membership').CancelDate,
       currSymbol: this.model.get('monthlyStripePlan').CurrSymbol,
       subscriptionAmount: this.getCurrentNetAmount(),
       termType: this.getTermType(),
@@ -81,8 +81,11 @@ class CanceledPlan extends View {
   }
 
   getTagline() {
+    const expirationDate = (this.model.get('stripePlansCountry') === 'US')
+      ? this.model.get('Membership').ExpirationDate
+      : this.getLocalizedDate(this.model.get('Membership').ExpirationDate)
     // return `you can stream until ${this.model.get('Membership').ExpirationDate}.`
-    return this.i18n.t('YOU-CAN-STREAM-UNTIL-DATE', { expirationDate: this.model.get('Membership').ExpirationDate })
+    return this.i18n.t('YOU-CAN-STREAM-UNTIL-DATE', { expirationDate })
   }
 
   getPlanType() {
@@ -94,12 +97,20 @@ class CanceledPlan extends View {
   }
 
   restartNowBanner() {
-    const message = this.i18n.t('PLAN-TYPE-WAS-CANCELED-DATE-RESTART-NOW', {
-      cancelledDate: this.model.get('Membership').CancelDate,
-    })
+    const cancelledDate = (this.model.get('stripePlansCountry') === 'US')
+      ? this.model.get('Membership').CancelDate
+      : this.getLocalizedDate(this.model.get('Membership').CancelDate)
+    const message = this.i18n.t('PLAN-TYPE-WAS-CANCELED-DATE-RESTART-NOW', { cancelledDate })
     const type = 'error'
 
     this.flashMessage.onFlashMessageShow(message, type)
+  }
+
+  getLocalizedDate(mmddyy) {
+    const mmddyyObj = Date.parse(mmddyy)
+    const d = new Date(0)
+    d.setUTCMilliseconds(mmddyyObj)
+    return this.model.formatDate(d)
   }
 }
 

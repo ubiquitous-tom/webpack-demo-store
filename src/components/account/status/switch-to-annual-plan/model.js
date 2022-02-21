@@ -79,7 +79,15 @@ class SwitchToAnnualPlanModel extends ATVModel {
     console.log(model, resp, options)
     debugger
     const annualPricing = this.get('annualStripePlan').CurrSymbol + this.get('annualStripePlan').SubscriptionAmount
-    const currentPeriodEnd = new Date(resp.current_period_end * 1000).toLocaleDateString('en-US')
+    const currentPeriodEnd = new Date(resp.current_period_end * 1000)
+      .toLocaleDateString(
+        `${this.model.get('stripePlansLang')}-${this.model.get('stripePlansCountry')}`,
+        {
+          year: '2-digit',
+          month: '2-digit',
+          day: '2-digit',
+        },
+      )
     const pricing = (Math.floor((this.get('annualStripePlan').SubscriptionAmount / 12) * 100) / 100).toFixed(2)
     const perMonthPricing = this.get('annualStripePlan').CurrSymbol + pricing
     this.set({

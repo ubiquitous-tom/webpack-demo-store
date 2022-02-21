@@ -43,7 +43,7 @@ class MonthlyPlanModel extends ATVModel {
     // }
 
     // this.getMonthlyToAnnualUpgradeInfo()
-    this.getRenewalDate()
+    // this.getRenewalDate()
   }
 
   getStorageContent(localStorageID) {
@@ -88,7 +88,19 @@ class MonthlyPlanModel extends ATVModel {
     const renewalDate = this.get('Membership').NextBillingDate || this.get('Membership').ExpirationDate
     // console.log(renewalDate)
     // this.set('renewalDate', renewalDate)
-    return renewalDate
+    // return renewalDate
+    const renewalDateObj = Date.parse(renewalDate)
+    console.log(renewalDateObj)
+    const dynamicDate = new Date(renewalDateObj)
+    console.log(`${this.get('stripePlansLang')}-${this.get('stripePlansCountry')}`)
+    return dynamicDate.toLocaleDateString(
+      `${this.get('stripePlansLang')}-${this.get('stripePlansCountry')}`,
+      {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      },
+    )
   }
 
   // getTrialEndDate() {
@@ -112,16 +124,20 @@ class MonthlyPlanModel extends ATVModel {
   // }
 
   formatDate(d) {
+    const dynamicDate = new Date()
     // get the month
     let month = d.getMonth()
+    dynamicDate.setMonth(month)
     // get the day
     // convert day to string
     let day = d.getDate().toString()
+    dynamicDate.setDate(day)
     // get the year
     let year = d.getFullYear()
 
     // pull the last two digits of the year
     year = year.toString().substr(-2)
+    dynamicDate.setYear(year)
 
     // increment month by 1 since it is 0 indexed
     // converts month to a string
@@ -138,7 +154,16 @@ class MonthlyPlanModel extends ATVModel {
     }
 
     // return the string "MMddyy"
-    return [month, day, year].join('/')
+    // return [month, day, year].join('/')
+
+    // US English uses month-day-year order
+    console.log('US English uses month-day-year order', dynamicDate.toLocaleDateString('en-US'))
+
+    // British English uses day-month-year order
+    console.log('British English uses day-month-year order', dynamicDate.toLocaleDateString('en-GB'))
+
+    console.log(`${this.get('stripePlansLang')}-${this.get('stripePlansCountry')}`)
+    return dynamicDate.toLocaleDateString(`${this.get('stripePlansLang')}-${this.get('stripePlansCountry')}`)
   }
 }
 

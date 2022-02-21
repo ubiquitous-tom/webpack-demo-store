@@ -40,10 +40,11 @@ class AnnualPlanModel extends ATVModel {
     })
     // }
 
-    this.set({
-      // renewalDate: this.getRenewalDate(),
-      annualPerMonthPricing: this.annualPerMonthPricing(),
-    })
+    // Too early to call this function here.
+    // this.set({
+    //   // renewalDate: this.getRenewalDate(),
+    //   annualPerMonthPricing: this.annualPerMonthPricing(),
+    // })
   }
 
   getMonthlyToAnnualUpgradeInfo() {
@@ -74,28 +75,44 @@ class AnnualPlanModel extends ATVModel {
     const renewalDate = this.get('Membership').NextBillingDate || this.get('Membership').ExpirationDate
     // console.log(renewalDate)
     // this.model.set('renewalDate', renewalDate)
-    return renewalDate
+    // return renewalDate
+    const renewalDateObj = Date.parse(renewalDate)
+    console.log(renewalDateObj)
+    const dynamicDate = new Date(renewalDateObj)
+    console.log(`${this.get('stripePlansLang')}-${this.get('stripePlansCountry')}`)
+    return dynamicDate.toLocaleDateString(
+      `${this.get('stripePlansLang')}-${this.get('stripePlansCountry')}`,
+      {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      },
+    )
   }
 
   annualPerMonthPricing() {
     console.log('AnnualPlanModel getMonthlyPricing')
-    const pricing = (
-      Math.floor((this.get('Membership').SubscriptionAmount / 12) * 100) / 100
-    ).toFixed(2)
+    const pricing = (this.get('stripePlansCountry') === 'US')
+      ? (Math.floor((this.get('Membership').SubscriptionAmount / 12) * 100) / 100).toFixed(2)
+      : this.get('monthlyStripePlan').SubscriptionAmount
     console.log(pricing)
-    // this.model.set('annualPerMonthPricing', pricing)
+    this.set('annualPerMonthPricing', pricing)
     return pricing
   }
 
   formatDate(d) {
+    const dynamicDate = new Date()
     // get the month
     let month = d.getMonth()
+    dynamicDate.setMonth(month)
     // get the day
     // convert day to string
     let day = d.getDate().toString()
+    dynamicDate.setDate(day)
     // get the year
     let year = d.getFullYear()
 
+    dynamicDate.setFullYear(year)
     // pull the last two digits of the year
     year = year.toString().substr(-2)
 
@@ -114,7 +131,16 @@ class AnnualPlanModel extends ATVModel {
     }
 
     // return the string "MMddyy"
-    return [month, day, year].join('/')
+    // return [month, day, year].join('/')
+
+    // US English uses month-day-year order
+    console.log('US English uses month-day-year order', dynamicDate.toLocaleDateString('en-US'))
+
+    // British English uses day-month-year order
+    console.log('British English uses day-month-year order', dynamicDate.toLocaleDateString('en-GB'))
+
+    console.log(`${this.get('stripePlansLang')}-${this.get('stripePlansCountry')}`)
+    return dynamicDate.toLocaleDateString(`${this.get('stripePlansLang')}-${this.get('stripePlansCountry')}`)
   }
 }
 

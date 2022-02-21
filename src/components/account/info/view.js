@@ -3,6 +3,7 @@ import { View } from 'backbone'
 import './stylesheet.scss'
 import template from './index.hbs'
 import reducedTemplate from './reduced.hbs'
+import AccountInfoModel from './model'
 
 class AccountInfo extends View {
   get el() {
@@ -21,7 +22,11 @@ class AccountInfo extends View {
 
   initialize() {
     console.log('AccountInfo initialize')
-    this.render()
+    this.model = new AccountInfoModel(this.model.attributes)
+    this.listenTo(this.model, 'change:monthlyStripePlan', () => {
+      this.model.getJoinedDate()
+      this.render()
+    })
   }
 
   render() {
