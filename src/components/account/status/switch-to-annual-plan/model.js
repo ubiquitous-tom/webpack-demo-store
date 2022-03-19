@@ -81,7 +81,7 @@ class SwitchToAnnualPlanModel extends ATVModel {
     const annualPricing = this.get('annualStripePlan').CurrSymbol + this.get('annualStripePlan').SubscriptionAmount
     const currentPeriodEnd = new Date(resp.current_period_end * 1000)
       .toLocaleDateString(
-        `${this.model.get('stripePlansLang')}-${this.model.get('stripePlansCountry')}`,
+        `${this.get('stripePlansLang')}-${this.get('stripePlansCountry')}`,
         {
           year: '2-digit',
           month: '2-digit',
