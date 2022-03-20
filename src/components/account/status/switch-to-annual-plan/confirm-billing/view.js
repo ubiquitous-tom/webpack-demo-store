@@ -1,7 +1,7 @@
 import { View } from 'backbone'
 // import _ from 'underscore'
 
-import './stylesheet.css'
+import './stylesheet.scss'
 import StripeForm from 'shared/stripe-form'
 import template from './index.hbs'
 
