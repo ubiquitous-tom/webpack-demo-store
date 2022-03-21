@@ -15,7 +15,7 @@ module.exports = {
     index: './src/app.js',
   },
   output: {
-    filename: '[name].bundle.js', // '[name].[hash].js',
+    filename: '[name].[hash].js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
   },
