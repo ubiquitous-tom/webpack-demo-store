@@ -65,9 +65,11 @@ class CanceledPlan extends View {
   restartMembership(e) {
     console.log('CanceledPlan restartMembership')
     e.preventDefault()
-    const startFreeTrialURL = `${this.model.get('signinEnv')}/trialsignup.jsp?OperationalScenario=STORE`
-    console.log(startFreeTrialURL)
-    window.location.assign(startFreeTrialURL)
+    /* eslint max-len: 0 */
+    // const startFreeTrialURL = `${this.model.get('signinEnv')}/trialsignup.jsp?OperationalScenario=STORE`
+    const reStartMembershipURL = `${this.model.get('storeEnv')}/#membershp`
+    console.log(reStartMembershipURL)
+    window.location.assign(reStartMembershipURL)
   }
 
   getCurrentNetAmount() {
