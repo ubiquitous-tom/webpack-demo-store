@@ -67,7 +67,7 @@ class CanceledPlan extends View {
     e.preventDefault()
     /* eslint max-len: 0 */
     // const startFreeTrialURL = `${this.model.get('signinEnv')}/trialsignup.jsp?OperationalScenario=STORE`
-    const reStartMembershipURL = `${this.model.get('storeEnv')}/#membershp`
+    const reStartMembershipURL = `${this.model.get('storeEnv')}/#membership`
     console.log(reStartMembershipURL)
     window.location.assign(reStartMembershipURL)
   }
