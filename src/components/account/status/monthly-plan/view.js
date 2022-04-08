@@ -123,7 +123,7 @@ class MonthlyPlan extends View {
   getTrialInfo() {
     // const message = `Your free trial starts now and ends on ${this.getTrialEndDate()}`
     const message = this.i18n.t('FREE-TRIAL-START-NOW-DATE', {
-      trialEndDate: this.getTrialEndDate(),
+      trialEndDate: this.model.get('Membership').NextBillingDate, // this.getTrialEndDate(),
     })
     const type = 'success'
 
