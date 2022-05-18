@@ -83,7 +83,7 @@
         "content": {
           "en": "recently watched",
           "es": "Visto recientemente",
-          "uk": "recently watched"
+          "uk": "(Spanish)"
         }
       },
       "MY-WATCHLIST": {
@@ -2089,7 +2089,7 @@
       "ACORNTV-STREAMS-CONTENT": {
         "type": "text",
         "content": {
-          "en": "Acorn TV streams world-class mysteries, dramas, and comedies from Britain and beyond. Hailed as \u201cNetflix for the Anglophile\u201d by NPR, Acorn TV\u2019s catalog includes hundreds of hours of exclusive programming<span class=\"hidden-xs\"> including Agatha Raisin, 800 Words, Loch Ness, Striking Out, Love, Lies & Records, and more. Acorn TV offers the newest seasons of fan favorite shows including Doc Martin, A Place to Call Home, Detectorists, The Brokenwood Mysteries, Midsomer Murders, Murdoch Mysteries, and more. The New York Times raves \u201cAcorn is an absolute must for anyone who wants to spend hours every day touring around quaint villages and gritty British city streets, enjoying gentle comedy and hard-hitting crime stories alike\u201d. <br><br>Start your free trial to binge-watch a classic series or discover your new favorite show. With thousands of hours of commercial-free programming and new shows added weekly, there\u2019s always something to watch! After your trial, the subscription is just $6.99 a month. You can cancel anytime.",
+          "en": "Acorn TV streams world-class mysteries, dramas, and comedies from Britain and beyond. Hailed as \u201cNetflix for the Anglophile\u201d by NPR, Acorn TV\u2019s catalog includes hundreds of hours of exclusive programming<span class=\"hidden-xs\"> including Agatha Raisin, 800 Words, Loch Ness, Striking Out, Love, Lies & Records, and more. Acorn TV offers the newest seasons of fan favorite shows including Doc Martin, A Place to Call Home, Detectorists, The Brokenwood Mysteries, Midsomer Murders, Murdoch Mysteries, and more. The New York Times raves \u201cAcorn is an absolute must for anyone who wants to spend hours every day touring around quaint villages and gritty British city streets, enjoying gentle comedy and hard-hitting crime stories alike\u201d. <br><br>Start your free trial to binge-watch a classic series or discover your new favorite show. With thousands of hours of commercial-free programming and new shows added weekly, there\u2019s always something to watch! After your trial, the subscription is just $4.99 a month. You can cancel anytime.",
           "es": "Acorn TV ofrece streaming de misterios, dramas y comedias de clase mundial desde Gran Breta\u00f1a y m\u00e1s all\u00e1. Aclamado como el  \u201cNetflix para los amantes de la cultura brit\u00e1nica\u201d por NPR, el cat\u00e1logo de Acorn TV incluye cientos de horas de programaci\u00f3n exclusiva <span class=\"hidden-xs\"> que incluye Agatha Raisin, 800 Words, Loch Ness, Striking Out, Love, Lies & Records y m\u00e1s. Acorn TV adem\u00e1s ofrece las temporadas m\u00e1s recientes de tus series favoritas como Doc Martin, A Place to Call Home, Detectorists, The Brokenwood Mysteries, Midsomer Murders, Murdoch Mysteries y m\u00e1s. The New York Times considera que \u201cAcorn TV es indispensable para aquellos que quieran pasar sus d\u00edas visitando pintorescos poblados y agitadas calles de ciudades brit\u00e1nicas, ya sea con una gran comedia o con intensos programas policiacos\u201d. <br><br> Comienza tu prueba gratis para empezar un marat\u00f3n de series aclamadas por la cr\u00edtica o descubrir tu nuevo programa favorito. \u00a1Siempre hay algo para ver! Miles de horas de programaci\u00f3n sin anuncios y series nuevas  que se agregan semanalmente. Al finalizar tu prueba gratis, la suscripci\u00f3n tiene un costo de s\u00f3lo $79 pesos por mes y la  puedes cancelar en cualquier momento.\n",
           "uk": "Acorn TV streams world-class mysteries, dramas, and comedies from Britain and beyond. Hailed as \u201cNetflix for the Anglophile\u201d by NPR, Acorn TV\u2019s catalog includes hundreds of hours of exclusive programming. The New York Times raves \u201cAcorn is an absolute must for anyone who wants to spend hours every day touring around quaint villages and gritty British city streets, enjoying gentle comedy and hard-hitting crime stories alike\u201d. <br><br>Always Something New From exclusive premieres to compelling international dramas and a curated collection of British classics including Foyle\u2019s War, Inspector George Gently and many more. New shows added weekly."
         }
@@ -2625,9 +2625,9 @@
       "SET-UP-ACCOUNT": {
         "type": "text",
         "content": {
-          "en": "After clicking this button, you will be asked to set up an account to start your free trial including billing information to be used once your 7-day free trial ends. Once your trial is over, the cost is $6.99\/month. You may cancel at any time before your 7 days are up to avoid charges.",
-          "es": "Tras dar clic en el bot\u00f3n, se te pedir\u00e1 que des de alta una cuenta para comenzar tu prueba gratis. Se te solicitar\u00e1 la informaci\u00f3n de pago que se utilizar\u00e1 una vez que finalice tu periodo de prueba. Cuando este concluya, el costo de la suscripci\u00f3n es de $6.99\/mes. Puedes cancelar cualquier momento antes de que se terminen los 7 d\u00edas para evitar cargos.",
-          "uk": "After clicking this button, you will be asked to set up an account to start your free trial including billing information to be used once your 30-day free trial ends. Once your trial is over, the cost is $6.99\/month. You may cancel at any time before your 30 days are up to avoid charges."
+          "en": "After clicking this button, you will be asked to set up an account to start your free trial including billing information to be used once your 7-day free trial ends. Once your trial is over, the cost is $4.99\/month. You may cancel at any time before your 7 days are up to avoid charges.",
+          "es": "Tras dar clic en el bot\u00f3n, se te pedir\u00e1 que des de alta una cuenta para comenzar tu prueba gratis. Se te solicitar\u00e1 la informaci\u00f3n de pago que se utilizar\u00e1 una vez que finalice tu periodo de prueba. Cuando este concluya, el costo de la suscripci\u00f3n es de $4.99\/mes. Puedes cancelar cualquier momento antes de que se terminen los 7 d\u00edas para evitar cargos.",
+          "uk": "After clicking this button, you will be asked to set up an account to start your free trial including billing information to be used once your 30-day free trial ends. Once your trial is over, the cost is $4.99\/month. You may cancel at any time before your 30 days are up to avoid charges."
         }
       },
       "FOUR-DIGIT-CODE": {
@@ -2689,7 +2689,7 @@
       "SIGNUP-DETAILS": {
         "type": "text",
         "content": {
-          "en": "After clicking \"Sign Up\", you will be asked to set up an account to begin your 30-day free trial. You will be asked for billing information to be used when your free trial period ends. Once your trial is over, your monthly membership cost is $6.99\/mo. You may cancel at any time before your trial expires to avoid any charges.",
+          "en": "After clicking \"Sign Up\", you will be asked to set up an account to begin your 30-day free trial. You will be asked for billing information to be used when your free trial period ends. Once your trial is over, your monthly membership cost is $4.99\/mo. You may cancel at any time before your trial expires to avoid any charges.",
           "es": "Tras dar clic en \"Reg\u00edstrate\" se te pedir\u00e1 que des de alta una cuenta para comenzar tu prueba de 30 d\u00edas gratis. Se te solicitar\u00e1 la informaci\u00f3n de pago que se utilizar\u00e1 una vez que finalice tu periodo de prueba. Cuando este concluya, el costo de la suscripci\u00f3n es de $4.99\/mes. Puedes cancelar en cualquier momento antes de que se terminen los 30 d\u00edas para evitar cargos.",
           "uk": "After clicking \"Sign Up\", you will be asked to set up an account to begin your 30-day free trial. You will be asked for billing information to be used when your free trial period ends. Once your trial is over, your monthly membership cost is $4.99\/mo. You may cancel at any time before your trial expires to avoid any charges."
         }
@@ -5196,6 +5196,94 @@
           "en": "Restart Membership",
           "es": "Reiniciar la membres\u00eda",
           "uk": "Restart Membership"
+        }
+      },
+      "TESTING-LANGUAGE": {
+        "type": "text",
+        "content": {
+          "en": "Testing Language",
+          "es": "(Spanish)",
+          "uk": "Test Language"
+        }
+      },
+      "GREAT-LETS-CREATE": {
+        "type": "text",
+        "content": {
+          "en": "Great! Let\u2019s create an Acorn TV login",
+          "es": "\u00a1Genial! Ahora creemos la cuenta para iniciar Acorn TV",
+          "uk": "Great! Let\u2019s create an Acorn TV login"
+        }
+      },
+      "PLEASE-CREATE-AN-ACCOUNT": {
+        "type": "text",
+        "content": {
+          "en": "Please create an Acorn TV login to use across all of your devices and get started streaming.",
+          "es": "Por favor crea tu cuenta de Acorn TV para usar en todos tus dispositivos y comienza a disfrutar.",
+          "uk": "Please create an Acorn TV login to use across all of your devices and get started streaming."
+        }
+      },
+      "PLEASE-PROVIDE-AN-EMAIL": {
+        "type": "text",
+        "content": {
+          "en": "Please provide an email address and password to continue",
+          "es": "Por favor, carga un email y una contrase\u00f1a para continuar.",
+          "uk": "Please provide an email address and password to continue"
+        }
+      },
+      "LOOKS-LIKE-YOU-ALREADY": {
+        "type": "text",
+        "content": {
+          "en": "Looks like you already have an account with this email. Sign in here",
+          "es": "Parece que ya tienes una cuenta con este correo electr\u00f3nico. Inicia sesi\u00f3n aqu\u00ed",
+          "uk": "Looks like you already have an account with this email. Sign in here"
+        }
+      },
+      "WATCH-NEW-HIT-SERIES": {
+        "type": "text",
+        "content": {
+          "en": "Watch new hit series and exclusive UK premieres you won\u2019t see anywhere else.\n Stream addictive dramas, thrilling mysteries, and warm-hearted comedies commercial-free.",
+          "es": "Mira las mejores series Brit\u00e1nicas, con estrenos exclusivos que no podr\u00e1s ver en otro lado. \n Disfruta de los mejores dramas, las mejores series de misterio y las comedias m\u00e1s divertidas",
+          "uk": "Watch new hit series and exclusive UK premieres you won\u2019t see anywhere else.\n Stream addictive dramas, thrilling mysteries, and warm-hearted comedies commercial-free."
+        }
+      },
+      "PLEASE-REFER-TO-YOUR": {
+        "type": "text",
+        "content": {
+          "en": "Please refer to your Tigo Account page to manage your subscription and payment settings.\n Contact support@acorn.tv if you need help.",
+          "es": "Por favor dir\u00edgete a tu cuenta de TIGO para administrar la suscripci\u00f3n a este servicio.\n \u00bfNecesitas ayuda? Por favor cont\u00e1ctanos: support@acorn.tv",
+          "uk": "Please refer to your Tigo Account page to manage your subscription and payment settings.\n Contact support@acorn.tv if you need help."
+        }
+      },
+      "DOWNLOAD-ACORN-TV-APP": {
+        "type": "text",
+        "content": {
+          "en": "Download Acorn TV App",
+          "es": "Descarga Acorn TV",
+          "uk": "Download Acorn TV App"
+        }
+      },
+      "LET-CREATE-AN-ACCOUNT-TIGO": {
+        "type": "text",
+        "content": {
+          "en": "Great! Let's create an Acorn TV login",
+          "es": "\u00a1Genial! Ahora creemos la cuenta para iniciar Acorn TV ",
+          "uk": "Great! Let's create an Acorn TV login"
+        }
+      },
+      "PLEASE-CREATE-AN-ACCOUNT-TIGO": {
+        "type": "text",
+        "content": {
+          "en": "Please create an Acorn TV login to use across all of your devices and get started streaming.",
+          "es": "Por favor crea tu cuenta de Acorn TV para usar en todos tus dispositivos y comienza a disfrutar. ",
+          "uk": "Please create an Acorn TV login to use across all of your devices and get started streaming."
+        }
+      },
+      "MONTHLY-PLAN-RENEWS-ON-TIGO": {
+        "type": "text",
+        "content": {
+          "en": "Your Monthly Plan renews on %{renewalDate}.",
+          "es": "Su Plan Mensual se renueva el %{renewalDate}.",
+          "uk": "Your Monthly Plan renews on %{renewalDate}."
         }
       }
     }

@@ -31,7 +31,14 @@ class AccountInfo extends View {
 
   render() {
     console.log('AccountInfo render')
-    const html = this.template(this.model.attributes)
+    const data = {
+      customerName: this.model.get('Customer').Name,
+      customerEmail: this.model.get('Customer').Email,
+      customerJoinedDate: this.model.get('joinedDate'),
+      noSubscription: this.model.get('Subscription').NoSubscription,
+      isTigo: (this.model.get('Membership').Store === 'Tigo'),
+    }
+    const html = this.template(data)
     this.$el.find('#accountInfoView').html(html)
 
     return this

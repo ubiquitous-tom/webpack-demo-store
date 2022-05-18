@@ -3,24 +3,33 @@
     <h1>{{t "ACCOUNT-INFO"}}</h1>
     <div class="row">
       <div class="col-lg-3 col-xs-4">{{t "NAME"}}:</div>
-      <div class="col-lg-9 col-xs-8 info">{{Customer.Name}}</div>
+      <div class="col-lg-9 col-xs-8 info">{{customerName}}</div>
     </div>
     <div class="row">
       <div class="col-lg-3 col-xs-4">{{t "EMAIL"}}:</div>
-      <div class="col-lg-9 col-xs-8 info">{{Customer.Email}}</div>
+      <div class="col-lg-9 col-xs-8 info">{{customerEmail}}</div>
     </div>
-    {{#unless Subscription.NoSubscription}}
+    {{#unless noSubscription}}
       <div class="row">
         <div class="col-lg-3 col-xs-4">{{t "JOINED-ON"}}:</div>
-        <div class="col-lg-9 col-xs-8 info">{{joinedDate}}</div>
+        <div class="col-lg-9 col-xs-8 info">{{customerJoinedDate}}</div>
       </div>
     {{/unless}}
   </div>
 </div>
-{{#unless Subscription.NoSubscription}}
+{{#if isTigo}}
+  <div class="row tigo-membership">
+    <div class="col-md-8">
+    <p>Please refer to your <a href="#" title="Tigo Account">Tigo Account</a> page to manage your subscription and payment settings.<br>
+    Contact support@acorn.tv if you need help.</p>
+    </div>
+  </div>
+{{else}}
+  {{#unless noSubscription}}
   <div class="row cancel-membership">
     <div class="col-md-8">
       <a href="#">{{t "CANCEL-MEMBERSHIP"}}</a>
     </div>
   </div>
-{{/unless}}
+  {{/unless}}
+{{/if}}

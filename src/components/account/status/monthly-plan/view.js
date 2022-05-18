@@ -58,8 +58,9 @@ class MonthlyPlan extends View {
       subscriptionAmount: this.getCurrentNetAmount(),
       annualSubscriptionAmount: this.model.get('annualStripePlan').SubscriptionAmount,
       tagline: this.getTagline(),
-      // TODO: `isUS` for initial launch. Remove in phase 2.
-      isUS: true, // (this.model.get('stripePlansCountry') === 'US'),
+      // TODO: `isUpgradeAllowed` for initial launch. Remove in phase 2.
+      isTigo: (this.model.get('Membership').Store === 'Tigo'),
+      isUpgradeAllowed: (this.model.get('stripePlansCountry') === 'US' && this.model.get('Membership').Store !== 'Tigo'),
     }
     const html = this.template(data)
     this.$el.find('.current-plan').html(html)

@@ -5,13 +5,17 @@
   </div>
   <div class="col-md-8 banner">
     <p>
+      {{#if isTigo}}
+      {{t "MONTHLY-PLAN-RENEWS-ON-TIGO"}}<br />
+      {{else}}
       {{t "MONTHLY-PLAN-RENEWS-ON-DATE-PRICE"}}<br />
+      {{/if}}
       {{{tagline}}}
     </p>
   </div>
 </div>
-{{! TODO: `isUS` for initial launch. Remove in phase 2. }}
-{{#if isUS}}
+{{! TODO: `isUpgradeAllowed` for initial launch. Remove in phase 2. }}
+{{#if isUpgradeAllowed}}
   <div class="row">
     <div class="col-lg-6 col-sm-9">
       <div class="upgrade-to-annual">
