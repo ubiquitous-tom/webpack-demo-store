@@ -35,7 +35,8 @@ class Navigation extends View {
   render() {
     console.log('Navigation render')
     // const template = Handlebars.compile(this.template())
-    const html = this.template(this.model.attributes)
+    const data = { ...this.model.attributes, Navigation: { EmailSection: this.model.get('Customer').webPaymentEdit || (this.model.get('Membership').Store === 'Tigo') } }
+    const html = this.template(data)
     this.$el.html(html)
     // this.$el.html(this.template())
     // this.setActive(this.$el)

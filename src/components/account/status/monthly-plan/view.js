@@ -60,7 +60,7 @@ class MonthlyPlan extends View {
       tagline: this.getTagline(),
       // TODO: `isUpgradeAllowed` for initial launch. Remove in phase 2.
       isTigo: (this.model.get('Membership').Store === 'Tigo'),
-      isUpgradeAllowed: (this.model.get('stripePlansCountry') === 'US' && this.model.get('Membership').Store !== 'Tigo'),
+      isUpgradeAllowed: (this.model.get('Membership').Store !== 'Tigo'),
     }
     const html = this.template(data)
     this.$el.find('.current-plan').html(html)
@@ -124,7 +124,7 @@ class MonthlyPlan extends View {
   getTrialInfo() {
     // const message = `Your free trial starts now and ends on ${this.getTrialEndDate()}`
     const message = this.i18n.t('FREE-TRIAL-START-NOW-DATE', {
-      trialEndDate: this.getTrialEndDate(), // this.model.get('Membership').NextBillingDate,
+      trialEndDate: this.model.get('Membership').NextBillingDate, // this.getTrialEndDate(),
     })
     const type = 'success'
 

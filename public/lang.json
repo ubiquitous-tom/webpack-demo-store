@@ -3569,7 +3569,7 @@
       "MEMBERSHIP-CANCELLED": {
         "type": "text",
         "content": {
-          "en": "Your membership has been cancelled.",
+          "en": "Your membership has been canceled.",
           "es": "Tu suscripci\u00f3n ha sido cancelada.",
           "uk": "Your membership has been cancelled."
         }
@@ -4898,7 +4898,7 @@
         "type": "text",
         "content": {
           "en": "Account Info",
-          "es": "Informacion De Cuenta",
+          "es": "Informaci\u00f3n de Cuenta",
           "uk": "Account Info"
         }
       },
@@ -4906,7 +4906,7 @@
         "type": "text",
         "content": {
           "en": "Joined on",
-          "es": "Cuando te uniste",
+          "es": "Se uni\u00f3 en",
           "uk": "Joined on"
         }
       },
@@ -5066,7 +5066,7 @@
         "type": "text",
         "content": {
           "en": "Membership",
-          "es": "Membres\u00eda",
+          "es": "Calidad de miembro",
           "uk": "Membership"
         }
       },
@@ -5153,7 +5153,7 @@
       "ANNUAL-WAS-CANCELED-DATE-PRICE": {
         "type": "text",
         "content": {
-          "en": "Your Annual Plan was cancelled on %{cancelledDate}. (%{currSymbol}%{subscriptionAmount}\/yr)",
+          "en": "Your Annual Plan was canceled on %{cancelledDate}. (%{currSymbol}%{subscriptionAmount}\/yr)",
           "es": "Su suscripci\u00f3n anual se cancel\u00f3 el %{cancelledDate}. (%{currSymbol}%{subscriptionAmount}\/a\u00f1o)",
           "uk": "Your Annual Plan was cancelled on %{cancelledDate}. (%{currSymbol}%{subscriptionAmount}\/yr)"
         }
@@ -5169,7 +5169,7 @@
       "PLAN-TYPE-WAS-CANCELED-DATE-PRICE": {
         "type": "text",
         "content": {
-          "en": "Your %{planType} Plan was cancelled on %{cancelledDate}. (%{currSymbol}%{subscriptionAmount}\/%{termType}),",
+          "en": "Your %{planType} Plan was canceled on %{cancelledDate}. (%{currSymbol}%{subscriptionAmount}\/%{termType}),",
           "es": "Su suscripci\u00f3n %{planType} se cancel\u00f3 el %{cancelledDate}. (%{currSymbol}%{subscriptionAmount}\/%{termType})",
           "uk": "Your %{planType} Plan was cancelled on %{cancelledDate}. (%{currSymbol}%{subscriptionAmount}\/%{termType}),"
         }
@@ -5177,7 +5177,7 @@
       "PLAN-TYPE-WAS-CANCELED-DATE-RESTART-NOW": {
         "type": "text",
         "content": {
-          "en": "Your membership was cancelled on %{cancelledDate}. RESTART NOW",
+          "en": "Your membership was canceled on %{cancelledDate}. RESTART NOW",
           "es": "Su membres\u00eda fue cancelada el %{cancelledDate}. REINICIAR AHORA",
           "uk": "Your membership was cancelled on %{cancelledDate}. RESTART NOW"
         }
@@ -5249,11 +5249,20 @@
       "PLEASE-REFER-TO-YOUR": {
         "type": "text",
         "content": {
-          "en": "Please refer to your Tigo Account page to manage your subscription and payment settings.\n Contact support@acorn.tv if you need help.",
-          "es": "Por favor dir\u00edgete a tu cuenta de TIGO para administrar la suscripci\u00f3n a este servicio.\n \u00bfNecesitas ayuda? Por favor cont\u00e1ctanos: support@acorn.tv",
-          "uk": "Please refer to your Tigo Account page to manage your subscription and payment settings.\n Contact support@acorn.tv if you need help."
+          "en": "Please refer to your Tigo Account page to manage your subscription and payment settings.",
+          "es": "Por favor dir\u00edgete a tu cuenta de TIGO para administrar la suscripci\u00f3n a este servicio.",
+          "uk": "Please refer to your Tigo Account page to manage your subscription and payment settings."
         }
       },
+      "PLEASE-REFER-TO-YOUR-CONTACT": {
+        "type": "text",
+        "content": {
+          "en": "Contact support@acorn.tv if you need help.",
+          "es": "\u00bfNecesitas ayuda? Por favor cont\u00e1ctanos: support@acorn.tv",
+          "uk": "Contact support@acorn.tv if you need help."
+        }
+      },
+
       "DOWNLOAD-ACORN-TV-APP": {
         "type": "text",
         "content": {
@@ -5282,7 +5291,7 @@
         "type": "text",
         "content": {
           "en": "Your Monthly Plan renews on %{renewalDate}.",
-          "es": "Su Plan Mensual se renueva el %{renewalDate}.",
+          "es": "Tu Plan Mensual se renueva el %{renewalDate}.",
           "uk": "Your Monthly Plan renews on %{renewalDate}."
         }
       }

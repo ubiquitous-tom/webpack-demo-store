@@ -30,7 +30,8 @@ class Header extends View {
     // const template = Handlebars.compile(this.template)
     console.log(this.model.attributes)
     // debugger
-    const html = this.template(this.model.attributes)
+    const data = { ...this.model.attributes, Navigation: { EmailSection: this.model.get('Customer').webPaymentEdit || (this.model.get('Membership').Store === 'Tigo') } }
+    const html = this.template(data)
     // console.log(html)
     this.$el.html(html)
 
