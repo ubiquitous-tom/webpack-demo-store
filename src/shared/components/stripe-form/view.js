@@ -214,7 +214,12 @@ class StripeForm extends View {
           this.loadingStop()
           this.$el.find('#stripe-form').empty()
           this.parentView.render()
-          // this.addNewStripeCard(stripeCardTokenID)
+
+          // If this is `#updatecard` page then update card by adding new card to the account.
+          if (this.$el.find('#stripe-form.update-cc').length) {
+            debugger
+            this.addNewStripeCard(stripeCardTokenID)
+          }
         } else {
           console.log(result)
           gaAction = 'Failed'

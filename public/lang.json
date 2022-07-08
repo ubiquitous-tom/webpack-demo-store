@@ -3026,7 +3026,7 @@
         "type": "text",
         "content": {
           "en": "Already a member?",
-          "es": "Ya eres usuario?",
+          "es": "\u00bfYa eres usuario?",
           "uk": "Already a member?"
         }
       },
@@ -4138,7 +4138,7 @@
         "type": "text",
         "content": {
           "en": "plus ${var1} (Estimated taxes)",
-          "es": "plus ${var1} (Estimated taxes)",
+          "es": "Mas ${var1} (Estimated taxes)",
           "uk": "plus ${var1} (Estimated taxes)"
         }
       },
@@ -4146,7 +4146,7 @@
         "type": "text",
         "content": {
           "en": "plus %{var1} (Estimated taxes)",
-          "es": "plus %{var1} (Estimated taxes)",
+          "es": "Mas %{var1} (Estimated taxes)",
           "uk": "plus %{var1} (Estimated taxes)"
         }
       },
@@ -4154,7 +4154,7 @@
         "type": "text",
         "content": {
           "en": "plus ${var1} (Sales tax)",
-          "es": "plus ${var1} (Sales tax)",
+          "es": "Mas ${var1} (Sales tax)",
           "uk": "plus ${var1} (Sales tax)"
         }
       },
@@ -4162,7 +4162,7 @@
         "type": "text",
         "content": {
           "en": "plus %{var1} (Sales tax)",
-          "es": "plus %{var1} (Sales tax)",
+          "es": "Mas%{var1} (Sales tax)",
           "uk": "plus %{var1} (Sales tax)"
         }
       },
@@ -4298,7 +4298,7 @@
         "type": "text",
         "content": {
           "en": "plus ${var1} (VAT)",
-          "es": "plus ${var1} (VAT)",
+          "es": "Mas ${var1} (VAT)",
           "uk": "plus ${var1} (VAT)"
         }
       },
@@ -4306,7 +4306,7 @@
         "type": "text",
         "content": {
           "en": "plus %{var1} (VAT)",
-          "es": "plus %{var1} (VAT)",
+          "es": "Mas %{var1} (VAT)",
           "uk": "plus %{var1} (VAT)"
         }
       },
@@ -4898,7 +4898,7 @@
         "type": "text",
         "content": {
           "en": "Account Info",
-          "es": "Informaci\u00f3n de Cuenta",
+          "es": "Informacion De Cuenta",
           "uk": "Account Info"
         }
       },
@@ -4906,7 +4906,7 @@
         "type": "text",
         "content": {
           "en": "Joined on",
-          "es": "Se uni\u00f3 en",
+          "es": "Cuando te uniste",
           "uk": "Joined on"
         }
       },
@@ -5066,7 +5066,7 @@
         "type": "text",
         "content": {
           "en": "Membership",
-          "es": "Calidad de miembro",
+          "es": "Membres\u00eda",
           "uk": "Membership"
         }
       },
@@ -5161,7 +5161,7 @@
       "MONTHLY-WAS-CANCELED-DATE-PRICE": {
         "type": "text",
         "content": {
-          "en": "Your Monthly Plan was cancelled on %{cancelledDate}. (%{currSymbol}%{subscriptionAmount}\/yr)",
+          "en": "Your Monthly Plan was canceled on %{cancelledDate}. (%{currSymbol}%{subscriptionAmount}\/yr)",
           "es": "Su suscripci\u00f3n mensual se cancel\u00f3 el %{cancelledDate}. (%{currSymbol}%{subscriptionAmount}\/mes)",
           "uk": "Your Monthly Plan was cancelled on %{cancelledDate}. (%{currSymbol}%{subscriptionAmount}\/mo)"
         }
@@ -5249,20 +5249,11 @@
       "PLEASE-REFER-TO-YOUR": {
         "type": "text",
         "content": {
-          "en": "Please refer to your Tigo Account page to manage your subscription and payment settings.",
-          "es": "Por favor dir\u00edgete a tu cuenta de TIGO para administrar la suscripci\u00f3n a este servicio.",
-          "uk": "Please refer to your Tigo Account page to manage your subscription and payment settings."
+          "en": "Please refer to your Tigo Account page to manage your subscription and payment settings.\n Contact support@acorn.tv if you need help.",
+          "es": "Por favor dir\u00edgete a tu cuenta de TIGO para administrar la suscripci\u00f3n a este servicio.\n \u00bfNecesitas ayuda? Por favor cont\u00e1ctanos: support@acorn.tv",
+          "uk": "Please refer to your Tigo Account page to manage your subscription and payment settings.\n Contact support@acorn.tv if you need help."
         }
       },
-      "PLEASE-REFER-TO-YOUR-CONTACT": {
-        "type": "text",
-        "content": {
-          "en": "Contact support@acorn.tv if you need help.",
-          "es": "\u00bfNecesitas ayuda? Por favor cont\u00e1ctanos: support@acorn.tv",
-          "uk": "Contact support@acorn.tv if you need help."
-        }
-      },
-
       "DOWNLOAD-ACORN-TV-APP": {
         "type": "text",
         "content": {
@@ -5291,8 +5282,40 @@
         "type": "text",
         "content": {
           "en": "Your Monthly Plan renews on %{renewalDate}.",
-          "es": "Tu Plan Mensual se renueva el %{renewalDate}.",
+          "es": "Su Plan Mensual se renueva el %{renewalDate}.",
           "uk": "Your Monthly Plan renews on %{renewalDate}."
+        }
+      },
+      "SORRY-UNABLE-TO-CREATE-ACCOUNT": {
+        "type": "text",
+        "content": {
+          "en": "Sorry, we are unable to create your account. Please contact customer support: support@acorn.tv",
+          "es": "Lo sentimos no se pudo crear su cuenta. Por favor contactese con support@acorn.tv",
+          "uk": "Sorry, we are unable to create your account. Please contact customer support: support@acorn.tv"
+        }
+      },
+      "PLEASE-REFER-TO-YOUR-CONTACT": {
+        "type": "text",
+        "content": {
+          "en": "Contact support@acorn.tv if you need help.",
+          "es": "\u00bfNecesitas ayuda? Por favor cont\u00e1ctanos: support@acorn.tv",
+          "uk": "Contact support@acorn.tv if you need help."
+        }
+      },
+      "UPDATE": {
+        "type": "text",
+        "content": {
+          "en": "update",
+          "es": "Actualizar",
+          "uk": "update"
+        }
+      },
+      "CURRENT-CREDIT-CARD": {
+        "type": "text",
+        "content": {
+          "en": "current credit card",
+          "es": "tarjeta de cr\u00e9dito actual",
+          "uk": "current credit card"
         }
       }
     }

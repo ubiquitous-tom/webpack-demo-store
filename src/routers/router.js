@@ -95,7 +95,7 @@ class Workspace extends Router {
 
   updateCard() {
     console.log('Router loads updateCard')
-    new UpdateCard({ model: this.model })
+    new UpdateCard({ model: this.model, i18n: this.i18n })
   }
 
   refresh() {

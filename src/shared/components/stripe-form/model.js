@@ -42,11 +42,12 @@ class StripeFormModel extends Model {
     }
 
     console.log(attributes, options)
+    debugger
     stripeCard.save(attributes, options)
   }
 
   success(model, resp, options) {
-    console.log('SwitchToAnnualPlanModel success')
+    console.log('StripeFormModel success')
     console.log(model, resp, options)
     debugger
     this.set({
@@ -60,7 +61,7 @@ class StripeFormModel extends Model {
   }
 
   error(model, resp, options) {
-    console.log('SwitchToAnnualPlanModel error')
+    console.log('StripeFormModel error')
     console.log(model, resp, options)
     debugger
     let message = 'ERR-PROCESS-REQUEST'
