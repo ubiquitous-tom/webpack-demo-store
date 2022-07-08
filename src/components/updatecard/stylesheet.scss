@@ -1,96 +1,6 @@
-// #stunning {
-//   height: 100vh;
-//   width: 100vw;
-//   position: fixed;
-//   top: 56px;
-//   left: 0;
-//   background-color: #cbcbcb;
-//   #stunning-form {
-//     border: none;
-//     margin: 0;
-//     padding: 0;
-//     overflow: hidden;
-
-//     height: 100vh;
-//     width: 100vw;
-//     // font-family: futura-pt, sans-serif;
-//     font-family: "Oxygen", sans-serif;
-//     position: fixed;
-//     top: 56px;
-//     left: 0;
-
-//     display: flex;
-//     flex-flow: column nowrap;
-//     justify-content: center;
-//     align-items: center;
-//     text-align: center;
-//     color: #fff;
-
-//     z-index: 100;
-//   }
-// }
-// #account {
-//   button {
-//     &.go-to-membership {
-//       position: fixed;
-//       right: 2%;
-//       bottom: 5%;
-//       z-index: 150;
-//     }
-//   }
-// }
-
 #account .update-credit-card {
-  // background: rgb(11, 23, 51);
-  // background: linear-gradient(
-  //   180deg,
-  //   rgba(11, 23, 51, 1) 0%,
-  //   rgba(11, 37, 89, 1) 80%,
-  //   rgba(19, 79, 117, 1) 100%
-  // );
-  // height: 100vh;
-  // width: 100vw;
-  // font-family: futura-pt, sans-serif;
+
   font-family: "Oxygen", sans-serif;
-  // position: fixed;
-  // top: 56px;
-  // left: 0;
-
-  // display: flex;
-  // flex-flow: column nowrap;
-  // justify-content: center;
-  // align-items: center;
-  // text-align: center;
-  // color: #fff;
-  // z-index: 105;
-
-  // &::before {
-  //   content: "";
-  //   flex: 1;
-  // }
-  // &::after {
-  //   content: "";
-  //   flex: 3;
-  // }
-
-  // h1 {
-  //   color: #fff;
-  //   font-weight: 300;
-  //   font-size: 4rem;
-  //   line-height: 5rem;
-  //   letter-spacing: 0.5px;
-  // }
-
-  // p {
-  //   color: #fff;
-  //   font-weight: 300;
-  //   font-size: 1.5rem;
-  //   line-height: 3rem;
-  //   .applied-success {
-  //     font-weight: 700;
-  //     color: #34b731;
-  //   }
-  // }
 
   #billing-container {
     display: flex;
@@ -99,42 +9,6 @@
     justify-content: center;
     width: 44rem;
     margin-top: 4rem;
-
-    // #confirm-billing {
-    //   text-align: left;
-    //   padding-left: 25px;
-    //   padding-right: 25px;
-
-    //   h4 {
-    //     color: #222;
-    //     font-family: 'Source Sans Pro', sans-serif;
-    //     font-size: 1.25rem;
-    //     font-weight: 600;
-    //     text-transform: uppercase;
-    //     letter-spacing: 1px;
-    //   }
-
-    //   // #billing-info {
-    //   //   background: #464646;
-    //   //   border-radius: 3px;
-    //   //   text-align: left;
-    //   //   padding: 1.5rem 2rem;
-    //   //   position: relative;
-    //   //   width: 40rem;
-
-    //   //   a {
-    //   //     position: absolute;
-    //   //     top: 1.5rem;
-    //   //     right: 2rem;
-    //   //     color: #fff;
-    //   //     text-decoration: underline;
-    //   //   }
-
-    //   //   .cc-number {
-    //   //     padding-bottom: 1rem;
-    //   //   }
-    //   // }
-    // }
 
     .StripeElement {
       padding: 0.735rem 0.5rem;
@@ -157,7 +31,6 @@
   }
 
   button {
-    // width: 20rem;
     padding: 1rem 2rem;
     margin-top: 2rem;
     margin-bottom: 2rem;
@@ -204,26 +77,3 @@
     }
   }
 }
-
-// #promocode-container {
-//   width: 100%;
-//   margin-bottom: 15px;
-// }
-
-// @media (max-width: 768px) {
-//   #account .update-credit-card {
-//     #billing-container {
-//       width: auto;
-//     }
-
-//     #confirm-billing #billing-info {
-//       width: 44rem;
-//     }
-//     // .legal-notice {
-//     //   max-width: 30rem;
-//     // }
-//   }
-//   // #promocode-container {
-//   //   max-width: 30rem;
-//   // }
-// }

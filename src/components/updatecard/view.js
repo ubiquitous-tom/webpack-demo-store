@@ -67,15 +67,11 @@ class UpdateCard extends View {
     return this
   }
 
-  // goBack(context) {
-  //   context.$el.find('button.go-to-membership').removeClass('hidden')
-  // }
-
   goToMembership(e) {
     console.log('UpdateCard goToMembership')
     e.preventDefault()
     this.$el.find('#stunning').remove()
-    this.showFooter()
+    // this.showFooter()
     window.location.assign('#accountStatus')
     window.location.reload()
   }
