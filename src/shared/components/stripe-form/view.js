@@ -56,9 +56,7 @@ class StripeForm extends View {
       const { interpolationOptions, type } = model.get('flashMessage')
       message = this.i18n.t(message, interpolationOptions)
       debugger
-      if (!value) {
-        this.flashMessage.onFlashMessageShow(message, type)
-      }
+      this.flashMessage.onFlashMessageShow(message, type)
     })
   }
 

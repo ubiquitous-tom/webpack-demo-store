@@ -3497,9 +3497,9 @@
       "ERR-PROCESS-REQUEST": {
         "type": "text",
         "content": {
-          "en": "There was an error processing your request.",
-          "es": "Ocurri\u00f3 un error al procesar tu solicitud.",
-          "uk": "There was an error processing your request."
+          "en": "There was an error processing your request. Please try again later.",
+          "es": "Ocurri\u00f3 un error al procesar tu solicitud. Por favor int\u00e9nta de nuevo m\u00e1s tarde.",
+          "uk": "There was an error processing your request. Please try again later."
         }
       },
       "CODE-INVALID": {
@@ -5316,6 +5316,14 @@
           "en": "current credit card",
           "es": "tarjeta de cr\u00e9dito actual",
           "uk": "current credit card"
+        }
+      },
+      "CREDIT-CARD-UPDATED": {
+        "type": "text",
+        "content": {
+          "en": "Your credit card was successfully updated.",
+          "es": "Tu tarjeta de cr\u00e9dito se actualiz\u00f3 con \u00e9xito.",
+          "uk": "Your credit card was successfully updated."
         }
       }
     }

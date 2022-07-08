@@ -54,7 +54,7 @@ class StripeFormModel extends Model {
       addNewStripeCardSuccess: true,
       flashMessage: {
         type: 'success',
-        message: 'UPDATE-CREDIT-CARD', // TODO: need new text here
+        message: 'CREDIT-CARD-UPDATED',
         interpolationOptions: {},
       },
     })
