@@ -1,0 +1,56 @@
+#account .update-credit-card {
+  #confirm-billing {
+    text-align: left;
+    padding-left: 0;
+    padding-right: 0;
+
+    h4 {
+      color: #222;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    #billing-info {
+      background: #ddd;
+      border-radius: 3px;
+      text-align: left;
+      padding: 1.5rem 2rem;
+      position: relative;
+      width: 44rem;
+
+      a {
+        position: absolute;
+        top: 1.5rem;
+        right: 2rem;
+        // color: #fff;
+        text-decoration: underline;
+        text-transform: capitalize;
+      }
+
+      .cc-number {
+        padding-bottom: 1rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #account .update-credit-card {
+    #billing-container {
+      width: auto;
+    }
+
+    #confirm-billing #billing-info {
+      width: auto;
+    }
+    // .legal-notice {
+    //   max-width: 30rem;
+    // }
+  }
+  // #promocode-container {
+  //   max-width: 30rem;
+  // }
+}

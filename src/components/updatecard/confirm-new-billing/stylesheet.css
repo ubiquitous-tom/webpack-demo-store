@@ -1,0 +1,35 @@
+#account .update-credit-card #confirm-billing {
+  text-align: left;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+#account .update-credit-card #confirm-billing h4 {
+  font-size: 1.25rem;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+#account .update-credit-card #confirm-billing #billing-info {
+  background: #464646;
+  border-radius: 3px;
+  text-align: left;
+  padding: 1.5rem 2rem;
+  position: relative;
+  width: 40rem;
+}
+
+#account .update-credit-card #confirm-billing #billing-info a {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  color: #fff;
+  text-decoration: underline;
+}
+
+#account
+  .update-credit-card
+  #confirm-billing
+  #billing-info
+  .cc-number {
+  padding-bottom: 1rem;
+}
