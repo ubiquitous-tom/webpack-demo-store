@@ -65,7 +65,8 @@ class GuestPlan extends View {
     // const message = `
     // Start streaming now! Try ${this.model.get('monthlyStripePlan').TrialDays} Days Free
     // `
-    const message = this.i18n.t('START-STREAMING-NOW-TRY-NUMBERS-DAY-FREE', {
+    const message = this.i18n.t('START-STREAMING-NOW-TRY-NUMBERS-DAY-FREE-WITH-LINK', {
+      url: `${this.model.get('signinEnv')}/trialsignup.jsp?OperationalScenario=STORE`,
       trialDays: this.model.get('monthlyStripePlan').TrialDays,
     })
     const type = 'success'
