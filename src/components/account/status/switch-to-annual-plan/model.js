@@ -50,9 +50,7 @@ class SwitchToAnnualPlanModel extends ATVModel {
     const headers = {
       StripeMembershipID: this.get('currentMembership').StripeMembershipID,
       CustomerID: this.get('currentMembership').CustomerID,
-      StripeCardToken: (this.has('currentBillingInfo') && this.get('currentBillingInfo').StripeCardToken)
-        ? this.get('currentBillingInfo').StripeCardToken
-        : '',
+      StripeCardToken: '', // Because we now update the card beforehand so this has to be an empty string (WWW-2549).
     }
 
     const attributes = {
