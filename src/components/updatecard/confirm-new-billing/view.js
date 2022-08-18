@@ -51,7 +51,7 @@ class ConfirmNewBilling extends View {
     this.$el.find('#confirm-billing').empty().append(html)
     // this.$el.html(html)
 
-    this.updateCard.model.set('promoCodeFieldDisplay', true)
+    // this.updateCard.model.set('promoCodeFieldDisplay', true)
   }
 
   editCreditCard(e) {
