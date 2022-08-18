@@ -1,6 +1,9 @@
 const path = require('path')
+const crypto = require('crypto')
+// eslint-disable-next-line no-unused-vars
+const dotenv = require('dotenv').config()
 const { ProvidePlugin } = require('webpack')
-// const {EnvironmentPlugin } = require('webpack')
+// const { EnvironmentPlugin } = require('webpack')
 const DotenvWebpack = require('dotenv-webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ESLintWebpackPlugin = require('eslint-webpack-plugin')
@@ -38,23 +41,33 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: './public/index.html',
+      template: './public/index.hbs',
       favicon: './src/assets/images/favicon.ico',
+      meta: {
+        'csrf-token': crypto.randomUUID(),
+      },
       minify: {
         collapseWhitespace: true,
         minifyCSS: true,
         minifyJS: true,
       },
+      inject: true,
+      captchaScript: `<script src="https://www.google.com/recaptcha/api.js?render=${process.env.CAPTCHA_V3_KEY}" async defer></script>`,
     }),
     new HtmlWebpackPlugin({
       filename: 'index.jsp',
-      template: './public/index.html',
+      template: './public/index.hbs',
       favicon: './src/assets/images/favicon.ico',
+      meta: {
+        'csrf-token': crypto.randomUUID(),
+      },
       minify: {
         collapseWhitespace: true,
         minifyCSS: true,
         minifyJS: true,
       },
+      inject: true,
+      captchaScript: `<script src="https://www.google.com/recaptcha/api.js?render=${process.env.CAPTCHA_V3_KEY}" async defer></script>`,
     }),
     new ESLintWebpackPlugin(),
     new CleanWebpackPlugin({

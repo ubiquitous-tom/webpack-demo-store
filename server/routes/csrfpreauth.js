@@ -3,47 +3,45 @@ const dotenv = require('dotenv')
 
 dotenv.config()
 
-const stripeCard = (req, res) => {
-  console.log('Express Router stripeCard')
-  console.log(req.headers)
-  console.log(req.query)
+const csrfPreAuth = (req, res) => {
+  console.log('Express Router csrfPreAuth')
+  console.log(req.headers, req.headers['csrf-token'])
   console.log(req.body)
 
   const atvSessionCookie = req.cookies.ATVSessionCookie
-  console.log('Express Router stripeCard ATVSessionCookie', atvSessionCookie)
+  console.log('Express Router csrfPreAuth ATVSessionCookie', atvSessionCookie)
 
   const postData = JSON.stringify(req.body)
-  const queryString = new URLSearchParams(req.body).toString()
+  const queryString = new URLSearchParams(req.body.country).toString()
   const options = {
     host: `account${process.env.API_ENVIRONMENT}.acorn.tv`,
-    path: `/stripecard?${queryString}`,
+    path: '/api/user/csrfPreAuth',
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      StripeCustomerId: req.headers.stripecustomerid,
-      CustomerID: req.headers.customerid,
-      StripeCardToken: req.headers.stripecardtoken,
+      'csrf-token': req.headers['csrf-token'],
     },
   }
 
   console.log(queryString, postData)
-  console.log(options, req.headers.stripecustomerid)
+  console.log(options)
 
   const httpsReq = https.request(options, (resp) => {
     // console.log(resp)
     const { statusCode } = resp
-    const contentType = resp.headers['content-type']
-    console.log(statusCode, contentType)
+    const contentType = req.headers['content-type']
+    console.log('statusCode', statusCode)
+    console.log(contentType)
 
     // let error
     // // Any 2xx status code signals a successful response but
     // // here we're only checking for 200.
     // if (statusCode !== 200) {
-    //   error = new Error('Request Failed.\n' +
-    //     `Status Code: ${statusCode}`)
+    //   error = new Error('Request Failed.\n'
+    //     + `Status Code: ${statusCode}`)
     // } else if (!/^application\/json/.test(contentType)) {
-    //   error = new Error('Invalid content-type.\n' +
-    //     `Expected application/json but received ${contentType}`)
+    //   error = new Error('Invalid content-type.\n'
+    //     + `Expected application/json but received ${contentType}`)
     // }
     // if (error) {
     //   console.error(error.message)
@@ -60,10 +58,13 @@ const stripeCard = (req, res) => {
     })
     resp.on('end', () => {
       try {
-        const parsedData = JSON.parse(rawData)
+        const parsedData = JSON.parse(JSON.stringify(rawData))
+        console.log('statusCode', statusCode)
         console.log('parseData', parsedData)
-        res.status(statusCode).send(parsedData)
+        res.send(JSON.stringify(rawData))
       } catch (e) {
+        console.log(e)
+        console.log('statusCode', statusCode)
         console.error(e.message)
         res.status(statusCode).send(e.message)
       }
@@ -77,4 +78,4 @@ const stripeCard = (req, res) => {
   httpsReq.end()
 }
 
-module.exports = stripeCard
+module.exports = csrfPreAuth

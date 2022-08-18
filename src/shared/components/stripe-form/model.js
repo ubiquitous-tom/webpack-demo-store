@@ -18,8 +18,14 @@ class StripeFormModel extends Model {
     })
   }
 
-  addNewStripeCard(stripeCardTokenID) {
+  addNewStripeCard(data) {
     const stripeCard = new Model()
+    const {
+      stripeCardTokenID,
+      captchaToken,
+      captchaVersion,
+      csrfToken,
+    } = data
     const headers = {
       StripeCustomerId: this.get('stripeCustomerId'),
       CustomerId: this.get('customerId'),
@@ -28,6 +34,9 @@ class StripeFormModel extends Model {
 
     const attributes = {
       country: this.get('country'),
+      captcha_token: captchaToken,
+      captcha_version: captchaVersion,
+      csrf_token: csrfToken,
     }
 
     const options = {
@@ -99,7 +108,7 @@ class StripeFormModel extends Model {
             interpolationOptions: {},
           },
         })
-        console.log(model.get('flashMessage').message, model.get('flashMessage').type)
+        console.log(options.context.get('flashMessage').message, options.context.get('flashMessage').type)
       })
   }
 }

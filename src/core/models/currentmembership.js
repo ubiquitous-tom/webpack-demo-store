@@ -24,7 +24,7 @@ class CurrentMembership extends Model {
         dataType: 'json',
         ajaxSync: true,
         wait: true,
-        data: $.param(params)
+        data: $.param(params),
       })
     }
   }

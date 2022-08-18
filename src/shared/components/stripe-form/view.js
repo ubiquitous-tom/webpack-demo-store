@@ -1,11 +1,15 @@
 import { View } from 'backbone'
 import _ from 'underscore'
 
+import CSRFAuthorization from 'core/models/csrf-authorization'
 import BackBoneContext from 'core/contexts/backbone-context'
 import SubmitLoader from 'shared/elements/submit-loader'
 import FlashMessage from 'shared/elements/flash-message'
+import ReCaptcha from 'shared/recaptcha'
+
 import './stylesheet.scss'
 import template from './index.hbs'
+
 import StripeFormModel from './model'
 
 class StripeForm extends View {
@@ -19,10 +23,10 @@ class StripeForm extends View {
 
   get events() {
     return {
-      'input input#nameoncard': 'validateInput',
-      'blur input#nameoncard': 'validateBlur',
-      'input input#card-zipcode': 'validateInput',
-      'blur input#card-zipcode': 'validateBlur',
+      'input input#nameoncard': 'validateInputName',
+      'blur input#nameoncard': 'validateBlurName',
+      'input input#card-zipcode': 'validateInputZipcode',
+      'blur input#card-zipcode': 'validateBlurZipcode',
       'click #stripe-form button[type="reset"]': 'reset',
       'click #stripe-form button[type="submit"]': 'submit',
     }
@@ -31,6 +35,8 @@ class StripeForm extends View {
   initialize(options) {
     console.log('StripeForm initialize')
     // console.log(options)
+    this.csrfAuthorization = new CSRFAuthorization(options.parentView)
+    this.reCaptcha = new ReCaptcha()
     this.submitLoader = new SubmitLoader()
     this.flashMessage = new FlashMessage()
     this.i18n = options.i18n
@@ -43,6 +49,44 @@ class StripeForm extends View {
       customerId: this.parentView.model.get('Customer').CustomerID,
     })
 
+    this.listenTo(this.csrfAuthorization.model, 'change:setCSRFAuthorizationSuccess', (model, value, options) => {
+      console.log(model, value, options)
+      console.log(model.get('csrfToken'))
+      debugger
+      if (value) {
+        const csrfToken = model.get('csrfToken')
+        this.model.set('csrfToken', csrfToken)
+      } else {
+        let message = 'ERR-PROCESS-REQUEST'
+        const interpolationOptions = {}
+        const type = 'error'
+        message = this.i18n.t(message, interpolationOptions)
+        this.flashMessage.onFlashMessageShow(message, type)
+      }
+    })
+
+    this.listenTo(this.reCaptcha.model, 'change:setCaptchaTokenSuccess', (model, value, options) => {
+      console.log(model, value, options)
+      console.log(model.get('captchaToken'))
+      const captchaToken = model.get('captchaToken')
+      debugger
+      if (value) {
+        const newStripeCardInfo = {
+          stripeCardTokenID: this.model.get('stripeCardTokenID'),
+          captchaToken,
+          captchaVersion: this.reCaptcha.model.get('captchaVersion'),
+          csrfToken: this.csrfAuthorization.model.get('csrfToken'),
+        }
+        this.model.addNewStripeCard(newStripeCardInfo)
+      } else {
+        this.reCaptcha.render()
+        // This is set after `render()` so we can't render reCaptcha V2 again to prevent an infinite loop.
+        this.reCaptcha.model.set({
+          isCaptchaV2Rendered: true,
+        })
+      }
+    })
+
     this.listenTo(this.model, 'change:stripeKey', this.initializeStripeForm)
 
     /* eslint no-shadow:0 */
@@ -50,13 +94,22 @@ class StripeForm extends View {
       console.log(model, value, options)
       debugger
       this.loadingStop()
-      this.$el.find('#stripe-form').empty()
-      this.parentView.render()
+
       let { message } = model.get('flashMessage')
       const { interpolationOptions, type } = model.get('flashMessage')
       message = this.i18n.t(message, interpolationOptions)
-      debugger
-      this.flashMessage.onFlashMessageShow(message, type)
+      if (value) {
+        debugger
+        this.$el.find('#stripe-form').empty()
+        this.parentView.render()
+        this.flashMessage.onFlashMessageShow(message, type)
+      } else {
+        debugger
+        this.reCaptcha.model.set({
+          isCaptchaTested: true,
+          generateCaptchaTokenSuccess: false,
+        })
+      }
     })
   }
 
@@ -167,6 +220,8 @@ class StripeForm extends View {
     this.cardExpiry.mount('#card-expiry')
     this.cardCvc.mount('#card-cvc')
 
+    this.csrfAuthorization.setPreAuth()
+
     return this
   }
 
@@ -180,6 +235,8 @@ class StripeForm extends View {
     console.log('StripeForm reset')
     this.$el.find('#stripe-form').empty()
     this.parentView.render()
+
+    this.reCaptcha.resetCaptcha()
   }
 
   submit(e) {
@@ -188,8 +245,13 @@ class StripeForm extends View {
     console.log(this.parentView.model)
     this.loadingStart()
     if (this.validateSubmit()) {
+      console.log('this.generateToken')
       this.generateToken()
     }
+  }
+
+  onCaptchaSubmit() {
+    console.log('onCaptchaSubmit')
   }
 
   generateToken() {
@@ -208,16 +270,19 @@ class StripeForm extends View {
           const updatedStripeCard = _.extend(stripeCard, { token: stripeCardTokenID })
           console.log(updatedStripeCard)
           this.parentView.model.set('newStripeCardInfo', updatedStripeCard)
+          this.model.set('stripeCardTokenID', stripeCardTokenID)
           // console.log(this, this.parentView)
           this.loadingStop()
-          this.$el.find('#stripe-form').empty()
-          this.parentView.render()
+          // // This was moved into `change:addNewStripeCardSuccess` event.
+          // this.$el.find('#stripe-form').empty()
+          // this.parentView.render()
 
           // If this is `#updatecard` page then update card by adding new card to the account.
-          if (this.$el.find('#stripe-form.update-cc').length) {
-            debugger
-            this.addNewStripeCard(stripeCardTokenID)
-          }
+          // if (this.$el.find('#stripe-form.update-cc').length) {
+          //   debugger
+          //   this.model.addNewStripeCard(stripeCardTokenID)
+          // }
+          this.reCaptcha.generateCaptchaToken()
         } else {
           console.log(result)
           gaAction = 'Failed'
@@ -228,32 +293,40 @@ class StripeForm extends View {
       })
   }
 
-  addNewStripeCard(stripeCardTokenID) {
-    this.model.addNewStripeCard(stripeCardTokenID)
-  }
-
-  validateInput() {
+  validateInputName() {
+    let isValidated = true
     if (_.isEmpty(this.$el.find('input#nameoncard').val())) {
-      this.$el.find('input#nameoncard').parent('.item').addClass('has-error')
+      this.$el.find('input#nameoncard').parent('.item').removeClass('has-success').addClass('has-error')
+      isValidated = false
     } else {
       this.$el.find('input#nameoncard').parent('.item').removeClass('has-error')
     }
 
+    return isValidated
+  }
+
+  validateInputZipcode() {
+    let isValidated = true
     if (_.isEmpty(this.$el.find('input#card-zipcode').val())) {
-      this.$el.find('input#card-zipcode').parent('.subitem').addClass('has-error')
+      this.$el.find('input#card-zipcode').parent('.subitem').removeClass('has-success').addClass('has-error')
+      isValidated = false
     } else {
       this.$el.find('input#card-zipcode').parent('.subitem').removeClass('has-error')
     }
+
+    return isValidated
   }
 
-  validateBlur() {
+  validateBlurName() {
     if (
       !_.isEmpty(this.$el.find('input#nameoncard').val())
       && !this.$el.find('input#nameoncard').parent('.item').hasClass('has-error')
     ) {
       this.$el.find('input#nameoncard').parent('.item').addClass('has-success')
     }
+  }
 
+  validateBlurZipcode() {
     if (
       !_.isEmpty(this.$el.find('input#card-zipcode').val())
       && !this.$el.find('input#card-zipcode').parent('.subitem').hasClass('has-error')
@@ -263,14 +336,15 @@ class StripeForm extends View {
   }
 
   validateSubmit() {
-    this.validateInput()
     if (
-      !_.isEmpty(this.$el.find('input#nameoncard').val())
+      this.validateInputName()
+      && this.validateInputZipcode()
+      && !_.isEmpty(this.$el.find('input#nameoncard').val())
       && !_.isEmpty(this.$el.find('input#card-zipcode').val())
     ) {
       return true
     }
-    this.loadingStop()
+    // this.loadingStop()
     return false
   }
 
@@ -281,7 +355,7 @@ class StripeForm extends View {
   }
 
   loadingStop() {
-    this.$el.find('#stripe-form input').val('').prop('disabled', false)
+    this.$el.find('#stripe-form input').prop('disabled', false)
     this.$el.find('#stripe-form button[type="reset"]').prop('disabled', false)
     this.submitLoader.loadingStop(this.$el.find('#stripe-form button[type="submit"]'))
   }
