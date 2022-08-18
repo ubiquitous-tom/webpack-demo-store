@@ -61,7 +61,8 @@ const csrfPreAuth = (req, res) => {
         const parsedData = JSON.parse(JSON.stringify(rawData))
         console.log('statusCode', statusCode)
         console.log('parseData', parsedData)
-        res.send(JSON.stringify(rawData))
+        // res.send(JSON.stringify(rawData))
+        res.send()
       } catch (e) {
         console.log(e)
         console.log('statusCode', statusCode)

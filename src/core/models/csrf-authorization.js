@@ -38,7 +38,7 @@ class CSRFAuthorization extends Model {
       url: this.url,
       context: this,
       headers,
-      dataType: 'json',
+      dataType: 'html',
       ajaxSync: true,
       wait: true,
       success: this.success,
