@@ -32,7 +32,7 @@ class PromoCode extends View {
     console.log(this, options)
     this.i18n = options.i18n
     this.switchToAnnualPlan = options.switchToAnnualPlan
-    this.confirmBilling = this.switchToAnnualPlan.confirmBilling
+    // this.confirmBilling = this.switchToAnnualPlan.confirmBilling
     // this.model = this.switchToAnnualPlan.model
     this.model = new PromoCodeModel()
     this.submitLoader = new SubmitLoader()

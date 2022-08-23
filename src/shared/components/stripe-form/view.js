@@ -344,7 +344,7 @@ class StripeForm extends View {
     ) {
       return true
     }
-    // this.loadingStop()
+    this.loadingStop()
     return false
   }
 
