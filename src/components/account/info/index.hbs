@@ -26,10 +26,17 @@
   </div>
 {{else}}
   {{#unless noSubscription}}
-  <div class="row cancel-membership">
-    <div class="col-md-8">
-      <a href="#">{{t "CANCEL-MEMBERSHIP"}}</a>
+    <div class="row cancel-membership">
+      <div class="col-md-8">
+        <a href="#">{{t "CANCEL-MEMBERSHIP"}}</a>
+      </div>
     </div>
-  </div>
+    <div class="row contact-support">
+      <div class="col-md-8">
+        <span>
+          {{{t "CONTACT-SUPPORT"}}}
+        </span>
+      </div>
+    </div>
   {{/unless}}
 {{/if}}
