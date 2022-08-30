@@ -11,7 +11,7 @@ import AnnualPlanModel from './model'
 
 class AnnualPlan extends View {
   get el() {
-    return 'section'
+    return '.current-plan'
   }
 
   get template() {
@@ -58,9 +58,9 @@ class AnnualPlan extends View {
     const html = this.template(data)
     // console.log(html)
     // console.log(this.$el.find('.current-plan'))
-    this.$el.find('.current-plan').html(html)
+    // this.$el.find('.current-plan').html(html)
 
-    // this.$el.html(html)
+    this.$el.html(html)
     // this.$el.html(this.template(this.model.attributes))
     return this
   }

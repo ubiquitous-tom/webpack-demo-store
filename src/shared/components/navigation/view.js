@@ -28,6 +28,20 @@ class Navigation extends View {
     this.router = new Router()
     // this.model = new NavigationModel()
 
+    const isWebPaymentEdit = this.model.get('Customer').webPaymentEdit
+    const isTigo = this.model.get('Membership').Store === 'Tigo'
+    // const data = {
+    //   ...this.model.attributes,
+    //   Navigation: {
+    //     EmailSection: isWebPaymentEdit || isTigo,
+    //   },
+    // }
+    this.model.set({
+      navigation: {
+        emailSection: isWebPaymentEdit || isTigo,
+      },
+    })
+
     // this.listenTo(this.model, 'change', this.setActive)
     this.render()
   }
@@ -35,17 +49,9 @@ class Navigation extends View {
   render() {
     console.log('Navigation render')
     // const template = Handlebars.compile(this.template())
-    const data = { ...this.model.attributes, Navigation: { EmailSection: this.model.get('Customer').webPaymentEdit || (this.model.get('Membership').Store === 'Tigo') } }
-    const html = this.template(data)
-    this.$el.html(html)
-    // this.$el.html(this.template())
-    // this.setActive(this.$el)
 
-    // // A hack to get default navigation to work
-    // if (!$('ul li').hasClass('active')) {
-    //   const hash = !_.isEmpty(window.location.hash) ? window.location.hash : '#accountStatus'
-    //   $(`${hash}Nav`).addClass('active')
-    // }
+    const html = this.template(this.model.attributes)
+    this.$el.html(html)
 
     return this
   }

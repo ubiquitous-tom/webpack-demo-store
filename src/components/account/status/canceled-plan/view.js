@@ -9,7 +9,7 @@ import AnnualPlanModel from '../annual-plan/model'
 
 class CanceledPlan extends View {
   get el() {
-    return 'section'
+    return '.current-plan'
   }
 
   get template() {
@@ -50,7 +50,7 @@ class CanceledPlan extends View {
       tagline: this.getTagline(),
     }
     const html = this.template(data)
-    this.$el.find('.current-plan').html(html)
+    this.$el.html(html)
 
     this.restartNowBanner()
 
@@ -59,7 +59,7 @@ class CanceledPlan extends View {
 
   contentPlaceholder() {
     console.log('CanceledPlan contentPlaceholder')
-    this.$el.find('.current-plan').html(placeholder)
+    this.$el.html(placeholder)
   }
 
   restartMembership(e) {

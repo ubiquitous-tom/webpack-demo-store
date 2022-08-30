@@ -12,7 +12,7 @@ import SwitchToAnnualPlan from '../switch-to-annual-plan'
 
 class MonthlyPlan extends View {
   get el() {
-    return 'section'
+    return '.current-plan'
   }
 
   get template() {
@@ -63,14 +63,14 @@ class MonthlyPlan extends View {
       isUpgradeAllowed: (this.model.get('Membership').Store !== 'Tigo'),
     }
     const html = this.template(data)
-    this.$el.find('.current-plan').html(html)
+    this.$el.html(html)
     // this.$el.html(this.template)
 
     return this
   }
 
   contentPlaceholder() {
-    this.$el.find('.current-plan').html(placeholder)
+    this.$el.html(placeholder)
   }
 
   switchToAnnual(e) {

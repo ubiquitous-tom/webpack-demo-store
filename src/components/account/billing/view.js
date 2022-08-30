@@ -3,7 +3,7 @@ import template from './index.hbs'
 
 class BillingInfo extends View {
   get el() {
-    return 'section'
+    return '#billingInfoView'
   }
 
   get template() {
@@ -24,7 +24,7 @@ class BillingInfo extends View {
     console.log('BillingInfo render')
     // console.log(this.model.attributes)
     const html = this.template(this.model.attributes)
-    this.$el.find('#billingInfoView').html(html)
+    this.$el.html(html)
   }
 }
 

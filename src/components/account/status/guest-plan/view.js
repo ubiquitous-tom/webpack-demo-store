@@ -9,7 +9,7 @@ import GuestPlanModel from './model'
 
 class GuestPlan extends View {
   get el() {
-    return 'section'
+    return '.current-plan'
   }
 
   get template() {
@@ -50,7 +50,7 @@ class GuestPlan extends View {
       annualSubscriptionAmount: this.model.get('annualStripePlan').SubscriptionAmount,
     }
     const html = this.template(data)
-    this.$el.find('.current-plan').html(html)
+    this.$el.html(html)
 
     this.startFreeTrialBanner()
 
@@ -58,7 +58,7 @@ class GuestPlan extends View {
   }
 
   contentPlaceholder() {
-    this.$el.find('.current-plan').html(placeholder)
+    this.$el.html(placeholder)
   }
 
   startFreeTrialBanner() {

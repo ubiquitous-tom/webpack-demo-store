@@ -7,7 +7,7 @@ import AccountInfoModel from './model'
 
 class AccountInfo extends View {
   get el() {
-    return 'section'
+    return '#accountInfoView'
   }
 
   get template() {
@@ -39,7 +39,7 @@ class AccountInfo extends View {
       isTigo: (this.model.get('Membership').Store === 'Tigo'),
     }
     const html = this.template(data)
-    this.$el.find('#accountInfoView').html(html)
+    this.$el.html(html)
 
     return this
   }
