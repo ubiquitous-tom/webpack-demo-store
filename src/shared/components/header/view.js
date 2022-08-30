@@ -30,12 +30,6 @@ class Header extends View {
 
     const isWebPaymentEdit = this.model.get('Customer').webPaymentEdit
     const isTigo = this.model.get('Membership').Store === 'Tigo'
-    // const data = {
-    //   ...this.model.attributes,
-    //   Navigation: {
-    //     EmailSection: isWebPaymentEdit || isTigo,
-    //   },
-    // }
     this.model.set({
       atvlogo,
       navigation: {
@@ -77,9 +71,14 @@ class Header extends View {
     const article = $('article')
     const children = article.children('[role="dialog"]')
     console.log(article, children, children.length)
-    if (children) {
+    if (children.length) {
       children.remove()
+      this.showFooter()
     }
+  }
+
+  showFooter() {
+    $('footer').show()
   }
 
   resetActive() {

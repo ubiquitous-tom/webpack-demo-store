@@ -30,12 +30,6 @@ class Navigation extends View {
 
     const isWebPaymentEdit = this.model.get('Customer').webPaymentEdit
     const isTigo = this.model.get('Membership').Store === 'Tigo'
-    // const data = {
-    //   ...this.model.attributes,
-    //   Navigation: {
-    //     EmailSection: isWebPaymentEdit || isTigo,
-    //   },
-    // }
     this.model.set({
       navigation: {
         emailSection: isWebPaymentEdit || isTigo,
