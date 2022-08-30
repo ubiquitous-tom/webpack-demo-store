@@ -69,7 +69,7 @@ class FlashMessage extends View {
     $(e.target)
       .parent('.flash-message')
       .slideUp(600, () => {
-        $('.flash-message').remove()
+        $.remove()
       })
   }
 
