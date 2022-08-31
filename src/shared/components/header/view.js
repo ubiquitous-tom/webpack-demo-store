@@ -1,5 +1,5 @@
 import { Router, View } from 'backbone'
-// import _ from 'underscore'
+import _ from 'underscore'
 import atvlogo from 'img/atvlogo.png'
 import './stylesheet.scss'
 import template from './index.hbs'
@@ -62,7 +62,7 @@ class Header extends View {
     // router.navigate('/');
 
     this.removeOverlay()
-    this.resetActive()
+    this.resetActive(e.target.hash)
     this.setActive(e.target.hash)
   }
 
@@ -81,16 +81,20 @@ class Header extends View {
     $('footer').show()
   }
 
-  resetActive() {
+  resetActive(hash) {
     console.log('resetActive')
-    $('.nav-tabs li').removeClass('active')
+    if (!_.isEmpty(hash)) {
+      $('.nav-tabs li').removeClass('active')
+    }
   }
 
   setActive(hash) {
     console.log('setActive', hash)
     // console.l0g($(el), $(el).parent())
     // $('.nav-tabs li').addClass('active')
-    $(`li${hash}`).addClass('active')
+    if (!_.isEmpty(hash)) {
+      $(`li${hash}`).addClass('active')
+    }
     // this.$el.find(el).add('active')
   }
 
