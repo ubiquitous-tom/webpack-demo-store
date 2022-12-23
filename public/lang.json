@@ -4894,6 +4894,14 @@
                     "uk": "Get 12 Months for the Price of 10"
                 }
             },
+            "12-MONTHS-FOR-PRICE-OF-NUMBER": {
+                "type": "text",
+                "content": {
+                    "en": "Get 12 Months for the Price of %{promoNumberOfMonth}",
+                    "es": "Obtenga 12 meses por el precio de %{promoNumberOfMonth} meses",
+                    "uk": "Get 12 Months for the Price of %{promoNumberOfMonth}"
+                }
+            },
             "UPGRADE-TO-ANNUAL": {
                 "type": "text",
                 "content": {
