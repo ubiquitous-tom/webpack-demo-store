@@ -98,6 +98,8 @@ class SwitchToAnnualPlan extends View {
         ? this.model.get('promoAppliedAmount')
         : this.model.get('annualStripePlan').SubscriptionAmount,
       nextBillingDate: this.getLocalizedDate(this.model.get('Membership').NextBillingDate),
+      isUK: (this.model.get('stripePlansCountry') === 'GB'),
+      promoNumberOfMonth: (this.model.get('stripePlansCountry') === 'GB') ? 6 : 10,
     }
     const html = this.template(data)
     // console.log(html)
