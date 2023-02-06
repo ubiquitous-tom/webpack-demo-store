@@ -61,8 +61,6 @@ class MonthlyPlan extends View {
       // TODO: `isUpgradeAllowed` for initial launch. Remove in phase 2.
       isTigo: (this.model.get('Membership').Store === 'Tigo'),
       isUpgradeAllowed: (this.model.get('Membership').Store !== 'Tigo'),
-      isUK: (this.model.get('stripePlansCountry') === 'GB'),
-      promoNumberOfMonth: (this.model.get('stripePlansCountry') === 'GB') ? 6 : 10,
     }
     const html = this.template(data)
     this.$el.html(html)
