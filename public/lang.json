@@ -3313,17 +3313,17 @@
             "termsURL": {
                 "type": "url",
                 "content": {
-                    "en": "https:\/\/app.rlje.net\/terms\/acorn\/en.html",
-                    "es": "https:\/\/app.rlje.net\/terms\/acorn\/es.html",
-                    "uk": "https:\/\/app.rlje.net\/terms\/acorn\/en.html"
+                    "en": "https:\/\/www.amcnetworks.com\/terms-of-use\/",
+                    "es": "https:\/\/www.amcnetworks.com\/terms-of-use\/",
+                    "uk": "https:\/\/www.amcnetworks.com\/terms-of-use\/"
                 }
             },
             "privacyURL": {
                 "type": "url",
                 "content": {
-                    "en": "https:\/\/app.rlje.net\/privacy\/acorn\/en.html",
-                    "es": "https:\/\/app.rlje.net\/privacy\/acorn\/es.html",
-                    "uk": "https:\/\/app.rlje.net\/privacy\/acorn\/en.html"
+                    "en": "https:\/\/www.amcnetworks.com\/privacy-policy\/",
+                    "es": "https:\/\/www.amcnetworks.com\/privacy-policy\/",
+                    "uk": "https:\/\/www.amcnetworks.com\/privacy-policy\/"
                 }
             },
             "PRICING": {
