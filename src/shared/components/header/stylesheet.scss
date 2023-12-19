@@ -254,7 +254,7 @@
   }
 }
 
-@media all and (min-width: 1150px) {
+@media all and (min-width: 1300px) {
   /* NAVBAR */
   .navbar-toggle {
     display: none;
@@ -273,7 +273,7 @@
   }
 }
 
-@media (max-width: 1150px) {
+@media (max-width: 1300px) {
   /* NAVBAR */
   .navbar-toggle .icon-bar {
     background: #fff none repeat scroll 0 0;
@@ -342,6 +342,7 @@
     position: fixed;
     overflow: hidden;
     transition: width 0.4s;
+    background: #0b1733;
   }
   .side-collapse.in {
     width: 0;

@@ -3,7 +3,7 @@ import _ from 'underscore'
 import atvlogo from 'img/atvlogo.png'
 import './stylesheet.scss'
 import template from './index.hbs'
-// import HeaderModel from './model'
+import HeaderModel from './model'
 
 class Header extends View {
   get el() {
@@ -23,7 +23,7 @@ class Header extends View {
     }
   }
 
-  initialize() {
+  initialize(options) {
     console.log('Header initialize')
     // this.model = new HeaderModel()
     this.router = new Router()
@@ -36,11 +36,16 @@ class Header extends View {
         emailSection: isWebPaymentEdit || isTigo,
       },
     })
+
+    this.i18n = options.i18n
+    this.model = new HeaderModel(this.model.attributes)
     // this.model.set('atvlogo', atvlogo)
-    this.render()
+    // this.render()
+    this.listenTo(this.model, 'change:headerNavSuccess', this.render)
   }
 
   render() {
+    console.log('Header render')
     // https://gist.github.com/kyleondata/3440492
     // const template = Handlebars.compile(this.template)
     console.log(this.model.attributes)

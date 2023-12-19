@@ -1,7 +1,17 @@
 import { Model } from 'backbone'
+import _ from 'underscore'
 import StripeKey from 'core/models/stripe-key'
 
 class StripeFormModel extends Model {
+  get defaults() {
+    return {
+      captchaVersion: 'v3',
+      csrfValidationSuccess: true,
+      captchaValidationV2Success: true,
+      captchaValidationV3Success: true,
+    }
+  }
+
   get url() {
     return '/stripecard'
   }
@@ -73,14 +83,19 @@ class StripeFormModel extends Model {
     console.log('StripeFormModel error')
     console.log(model, resp, options)
     debugger
+    const captchaVersion = this.get('captchaVersion')
     let message = 'ERR-PROCESS-REQUEST'
+    let csrfValidationSuccess = true
+    let captchaValidationV3Success = true
+    let captchaValidationV2Success = true
     /* eslint function-paren-newline: 0 */
     resp
       .then(
         (response) => {
           console.log(response.responseJSON, response.responseText)
           if (!_.isEmpty(response.responseJSON)) {
-            message = response.responseJSON.message
+            message = response.responseJSON.message || response.responseJSON.error
+            console.log(message)
             return message
           }
           return message
@@ -88,7 +103,18 @@ class StripeFormModel extends Model {
         (error) => {
           console.log(error.responseJSON, error.responseText)
           if (!_.isEmpty(error.responseJSON)) {
-            message = error.responseJSON.error
+            message = error.responseJSON.message || error.responseJSON.error
+            console.log(message)
+            if (message.toLocaleLowerCase().includes('csrf')) {
+              csrfValidationSuccess = false
+            }
+            if (message.toLocaleLowerCase().includes('captcha')) {
+              if (captchaVersion === 'v3') {
+                captchaValidationV3Success = false
+              } else {
+                captchaValidationV2Success = false
+              }
+            }
             return message
           }
           if (!_.isEmpty(error.responseText)) {
@@ -101,6 +127,9 @@ class StripeFormModel extends Model {
         })
       .always(() => {
         options.context.set({
+          csrfValidationSuccess,
+          captchaValidationV3Success,
+          captchaValidationV2Success,
           addNewStripeCardSuccess: false,
           flashMessage: {
             type: 'error',

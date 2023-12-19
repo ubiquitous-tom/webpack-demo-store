@@ -37,6 +37,7 @@ class AccountInfo extends View {
       customerJoinedDate: this.model.get('joinedDate'),
       noSubscription: this.model.get('Subscription').NoSubscription,
       isTigo: (this.model.get('Membership').Store === 'Tigo'),
+      showCancelMembership: !this.isGift(),
     }
     const html = this.template(data)
     this.$el.html(html)
@@ -50,6 +51,10 @@ class AccountInfo extends View {
     const env = this.environment()
     const cancelMembershipURL = `https://${env}acorn.tv/account/cancel`
     window.location.assign(cancelMembershipURL)
+  }
+
+  isGift() {
+    return this.model.get('Subscription').Gift
   }
 
   getMembershipType() {

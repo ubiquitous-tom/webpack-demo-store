@@ -4258,7 +4258,7 @@
                 "type": "text",
                 "content": {
                     "en": "By creating an account you confirm that you are over 18 years old and that you've read, understand and agree to our <a href=\"${var1}\" target=\"_blank\">Terms of Use<\/a>, <a href=\"${var2}\" target=\"_blank\">Privacy Policy<\/a> and <a href=\"${var3}\" target=\"_blank\">Cookie Policy<\/a>.",
-                    "es": "Al crear tu cuenta confirmas que eres mayor de edad y que has le\u00eddo y aceptado nuestros <a href=\"${var1}\" target=\"_blank\">Terminos de uso<\/a>, <a href=\"${var2}\" target=\"_blank\">Pol\u00edtica de privacidad<\/a> and <a href=\"${var3}\" target=\"_blank\">Poli\u00edtica de Cookies<\/a>.",
+                    "es": "Al crear una cuenta confirmas que eres mayor de 18 a\u00f1os y que has le\u00eddo, entiendes y aceptas nuestras <a href=\"${var1}\" target=\"_blank\">Terminos de uso<\/a>, <a href=\"${var2}\" target=\"_blank\">Pol\u00edtica de privacidad<\/a> and <a href=\"${var3}\" target=\"_blank\">Poli\u00edtica de Cookies<\/a>.",
                     "uk": "By creating an account you confirm that you are over 18 years old and that you've read, understand and agree to our <a href=\"${var1}\" target=\"_blank\">Terms of Use<\/a>, <a href=\"${var2}\" target=\"_blank\">Privacy Policy<\/a> and <a href=\"${var3}\" target=\"_blank\">Cookie Policy<\/a>."
                 }
             },
@@ -5364,6 +5364,94 @@
                     "en": "Start streaming now! <a href=\"%{url}\">Try %{trialDays}  Days Free.<\/a>",
                     "es": "\u00a1Empiece a ver ahora! <a href=\"%{url}\">Prueba por %{trialDays} d\u00edas gratis.<\/a>",
                     "uk": "Start streaming now! <a href=\"%{url}\">Try %{trialDays}  Days Free.<\/a>"
+                }
+            },
+            "NO-ACCOUNT-WITH-THAT-EMAIL": {
+                "type": "text",
+                "content": {
+                    "en": "No account with that email address exists.",
+                    "es": "No existe ninguna cuenta con esa direcci\u00f3n de correo electr\u00f3nico.",
+                    "uk": "No account with that email address exists."
+                }
+            },
+            "FREE-EPISODES": {
+                "type": "text",
+                "content": {
+                    "en": "Free Episodes",
+                    "es": "Episodios Gratis",
+                    "uk": "Free Episodes"
+                }
+            },
+            "ABOUT": {
+                "type": "text",
+                "content": {
+                    "en": "About",
+                    "es": "Sobre",
+                    "uk": "About"
+                }
+            },
+            "COOKIES-POLICY": {
+                "type": "text",
+                "content": {
+                    "en": "Cookie Policy",
+                    "es": "Pol\u00edtica de cookies",
+                    "uk": "Cookie Policy"
+                }
+            },
+            "DO-NOT-SELL-MY-INFORMATION": {
+                "type": "text",
+                "content": {
+                    "en": "Do Not Sell My Personal Information",
+                    "es": "Do Not Sell My Personal Information",
+                    "uk": "Do Not Sell My Personal Information"
+                }
+            },
+            "DO-NOT-SELL-MY-PERSONAL-INFORMATION": {
+                "type": "text",
+                "content": {
+                    "en": "Do Not Sell My Personal Information",
+                    "es": "Do Not Sell My Personal Information",
+                    "uk": "Do Not Sell My Personal Information"
+                }
+            },
+            "EU-LEGAL-NOTICE": {
+                "type": "text",
+                "content": {
+                    "en": "EU Legal Notice",
+                    "es": "Aviso Legal De Uni\u00f3n Europe",
+                    "uk": "EU Legal Notice"
+                }
+            },
+            "COMING-SOON": {
+                "type": "text",
+                "content": {
+                    "en": "Coming Soon",
+                    "es": "Estrenos",
+                    "uk": "Coming Soon"
+                }
+            },
+            "LEGAL-CONSENT-INFORMATION-08-2023": {
+                "type": "text",
+                "content": {
+                    "en": "By clicking the \"Start Your Free Trial\" button, <strong>you agree that after your free trial, Acorn TV will auto-renew your membership at the then-current price (plus taxes) for the plan and the membership term you have selected, until you cancel.<\/strong> You may cancel at any time during your free trial and will not be charged. To cancel, go to Manage account and click \u201cCancel Membership\u201d in the My Acorn TV Settings. There are no refunds or credits for partial or unused months.",
+                    "es": "Al hacer clic en el bot\u00f3n \"Comienza tu prueba gratuita\", <strong>acepta que, una vez finalizada la prueba gratuita, Acorn TV le renueve autom\u00e1ticamente la suscripci\u00f3n al precio vigente en ese momento (m\u00e1s impuestos) para el plan y el plazo de suscripci\u00f3n que haya seleccionado, hasta que la cancele.<\/strong> Puede darse de baja en cualquier momento durante el periodo de prueba gratuito y no se le cobrar\u00e1 nada. Para cancelar, vaya a Administrar mi cuenta y haga clic en \"Cancela tu suscripci\u00f3n\" en la configuraci\u00f3n de Mi Acorn TV. No hay reembolsos ni cr\u00e9ditos por meses parciales o no utilizados.",
+                    "uk": "By clicking the \"Start Your Free Trial\" button, <strong>you agree that after your free trial, Acorn TV will auto-renew your membership at the then-current price (plus taxes) for the plan and the membership term you have selected, until you cancel.<\/strong> You may cancel at any time during your free trial and will not be charged. To cancel, go to Manage account and click \u201cCancel Membership\u201d in the My Acorn TV Settings. There are no refunds or credits for partial or unused months."
+                }
+            },
+            "DO-NOT-SELL-OR-SHARE-MY-PERSONAL-INFORMATION": {
+                "type": "text",
+                "content": {
+                    "en": "Do Not Sell or Share My Personal Information",
+                    "es": "No vender ni compartir mi informaci\u00f3n personal",
+                    "uk": "Do Not Sell or Share My Personal Information"
+                }
+            },
+            "ANNUAL-PLAN-GIFT-ENDS-ON-DATE": {
+                "type": "text",
+                "content": {
+                    "en": "Your annual plan gift ends on %{endDate}.",
+                    "es": "Tu plan anual de regalo finaliza el %{endDate}.",
+                    "uk": "Your annual plan gift ends on %{endDate}."
                 }
             }
         }

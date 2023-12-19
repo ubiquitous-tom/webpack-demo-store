@@ -69,6 +69,9 @@ class StripeForm extends View {
       console.log(model, value, options)
       console.log(model.get('captchaToken'))
       const captchaToken = model.get('captchaToken')
+      this.model.set({
+        captchaVersion: this.reCaptcha.model.get('captchaVersion'),
+      })
       debugger
       if (value) {
         const newStripeCardInfo = {
@@ -90,6 +93,50 @@ class StripeForm extends View {
     this.listenTo(this.model, 'change:stripeKey', this.initializeStripeForm)
 
     /* eslint no-shadow:0 */
+    this.listenTo(this.model, 'change:csrfValidationSuccess', (model, value, options) => {
+      console.log(model, value, options)
+      debugger
+      if (value) {
+        console.log('csrf validation passed')
+        debugger
+      } else {
+        console.log('csrf validation failed')
+        debugger
+      }
+    })
+
+    this.listenTo(this.model, 'change:captchaValidationV3Success', (model, value, options) => {
+      console.log(model, value, options)
+      debugger
+      if (value) {
+        console.log('captcha validation passed')
+        debugger
+      } else {
+        console.log('captcha validation failed')
+        debugger
+        this.reCaptcha.model.set({
+          isCaptchaTested: true,
+          generateCaptchaTokenSuccess: false,
+        })
+      }
+    })
+
+    this.listenTo(this.model, 'change:captchaValidationV2Success', (model, value, options) => {
+      console.log(model, value, options)
+      debugger
+      let { message } = model.get('flashMessage')
+      const { interpolationOptions, type } = model.get('flashMessage')
+      message = this.i18n.t(message, interpolationOptions)
+      if (value) {
+        console.log('captcha validation passed')
+        debugger
+      } else {
+        console.log('captcha validation failed')
+        debugger
+        this.flashMessage.onFlashMessageShow(message, type)
+      }
+    })
+
     this.listenTo(this.model, 'change:addNewStripeCardSuccess', (model, value, options) => {
       console.log(model, value, options)
       debugger
@@ -102,14 +149,11 @@ class StripeForm extends View {
         debugger
         this.$el.find('#stripe-form').empty()
         this.parentView.render()
-        this.flashMessage.onFlashMessageShow(message, type)
-      } else {
-        debugger
-        this.reCaptcha.model.set({
-          isCaptchaTested: true,
-          generateCaptchaTokenSuccess: false,
-        })
       }
+      //  else {
+      //   this.resetStripeForm()
+      // }
+      this.flashMessage.onFlashMessageShow(message, type)
     })
   }
 
@@ -211,6 +255,12 @@ class StripeForm extends View {
       })
 
     this.render()
+  }
+
+  resetStripeForm() {
+    this.cardNumber.clear()
+    this.cardExpiry.clear()
+    this.cardCvc.clear()
   }
 
   render() {

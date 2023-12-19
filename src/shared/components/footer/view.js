@@ -35,12 +35,12 @@ class Footer extends View {
     Fancybox.bind('[data-fancybox]')
 
     // render for sync
-    // this.listenTo(this.model, 'change', this.render)
+    this.listenTo(this.model, 'change:footerNavSuccess', this.render)
 
     // render for localStorage
     // console.log('context', this.context)
     // debugger
-    this.render()
+    // this.render()
   }
 
   render() {

@@ -74,15 +74,13 @@
 
     <div class="navbar-collapse side-collapse in">
       <ul class="nav navbar-nav">
-        <li><a href="//{{environment}}acorn.tv/">{{t "HOME"}}</a></li>
-        <li><a href="//{{environment}}acorn.tv/browse">{{t "BROWSE"}}</a></li>
+        {{#each navData}}
         <li>
-          <a href="//{{environment}}acorn.tv/schedule">
-            {{t "SCHEDULE"}}
+          <a href="{{ headerNavURL }}">
+            {{ t i18nKey }}
           </a>
         </li>
-        <li><a href="//support.acorn.tv">{{t "HELP"}}</a></li>
-        <li><a id="store-link" href="{{storeEnv}}">{{t "STORE"}}</a></li>
+        {{/each}}
       </ul>
     </div>
   </div>

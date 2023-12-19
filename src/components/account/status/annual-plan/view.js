@@ -54,6 +54,7 @@ class AnnualPlan extends View {
       annualPerMonthPricing: this.model.get('annualPerMonthPricing'),
       monthlySubscriptionAmount: this.model.get('monthlyStripePlan').SubscriptionAmount,
       tagline: this.getTagline(),
+      annualPlanMessage: this.getAnnualPlanMessage(),
     }
     const html = this.template(data)
     // console.log(html)
@@ -68,6 +69,20 @@ class AnnualPlan extends View {
   contentPlaceholder() {
     console.log('AnnualPlan contentPlaceholder')
     this.$el.find('.current-plan').html(placeholder)
+  }
+
+  getAnnualPlanMessage() {
+    if (this.isGift()) {
+      return this.i18n.t('ANNUAL-PLAN-GIFT-ENDS-ON-DATE', { endDate: this.model.get('Membership').ExpirationDate })
+    }
+    return this.i18n.t('ANNUAL-PLAN-RENEWS-ON-DATE-PRICE', {
+      currSymbol: this.model.get('annualStripePlan').CurrSymbol,
+      subscriptionAmount: this.getCurrentNetAmount(),
+    })
+  }
+
+  isGift() {
+    return this.model.get('Subscription').Gift
   }
 
   switchToMonthly(e) {

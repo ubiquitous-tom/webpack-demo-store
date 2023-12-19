@@ -4,40 +4,29 @@
 </div>
 <div class="terms-condition">
   <ul>
-    <li>
-      <a href="https://www.amcnetworks.com/terms-of-use/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {{t 'TERMS-AND-CONDITIONS'}}
-      </a>
-    </li>
-    <li>
-      <a href="https://www.amcnetworks.com/privacy-policy/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {{t 'PRIVACY-POLICY-UPPER'}}
-      </a>
-    </li>
-    <li>
-      <a href="https://www.amcnetworks.com/cookies-2/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {{t 'COOKIE-POLICY'}}
-      </a>
-    </li>
+    {{#each navData}}
     <li>
       <a
-      href="https://app.rlje.net/caption-policy/{{ currentLanguage }}.html"
+      href="{{ footerNavURL }}"
+        {{#if displayClasses}}
+        class="{{ displayClasses }}"
+        {{/if}}
+
+        {{#if isPopUp}}
         data-fancybox
         data-type="iframe"
         data-preload="false"
+        {{else}}
+        {{#if target}}
+        target="{{ target }}"
+        {{/if}}
+        rel="noopener noreferrer"
+        {{/if}}
       >
-        {{t 'CAPTIONING-POLICY-UPPER'}}
+        {{t i18nKey}}
       </a>
     </li>
+    {{/each}}
   </ul>
 </div>
 
