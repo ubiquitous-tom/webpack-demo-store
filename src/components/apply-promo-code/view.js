@@ -7,7 +7,7 @@ import ApplyPromoCodeModel from './model'
 
 class ApplyPromoCode extends View {
   get el() {
-    return 'section'
+    return 'section.account-wrap'
   }
 
   get template() {

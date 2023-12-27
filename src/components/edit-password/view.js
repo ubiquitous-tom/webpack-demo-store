@@ -8,7 +8,7 @@ import EditPasswordModel from './model'
 
 class EditPassword extends View {
   get el() {
-    return 'section'
+    return 'section.account-wrap'
   }
 
   get template() {

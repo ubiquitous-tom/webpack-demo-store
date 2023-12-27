@@ -10,7 +10,7 @@ import CanceledPlan from './canceled-plan'
 
 class AccountStatus extends View {
   get el() {
-    return 'section'
+    return 'section.account-wrap'
   }
 
   get template() {

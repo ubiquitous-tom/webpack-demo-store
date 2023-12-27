@@ -12,7 +12,7 @@ import ConfirmNewBilling from './confirm-new-billing'
 
 class UpdateCard extends View {
   get el() {
-    return 'section'
+    return 'section.account-wrap'
   }
 
   get template() {
