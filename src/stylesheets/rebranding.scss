@@ -1,44 +1,21 @@
-/* ACORN REBRANDING 2019-08-15 */
-body {
-	background: #0b1733;
+h1,
+.h1,
+.highlight,
+.sign-in h4,
+.signedIn h4,
+.recBooks h4,
+.routing .order-items h2,
+.billing .acorn-login strong {
+    color: #720000;
 }
-.navbar {
-	background: #0b1733;
-	box-shadow: 0 0 30px -5px #0A132A;
+
+.btn-primary {
+    background-color: #008989;
 }
-.nav-tabs {
-	>li.active {
-		>a {
-			background: #0b1733;
-			&:hover {
-				background: #0b1733;
-			}
-			&:focus {
-				background: #0b1733;
-			}
-		}
-	}
-	>li {
-		>a {
-			&:hover {
-				background: #008989;
-			}
-		}
-	}
-}
-#account {
-	button {
-		background: #008989;
-		&:hover {
-			background: #0b1733;
-		}
-	}
-}
-.drop-select {
-	background: #0b1733;
-	li {
-		&:hover {
-			background: #008989;
-		}
-	}
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus,
+.btn-primary:hover:active {
+    background-color: #0b1733;
 }

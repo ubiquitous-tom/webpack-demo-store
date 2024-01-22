@@ -17,7 +17,7 @@ class CSRFAuthorization extends Model {
     /* eslint-disable no-shadow */
     this.model.on('change:setPreAuthSuccess', (model, value, options) => {
       console.log(model, value, options)
-      debugger
+      // debugger
       this.model.set('setCSRFAuthorizationSuccess', value)
     })
   }

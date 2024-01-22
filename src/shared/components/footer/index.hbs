@@ -1,40 +1,43 @@
-<div class="copyright">
-{{!log this level="error"}}
-  <p>&copy; {{ currentYear }} RLJ Entertainment, Inc. {{t 'ALL-RIGHTS-SHORT'}}</p>
-</div>
-<div class="terms-condition">
-  <ul>
-    {{#each navData}}
-    <li>
-      <a
-      href="{{ footerNavURL }}"
-        {{#if displayClasses}}
-        class="{{ displayClasses }}"
-        {{/if}}
+<div class="container">
+  <div class="copyright">
+  {{!log this level="error"}}
+    <p>&copy; {{ currentYear }} RLJ Entertainment, Inc. {{t 'ALL-RIGHTS-SHORT'}}</p>
+  </div>
 
-        {{#if isPopUp}}
-        data-fancybox
-        data-type="iframe"
-        data-preload="false"
-        {{else}}
-        {{#if target}}
-        target="{{ target }}"
-        {{/if}}
-        rel="noopener noreferrer"
-        {{/if}}
-      >
-        {{t i18nKey}}
-      </a>
-    </li>
-    {{/each}}
-  </ul>
-</div>
+  <div class="terms-condition">
+    <ul>
+      {{#each navData}}
+      <li>
+        <a
+        href="{{ footerNavURL }}"
+          {{#if displayClasses}}
+          class="{{ displayClasses }}"
+          {{/if}}
 
-<div class="lang-select">
-  <label class="atv-locale" for="atvLocale">{{t 'Language' }}:</label>
-  <select name="atv_locale" id="atvLocale">
-    {{#each languages}}
-    {{{option @key ../currentLanguage this}}}
-    {{/each}}
-  </select>
+          {{#if isPopUp}}
+          data-fancybox
+          data-type="iframe"
+          data-preload="false"
+          {{else}}
+          {{#if target}}
+          target="{{ target }}"
+          {{/if}}
+          rel="noopener noreferrer"
+          {{/if}}
+        >
+          {{t i18nKey}}
+        </a>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+
+  <div class="lang-select">
+    <label class="atv-locale" for="atvLocale">{{t 'Language' }}:</label>
+    <select name="atv_locale" id="atvLocale">
+      {{#each languages}}
+      {{{option @key ../currentLanguage this}}}
+      {{/each}}
+    </select>
+  </div>
 </div>

@@ -2,6 +2,8 @@ import _ from 'underscore'
 import { LocalStorage } from 'backbone'
 import ATVModel from 'core/model'
 
+import docCookies from 'doc-cookies'
+
 class LogoutModel extends ATVModel {
   get defaults() {
     return {
@@ -40,6 +42,8 @@ class LogoutModel extends ATVModel {
   }
 
   clearStorageContent() {
+    docCookies.removeItem('ATVSessionCookie')
+
     if (!_.isEmpty(this.localStorage.records)) {
       _.each(this.get('localStorageIDs'), (localStorageID, key, collection) => {
         this.localStorage = new LocalStorage(localStorageID)

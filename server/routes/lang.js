@@ -14,7 +14,7 @@ const lang = (req, res) => {
   console.log('Express Router lang ATVSessionCookie', atvSessionCookie)
 
   const options = {
-    host: `account${process.env.API_ENVIRONMENT}.acorn.tv`,
+    host: `store${process.env.API_ENVIRONMENT}.acorn.tv`,
     path: '/lang',
     headers: {
       Cookie: `ATVSessionCookie=${atvSessionCookie}`,

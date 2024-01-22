@@ -28,8 +28,8 @@ class Header extends View {
     // this.model = new HeaderModel()
     this.router = new Router()
 
-    const isWebPaymentEdit = this.model.get('Customer').webPaymentEdit
-    const isTigo = this.model.get('Membership').Store === 'Tigo'
+    const isWebPaymentEdit = this.model.has('Customer') && this.model.get('Customer').webPaymentEdit
+    const isTigo = this.model.has('Membership') && this.model.get('Membership').Store === 'Tigo'
     this.model.set({
       atvlogo,
       navigation: {

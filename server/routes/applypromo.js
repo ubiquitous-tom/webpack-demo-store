@@ -15,7 +15,7 @@ const applyPromo = (req, res) => {
 
   const postData = JSON.stringify(req.body)
   const options = {
-    host: `account${process.env.API_ENVIRONMENT}.acorn.tv`,
+    host: `store${process.env.API_ENVIRONMENT}.acorn.tv`,
     // port: 443,
     path: '/applypromo',
     method: 'POST',

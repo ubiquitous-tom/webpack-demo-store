@@ -9,7 +9,7 @@ const stripeKey = (req, res) => {
   // console.log(res)
 
   const options = {
-    host: `account${process.env.API_ENVIRONMENT}.acorn.tv`,
+    host: `store${process.env.API_ENVIRONMENT}.acorn.tv`,
     path: '/stripekey',
   }
 

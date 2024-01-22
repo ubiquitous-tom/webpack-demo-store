@@ -53,11 +53,11 @@ class HeaderModel extends Model {
     resp.forEach((item) => {
       item.i18nKey = item.title.toUpperCase().replace(/\s+/g, '-')
       item.displayClasses = item.classes.join(' ')
-      console.log(item.url)
+      // console.log(item.url)
       const baseURL = `https://${this.get('environment')}acorn.tv/`
-      console.log(baseURL)
+      // console.log(baseURL)
       const url = new URL(item.url, baseURL)
-      console.log(url)
+      // console.log(url)
       item.headerNavURL = url.href
     })
     data.navData = resp

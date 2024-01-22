@@ -1,178 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Acorn TV</title>
+	<head>
+		<meta charset='utf-8'>
+		<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Acorn TV Store</title>
 
-    <!-- reCaptcha -->
-    <script src="https://www.google.com/recaptcha/api.js?render=6LcopHAcAAAAAK1rAANQV5JNrIoeZ5JyW1GoczaE" async defer></script>
-    <script>
-      // How this code snippet works:
-      // This logic overwrites the default behavior of `grecaptcha.ready()` to
-      // ensure that it can be safely called at any time. When `grecaptcha.ready()`
-      // is called before reCAPTCHA is loaded, the callback function that is passed
-      // by `grecaptcha.ready()` is enqueued for execution after reCAPTCHA is
-      // loaded.
-      if(typeof grecaptcha === 'undefined') {
-        grecaptcha = {};
-      }
-      grecaptcha.ready = function(cb){
+        <!-- reCaptcha -->
+        <script src="https://www.google.com/recaptcha/api.js?render=6LcopHAcAAAAAK1rAANQV5JNrIoeZ5JyW1GoczaE" async defer></script>
+        <script>
+        // How this code snippet works:
+        // This logic overwrites the default behavior of `grecaptcha.ready()` to
+        // ensure that it can be safely called at any time. When `grecaptcha.ready()`
+        // is called before reCAPTCHA is loaded, the callback function that is passed
+        // by `grecaptcha.ready()` is enqueued for execution after reCAPTCHA is
+        // loaded.
         if(typeof grecaptcha === 'undefined') {
-          // window.__grecaptcha_cfg is a global variable that stores reCAPTCHA's
-          // configuration. By default, any functions listed in its 'fns' property
-          // are automatically executed when reCAPTCHA loads.
-          const c = '___grecaptcha_cfg';
-          window[c] = window[c] || {};
-          (window[c]['fns'] = window[c]['fns']||[]).push(cb);
-        } else {
-          cb();
+            grecaptcha = {};
         }
-      }
-
-      // Usage
-      // grecaptcha.ready(function(){
-      //   grecaptcha.render("container", {
-      //     sitekey: "ABC-123"
-      //   });
-      // });
-    </script>
-
-    <!-- Google Analytics Tracking start -->
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-901883-10', 'auto');
-      // ga('send', 'pageview');
-    </script>
-    <!-- Google Analytics Tracking end -->
-
-    <!-- OneTrust Cookies Consent Notice start -->
-    <script type="text/javascript" src="https://cdn.cookielaw.org/consent/3468fb8f-06a6-4518-89d0-5c471524b0dd/OtAutoBlock.js"></script>
-    <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"  type="text/javascript" charset="UTF-8" data-domain-script="3468fb8f-06a6-4518-89d0-5c471524b0dd"></script>
-    <script type="text/javascript">
-    function OptanonWrapper() { }
-    </script>
-    <!-- OneTrust Cookies Consent Notice end -->
-
-    <!-- Braze Tracking -->
-    <script type="text/javascript">
-      +function(a,p,P,b,y){a.appboy={};a.appboyQueue=[];for(var s="initialize destroy getDeviceId toggleAppboyLogging setLogger openSession changeUser requestImmediateDataFlush requestFeedRefresh subscribeToFeedUpdates requestContentCardsRefresh subscribeToContentCardsUpdates logCardImpressions logCardClick logCardDismissal logFeedDisplayed logContentCardsDisplayed logInAppMessageImpression logInAppMessageClick logInAppMessageButtonClick logInAppMessageHtmlClick subscribeToNewInAppMessages subscribeToInAppMessage removeSubscription removeAllSubscriptions logCustomEvent logPurchase isPushSupported isPushBlocked isPushGranted isPushPermissionGranted registerAppboyPushMessages unregisterAppboyPushMessages trackLocation stopWebTracking resumeWebTracking wipeData ab ab.DeviceProperties ab.User ab.User.Genders ab.User.NotificationSubscriptionTypes ab.User.prototype.getUserId ab.User.prototype.setFirstName ab.User.prototype.setLastName ab.User.prototype.setEmail ab.User.prototype.setGender ab.User.prototype.setDateOfBirth ab.User.prototype.setCountry ab.User.prototype.setHomeCity ab.User.prototype.setLanguage ab.User.prototype.setEmailNotificationSubscriptionType ab.User.prototype.setPushNotificationSubscriptionType ab.User.prototype.setPhoneNumber ab.User.prototype.setAvatarImageUrl ab.User.prototype.setLastKnownLocation ab.User.prototype.setUserAttribute ab.User.prototype.setCustomUserAttribute ab.User.prototype.addToCustomAttributeArray ab.User.prototype.removeFromCustomAttributeArray ab.User.prototype.incrementCustomUserAttribute ab.User.prototype.addAlias ab.User.prototype.setCustomLocationAttribute ab.InAppMessage ab.InAppMessage.SlideFrom ab.InAppMessage.ClickAction ab.InAppMessage.DismissType ab.InAppMessage.OpenTarget ab.InAppMessage.ImageStyle ab.InAppMessage.TextAlignment ab.InAppMessage.Orientation ab.InAppMessage.CropType ab.InAppMessage.prototype.subscribeToClickedEvent ab.InAppMessage.prototype.subscribeToDismissedEvent ab.InAppMessage.prototype.removeSubscription ab.InAppMessage.prototype.removeAllSubscriptions ab.InAppMessage.prototype.closeMessage ab.InAppMessage.Button ab.InAppMessage.Button.prototype.subscribeToClickedEvent ab.InAppMessage.Button.prototype.removeSubscription ab.InAppMessage.Button.prototype.removeAllSubscriptions ab.SlideUpMessage ab.ModalMessage ab.FullScreenMessage ab.HtmlMessage ab.ControlMessage ab.Feed ab.Feed.prototype.getUnreadCardCount ab.ContentCards ab.ContentCards.prototype.getUnviewedCardCount ab.Card ab.Card.prototype.dismissCard ab.ClassicCard ab.CaptionedImage ab.Banner ab.ControlCard ab.WindowUtils display display.automaticallyShowNewInAppMessages display.showInAppMessage display.showFeed display.destroyFeed display.toggleFeed display.showContentCards display.hideContentCards display.toggleContentCards sharedLib".split(" "),i=0;i<s.length;i++){for(var m=s[i],k=a.appboy,l=m.split("."),j=0;j<l.length-1;j++)k=k[l[j]];k[l[j]]=(new Function("return function "+m.replace(/\./g,"_")+"(){window.appboyQueue.push(arguments); return true}"))()}window.appboy.getUser=function(){return new window.appboy.ab.User};window.appboy.getCachedFeed=function(){return new window.appboy.ab.Feed};window.appboy.getCachedContentCards=function(){return new window.appboy.ab.ContentCards};(y=p.createElement(P)).type='text/javascript';
-        y.src='https://js.appboycdn.com/web-sdk/2.5/appboy.min.js';
-        y.async=1;(b=p.getElementsByTagName(P)[0]).parentNode.insertBefore(y,b)
-      }(window,document,'script');
-
-      appboy.initialize('69600974-f173-4135-890b-b1dcabb58f65');
-      appboy.display.automaticallyShowNewInAppMessages();
-    </script>
-
-    <!-- Salesforce Tracking code -->
-    <script class="kxct" data-id="trphemxeo" data-timing="async" data-version="3.0" type="text/javascript">
-      window.Krux||((Krux=function(){Krux.q.push(arguments)}).q=[]);
-      (function(){
-        var k=document.createElement('script');k.type='text/javascript';k.async=true;
-        k.src=(location.protocol==='https:'?'https:':'http:')+'//cdn.krxd.net/controltag/trphemxeo.js';
-        var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(k,s);
-      }());
-    </script>
-    <!-- END Salesforce DMP ControlTag -->
-
-    <script>
-      Krux('ns:amcnetworks', 'consent:set', {
-        dc: true,
-        al: true,
-        tg: true,
-        cd: true,
-        sh: true,
-        re: true
-      }, function(errors, body) {
-        if (errors) {
-          console.error(errors);
-        } else {
-          console.log('Successfully set consent flags.');
+        grecaptcha.ready = function(cb){
+            if(typeof grecaptcha === 'undefined') {
+            // window.__grecaptcha_cfg is a global variable that stores reCAPTCHA's
+            // configuration. By default, any functions listed in its 'fns' property
+            // are automatically executed when reCAPTCHA loads.
+            const c = '___grecaptcha_cfg';
+            window[c] = window[c] || {};
+            (window[c]['fns'] = window[c]['fns']||[]).push(cb);
+            } else {
+            cb();
+            }
         }
-      });
-    </script>
-    <script src="https://js.stripe.com/v3"></script>
-  </head>
-  <body>
-    <header></header>
-    <article id="account">
-      <div class="container">
-        <div class="row">
-          <nav class="col-lg-3 col-sm-4 col-xs-12 tabs">
-            <div class="item">
-              <div class="content">
-                <div class="item-sidebar"></div>
-                <div class="item-sidebar"></div>
-                <div class="item-sidebar"></div>
-                <div class="item-sidebar"></div>
-                <div class="item-sidebar"></div>
-              </div>
-            </div>
-          </nav>
-          <section class="col-lg-9 col-sm-8 col-xs-12 account-wrap">
-            <div id="annual-plan" class="row">
-              <div class="col-md-8">
-                <div class="item">
-                  <div class="content">
-                    <div class="super-short-title"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-8">
-                <div class="item">
-                  <div class="content">
-                    <div class="title"></div>
-                    <div class="short-title"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-8">
-                <div class="item">
-                  <div class="content">
-                    <div class="title"></div>
-                    <div class="short-title"></div>
-                    <div class="title"></div>
-                    <div class="title"></div>
-                    <div class="short-title"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-8">
-                <div class="item">
-                  <div class="content">
-                    <div class="short-title"></div>
-                    <div class="title"></div>
-                    <div class="title"></div>
-                    <div class="title"></div>
-                    <div class="title"></div>
-                    <div class="short-title"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-8">
-                <div class="item">
-                  <div class="content">
-                    <div class="short-title"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-      </div>
-    </article>
-    <footer class="container"></footer>
-  </body>
+
+        // Usage
+        // grecaptcha.ready(function(){
+        //   grecaptcha.render("container", {
+        //     sitekey: "ABC-123"
+        //   });
+        // });
+        </script>
+
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-56956414-1', 'auto');
+			ga(function() {
+				ga('require', 'ecommerce');
+			});
+		</script>
+
+		<!-- Google Tag Manager -->
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+			j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+			})(window,document,'script','dataLayer','GTM-5C5NK6');
+		</script>
+		<!-- End Google Tag Manager -->
+
+		<!-- Fav and touch icons -->
+		<link rel='apple-touch-icon-precomposed' sizes='72x72' href='img/apple-touch-icon-72x72-precomposed.png'>
+		<link rel="shortcut icon" href="img/favicon.ico" />
+
+		{{!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<link href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
+		<link href='//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css' rel='stylesheet'>
+
+		<link href="css/updates.css" rel="stylesheet">
+		<link href="css/main.css" rel="stylesheet">
+		<link href="css/rebranding.css" rel="stylesheet"> --}}
+
+		<!-- OneTrust Cookies Consent Notice start -->
+		<script type="text/javascript" src="https://cdn.cookielaw.org/consent/3468fb8f-06a6-4518-89d0-5c471524b0dd/OtAutoBlock.js"></script>
+		<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"  type="text/javascript" charset="UTF-8" data-domain-script="3468fb8f-06a6-4518-89d0-5c471524b0dd"></script>
+		<script type="text/javascript">
+		function OptanonWrapper() { }
+		</script>
+		<!-- OneTrust Cookies Consent Notice end -->
+
+		<!-- Braze Tracking -->
+		<script type="text/javascript">
+			+function(a,p,P,b,y){a.appboy={};a.appboyQueue=[];for(var s="initialize destroy getDeviceId toggleAppboyLogging setLogger openSession changeUser requestImmediateDataFlush requestFeedRefresh subscribeToFeedUpdates requestContentCardsRefresh subscribeToContentCardsUpdates logCardImpressions logCardClick logCardDismissal logFeedDisplayed logContentCardsDisplayed logInAppMessageImpression logInAppMessageClick logInAppMessageButtonClick logInAppMessageHtmlClick subscribeToNewInAppMessages subscribeToInAppMessage removeSubscription removeAllSubscriptions logCustomEvent logPurchase isPushSupported isPushBlocked isPushGranted isPushPermissionGranted registerAppboyPushMessages unregisterAppboyPushMessages trackLocation stopWebTracking resumeWebTracking wipeData ab ab.DeviceProperties ab.User ab.User.Genders ab.User.NotificationSubscriptionTypes ab.User.prototype.getUserId ab.User.prototype.setFirstName ab.User.prototype.setLastName ab.User.prototype.setEmail ab.User.prototype.setGender ab.User.prototype.setDateOfBirth ab.User.prototype.setCountry ab.User.prototype.setHomeCity ab.User.prototype.setLanguage ab.User.prototype.setEmailNotificationSubscriptionType ab.User.prototype.setPushNotificationSubscriptionType ab.User.prototype.setPhoneNumber ab.User.prototype.setAvatarImageUrl ab.User.prototype.setLastKnownLocation ab.User.prototype.setUserAttribute ab.User.prototype.setCustomUserAttribute ab.User.prototype.addToCustomAttributeArray ab.User.prototype.removeFromCustomAttributeArray ab.User.prototype.incrementCustomUserAttribute ab.User.prototype.addAlias ab.User.prototype.setCustomLocationAttribute ab.InAppMessage ab.InAppMessage.SlideFrom ab.InAppMessage.ClickAction ab.InAppMessage.DismissType ab.InAppMessage.OpenTarget ab.InAppMessage.ImageStyle ab.InAppMessage.TextAlignment ab.InAppMessage.Orientation ab.InAppMessage.CropType ab.InAppMessage.prototype.subscribeToClickedEvent ab.InAppMessage.prototype.subscribeToDismissedEvent ab.InAppMessage.prototype.removeSubscription ab.InAppMessage.prototype.removeAllSubscriptions ab.InAppMessage.prototype.closeMessage ab.InAppMessage.Button ab.InAppMessage.Button.prototype.subscribeToClickedEvent ab.InAppMessage.Button.prototype.removeSubscription ab.InAppMessage.Button.prototype.removeAllSubscriptions ab.SlideUpMessage ab.ModalMessage ab.FullScreenMessage ab.HtmlMessage ab.ControlMessage ab.Feed ab.Feed.prototype.getUnreadCardCount ab.ContentCards ab.ContentCards.prototype.getUnviewedCardCount ab.Card ab.Card.prototype.dismissCard ab.ClassicCard ab.CaptionedImage ab.Banner ab.ControlCard ab.WindowUtils display display.automaticallyShowNewInAppMessages display.showInAppMessage display.showFeed display.destroyFeed display.toggleFeed display.showContentCards display.hideContentCards display.toggleContentCards sharedLib".split(" "),i=0;i<s.length;i++){for(var m=s[i],k=a.appboy,l=m.split("."),j=0;j<l.length-1;j++)k=k[l[j]];k[l[j]]=(new Function("return function "+m.replace(/\./g,"_")+"(){window.appboyQueue.push(arguments); return true}"))()}window.appboy.getUser=function(){return new window.appboy.ab.User};window.appboy.getCachedFeed=function(){return new window.appboy.ab.Feed};window.appboy.getCachedContentCards=function(){return new window.appboy.ab.ContentCards};(y=p.createElement(P)).type='text/javascript';
+				y.src='https://js.appboycdn.com/web-sdk/2.5/appboy.min.js';
+				y.async=1;(b=p.getElementsByTagName(P)[0]).parentNode.insertBefore(y,b)
+			}(window,document,'script');
+
+			appboy.initialize('69600974-f173-4135-890b-b1dcabb58f65');
+			appboy.display.automaticallyShowNewInAppMessages();
+		</script>
+
+		<!-- Salesforce Tracking code -->
+		<script class="kxct" data-id="trphemxeo" data-timing="async" data-version="3.0" type="text/javascript">
+            window.Krux||((Krux=function(){Krux.q.push(arguments)}).q=[]);
+            (function(){
+                var k=document.createElement('script');k.type='text/javascript';k.async=true;
+                k.src=(location.protocol==='https:'?'https:':'http:')+'//cdn.krxd.net/controltag/trphemxeo.js';
+                var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(k,s);
+            }());
+        </script>
+        <!-- END Salesforce DMP ControlTag -->
+
+        <script>
+            Krux('ns:amcnetworks', 'consent:set', {
+                dc: true,
+                al: true,
+                tg: true,
+                cd: true,
+                sh: true,
+                re: true
+            }, function(errors, body) {
+                if (errors) {
+                    console.error(errors);
+                } else {
+                    console.log('Successfully set consent flags.');
+                }
+            });
+        </script>
+
+        <script src="https://js.stripe.com/v3/"></script>
+	</head>
+
+	<body data-grid-framework="bf" data-grid-color="red" data-grid-opacity="0.3" data-grid-zindex="10" data-grid-nbcols="12">
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5C5NK6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+
+		<!-- <script>
+			if (window.location.protocol !== 'https:') {
+				window.location = 'https://' + window.location.hostname + window.location.pathname + window.location.hash;
+			}
+		</script> -->
+        <header></header>
+        <div id="content-section" class="page-wrap"></div>
+        <footer></footer>
+
+		<!-- <script src="//sadmin.brightcove.com/js/BrightcoveExperiences.js"></script>
+		<script src="js/vendor/jquery.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/polyglot.js/2.2.2/polyglot.min.js"></script>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+		<script src="js/vendor/underscore.min.js"></script>
+		<script src="js/vendor/backbone.min.js"></script>
+		<script src="js/vendor/backbone.validation.min.js"></script>
+		<script src="js/plugins.js"></script>
+		<script src="js/main.js"></script>
+		<script src="js/updates.js"></script> -->
+    </body>
 </html>

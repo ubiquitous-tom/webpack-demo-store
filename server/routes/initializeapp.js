@@ -13,7 +13,7 @@ const initializeApp = (req, res) => {
   console.log('Express Router initializeApp ATVSessionCookie', atvSessionCookie)
 
   const options = {
-    host: `account${process.env.API_ENVIRONMENT}.acorn.tv`,
+    host: `store${process.env.API_ENVIRONMENT}.acorn.tv`,
     path: '/initializeapp?AppVersion=ATV2.0.0',
     headers: {
       Cookie: `ATVSessionCookie=${atvSessionCookie}`,

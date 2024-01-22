@@ -1,26 +1,28 @@
 import { History, Router } from 'backbone'
 import _ from 'underscore'
 import BackBoneContext from 'core/contexts/backbone-context'
+
 import Logout from 'shared/elements/logout'
 
-import AccountHome from 'components/account'
-import EditEmail from 'components/edit-email'
-import EditPassword from 'components/edit-password'
+import StoreHome from 'components/store'
+import Membership from 'components/membership'
+import Give from 'components/give'
+import ApplyGiftCode from 'components/apply-gift-code'
 import ApplyPromoCode from 'components/apply-promo-code'
-import UpdateCard from 'components/updatecard/view'
+import EditBilling from 'components/edit-billing'
+import Review from 'components/review'
+import Thankyou from 'components/thankyou'
 
 class Workspace extends Router {
   get routes() {
     return {
-      accountStatus: 'accountStatus',
-      editAccount: 'editAccount',
-      editEmail: 'editEmail',
-      editPassword: 'editPassword',
-      cancelMembership: 'cancelMembership',
-      renewMembership: 'renewMembership',
-      buyMembership: 'buyMembership',
+      membership: 'membership',
+      give: 'give',
+      applyGiftCode: 'applyGiftCode',
       applyPromoCode: 'applyPromoCode',
-      updatecard: 'updateCard',
+      editBilling: 'editBilling',
+      review: 'review',
+      thankyou: 'thankyou',
       refresh: 'refresh',
       logout: 'logout',
       '*path': 'home',
@@ -35,11 +37,17 @@ class Workspace extends Router {
     this.context = new BackBoneContext()
     this.ga = this.context.getContext('ga')
     // Backbone.history.trigger('route', router, name, args);
+
+    this.listenTo(this, 'navChange', (model, value) => {
+      console.log(model, value)
+      debugger
+    })
   }
 
   execute(callback, args, name) {
     console.log('Router execute', callback, args, name)
-    this.setActiveSidebar()
+    // this.setActiveSidebar()
+    this.setDefaultHome()
     this.ga.logPageView(name)
 
     if (callback) {
@@ -49,12 +57,7 @@ class Workspace extends Router {
 
   goToLogin() {
     console.log('Router loads goToLogin')
-    this.accountStatus()
-  }
-
-  accountStatus() {
-    console.log('Router loads accountStatus')
-    new AccountHome({ model: this.model, i18n: this.i18n })
+    this.home()
   }
 
   logout() {
@@ -62,30 +65,19 @@ class Workspace extends Router {
     new Logout()
   }
 
-  editAccount() {
-    console.log('Router loads editAccount')
+  membership() {
+    console.log('Router loads membership')
+    new Membership({ model: this.model, i18n: this.i18n })
   }
 
-  editEmail() {
-    console.log('Router loads editEmail')
-    new EditEmail({ model: this.model, i18n: this.i18n })
+  give() {
+    console.log('Router loads give')
+    new Give({ model: this.model, i18n: this.i18n })
   }
 
-  editPassword() {
-    console.log('Router loads editPassword')
-    new EditPassword({ model: this.model, i18n: this.i18n })
-  }
-
-  cancelMembership() {
-    console.log('Router loads cancelMembership')
-  }
-
-  renewMembership() {
-    console.log('Router loads renewMembership')
-  }
-
-  buyMembership() {
-    console.log('Router loads buyMembership')
+  applyGiftCode() {
+    console.log('Router loads applyGiftCode')
+    new ApplyGiftCode({ model: this.model, i18n: this.i18n })
   }
 
   applyPromoCode() {
@@ -93,9 +85,19 @@ class Workspace extends Router {
     new ApplyPromoCode({ model: this.model, i18n: this.i18n })
   }
 
-  updateCard() {
-    console.log('Router loads updateCard')
-    new UpdateCard({ model: this.model, i18n: this.i18n })
+  editBilling() {
+    console.log('Router loads editBilling')
+    new EditBilling({ model: this.model, i18n: this.i18n })
+  }
+
+  review() {
+    console.log('Router loads review')
+    new Review({ model: this.model, i18n: this.i18n })
+  }
+
+  thankyou() {
+    console.log('Router loads thankyou')
+    new Thankyou({ model: this.model, i18n: this.i18n })
   }
 
   refresh() {
@@ -104,40 +106,22 @@ class Workspace extends Router {
   }
 
   home() {
-    this.navigate('accountStatus', true)
+    console.log('Route loads home')
+    new StoreHome({ model: this.model, i18n: this.i18n })
   }
 
-  setActiveSidebar() {
-    // A hack to get default navigation to work
-    if (!$('ul li').hasClass('active')) {
-      const hash = !_.isEmpty(window.location.hash) ? window.location.hash : '#accountStatus'
-      $(`${hash}Nav`).addClass('active')
+  // setActiveSidebar() {
+  //   // A hack to get default navigation to work
+  //   if (!$('ul li').hasClass('active')) {
+  //     const hash = !_.isEmpty(window.location.hash) ? window.location.hash : '#home'
+  //     $(`${hash}Nav`).addClass('active')
+  //   }
+  // }
+
+  setDefaultHome() {
+    if (_.isEmpty(window.location.hash)) {
+      window.location.hash = '#home'
     }
-  }
-
-  subscriptionUpdatedSuccess(model) {
-    console.log('Router subscriptionUpdatedSuccess')
-    console.log(this, model)
-    // debugger
-    // this.navigate('accountStatus', { trigger: true, replace: true })
-    // let newFragment = Backbone.history.getFragment($(this).attr('href'));
-    // if (Backbone.history.fragment == newFragment) {
-    //   // need to null out Backbone.history.fragement because
-    //   // navigate method will ignore when it is the same as newFragment
-    //   Backbone.history.fragment = null;
-    //   Backbone.history.navigate(newFragment, true);
-    // }
-    // this.accountStatus()
-    window.location.reload()
-  }
-
-  subscriptionUpdatedError(model) {
-    console.log('Router subscriptionUpdatedError')
-    console.log(this, model)
-    // debugger
-    // this.navigate('accountStatus', { trigger: true, replace: true })
-    // this.accountStatus()
-    window.location.reload()
   }
 }
 

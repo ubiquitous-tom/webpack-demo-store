@@ -14,7 +14,7 @@ const logout = (req, res) => {
   console.log('Express Router logout ATVSessionCookie', atvSessionCookie)
 
   const options = {
-    host: `account${process.env.API_ENVIRONMENT}.acorn.tv`,
+    host: `store${process.env.API_ENVIRONMENT}.acorn.tv`,
     path: '/logout',
     headers: {
       Cookie: `ATVSessionCookie=${atvSessionCookie}`,

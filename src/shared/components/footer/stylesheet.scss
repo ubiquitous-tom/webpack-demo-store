@@ -1,71 +1,195 @@
 footer {
-  display: flex;
-  flex-direction: column;
+  background: #161616 none repeat scroll 0 0;
+  font-size: 1em;
+  padding: 1em;
+}
+
+footer ul li a {
+  color: #d3d2cf;
+  font-weight: 300;
+  text-decoration: none;
+}
+
+footer ul li a:hover {
+  color: #d3d2cf;
+  text-decoration: none;
+}
+
+footer ul li a.dark {
+  color: #a8a6a1;
+}
+
+footer ul li a.dark:hover {
+  color: #a8a6a1;
+  text-decoration: none;
+  border-bottom: 1px solid #9b9995;
+}
+
+@media screen and (min-width: 1024px) {
+  footer {
+    padding: 2em 1.5em;
+  }
+}
+
+footer {
   padding: 20px 0;
   color: #fff;
-  &:after,
-  &:before {
-    content: none !important;
-  }
-  .copyright {
-    order: 3;
-    padding: 8px 0;
-  }
-  .terms-condition {
-    order: 2;
-    padding: 5px 0;
-  }
-  .lang-select {
-    order: 1;
-    padding: 10px 0;
-  }
-  p {
-    color: white;
-    margin: 0;
-    font-size: 14px;
-  }
-  ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    li {
-      padding: 5px 0;
-      a {
-        color: white;
-        font-size: 13px;
-        font-weight: 300;
-        &:hover {
-          color: #d3d2cf;
-        }
-      }
-    }
-  }
+  font-size: 12px;
+}
+
+footer>div {
+  display: flex;
+  flex-direction: column;
+}
+
+footer>div:after,
+footer>div:before {
+  content: none !important;
+}
+
+footer .copyright {
+  padding: 5px 0;
+}
+
+footer .copyright {
+  order: 3;
+}
+
+footer .terms-condition {
+  margin-top: 5px;
+  padding: 5px 0;
+}
+
+footer .terms-condition {
+  order: 2;
+}
+
+footer .lang-select {
+  margin-top: 3px;
+  padding: 5px 0;
+}
+
+footer .lang-select {
+  order: 1;
+}
+
+footer p {
+  font-size: 14px;
+  margin: 0
+}
+
+footer ul {
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+}
+
+footer li {
+  padding: 5px 0;
+  line-height: normal;
+  list-style: none;
+}
+
+footer ul li a {
+  color: #fff
 }
 
 #atvLocale {
   background: #fff;
   color: #555555;
+  width: initial;
   margin-left: 15px;
-  border-radius: 4px;
+}
+
+footer {
+  background: #0b1733 none repeat scroll 0 0
 }
 
 @media all and (min-width: 992px) {
-  footer {
-    flex-direction: row;
-    justify-content: space-between;
-    .copyright {
-      order: 1;
-    }
-    .terms-condition {
-      order: 3;
-    }
-    .lang-select {
-      order: 2;
-    }
-    li {
-      display: inline-block;
-      padding: 0;
-      margin-right: 10px;
-    }
-  }
+ footer li {display: inline-block;padding: 0;margin-right: 10px;line-height: 1.5;}
+footer > div {flex-direction: row;justify-content: space-between;}
+footer .copyright,
+footer .terms-condition,
+footer .lang-select {padding: 0;}
+footer .copyright {order: 1;}
+footer .terms-condition {order: 3;}
+footer .lang-select {order: 2;}
 }
+
+// footer {
+//   &:after,
+//   &:before {
+//     content: none !important;
+//   }
+//   .container {
+//     display: flex;
+//     flex-direction: column;
+//     padding: 20px 0;
+//     color: #fff;
+//   }
+//   .copyright {
+//     order: 3;
+//     // padding: 8px 0;
+//   }
+//   .terms-condition {
+//     order: 2;
+//     // padding: 5px 0;
+//   }
+//   .lang-select {
+//     order: 1;
+//     // padding: 10px 0;
+//   }
+//   p {
+//     color: white;
+//     margin: 0;
+//     font-size: 14px;
+//   }
+//   ul {
+//     padding: 0;
+//     margin: 0;
+//     list-style: none;
+//     li {
+//       padding: 5px 0;
+//       a {
+//         color: white;
+//         font-size: 13px;
+//         font-weight: 300;
+//         &:hover {
+//           color: #d3d2cf;
+//         }
+//       }
+//     }
+//   }
+// }
+
+// #atvLocale {
+//   background: #fff;
+//   color: #555555;
+//   margin-left: 15px;
+//   border-radius: 4px;
+// }
+
+// footer {
+//   background: #0b1733 none repeat scroll 0 0;
+// }
+
+// @media all and (min-width: 992px) {
+//   footer {
+//     flex-direction: row;
+//     justify-content: space-between;
+//     .copyright {
+//       order: 1;
+//     }
+//     .terms-condition {
+//       order: 3;
+//     }
+//     .lang-select {
+//       order: 2;
+//     }
+//     li {
+//       display: inline-block;
+//       padding: 0;
+//       margin-right: 10px;
+//     }
+//   }
+// }

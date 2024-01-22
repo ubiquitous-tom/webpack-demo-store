@@ -28,8 +28,8 @@ class Navigation extends View {
     this.router = new Router()
     // this.model = new NavigationModel()
 
-    const isWebPaymentEdit = this.model.get('Customer').webPaymentEdit
-    const isTigo = this.model.get('Membership').Store === 'Tigo'
+    const isWebPaymentEdit = this.model.has('Customer') && this.model.get('Customer').webPaymentEdit
+    const isTigo = this.model.has('Membership') && this.model.get('Membership').Store === 'Tigo'
     this.model.set({
       navigation: {
         emailSection: isWebPaymentEdit || isTigo,

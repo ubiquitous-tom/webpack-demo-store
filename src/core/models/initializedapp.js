@@ -1,8 +1,14 @@
 import { Model } from 'backbone'
 import _ from 'underscore'
+
 import { LocalStorage } from 'backbone.localstorage'
 import { getLocalStorage } from 'backbone.localstorage/src/utils'
+
 import docCookies from 'doc-cookies'
+
+import StripePlans from 'core/models/stripe-plans'
+import Gifting from 'core/models/gifting'
+import ShoppingCart from 'core/models/cart'
 
 class InitializeApp extends Model {
   get defaults() {
@@ -21,6 +27,49 @@ class InitializeApp extends Model {
     console.log('InitializeApp initialize')
     console.log(this)
     this.localStorage = new LocalStorage(this.get('localStorageID'))
+    this.stripePlans = new StripePlans()
+    this.shoppingCart = new ShoppingCart()
+    this.gifting = new Gifting()
+
+    this.stripePlans.on('change:stripePlans', (model, value) => {
+      console.log(model, value)
+      // debugger
+      this.set({
+        stripePlans: value,
+        stripePlansCountry: model.get('stripePlansCountry'),
+        stripePlansLang: model.get('stripePlansLang'),
+      })
+    })
+
+    this.stripePlans.on('change:annualStripePlan', (model, value) => {
+      console.log(model, value)
+      // debugger
+      this.shoppingCart.updateDefaultAnnual(value)
+      this.gifting.updateGiftPrice(value)
+      this.set('annualStripePlan', value)
+    })
+
+    this.stripePlans.on('change:monthlyStripePlan', (model, value) => {
+      console.log(model, value)
+      // debugger
+      this.shoppingCart.updateDefaultMonthly(value)
+      this.gifting.updateGiftCurrency(value)
+      this.set('monthlyStripePlan', value)
+    })
+
+    this.on('change:DiscountRate', (model, value) => {
+      console.log(model, value)
+      // debugger
+      // this.gifting.discountRateGiftPricing(value)
+      this.unset('DiscountRate', { silent: true })
+    })
+
+    // this.on('change:monthlyStripePlan', (model, value) => {
+    //   console.log(model, value)
+    //   // debugger
+    //   this.gifting.updateGiftCurrency(value)
+    // })
+
     // console.log(this.localStorage)
     const store = getLocalStorage(this)
     // console.log(store)
@@ -40,15 +89,18 @@ class InitializeApp extends Model {
     this.set({
       environment: this.environment(),
       signinEnv: this.signinEnv(),
+      signupEnv: this.signupEnv(),
       storeEnv: this.storeEnv(),
       currentLanguage: docCookies.getItem('ATVLocale') || 'en',
+      cart: this.shoppingCart,
+      gifting: this.gifting,
     })
 
     // If this is a brand new account never been created then go to signup
-    if (!this.has('Customer')) {
-      const signinURL = `${this.get('signinEnv')}/signin.jsp?OperationalScenario=STORE`
-      window.location.assign(signinURL)
-    }
+    // if (!this.has('Customer')) {
+    //   const signinURL = `${this.get('signinEnv')}/signin.jsp?OperationalScenario=STORE`
+    //   window.location.assign(signinURL)
+    // }
 
     const storage = getLocalStorage(this)
     if (!_.isEmpty(storage.records)) {
@@ -57,6 +109,11 @@ class InitializeApp extends Model {
       // this.sync('create', this)
       // console.log(this.localStorage.findAll())
     }
+
+    // A Hack for local developement to mimic Java servlet
+    // if (!docCookies.getItem('ATVSessionCookie')) {
+    //   docCookies.setItem('ATVSessionCookie', response.Session.SessionID)
+    // }
 
     return data
   }
@@ -83,11 +140,15 @@ class InitializeApp extends Model {
   }
 
   signinEnv() {
-    return `${window.location.protocol}//${window.location.hostname.replace('account', 'signup')}`
+    return `${window.location.protocol}//${window.location.hostname.replace('store', 'signup')}`
+  }
+
+  signupEnv() {
+    return `${window.location.protocol}//${window.location.hostname.replace('store', 'signup')}`
   }
 
   storeEnv() {
-    return `${window.location.protocol}//${window.location.hostname.replace('account', 'store')}`
+    return `${window.location.protocol}//${window.location.hostname.replace('store', 'store')}`
   }
 
   getStorageContent() {

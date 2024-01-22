@@ -1,57 +1,40 @@
 <div class="navbar navbar-fixed-top" role="navigation">
   {{!log this level="error"}}
   <div class="container">
-    <ul class="navbar-right-ul accountUser">
-      <li class="navbar-right">
-        <div class="menuOptions" id="menuOptions">
-          <span class="accountOptions hidden-xs hidden-sm">
-            {{t "MY-ACORN-TV"}}
-          </span>
-          <span id="clicker">
-            <img
-              class="accountIcon"
-              width="18"
-              src="//api.rlje.net/acorn/artwork/size/account-icon?t=Icons"
-            />
-          </span>
-        </div>
+    <ul class="navbar-right-ul">
 
-        <ul class="drop-select closed" style="display:none;">
-          <li>
-            <a href="//{{environment}}acorn.tv/browse/recentlywatched/">
-              {{t "RECENTLY-WATCHED"}}
+      {{#if Session.LoggedIn}}
+        <li class="navbar-right">
+          <a class="log-in" href="#logout">
+            {{t "LOG-OUT"}}
+          </a>
+        </li>
+
+        {{#if Customer.webPaymentEdit}}
+          <li class="navbar-right">
+            <a class="log-in" href="#applyPromoCode">
+              {{t "REDEEM-GIFT"}}
             </a>
           </li>
-          <li>
-            <a href="//{{environment}}acorn.tv/browse/yourwatchlist/">
-              {{t "MY-WATCHLIST"}}
-            </a>
-          </li>
-          <li><a href="#accountStatus">{{t "MANAGE-ACCOUNT"}}</a></li>
-          <li><a href="#editPassword">{{t "CHANGE-PASSWORD"}}</a></li>
-          {{#if Customer.webPaymentEdit}}
-            {{#if Customer.StripeEnabled}}
-              <li>
-                <a href="#updatecard">
-                  {{t "UPDATE-BILLING-INFORMATION"}}
-                </a>
-              </li>
-            {{/if}}
-          {{/if}}
-          {{#if navigation.emailSection}}
-            <li><a href="#editEmail">{{t "CHANGE-EMAIL"}}</a></li>
-          {{/if}}
-          {{#if Session.LoggedIn}}
-            <li><a href="#logout">{{t "LOG-OUT"}}</a></li>
-          {{else}}
-            <li>
-              <a href="{{signinEnv}}/signin.jsp?OperationalScenario=STORE">
-                {{t "SIGN-IN"}}
-              </a>
-            </li>
-          {{/if}}
-        </ul>
-      </li>
+        {{/if}}
+
+      {{else}}
+        <li class="navbar-right sign-up">
+          <a class="free-month" href="{{signupEnv}}/">
+            {{t "START-FREE-TRIAL-LC"}}
+          </a>
+        </li>
+
+        <li class="navbar-right">
+          <a
+            class="log-in"
+            href="{{signupEnv}}/signin.jsp?OperationalScenario=STORE"
+          >
+            {{t "LOG-IN"}}
+          </a>
+        </li>
+      {{/if}}
+
     </ul>
 
     <div class="navbar-header">
@@ -75,11 +58,11 @@
     <div class="navbar-collapse side-collapse in">
       <ul class="nav navbar-nav">
         {{#each navData}}
-        <li>
-          <a href="{{ headerNavURL }}">
-            {{ t i18nKey }}
-          </a>
-        </li>
+          <li>
+            <a href="{{headerNavURL}}">
+              {{t i18nKey}}
+            </a>
+          </li>
         {{/each}}
       </ul>
     </div>

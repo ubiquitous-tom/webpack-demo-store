@@ -15,7 +15,7 @@ const stripeCard = (req, res) => {
   const postData = JSON.stringify(req.body)
   const queryString = new URLSearchParams(req.body).toString()
   const options = {
-    host: `account${process.env.API_ENVIRONMENT}.acorn.tv`,
+    host: `store${process.env.API_ENVIRONMENT}.acorn.tv`,
     path: `/stripecard?${queryString}`,
     method: 'POST',
     headers: {

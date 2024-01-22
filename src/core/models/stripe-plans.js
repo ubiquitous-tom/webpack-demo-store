@@ -111,6 +111,7 @@ class StripePlans extends Model {
     const type = {
       Term: 12,
       TermType: 'MONTH',
+      DefaultPlan: true,
     }
     // console.log(this.attributes)
     const stripePlan = _.result(this.attributes, 'StripePlans')
@@ -125,6 +126,7 @@ class StripePlans extends Model {
     const type = {
       Term: 30,
       TermType: 'DAY',
+      DefaultPlan: true,
     }
     // console.log(this.attributes)
     const stripePlan = _.result(this.attributes, 'StripePlans')
