@@ -1,0 +1,21 @@
+<article class="giveDetails">
+    {{#if isRecordedBook}}
+        {{#unless isExpiredCancelledStatus}}
+        <aside id="recBooks" class="recBooks">
+            <h4>{{t "FREE-SEVEN-DAYS" }}</h4>
+            <p>{{t "SIGNUP-FULL-MEMBERSHIP" }}</p>
+        {{else}}
+            <h4>{{t "FREE-ACCESS-ENDED" }}</h4>
+            <p>{{t "SIGNUP-FULL-MEMBERSHIP" }}</p>
+        </aside>
+        {{/unless}}
+    {{else}}
+        {{#if isExpiredCancelledStatus}}
+            <h1>{{t "RENEW-ACORNTV-MEMBERSHIP" }}</h1>
+            <p>{{t "MEMBERSHIP-EXPIRATION"  }}</p>
+        {{else}}
+            <h1>{{t "START-WATCHING-ACORNTV-NOW" }}</h1>
+            <p>{{t "ENJOY-BRITISH-SHOWS" }}</p>
+        {{/if}}
+    {{/if}}
+</article>

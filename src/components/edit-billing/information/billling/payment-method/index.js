@@ -1,0 +1,3 @@
+import EditBillingInformationBillingPaymentMethod from './view'
+
+export default EditBillingInformationBillingPaymentMethod

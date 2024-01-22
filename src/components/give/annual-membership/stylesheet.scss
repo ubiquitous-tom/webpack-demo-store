@@ -1,0 +1,46 @@
+.order-item.slim {
+    padding: 2em 2.1em;
+    // img {
+    //     max-width: 11.5em;
+    //     margin: 0 auto;
+    // }
+
+    .span7.left {
+        p {
+            line-height: 1.4em;
+            margin-bottom: .4em;
+        }
+    }
+
+    hr {
+        margin-top: 0;
+        margin-bottom: .6em;
+    }
+
+    .remove {
+        margin-bottom: 0;
+        text-align: right;
+        a {
+            font-size: 15.5px;
+            font-weight: 400;
+        }
+    }
+
+    .price {
+        margin-bottom: 0;
+    }
+
+    .qty {
+        font-size: 1.4em;
+        margin-bottom: .7em;
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .order-item.slim {
+        .price {
+            margin-top: 1em;
+        }
+    }
+}

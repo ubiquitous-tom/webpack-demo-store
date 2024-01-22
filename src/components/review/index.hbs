@@ -1,0 +1,198 @@
+<div class="review store container">
+  <header>
+    <h1>{{t "ACORNTV-CHECKOUT"}}</h1>
+    <h2>{{t "REVIEW-ORDER"}}</h2>
+    <p>{{t "ALMOST-DONE"}}</p>
+  </header>
+  <div class="billing-info">
+    <h3 class="head">{{t "BILLING-ORDER-INFORMATION"}}
+      <div class="update-billing">
+        <a href="#" id="editBilling">{{t "CHANGE-PAYMENT"}}</a>
+      </div>
+    </h3>
+    <p class="billing-name">
+      {{t "NAME"}}
+      <strong>{{customer.Name}}</strong>
+    </p>
+  </div>
+
+  <div class="order-item">
+    <h3 class="head order-summary">{{t "ORDER-SUMMARY"}}</h3>
+
+    {{#if annual.quantity}}
+      <div class="row">
+        <span class="col-md-3">
+          <img
+            src="img/membership-user.png"
+            alt="gift-box"
+            width="85"
+            height=""
+          />
+        </span>
+        <span class="col-md-7">
+          <h4 class="item-name">{{t "ANNUAL-MEMBERSHIP"}}</h4>
+          {{!-- <\% if(giveObj.get("Give").quantity > 0) { %>
+            <p>{{t "UNLIMITED-ACCESS" }}</p>
+          <\% } %> --}}
+
+        </span>
+        <span class="col-md-2 text-right">
+          <p class="price text-right">
+            {{! <\%= plans.get("defaultCurrency") + plans.get("defaultCurrencySymbl") + giveObj.get("Membership").price %> }}
+            {{annualPrice}}
+          </p>
+          <p class="text-right">
+            Qty:
+            {{annual.quantity}}
+          </p>
+          {{#if gift}}
+            <div class="control-group row text-right" style="margin-bottom:0;">
+              <div class="controls">
+                <p class="remove">x <a href="#">{{t "REMOVE-THIS-ITEM"}}</a></p>
+              </div>
+            </div>
+          {{/if}}
+        </span>
+      </div>
+    {{/if}}
+
+    {{#if monthly.quantity}}
+      <div class="row">
+        <span class="col-md-3">
+          <img
+            src="img/membership-user.png"
+            alt="gift-box"
+            width="85"
+            height=""
+          />
+        </span>
+        <span class="col-md-7">
+          <h4 class="item-name">{{t "ACORNTV-MONTHLY-MEMBERSHIP"}}</h4>
+          {{#if Give}}
+            <p>{{t "UNLIMITED-ACCESS"}}</p>
+          {{/if}}
+        </span>
+        <span class="col-md-2">
+          <p class="price text-right">
+            {{! <\%= plans.get("defaultCurrency") + plans.get("defaultCurrencySymbl") + giveObj.get("MonthlyMembership").price  %> }}
+            {{monthlyPrice}}
+          </p>
+          <p class="text-right">
+            {{t "QTY"}}
+            {{monthly.quantity}}
+          </p>
+          {{#if gift}}
+            <div class="control-group row text-right" style="margin-bottom:0;">
+              <div class="controls">
+                <p class="remove">x <a href="#">{{t "REMOVE-THIS-ITEM"}}</a></p>
+              </div>
+            </div>
+          {{/if}}
+        </span>
+      </div>
+    {{/if}}
+
+    {{#if Give}}
+      <div class="row">
+        <span class="col-md-3">
+          <img src="img/gift-box.png" alt="gift-box" width="85" height="" />
+        </span>
+        <span class="col-md-7">
+          <h4 class="item-name">{{t "GIFT-MEMBERSHIP"}}</h4>
+          <p class="details">{{t "YEAR-UNLIMITED-ACCESS"}}</p>
+          <hr />
+        </span>
+        <span class="col-md-2">
+          <p class="price text-right">
+            {{! <\%= plans.get("defaultCurrency") + plans.get("defaultCurrencySymbl") + reviewTotal.amount %> }}
+            {{giftPrice}}
+          </p>
+          <p class="qty text-right">
+            {{t "QTY"}}
+            {{Give.quantity}}
+          </p>
+        </span>
+      </div>
+    {{/if}}
+  </div>
+
+  <div class="order-total">
+    <div class="row">
+      <div class="col-md-6">
+        {{! <\% if(giveObj.get("Membership").quantity && !giveObj.get("Give").quantity) { %> }}
+        {{#if MonthlyAndGive}}
+          <div class="form-inline">
+            <div class="form-group">
+              <label for="promo-code" class="control-label">
+                {{t "GOT-PROMO-CODE"}}
+              </label>
+              <input type="text" id="promo-code" class="form-control" />
+            </div>
+          </div>
+          {{! <\% } %> }}
+        {{/if}}
+      </div>
+      <div class="col-md-6 text-right">
+        {{t "ORDER-TOTAL"}}
+        {{! <\%= plans.get("defaultCurrency") + plans.get("defaultCurrencySymbl") + giveObj.get("Total") %> }}
+        {{total}}
+        <br />
+        <span class="tax-placeholder">
+          <div class="lds-roller">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </span>
+      </div>
+    </div>
+
+  </div>
+  <div class="submit-cancel purchase-footer">
+    <a href="#" id="cancelOrder" class="cancel-order">
+      {{t "CANCEL-ORDER"}}
+    </a>
+    <button class="btn btn-primary btn-lg submit-order">
+      {{t "PLACE-ORDER"}}
+    </button>
+  </div>
+
+  <p class="legal">
+    {{t "MEMBERSHIP-EFFECT"}}
+    {{t "CURRENTLY-AVAILABLE"}}
+  </p>
+
+  <div
+    id="reviewPurchaseModal"
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="reviewPurchaseLabel"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-hidden="true"
+          >&times;</button>
+          <h4>{{t "CANCELED-ORDER"}}</h4>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-dismiss="modal">
+            {{t "CONTINUE"}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

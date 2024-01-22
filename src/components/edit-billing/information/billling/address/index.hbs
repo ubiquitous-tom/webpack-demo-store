@@ -1,0 +1,107 @@
+<div class="row">
+  <div class="col-md-6">
+
+    <div class="form-group">
+      <label for="firstname" class="control-label">
+        {{t "FIRST-NAME-NO-ASTERISK"}}<span class="req">*</span>
+      </label>
+      {{! <\%
+							var firstName = '';
+							var lastName = '';
+							if ( address.Name && address.Name != '' ) {
+								nameArray = address.Name.split(" ");
+								firstName = nameArray[0];
+								if(nameArray.length > 1) {
+									var arrayLength = nameArray.length;
+									for (var i = 1; i < arrayLength; i++) {
+										lastName = lastName + " " + nameArray[i];
+									}
+								}
+							}
+						%> }}
+
+      <input
+        type="text"
+        placeholder=""
+        value="{{firstName}}"
+        name="firstname"
+        id="firstname"
+        class="form-control domain"
+        minlength="2"
+        required
+      />
+    </div>
+
+  </div>
+
+  <div class="col-md-6">
+
+    <div class="form-group">
+      <label for="lastname" class="control-label">
+        {{t "LAST-NAME-NO-ASTERISK"}}<span class="req">*</span>
+      </label>
+
+      <input
+        type="text"
+        placeholder=""
+        value="{{lastName}}"
+        name="lastname"
+        id="lastname"
+        class="form-control"
+        minlength="2"
+        required
+      />
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+
+    <div class="form-group">
+      <label for="billingcountry" class="control-label">
+        {{t "COUNTRY-NO-ASTERISK"}}<span class="req">*</span>
+      </label>
+
+      <select
+        name="billingcountry"
+        id="billingcountry"
+        class="form-control"
+        required
+      >
+        {{! <option value="">- Country -</option> }}
+        {{! <\% _.each(address.countries, function(country) { %>
+          <\% if(!_.isFunction(country)) { %>
+          <option value="<\%= country.abbr %>" <\%= country.abbr === address.Country ? 'selected' : '' %>><\%= country.name %></option>
+          <\% } %>
+        <\% }) %> }}
+        {{{countries}}}
+      </select>
+    </div>
+
+  </div>
+
+  <div class="col-md-6">
+
+    <div class="form-group">
+      <label for="billingzip" class="control-label">
+        {{t "ZIP"}}<span class="req">*</span>
+      </label>
+
+      <input
+        type="text"
+        placeholder=""
+        value="{{postalCode}}"
+        class="form-control"
+        name="billingzip"
+        id="billingzip"
+        maxlength="10"
+        minlength="2"
+        required
+      />
+
+    </div>
+
+  </div>
+</div>

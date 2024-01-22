@@ -1,0 +1,49 @@
+#landing-callout {
+    background: #191919 none repeat scroll 0 0;
+    padding: 20px 0 30px;
+    width: 100%
+}
+
+#landing-callout h4 {
+    color: #fff;
+    line-height: 25px
+}
+
+#landing-callout p {
+    color: #f0f0f0;
+}
+
+#landing-callout button {
+    display: inline-block;
+    background: transparent;
+    box-shadow: none;
+    border: 1px solid #fff;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    letter-spacing: .19em;
+    font-size: 10px;
+}
+
+#landing-callout button:hover {
+    display: inline-block;
+    background: rgba(0, 0, 0, .23);
+    -webkit-transition: .3s ease;
+    -moz-transition: .3s ease;
+    -o-transition: .3s ease;
+    -ms-transition: .3s ease;
+    transition: .3s ease;
+}
+
+@media (min-width: 768px) {
+    #landing-callout .col-right {
+        text-align: right
+    }
+
+    #acorn-online {
+        margin-top: 18px
+    }
+
+    #landing-callout button {
+        font-size: 11px;
+    }
+}

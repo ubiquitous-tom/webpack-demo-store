@@ -1,0 +1,35 @@
+<tr>
+  <th class="item-name" colspan="3">
+    {{t "GIFT-MEMBERSHIP"}}
+  </th>
+</tr>
+
+{{#if giftItemSummary}}
+
+  {{#each giftItemSummary}}
+    <tr>
+      <td class="qty">
+        {{t "QTY"}}
+        {{quantity}}
+      </td>
+      <td class="price text-right">
+        {{amount}}
+        {{t "EA"}}
+      </td>
+    </tr>
+  {{/each}}
+
+{{else}}
+
+  <tr>
+    <td class="qty">
+      {{t "QTY"}}
+      {{quantity}}
+    </td>
+    <td class="price text-right">
+      {{amount}}
+      {{t "EA"}}
+    </td>
+  </tr>
+
+{{/if}}

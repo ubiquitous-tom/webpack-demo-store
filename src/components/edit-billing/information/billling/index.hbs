@@ -1,0 +1,95 @@
+<div class="col-md-8">
+  <div class="form-wrap">
+    <div id="signin-form-insert">
+    </div>
+    <form class="form-trial-signup form-processing">
+      <div id="appliedCodeContainer"></div>
+
+      <div id="billingAddressContainer"></div>
+
+      <div id="billingEmailContainer"></div>
+
+      <div id="paymentMethodContainer"></div>
+
+      {{! <div id="updateBillingAlert" class="alert" style="display: none"></div> }}
+
+      <div class="control-group">
+        <div class="controls">
+          <button
+            class="btn btn-large btn-primary text-right"
+            id="savePayment"
+          >{{t "CONTINUE-TO-REVIEW"}}
+            <i class="icon-circle-arrow-right"></i></button>
+        </div>
+      </div>
+    </form>
+
+    <div
+      id="updateBillingModal"
+      class="modal fade"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="updateBillingLabel"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-hidden="true"
+            >&times;</button>
+            <h3 id="confirm-cancel-label">{{t
+                "UPDATE-BILLING-INFORMATION"
+              }}</h3>
+          </div>
+          <div class="modal-body">
+            <h4 id="updateBillingStatus"></h4>
+          </div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-primary btn-confirmation"
+              data-dismiss="modal"
+            >{{t "OKAY"}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="signInModal"
+      class="modal fade"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="signInModal"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-hidden="true"
+            >&times;</button>
+            <h3 id="confirm-cancel-label">{{t "SIGN-IN-INFORMATION"}}</h3>
+          </div>
+          <div class="modal-body">
+            <h4 id="SignInStatus"></h4>
+          </div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-primary btn-confirmation"
+              data-dismiss="modal"
+            >{{t "OKAY"}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="legal" style="margin-top: 4em">
+      {{t "MEMBERSHIP-EFFECT"}}
+    </p>
+  </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="order-item gift-item" data-price="{{gift.amount}}">
+
+    {{#if DiscountRate}}
+      <div id="special-discount" class="col-md-12">
+        <div class="accent">{{t "BLACK-FRIDAY-PROMO-TEXT-2019"}}</div>
+        <div class="special-discount-listing">
+          <ul>
+            <li>{{t "BLACK-FRIDAY-PROMO-LIST-1-2019"}}</li>
+            {{! var1=" <%= specialDiscount[0].displayPrice %>" }}
+            <li>{{t "BLACK-FRIDAY-PROMO-LIST-2-2019"}}</li>
+            {{! var1=" <%= specialDiscount[1].displayPrice %>" }}
+            <li>{{t "BLACK-FRIDAY-PROMO-LIST-3-2019"}}</li>
+            {{! var1=" <%= specialDiscount[2].displayPrice %>" }}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
+
+    <div class="col-md-3">
+      <img src="{{GiftBox}}" alt="gift-box" width="185" height="204" />
+    </div>
+
+    <div class="col-md-5">
+      <h3 class="item-name">{{t "GIFT-MEMBERSHIP"}}</h3>
+      <p>{{t "YEAR-UNLIMITED-ACCESS"}}</p>
+    </div>
+
+    <div class="col-md-2">
+
+      <div class="item-price">
+        <span>{{t "GIFT-PRICE"}}</span>
+        {{giftPrice}}
+      </div>
+
+      <div class="form-group">
+
+        <label for="qty" class="control-label qty">
+          <strong>{{t "QTY"}}</strong>
+        </label>
+
+        <select
+          id="qty"
+          class="qty form-control inline-form-control"
+          name="qty"
+        >
+          {{{options}}}
+        </select>
+
+      </div>
+
+    </div>
+
+    <div class="col-md-2 text-right" id="quantityTotal">
+      <strong>{{total}}</strong>
+    </div>
+
+  </div>
+</div>
+
+{{!-- <div id="selectGiftModal" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3 id="confirm-cancel-label">{{t "GIFT" }}</h3>
+			</div>
+			<div class="modal-body">
+				<h4 id="updateGiftAmount">{{t "PLS-SELECT-GIFT" }}</h4>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary btn-confirmation" data-dismiss="modal">{{t "OKAY" }}</button>
+			</div>
+		</div>
+	</div>
+</div> --}}

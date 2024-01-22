@@ -1,0 +1,13 @@
+section.plan {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+section.plan label {
+    margin: 0;
+    padding: 0 15px;
+}
+
+section.plan label .h4 {
+    margin: 0;
+}

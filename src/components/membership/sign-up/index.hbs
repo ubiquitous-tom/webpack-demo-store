@@ -1,0 +1,64 @@
+<aside id="signUpForm" class="sign-in">
+  <h4>{{t "SIGN-UP"}}</h4>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="firstName" class="control-label">
+          {{t "FIRST-NAME"}}
+          <span>({{t "REQUIRED"}})</span>
+        </label>
+        <input
+          id="firstName"
+          class="form-control"
+          name="firstName"
+          type="text"
+          value="{{firstName}}"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="lastName" class="control-label">
+          {{t "LAST-NAME"}}
+          <span>({{t "REQUIRED"}})</span>
+        </label>
+        <input
+          id="lastName"
+          class="form-control"
+          name="lastName"
+          type="text"
+          value="{{lastName}}"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="email" class="control-label">
+          {{t "EMAIL-ADDRESS"}}
+          <span>({{t "REQUIRED"}})</span>
+        </label>
+        <input
+          id="email"
+          class="form-control"
+          name="email"
+          type="text"
+          value="{{email}}"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <p>
+      {{t "MEMBERSHIP-RENEWAL"}}
+      <a href="#" id="sign-in-link">
+        {{t "SIGN-IN"}}
+      </a>.
+    </p>
+  </div>
+</aside>

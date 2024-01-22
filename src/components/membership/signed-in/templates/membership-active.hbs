@@ -1,0 +1,52 @@
+<aside id="signedIn" class="signedIn">
+  <h4>{{t "HELLO"}} <span>{{Customer.Name}}</span>, {{t "ALREADY-MEMBER"}}</h4>
+
+  {{!-- {{#if membership.Term.toUpperCase() == 'MONTH' && !membership.ExpirationDate}}
+      {{t "YOUR-MEMBERSHIP-TYPE" }} <strong>{{ (membership.Term.toUpperCase() == 'MONTH' ? 'MONTHLY' : 'ANNUAL') }}</strong>
+  {{/if}} --}}
+  {{{yourMembershipType}}}
+
+  {{!-- {{#if membership.ExpirationDate}}
+      {{t "MEMBERSHIP-SET-EXPIRE" }} {{ membership.ExpirationDate }}
+  {{/if}} --}}
+  {{yourMembershipExpiredDate}}
+
+  <a class="btn btn-primary" href="{{environment}}acorn.tv">Watch Now</a>
+  <p>
+    {{#if Customer.webPaymentEdit}}
+
+      {{!-- {{# ['MONTH', 'TRIAL'].includes(membership.Term.toUpperCase()) }}
+          <a href="#" id="changeToAnnual">
+              {{t "CHANGE-TO-ANNUAL" }}
+          </a>
+          <br>
+      {{/if}} --}}
+      {{{upgradeToAnnual}}}
+
+      {{!-- {{#if membership.Term.toUpperCase() == 'ANNUAL' && membership.ExpirationDate}}
+          <a href="#" id="renewMembership">
+              {{t "RENEW-MEMBERSHIP" }}
+          </a>
+          <br>
+      {{/if}} --}}
+      {{{renewMembership}}}
+
+    {{else}}
+
+      <br />
+      {{t "MANAGE-BILLING-DETAILS"}}
+      {{Membership.Device}}.
+      {{t "PLEASE-LOG-IN"}}
+      {{Membership.Device}}
+      to
+      {{t "MANAGE-BILLING"}}
+      <br />
+
+    {{/if}}
+
+    {{! Hide Gifting when not in allowed groupname }}
+    {{#if isGroupNameAllowedGifting}}
+      <a href="#" id="giveGift">{{t "GIVE-ACORNTV"}}</a>
+    {{/if}}
+  </p>
+</aside>

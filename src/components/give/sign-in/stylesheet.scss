@@ -1,0 +1,46 @@
+section.memberOptIn h4 {
+    margin-bottom: .4em;
+}
+
+section.memberOptIn span {
+    display: block;
+}
+
+section.memberOptIn label {
+    font-weight: normal;
+    display: inline-block;
+    font-size: .95em;
+    margin-top: .7em;
+}
+
+section.memberOptIn input[type='checkbox'] {
+    margin-top: -2px;
+    margin-right: 7px;
+    font-size: 1.3em;
+}
+
+section.memberOptIn p {
+    color: #000;
+    margin: 2.2em 0 0 2em;
+}
+
+.sign-in,
+.signedIn {
+    background-color: #fbfbfb;
+    border: solid #ededed 1px;
+    overflow: hidden;
+    padding: 1.5em 2em;
+}
+
+.sign-in h4,
+.signedIn h4 {
+    color: #933;
+    font-size: 1.6em;
+    margin-bottom: 15px;
+}
+
+.sign-in h4 span {
+    color: #000;
+    font-weight: 400;
+    font-size: 0.8em;
+}

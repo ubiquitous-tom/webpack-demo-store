@@ -1,0 +1,288 @@
+@import url(https://fonts.googleapis.com/css?family=Oxygen:400,300,700);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300);
+
+/* BASE */
+body {background:#161616; font-family: "Futura PT Light", Arial, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;}
+a, a:hover,a:active, a:visited, a:link{text-decoration: none;outline: 0}
+h1 {color:#993333; text-decoration:none;-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;}
+h1 {color: #933;font-family: inherit;font-size: 2.7em;font-weight: 400;line-height: 40px;margin: 0 0 0.5em;}
+h2 {font-size:32px;}
+h3.formhead {border-bottom: 1px solid #000;font-weight: 400;margin-bottom: 20px;position: relative;}
+h3 {font-size: 20.5px;}
+img {max-width: 100%; height: auto;}
+p {color: #424242;font-family: inherit;font-size: 1.2em;line-height: 25px;margin: 0 0 1em;}
+
+/* ACORN REBRANDING 2019-08-15 */
+body {background: #0b1733;}
+
+/* LAYOUT */
+.container{width:96%;padding-left: 10px;padding-right: 10px;max-width: none;}
+
+/* NAVBAR */
+.atv-logo{width:154px; margin-top:16px; margin-left:11px;}
+.navbar{background:#161616;border:none;height:56px;box-shadow: 0 0 10px -5px #050505;-moz-box-shadow: 0 0 10px -5px #000000;-webkit-box-shadow: 0 0 10px -5px #050505;}
+.navbar-nav {padding:0px 0px 0px 20px;}
+.navbar-nav > li > a{padding-top:27px;font-family: 'Futura PT Light', sans-serif;letter-spacing: .17em;font-weight:normal;display: inline-block; text-transform:uppercase;font-size:23px;color:#fff;}
+.nav > li > a:hover{background:none;}
+.nav > li > a:focus{background:transparent;}
+.navbar-collapse {margin-top:5px;box-shadow: none;padding-left: 0px}
+.navbar-toggle {display: block;margin-top: 14px;float:left;margin-right: -10px}
+.navbar-right{display: block; position: relative;float:right;margin-right:0px;}
+.navbar-right-ul{float:right;width:110px;margin-top:0px;}
+.navbar-toggle .icon-bar {border-radius: 0;width: 15px;height:1px;}
+.log-in{color: #fff;display: inline-block;font-family: 'Futura PT Light',sans-serif;font-size: 10.3px;font-weight: normal;letter-spacing: 0.17em;margin-top: 20px;text-transform: uppercase;margin-right:0px;margin-left: 10px}
+.free-month{color: #fff;display: inline-block;font-family: 'Futura PT Light',sans-serif;font-size: 13.8px;font-weight: normal;letter-spacing: 0.17em;margin-top: 15px;text-transform: uppercase;padding:12px;background:rgba(11, 152, 184, 0.85) none repeat scroll 0 0;margin-left:8px;}
+#signup{margin-bottom:0px;}
+
+/* ACORN REBRANDING 2019-08-15 */
+.navbar {background: #0b1733; box-shadow: 0 0 30px -5px #0A132A;}
+
+
+/* NAVTABS */
+.nav-tools {border-radius: 8px; padding:0 10px; background:#c2c2c2; margin:0;margin:0; }
+.nav-tools a {font-weight: bold;}
+.nav-tools li { width: 33.333%; font-size:12px; text-align: center; white-space:nowrap;}
+.nav > li > a:hover, .nav > li > a:focus {text-decoration:none; }
+.nav-tabs>li>a, .nav-pills>li>a {padding:15px 10px;}
+.nav-stacked > li{background: #f0f0f0 none repeat scroll 0 0;}
+.nav-stacked > li + li {border-top: medium none;margin-bottom: 0;margin-left: 0;margin-top: 2px;padding: 0;}
+.nav-tabs > li > a, .nav-pills > li > a {padding: 9px;}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {background: rgba(129, 12, 12, 0.9) none repeat scroll 0 0;color:#fff;border:none;}
+.nav-tabs > li > a {border: none;border-radius: 0;line-height: 2.5;margin-right: 0px;font-weight: 600;color: #222;display: block;font-size: 10px;letter-spacing: 0.15em;padding: 9px 18px;text-decoration: none;text-transform: uppercase;}
+.nav-tabs > li > a:hover{background-color: #e0e0e0;-webkit-transition: .4s ease;-moz-transition: .4s ease;-o-transition: .4s ease;-ms-transition: .4s ease;transition: .4s ease;}
+#accountStatusNav{border-top: none;padding: 0px;margin-bottom: 0px;}
+
+/* ACORN REBRANDING 2019-08-15 */
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {background: #0b1733;}
+.nav-tabs > li > a:hover {background: #008989;}
+
+/* ACCOUNT TEMPLATE */
+.account-wrap{float:none;margin-bottom: 50px}
+#account {padding: 40px 0 60px; background: #fff none repeat scroll 0 0;}
+#account h1{color: #404040;font-family: "Futura PT Light",sans-serif;font-size: 18px;font-weight: 400;line-height: 37px;margin-bottom: 0;margin-top: 15px}
+#account p{color: #555;font-family: "Futura PT Light",sans-serif;font-size: 13.5px;line-height: 23px;margin-bottom: 15px;margin-top: 5px;}
+#account input{/*border: 1px solid #c0c0c0;*/font-family: inherit;font-size: inherit;line-height: inherit;padding: 6px;width: 100%;-webkit-appearance: none;border-radius: 0px;}
+#account .radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {margin-left: 55px;position: absolute;-webkit-appearance:checkbox;}
+#account button {background: #0b98b8 none repeat scroll 0 0;border: medium none;border-radius: 0;color: #fff;font-size: 10px;font-weight: 600;letter-spacing: 0.08em;margin: 5px auto 0;padding: 9px 13px ;text-shadow: none;text-transform: uppercase;}
+#account label {/*color: #444444;*/font-size: 12.5px;font-weight: 400;margin-top: 10px;text-align: left;}
+#account .formhead {border-bottom: 1px solid #eee;color: #111111;font-family: "Futura PT Light",sans-serif;font-size: 13.5px;margin-bottom: 15px;padding: 0 0 10px;position: relative;text-align: left;}
+
+/* ACORN REBRANDING 2019-08-15 */
+#account button {background: #008989;}
+#account button:hover {background: #0b1733;}
+
+/* DROPDOWN */
+.accountIcon {margin-left: 5px;}
+.menuOptions > span, .subnav > li {-moz-user-select: none;}
+.accountOptions {vertical-align: middle;}
+#clicker {padding: 0;}
+.menuOptions {color: #fff;cursor: pointer;display: inline-block;font-family: "Futura PT Light",sans-serif;font-size: 11px;font-weight: normal;letter-spacing: 0.05em;padding: 19px 15px;text-transform: uppercase;width: 100%;}
+.menuOptions > span, .subnav > li {-moz-user-select: none;}
+.menuOptions #clicker {border: 0 none;float: none;margin: 0;}
+.drop-select {background: rgba(9, 9, 9, 0.9) none repeat scroll 0 0;border-top: medium none;display: none;margin: 0 0 100%;padding: 10px 0;position: relative;width: 160px;margin-left:-30px;}
+.drop-select li {color: #fff;font-family: "Futura PT Light",sans-serif;font-size: 11px;font-weight: normal;letter-spacing: 0.1em;padding: 18px 15px;text-align: left;text-transform: uppercase;}
+.drop-select li:hover {background: #191919 none repeat scroll 0 0;}
+.navbar-right-ul.accountUser {max-width: 155px;}
+.navbar-right-ul.accountUser > li {text-align: right;width: 100%;}
+.navbar-collapse .menuOptions {min-width: 200px;padding: 15px;}
+.navbar-collapse .drop-select {min-width: 190px;width: 100%;}
+.accountOptions {vertical-align: middle;}
+.accountIcon {margin-left: 5px;}
+
+/* ACORN REBRANDING 2019-08-15 */
+.drop-select {background: #0b1733;}
+.drop-select li:hover {background: #008989;}
+
+/* FOOTER */
+footer {display: flex;flex-direction: column;padding: 20px 0;color: #fff;}
+/* Remove BS 3 clearfix hack */
+footer:after,
+footer:before {content: none !important;}
+footer .copyright,
+footer .terms-condition,
+footer .lang-select {padding: 5px 0;}
+footer .copyright {order: 3;}
+footer .terms-condition {order: 2;}
+footer .lang-select {order: 1;}
+footer p {color: white;margin:0;font-size: 14px;}
+#atvLocale {background: #fff;color: #555555;margin-left: 15px;border-radius: 4px;}
+footer ul {padding: 0;margin: 0;list-style: none;}
+footer li {padding: 5px 0;}
+footer a {color:white;font-size: 13px;font-weight: 300;}
+footer a:hover {color:#d3d2cf}
+
+/* FORMS */
+.form-wrap {max-width:600px; margin:0 auto;}
+.row-fluid .form-wrap {max-width:none;}
+input[type="text"], input[type="password"] {margin-bottom: 0;}
+input[type="text"]:focus, input[type="password"]:focus {border-color: rgba(67, 211, 223, 0.8); -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(67, 211, 223,.6);}
+.help-form {font-size:12px; font-weight:normal; position:absolute; right:0; bottom:0; line-height: 24px;}
+label .help-input {color: #993333;font-size: 12px;font-weight: normal;position: absolute;right: 15px;}
+.req {/*color:#000;*/ font-weight: bold; padding-left: 5px;}
+.help-inline {padding-left:0; font-size: 14px;}
+.more-info {margin:25px 0;}
+.cc-logos label {display: inline-block; margin-right: 25px;}
+.tos {margin:25px 0;}
+.tos .help-inline {display: block;}
+.controls p {font-size: 14px;}
+.field-wrap {margin-bottom: 15px;}
+.field-label {text-align:right; display: block; color:#555; padding-right:10px; font-weight:normal; width:40%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;}
+.field-value {width:60%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;}
+.member-status {color:#333; background:#ddd; text-align:center; display:block; max-width:125px;}
+.card-status {color:#333; background:#eee; text-align:center; display:block; max-width:125px;}
+.status-annual {background: #993333; color:#fff;}
+.status-monthly {background: #279da8; color:#fff;}
+.status-trial {background:#999; }
+.status-nonmember, .status-nofile { color:#993333;}
+.status-expired {background: #f2dede; color:#993333;}
+.status-onfile {color:green;}
+.field-value {font-weight: bold;}
+
+/* BUTTONS */
+.btn {color:#993333;-webkit-box-shadow: none;box-shadow: none;padding: 15px;}
+.btn:hover,.btn:focus {color: #993333;}
+.btn-large {font-weight: bold;}
+.btn-jumbo {padding:15px 19px; font-weight: bold; font-size:26px; /* box-shadow:0 3px 5px rgba(0, 0, 0, 0.6), 0 1px 0 rgba(255, 255, 255, 0.35) inset; */}
+.sub {color:#999; display: block; margin:10px 0 0; font-size:18px;}
+.btn i {margin-right: 2px;}
+.btn-primary {background-color: #29aab6;background-image: none;background-repeat: repeat-x;border: medium none;box-shadow: none;color: #fff;font-family: "Futura PT Light",sans-serif;font-size: 15px;padding: 15px;text-shadow: none;}
+.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary.active,.btn-primary.disabled,.btn-primary[disabled] {color: #ffffff;background-color: #0a656f;*background-color: #0a656f;}
+.btn-primary .sub {color:#a7ecf1;}
+.btn-primary:hover {background-color:#0a656f; }
+.btn-primary [class^="icon-"] {color:#fff;}
+.btn-secondary {color:#fff;background-color: #993333;background-image: linear-gradient(to bottom,#993333,#732626); /* W3C */background-image: -moz-linear-gradient(top, #993333, #732626);  /* FF3.6+ */background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#993333), to(#732626)); /* Chrome,Safari4+ */background-image: -webkit-linear-gradient(top, #993333, #732626); /* Chrome10+,Safari5.1+ */background-image: -o-linear-gradient(top, #993333, #732626); /* Opera 11.10+ */background: -ms-linear-gradient(top,  #993333 0%,#732626 100%); /* IE10+ */background-repeat: repeat-x;
+border-color: #993333 #732626 #732626 #732626;text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);}
+.btn-secondary:hover,.btn-secondary:focus,.btn-secondary:active,.btn-secondary.active,.btn-secondary.disabled,.btn-secondary[disabled] {color: #ffffff;background-color: #732626;*background-color: #732626;}
+.btn-secondary .sub {color:#efd0d0;}
+.btn-secondary:hover {background-color:#732626; }
+.btn-secondary [class^="icon-"] {color:#fff; margin-left:5px;}
+
+
+/* STEPS */
+.steps .nav-pills {margin:20px auto; width: 300px;}
+.signup-steps {margin-top:35px;}
+.row-fluid .step {border:1px solid #6c6c6c; text-align: center; background:#fff; margin-bottom:20px;}
+.step h3 {font-size:20px; background:#efefef url("img/bg-header.png"); margin:0; padding:6px 10px; line-height: 42px;  vertical-align:middle; border-bottom:1px solid #c1c1c1;}
+.step h3 .header {position:relative; padding-left:20px;}
+.step h3 .header span {color:#9e9e9e; position:absolute; left:-8px; font-size:36px;}
+.content ul {margin:10px 50px; padding:0;}
+.content li {text-align: left;}
+.content p {margin:10px auto;}
+.step h3 {color:#993333;}
+.step .top {min-height: 50px; padding:10px 15px 0; font-weight: bold;}
+.step .middle {min-height: 100px; background:#e5e5e5; padding:20px 0;}
+.step .bottom { padding:10px 0;}
+
+@media (min-width: 375px){
+#account h1 {font-size: 20px;line-height: 37px;margin-bottom: 0;}
+}
+
+@media (min-width: 768px){
+body {padding-top: 75px;}
+/* NAVBAR */
+.navbar{height:75px;}
+.navbar-nav > li > a{font-size:13.8px;}
+.atv-logo{width:215px;margin-top:20px;margin-left: 0px;}
+.navbar-collapse {margin-top:13px;}
+.navbar-right-ul{width:265px;}
+.navbar-toggle {margin-top: 22px;margin-right: 0px}
+.navbar-toggle .icon-bar {width: 22px;height: 1.7px}
+.log-in{font-size: 13.8px;margin-top: 27px;margin-left: 20px}
+
+/* NAVTABS */
+.nav-tabs > li > a {border: none;font-size: 10.5px;}
+
+/* DROPDOWN */
+.drop-select {width: 220px;margin-left:0px;}
+#cover {margin: 15px 0 0 5px;}
+.menuOptions {padding: 10px 15px;}
+.menuOptions, .navbar-collapse .menuOptions {font-size: 13.8px;padding: 27px 0 0;text-align: center;width: 190px;}
+.drop-select {left: -15px;top: 26px;}
+.drop-select li {font-size: 12.5px;padding: 25px 30px;}
+
+/* ACCOUNT TEMPLATE */
+.account-wrap{float:right;margin-bottom: 0px}
+#account {padding: 80px 0 100px;}
+#account h1 {font-size: 32px;margin-bottom: 15px;}
+#account p{font-size: 16.5px;line-height: 25px;margin-bottom: 10px;margin-top: 10px;}
+#account label {font-size: 14px;margin-top: 15px;}
+#account button {font-size: 11.5px;}
+#account .formhead {border-bottom: 1px solid #d0d0d0;font-size: 16.5px;margin-bottom: 15px;padding: 0 0 6px;position: relative;text-align: left;}
+#account .radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {margin-left: 40px;position: absolute;}
+
+}
+
+@media all and (min-width: 950px) {
+#account .tabs{max-width: 285px}
+
+}
+
+@media all and (min-width: 992px) {
+footer {flex-direction: row;justify-content: space-between;}
+footer .copyright {order: 1;}
+footer .terms-condition {order: 3;}
+footer .lang-select {order: 2;}
+footer li {display: inline-block;padding: 0;margin-right: 10px;}
+}
+
+@media all and (min-width: 1100px) {
+
+/* LAYOUT */
+.container{width:92%;}
+}
+
+@media all and (min-width: 1150px) {
+
+/* NAVBAR */
+.navbar-toggle {display:none;}
+.navbar-collapse {margin: 0px}
+#store-link{display:none;}
+}
+
+@media (min-width:1300px){
+#store-link{display:block;}
+}
+
+
+@media (min-width:1450px){
+
+/* LAYOUT */
+.container{width:1350px}
+}
+
+@media (max-width: 1150px) {
+
+/* NAVBAR */
+.navbar-toggle .icon-bar {background: #fff none repeat scroll 0 0;}
+.navbar-header {float: none;}
+.nav > li {display: inline-block;position: relative;width: 100%;margin-bottom: 8px;padding-left: 15px;padding-top:8px;border-top: thin solid #141414;}
+.navbar-collapse {border-top:none; background: #0b0b0b none repeat scroll 0 0;}
+.navbar-collapse.collapse {display: none!important;}
+.navbar-nav {float: none!important;margin: 7.5px -15px;}
+.navbar-nav>li {float: none;}
+.navbar-nav>li>a {padding-top: 10px;padding-bottom: 10px;}
+.navbar-text {float: none;margin: 15px 0;}
+.navbar-collapse.collapse.in { display: block!important;}
+.navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse {max-height: none;}
+
+/* NAVBAR-SLIDEOUT */
+.collapsing {overflow: hidden!important;}
+.side-collapse-container{width:100%;position:relative;left:0;transition:left .4s;}
+.side-collapse-container.out{right:320px;}
+.side-collapse { top:60px;bottom:0;left:0px;width:290px;position:fixed;overflow:hidden;transition:width .4s;}
+.side-collapse.in {width:0;}
+}
+
+@media (max-width: 768px) {
+
+/* NAVBAR-SLIDEOUT */
+.side-collapse {top:51px;right:-15px;}
+}
+
+.divMsgError,
+.divMsgError:hover {color:red;}
+.divMsgError a {font-weight: 600;color: red;}
+.divMsgError a:hover {text-decoration: underline;}
+
+.divMsgSuccess,
+.divMsgSuccess:hover {color:#39d428;}

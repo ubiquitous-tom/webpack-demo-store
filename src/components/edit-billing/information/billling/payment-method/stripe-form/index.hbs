@@ -1,0 +1,40 @@
+<div class="group">
+  <div class="item">
+    <label class="control-label">{{t "NAME-ON-CARD"}}</label>
+    <input
+      type="text"
+      class="form-control"
+      id="nameoncard"
+      name="nameoncard"
+      placeholder="{{t 'FULL-NAME'}}"
+    />
+  </div>
+  <div class="item">
+    <label class="control-label">{{t "CREDIT-CARD-NUMBER"}}</label>
+    <div id="card-number" class="card-field"></div>
+  </div>
+  <div class="inline-item">
+    <div class="subitem">
+      <label class="control-label">{{t "EXPIRATION"}}</label>
+      <div id="card-expiry" class="card-field"></div>
+    </div>
+    <div class="subitem">
+      <label class="control-label">{{t "CVC"}}</label>
+      <div id="card-cvc" class="card-field"></div>
+    </div>
+    <div class="subitem">
+      <label class="control-label">{{t "ZIP-CODE"}}</label>
+      <input
+        type="text"
+        class="form-control"
+        id="card-zipcode"
+        name="card-zipcode"
+        placeholder="{{t 'ZIP-CODE'}}"
+      />
+    </div>
+  </div>
+</div>
+<div class="buttons">
+  <button type="reset">{{t "CANCEL"}}</button>
+  <button type="submit">{{t "SAVE"}}</button>
+</div>

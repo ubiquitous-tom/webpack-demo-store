@@ -1,0 +1,5 @@
+{
+  "prettier.trailingComma": "none",
+  "javascript.format.semicolons": "ignore",
+  "prettier.semi": false
+}

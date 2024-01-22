@@ -1,0 +1,43 @@
+#promo-code {
+    width: 55%;
+    margin-right: 1em;
+    height: 3em;
+    border-radius: 0;
+}
+
+.promo-message {
+    border-radius: 2px;
+    padding: 0.25em;
+    margin-top: .5em;
+    width: 77%;
+}
+
+.promo-message.success {
+    border: 1px solid #082;
+    color: #082;
+}
+
+.promo-message.error {
+    border: 1px solid #CA081A;
+    color: #CA081A;
+}
+
+.plan del {
+    color: red;
+}
+
+.plan del span {
+    color: #000;
+    margin-left: 0.25em;
+}
+
+#promo-clear i.fa {
+    color: #000;
+    position: absolute;
+    right: 25%;
+    top: 5px;
+}
+
+.fa-times-thin:before {
+    content: '\00d7';
+}

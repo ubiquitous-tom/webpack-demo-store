@@ -1,0 +1,18 @@
+/* BUTTONS */
+.btn {color:#993333;-webkit-box-shadow: none;box-shadow: none;padding: 15px;}
+.btn:hover,.btn:focus {color: #993333;}
+.btn-large {font-weight: bold;}
+.btn-jumbo {padding:15px 19px; font-weight: bold; font-size:26px; /* box-shadow:0 3px 5px rgba(0, 0, 0, 0.6), 0 1px 0 rgba(255, 255, 255, 0.35) inset; */}
+.sub {color:#999; display: block; margin:10px 0 0; font-size:18px;}
+.btn i {margin-right: 2px;}
+.btn-primary {background-color: #29aab6;background-image: none;background-repeat: repeat-x;border: medium none;box-shadow: none;color: #fff;font-family: "Futura PT Book",sans-serif;font-size: 15px;padding: 15px;text-shadow: none;}
+.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary.active,.btn-primary.disabled,.btn-primary[disabled] {color: #ffffff;background-color: #0a656f;*background-color: #0a656f;}
+.btn-primary .sub {color:#a7ecf1;}
+.btn-primary:hover {background-color:#0a656f; }
+.btn-primary [class^="icon-"] {color:#fff;}
+.btn-secondary {color:#fff;background-color: #993333;background-image: linear-gradient(to bottom,#993333,#732626); /* W3C */background-image: -moz-linear-gradient(top, #993333, #732626);  /* FF3.6+ */background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#993333), to(#732626)); /* Chrome,Safari4+ */background-image: -webkit-linear-gradient(top, #993333, #732626); /* Chrome10+,Safari5.1+ */background-image: -o-linear-gradient(top, #993333, #732626); /* Opera 11.10+ */background: -ms-linear-gradient(top,  #993333 0%,#732626 100%); /* IE10+ */background-repeat: repeat-x;
+border-color: #993333 #732626 #732626 #732626;text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);}
+.btn-secondary:hover,.btn-secondary:focus,.btn-secondary:active,.btn-secondary.active,.btn-secondary.disabled,.btn-secondary[disabled] {color: #ffffff;background-color: #732626;*background-color: #732626;}
+.btn-secondary .sub {color:#efd0d0;}
+.btn-secondary:hover {background-color:#732626; }
+.btn-secondary [class^="icon-"] {color:#fff; margin-left:5px;}

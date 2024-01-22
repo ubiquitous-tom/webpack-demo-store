@@ -1,0 +1,92 @@
+<div class="col-md-4">
+  <div id="orderItems">
+    <div class="order-summary">
+      <h3>{{t "ORDER-SUMMARY"}}</h3>
+      <table>
+        <thead>
+          <tr>
+            <caption></caption>
+          </tr>
+        </thead>
+        <tbody>
+          {{! <caption></caption> }}
+          {{!-- <\% if (giveObj.get("Membership").quantity > 0) { %>
+						<tr>
+							<th class="item-name" colspan="2">
+								{{t "ACORN-ANNUAL-MEMBERSHIP" }}
+							</th>
+						</tr>
+						<tr>
+							<td class="qty">
+								{{t "QTY" }} <\%= giveObj.get("Membership").quantity %>
+							</td>
+							<td class="price text-right">
+								<\%= plans.get("defaultCurrency") + plans.get("defaultCurrencySymbl") + giveObj.get("Membership").price %> {{t "EA" }}
+							</td>
+						</tr>
+					<\% } %> --}}
+
+          {{!-- <\% if (giveObj.get("MonthlyMembership").quantity > 0) { %>
+						<tr>
+							<th class="item-name" colspan="2">
+								{{t "ACORN-MONTHLY-MEMBERSHIP" }}
+							</th>
+						</tr>
+						<tr>
+							<td class="qty">
+								{{t "QTY" }} <\%= giveObj.get("MonthlyMembership").quantity %>
+							</td>
+							<td class="price text-right">
+								<\%= plans.get("defaultCurrency") + plans.get("defaultCurrencySymbl") + giveObj.get("MonthlyMembership").price %> {{t "EA" }}
+							</td>
+						</tr>
+					<\% } %> --}}
+
+          {{!-- <\% if (giveObj.get("Give").quantity > 0) { %>
+						<tr>
+							<th class="item-name" colspan="3">
+								{{t "GIFT-MEMBERSHIP" }}
+							</th>
+						</tr>
+						<\% if(_.isEmpty(giftItemSummary)) { %>
+						<tr>
+							<td class="qty">
+								{{t "QTY" }} <\%= giveObj.get("Give").quantity %>
+							</td>
+							<td class="price text-right">
+								<\%= plans.get("defaultCurrency") + plans.get("defaultCurrencySymbl") + giveObj.get("Give").price %> {{t "EA" }}
+							</td>
+						</tr>
+						<\% } else { %>
+						<\% giftItemSummary.forEach(function(item, ind) { %>
+						<tr>
+							<td class="qty">
+								{{t "QTY" }} <\%= item.Quantity %>
+							</td>
+							<td class="price text-right">
+								<\%= plans.get("defaultCurrency") + plans.get("defaultCurrencySymbl") + item.Amount %> {{t "EA" }}
+							</td>
+						</tr>
+						<\% }); %>
+						<\% } %>
+					<\% } %> --}}
+
+          {{!-- <tr>
+            <th>
+              {{t "ORDER-TOTAL"}}
+            </th>
+            <th class="text-right">
+              {{orderTotal}}
+            </th>
+          </tr> --}}
+        </tbody>
+      </table>
+      <p style="font-size: .9em;">
+        <span class="tax-placeholder">{{t "TAX-APPLICABLE"}}</span>
+      </p>
+      <p class="update-order">
+        <a href="#" id="updateOrder">{{t "UPDATE-YOUR-ORDER"}}</a>
+      </p>
+    </div>
+  </div>
+</div>

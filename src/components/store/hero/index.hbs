@@ -1,0 +1,62 @@
+<section id="hero">
+  <section class="visible-xs" id="landing-hero-mobile">
+    <header>
+      <h4 class="text-center">
+        {{t "STREAM-WORLDCLASS-TV-STORE"}}
+        {{! plans.showMonthly() }}
+      </h4>
+      <h5 class="text-center">
+        <i>{{t "MONTHLY-PRICE-STORE"}}</i>
+        {{! plans.showMonthly() }}
+      </h5>
+      <a class="mobile" href="#membership">
+        <button>{{t "SUBSCRIBE"}}</button>
+      </a>
+    </header>
+  </section>
+
+  {{!
+    // Hide Gifting when not in allowed groupname
+    String landingHeroClasses = "col-sm-6 col-md-4 col-lg-4";
+    if ( ! isGroupNameAllowedGifting ) {
+        landingHeroClasses = "col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2";
+    }
+  }}
+
+  <section class="hidden-xs" id="landing-hero">
+    <div class="container">
+      <div id="landing-hero-1" class="{{landingHeroClasses}}">
+        <div class="image first"></div>
+        <div class="hero-item">
+          <h3>{{t "MEMBERSHIP-OPTIONS"}}</h3>
+          <a href="#membership">
+            <button>{{t "BUY-NOW"}}</button>
+          </a>
+        </div>
+      </div>
+
+      {{! Hide Gifting when not in allowed groupname }}
+      {{#if isGroupNameAllowedGifting}}
+        <div id="landing-hero-2" class="{{landingHeroClasses}}">
+          <div class="image second"></div>
+          <div class="hero-item">
+            <h3>{{t "GIFT-MEMBERSHIP"}}</h3>
+            <a href="#give">
+              <button>{{t "BUY-NOW"}}</button>
+            </a>
+          </div>
+        </div>
+      {{/if}}
+
+      <div id="landing-hero-3" class="hidden-sm col-md-4 col-lg-4">
+        <div class="image third"></div>
+        <div class="hero-item">
+          <h3>{{t "START-FREE-TRIAL-LC"}}</h3>
+          <a href="/createaccount.jsp">
+            <button>{{t "JOIN-NOW"}}</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>

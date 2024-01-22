@@ -1,0 +1,46 @@
+#special-discount {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 32px;
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 5px 0 10px;
+
+        li {
+            padding: 0;
+            font-weight: 400;
+        }
+    }
+
+    .accent {
+        color: #be0300;
+        font-weight: 400;
+    }
+
+    &~.col-md-2 {
+        margin-top: 1.5em;
+    }
+}
+.order-item.gift-item {
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+}
+
+.order-item .item-price {
+    margin: 15px 0;
+}
+
+@media (min-width: 768px) {
+    .flex-display {
+        display: flex;
+        align-items: center;
+        flex-flow: row nowrap;
+    }
+
+    .order-item.gift-item #quantityTotal {
+        text-align: right;
+    }
+}

@@ -1,0 +1,44 @@
+/* ACORN REBRANDING 2019-08-15 */
+body {
+	background: #0b1733;
+}
+.navbar {
+	background: #0b1733;
+	box-shadow: 0 0 30px -5px #0A132A;
+}
+.nav-tabs {
+	>li.active {
+		>a {
+			background: #0b1733;
+			&:hover {
+				background: #0b1733;
+			}
+			&:focus {
+				background: #0b1733;
+			}
+		}
+	}
+	>li {
+		>a {
+			&:hover {
+				background: #008989;
+			}
+		}
+	}
+}
+#account {
+	button {
+		background: #008989;
+		&:hover {
+			background: #0b1733;
+		}
+	}
+}
+.drop-select {
+	background: #0b1733;
+	li {
+		&:hover {
+			background: #008989;
+		}
+	}
+}

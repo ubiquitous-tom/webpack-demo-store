@@ -1,0 +1,14 @@
+.StripeElement {
+  border: 1px solid #c0c0c0;
+  border-radius: 0.25em;
+  padding-left: 6px;
+  padding: .5em;
+  // &.StripeElement--complete {
+  //   border-color: #3c773d;
+  //   // background-color: rgba(60, 119, 61, 0.1);
+  // }
+  &.StripeElement--invalid {
+    border-color: #a94442;
+    // background-color: rgba(169, 68, 66, 0.1);
+  }
+}

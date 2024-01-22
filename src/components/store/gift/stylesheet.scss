@@ -1,0 +1,65 @@
+#landing-gift {
+    z-index: 2;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background: #f0f0f0;
+    border-top: 1px solid #ccc;
+}
+
+#landing-gift h6 {
+    color: #8c0909;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: .04em
+}
+
+#landing-gift h4 {
+    font-size: 22px;
+}
+
+#landing-gift p {
+    margin-bottom: 25px;
+    line-height: 30px
+}
+
+#landing-gift .description {
+    padding: 50px 0;
+}
+
+#landing-gift .asset {
+    padding: 35px
+}
+
+#landing-gift a {
+    border-bottom: 1px solid;
+    color: #333;
+    font-family: source sans pro;
+    font-size: 13.5px;
+    font-weight: 600;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+}
+
+#landing-gift span {
+    font-size: 12px;
+    margin: 0 5px;
+}
+
+@media (min-width: 768px) {
+    #landing-gift .description {
+        padding: 70px 20px 70px 20px;
+    }
+}
+
+@media all and (min-width: 992px) {
+    #landing-gift .description {
+        padding: 90px 20px 70px 35px;
+    }
+}
+
+@media (min-width:1400px) {
+    #landing-gift .asset {
+        padding: 50px 70px 50px 15px;
+    }
+}

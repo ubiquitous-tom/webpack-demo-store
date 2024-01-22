@@ -1,0 +1,66 @@
+<h3 class="formhead" id="creditCard">{{t "CREDIT-CARD-INFO"}}</h3>
+
+<div class="form-group" id="creditCardName">
+
+  <label for="nameoncard" class="control-label">
+    <span>{{t "NAME-ON-CARD-NO-ASTERISK"}} <span class="req">*</span></span>
+  </label>
+
+  <span class="help-input pull-right">{{t "ENTER-NAME"}}</span>
+
+  <input
+    type="text"
+    placeholder=""
+    class="form-control"
+    name="nameoncard"
+    id="nameoncard"
+    minlength="2"
+    maxlength="30"
+    required
+  />
+
+</div>
+
+<div class="row" id="creditCardStripe">
+
+  {{! <input type="hidden" id="stripe-token" name="StripeToken" />
+  <input type="hidden" id="stripe-country" name="StripeCountry" /> }}
+
+  <div class="col-md-6">
+    <div class="form-group">
+
+      <label class="control-label">
+        <span>{{t "CREDIT-CARD-NUMBER"}} *</span>
+      </label>
+
+      <div id="card-number"></div>
+
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="form-group">
+      <label class="control-label">
+        <span>{{t "CARD-EXPIRY-DATE"}} *</span>
+      </label>
+
+      <div id="card-expiry"></div>
+
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="form-group">
+
+      <label class="control-label">
+        <span>{{t "CARD-VERIFICATION-NUMBER"}} *</span>
+      </label>
+
+      <div id="card-cvc"></div>
+
+    </div>
+  </div>
+
+  {{! <div id="card-errors" class="help-block hidden" role="alert">boop beep bob.</div> }}
+
+</div>

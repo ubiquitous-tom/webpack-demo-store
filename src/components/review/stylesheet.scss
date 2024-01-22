@@ -1,0 +1,109 @@
+.review.container {
+    margin-top: 1.5em;
+}
+
+.purchase-footer {
+    padding: 20px;
+}
+
+.review .row-fluid [class*="span"]:first-child {
+    text-align: center;
+}
+
+.review .billing-info {
+    padding: 2.5em 2.1em;
+    border: 0.1em solid rgba(0, 0, 0, 0.075);
+}
+
+.review .order-items img {
+    margin-left: 0;
+}
+
+.review .price {
+    font-size: 1.125em;
+    color: #424242;
+}
+
+.review .order-total {
+    border-top: none;
+}
+
+.review .order-cancel a {
+    font-size: 1em !important;
+    text-decoration: underline;
+}
+
+.review .update,
+.review .update-order,
+.review .update-item,
+.review .update-billing {
+    font-size: .95em;
+    font-weight: normal;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    line-height: 1.5em;
+}
+
+.review .update-billing {
+    top: 1.3em;
+    line-height: .6em;
+    margin-bottom: 2em;
+}
+
+.review .order-item.slim img {
+    max-width: 13em;
+}
+
+.review .order-item.slim .price {
+    margin-bottom: 1em;
+}
+
+.review .order-item.billing {
+    border-top: 0.1em solid rgba(0, 0, 0, 0.075);
+    border-radius: .5em;
+    margin-bottom: -.6em;
+}
+
+.review a.btn.btn-large.btn-secondary {
+    margin: 0 1em;
+}
+
+.review .order-item .item {
+    margin-bottom: 25px;
+}
+
+@media (max-width: 480px) {
+    .review .btn {
+        width: 100% !important;
+        margin: .5em 0 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        text-align: center !important;
+    }
+
+    .review .btn [class^="icon-"],
+    .billing .btn [class*=" icon-"] {
+        display: none;
+    }
+
+    .review .order-items.two {
+        padding-bottom: 3em;
+    }
+
+    .review .order-items img {
+        margin-left: 0;
+        margin-bottom: 2em;
+    }
+
+    .review .text-right {
+        text-align: left !important;
+    }
+
+    .review .update,
+    .review .update-order,
+    .review .update-item,
+    .review .update-billing {
+        position: relative;
+    }
+}
