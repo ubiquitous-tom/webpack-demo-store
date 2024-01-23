@@ -1,0 +1,3 @@
+import EditBillingInformationBillingStatusModal from './view'
+
+export default EditBillingInformationBillingStatusModal

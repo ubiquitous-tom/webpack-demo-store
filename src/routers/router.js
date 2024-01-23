@@ -11,7 +11,7 @@ import ApplyGiftCode from 'components/apply-gift-code'
 import ApplyPromoCode from 'components/apply-promo-code'
 import EditBilling from 'components/edit-billing'
 import Review from 'components/review'
-import Thankyou from 'components/thankyou'
+import ThankYou from 'components/thank-you'
 
 class Workspace extends Router {
   get routes() {
@@ -21,8 +21,8 @@ class Workspace extends Router {
       applyGiftCode: 'applyGiftCode',
       applyPromoCode: 'applyPromoCode',
       editBilling: 'editBilling',
-      review: 'review',
-      thankyou: 'thankyou',
+      reviewPurchase: 'reviewPurchase',
+      thankYou: 'thankYou',
       refresh: 'refresh',
       logout: 'logout',
       '*path': 'home',
@@ -90,14 +90,14 @@ class Workspace extends Router {
     new EditBilling({ model: this.model, i18n: this.i18n })
   }
 
-  review() {
+  reviewPurchase() {
     console.log('Router loads review')
     new Review({ model: this.model, i18n: this.i18n })
   }
 
-  thankyou() {
-    console.log('Router loads thankyou')
-    new Thankyou({ model: this.model, i18n: this.i18n })
+  thankYou() {
+    console.log('Router loads thankYou')
+    new ThankYou({ model: this.model, i18n: this.i18n })
   }
 
   refresh() {

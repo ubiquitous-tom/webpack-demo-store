@@ -1,0 +1,3 @@
+import EditBillingInformationBillingSignInModal from './view'
+
+export default EditBillingInformationBillingSignInModal

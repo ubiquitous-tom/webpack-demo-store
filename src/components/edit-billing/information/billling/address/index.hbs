@@ -70,13 +70,12 @@
         class="form-control"
         required
       >
-        {{! <option value="">- Country -</option> }}
+        <option value="">- Country -</option>
         {{! <\% _.each(address.countries, function(country) { %>
           <\% if(!_.isFunction(country)) { %>
           <option value="<\%= country.abbr %>" <\%= country.abbr === address.Country ? 'selected' : '' %>><\%= country.name %></option>
           <\% } %>
         <\% }) %> }}
-        {{{countries}}}
       </select>
     </div>
 

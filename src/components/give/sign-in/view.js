@@ -29,7 +29,7 @@ class GiveSignIn extends View {
 
     this.listenTo(this.giveSignInModel, 'change:signInSuccess', (model, value) => {
       console.log(model, value)
-      debugger
+      // debugger
       if (value) {
         window.location.reload()
       } else {

@@ -223,6 +223,16 @@ class ShoppingCart extends Model {
     return total
   }
 
+  getItemTotalAmount(type) {
+    const { attributes } = this
+    let total = 0
+    // debugger
+    if (!_.isEmpty(attributes[type])) {
+      total = attributes[type].quantity * attributes[type].amount
+    }
+    return parseFloat(total.toFixed(2))
+  }
+
   getTotalQuantity() {
     const { attributes } = this
     let total = 0
@@ -241,6 +251,21 @@ class ShoppingCart extends Model {
       total += value.quantity * value.amount
     })
     return parseFloat(total.toFixed(2))
+  }
+
+  emptyCart() {
+    this.set({
+      monthly: {
+        amount: 0,
+        quantity: 0,
+        total: 0,
+      },
+      annual: {
+        amount: 0,
+        quantity: 0,
+        total: 0,
+      },
+    })
   }
 }
 

@@ -36,12 +36,15 @@ class EditBillingInformationBillingAddress extends View {
     this.listenTo(this.editBillingInformationBillingAddressModel, 'change:countries', (model, value) => {
       console.log(model, value)
       // debugger
-      this.render()
+      const optionsEls = this.countriesDropdown()
+      this.$el
+        .find('#billingcountry')
+        .html(optionsEls)
     })
 
     this.listenTo(this.model, 'editBillingValidation:address', (model, context) => {
       console.log(model, context)
-      debugger
+      // debugger
       if (
         context.$el.find('#firstname')[0].checkValidity()
         && context.$el.find('#lastname')[0].checkValidity()
@@ -54,35 +57,59 @@ class EditBillingInformationBillingAddress extends View {
             address_country: context.$el.find('#billingcountry').val(),
           },
         })
-        const paymentInfo = model.get('paymentInfo')
+        let paymentInfo = model.get('paymentInfo')
         const billingAddress = {
           BillingAddress: {
-            Name: [context.$el.find('#firstname'), context.$el.find('#lastname')].join(' '),
+            Name: [context.$el.find('#firstname').val(), context.$el.find('#lastname').val()].join(' '),
             Country: context.$el.find('#billingcountry').val(),
             Zip: context.$el.find('#billingzip').val(),
           },
         }
-        _.extend(paymentInfo, billingAddress)
-        debugger
-        model.set(paymentInfo)
-        debugger
+        paymentInfo = { ...paymentInfo, ...billingAddress }
+        // debugger
+        model.set({
+          paymentInfo,
+        })
+        // debugger
         model.trigger('editBillingValidation:email', model, context)
       }
+      // else {
+      //   context.$el.find('#firstname')[0].addEventListener('invalid', (e) => {
+      //     console.log(e)
+      //     context.$el.find('#firstname')[0].closest('.form-group').classList.add('has-error')
+      //   }, false)
+      //   context.$el.find('#lastname')[0].addEventListener('invalid', (e) => {
+      //     console.log(e)
+      //     context.$el.find('#firstname')[0].closest('.form-group').classList.add('has-error')
+      //   }, false)
+      //   context.$el.find('#billingcountry')[0].addEventListener('invalid', (e) => {
+      //     console.log(e)
+      //     context.$el.find('#firstname')[0].closest('.form-group').classList.add('has-error')
+      //   }, false)
+      //   context.$el.find('#billingzip')[0].addEventListener('invalid', (e) => {
+      //     console.log(e)
+      //     context.$el.find('#firstname')[0].closest('.form-group').classList.add('has-error')
+      //   }, false)
+      // }
     })
+
+    this.render()
   }
 
   render() {
     console.log('EditBillingInformationBillingAddress render')
     console.log(this.model.attributes)
     // debugger
-    const name = this.model.get('Customer')?.Name
+    const name = this.model.has('Customer')
+      ? this.model.get('Customer')?.Name
+      : ''
     const [firstName, lastName] = name.split(/(?<=^\S+)\s/)
-    const countries = this.countriesDropdown()
+    // const countries = this.countriesDropdown()
     const postalCode = this.model.get('BillingAddress')?.PostalCode
     const attributes = {
       firstName,
       lastName,
-      countries,
+      // countries,
       postalCode,
     }
     const html = this.template(attributes)

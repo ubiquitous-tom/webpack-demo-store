@@ -12,18 +12,18 @@
     </h3>
     <p class="billing-name">
       {{t "NAME"}}
-      <strong>{{customer.Name}}</strong>
+      <strong>{{name}}</strong>
     </p>
   </div>
 
   <div class="order-item">
     <h3 class="head order-summary">{{t "ORDER-SUMMARY"}}</h3>
 
-    {{#if annual.quantity}}
+    {{#if annualQuantity}}
       <div class="row">
         <span class="col-md-3">
           <img
-            src="img/membership-user.png"
+            src="{{membershipUserImg}}"
             alt="gift-box"
             width="85"
             height=""
@@ -31,9 +31,9 @@
         </span>
         <span class="col-md-7">
           <h4 class="item-name">{{t "ANNUAL-MEMBERSHIP"}}</h4>
-          {{!-- <\% if(giveObj.get("Give").quantity > 0) { %>
-            <p>{{t "UNLIMITED-ACCESS" }}</p>
-          <\% } %> --}}
+          {{#if giftQuantity}}
+            <p>{{t "UNLIMITED-ACCESS"}}</p>
+          {{/if}}
 
         </span>
         <span class="col-md-2 text-right">
@@ -43,9 +43,9 @@
           </p>
           <p class="text-right">
             Qty:
-            {{annual.quantity}}
+            {{annualQuantity}}
           </p>
-          {{#if gift}}
+          {{#if giftStore}}
             <div class="control-group row text-right" style="margin-bottom:0;">
               <div class="controls">
                 <p class="remove">x <a href="#">{{t "REMOVE-THIS-ITEM"}}</a></p>
@@ -56,11 +56,11 @@
       </div>
     {{/if}}
 
-    {{#if monthly.quantity}}
+    {{#if monthlyQuantity}}
       <div class="row">
         <span class="col-md-3">
           <img
-            src="img/membership-user.png"
+            src="{{membershipUserImg}}"
             alt="gift-box"
             width="85"
             height=""
@@ -68,7 +68,7 @@
         </span>
         <span class="col-md-7">
           <h4 class="item-name">{{t "ACORNTV-MONTHLY-MEMBERSHIP"}}</h4>
-          {{#if Give}}
+          {{#if giftQuantity}}
             <p>{{t "UNLIMITED-ACCESS"}}</p>
           {{/if}}
         </span>
@@ -79,9 +79,9 @@
           </p>
           <p class="text-right">
             {{t "QTY"}}
-            {{monthly.quantity}}
+            {{monthlyQuantity}}
           </p>
-          {{#if gift}}
+          {{#if giftStore}}
             <div class="control-group row text-right" style="margin-bottom:0;">
               <div class="controls">
                 <p class="remove">x <a href="#">{{t "REMOVE-THIS-ITEM"}}</a></p>
@@ -95,7 +95,7 @@
     {{#if Give}}
       <div class="row">
         <span class="col-md-3">
-          <img src="img/gift-box.png" alt="gift-box" width="85" height="" />
+          <img src="{{giftBoxImg}}" alt="gift-box" width="85" height="" />
         </span>
         <span class="col-md-7">
           <h4 class="item-name">{{t "GIFT-MEMBERSHIP"}}</h4>
@@ -109,7 +109,7 @@
           </p>
           <p class="qty text-right">
             {{t "QTY"}}
-            {{Give.quantity}}
+            {{giftQuantity}}
           </p>
         </span>
       </div>
@@ -120,7 +120,7 @@
     <div class="row">
       <div class="col-md-6">
         {{! <\% if(giveObj.get("Membership").quantity && !giveObj.get("Give").quantity) { %> }}
-        {{#if MonthlyAndGive}}
+        {{!-- {{#if annualAndGift}}
           <div class="form-inline">
             <div class="form-group">
               <label for="promo-code" class="control-label">
@@ -129,8 +129,8 @@
               <input type="text" id="promo-code" class="form-control" />
             </div>
           </div>
-          {{! <\% } %> }}
-        {{/if}}
+        {{/if}} --}}
+        {{! <\% } %> }}
       </div>
       <div class="col-md-6 text-right">
         {{t "ORDER-TOTAL"}}
@@ -138,7 +138,7 @@
         {{total}}
         <br />
         <span class="tax-placeholder">
-          <div class="lds-roller">
+          {{! <div class="lds-roller">
             <div></div>
             <div></div>
             <div></div>
@@ -147,7 +147,8 @@
             <div></div>
             <div></div>
             <div></div>
-          </div>
+          </div> }}
+          {{estimatedTaxPrice}}
         </span>
       </div>
     </div>
@@ -167,7 +168,7 @@
     {{t "CURRENTLY-AVAILABLE"}}
   </p>
 
-  <div
+  {{!-- <div
     id="reviewPurchaseModal"
     class="modal fade"
     tabindex="-1"
@@ -194,5 +195,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> --}}
 </div>

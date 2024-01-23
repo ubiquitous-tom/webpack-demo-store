@@ -29,7 +29,7 @@ class MembershipSelections extends View {
 
     this.listenTo(this.model, 'change:membershipPromo', (model, value, options) => {
       console.log(model, value, options)
-      debugger
+      // debugger
       this.resetMonthlyPricing()
       this.resetAnnualPricing()
     })
@@ -66,7 +66,7 @@ class MembershipSelections extends View {
 
     this.listenTo(this.cart, 'change:annual', (model, value, options) => {
       console.log(model, value, options)
-      debugger
+      // debugger
       if (this.model.has('membershipPromo')) {
         if (value.total > 0) {
           // const subscriptionAmount = this.plans.getMonthly().price

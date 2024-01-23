@@ -15,10 +15,10 @@ class EditBillingInformationBillingEmail extends View {
 
   get events() {
     return {
-      'input input#billingEmail': 'validate',
-      'blur input#billingEmail': 'validate',
-      'input input#billingEmailConfirm': 'validate',
-      'blur input#billingEmailConfirm': 'validate',
+      'input input#billingEmail': 'validateEmail',
+      'blur input#billingEmail': 'validateEmail',
+      'input input#billingEmailConfirm': 'validateEmail',
+      'blur input#billingEmailConfirm': 'validateEmail',
       'input input#membershipPassword': 'validate',
       'blur input#membershipPassword': 'validate',
       'input input#membershipPasswordConfirm': 'validate',
@@ -32,7 +32,7 @@ class EditBillingInformationBillingEmail extends View {
 
     this.listenTo(this.model, 'editBillingValidation:email', (model, context) => {
       console.log(model, context)
-      debugger
+      // debugger
       // Customer is not logged in
       // which means `billingEmail input exists
       // sp we need to pass
@@ -48,44 +48,43 @@ class EditBillingInformationBillingEmail extends View {
       // in `paymentInfo` object
 
       if (context.$el.find('#billingEmail').length) {
-        const paymentInfo = model.get('paymentInfo')
+        let paymentInfo = model.get('paymentInfo')
+        const emailEl = context.$el.find('#billingEmail')
+        const emailConfirmEl = context.$el.find('#billingEmailConfirm')
+        const passwordEl = context.$el.find('#membershipPassword')
+        const passwordConfirmEl = context.$el.find('#membershipPasswordConfirm')
         if (
-          (
-            context.$el.find('#billingEmail')[0].checkValidity()
-            && this.validateEmail(context.$el.find('#billingEmail').val())
-          )
-          && (
-            context.$el.find('#billingEmailConfirm')[0].checkValidity()
-            && this.validateEmail(context.$el.find('#billingEmailConfirm').val())
-          )
-          && (context.$el.find('#billingEmail').val().trim() === context.$el.find('#billingEmailConfirm').val().trim())
+          (emailEl[0].checkValidity() && this.validateEmailFormat(emailEl.val()))
+          && (emailConfirmEl[0].checkValidity() && this.validateEmailFormat(emailConfirmEl.val()))
+          && (emailEl.val().trim() === emailConfirmEl.val().trim())
         ) {
           const customer = {
             Customer: {
-              Email: context.$el.find('#billingEmail').val(),
+              Email: emailEl.val().trim(),
               MarketingOptIn: context.$el.find('#marketing-agree').val(),
             },
           }
-          _.extend(paymentInfo, customer)
+          paymentInfo = { ...paymentInfo, ...customer }
         }
 
         if (
-          context.$el.find('#membershipPassword')[0].checkValidity()
-          && context.$el.find('#membershipPasswordConfirm')[0].checkValidity()
-          && (context.$el.find('#membershipPassword').val().trim() === context.$el.find('#membershipPasswordConfirm').val().trim())
+          passwordEl[0].checkValidity()
+          && passwordConfirmEl[0].checkValidity()
+          && (passwordEl.val().trim() === passwordConfirmEl.val().trim())
         ) {
-          // const paymentInfo = model.get('paymentInfo')
           const credentials = {
             Credentials: {
-              Password: context.$el.find('#membershipPassword').val(),
+              Password: passwordEl.val().trim(),
             },
           }
-          _.extend(paymentInfo, credentials)
+          paymentInfo = { ...paymentInfo, ...credentials }
         }
-        debugger
-        model.set(paymentInfo)
+        // debugger
+        model.set({
+          paymentInfo,
+        })
       }
-      debugger
+      // debugger
       model.trigger('editBillingValidation:paymentMethod', model, context)
     })
 

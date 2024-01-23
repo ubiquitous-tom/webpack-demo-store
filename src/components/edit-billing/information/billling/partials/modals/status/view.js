@@ -1,45 +1,42 @@
 import { View } from 'backbone'
 
-// import './stylesheet.scss'
-import template from './modal.hbs'
+import template from './index.hbs'
 
-class MembershipSignUpModal extends View {
+class EditBillingInformationBillingStatusModal extends View {
   get el() {
-    return '.give.store.container'
+    return '#signInForm'
   }
 
   get template() {
     return template
   }
 
-  // get events() {
-  //   return {
-  //     'click #signInModal': 'remove',
-  //   }
-  // }
+  get events() {
+    return {
+      'click .btn-confirmation': 'confirmation',
+    }
+  }
 
-  initialize(options) {
-    console.log('MembershipSignUpModal initialize')
-    this.i18n = options.i18n
+  initialize() {
+    console.log('EditBillingInformationBillingStatusModal initialize')
   }
 
   render() {
     this.removeLoader()
-    console.log(this.model.attributes)
+
     const attributes = {
       message: this.i18n.t('ACCOUNT-EXISTS'),
     }
     const html = this.template(attributes)
-    this.$el.find('#signUpForm').after(html)
-    this.$el.find('#signInModal').modal()
+
+    this.$el.after(html).modal()
 
     // this.$el
     //   .find('#SignInStatus')
     //   .html(this.i18n.t('ACCOUNT-EXISTS'))
 
-    this.$el.find('#signInModal').on('hidden.bs.modal', () => {
-      this.$el.find('#signInModal').remove()
-      this.model.trigger('membership:accountAlreadyExist')
+    this.$el.find('#updateBillingModal').on('hidden.bs.modal', () => {
+      this.$el.find('#updateBillingModal').remove()
     })
 
     // this.$el
@@ -47,26 +44,26 @@ class MembershipSignUpModal extends View {
     //   .modal()
   }
 
-  remove() {
-    this.$el.find('#signInModal').remove()
+  confirmation() {
+    this.$el.find('#updateBillingModal').remove()
   }
 
   displayLoader() {
     const loader = `<i class="icon-spinner icon-spin icon-large"></i> ${this.i18n.t('CHECKING-FOR-ACCOUNT')}`
     const modal = $('<div>')
-      .attr({ id: 'signInAlert' })
+      .attr({ id: 'updateBillingAlert' })
       .addClass('alert alert-info')
       .html(loader)
-    // debugger
+    debugger
     this.$el
-      .find('#signUpForm')
+      .find('.form-trial-signup')
       .after(modal)
       .slideDown()
   }
 
   removeLoader() {
     this.$el
-      .find('#signInAlert')
+      .find('#updateBillingModal')
       .slideUp()
       .remove()
   }
@@ -92,4 +89,4 @@ class MembershipSignUpModal extends View {
   // }
 }
 
-export default MembershipSignUpModal
+export default EditBillingInformationBillingStatusModal

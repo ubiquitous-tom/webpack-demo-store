@@ -25,7 +25,7 @@ class ReCaptcha extends View {
     this.listenTo(this.model, 'change:generateCaptchaTokenSuccess', (model, value, options) => {
       console.log(model, value, options)
       console.log(model.get('captchaToken'))
-      debugger
+      // debugger
       if (value) {
         model.set({
           setCaptchaTokenSuccess: true,

@@ -29,36 +29,37 @@ class EditBillingInformationBillingPaymentMethod extends View {
 
     this.listenTo(this.model, 'editBillingValidation:paymentMethod', (model, context) => {
       console.log(model, context)
-      debugger
+      // debugger
       context.$el.find('#nameoncard').focus().blur()
-      // if (context.$el.find('#nameoncard')[0].checkValidity()) {
       this.stripeForm.generateToken()
-      // }
     })
 
-    this.listenTo(this.model, 'change:newStripeCardInfo', (model, value) => {
-      console.log(model, value)
-      debugger
+    this.listenTo(this.model, 'change:newStripeCardInfo', (model, value, options) => {
+      console.log(model, value, options)
+      const { context } = options
+      // debugger
       if (
-        _.isEmpty(this.$el.model.find('#nameoncard').val())
-        && this.$el.model.find('#nameoncard')[0].checkValidity()
+        !_.isEmpty(context.$el.find('#nameoncard').val())
+        && context.$el.find('#nameoncard')[0].checkValidity()
       ) {
         if (value) {
-          const paymentInfo = model.get('paymentInfo')
+          let paymentInfo = model.get('paymentInfo')
           const paymentMethod = {
             PaymentMethod: {
-              NameOnAccount: value.name,
+              NameOnAccount: context.$el.find('#nameoncard').val().trim(),
               StripeToken: value.token,
             },
           }
-          _.extend(paymentInfo, paymentMethod)
-          debugger
-          model.set(paymentMethod)
-          debugger
-          this.model.trigger('editBillingValidation:stripeCardInfo', value)
+          paymentInfo = { ...paymentInfo, ...paymentMethod }
+          // debugger
+          model.set({
+            paymentInfo,
+          })
+          // debugger
+          context.model.trigger('editBillingValidation:stripeCardInfo', model, context)
         }
       } else {
-        this.$el.model.find('#nameoncard').parent('.form-group').removeClass('has-success').addClass('has-error')
+        context.$el.find('#nameoncard').parent('.form-group').removeClass('has-success').addClass('has-error')
       }
     })
 

@@ -9,6 +9,9 @@ import EditBillingInformationBillingAddress from './address'
 import EditBillingInformationBillingEmail from './email'
 import EditBillingInformationBillingPaymentMethod from './payment-method'
 
+import EditBillingInformationBillingSignInModal from './partials/modals/sign-in'
+import EditBillingInformationBillingStatusModal from './partials/modals/status'
+
 class EditBillingInformationBilling extends View {
   get el() {
     return '#edit-billing-information'
@@ -30,124 +33,124 @@ class EditBillingInformationBilling extends View {
 
     this.editBillingInformationBillingModel = new EditBillingInformationBillingModel()
 
-    this.listenTo(this.model, 'editBillingValidation:submit', (model, context) => {
-      console.log(model, context)
-      debugger
-      context.model.trigger('editBillingValidation:address', model, context)
-    })
+    this.signInModal = new EditBillingInformationBillingSignInModal()
+    this.statusModal = new EditBillingInformationBillingStatusModal()
 
-    this.listenTo(this.model, 'editBillingValidation:stripeCardInfo', (value) => {
+    // this.listenTo(this.model, 'editBillingValidation:submit', (model, context) => {
+    //   console.log(model, context)
+    //   debugger
+    //   context.model.trigger('editBillingValidation:address', model, context)
+    // })
+
+    this.listenTo(this.model, 'editBillingValidation:stripeCardInfo', (value, context) => {
       console.log(value)
-      debugger
+      // debugger
       if (value) {
-        // {
-        //   "Session": {
-        //     "SessionID": "4739a38e-a897-4665-a19c-15609c89f4bc"
-        //   },
-        //   "BillingAddress": {
-        //     "Name": "Tom Test23",
-        //     "Country": "US",
-        //     "Zip": "90066"
-        //   },
-        //   // "Customer": {
-        //   //   "Email": "toms23@test.com",
-        //   //   "MarketingOptIn": "1",
-        //   // },
-        //   // "Credentials": {
-        //   //   "Password": "tomtom",
-        //   // },
-        //   "PaymentMethod": {
-        //     "NameOnAccount": "Tom Test",
-        //     "StripeToken": "tok_1ObAtP2hcBjtiCUZldDfXCkN"
-        //   },
-        //   "Ammount": "6.99"
-        // }
-        const paymentInfo = this.model.get('paymentInfo')
+        let paymentInfo = this.model.get('paymentInfo')
         const session = {
-          Session: this.model.get('Session').SessinID,
+          Session: {
+            SessionID: context.model.get('Session').SessionID,
+          },
+        }
+        // WEIRD TYPO HERE `Ammount` 2 m's, for some reasons...
+        const amount = {
           Ammount: this.membershipAmount(),
         }
-        _.extend(paymentInfo, session)
-        debugger
-        this.model.set(paymentInfo)
-        debugger
+        paymentInfo = { ...paymentInfo, ...session, ...amount }
+        // debugger
+        context.model.set({
+          paymentInfo,
+        })
+        // debugger
         this.editBillingInformationBillingModel.submit(paymentInfo)
       }
     })
 
     this.listenTo(this.editBillingInformationBillingModel, 'change:paymentSuccess', (model, value) => {
       console.log(model, value)
-      debugger
+      // debugger
       if (value) {
-        Backbone.history.navigate('reviewPurchase')
+        Backbone.history.navigate('reviewPurchase', { trigger: true })
       } else {
-        // if (model.get('message').indexOf('Sign In') >= 0) {
-        //   this.modal.render()
+        /* eslint no-lonely-if: 0 */
+        if (model.get('message').indexOf('Sign In') >= 0) {
+          Backbone.history.navigate('give', { trigger: true })
+          //   this.modal.render()
 
-        //   this.$signInStatus.html(errorMessage)
+          //   this.$signInStatus.html(errorMessage)
 
-        //   this.$signInModal.modal()
-        //   this.$signInModal.on('hidden.bs.modal', _.bind(function () {
-        //     Backbone.trigger('navChange', 'give')
-        //   }, this))
-        // } else {
-        //   var billingAddress = xhr.responseJSON.error.BillingAddress
-        //   if (billingAddress == null) {
-        //     if (errorMessage.indexOf('unable to process this transaction') >= 0) {
-        //       errorMessage = polyglot.t("CREDIT-CARD-NOT-SUPPORTED")
-        //     }
-        //     this.$billingStatus.html(errorMessage)
-        //   } else {
-        //     var emptyData = []
-        //     // if (billingAddress.Address != null && billingAddress.Address == "Empty") {
-        //     //   emptyData.push("Address")
-        //     // }
-        //     // if (billingAddress.City != null && billingAddress.City == "Empty") {
-        //     //   emptyData.push("City")
-        //     // }
-        //     // if (billingAddress.Name != null && billingAddress.Name == "Empty") {
-        //     //   emptyData.push("Name")
-        //     // }
-        //     // if (billingAddress.State != null && billingAddress.State == "Empty") {
-        //     //   emptyData.push("State/Province")
-        //     // }
-        //     if (billingAddress.Country != null && billingAddress.Country == 'Empty') {
-        //       emptyData.push('Country')
-        //     }
-        //     if (billingAddress.Zip != null && billingAddress.Zip == "Empty") {
-        //       emptyData.push("Zip/Postal Code")
-        //     }
+          //   this.$signInModal.modal()
+          //   this.$signInModal.on('hidden.bs.modal', _.bind(function () {
+          //     Backbone.trigger('navChange', 'give')
+          //   }, this))
+          // } else {
+          //   var billingAddress = xhr.responseJSON.error.BillingAddress
+          //   if (billingAddress == null) {
+          //     if (errorMessage.indexOf('unable to process this transaction') >= 0) {
+          //       errorMessage = polyglot.t("CREDIT-CARD-NOT-SUPPORTED")
+          //     }
+          //     this.$billingStatus.html(errorMessage)
+          //   } else {
+          //     var emptyData = []
+          //     // if (billingAddress.Address != null && billingAddress.Address == "Empty") {
+          //     //   emptyData.push("Address")
+          //     // }
+          //     // if (billingAddress.City != null && billingAddress.City == "Empty") {
+          //     //   emptyData.push("City")
+          //     // }
+          //     // if (billingAddress.Name != null && billingAddress.Name == "Empty") {
+          //     //   emptyData.push("Name")
+          //     // }
+          //     // if (billingAddress.State != null && billingAddress.State == "Empty") {
+          //     //   emptyData.push("State/Province")
+          //     // }
+          //     if (billingAddress.Country != null && billingAddress.Country == 'Empty') {
+          //       emptyData.push('Country')
+          //     }
+          //     if (billingAddress.Zip != null && billingAddress.Zip == "Empty") {
+          //       emptyData.push("Zip/Postal Code")
+          //     }
 
-        //     var message
-        //     if (emptyData.length > 0) {
-        //       message = polyglot.t("ENTER-DATA")
-        //       for (var i = 0 i < emptyData.length i++) {
-        //         message += emptyData[i] + ", "
-        //       }
-        //       message = message.substring(0, message.length - 2) + "."
-        //     } else {
-        //       message = polyglot.t("ERR-PROCESS-REQUEST")
-        //     }
+          //     var message
+          //     if (emptyData.length > 0) {
+          //       message = polyglot.t("ENTER-DATA")
+          //       for (var i = 0 i < emptyData.length i++) {
+          //         message += emptyData[i] + ", "
+          //       }
+          //       message = message.substring(0, message.length - 2) + "."
+          //     } else {
+          //       message = polyglot.t("ERR-PROCESS-REQUEST")
+          //     }
 
-        //     this.$billingStatus.html(message)
+          //     this.$billingStatus.html(message)
+          //   }
 
-        //     // this.paymentMethod.render()
-        //     // this.$('#stripe-token').val('')
-        this.$el.find('#savePayment').prop('disabled', false)
-        //   }
-        // }
+          //   this.$billingModal.modal();
+
+          //      // Clear Stripe Token field and reset Stripe since we
+          //      // have problem processing credit card by Stripe.
+          //     this.paymentMethod.render()
+          //     this.$('#stripe-token').val('')
+          //   }
+          // }
+        }
+
+        this.$el
+          .find('#savePayment')
+          .prop('disabled', false)
       }
     })
 
+    // debugger
     if (this.cart.getTotalQuantity() === 0) {
-      if (this.model.get('Session').LoggedIn) {
-        Backbone.history.navigate('membership', { trigger: true })
-      } else {
+      if (this.model.get('storeType') === 'Gift') {
         Backbone.history.navigate('give', { trigger: true })
+      } else {
+        Backbone.history.navigate('membership', { trigger: true })
       }
+    } else {
+      this.render()
     }
-
-    this.render()
   }
 
   render() {
@@ -183,8 +186,34 @@ class EditBillingInformationBilling extends View {
     e.preventDefault()
     console.log('EditBillingInformationBilling submit')
     if (this.cart.getTotalQuantity()) {
-      // this.$el.find('#savePayment').prop('disabled', true)
-      this.model.trigger('editBillingValidation:submit', this.model, this)
+      this.$el.find('#savePayment').prop('disabled', true)
+
+      // start form validation process
+      const defaultPaymentInfo = {
+        Session: {
+          SessionID: '',
+        },
+        BillingAddress: {
+          Name: '',
+          Country: '',
+          Zip: '',
+        },
+        PaymentMethod: {
+          NameOnAccount: '',
+          StripeToken: '',
+        },
+        Ammount: '',
+      }
+      const paymentInfo = this.model.has('paymentInfo')
+        ? this.model.get('paymentInfo')
+        : defaultPaymentInfo
+      this.model.set({
+        paymentInfo,
+      })
+      // debugger
+      // this.model.get('paymentInfo')
+      // this.model.trigger('editBillingValidation:submit', this.model, this)
+      this.model.trigger('editBillingValidation:address', this.model, this)
     }
   }
 

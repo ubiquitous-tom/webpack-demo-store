@@ -37,7 +37,7 @@ class MembershipSignUp extends View {
 
     this.listenTo(this.model, 'membership:checkout', (model, value) => {
       console.log(model, value)
-      debugger
+      // debugger
       if (this.validateSignUpForm()) {
         // `Customer.StripEnabled` is unique to only in Acorn Store service
         // if the customer updated the Stripe card in Store then it will be set to `true`
@@ -72,7 +72,7 @@ class MembershipSignUp extends View {
 
     this.listenTo(this.membershipSignUpModel, 'change:checkProfileEmailSuccess', (model, value) => {
       console.log(model, value)
-      debugger
+      // debugger
       this.popup.removeLoader()
 
       if (value) {

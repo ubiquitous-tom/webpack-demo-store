@@ -69,7 +69,7 @@ class StripeForm extends View {
       this.model.set({
         captchaVersion: this.reCaptcha.model.get('captchaVersion'),
       })
-      debugger
+      // debugger
       if (value) {
         const newStripeCardInfo = {
           stripeCardTokenID: this.model.get('stripeCardTokenID'),
@@ -92,7 +92,7 @@ class StripeForm extends View {
     /* eslint no-shadow:0 */
     this.listenTo(this.model, 'change:csrfValidationSuccess', (model, value, options) => {
       console.log(model, value, options)
-      debugger
+      // debugger
       if (value) {
         console.log('csrf validation passed')
         debugger
@@ -146,7 +146,7 @@ class StripeForm extends View {
         debugger
         // this.$el.find('#stripe-form').empty()
         // this.parentView.render()
-        Backbone.history.navigate('reviewPurchase')
+        Backbone.history.navigate('reviewPurchase', { trigger: true })
       }
       //  else {
       //   this.resetStripeForm()
@@ -319,7 +319,7 @@ class StripeForm extends View {
           const stripeCard = result.token.card
           const updatedStripeCard = _.extend(stripeCard, { token: stripeCardTokenID })
           console.log(updatedStripeCard)
-          this.parentView.model.set('newStripeCardInfo', updatedStripeCard)
+          this.parentView.model.set('newStripeCardInfo', updatedStripeCard, { context: this.parentView })
           this.model.set('stripeCardTokenID', stripeCardTokenID)
           // console.log(this, this.parentView)
           this.loadingStop()

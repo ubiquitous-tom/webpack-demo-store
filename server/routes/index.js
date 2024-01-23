@@ -16,6 +16,8 @@ const plansChange = require('./planschange')
 const plansAvailable = require('./plansavailable')
 const stripeDefaultCard = require('./stripedefaultcard')
 const currentMembership = require('./currentmembership')
+const payment = require('./payment')
+const purchase = require('./purchase')
 
 router.get('/hello', (req, res) => {
   // res.json({ custom: 'response' });
@@ -38,5 +40,7 @@ router.post('/changeemail', changeEmail)
 router.post('/acorn/plans/change', plansChange)
 router.post('/stripecard', stripeCard)
 router.post('/api/user/csrfPreAuth', csrfPreAuth)
+router.post('/payment', payment)
+router.post('/purchase', purchase)
 
 module.exports = router

@@ -47,6 +47,10 @@ class Membership extends View {
     //   // })
     // })
 
+    this.model.set({
+      storeType: 'Membership',
+    })
+
     this.render()
   }
 

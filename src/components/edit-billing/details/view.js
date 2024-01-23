@@ -15,8 +15,9 @@ class EditBillingDetails extends View {
     return template
   }
 
-  initialize() {
+  initialize(options) {
     console.log('EditBillingDetails initialize')
+    this.i18n = options.i18n
 
     this.render()
   }

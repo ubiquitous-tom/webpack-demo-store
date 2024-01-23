@@ -959,7 +959,7 @@ section.plan label .h4 {
 } */
 
 /* CSS Loader */
-.lds-roller {
+/* .lds-roller {
   display: inline-block;
   position: relative;
   width: calc(29% - 64px);
@@ -1043,4 +1043,4 @@ section.plan label .h4 {
   100% {
     transform: rotate(360deg);
   }
-}
+} */

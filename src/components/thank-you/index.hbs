@@ -1,0 +1,133 @@
+<h1>{{t "THANK-YOU"}}</h1>
+
+{{#if giftStore}}
+  <p>{{t "RECEIVE-EMAIL"}}</p>
+  <h2>{{t "GIVING-YOUR-GIFT"}}</h2>
+  <ul>
+    <li>{{t "OPEN-EMAIL"}}</li>
+    <li>{{t "COPY-LINKS"}}</li>
+    <li>{{t "CLICK-LINKS"}}</li>
+  </ul>
+{{/if}}
+
+{{#if membershipStore}}
+  <p>
+    {{t "RECEIVE-EMAIL-ORDER-DETAIL"}}
+
+    {{#if giftQuantity}}
+      {{t "RECEIVE-ANOTHER-EMAIL"}}
+    {{/if}}
+
+  </p>
+
+  {{#if giftQuantity}}
+    <h2>{{t "GIVING-YOUR-GIFT"}}</h2>
+    <ul>
+      <li>{{t "OPEN-EMAIL"}}</li>
+      <li>{{t "COPY-LINKS"}}</li>
+      <li>{{t "CLICK-LINKS"}}</li>
+    </ul>
+  {{/if}}
+{{/if}}
+
+<div class="row">
+  <div class="order-item">
+
+    <h3 class="head">Order #{{orderId}}</h3>
+
+    {{#if giftQuanity}}
+      <div class="row item order-detail">
+        <span class="col-md-3">
+          <b>{{giftQuanityy}} {{t "ANNUAL-MEMBERSHIP-ACORNTV"}}</b>
+        </span>
+        <span class="col-md-6">
+          <b>{{t "QTY"}} {{giftQuanityy}}</b>
+        </span>
+        <span class="col-md-3 text-right">
+          <b>{{t "ORDER-TOTAL"}}</b>
+          {{! <\%= plans.get("defaultCurrency") + plans.get("defaultCurrencySymbl") + giveObj.get("Total") %></b> }}
+          {{total}}
+          <br />
+          <span class="tax-placeholder">{{estimatedTaxAmount}}</span>
+        </span>
+      </div>
+    {{/if}}
+
+  </div>
+
+  {{#if annualMembership}}
+    <div class="order-item slim">
+      <span class="col-md-3">
+        <img
+          src="{{membershipUserImg}}"
+          alt="gift-box"
+          width="185"
+          height="204"
+        />
+      </span>
+      <span class="col-md-7">
+        <h4 class="item-name">{{t "ANNUAL-MEMBERSHIP"}}</h4>
+      </span>
+      <span class="col-md-2">
+        <p class="price text-right">
+          {{! <\%= plans.get("defaultCurrency") + plans.get("defaultCurrencySymbl") + giveObj.get("Membership").price %> }}
+          {{annualPrice}}
+        </p>
+        <p class="text-right">
+          {{t "QTY"}}
+          {{annualQuantity}}
+        </p>
+      </span>
+    </div>
+  {{/if}}
+
+  {{#if monthlyMembership}}
+    <div class="order-item slim">
+      <span class="col-md-3">
+        <img
+          src="{{membershipUserImg}}"
+          alt="gift-box"
+          width="185"
+          height="204"
+        />
+      </span>
+      <span class="col-md-7">
+        <h4 class="item-name">{{t "ACORNTV-MONTHLY-MEMBERSHIP"}}</h4>
+      </span>
+      <span class="col-md-2">
+        <p class="price text-right">
+          {{! <\%= plans.get("defaultCurrency") + plans.get("defaultCurrencySymbl") + giveObj.get("MonthlyMembership").price %> }}
+          {{monthlyPrice}}
+        </p>
+        <p class="text-right">
+          {{t "QTY"}}
+          {{monthlyQuantity}}
+        </p>
+      </span>
+    </div>
+  {{/if}}
+
+  {{! <\% if(giveObj.get("MonthlyMembership").quantity > 0 || giveObj.get("Membership").quantity > 0) { %> }}
+  {{#if membership}}
+    <div class="watchnow purchase-footer">
+      <a
+        class="btn btn-primary checkout text-right"
+        href="//{{environment}}acorn.tv"
+      >
+        <!-- {{t "START-WATCHING-NOW"}} -->
+        Discover extraordinary mysteries, dramas, and thrillers from around the
+        world. When ho-hum TV isn't cutting it, stream something brilliant.
+      </a>
+      <br />
+    </div>
+  {{/if}}
+</div>
+
+<p class="legal">
+  {{t "ANNUAL-ACORNTV-GIFT"}}
+  Recipient will be asked to provide an email address for membership
+  confirmation.
+  <a href="https://www.amcnetworks.com/privacy-policy/" target="_blank">
+    {{t "PRIVACY-POLICY"}}
+  </a>
+</p>

@@ -24,6 +24,10 @@ class Give extends View {
     console.log('Give initialize')
     this.i18n = options.i18n
 
+    this.model.set({
+      storeType: 'Gift',
+    })
+
     this.listenTo(this.model.get('cart'), 'change:annual', this.render)
 
     this.render()
