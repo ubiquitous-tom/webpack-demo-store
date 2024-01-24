@@ -43,7 +43,7 @@ class EditBillingDetailsOrderSummaryTotal extends View {
     return [
       this.gifting.get('gift').CurrencyDesc,
       this.gifting.get('gift').CurrSymbol,
-      total,
+      Intl.NumberFormat(`${this.model.get('stripePlansLang')}-IN`, { maximumFractionDigits: 2, minimumFractionDigits: 2, trailingZeroDisplay: 'stripIfInteger' }).format(total),
     ].join('')
   }
 }

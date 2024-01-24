@@ -1,11 +1,20 @@
 .order-summary {
   th {
-    font-size: .9em;
+    font-size: 0.9em;
     font-weight: 400;
   }
 
   td {
-    font-size: .9em;
+    font-size: 0.9em;
+    &.price {
+      del {
+        color: red;
+        margin-left: 0.25em;
+        span {
+          color: #000;
+        }
+      }
+    }
   }
 
   #updateOrder {

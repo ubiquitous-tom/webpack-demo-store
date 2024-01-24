@@ -25,48 +25,30 @@ class MembershipApplyPromoCode extends View {
     console.log('MembershipApplyPromoCode initialize')
     this.i18n = options.i18n
     this.cart = this.model.get('cart')
+    this.gifting = this.model.get('gifting')
     this.membershipApplyPromoCodeModel = new MembershipApplyPromoCodeModel()
 
     /* eslint no-shadow: 0 */
     this.listenTo(this.membershipApplyPromoCodeModel, 'change:promoCodeSuccess', (model, value) => {
       console.log(model, value)
       console.log(this, this.model.attributes)
-      debugger
+      // debugger
       model.unset('promoCodeSuccess', { silent: true })
       // this.loadingStop()
       if (value) {
         const membershipPromo = this.membershipApplyPromoCodeModel.get('promo')
-        this.model.set(
-          { membershipPromo },
-          { context: this },
-        )
-        this.cart.set(
-          { promoCodeApplied: membershipPromo },
-          { context: true },
-        )
+        this.model.set({ membershipPromo }, { context: this })
         console.log(this.model.attributes)
-        this.updatePromoMessage(model, value)
       } else {
         console.log('promoCodeSuccess: false')
       }
+
+      const { message } = model.get('flashMessage')
+      this.updatePromoMessage(message, value)
     })
 
-    // this.membershipApplyPromoCodeModel.on('error', (model, value, options) => {
-    //   console.log('Promocode initialize on error')
-    //   // console.log(model, value, options)
-    //   // console.log(this.$el[0])
-    //   // console.log(this.$el.find('#promocode-field .form-group')[0])
-    //   debugger
-    //   this.$el.find('#promocode-field .form-group').addClass('has-error')
-    // })
-    // const isLoggedIn = this.model.get('Session').LoggedIn
-    // const isRecordedBook = (
-    //   this.model.has('Membership')
-    //   && this.model.get('Membership').Store === 'RECORDEDBOOKS'
-    // )
-
     // const isGroupNameAllowedGifting = true // this.model.get('isGroupNameAllowedGifting')
-    const membershipActive = this.model.get('Membership').Status.toUpperCase() === 'ACTIVE'
+    const membershipActive = (this.model.get('Membership').Status.toUpperCase() === 'ACTIVE')
     if (!membershipActive) {
       this.render()
     }
@@ -75,11 +57,20 @@ class MembershipApplyPromoCode extends View {
   render() {
     console.log('MembershipApplyPromoCode render')
     console.log(this.model.attributes)
-    const html = this.template(this.model.attributes)
+    const html = this.template()
     if (this.$el.find('#signUpForm').length) {
       this.$el.find('#signUpForm').replaceWith(html)
     } else {
       this.$el.append(html)
+    }
+
+    if (this.model.has('membershipPromo')) {
+      debugger
+      const promoCode = this.model.get('membershipPromo').PromotionCode
+      const stripePercentOff = this.model.get('membershipPromo').StripePercentOff
+      const message = `${promoCode} applied. Enjoy your ${stripePercentOff}% off!`
+      this.$el.find('#promo-code').val(promoCode)
+      this.updatePromoMessage(message, 'success')
     }
 
     return this
@@ -96,8 +87,9 @@ class MembershipApplyPromoCode extends View {
     console.log('MembershipApplyPromoCode clearPromoCode')
     e.preventDefault()
     console.log(e)
-    this.model.unset('membershipPromo', { context: this })
+    // debugger
     // this.cart.unset('promoCodeApplied', { context: this })
+    this.model.unset('membershipPromo', { context: this })
 
     this.clearPromoMessage(e)
   }
@@ -128,14 +120,14 @@ class MembershipApplyPromoCode extends View {
     promoMessage.remove()
   }
 
-  updatePromoMessage(model, value) {
+  updatePromoMessage(message, value) {
     console.log('MembershipApplyPromoCode updatePromoMessage')
-    debugger
+    // debugger
     const promoCodeApplied = $('<div>').addClass('col-md-9 promo-message text-center pull-right')
     const promoCodeAppliedType = value ? 'success' : 'error'
     // const i = $('<i>').addClass('glyphicon glyphicon-ok')
 
-    const { message } = model.get('flashMessage')
+    // const { message } = model.get('flashMessage')
 
     const container = this.$el.find('#apply-promo-code')
     const promoInput = container.find('#promo-code')
@@ -161,7 +153,7 @@ class MembershipApplyPromoCode extends View {
         background: '#afafaf',
         color: '#000'
       })
-      .html('Applied')
+      .html(this.i18n.t('APPLIED-PROMO-CODE'))
 
     // display new promo message
     container

@@ -9,8 +9,8 @@
 
     <section
       class="plan monthly"
-      data-price="{{monthlyStripePlan.SubscriptionAmount}}"
-      data-plan-id="{{monthlyStripePlan.PlanID}}"
+      data-price="{{monthlyAmount}}"
+      data-plan-id="{{monthlyPlanID}}"
     >
       <input
         id="becomeMonthlyMember"
@@ -22,7 +22,7 @@
         <div class="h4">
           <strong>{{t "MONTHLY"}}</strong>
           <span class="plans-price">
-            {{monthlyPlanPrice}}
+            {{{monthlyPlanPrice}}}
           </span>
         </div>
         <p class="text-right">
@@ -33,8 +33,8 @@
 
     <section
       class="plan yearly"
-      data-price="{{annualStripePlan.SubscriptionAmount}}"
-      data-plan-id="{{annualStripePlan.PlanID}}"
+      data-price="{{annualAmount}}"
+      data-plan-id="{{annualPlanID}}"
     >
       <input
         id="becomeAnnualRenewingMember"
@@ -46,7 +46,7 @@
         <div class="h4">
           <strong>{{t "ANNUAL"}}</strong>
           <span class="plan-price">
-            {{annualPlanPrice}}
+            {{{annualPlanPrice}}}
           </span>
         </div>
         <p class="text-right">

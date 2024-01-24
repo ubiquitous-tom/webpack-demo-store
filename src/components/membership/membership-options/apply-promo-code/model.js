@@ -46,7 +46,7 @@ class MembershipApplyPromoCodeModel extends ATVModel {
     console.log('MembershipApplyPromoCodeModel success')
     console.log(model, resp, options)
     console.log(this)
-    debugger
+    // debugger
     this.set({
       promoCodeSuccess: true,
       promo: resp,
@@ -69,13 +69,12 @@ class MembershipApplyPromoCodeModel extends ATVModel {
     console.log('MembershipApplyPromoCodeModel error')
     console.log(model, resp, options)
     console.log(this)
-    debugger
+    // debugger
     let message = ''
     /* eslint function-paren-newline: 0 */
     resp
       .then(
         (response) => {
-          debugger
           console.log(response.responseJSON, response.responseText)
           if (!_.isEmpty(response.responseJSON)) {
             message = response.responseJSON.message
@@ -88,7 +87,6 @@ class MembershipApplyPromoCodeModel extends ATVModel {
           return message
         },
         (error) => {
-          debugger
           console.log(error.responseJSON, error.responseText)
           if (!_.isEmpty(error.responseJSON)) {
             message = error.responseJSON.error
@@ -101,7 +99,6 @@ class MembershipApplyPromoCodeModel extends ATVModel {
           return message
         })
       .always(() => {
-        debugger
         model.set({
           promoCodeSuccess: false,
           flashMessage: {

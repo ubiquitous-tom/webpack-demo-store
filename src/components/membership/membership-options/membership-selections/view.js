@@ -21,6 +21,7 @@ class MembershipSelections extends View {
   initialize() {
     console.log('MembershipSelections initialize')
     this.cart = this.model.get('cart')
+    this.gifting = this.model.get('gifting')
     // const isLoggedIn = this.model.get('Session').LoggedIn
     // const isRecordedBook = (
     //   this.model.has('Membership')
@@ -30,87 +31,25 @@ class MembershipSelections extends View {
     this.listenTo(this.model, 'change:membershipPromo', (model, value, options) => {
       console.log(model, value, options)
       // debugger
-      this.resetMonthlyPricing()
-      this.resetAnnualPricing()
+      this.cart.trigger('cart:promoCodeApplied', value, options)
+      // this.resetMonthlyPricing()
+      // this.resetAnnualPricing()
     })
 
     this.listenTo(this.cart, 'change:monthly', (model, value, options) => {
       console.log(model, value, options)
       // debugger
-      if (this.model.has('membershipPromo')) {
-        if (value.total > 0) {
-          // const subscriptionAmount = this.plans.getMonthly().price
-          // const discountedPrice = subscriptionAmount - ((value * subscriptionAmount) / 100)
-          // const promoAppliedAmount = (Math.floor(discountedPrice * 100) / 100).toFixed(2)
-          const oldPricing = [
-            this.model.get('monthlyStripePlan').CurrSymbol,
-            this.model.get('monthlyStripePlan').SubscriptionAmount,
-          ].join('')
-          const newPricing = [
-            this.model.get('monthlyStripePlan').CurrencyDesc,
-            this.model.get('monthlyStripePlan').CurrSymbol,
-            value.total,
-          ].join('')
-
-          const oldPricingContainer = $('<del>').append($('<span>').addClass('old-pricing').html(oldPricing))
-          const newPricingContainer = $('<span>').html(newPricing).append(oldPricingContainer)
-
-          // this.$el.find('.annual-plan-message span').addClass('applied-success').html(pricing)
-          // this.$el.find('#billing-container .legal-notice span').html(pricing)
-          this.$el.find('.plan.monthly .h4 span').replaceWith(newPricingContainer)
-        }
-      } else {
-        this.resetMonthlyPricing()
-      }
+      this.updateMonthlyPricing(value.total)
     })
 
     this.listenTo(this.cart, 'change:annual', (model, value, options) => {
       console.log(model, value, options)
       // debugger
-      if (this.model.has('membershipPromo')) {
-        if (value.total > 0) {
-          // const subscriptionAmount = this.plans.getMonthly().price
-          // const discountedPrice = subscriptionAmount - ((value * subscriptionAmount) / 100)
-          // const promoAppliedAmount = (Math.floor(discountedPrice * 100) / 100).toFixed(2)
-          const oldPricing = [
-            this.model.get('annualStripePlan').CurrSymbol,
-            this.model.get('annualStripePlan').SubscriptionAmount,
-          ].join('')
-          const newPricing = [
-            this.model.get('annualStripePlan').CurrencyDesc,
-            this.model.get('annualStripePlan').CurrSymbol,
-            value.total,
-          ].join('')
-
-          const oldPricingContainer = $('<del>').append($('<span>').addClass('old-pricing').html(oldPricing))
-          const newPricingContainer = $('<span>').html(newPricing).append(oldPricingContainer)
-
-          // this.$el.find('.annual-plan-message span').addClass('applied-success').html(pricing)
-          // this.$el.find('#billing-container .legal-notice span').html(pricing)
-          this.$el.find('.plan.annual .h4 span').replaceWith(newPricingContainer)
-        }
-      } else {
-        this.resetAnnualPricing()
-      }
+      this.updateAnnualPricing(value.total)
     })
 
     // const isGroupNameAllowedGifting = true // this.model.get('isGroupNameAllowedGifting')
     // const membershipActive = this.model.get('Membership').Status.toUpperCase() === 'ACTIVE'
-    const monthlyPlanPrice = [
-      this.model.get('monthlyStripePlan').CurrencyDesc,
-      this.model.get('monthlyStripePlan').CurrSymbol,
-      this.model.get('monthlyStripePlan').SubscriptionAmount,
-    ].join('')
-    const annualPlanPrice = [
-      this.model.get('annualStripePlan').CurrencyDesc,
-      this.model.get('annualStripePlan').CurrSymbol,
-      this.model.get('annualStripePlan').SubscriptionAmount,
-    ].join('')
-
-    this.model.set({
-      monthlyPlanPrice,
-      annualPlanPrice,
-    })
 
     this.render()
   }
@@ -118,7 +57,31 @@ class MembershipSelections extends View {
   render() {
     console.log('MembershipSelections render')
     console.log(this.model.attributes)
-    const html = this.template(this.model.attributes)
+    const monthlyAmount = this.model.get('monthlyStripePlan').SubscriptionAmount
+    const monthlyPlanPrice = this.applyPromoPrice([
+      this.model.get('monthlyStripePlan').CurrencyDesc,
+      this.model.get('monthlyStripePlan').CurrSymbol,
+      this.model.get('monthlyStripePlan').SubscriptionAmount,
+    ].join(''), 'monthly')
+    const monthlyPlanID = this.model.get('monthlyStripePlan').PlanID
+
+    const annualAmount = this.model.get('annualStripePlan').SubscriptionAmount
+    const annualPlanPrice = this.applyPromoPrice([
+      this.model.get('annualStripePlan').CurrencyDesc,
+      this.model.get('annualStripePlan').CurrSymbol,
+      this.model.get('annualStripePlan').SubscriptionAmount,
+    ].join(''), 'annual')
+    const annualPlanID = this.model.get('annualStripePlan').PlanID
+
+    const attributes = {
+      monthlyAmount,
+      monthlyPlanID,
+      monthlyPlanPrice,
+      annualAmount,
+      annualPlanID,
+      annualPlanPrice,
+    }
+    const html = this.template(attributes)
     this.$el.append(html)
 
     this.selectDefaultPlan()
@@ -203,6 +166,79 @@ class MembershipSelections extends View {
     // })
 
     console.log(this.model.attributes)
+  }
+
+  updateMonthlyPricing(total) {
+    if (this.model.has('membershipPromo')) {
+      if (total > 0) {
+        // const subscriptionAmount = this.plans.getMonthly().price
+        // const discountedPrice = subscriptionAmount - ((value * subscriptionAmount) / 100)
+        // const promoAppliedAmount = (Math.floor(discountedPrice * 100) / 100).toFixed(2)
+        const oldPricing = [
+          this.model.get('monthlyStripePlan').CurrSymbol,
+          this.model.get('monthlyStripePlan').SubscriptionAmount,
+        ].join('')
+        const newPricing = [
+          this.model.get('monthlyStripePlan').CurrencyDesc,
+          this.model.get('monthlyStripePlan').CurrSymbol,
+          Intl.NumberFormat('en-IN', { maximumFractionDigits: 2, minimumFractionDigits: 2, trailingZeroDisplay: 'stripIfInteger' }).format(total),
+        ].join('')
+
+        const oldPricingContainer = $('<del>').append($('<span>').addClass('old-pricing').html(oldPricing))
+        const newPricingContainer = $('<span>').html(newPricing).append(oldPricingContainer)
+
+        // this.$el.find('.annual-plan-message span').addClass('applied-success').html(pricing)
+        // this.$el.find('#billing-container .legal-notice span').html(pricing)
+        this.$el.find('.plan.monthly .h4 span').replaceWith(newPricingContainer)
+      }
+    } else {
+      this.resetMonthlyPricing()
+    }
+  }
+
+  updateAnnualPricing(total) {
+    if (this.model.has('membershipPromo')) {
+      if (total > 0) {
+        // const subscriptionAmount = this.plans.getMonthly().price
+        // const discountedPrice = subscriptionAmount - ((value * subscriptionAmount) / 100)
+        // const promoAppliedAmount = (Math.floor(discountedPrice * 100) / 100).toFixed(2)
+        const oldPricing = [
+          this.model.get('annualStripePlan').CurrSymbol,
+          this.model.get('annualStripePlan').SubscriptionAmount,
+        ].join('')
+        const newPricing = [
+          this.model.get('annualStripePlan').CurrencyDesc,
+          this.model.get('annualStripePlan').CurrSymbol,
+          Intl.NumberFormat(`${this.model.get('stripePlansLang')}-IN`, { maximumFractionDigits: 2, minimumFractionDigits: 2, trailingZeroDisplay: 'stripIfInteger' }).format(total),
+        ].join('')
+
+        const oldPricingContainer = $('<del>').append($('<span>').addClass('old-pricing').html(oldPricing))
+        const newPricingContainer = $('<span>').html(newPricing).append(oldPricingContainer)
+
+        // this.$el.find('.annual-plan-message span').addClass('applied-success').html(pricing)
+        // this.$el.find('#billing-container .legal-notice span').html(pricing)
+        this.$el.find('.plan.annual .h4 span').replaceWith(newPricingContainer)
+      }
+    } else {
+      this.resetAnnualPricing()
+    }
+  }
+
+  applyPromoPrice(originalPrice, type) {
+    if (this.model.has('membershipPromo')) {
+      const oldPrice = [
+        this.gifting.get('gift').CurrSymbol,
+        this.model.get(`${type}StripePlan`).SubscriptionAmount,
+      ].join('')
+      const newPrice = [
+        this.gifting.get('gift').CurrencyDesc,
+        this.gifting.get('gift').CurrSymbol,
+        this.cart.getItemAmount(type),
+      ].join('')
+      return `<span>${newPrice}<del> <span class="old-pricing">${oldPrice}</span></del></span>`
+    }
+
+    return originalPrice
   }
 
   resetMonthlyPricing() {

@@ -27,8 +27,9 @@ class EditBillingInformationBilling extends View {
     }
   }
 
-  initialize() {
+  initialize(options) {
     console.log('EditBillingInformationBilling initialize')
+    this.i18n = options.i18n
     this.cart = this.model.get('cart')
 
     this.editBillingInformationBillingModel = new EditBillingInformationBillingModel()

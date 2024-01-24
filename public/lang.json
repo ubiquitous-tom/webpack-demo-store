@@ -1558,6 +1558,14 @@
                     "uk": "(Gift membership codes are good only for a one--time use on Acorn TV for the disclosed gift membership period and are subject to the Acorn TV Terms and Conditions and Privacy Policy) "
                 }
             },
+            "ANNUAL-ACORNTV-GIFT-RECIPIENT": {
+                "type": "text",
+                "content": {
+                    "en": "Recipient will be asked to provide an email address for membership confirmation.",
+                    "es": "A la persona que le regalaste la suscripci\u00f3n solo se le solicitar\u00e1 un correo electr\u00f3nico.",
+                    "uk": "Recipient will be asked to provide an email address for membership confirmation."
+                }
+            },
             "ANNUAL-MEMBERSHIP-RENEWAL": {
                 "type": "text",
                 "content": {
@@ -4262,6 +4270,14 @@
                     "uk": "Have a Promo Code? Click the 'Apply Code' button to enter you code."
                 }
             },
+            "APPLY-GIFT-CODE-HERE": {
+                "type": "text",
+                "content": {
+                    "en": "Have a Gift Code? Click the 'Apply Code' button to enter you code.",
+                    "es": "\u00bfTienes un c\u00f3digo regalo? Da clic en 'Aplica c\u00f3digo'",
+                    "uk": "Have a Gift Code? Click the 'Apply Code' button to enter you code."
+                }
+            },
             "VISA-REQUIREMENT": {
                 "type": "text",
                 "content": {
@@ -4966,6 +4982,14 @@
                     "uk": "Promo Code"
                 }
             },
+            "GIFT-CODE": {
+                "type": "text",
+                "content": {
+                    "en": "Gift Code",
+                    "es": "C\u00f3digo regalo",
+                    "uk": "Gift Code"
+                }
+            },
             "CONFIRM-UPGRADE": {
                 "type": "text",
                 "content": {
@@ -5460,6 +5484,14 @@
                     "en": "Your annual plan gift ends on %{endDate}.",
                     "es": "Tu plan anual de regalo finaliza el %{endDate}.",
                     "uk": "Your annual plan gift ends on %{endDate}."
+                }
+            },
+            "DISCOVER-EXTRAORDINARY-MYSTERIES": {
+                "type": "text",
+                "content": {
+                    "en": "Discover extraordinary mysteries, dramas, and thrillers from around the world. When ho-hum TV isn't cutting it, stream something brilliant.",
+                    "es": "Discover extraordinary mysteries, dramas, and thrillers from around the world. When ho-hum TV isn't cutting it, stream something brilliant.",
+                    "uk": "Discover extraordinary mysteries, dramas, and thrillers from around the world. When ho-hum TV isn't cutting it, stream something brilliant."
                 }
             }
         }

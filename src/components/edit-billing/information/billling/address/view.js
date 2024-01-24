@@ -140,7 +140,7 @@ class EditBillingInformationBillingAddress extends View {
   }
 
   countriesDropdown() {
-    let options = '<option value="">- Country -</option>'
+    let options = `<option value="">${this.i18n.t('DROPDOWN-COUNTRY')}</option>`
     const countries = this.editBillingInformationBillingAddressModel.get('countries')
     _.each(countries, (country) => {
       options += `<option value="${country.abbr}">${country.name}</option>`

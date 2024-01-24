@@ -31,19 +31,38 @@ class EditBillingDetailsOrderSummaryMonthly extends View {
     console.log('EditBillingDetailsOrderSummaryMonthly render')
     console.log(this.model.attributes)
     const quantity = this.cart.getItemQuantity('monthly')
-    const amount = [
-      this.gifting.get('gift').CurrencyDesc,
-      this.gifting.get('gift').CurrSymbol,
-      this.cart.getItemAmount('monthly'),
-    ].join('')
+    const price = this.applyPromoPrice(
+      [
+        this.gifting.get('gift').CurrencyDesc,
+        this.gifting.get('gift').CurrSymbol,
+        this.cart.getItemAmount('monthly'),
+      ].join(''),
+    )
     const attributes = {
       quantity,
-      amount,
+      price,
     }
     const html = this.template(attributes)
     this.$el.find('.order-summary table tbody').append(html)
 
     return this
+  }
+
+  applyPromoPrice(originalPrice) {
+    if (this.model.has('membershipPromo')) {
+      const oldPrice = [
+        this.gifting.get('gift').CurrSymbol,
+        this.model.get('monthlyStripePlan').SubscriptionAmount,
+      ].join('')
+      const newPrice = [
+        this.gifting.get('gift').CurrencyDesc,
+        this.gifting.get('gift').CurrSymbol,
+        this.cart.getItemAmount('monthly'),
+      ].join('')
+      return `<span>${newPrice}<del> <span class="old-pricing">${oldPrice}</span></del></span>`
+    }
+
+    return originalPrice
   }
 }
 

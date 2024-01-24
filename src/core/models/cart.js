@@ -32,14 +32,14 @@ class ShoppingCart extends Model {
     //   })
     // }
 
-    this.on('change:promoCodeApplied', (model, value, options) => {
-      console.log(model, value, options)
-      debugger
-      this.unset('promoCodeApplied', { silent: true })
+    this.on('cart:promoCodeApplied', (value, options) => {
+      console.log(value, options)
+      // debugger
+      // this.unset('promoCodeApplied', { silent: true })
       if (value) {
-        this.applyPromoPricing(model, value, options)
+        this.applyPromoPricing(value, options)
       } else {
-        this.removePromoPricing(model, value, options)
+        this.removePromoPricing(value, options)
       }
     })
 
@@ -124,10 +124,11 @@ class ShoppingCart extends Model {
     this.set(defaultMonthly, { silent: true })
   }
 
-  applyPromoPricing(model, value, options) {
+  applyPromoPricing(value, options) {
     console.log('ShoppingCart applyPromoPricing')
-    console.log(model, value, options)
-    debugger
+    console.log(value, options)
+    const { context } = options
+    // debugger
     let type = 'monthly'
     const {
       // PromotionCode,
@@ -149,12 +150,12 @@ class ShoppingCart extends Model {
       }
     }
 
-    if (model.has(type)) {
+    if (context.cart.has(type)) {
       const {
         quantity,
         amount,
         // total,
-      } = model.get(type)
+      } = context.cart.get(type)
 
       const discountedAmount = amount - (amount * (StripePercentOff / 100))
       const discountedTotal = quantity * discountedAmount
@@ -165,41 +166,45 @@ class ShoppingCart extends Model {
         amount: parseFloat(discountedAmount.toFixed(2)),
         total: parseFloat(discountedTotal.toFixed(2)),
       }
-      model.set(discountedMembership)
+      context.cart.set(discountedMembership)
     }
   }
 
-  removePromoPricing(model, value, options) {
+  removePromoPricing(value, options) {
     console.log('ShoppingCart removePromoPricing')
-    console.log(model, value, options)
+    console.log(value, options)
     const { context } = options
-    debugger
-    if (model.has('monthly')) {
-      const { quantity } = model.get('monthly')
-      const amount = context.model.get('monthlyStripePlan').SubscriptionAmount
-      const total = parseFloat((quantity * amount).toFixed(2))
-      // debugger
-      model.set({
-        monthly: {
-          quantity,
-          amount,
-          total,
-        },
-      })
+    // debugger
+    if (context.cart.has('monthly')) {
+      const { quantity } = context.cart.get('monthly')
+      if (quantity) {
+        const amount = context.model.get('monthlyStripePlan').SubscriptionAmount
+        const total = parseFloat((quantity * amount).toFixed(2))
+        // debugger
+        context.cart.set({
+          monthly: {
+            quantity,
+            amount,
+            total,
+          },
+        })
+      }
     }
-
-    if (model.has('annual')) {
-      const { quantity } = model.get('annual')
-      const amount = context.model.get('annualStripePlan').SubscriptionAmount
-      const total = parseFloat((quantity * amount).toFixed(2))
-      // debugger
-      model.set({
-        monthly: {
-          quantity,
-          amount,
-          total,
-        },
-      })
+    // debugger
+    if (context.cart.has('annual')) {
+      const { quantity } = context.cart.get('annual')
+      if (quantity) {
+        const amount = context.model.get('annualStripePlan').SubscriptionAmount
+        const total = parseFloat((quantity * amount).toFixed(2))
+        // debugger
+        context.cart.set({
+          monthly: {
+            quantity,
+            amount,
+            total,
+          },
+        })
+      }
     }
   }
 
