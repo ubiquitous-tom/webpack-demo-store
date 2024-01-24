@@ -1,8 +1,8 @@
-import { View } from 'backbone'
+import { Model, View } from 'backbone'
 import _ from 'underscore'
 
 import './stylesheet.scss'
-import GiftBox from './img/gift-box.png'
+import giftBoxImg from './img/gift-box.png'
 import template from './index.hbs'
 
 class GiveGiftMembership extends View {
@@ -25,6 +25,8 @@ class GiveGiftMembership extends View {
     this.i18n = options.i18n
     this.gifting = this.model.get('gifting')
     this.cart = this.model.get('cart')
+
+    this.giftMembershipModel = new Model()
     // const isLoggedIn = this.model.get('Session').LoggedIn
     // const isRecordedBook = (
     //   this.model.has('Membership')
@@ -34,18 +36,25 @@ class GiveGiftMembership extends View {
     const isGroupNameAllowedGifting = true // this.model.get('isGroupNameAllowedGifting')
     // const membershipActive = this.model.get('Membership').Status.toUpperCase() === 'ACTIVE'
     if (isGroupNameAllowedGifting) {
+      const giftAmount = this.gifting.get('amount')
+      const discountRate = this.model.has('DiscountRate') ? this.model.get('DiscountRate') : null
       const giftPrice = [
         this.gifting.get('gift').CurrencyDesc,
         this.gifting.get('gift').CurrSymbol,
         this.gifting.get('gift').amount,
       ].join('')
+      const optionsEls = this.giftOptions()
+      const total = this.total()
 
-      this.model.set({
-        GiftBox,
+      this.giftMembershipModel.set({
+        giftAmount,
+        discountRate,
+        giftBoxImg,
         giftPrice,
-        options: this.giftOptions(),
-        total: this.total(),
+        optionsEls,
+        total,
       })
+
       this.render()
     }
   }
@@ -53,7 +62,8 @@ class GiveGiftMembership extends View {
   render() {
     console.log('GiveGiftMembership render')
     console.log(this.model.attributes)
-    const html = this.template(this.model.attributes)
+
+    const html = this.template(this.giftMembershipModel.attributes)
     this.$el.append(html)
 
     this.renderTimelinePromotionAccent()
@@ -161,10 +171,7 @@ class GiveGiftMembership extends View {
         amount,
         total: parseFloat(total),
       }
-      this.cart.set(
-        { gift },
-        { context: this },
-      )
+      this.cart.set({ gift }, { context: this })
     } else {
       this.cart.unset('gift', { silent: true })
     }

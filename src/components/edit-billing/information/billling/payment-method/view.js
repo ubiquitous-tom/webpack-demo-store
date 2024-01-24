@@ -4,7 +4,7 @@ import _ from 'underscore'
 import './stylesheet.scss'
 import template from './index.hbs'
 
-import StripeForm from './stripe-form'
+// import StripeForm from './stripe-form'
 
 class EditBillingInformationBillingPaymentMethod extends View {
   get el() {
@@ -24,8 +24,6 @@ class EditBillingInformationBillingPaymentMethod extends View {
 
   initialize() {
     console.log('EditBillingInformationBillingPaymentMethod initialize')
-
-    this.stripeForm = new StripeForm({ parentView: this, i18n: this.i18n })
 
     this.listenTo(this.model, 'editBillingValidation:paymentMethod', (model, context) => {
       console.log(model, context)

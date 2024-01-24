@@ -3,14 +3,14 @@
   <div class="container">
     <ul class="navbar-right-ul">
 
-      {{#if Session.LoggedIn}}
+      {{#if isLoggedIn}}
         <li class="navbar-right">
           <a class="log-in" href="#logout">
             {{t "LOG-OUT"}}
           </a>
         </li>
 
-        {{#if Customer.webPaymentEdit}}
+        {{#if isWebPaymentEdit}}
           <li class="navbar-right">
             <a class="log-in" href="#applyPromoCode">
               {{t "REDEEM-GIFT"}}

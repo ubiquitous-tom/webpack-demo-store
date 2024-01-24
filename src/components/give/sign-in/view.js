@@ -94,28 +94,29 @@ class GiveSignIn extends View {
 
   removeAnnualMembership() {
     console.log('GiveTaGiveSignInline removeMember')
-    // this.model.get('cart').unset('annual')
-    const quantity = 0
-    const amount = (this.model.has('membershipPromo'))
-      ? this.model.get('cart')?.get('annual')?.amount
-      : this.model.get('annualStripePlan')?.SubscriptionAmount
-    const total = 0
-    const membership = {
-      annual: {
-        quantity,
-        amount,
-        total,
-      },
-    }
-    this.model.get('cart').set(membership)
-    console.log(this.model.attributes)
+    this.$el.find('#membershipItem').slideUp(500, () => {
+      const quantity = 0
+      const amount = (this.model.has('membershipPromo'))
+        ? this.model.get('cart')?.get('annual')?.amount
+        : this.model.get('annualStripePlan')?.SubscriptionAmount
+      const total = 0
+      const membership = {
+        annual: {
+          quantity,
+          amount,
+          total,
+        },
+      }
+      this.model.get('cart').set(membership)
+      console.log(this.model.attributes)
+    })
   }
 
   signIn(e) {
     console.log('GiveSignIn signIn')
     e.preventDefault()
     const data = {
-      email: this.$el.find('#signInEmail').val(),
+      email: this.$el.find('#email').val(),
       password: this.$el.find('#password').val(),
     }
     this.giveSignInModel.signIn(data)

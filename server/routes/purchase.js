@@ -5,8 +5,8 @@ dotenv.config()
 
 const purchase = (req, res) => {
   console.log('Express Router purchase')
-  console.log(req.headers)
-  console.log(req.query)
+  // console.log(req.headers)
+  // console.log(req.query)
   console.log(req.body)
 
   const atvSessionCookie = req.cookies.ATVSessionCookie
@@ -57,7 +57,7 @@ const purchase = (req, res) => {
     resp.on('end', () => {
       try {
         const parsedData = JSON.parse(rawData)
-        console.log('parseData', parsedData)
+        console.log('purchase parseData', parsedData)
         res.status(statusCode).send(parsedData)
       } catch (e) {
         console.error(e.message)

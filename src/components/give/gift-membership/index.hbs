@@ -1,7 +1,7 @@
 <div class="row">
-  <div class="order-item gift-item" data-price="{{gift.amount}}">
+  <div class="order-item gift-item" data-price="{{giftAmount}}">
 
-    {{#if DiscountRate}}
+    {{#if discountRate}}
       <div id="special-discount" class="col-md-12">
         <div class="accent">{{t "BLACK-FRIDAY-PROMO-TEXT-2019"}}</div>
         <div class="special-discount-listing">
@@ -18,7 +18,7 @@
     {{/if}}
 
     <div class="col-md-3">
-      <img src="{{GiftBox}}" alt="gift-box" width="185" height="204" />
+      <img src="{{giftBoxImg}}" alt="gift-box" width="185" height="204" />
     </div>
 
     <div class="col-md-5">
@@ -44,7 +44,7 @@
           class="qty form-control inline-form-control"
           name="qty"
         >
-          {{{options}}}
+          {{{optionsEls}}}
         </select>
 
       </div>

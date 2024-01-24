@@ -1,4 +1,4 @@
-<div class="order-item gift-item slim" data-price="{{gift.amount}}">
+<div class="order-item gift-item slim" data-price="{{giftAmount}}">
 
   <div class="col-md-8 left">
     <h3 class="item-name">{{t "GIFT-MEMBERSHIP"}}</h3>
@@ -21,7 +21,7 @@
         <strong>{{t "QTY"}}</strong>
       </label>
       <select class="form-control inline-form-control" id="qty" name="qty">
-        {{{options}}}
+        {{{optionsEls}}}
       </select>
     </div>
 
@@ -29,7 +29,7 @@
 
   <div class="col-md-1" id="quantityTotal">
     <div class="row">
-      <strong>{{total}}</strong>
+      <strong>{{{total}}}</strong>
     </div>
   </div>
 

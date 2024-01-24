@@ -1,4 +1,5 @@
 import { Model } from 'backbone'
+import _ from 'underscore'
 
 class EditBillingInformationBillingModel extends Model {
   // get defaults() {

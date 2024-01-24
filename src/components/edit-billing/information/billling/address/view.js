@@ -40,6 +40,8 @@ class EditBillingInformationBillingAddress extends View {
       this.$el
         .find('#billingcountry')
         .html(optionsEls)
+
+      this.selectDefaultCountry()
     })
 
     this.listenTo(this.model, 'editBillingValidation:address', (model, context) => {
@@ -115,7 +117,7 @@ class EditBillingInformationBillingAddress extends View {
     const html = this.template(attributes)
     this.$el.html(html)
 
-    this.selectDefaultCountry()
+    // this.selectDefaultCountry()
 
     return this
   }

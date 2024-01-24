@@ -1,4 +1,4 @@
-import { View } from 'backbone'
+import { Model, View } from 'backbone'
 import _ from 'underscore'
 
 import './stylesheet.scss'
@@ -24,6 +24,8 @@ class MembershipGiftOptions extends View {
     this.i18n = options.i18n
     this.gifting = this.model.get('gifting')
     this.cart = this.model.get('cart')
+
+    this.giftOptionsModel = new Model()
     // const isLoggedIn = this.model.get('Session').LoggedIn
     // const isRecordedBook = (
     //   this.model.has('Membership')
@@ -33,16 +35,22 @@ class MembershipGiftOptions extends View {
     const isGroupNameAllowedGifting = true // this.model.get('isGroupNameAllowedGifting')
     // const membershipActive = this.model.get('Membership').Status.toUpperCase() === 'ACTIVE'
     if (isGroupNameAllowedGifting) {
+      const giftAmount = this.gifting.get('amount')
+      const discountRate = this.model.has('DiscountRate') ? this.model.get('DiscountRate') : null
       const giftPrice = [
         this.gifting.get('gift').CurrencyDesc,
         this.gifting.get('gift').CurrSymbol,
         this.gifting.get('gift').amount,
       ].join('')
+      const optionsEls = this.giftOptions()
+      const total = this.total()
 
-      this.model.set({
+      this.giftOptionsModel.set({
+        giftAmount,
+        discountRate,
         giftPrice,
-        options: this.giftOptions(),
-        total: this.total(),
+        optionsEls,
+        total,
       })
       this.render()
     }
@@ -50,8 +58,8 @@ class MembershipGiftOptions extends View {
 
   render() {
     console.log('MembershipGiftOptions render')
-    console.log(this.model.attributes)
-    const html = this.template(this.model.attributes)
+    console.log(this.model.attributes, this.giftOptionsModel.attributes)
+    const html = this.template(this.giftOptionsModel.attributes)
     this.$el.append(html)
 
     this.selectDefaultGiftQuantity()
@@ -69,12 +77,10 @@ class MembershipGiftOptions extends View {
   }
 
   total() {
-    let total = ''
-    const giftQuantity = this.gifting.get('gift').quantity
-    const giftPrice = this.gifting.get('gift').amount
-    if (giftQuantity === 0) {
-      total = this.i18n.t('NO-GIFT-SELECTED')
-    } else {
+    let total = this.i18n.t('NO-GIFT-SELECTED')
+    const giftQuantity = this.cart.has('gift') ? this.cart.get('gift').quantity : 0
+    const giftPrice = this.cart.has('gift') ? this.cart.get('gift').amount : 0
+    if (giftQuantity) {
       const totalGiftAmount = (giftQuantity * giftPrice).toFixed(2)
       total = `${this.i18n.t('TOTAL')} <span>${totalGiftAmount}</span>`
     }

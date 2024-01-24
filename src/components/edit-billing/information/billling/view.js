@@ -43,6 +43,10 @@ class EditBillingInformationBilling extends View {
     //   context.model.trigger('editBillingValidation:address', model, context)
     // })
 
+    // clear `paymentInfo` on every page change
+    // this will prevent using same `Stripe token` issue
+    this.model.unset('paymentInfo')
+
     this.listenTo(this.model, 'editBillingValidation:stripeCardInfo', (value, context) => {
       console.log(value)
       // debugger

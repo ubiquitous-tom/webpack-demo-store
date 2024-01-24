@@ -68,7 +68,6 @@ class HeaderModel extends Model {
   success(model, resp, options) {
     console.log('HeaderModel success')
     console.log(model, resp, options)
-    // debugger
     model.set({
       headerNavSuccess: true,
     })

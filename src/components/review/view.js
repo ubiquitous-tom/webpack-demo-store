@@ -54,7 +54,7 @@ class Review extends View {
       PostalCode: this.model.get('BillingAddress').PostalCode,
       Amount: this.model.get('paymentInfo').Ammount, // Weird typo from the API `Ammount` with 2m's
     }
-    debugger
+    // debugger
     this.paymentEstimation.getPaymentEstimation(attributes)
 
     this.listenTo(this.model, 'review:clearPurchase', () => {

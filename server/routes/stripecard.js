@@ -61,7 +61,7 @@ const stripeCard = (req, res) => {
     resp.on('end', () => {
       try {
         const parsedData = JSON.parse(rawData)
-        console.log('parseData', parsedData)
+        console.log('stripeCard parseData', parsedData)
         res.status(statusCode).send(parsedData)
       } catch (e) {
         console.error(e.message)

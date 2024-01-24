@@ -1,5 +1,9 @@
-import { View } from 'backbone'
+import Backbone, { View } from 'backbone'
+// import _ from 'underscore'
+
 import template from './index.hbs'
+
+import GiveCheckoutModal from './modal/view'
 
 class GiveCheckout extends View {
   get el() {
@@ -16,12 +20,11 @@ class GiveCheckout extends View {
     }
   }
 
-  initialize() {
+  initialize(options) {
     console.log('GiveCheckout initialize')
-
-    this.model.set({
-      specialDiscount: this.specialDiscount(),
-    })
+    this.i18n = options.i18n
+    this.cart = this.model.get('cart')
+    this.modal = new GiveCheckoutModal({ model: this.model, i18n: this.i18n })
 
     this.render()
   }
@@ -29,23 +32,26 @@ class GiveCheckout extends View {
   render() {
     console.log('GiveCheckout render')
     console.log(this.model.attributes)
-    const html = this.template(this.model.attributes)
+    const attributes = {
+      discountRate: this.model.has('DiscountRate'),
+    }
+    const html = this.template(attributes)
     this.$el.append(html)
 
     return this
   }
 
   specialDiscount() {
-    // Timeline Promotion.
-    // var specialDiscount = this.model.has('DiscountRate') ? this.model.get('DiscountRate') : {};
+    // // Timeline Promotion.
+    // const specialDiscount = this.model.has('DiscountRate') ? this.model.get('DiscountRate') : {}
     // if (!_.isEmpty(specialDiscount)) {
-    //   _.each(specialDiscount, function (item) {
-    //     item.defaultCurrency = this.plans.get('defaultCurrency');
-    //     item.defaultCurrencySymbl = this.plans.get('defaultCurrencySymbl');
-    //     item.displayPrice = item.defaultCurrency + item.defaultCurrencySymbl + item.Amount;
-    //     return item;
-    //   }, this);
-    //   giveObj.set("SeasonalPromotion", specialDiscount);
+    //   _.each(specialDiscount, (item) => {
+    //     item.defaultCurrency = this.plans.get('defaultCurrency')
+    //     item.defaultCurrencySymbl = this.plans.get('defaultCurrencySymbl')
+    //     item.displayPrice = item.defaultCurrency + item.defaultCurrencySymbl + item.Amount
+    //     return item
+    //   }, this)
+    //   this.model.set('SeasonalPromotion', specialDiscount)
     // }
     return this.model.has('DiscountRate')
   }
@@ -54,11 +60,13 @@ class GiveCheckout extends View {
     console.log('GiveCheckout checkout')
     console.log(e)
     e.preventDefault()
-    const isLoggedIn = this.model.has('Subscription')
-    debugger
-    if (isLoggedIn) {
-      Backbone.History.nagivate('editBilling')
+    // const isLoggedIn = this.model.has('Subscription')
+    // debugger
+    if (this.cart.getItemQuantity('gift')) {
+      Backbone.history.navigate('editBilling', { trigger: true })
     } else {
+      // Error popup here with Gift quantity of at least 1 requirement
+      this.modal.render()
       this.$el.find('.giveDetails')[0].scrollIntoView({ behavior: 'smooth' })
     }
   }

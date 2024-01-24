@@ -2,7 +2,7 @@ import { View } from 'backbone'
 import _ from 'underscore'
 
 import './stylesheet.scss'
-// import template from './index.hbs'
+
 import MembershipActiveTemplate from './templates/membership-active.hbs'
 import MembershipNotActiveTemplate from './templates/membership-not-active.hbs'
 
@@ -12,10 +12,10 @@ class MembershipSignedIn extends View {
   }
 
   get template() {
-    const isMembershipActive = this.model.get('Membership').Status === 'ACTIVE'
+    const isMembershipActive = (this.model.get('Membership').Status === 'ACTIVE')
     const isRecordedBook = (
       this.model.has('Membership')
-      && this.model.get('Membership').Store === 'RECORDEDBOOKS'
+      && (this.model.get('Membership').Store === 'RECORDEDBOOKS')
     )
     return (isMembershipActive && !isRecordedBook)
       ? MembershipActiveTemplate
@@ -33,15 +33,7 @@ class MembershipSignedIn extends View {
     //   && this.model.get('Membership').Store === 'RECORDEDBOOKS'
     // )
 
-    const isGroupNameAllowedGifting = true // this.model.get('isGroupNameAllowedGifting')
-
     // if (isMembershipActive && !isRecordedBook) {
-    this.model.set({
-      yourMembershipType: this.yourMembershipType(),
-      upgradeToAnnual: this.upgradeToAnnual(),
-      renewMembership: this.renewMembership(),
-      isGroupNameAllowedGifting,
-    })
 
     this.render()
     // }
@@ -50,14 +42,20 @@ class MembershipSignedIn extends View {
   render() {
     console.log('MembershipSignedIn render')
     console.log(this.model.attributes)
-    const html = this.template(this.model.attributes)
+    const attributes = {
+      yourMembershipType: this.yourMembershipType(),
+      upgradeToAnnual: this.upgradeToAnnual(),
+      renewMembership: this.renewMembership(),
+      isGroupNameAllowedGifting: true, // this.model.get('isGroupNameAllowedGifting'),
+    }
+    const html = this.template(attributes)
     this.$el.append(html)
 
     return this
   }
 
   yourMembershipType() {
-    const isMonthly = this.model.get('Membership').Term.toUpperCase() === 'MONTH'
+    const isMonthly = (this.model.get('Membership').Term.toUpperCase() === 'MONTH')
     const isExpirationDate = !_.isEmpty(this.model.get('Membership').ExpirationDate)
     if (isMonthly && !isExpirationDate) {
       const membershipType = (this.model.get('Membership').Term.toUpperCase() === 'MONTH')
@@ -89,7 +87,7 @@ class MembershipSignedIn extends View {
 
   renewMembership() {
     if (this.model.get('Customer').webPaymentEdit) {
-      const isAnnual = this.model.get('Membership').Term.toUpperCase() === 'ANNUAL'
+      const isAnnual = (this.model.get('Membership').Term.toUpperCase() === 'ANNUAL')
       const isExpirationDate = !_.isEmpty(this.model.get('Membership').ExpirationDate)
       if (isAnnual && isExpirationDate) {
         return `<a href="#" id="renewMembership">${this.i18n.t('RENEW-MEMBERSHIP')}</a><br>`

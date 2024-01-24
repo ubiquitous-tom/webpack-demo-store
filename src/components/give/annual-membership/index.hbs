@@ -1,12 +1,17 @@
-<div class="row" id="membershipItem">
+<div class="row" id="membershipItem" style="display: none;">
   <div
     class="order-item yearly-plan slim"
-    data-price="{{annualStripePlan.SubscriptionAmount}}"
-    data-plan-id="{{annualStripePlan.PlanID}}"
+    data-price="{{annualAmount}}"
+    data-plan-id="{{annualPlanID}}"
   >
 
     <div class="col-md-3">
-      <img src="{{MembershipUser}}" alt="gift-box" width="185" height="204" />
+      <img
+        src="{{membershipUserImg}}"
+        alt="gift-box"
+        width="185"
+        height="204"
+      />
     </div>
 
     <div class="col-md-7">
