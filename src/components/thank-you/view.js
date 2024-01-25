@@ -35,28 +35,30 @@ class ThankYou extends View {
 
     const giftQuantity = this.cart.getItemQuantity('gift')
     const orderId = this.model.get('orderId')
-    const total = [
+    const total = this.applyTotalPromoPrice([
       this.gifting.get('gift').CurrencyDesc,
       this.gifting.get('gift').CurrSymbol,
       this.cart.getTotalAmount(),
-    ].join('')
+    ].join(''))
     const estimatedTaxPrice = this.model.get('estimatedTaxPrice')
     debugger
     const annualMembership = this.cart.getItemQuantity('annual')
-    const annualPrice = [
+    const annualPrice = this.applyMembershipPromoPrice([
       this.gifting.get('gift').CurrencyDesc,
       this.gifting.get('gift').CurrSymbol,
       this.cart.getItemTotalAmount('annual'),
-    ].join('')
+    ].join(''), 'annual')
     const annualQuantity = this.cart.getItemQuantity('annual')
 
     const monthlyMembership = this.cart.getItemQuantity('monthly')
-    const monthlyPrice = [
+    const monthlyPrice = this.applyMembershipPromoPrice([
       this.gifting.get('gift').CurrencyDesc,
       this.gifting.get('gift').CurrSymbol,
       this.cart.getItemTotalAmount('monthly'),
-    ].join('')
+    ].join(''), 'monthly')
     const monthlyQuantity = this.cart.getItemQuantity('monthly')
+    const membershipPromo = this.model.has('membershipPromo')
+    const promoName = membershipPromo ? this.model.get('membershipPromo').Name : ''
 
     const membership = (annualMembership || monthlyMembership)
     const environment = this.model.get('environment')
@@ -75,6 +77,8 @@ class ThankYou extends View {
       monthlyMembership,
       monthlyPrice,
       monthlyQuantity,
+      membershipPromo,
+      promoName,
       membership,
       environment,
     })
@@ -179,6 +183,56 @@ class ThankYou extends View {
     this.model.unset('Session')
 
     docCookies.removeItem('ATVSessionCookie')
+  }
+
+  applyMembershipPromoPrice(originalPrice, type) {
+    if (this.model.has('membershipPromo')) {
+      const oldPrice = [
+        this.gifting.get('gift').CurrSymbol,
+        this.model.get(`${type}StripePlan`).SubscriptionAmount,
+      ].join('')
+      const newPrice = [
+        this.gifting.get('gift').CurrencyDesc,
+        this.gifting.get('gift').CurrSymbol,
+        Intl.NumberFormat(`${this.model.get('stripePlansLang')}-IN`, { maximumFractionDigits: 2, minimumFractionDigits: 2, trailingZeroDisplay: 'stripIfInteger' }).format(this.cart.getItemAmount('monthly')),
+      ].join('')
+      return `<span>${newPrice}<del> <span class="old-pricing">${oldPrice}</span></del></span>`
+    }
+
+    return originalPrice
+  }
+
+  applyTotalPromoPrice(originalPrice) {
+    if (this.model.has('membershipPromo')) {
+      const oldTotal = this.getTotalAmount()
+      const oldPrice = [
+        this.gifting.get('gift').CurrencyDesc,
+        this.gifting.get('gift').CurrSymbol,
+        Intl.NumberFormat(`${this.model.get('stripePlansLang')}-IN`, { maximumFractionDigits: 2, minimumFractionDigits: 2, trailingZeroDisplay: 'stripIfInteger' }).format(oldTotal),
+      ].join('')
+      const newTotal = this.cart.getTotalAmount()
+      const newPrice = [
+        this.gifting.get('gift').CurrSymbol,
+        Intl.NumberFormat(`${this.model.get('stripePlansLang')}-IN`, { maximumFractionDigits: 2, minimumFractionDigits: 2, trailingZeroDisplay: 'stripIfInteger' }).format(newTotal),
+      ].join('')
+      return `<span>${newPrice}<del> <span class="old-pricing">${oldPrice}</span></del></span>`
+    }
+
+    return originalPrice
+  }
+
+  getTotalAmount() {
+    const { attributes } = this.cart
+    let total = 0
+    _.each(attributes, (value, key, list) => {
+      console.log(value, key, list)
+      let fullAmount = value.amount
+      if (key !== 'gift') {
+        fullAmount = this.model.get(`${key}StripePlan`).SubscriptionAmount
+      }
+      total += value.quantity * fullAmount
+    })
+    return parseFloat(total.toFixed(2))
   }
 }
 

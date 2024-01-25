@@ -48,23 +48,23 @@ class EditBillingInformationBillingAddress extends View {
       console.log(paymentInfo, context)
       debugger
       if (
-        context.$el.find('#firstname')[0].checkValidity()
-        && context.$el.find('#lastname')[0].checkValidity()
-        && context.$el.find('#billingcountry')[0].checkValidity()
-        && context.$el.find('#billingzip')[0].checkValidity()
+        this.$el.find('#firstname')[0].checkValidity()
+        && this.$el.find('#lastname')[0].checkValidity()
+        && this.$el.find('#billingcountry')[0].checkValidity()
+        && this.$el.find('#billingzip')[0].checkValidity()
       ) {
-        context.model.set({
+        this.model.set({
           editBillingForm: {
-            address_zip: context.$el.find('#billingzip').val(),
-            address_country: context.$el.find('#billingcountry').val(),
+            address_zip: this.$el.find('#billingzip').val(),
+            address_country: this.$el.find('#billingcountry').val(),
           },
         })
         // let paymentInfo = model.get('paymentInfo')
         const billingAddress = {
           BillingAddress: {
-            Name: [context.$el.find('#firstname').val(), context.$el.find('#lastname').val()].join(' '),
-            Country: context.$el.find('#billingcountry').val(),
-            Zip: context.$el.find('#billingzip').val(),
+            Name: [this.$el.find('#firstname').val(), this.$el.find('#lastname').val()].join(' '),
+            Country: this.$el.find('#billingcountry').val(),
+            Zip: this.$el.find('#billingzip').val(),
           },
         }
         const paymentInfoNew = { ...paymentInfo, ...billingAddress }
@@ -75,9 +75,9 @@ class EditBillingInformationBillingAddress extends View {
         debugger
         const isLoggedIn = (this.model.has('Session') ? this.model.get('Session').LoggedIn : false)
         if (!isLoggedIn) {
-          context.model.trigger('editBillingValidation:email', paymentInfoNew, context)
+          this.model.trigger('editBillingValidation:email', paymentInfoNew, context)
         } else {
-          context.model.trigger('editBillingValidation:paymentMethod', paymentInfoNew, context)
+          this.model.trigger('editBillingValidation:paymentMethod', paymentInfoNew, context)
         }
       }
       // else {

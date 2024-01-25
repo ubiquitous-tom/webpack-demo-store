@@ -61,7 +61,7 @@ class EditBillingDetailsOrderSummaryMonthly extends View {
       const newPrice = [
         this.gifting.get('gift').CurrencyDesc,
         this.gifting.get('gift').CurrSymbol,
-        this.cart.getItemAmount('monthly'),
+        Intl.NumberFormat(`${this.model.get('stripePlansLang')}-IN`, { maximumFractionDigits: 2, minimumFractionDigits: 2, trailingZeroDisplay: 'stripIfInteger' }).format(this.cart.getItemAmount('monthly')),
       ].join('')
       return `<span>${newPrice}<del> <span class="old-pricing">${oldPrice}</span></del></span>`
     }

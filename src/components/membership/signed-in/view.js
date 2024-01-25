@@ -1,4 +1,4 @@
-import { View } from 'backbone'
+import Backbone, { View } from 'backbone'
 import _ from 'underscore'
 
 import './stylesheet.scss'
@@ -22,9 +22,18 @@ class MembershipSignedIn extends View {
       : MembershipNotActiveTemplate
   }
 
+  get events() {
+    return {
+      'click #changeToAnnual': 'addAnnualMembership',
+      'click #renewMembership': 'addAnnualMembership',
+      'click #giveGift': 'giveGift',
+    }
+  }
+
   initialize(options) {
     console.log('MembershipSignedIn initialize')
     this.i18n = options.i18n
+    this.cart = this.model.get('cart')
 
     // const isLoggedIn = this.model.get('Session').LoggedIn
     // const isMembershipActive = this.model.get('Membership').Status === 'ACTIVE'
@@ -44,6 +53,8 @@ class MembershipSignedIn extends View {
     console.log(this.model.attributes)
     const attributes = {
       yourMembershipType: this.yourMembershipType(),
+      yourMembershipExpiredDate: this.yourMembershipExpiredDate(),
+      isWebPaymentEdit: this.model.get('Customer').webPaymentEdit,
       upgradeToAnnual: this.upgradeToAnnual(),
       renewMembership: this.renewMembership(),
       isGroupNameAllowedGifting: true, // this.model.get('isGroupNameAllowedGifting'),
@@ -54,10 +65,53 @@ class MembershipSignedIn extends View {
     return this
   }
 
+  addAnnualMembership(e) {
+    e.preventDefault()
+    // Add a year of subscription for an already yearly subscriber
+    const monthlyMembership = {
+      monthly: {
+        amount: this.model.get('monthlyStripePlan').SubscriptionAmount,
+        quantity: 0,
+        total: this.model.get('monthlyStripePlan').SubscriptionAmount,
+      },
+    }
+    this.cart.set(monthlyMembership)
+
+    const annualMembership = {
+      annual: {
+        amount: this.model.get('annualStripePlan').SubscriptionAmount,
+        quantity: 1,
+        total: this.model.get('annualStripePlan').SubscriptionAmount,
+      },
+    }
+    this.cart.set(annualMembership)
+    debugger
+
+    const isLoggedIn = this.model.has('Subscription')
+    const isStripeEnabled = this.model.get('Customer')?.StripeEnabled
+    debugger
+    if (isLoggedIn) {
+      if (isStripeEnabled) {
+        Backbone.history.navigate('reviewPurchase', { trigger: true })
+      } else {
+        // Backbone.history.trigger('navChange', 'editBilling')
+        Backbone.history.navigate('editBilling', { trigger: true })
+      }
+    } else {
+      this.model.trigger('membership:checkout')
+    }
+  }
+
+  giveGift(e) {
+    e.preventDefault()
+    this.cart.emptyCart()
+    Backbone.history.navigate('give', { trigger: true })
+  }
+
   yourMembershipType() {
     const isMonthly = (this.model.get('Membership').Term.toUpperCase() === 'MONTH')
-    const isExpirationDate = !_.isEmpty(this.model.get('Membership').ExpirationDate)
-    if (isMonthly && !isExpirationDate) {
+    const isExpirationDate = _.isEmpty(this.model.get('Membership').ExpirationDate)
+    if (isMonthly && isExpirationDate) {
       const membershipType = (this.model.get('Membership').Term.toUpperCase() === 'MONTH')
         ? this.i18n.t('MONTHLY')
         : this.i18n.t('ANNUAL')
@@ -68,7 +122,9 @@ class MembershipSignedIn extends View {
   }
 
   yourMembershipExpiredDate() {
-    if (!_.isEmpty(this.model.get('Membership').ExpirationDate)) {
+    const isMonthly = (this.model.get('Membership').Term.toUpperCase() === 'MONTH')
+    const isExpirationDate = _.isEmpty(this.model.get('Membership').ExpirationDate)
+    if (isMonthly && !isExpirationDate) {
       return `${this.i18n.t('MEMBERSHIP-SET-EXPIRE')} this.model.get('Membership').ExpirationDate`
     }
 

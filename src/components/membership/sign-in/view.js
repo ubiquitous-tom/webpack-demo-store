@@ -30,7 +30,7 @@ class MembershipSignIn extends View {
 
     this.listenTo(this.membershipSignInModel, 'change:signInSuccess', (model, value) => {
       console.log(model, value)
-      debugger
+      // debugger
       if (value) {
         window.location.reload()
       } else {

@@ -41,6 +41,12 @@ class MembershipCheckout extends View {
     //   && this.model.get('Membership').Store === 'RECORDEDBOOKS'
     // )
 
+    this.listenTo(this.model, 'membership:signedInCheckout', (value) => {
+      console.log('membership:signedInCheckout', value)
+      // debugger
+      this.navigateTo()
+    })
+
     // const isGroupNameAllowedGifting = true // this.model.get('isGroupNameAllowedGifting')
     // const membershipActive = this.model.get('Membership').Status.toUpperCase() === 'ACTIVE'
 
@@ -59,9 +65,11 @@ class MembershipCheckout extends View {
   checkout(e) {
     console.log('MembershipCheckout checkout')
     e.preventDefault()
-
     // Router.trigget('isCartEmpty')
+    this.navigateTo()
+  }
 
+  navigateTo() {
     const isLoggedIn = this.model.has('Subscription')
     const isStripeEnabled = this.model.get('Customer')?.StripeEnabled
     if (isLoggedIn) {

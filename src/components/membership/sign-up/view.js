@@ -52,7 +52,8 @@ class MembershipSignUp extends View {
           //     Email: this.$el.find('#signUpForm #email').val().trim(),
           //   },
           // }
-          debugger
+          // debugger
+          console.log(this.model.has('Customer'))
           // this.model.set(customer)
           if (this.model.has('Customer') && !_.isEmpty(this.model.get('Customer').Email)) {
             Backbone.history.navigate('editBilling', { trigger: true })

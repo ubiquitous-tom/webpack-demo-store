@@ -1,100 +1,118 @@
 .thanks.store.container {
-    margin-top: 1.5em;
+  margin-top: 1.5em;
 }
 
 .thanks.store.container p,
 .thanks.store.container li {
-    font-size: 1.1443em;
+  font-size: 1.1443em;
 }
 
 .thanks.store.container li {
-    padding: .25em 0;
+  padding: 0.25em 0;
 }
 
 .thanks.store.container h2 {
-    margin-top: 1.25em;
+  margin-top: 1.25em;
 }
 
 .thanks.store .order-detail {
-    margin-top: 3em;
-    border-top: 0.1em solid rgba(0, 0, 0, 0.075);
-    padding-top: 2.5em;
+  margin-top: 3em;
+  border-top: 0.1em solid rgba(0, 0, 0, 0.075);
+  padding-top: 2.5em;
 }
 
 .table {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .table th {
-    border-top: none;
-    border-bottom: 1px solid #dddddd;
-    padding-bottom: .2em;
+  border-top: none;
+  border-bottom: 1px solid #dddddd;
+  padding-bottom: 0.2em;
 }
 
 .table td {
-    border: none;
-    padding-top: .1em;
-    padding-bottom: .1em;
+  border: none;
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
 }
 
 .table .pad td {
-    padding-top: .5em;
+  padding-top: 0.5em;
 }
 
 .thanks .details {
-    margin-bottom: 0em;
+  margin-bottom: 0em;
 }
 
 .thanks .row-fluid [class*="span"]:first-child {
-    text-align: center;
+  text-align: center;
 }
 
 .thanks .order-items img {
-    margin-left: 0;
+  margin-left: 0;
 }
 
 .thanks .price {
-    font-size: 1.125em;
-    color: #424242;
+  font-size: 1.125em;
+  color: #424242;
+}
+
+.review .price {
+  del {
+    color: red;
+    margin-left: 0.25em;
+    span {
+      color: #000;
+    }
+  }
+}
+
+.review .price .promo-name {
+  display: inline-block;
+  font-size: 14px;
+  position: relative;
+  top: -5px;
 }
 
 .thanks .order-total {
-    border-top: none;
+  border-top: none;
+  font-weight: 400;
 }
 
 .thanks .order-cancel a {
-    font-size: 1em !important;
-    text-decoration: underline;
+  font-size: 1em !important;
+  text-decoration: underline;
 }
 
 .thanks .print-confirmation {
-    font-size: .95em;
-    font-weight: normal;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    line-height: 1.5em;
+  font-size: 0.95em;
+  font-weight: normal;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  line-height: 1.5em;
 }
 
 .thanks .order-item.slim img {
-    max-width: 13em;
+  max-width: 13em;
 }
 
 .thanks .order-item.slim .price {
-    margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 
 @media (max-width: 480px) {
-    .thanks .order-items img {
-        margin-left: 0;
-        margin-bottom: 2em;
-    }
+  .thanks .order-items img {
+    margin-left: 0;
+    margin-bottom: 2em;
+  }
 
-    .thanks .text-right {
-        text-align: left !important;
-    }
+  .thanks .text-right {
+    text-align: left !important;
+  }
 
-    .thanks .print-confirmation {
-        position: relative;
-    }
+  .thanks .print-confirmation {
+    position: relative;
+  }
 }

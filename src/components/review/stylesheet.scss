@@ -24,8 +24,26 @@
   color: #424242;
 }
 
+.review .price {
+  del {
+    color: red;
+    margin-left: 0.25em;
+    span {
+      color: #000;
+    }
+  }
+}
+
+.review .price .promo-name {
+  display: inline-block;
+  font-size: 14px;
+  position: relative;
+  top: -5px;
+}
+
 .review .order-total {
   border-top: none;
+  font-weight: 400;
 }
 
 .review .order-cancel a {

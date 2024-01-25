@@ -39,7 +39,7 @@
         <span class="col-md-2 text-right">
           <p class="price text-right">
             {{! <\%= plans.get("defaultCurrency") + plans.get("defaultCurrencySymbl") + giveObj.get("Membership").price %> }}
-            {{annualPrice}}
+            {{{annualPrice}}}
           </p>
           <p class="text-right">
             Qty:
@@ -75,7 +75,13 @@
         <span class="col-md-2">
           <p class="price text-right">
             {{! <\%= plans.get("defaultCurrency") + plans.get("defaultCurrencySymbl") + giveObj.get("MonthlyMembership").price  %> }}
-            {{monthlyPrice}}
+            {{{monthlyPrice}}}
+
+            {{#if membershipPromo}}
+              <br />
+              {{promoName}}
+            {{/if}}
+
           </p>
           <p class="text-right">
             {{t "QTY"}}
@@ -105,7 +111,7 @@
         <span class="col-md-2">
           <p class="price text-right">
             {{! <\%= plans.get("defaultCurrency") + plans.get("defaultCurrencySymbl") + reviewTotal.amount %> }}
-            {{giftPrice}}
+            {{{giftPrice}}}
           </p>
           <p class="qty text-right">
             {{t "QTY"}}
@@ -132,13 +138,15 @@
         {{/if}} --}}
         {{! <\% } %> }}
       </div>
-      <div class="col-md-6 text-right">
-        {{t "ORDER-TOTAL"}}
-        {{! <\%= plans.get("defaultCurrency") + plans.get("defaultCurrencySymbl") + giveObj.get("Total") %> }}
-        {{total}}
-        <br />
-        <span class="tax-placeholder">
-          {{! <div class="lds-roller">
+      <div class="col-md-6 price text-right">
+        <div class="price text-right">
+          {{t "ORDER-TOTAL"}}
+          {{{total}}}
+          {{! <\%= plans.get("defaultCurrency") + plans.get("defaultCurrencySymbl") + giveObj.get("Total") %> }}
+        </div>
+        <div>
+          <span class="tax-placeholder">
+            {{! <div class="lds-roller">
             <div></div>
             <div></div>
             <div></div>
@@ -148,8 +156,9 @@
             <div></div>
             <div></div>
           </div> }}
-          {{estimatedTaxPrice}}
-        </span>
+            {{estimatedTaxPrice}}
+          </span>
+        </div>
       </div>
     </div>
 

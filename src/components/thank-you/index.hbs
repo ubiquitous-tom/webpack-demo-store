@@ -44,10 +44,10 @@
           <span class="col-md-6">
             <b>{{t "QTY"}} {{giftQuanityy}}</b>
           </span>
-          <span class="col-md-3 text-right">
+          <span class="col-md-3 price text-right">
             <b>{{t "ORDER-TOTAL"}}</b>
             {{! <\%= plans.get("defaultCurrency") + plans.get("defaultCurrencySymbl") + giveObj.get("Total") %></b> }}
-            {{total}}
+            {{{total}}}
             <br />
             <span class="tax-placeholder">{{estimatedTaxAmount}}</span>
           </span>
@@ -72,7 +72,7 @@
         <span class="col-md-2">
           <p class="price text-right">
             {{! <\%= plans.get("defaultCurrency") + plans.get("defaultCurrencySymbl") + giveObj.get("Membership").price %> }}
-            {{annualPrice}}
+            {{{annualPrice}}}
           </p>
           <p class="text-right">
             {{t "QTY"}}
@@ -98,7 +98,13 @@
         <span class="col-md-2">
           <p class="price text-right">
             {{! <\%= plans.get("defaultCurrency") + plans.get("defaultCurrencySymbl") + giveObj.get("MonthlyMembership").price %> }}
-            {{monthlyPrice}}
+            {{{monthlyPrice}}}
+
+            {{#if membershipPromo}}
+              <br />
+              {{promoName}}
+            {{/if}}
+
           </p>
           <p class="text-right">
             {{t "QTY"}}

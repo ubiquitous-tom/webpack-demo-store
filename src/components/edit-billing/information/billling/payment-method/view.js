@@ -32,7 +32,7 @@ class EditBillingInformationBillingPaymentMethod extends View {
       console.log(paymentInfo, context)
       this.tempPaymentInfo = paymentInfo
       debugger
-      context.$el.find('#nameoncard').focus().blur()
+      this.$el.find('#nameoncard').focus().blur()
       this.stripeForm.generateToken()
     })
 
@@ -41,14 +41,14 @@ class EditBillingInformationBillingPaymentMethod extends View {
       const { context } = options
       // debugger
       if (
-        !_.isEmpty(context.$el.find('#nameoncard').val())
-        && context.$el.find('#nameoncard')[0].checkValidity()
+        !_.isEmpty(this.$el.find('#nameoncard').val())
+        && this.$el.find('#nameoncard')[0].checkValidity()
       ) {
         if (value) {
           let paymentInfo = this.tempPaymentInfo // model.get('paymentInfo')
           const paymentMethod = {
             PaymentMethod: {
-              NameOnAccount: context.$el.find('#nameoncard').val().trim(),
+              NameOnAccount: this.$el.find('#nameoncard').val().trim(),
               StripeToken: value,
             },
           }
@@ -58,10 +58,10 @@ class EditBillingInformationBillingPaymentMethod extends View {
           //   paymentInfo,
           // })
           debugger
-          context.model.trigger('editBillingValidation:stripeCardToken', paymentInfo, context)
+          this.model.trigger('editBillingValidation:stripeCardToken', paymentInfo, context)
         }
       } else {
-        context.$el.find('#nameoncard').parent('.form-group').removeClass('has-success').addClass('has-error')
+        this.$el.find('#nameoncard').parent('.form-group').removeClass('has-success').addClass('has-error')
       }
     })
 

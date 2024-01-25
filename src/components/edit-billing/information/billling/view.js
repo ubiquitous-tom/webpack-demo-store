@@ -4,7 +4,7 @@ import './stylesheet.scss'
 import template from './index.hbs'
 
 import EditBillingInformationBillingModel from './model'
-import EditBillingInformationBillingAppliedCode from './applied-code'
+// import EditBillingInformationBillingAppliedCode from './applied-code'
 import EditBillingInformationBillingAddress from './address'
 import EditBillingInformationBillingEmail from './email'
 import EditBillingInformationBillingPaymentMethod from './payment-method'
@@ -42,13 +42,13 @@ class EditBillingInformationBilling extends View {
     this.model.unset('paymentInfo')
 
     this.listenToOnce(this.model, 'editBillingValidation:stripeCardToken', (paymentInfo, context) => {
-      console.log(paymentInfo)
+      console.log(paymentInfo, context)
       debugger
       if (paymentInfo) {
         // this.model.get('paymentInfo')
         const session = {
           Session: {
-            SessionID: context.model.get('Session').SessionID,
+            SessionID: this.model.get('Session').SessionID,
           },
         }
         // WEIRD TYPO HERE `Ammount` 2 m's, for some reasons...
@@ -162,10 +162,10 @@ class EditBillingInformationBilling extends View {
     const html = this.template(this.model.attributes)
     this.$el.html(html)
 
-    this.editBillingAppliedCode = new EditBillingInformationBillingAppliedCode({
-      model: this.model,
-      i18n: this.i18n,
-    })
+    // this.editBillingAppliedCode = new EditBillingInformationBillingAppliedCode({
+    //   model: this.model,
+    //   i18n: this.i18n,
+    // })
 
     this.editBillingAddress = new EditBillingInformationBillingAddress({
       model: this.model,

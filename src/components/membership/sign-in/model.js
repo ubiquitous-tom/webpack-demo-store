@@ -19,7 +19,7 @@ class MembershipSignInModel extends ATVModel {
 
     this.on('change:Session', (model, value, options) => {
       console.log(model, value, options)
-      debugger
+      // debugger
       docCookies.setItem('ATVSessionCookie', value.SessionID)
     })
   }
@@ -105,7 +105,7 @@ class MembershipSignInModel extends ATVModel {
   success(model, resp, options) {
     console.log('MembershipSignInModel success')
     console.log(model, resp, options)
-    debugger
+    // debugger
     model.set({
       signInSuccess: true,
     })
@@ -115,7 +115,7 @@ class MembershipSignInModel extends ATVModel {
   error(model, resp, options) {
     console.log('MembershipSignInModel error')
     console.log(model, resp, options)
-    debugger
+    // debugger
     let message = ''
     /* eslint function-paren-newline: 0 */
     resp

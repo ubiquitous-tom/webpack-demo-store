@@ -84,7 +84,7 @@ class ReviewModel extends Model {
 
     const { message } = resp
     model.set({
-      reviewModelSuccess: true,
+      purchaseSuccess: true,
       type: 'success',
       message,
     })
@@ -124,7 +124,7 @@ class ReviewModel extends Model {
         })
       .always(() => {
         model.set({
-          reviewModelSuccess: false,
+          purchaseSuccess: false,
           message,
         })
       })

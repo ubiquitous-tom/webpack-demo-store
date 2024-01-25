@@ -32,7 +32,7 @@ class EditBillingInformationBillingEmail extends View {
 
     this.listenToOnce(this.model, 'editBillingValidation:email', (paymentInfo, context) => {
       console.log(paymentInfo, context)
-      // debugger
+      debugger
       // Customer is not logged in
       // which means `billingEmail input exists
       // sp we need to pass
@@ -48,12 +48,12 @@ class EditBillingInformationBillingEmail extends View {
       // in `paymentInfo` object
       let paymentInfoNew = paymentInfo// model.get('paymentInfo')
 
-      if (context.$el.find('#billingEmail').length) {
+      if (this.$el.find('#billingEmail').length) {
         // let paymentInfo = model.get('paymentInfo')
-        const emailEl = context.$el.find('#billingEmail')
-        const emailConfirmEl = context.$el.find('#billingEmailConfirm')
-        const passwordEl = context.$el.find('#membershipPassword')
-        const passwordConfirmEl = context.$el.find('#membershipPasswordConfirm')
+        const emailEl = this.$el.find('#billingEmail')
+        const emailConfirmEl = this.$el.find('#billingEmailConfirm')
+        const passwordEl = this.$el.find('#membershipPassword')
+        const passwordConfirmEl = this.$el.find('#membershipPasswordConfirm')
         if (
           (emailEl[0].checkValidity() && this.validateEmailFormat(emailEl.val()))
           && (emailConfirmEl[0].checkValidity() && this.validateEmailFormat(emailConfirmEl.val()))
@@ -62,7 +62,7 @@ class EditBillingInformationBillingEmail extends View {
           const customer = {
             Customer: {
               Email: emailEl.val().trim(),
-              MarketingOptIn: context.$el.find('#marketing-agree').val(),
+              MarketingOptIn: this.$el.find('#marketing-agree').val(),
             },
           }
           paymentInfoNew = { ...paymentInfoNew, ...customer }
@@ -86,7 +86,7 @@ class EditBillingInformationBillingEmail extends View {
         // })
       }
       debugger
-      context.model.triggger('editBillingValidation:paymentMethod', paymentInfoNew, context)
+      this.model.trigger('editBillingValidation:paymentMethod', paymentInfoNew, context)
     })
 
     const isLoggedIn = this.model.has('Subscription')
