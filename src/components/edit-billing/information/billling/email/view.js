@@ -30,8 +30,8 @@ class EditBillingInformationBillingEmail extends View {
     console.log('EditBillingInformationBillingEmail initialize')
     this.cart = this.model.get('cart')
 
-    this.listenTo(this.model, 'editBillingValidation:email', (model, context) => {
-      console.log(model, context)
+    this.listenToOnce(this.model, 'editBillingValidation:email', (paymentInfo, context) => {
+      console.log(paymentInfo, context)
       // debugger
       // Customer is not logged in
       // which means `billingEmail input exists
@@ -46,9 +46,10 @@ class EditBillingInformationBillingEmail extends View {
       // },
       //
       // in `paymentInfo` object
+      let paymentInfoNew = paymentInfo// model.get('paymentInfo')
 
       if (context.$el.find('#billingEmail').length) {
-        let paymentInfo = model.get('paymentInfo')
+        // let paymentInfo = model.get('paymentInfo')
         const emailEl = context.$el.find('#billingEmail')
         const emailConfirmEl = context.$el.find('#billingEmailConfirm')
         const passwordEl = context.$el.find('#membershipPassword')
@@ -64,7 +65,7 @@ class EditBillingInformationBillingEmail extends View {
               MarketingOptIn: context.$el.find('#marketing-agree').val(),
             },
           }
-          paymentInfo = { ...paymentInfo, ...customer }
+          paymentInfoNew = { ...paymentInfoNew, ...customer }
         }
 
         if (
@@ -77,15 +78,15 @@ class EditBillingInformationBillingEmail extends View {
               Password: passwordEl.val().trim(),
             },
           }
-          paymentInfo = { ...paymentInfo, ...credentials }
+          paymentInfoNew = { ...paymentInfoNew, ...credentials }
         }
         // debugger
-        model.set({
-          paymentInfo,
-        })
+        // model.set({
+        //   paymentInfo,
+        // })
       }
-      // debugger
-      model.trigger('editBillingValidation:paymentMethod', model, context)
+      debugger
+      context.model.triggger('editBillingValidation:paymentMethod', paymentInfoNew, context)
     })
 
     const isLoggedIn = this.model.has('Subscription')

@@ -9,7 +9,7 @@ import template from './index.hbs'
 
 class ThankYou extends View {
   get el() {
-    return '#contentSecion'
+    return '#content-section'
   }
 
   get template() {

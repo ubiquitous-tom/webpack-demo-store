@@ -83,7 +83,7 @@ class ShoppingCart extends Model {
       console.log(model, value, options)
       const { context } = options
       const isDiscountRate = context.model.has('DiscountRate')
-      debugger
+      // debugger
       if (value && isDiscountRate) {
         console.log('apply discountRate gifting')
         const quantity = parseInt(value.quantity, 10)

@@ -44,22 +44,22 @@ class EditBillingInformationBillingAddress extends View {
       this.selectDefaultCountry()
     })
 
-    this.listenTo(this.model, 'editBillingValidation:address', (model, context) => {
-      console.log(model, context)
-      // debugger
+    this.listenToOnce(this.model, 'editBillingValidation:address', (paymentInfo, context) => {
+      console.log(paymentInfo, context)
+      debugger
       if (
         context.$el.find('#firstname')[0].checkValidity()
         && context.$el.find('#lastname')[0].checkValidity()
         && context.$el.find('#billingcountry')[0].checkValidity()
         && context.$el.find('#billingzip')[0].checkValidity()
       ) {
-        model.set({
+        context.model.set({
           editBillingForm: {
             address_zip: context.$el.find('#billingzip').val(),
             address_country: context.$el.find('#billingcountry').val(),
           },
         })
-        let paymentInfo = model.get('paymentInfo')
+        // let paymentInfo = model.get('paymentInfo')
         const billingAddress = {
           BillingAddress: {
             Name: [context.$el.find('#firstname').val(), context.$el.find('#lastname').val()].join(' '),
@@ -67,13 +67,18 @@ class EditBillingInformationBillingAddress extends View {
             Zip: context.$el.find('#billingzip').val(),
           },
         }
-        paymentInfo = { ...paymentInfo, ...billingAddress }
+        const paymentInfoNew = { ...paymentInfo, ...billingAddress }
         // debugger
-        model.set({
-          paymentInfo,
-        })
-        // debugger
-        model.trigger('editBillingValidation:email', model, context)
+        // model.set({
+        //   paymentInfo,
+        // })
+        debugger
+        const isLoggedIn = (this.model.has('Session') ? this.model.get('Session').LoggedIn : false)
+        if (!isLoggedIn) {
+          context.model.trigger('editBillingValidation:email', paymentInfoNew, context)
+        } else {
+          context.model.trigger('editBillingValidation:paymentMethod', paymentInfoNew, context)
+        }
       }
       // else {
       //   context.$el.find('#firstname')[0].addEventListener('invalid', (e) => {

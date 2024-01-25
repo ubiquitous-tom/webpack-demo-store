@@ -270,7 +270,8 @@ class StripeForm extends View {
     this.cardExpiry.mount('#card-expiry')
     this.cardCvc.mount('#card-cvc')
 
-    this.csrfAuthorization.setPreAuth()
+    // this.csrfAuthorization.setPreAuth()
+    this.parentView.model.trigger('stripeForm:initialized')
 
     return this
   }
@@ -319,7 +320,8 @@ class StripeForm extends View {
           const stripeCard = result.token.card
           const updatedStripeCard = _.extend(stripeCard, { token: stripeCardTokenID })
           console.log(updatedStripeCard)
-          this.parentView.model.set('newStripeCardInfo', updatedStripeCard, { context: this.parentView })
+          this.parentView.model.set('newStripeCardInfo', updatedStripeCard)
+          this.parentView.model.set('stripeCardTokenID', stripeCardTokenID, { context: this.parentView })
           this.model.set('stripeCardTokenID', stripeCardTokenID)
           // console.log(this, this.parentView)
           this.loadingStop()
@@ -332,7 +334,7 @@ class StripeForm extends View {
           //   debugger
           //   this.model.addNewStripeCard(stripeCardTokenID)
           // }
-          this.reCaptcha.generateCaptchaToken()
+          // this.reCaptcha.generateCaptchaToken()
         } else {
           console.log(result)
           gaAction = 'Failed'

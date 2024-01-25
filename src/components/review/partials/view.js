@@ -1,11 +1,11 @@
-import { View } from 'backbone'
+import { Model, View } from 'backbone'
 
 // import './stylesheet.scss'
 import template from './modal.hbs'
 
 class ReviewModal extends View {
   get el() {
-    return '.review.store.container'
+    return '#content-section'
   }
 
   get template() {
@@ -21,48 +21,42 @@ class ReviewModal extends View {
   initialize(options) {
     console.log('ReviewModal initialize')
     this.i18n = options.i18n
+
+    this.reviewModel = new Model()
+
+    this.listenTo(this.reviewModel, 'modalClearClose', () => {
+      console.log('ReviewModal modalClearClose', this.model)
+      this.model.trigger('review:clearPurchase')
+    })
   }
 
   render() {
-    this.removeLoader()
+    // this.removeLoader()
     console.log(this.model.attributes)
     const attributes = {
-      message: this.i18n.t('ACCOUNT-EXISTS'),
+      header: this.i18n.t('CANCELED-ORDER'),
     }
     const html = this.template(attributes)
-    this.$el.after(html)
-
-    this.$el.find('#reviewPurchaseModal').on('hidden.bs.modal', () => {
-      this.$el.find('#reviewPurchaseModal').remove()
-      this.model.trigger('review:clearPurchase')
-    })
-
-    // this.$el.find('#reviewPurchaseModal .modal-body')
-    //   .append(`<p>${this.i18n.t('NO-ACCOUNT-CHARGES')}</p>`)
-    // this.$el.find('#reviewPurchaseModal .modal-body')
-    //   .append(`<p>${this.i18n.t('CAN-EDIT-ORDER')}</p>`)
-    this.$el
-      .find('#reviewPurchaseModal .modal-body')
-      .append(`<p>${this.i18n.t('NO-ACCOUNT-CHARGES')}</p><p>${this.i18n.t('CAN-EDIT-ORDER')}</p>`)
-
-    this.$el
-      .find('#reviewPurchaseModal')
-      .modal()
+    this.$el.find('.review.store.container').append(html)
 
     return this
   }
 
   modalClear() {
-    const attributes = {
-      header: this.i18n.t('CANCELED-ORDER'),
-      body: `<p>${this.i18n.t('NO-ACCOUNT-CHARGES')}</p><p>${this.i18n.t('CAN-EDIT-ORDER')}</p>`,
-    }
-    const html = this.template(attributes)
-    this.$el.after(html)
+    this.render()
+    // const attributes = {
+    //   header: this.i18n.t('CANCELED-ORDER'),
+    //   body: `<p>${this.i18n.t('NO-ACCOUNT-CHARGES')}</p><p>${this.i18n.t('CAN-EDIT-ORDER')}</p>`,
+    // }
+    // debugger
+    this.$el
+      .find('#reviewPurchaseModal .modal-body')
+      .html(`<p>${this.i18n.t('NO-ACCOUNT-CHARGES')}</p><p>${this.i18n.t('CAN-EDIT-ORDER')}</p>`)
 
-    this.$el.find('#reviewPurchaseModal').on('hidden.bs.modal', () => {
+    this.$el.find('#reviewPurchaseModal').on('hide.bs.modal', (e) => {
+      console.log('#reviewPurchaseModal hide.bs.modal', e)
       this.$el.find('#reviewPurchaseModal').remove()
-      this.model.trigger('review:clearPurchase')
+      this.reviewModel.trigger('modalClearClose')
     })
 
     this.$el
@@ -71,14 +65,22 @@ class ReviewModal extends View {
   }
 
   modalError(message) {
-    const attributes = {
-      header: 'Error',
-      body: message,
-    }
-    const html = this.template(attributes)
-    this.$el.after(html)
+    this.render()
+    // const attributes = {
+    //   header: this.i18n.t('ERROR'),
+    //   body: message,
+    // }
+    // debugger
+    this.$el
+      .find('#reviewPurchaseModal .modal-header')
+      .html(`<p>${this.i18n.t('ERROR')}</p>`)
 
-    this.$el.find('#reviewPurchaseModal').on('hidden.bs.modal', () => {
+    this.$el
+      .find('#reviewPurchaseModal .modal-body')
+      .html(`<p>${message}</p>`)
+
+    this.$el.find('#reviewPurchaseModal').on('hidden.bs.modal', (e) => {
+      console.log('#reviewPurchaseModal hide.bs.modal', e)
       this.$el.find('#reviewPurchaseModal').remove()
     })
 

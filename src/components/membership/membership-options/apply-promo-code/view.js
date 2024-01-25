@@ -1,4 +1,5 @@
 import { View } from 'backbone'
+import _ from 'underscore'
 
 import './stylesheet.scss'
 import template from './index.hbs'
@@ -36,15 +37,18 @@ class MembershipApplyPromoCode extends View {
       model.unset('promoCodeSuccess', { silent: true })
       // this.loadingStop()
       if (value) {
+        let { message } = model.get('flashMessage')
+        let type = true
         const membershipPromo = this.membershipApplyPromoCodeModel.get('promo')
-        this.model.set({ membershipPromo }, { context: this })
-        console.log(this.model.attributes)
-      } else {
-        console.log('promoCodeSuccess: false')
+        if (!_.isEmpty(membershipPromo.SourceCodeMapping)) {
+          this.model.set({ membershipPromo }, { context: this })
+        } else {
+          message = this.i18n.t('PROMOCODE-NOT-FOUND')
+          type = false
+        }
+        this.updatePromoMessage(message, type)
       }
-
-      const { message } = model.get('flashMessage')
-      this.updatePromoMessage(message, value)
+      console.log(this.model.attributes)
     })
 
     // const isGroupNameAllowedGifting = true // this.model.get('isGroupNameAllowedGifting')
@@ -65,7 +69,7 @@ class MembershipApplyPromoCode extends View {
     }
 
     if (this.model.has('membershipPromo')) {
-      debugger
+      // debugger
       const promoCode = this.model.get('membershipPromo').PromotionCode
       const stripePercentOff = this.model.get('membershipPromo').StripePercentOff
       const message = `${promoCode} applied. Enjoy your ${stripePercentOff}% off!`

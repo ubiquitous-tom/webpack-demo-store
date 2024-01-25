@@ -37,21 +37,15 @@ class EditBillingInformationBilling extends View {
     this.signInModal = new EditBillingInformationBillingSignInModal()
     this.statusModal = new EditBillingInformationBillingStatusModal()
 
-    // this.listenTo(this.model, 'editBillingValidation:submit', (model, context) => {
-    //   console.log(model, context)
-    //   debugger
-    //   context.model.trigger('editBillingValidation:address', model, context)
-    // })
-
     // clear `paymentInfo` on every page change
     // this will prevent using same `Stripe token` issue
     this.model.unset('paymentInfo')
 
-    this.listenTo(this.model, 'editBillingValidation:stripeCardInfo', (value, context) => {
-      console.log(value)
-      // debugger
-      if (value) {
-        let paymentInfo = this.model.get('paymentInfo')
+    this.listenToOnce(this.model, 'editBillingValidation:stripeCardToken', (paymentInfo, context) => {
+      console.log(paymentInfo)
+      debugger
+      if (paymentInfo) {
+        // this.model.get('paymentInfo')
         const session = {
           Session: {
             SessionID: context.model.get('Session').SessionID,
@@ -61,17 +55,17 @@ class EditBillingInformationBilling extends View {
         const amount = {
           Ammount: this.membershipAmount(),
         }
-        paymentInfo = { ...paymentInfo, ...session, ...amount }
+        const paymentInformation = { ...paymentInfo, ...session, ...amount }
         // debugger
-        context.model.set({
-          paymentInfo,
-        })
-        // debugger
-        this.editBillingInformationBillingModel.submit(paymentInfo)
+        // context.model.set({
+        //   paymentInfo,
+        // })
+        debugger
+        this.editBillingInformationBillingModel.submit(paymentInformation)
       }
     })
 
-    this.listenTo(this.editBillingInformationBillingModel, 'change:paymentSuccess', (model, value) => {
+    this.listenToOnce(this.editBillingInformationBillingModel, 'change:paymentSuccess', (model, value) => {
       console.log(model, value)
       // debugger
       if (value) {
@@ -146,6 +140,10 @@ class EditBillingInformationBilling extends View {
       }
     })
 
+    this.listenTo(this.model, 'stripeForm:initialized', () => {
+      this.$el.find('#savePayment').prop('disabled', false)
+    })
+
     // debugger
     if (this.cart.getTotalQuantity() === 0) {
       if (this.model.get('storeType') === 'Gift') {
@@ -174,10 +172,13 @@ class EditBillingInformationBilling extends View {
       i18n: this.i18n,
     })
 
-    this.editBillingEmail = new EditBillingInformationBillingEmail({
-      model: this.model,
-      i18n: this.i18n,
-    })
+    const isLoggedIn = (this.model.has('Session') ? this.model.get('Session').LoggedIn : false)
+    if (!isLoggedIn) {
+      this.editBillingInformationBillingEmail = new EditBillingInformationBillingEmail({
+        model: this.model,
+        i18n: this.i18n,
+      })
+    }
 
     this.editBillingPaymentMethod = new EditBillingInformationBillingPaymentMethod({
       model: this.model,
@@ -212,13 +213,14 @@ class EditBillingInformationBilling extends View {
       const paymentInfo = this.model.has('paymentInfo')
         ? this.model.get('paymentInfo')
         : defaultPaymentInfo
-      this.model.set({
-        paymentInfo,
-      })
+      // this.model.set({
+      //   paymentInfo,
+      // })
       // debugger
       // this.model.get('paymentInfo')
       // this.model.trigger('editBillingValidation:submit', this.model, this)
-      this.model.trigger('editBillingValidation:address', this.model, this)
+      // this.model.trigger('editBillingValidation:address', this.model, this)
+      this.model.trigger('editBillingValidation:address', paymentInfo, this)
     }
   }
 

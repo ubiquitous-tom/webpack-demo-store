@@ -38,9 +38,13 @@ class EditBillingDetailsOrderSummaryMonthly extends View {
         this.cart.getItemAmount('monthly'),
       ].join(''),
     )
+    const membershipPromo = this.model.has('membershipPromo')
+    const promoName = membershipPromo ? this.model.get('membershipPromo').Name : ''
     const attributes = {
       quantity,
       price,
+      membershipPromo,
+      promoName,
     }
     const html = this.template(attributes)
     this.$el.find('.order-summary table tbody').append(html)

@@ -8,7 +8,7 @@ import StoreHome from 'components/store'
 import Membership from 'components/membership'
 import Give from 'components/give'
 import ApplyGiftCode from 'components/apply-gift-code'
-import ApplyPromoCode from 'components/apply-promo-code'
+// import ApplyPromoCode from 'components/apply-promo-code'
 import EditBilling from 'components/edit-billing'
 import Review from 'components/review'
 import ThankYou from 'components/thank-you'
@@ -19,7 +19,7 @@ class Workspace extends Router {
       membership: 'membership',
       give: 'give',
       applyGiftCode: 'applyGiftCode',
-      applyPromoCode: 'applyPromoCode',
+      // applyPromoCode: 'applyPromoCode',
       editBilling: 'editBilling',
       reviewPurchase: 'reviewPurchase',
       thankYou: 'thankYou',
@@ -82,7 +82,8 @@ class Workspace extends Router {
 
   applyPromoCode() {
     console.log('Router loads applyPromoCode')
-    new ApplyPromoCode({ model: this.model, i18n: this.i18n })
+    // new ApplyPromoCode({ model: this.model, i18n: this.i18n })
+    new Membership({ model: this.model, i18n: this.i18n })
   }
 
   editBilling() {

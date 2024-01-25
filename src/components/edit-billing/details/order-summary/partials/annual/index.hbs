@@ -13,3 +13,17 @@
     {{t "EA"}}
   </td>
 </tr>
+
+{{#if membershipPromo}}
+  <tr>
+    <th class="item-name"></th>
+  </tr>
+  <tr>
+    <td class="qty">
+      {{t "PROMOTION-APPLIED"}}
+    </td>
+    <td class="price text-right">
+      {{{promoName}}}
+    </td>
+  </tr>
+{{/if}}

@@ -4,7 +4,7 @@ import _ from 'underscore'
 import './stylesheet.scss'
 import template from './index.hbs'
 
-// import StripeForm from './stripe-form'
+import StripeForm from './stripe-form'
 
 class EditBillingInformationBillingPaymentMethod extends View {
   get el() {
@@ -25,14 +25,18 @@ class EditBillingInformationBillingPaymentMethod extends View {
   initialize() {
     console.log('EditBillingInformationBillingPaymentMethod initialize')
 
-    this.listenTo(this.model, 'editBillingValidation:paymentMethod', (model, context) => {
-      console.log(model, context)
-      // debugger
+    this.stripeForm = new StripeForm({ parentView: this, i18n: this.i18n })
+    this.tempPaymentInfo = {}
+
+    this.listenToOnce(this.model, 'editBillingValidation:paymentMethod', (paymentInfo, context) => {
+      console.log(paymentInfo, context)
+      this.tempPaymentInfo = paymentInfo
+      debugger
       context.$el.find('#nameoncard').focus().blur()
       this.stripeForm.generateToken()
     })
 
-    this.listenTo(this.model, 'change:newStripeCardInfo', (model, value, options) => {
+    this.listenToOnce(this.model, 'change:stripeCardTokenID', (model, value, options) => {
       console.log(model, value, options)
       const { context } = options
       // debugger
@@ -41,20 +45,20 @@ class EditBillingInformationBillingPaymentMethod extends View {
         && context.$el.find('#nameoncard')[0].checkValidity()
       ) {
         if (value) {
-          let paymentInfo = model.get('paymentInfo')
+          let paymentInfo = this.tempPaymentInfo // model.get('paymentInfo')
           const paymentMethod = {
             PaymentMethod: {
               NameOnAccount: context.$el.find('#nameoncard').val().trim(),
-              StripeToken: value.token,
+              StripeToken: value,
             },
           }
           paymentInfo = { ...paymentInfo, ...paymentMethod }
           // debugger
-          model.set({
-            paymentInfo,
-          })
-          // debugger
-          context.model.trigger('editBillingValidation:stripeCardInfo', model, context)
+          // model.set({
+          //   paymentInfo,
+          // })
+          debugger
+          context.model.trigger('editBillingValidation:stripeCardToken', paymentInfo, context)
         }
       } else {
         context.$el.find('#nameoncard').parent('.form-group').removeClass('has-success').addClass('has-error')
@@ -67,10 +71,10 @@ class EditBillingInformationBillingPaymentMethod extends View {
   render() {
     console.log('EditBillingInformationBillingPaymentMethod render')
     console.log(this.model.attributes)
-    const html = this.template(this.model.attributes)
+    const html = this.template()
     this.$el.html(html)
 
-    this.stripeForm.contentPlaceholder()
+    // this.stripeForm.contentPlaceholder()
 
     return this
   }

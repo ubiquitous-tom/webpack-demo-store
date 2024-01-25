@@ -7,8 +7,8 @@ import './stylesheet.scss'
 import membershipUserImg from './img/membership-user.png'
 import giftBoxImg from './img/gift-box.png'
 import template from './index.hbs'
-
 import ReviewModal from './partials'
+
 import ReviewModel from './model'
 
 class Review extends View {
@@ -23,7 +23,7 @@ class Review extends View {
   get events() {
     return {
       'click #editBilling': 'editBilling',
-      'click #editQuantity': 'editQuantity',
+      // 'click #editQuantity': 'editQuantity',
       'click .submit-order': 'submitPurchase',
       'click #cancelOrder': 'clearPurchase',
       'click .remove': 'memberRemove',
@@ -37,9 +37,10 @@ class Review extends View {
     this.cart = this.model.get('cart')
     this.gifting = this.model.get('gifting')
     this.paymentEstimation = new PaymentEstimation()
-    this.modal = new ReviewModal({ model: this.model, i18n: this.i18n })
+    this.popup = new ReviewModal({ model: this.model, i18n: this.i18n })
     this.reviewModel = new ReviewModel()
 
+    // if car is empty then send the customer back to their respective first page
     if (this.cart.getTotalQuantity() === 0) {
       if (this.model.get('storeType') === 'Gift') {
         Backbone.history.navigate('give', { trigger: true })
@@ -52,12 +53,13 @@ class Review extends View {
     const attributes = {
       Country: this.model.get('BillingAddress').Country,
       PostalCode: this.model.get('BillingAddress').PostalCode,
-      Amount: this.model.get('paymentInfo').Ammount, // Weird typo from the API `Ammount` with 2m's
+      Amount: this.cart.getTotalAmount(), // Weird typo from the API `Ammount` with 2m's
     }
     // debugger
     this.paymentEstimation.getPaymentEstimation(attributes)
 
     this.listenTo(this.model, 'review:clearPurchase', () => {
+      console.log('Review review:clearPurchase')
       if (this.model.get('storeType') === 'Gift') {
         Backbone.history.navigate('give', { trigger: true })
       } else {
@@ -71,7 +73,7 @@ class Review extends View {
       if (value) {
         Backbone.history.navigate('thankYou', { trigger: true })
       } else {
-        this.modal.modalError(model.get('message'))
+        this.popup.modalError(model.get('message'))
       }
     })
 
@@ -137,24 +139,30 @@ class Review extends View {
         this.gifting.get('gift').CurrSymbol,
         this.cart.getTotalAmount(),
       ].join(''),
+      estimatedTaxPrice: this.model.get('estimatedTaxPrice'),
     }
     const html = this.template(attributes)
     this.$el.html(html)
+
+    // this.popup.render()
 
     return this
   }
 
   editBilling(e) {
+    console.log('Review editBilling')
     e.preventDefault()
     Backbone.history.navigate('editBilling', { trigger: true })
   }
 
-  editQuantity(e) {
-    e.preventDefault()
-    Backbone.history.navigate('give', { trigger: true })
-  }
+  // editQuantity(e) {
+  //   console.log('Review editQuantity')
+  //   e.preventDefault()
+  //   Backbone.history.navigate('give', { trigger: true })
+  // }
 
   submitPurchase(e) {
+    console.log('Review submitPurchase')
     e.preventDefault()
 
     this.$el
@@ -165,12 +173,10 @@ class Review extends View {
   }
 
   clearPurchase(e) {
+    console.log('Review clearPurchase')
     e.preventDefault()
-
-    // clear out quantity
     this.cart.emptyCart()
-
-    this.modal.modalClear()
+    this.popup.modalClear()
   }
 
   memberRemove(e) {

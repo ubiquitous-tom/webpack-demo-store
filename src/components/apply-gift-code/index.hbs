@@ -1,52 +1,54 @@
-<h1>{{t "REDEEM-GIFT"}}</h1>
-<form id="applyCodeForm" class="form-apply-code">
-  <div class="row">
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="EnterPromoCode" class="control-label">
-          {{t "CODE"}}<span class="req">*</span>
-        </label>
-        <input
-          class="form-control"
-          type="text"
-          name="EnterPromoCode"
-          id="EnterPromoCode"
-          maxlength="30"
-          pattern="^[a-zA-Z0-9]+$"
-          required
-        />
+<div class="gift-code store container">
+  <h1>{{t "REDEEM-GIFT"}}</h1>
+  <form id="applyCodeForm" class="form-apply-code">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="EnterPromoCode" class="control-label">
+            {{t "CODE"}}<span class="req">*</span>
+          </label>
+          <input
+            class="form-control"
+            type="text"
+            name="EnterPromoCode"
+            id="EnterPromoCode"
+            maxlength="30"
+            pattern="^[a-zA-Z0-9]+$"
+            required
+          />
+        </div>
       </div>
     </div>
-  </div>
 
-  <div id="applyCodeAlert" class="alert hidden"></div>
+    <div id="applyCodeAlert" class="alert hidden"></div>
 
-  <button type="submit" class="btn btn-primary">
-    {{t "APPLY-CODE"}}
-  </button>
+    <button type="submit" class="btn btn-primary">
+      {{t "APPLY-CODE"}}
+    </button>
 
-</form>
+  </form>
 
-<div id="applyCodeModal" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-hidden="true"
-        >&times;</button>
-        <h3 id="confirm-cancel-label">{{t "REDEEM-GIFT"}}</h3>
-      </div>
-      <div class="modal-body">
-        <h4 id="applyCodeStatus"></h4>
-      </div>
-      <div class="modal-footer">
-        <button
-          class="btn btn-primary btn-confirmation"
-          data-dismiss="modal"
-        >{{t "OKAY"}}</button>
+  <div id="applyCodeModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-hidden="true"
+          >&times;</button>
+          <h3 id="confirm-cancel-label">{{t "REDEEM-GIFT"}}</h3>
+        </div>
+        <div class="modal-body">
+          <h4 id="applyCodeStatus"></h4>
+        </div>
+        <div class="modal-footer">
+          <button
+            class="btn btn-primary btn-confirmation"
+            data-dismiss="modal"
+          >{{t "OKAY"}}</button>
+        </div>
       </div>
     </div>
   </div>

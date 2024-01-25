@@ -36,6 +36,7 @@ class ReviewModel extends Model {
 
     const monthly = cart.getItemQuantity('monthly')
     const annual = cart.getItemQuantity('annual')
+    const promoCode = model.has('membershipPromo') ? model.get('membershipPromo').PromotionCode : ''
     let membershipType = 'monthly'
     if (monthly > 0) {
       membershipType = 'monthly'
@@ -58,6 +59,8 @@ class ReviewModel extends Model {
         Amount: cart.getItemAmount(membershipType),
         CurrencyDesc: gifting.get('gift').CurrencyDesc,
         PlanID: model.get(`${membershipType}StripePlan`).PlanID,
+        AutoRenew: false,
+        PromoCode: promoCode,
       },
     }
 

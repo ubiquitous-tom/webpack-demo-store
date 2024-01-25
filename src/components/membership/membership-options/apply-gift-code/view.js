@@ -1,4 +1,4 @@
-import { View } from 'backbone'
+import Backbone, { View } from 'backbone'
 
 import './stylesheet.scss'
 import template from './index.hbs'
@@ -71,7 +71,8 @@ class MembershipApplyGiftCode extends View {
     e.preventDefault()
     const isLoggedIn = this.model.get('Session').LoggedIn
     if (isLoggedIn) {
-      window.location.hash = '#applyGiftCode'
+      // window.location.hash = '#applyGiftCode'
+      Backbone.history.navigate('applyGiftCode', { trigger: true })
     } else {
       window.location.href = `${this.model.get('signupEnv')}/createaccount.jsp`
     }
