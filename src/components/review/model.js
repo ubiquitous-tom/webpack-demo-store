@@ -133,10 +133,11 @@ class ReviewModel extends Model {
   timelinePromotion(attributes, model) {
     const cart = model.get('cart')
     const gifting = model.get('gifting')
-
+    debugger
     // Timeline Promotion (2020).
-    const specialDiscount = model.has('DiscountRate') ? model.get('DiscountRate') : {}
-    if (!_.isEmpty(specialDiscount)) {
+    if (model.has('DiscountRate')) {
+      debugger
+      const specialDiscount = model.get('DiscountRate')
       // attributes.Gift = []
       const qty = cart.getItemQuantity('gift')
       const defaultCurrency = gifting.get('gift').CurrencyDesc
@@ -173,6 +174,8 @@ class ReviewModel extends Model {
         giftTotalCount += 1
       })
     }
+
+    return attributes
   }
 }
 

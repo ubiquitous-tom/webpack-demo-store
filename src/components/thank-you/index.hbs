@@ -36,13 +36,13 @@
 
       <h3 class="head">Order #{{orderId}}</h3>
 
-      {{#if giftQuanity}}
+      {{#if giftQuantity}}
         <div class="row item order-detail">
           <span class="col-md-3">
-            <b>{{giftQuanityy}} {{t "ANNUAL-MEMBERSHIP-ACORNTV"}}</b>
+            <b>{{giftQuantity}} {{t "ANNUAL-MEMBERSHIP-ACORNTV"}}</b>
           </span>
           <span class="col-md-6">
-            <b>{{t "QTY"}} {{giftQuanityy}}</b>
+            <b>{{t "QTY"}} {{giftQuantity}}</b>
           </span>
           <span class="col-md-3 price text-right">
             <b>{{t "ORDER-TOTAL"}}</b>
@@ -102,7 +102,7 @@
 
             {{#if membershipPromo}}
               <br />
-              {{promoName}}
+              <span class="promo-name">{{promoName}}</span>
             {{/if}}
 
           </p>
@@ -121,8 +121,7 @@
           class="btn btn-primary checkout text-right"
           href="//{{environment}}acorn.tv"
         >
-          <!-- {{t "START-WATCHING-NOW"}} -->
-          {{t "DISCOVER-EXTRAORDINARY-MYSTERIES"}}
+          {{t "START-WATCHING-NOW"}}
         </a>
         <br />
       </div>

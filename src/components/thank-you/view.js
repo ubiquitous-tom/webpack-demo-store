@@ -1,4 +1,5 @@
-import { Model, View } from 'backbone'
+import Backbone, { View } from 'backbone'
+import _ from 'underscore'
 
 import BackBoneContext from 'core/contexts/backbone-context'
 import docCookies from 'doc-cookies'
@@ -19,10 +20,25 @@ class ThankYou extends View {
   initialize() {
     console.log('ThankYou initialize')
     this.cart = this.model.get('cart')
+    this.gifting = this.model.get('gifting')
     this.context = new BackBoneContext()
     this.ga = this.context.getContext('ga')
 
-    this.thankYou = new Model()
+    if (!this.model.has('orderId')) {
+      if (this.model.get('storeType') === 'Membership') {
+        Backbone.history.navigate('membership', { trigger: true })
+      } else {
+        Backbone.history.navigate('give', { trigger: true })
+      }
+      return
+    }
+
+    this.render()
+  }
+
+  render() {
+    console.log('ThankYou render')
+    console.log(this.model.attributes)
 
     let giftStore = false
     let membershipStore = false
@@ -62,8 +78,8 @@ class ThankYou extends View {
 
     const membership = (annualMembership || monthlyMembership)
     const environment = this.model.get('environment')
-    debugger
-    this.thankYou.set({
+
+    const attributes = {
       giftStore,
       membershipStore,
       giftQuantity,
@@ -81,15 +97,8 @@ class ThankYou extends View {
       promoName,
       membership,
       environment,
-    })
-
-    this.listenTo(this.thankYou, 'change:orderId', this.render)
-  }
-
-  render() {
-    console.log('ThankYou render')
-    console.log(this.model.attributes, this.thankYou.attributes)
-    const html = this.template(this.thankYou.attributes)
+    }
+    const html = this.template(attributes)
     this.$el.html(html)
 
     this.googleAnalytics()
@@ -101,10 +110,16 @@ class ThankYou extends View {
   googleAnalytics() {
     // TODO: needs to be rewrite from UA -> GA4
 
+    const total = this.applyTotalPromoPrice([
+      this.gifting.get('gift').CurrencyDesc,
+      this.gifting.get('gift').CurrSymbol,
+      this.cart.getTotalAmount(),
+    ].join(''))
+
     /* eslint-disable no-undef */
     ga('ecommerce:addTransaction', {
-      id: this.thankYou.get('orderId'),
-      revenue: this.thankYou.get('total'),
+      id: this.model.get('orderId'),
+      revenue: total,
     })
 
     // push info to Google Analytics
@@ -114,7 +129,7 @@ class ThankYou extends View {
       quantity: this.cart.getItemQuantity('gift'),
     })
 
-    if (this.thankYou.get('annualMembership')) {
+    if (this.cart.getItemQuantity('annual')) {
       ga('ecommerce:addItem', {
         name: 'Personal Membership',
         price: this.cart.getItemAmount('annual'),
@@ -166,8 +181,8 @@ class ThankYou extends View {
     }
 
     dataLayer.push({
-      transactionId: this.thankYou.get('orderID'),
-      transactionTotal: this.thankYou.get('total'),
+      transactionId: this.model.get('orderID'),
+      transactionTotal: total,
       transactionProducts: dataLayerProducts,
       eventQuant: this.cart.getItemQuantity('gift'),
     })
