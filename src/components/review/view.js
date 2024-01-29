@@ -42,16 +42,17 @@ class Review extends View {
     this.reviewModel = new ReviewModel()
 
     // // if the cart is empty then send the customer back to their respective first page
-    // const isMembershipActive = (
-    //   this.model.has('Membership') && this.model.get('Membership').Status === 'ACTIVE'
-    // )
-    // debugger
-    // if (!isMembershipActive) {
-    //   Backbone.history.navigate('home', { trigger: true })
-    //   return
-    // }
-
     if (this.cart.getTotalQuantity() === 0) {
+      if (this.model.get('storeType') === 'Gift') {
+        Backbone.history.navigate('give', { trigger: true })
+      } else {
+        Backbone.history.navigate('membership', { trigger: true })
+      }
+      return
+    }
+
+    // not logged in then send back the customer back to  their respective first page
+    if (!this.model.get('Session')?.LoggedIn) {
       if (this.model.get('storeType') === 'Gift') {
         Backbone.history.navigate('give', { trigger: true })
       } else {
@@ -62,7 +63,7 @@ class Review extends View {
     // debugger
     let Country = 'US'
     let PostalCode = '90210'
-    if (this.model.get('Session')?.LoggedIn) {
+    if (this.model.has('BillingAddress')) {
       Country = this.model.get('BillingAddress').Country
       PostalCode = this.model.get('BillingAddress').PostalCode
     } else {
