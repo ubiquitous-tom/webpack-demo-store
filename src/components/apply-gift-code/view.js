@@ -85,7 +85,7 @@ class ApplyGiftCode extends View {
       }
     })
 
-    this.render()
+    // this.render()
   }
 
   render() {

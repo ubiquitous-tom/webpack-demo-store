@@ -45,6 +45,19 @@ class EditBillingDetailsOrderSummaryGift extends View {
 
     return this
   }
+
+  // renderTimelinePromotionHTML() {
+  //   // Timeline Promotion (2020).
+  //   let giftItemSummary = {}
+  //   const seasonalPromotionCart = giveObj.has('SeasonalPromotionCart')
+  //     ? giveObj.get('SeasonalPromotionCart')
+  //     : {}
+  //   if (!_.isEmpty(seasonalPromotionCart)) {
+  //     giftItemSummary = seasonalPromotionCart
+  //   }
+
+  //   return giftItemSummary
+  // }
 }
 
 export default EditBillingDetailsOrderSummaryGift

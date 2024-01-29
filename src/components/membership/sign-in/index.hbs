@@ -21,6 +21,7 @@
             name="email"
             type="email"
             value="{{Customer.Email}}"
+            pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
             required
           />
         </div>
@@ -35,6 +36,7 @@
             id="password"
             name="password"
             type="password"
+            minlength="6"
             required
           />
         </div>

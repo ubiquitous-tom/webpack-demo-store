@@ -46,7 +46,7 @@ class EditBillingInformationBillingAddress extends View {
 
     this.listenToOnce(this.model, 'editBillingValidation:address', (paymentInfo, context) => {
       console.log(paymentInfo, context)
-      debugger
+      // debugger
       if (
         this.$el.find('#firstname')[0].checkValidity()
         && this.$el.find('#lastname')[0].checkValidity()
@@ -72,7 +72,7 @@ class EditBillingInformationBillingAddress extends View {
         // model.set({
         //   paymentInfo,
         // })
-        debugger
+        // debugger
         const isLoggedIn = (this.model.has('Session') ? this.model.get('Session').LoggedIn : false)
         if (!isLoggedIn) {
           this.model.trigger('editBillingValidation:email', paymentInfoNew, context)

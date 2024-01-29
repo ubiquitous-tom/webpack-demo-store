@@ -32,7 +32,7 @@ class EditBillingInformationBillingEmail extends View {
 
     this.listenToOnce(this.model, 'editBillingValidation:email', (paymentInfo, context) => {
       console.log(paymentInfo, context)
-      debugger
+      // debugger
       // Customer is not logged in
       // which means `billingEmail input exists
       // sp we need to pass
@@ -85,7 +85,7 @@ class EditBillingInformationBillingEmail extends View {
         //   paymentInfo,
         // })
       }
-      debugger
+      // debugger
       this.model.trigger('editBillingValidation:paymentMethod', paymentInfoNew, context)
     })
 

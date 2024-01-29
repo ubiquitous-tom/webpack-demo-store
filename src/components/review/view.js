@@ -41,7 +41,16 @@ class Review extends View {
     this.popup = new ReviewModal({ model: this.model, i18n: this.i18n })
     this.reviewModel = new ReviewModel()
 
-    // if car is empty then send the customer back to their respective first page
+    // // if the cart is empty then send the customer back to their respective first page
+    // const isMembershipActive = (
+    //   this.model.has('Membership') && this.model.get('Membership').Status === 'ACTIVE'
+    // )
+    // debugger
+    // if (!isMembershipActive) {
+    //   Backbone.history.navigate('home', { trigger: true })
+    //   return
+    // }
+
     if (this.cart.getTotalQuantity() === 0) {
       if (this.model.get('storeType') === 'Gift') {
         Backbone.history.navigate('give', { trigger: true })
@@ -50,7 +59,7 @@ class Review extends View {
       }
       return
     }
-    debugger
+    // debugger
     let Country = 'US'
     let PostalCode = '90210'
     if (this.model.get('Session')?.LoggedIn) {
@@ -63,7 +72,7 @@ class Review extends View {
     const attributes = {
       Country,
       PostalCode,
-      Amount: this.cart.getTotalAmount(), // Weird typo from the API `Ammount` with 2m's
+      Amount: this.cart.getTotalAmount(),
     }
     // debugger
     this.paymentEstimation.getPaymentEstimation(attributes)
@@ -79,7 +88,7 @@ class Review extends View {
 
     this.listenTo(this.reviewModel, 'change:purchaseSuccess', (model, value) => {
       console.log(model, value)
-      debugger
+      // debugger
       if (value) {
         this.model.set({
           orderId: model.get('OrderID'),

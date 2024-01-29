@@ -3,7 +3,7 @@ import { View } from 'backbone'
 // import './stylesheet.scss'
 import template from './modal.hbs'
 
-class MembershipSignInModal extends View {
+class GivesignInModal extends View {
   get el() {
     return '.give.store.container'
   }
@@ -13,14 +13,14 @@ class MembershipSignInModal extends View {
   }
 
   initialize(options) {
-    console.log('MembershipSignInModal initialize')
+    console.log('GivesignInModal initialize')
     this.i18n = options.i18n
   }
 
   render() {
     const html = this.template()
     this.$el
-      .find('#signInForm')
+      .find('.sign-in')
       .after(html)
     this.$el
       .find('#signInModal')
@@ -34,4 +34,4 @@ class MembershipSignInModal extends View {
   }
 }
 
-export default MembershipSignInModal
+export default GivesignInModal

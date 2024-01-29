@@ -37,7 +37,7 @@ class GiveGiftMembership extends View {
     // const membershipActive = this.model.get('Membership').Status.toUpperCase() === 'ACTIVE'
     if (isGroupNameAllowedGifting) {
       const giftAmount = this.gifting.get('amount')
-      const discountRate = this.model.has('DiscountRate') ? this.model.get('DiscountRate') : null
+      const discountRate = this.model.has('DiscountRate')
       const giftPrice = [
         this.gifting.get('gift').CurrencyDesc,
         this.gifting.get('gift').CurrSymbol,
@@ -65,6 +65,8 @@ class GiveGiftMembership extends View {
 
     const html = this.template(this.giftMembershipModel.attributes)
     this.$el.append(html)
+
+    this.renderTimelineHTML()
 
     this.renderTimelinePromotionAccent()
     this.selectDefaultGiftQuantity()
@@ -99,6 +101,27 @@ class GiveGiftMembership extends View {
     if (this.cart.has('gift')) {
       const { quantity } = this.cart.get('gift')
       this.$el.find(`#qty option[value="${quantity}"]`).prop('selected', true)
+    }
+  }
+
+  renderTimelineHTML() {
+    if (this.model.has('DiscountRate')) {
+      const div = $('<div>').addClass('special-discount-listing').append($('<ul>'))
+      _.each(this.model.get('DiscountRate'), (element, index, list) => {
+        console.log(element, index, list)
+        const giftPrice = [
+          this.gifting.get('gift').CurrencyDesc,
+          this.gifting.get('gift').CurrSymbol,
+          element.Amount,
+        ].join('')
+        const percentOff = element.DiscountPct * 100
+        const html = this.i18n.t(`BLACK-FRIDAY-PROMO-LIST-${index + 1}-2024`, { giftPrice, percentOff })
+        // console.log(html)
+        div.find('ul').append($('<li>').html(html))
+        // console.log(div[0])
+      })
+      console.log(div)
+      this.$el.find('#special-discount').append(div)
     }
   }
 
@@ -152,9 +175,11 @@ class GiveGiftMembership extends View {
     let total = (parseInt(quantity, 10) * parseFloat(amount)).toFixed(2)
 
     if (this.model.has('DiscountRate')) {
-      const giftItem = this.model.get('DiscountRate').find(({ count }) => count === parseInt(quantity, 10))
-      total = (parseInt(quantity, 10) * parseFloat(giftItem.Amount)).toFixed(2)
-      // debugger
+      // const giftItem = this.model.get('DiscountRate')
+      //   .find(({ count }) => count === parseInt(quantity, 10))
+      // total = (parseInt(quantity, 10) * parseFloat(giftItem.Amount)).toFixed(2)
+      total = this.timelinePromotionTotal(quantity, amount)
+      debugger
     }
 
     return total
@@ -165,7 +190,7 @@ class GiveGiftMembership extends View {
     const quantity = e.target.value
     if (quantity > 0) {
       const { amount } = this.gifting.get('gift')
-      const total = (quantity * amount).toFixed(2)
+      const total = this.timelinePromotionTotal(quantity, amount) // (quantity * amount).toFixed(2)
       const gift = {
         quantity: Number(quantity),
         amount,
@@ -176,6 +201,31 @@ class GiveGiftMembership extends View {
       this.cart.unset('gift', { silent: true })
     }
     console.log(this.model.attributes)
+  }
+
+  timelinePromotionTotal(quantity, amount) {
+    if (this.model.has('DiscountRate')) {
+      const specialDiscount = this.model.get('DiscountRate')
+      const toCalculateElements = _.reject(
+        specialDiscount,
+        (element) => (element.count > quantity),
+      )
+      console.log(toCalculateElements)
+      // debugger
+      let total = 0
+      /* eslint arrow-body-style: 0 */
+      /* eslint no-return-assign: 0 */
+      toCalculateElements.forEach((element) => {
+        return total += parseFloat(element.Amount)
+      })
+      // debugger
+      total = (Math.round(total * 100) / 100)
+      console.log(total)
+      // debugger
+      return total.toFixed(2)
+    }
+
+    return (quantity, amount).toFixed(2)
   }
 }
 

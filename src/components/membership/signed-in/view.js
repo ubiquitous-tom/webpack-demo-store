@@ -51,13 +51,23 @@ class MembershipSignedIn extends View {
   render() {
     console.log('MembershipSignedIn render')
     console.log(this.model.attributes)
-    const attributes = {
-      yourMembershipType: this.yourMembershipType(),
-      yourMembershipExpiredDate: this.yourMembershipExpiredDate(),
-      isWebPaymentEdit: this.model.get('Customer').webPaymentEdit,
-      upgradeToAnnual: this.upgradeToAnnual(),
-      renewMembership: this.renewMembership(),
-      isGroupNameAllowedGifting: true, // this.model.get('isGroupNameAllowedGifting'),
+    const isMembershipActive = (this.model.get('Membership').Status === 'ACTIVE')
+    let attributes = {}
+    if (isMembershipActive) {
+      attributes = {
+        yourMembershipType: this.yourMembershipType(),
+        yourMembershipExpiredDate: this.yourMembershipExpiredDate(),
+        isWebPaymentEdit: this.model.get('Customer').webPaymentEdit,
+        upgradeToAnnual: this.upgradeToAnnual(),
+        renewMembership: this.renewMembership(),
+        isGroupNameAllowedGifting: true, // this.model.get('isGroupNameAllowedGifting'),
+      }
+    } else {
+      attributes = {
+        name: !_.isEmpty(this.model.get('Customer').Name)
+          ? this.model.get('Customer').Name
+          : '',
+      }
     }
     const html = this.template(attributes)
     this.$el.append(html)

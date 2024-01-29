@@ -31,7 +31,7 @@ class EditBillingInformationBillingPaymentMethod extends View {
     this.listenToOnce(this.model, 'editBillingValidation:paymentMethod', (paymentInfo, context) => {
       console.log(paymentInfo, context)
       this.tempPaymentInfo = paymentInfo
-      debugger
+      // debugger
       this.$el.find('#nameoncard').focus().blur()
       this.stripeForm.generateToken()
     })
@@ -57,7 +57,7 @@ class EditBillingInformationBillingPaymentMethod extends View {
           // model.set({
           //   paymentInfo,
           // })
-          debugger
+          // debugger
           this.model.trigger('editBillingValidation:stripeCardToken', paymentInfo, context)
         }
       } else {

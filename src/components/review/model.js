@@ -44,7 +44,7 @@ class ReviewModel extends Model {
     if (annual > 0) {
       membershipType = 'annual'
     }
-    debugger
+    // debugger
     let attributes = {
       Session: {
         SessionID: model.get('Session').SessionID,
@@ -59,7 +59,7 @@ class ReviewModel extends Model {
         Amount: cart.getItemAmount(membershipType),
         CurrencyDesc: gifting.get('gift').CurrencyDesc,
         PlanID: model.get(`${membershipType}StripePlan`).PlanID,
-        AutoRenew: false,
+        // AutoRenew: false,
         PromoCode: promoCode,
       },
     }
@@ -133,7 +133,7 @@ class ReviewModel extends Model {
   timelinePromotion(attributes, model) {
     const cart = model.get('cart')
     const gifting = model.get('gifting')
-    debugger
+    // debugger
     // Timeline Promotion (2020).
     if (model.has('DiscountRate')) {
       debugger

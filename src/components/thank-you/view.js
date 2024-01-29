@@ -57,7 +57,7 @@ class ThankYou extends View {
       this.cart.getTotalAmount(),
     ].join(''))
     const estimatedTaxPrice = this.model.get('estimatedTaxPrice')
-    debugger
+    // debugger
     const annualMembership = this.cart.getItemQuantity('annual')
     const annualPrice = this.applyMembershipPromoPrice([
       this.gifting.get('gift').CurrencyDesc,

@@ -34,16 +34,36 @@ class EditBillingInformationBilling extends View {
 
     this.editBillingInformationBillingModel = new EditBillingInformationBillingModel()
 
-    this.signInModal = new EditBillingInformationBillingSignInModal()
-    this.statusModal = new EditBillingInformationBillingStatusModal()
+    this.signInModal = new EditBillingInformationBillingSignInModal({
+      model: this.model,
+      i18n: this.i18n,
+    })
+    this.statusModal = new EditBillingInformationBillingStatusModal({
+      model: this.model,
+      i18n: this.i18n,
+    })
 
     // clear `paymentInfo` on every page change
     // this will prevent using same `Stripe token` issue
     this.model.unset('paymentInfo')
 
+    this.listenTo(this.model, 'membership:editBillingSubmitted', () => {
+      debugger
+      this.$el
+        .find('#updateBillingAlert')
+        .slideUp(400, (e) => {
+          console.log(e)
+          this.$el
+            .find('#updateBillingAlert')
+            .remove()
+          debugger
+          this.editBillingInformationBillingModel.submit()
+        })
+    })
+
     this.listenToOnce(this.model, 'editBillingValidation:stripeCardToken', (paymentInfo, context) => {
       console.log(paymentInfo, context)
-      debugger
+      // debugger
       if (paymentInfo) {
         // this.model.get('paymentInfo')
         const session = {
@@ -51,17 +71,17 @@ class EditBillingInformationBilling extends View {
             SessionID: this.model.get('Session').SessionID,
           },
         }
-        // WEIRD TYPO HERE `Ammount` 2 m's, for some reasons...
-        const amount = {
-          Ammount: this.membershipAmount(),
-        }
-        const paymentInformation = { ...paymentInfo, ...session, ...amount }
+        const paymentInformation = { ...paymentInfo, ...session }
         // debugger
         // context.model.set({
         //   paymentInfo,
         // })
         debugger
-        this.editBillingInformationBillingModel.submit(paymentInformation)
+        this.editBillingInformationBillingModel.set({
+          paymentInformation,
+        })
+        this.displayLoader()
+        // this.editBillingInformationBillingModel.submit(paymentInformation)
       }
     })
 
@@ -71,10 +91,10 @@ class EditBillingInformationBilling extends View {
       if (value) {
         Backbone.history.navigate('reviewPurchase', { trigger: true })
       } else {
+        this.removeLoader()
         /* eslint no-lonely-if: 0 */
         if (model.get('message').indexOf('Sign In') >= 0) {
           Backbone.history.navigate('give', { trigger: true })
-          //   this.modal.render()
 
           //   this.$signInStatus.html(errorMessage)
 
@@ -134,14 +154,19 @@ class EditBillingInformationBilling extends View {
           // }
         }
 
+        this.statusModal.render()
+
+        const errorMessage = model.get('message')
         this.$el
-          .find('#savePayment')
-          .prop('disabled', false)
+          .find('#updateBillingStatus')
+          .html(errorMessage)
       }
     })
 
     this.listenTo(this.model, 'stripeForm:initialized', () => {
-      this.$el.find('#savePayment').prop('disabled', false)
+      this.$el
+        .find('#savePayment')
+        .prop('disabled', false)
     })
 
     // debugger
@@ -192,7 +217,15 @@ class EditBillingInformationBilling extends View {
     e.preventDefault()
     console.log('EditBillingInformationBilling submit')
     if (this.cart.getTotalQuantity()) {
-      this.$el.find('#savePayment').prop('disabled', true)
+      this.$el
+        .find('.form-trial-signup input')
+        .prop('disabled', true)
+      this.$el
+        .find('.form-trial-signup select')
+        .prop('disabled', true)
+      this.$el
+        .find('#savePayment')
+        .prop('disabled', true)
 
       // start form validation process
       const defaultPaymentInfo = {
@@ -208,7 +241,6 @@ class EditBillingInformationBilling extends View {
           NameOnAccount: '',
           StripeToken: '',
         },
-        Ammount: '',
       }
       const paymentInfo = this.model.has('paymentInfo')
         ? this.model.get('paymentInfo')
@@ -228,6 +260,43 @@ class EditBillingInformationBilling extends View {
     return this.cart.getItemQuantity('monthly')
       ? this.cart.getItemAmount('monthly')
       : this.cart.getItemAmount('annual')
+  }
+
+  displayLoader() {
+    const loader = `<i class="icon-spinner icon-spin icon-large"></i> ${this.i18n.t('SUBMITTING')}`
+    const modal = $('<div>')
+      .attr({ id: 'updateBillingAlert' })
+      .addClass('alert alert-info')
+      .css({ display: 'none' })
+      .html(loader)
+    // debugger
+    this.$el
+      .find('.form-trial-signup')
+      .after(modal)
+    debugger
+    this.$el
+      .find('#updateBillingAlert')
+      .slideDown(400, () => {
+        debugger
+        this.statusModal.render()
+      })
+  }
+
+  removeLoader() {
+    this.$el
+      .find('#updateBillingAlert')
+      .slideUp()
+      .remove()
+
+    this.$el
+      .find('.form-trial-signup input')
+      .prop('disabled', false)
+    this.$el
+      .find('.form-trial-signup select')
+      .prop('disabled', false)
+    this.$el
+      .find('#savePayment')
+      .prop('disabled', false)
   }
 }
 

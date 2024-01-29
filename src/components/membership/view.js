@@ -60,27 +60,28 @@ class Membership extends View {
     const html = this.template(this.model.attributes)
     this.$el.html(html)
 
-    // const isLoggedIn = this.model.get('Session').LoggedIn
+    const isLoggedIn = (this.model.has('Session') && this.model.get('Session').LoggedIn)
     // const isMembershipActive = (
     //   this.model.has('Membership') || (this.model.get('Membership').Status === 'ACTIVE')
     // )
 
     this.membershipGiveDetails = new MembershipGiveDetails({ model: this.model, i18n: this.i18n })
-    if (this.model.has('Subscription')) {
+    if (isLoggedIn) {
       this.membershipSignedIn = new MembershipSignedIn({ model: this.model, i18n: this.i18n })
     } else {
       this.membershipSignUp = new MembershipSignUp({ model: this.model, i18n: this.i18n })
       this.membershipSignIn = new MembershipSignIn({ model: this.model, i18n: this.i18n })
-      this.membershipCurrencyOptions = new MembershipCurrencyOptions({
-        model: this.model,
-        i18n: this.i18n,
-      })
 
       this.model.set({
         membershipSignUp: this.membershipSignUp,
         membershipSignIn: this.membershipSignIn,
       })
       this.membershipSignUp.render()
+
+      this.membershipCurrencyOptions = new MembershipCurrencyOptions({
+        model: this.model,
+        i18n: this.i18n,
+      })
     }
     this.membershipOptions = new MembershipOptions({ model: this.model, i18n: this.i18n })
     this.membershipLegal = new MembershipLegal({ model: this.model, i18n: this.i18n })

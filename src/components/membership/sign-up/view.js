@@ -18,7 +18,7 @@ class MembershipSignUp extends View {
 
   get events() {
     return {
-      'change #email': 'checkEmail',
+      'blur #email': 'checkEmail',
       'click #sign-in-link': 'signInTemplate',
     }
   }
@@ -52,8 +52,8 @@ class MembershipSignUp extends View {
           //     Email: this.$el.find('#signUpForm #email').val().trim(),
           //   },
           // }
-          // debugger
           console.log(this.model.has('Customer'))
+          // debugger
           // this.model.set(customer)
           if (this.model.has('Customer') && !_.isEmpty(this.model.get('Customer').Email)) {
             Backbone.history.navigate('editBilling', { trigger: true })
@@ -64,17 +64,15 @@ class MembershipSignUp extends View {
       }
     })
 
-    this.listenTo(this.model, 'membership:accountAlreadyExist', (model, value) => {
-      console.log(model, value)
-      debugger
+    this.listenTo(this.model, 'membership:accountAlreadyExist', () => {
+      // debugger
       this.renderSignInTemplate()
-      this.membershipSignUpModel.unset('membership:accountAlreadyExist', { silent: true })
     })
 
     this.listenTo(this.membershipSignUpModel, 'change:checkProfileEmailSuccess', (model, value) => {
       console.log(model, value)
       // debugger
-      this.popup.removeLoader()
+      this.removeLoader()
 
       if (value) {
         // profile existed
@@ -133,8 +131,7 @@ class MembershipSignUp extends View {
     const emailValidation = /^((([a-z]|\d|[!#$%&'*+\-/=?^_`{|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#$%&'*+\-/=?^_`{|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/
     const isEmailValidated = email.match(emailValidation)
     if (this.validateSignUpForm() && isEmailValidated) {
-      this.popup.displayLoader()
-      this.membershipSignUpModel.checkEmail(email)
+      this.displayLoader(email)
     }
   }
 
@@ -180,6 +177,32 @@ class MembershipSignUp extends View {
     }
 
     return true
+  }
+
+  displayLoader(email) {
+    const loader = `<i class="icon-spinner icon-spin icon-large"></i> ${this.i18n.t('CHECKING-FOR-ACCOUNT')}`
+    const modal = $('<div>')
+      .attr({ id: 'signInAlert' })
+      .addClass('alert alert-info')
+      .css({ display: 'none' })
+      .html(loader)
+    // debugger
+    this.$el
+      .find('#signUpForm')
+      .after(modal)
+    // debugger
+    this.$el
+      .find('#signInAlert')
+      .slideDown(400, () => {
+        this.membershipSignUpModel.checkEmail(email)
+      })
+  }
+
+  removeLoader() {
+    this.$el
+      .find('#signInAlert')
+      .slideUp()
+      .remove()
   }
 }
 

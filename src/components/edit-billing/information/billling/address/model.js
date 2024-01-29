@@ -1,9 +1,12 @@
-import { Model } from 'backbone'
+import { Model, LocalStorage } from 'backbone'
 import _ from 'underscore'
+
+import { getLocalStorage } from 'backbone.localstorage/src/utils'
 
 class EditBillingInformationBillingAddressModel extends Model {
   get defaults() {
     return {
+      localStorageID: 'atv-countries',
       states: [
         {
           abbr: 'AK',
@@ -308,9 +311,14 @@ class EditBillingInformationBillingAddressModel extends Model {
 
   initialize() {
     console.log('EditBillingInformationBillingAddressModel initialize')
+    this.localStorage = new LocalStorage(this.get('localStorageID'))
+    const storage = getLocalStorage(this)
+    console.log(storage, this)
+    // if (_.isEmpty(this.getStorageContent(this.localStorageID))) {
     this.fetch({
       ajaxSync: true,
     })
+    // }
   }
 
   parse(resp) {
@@ -351,6 +359,28 @@ class EditBillingInformationBillingAddressModel extends Model {
     // console.log(env)
     return env
   }
+
+  // getStorageContent() {
+  //   console.log('EditBillingInformationBillingAddressModel getStorageContent')
+  //   debugger
+  //   const id = this.localStorage._getItem(this.get('localStorageID'))
+  //   // console.log(id)
+  //   const name = this.localStorage._itemName(id)
+  //   // console.log(name)
+  //   const item = this.localStorage._getItem(name)
+  //   // console.log(item)
+  //   const storage = this.localStorage.serializer.deserialize(item)
+  //   // console.log(storage)
+
+  //   return storage
+  // }
+
+  // updateModel() {
+  //   console.log('EditBillingInformationBillingAddressModel updateModel')
+  //   const storage = this.getStorageContent()
+  //   // console.log(storage)
+  //   this.set(storage)
+  // }
 }
 
 export default EditBillingInformationBillingAddressModel

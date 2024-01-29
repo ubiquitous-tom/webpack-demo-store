@@ -105,7 +105,7 @@ class GiveSignInModel extends ATVModel {
   success(model, resp, options) {
     console.log('GiveSignInModel success')
     console.log(model, resp, options)
-    debugger
+    // debugger
     model.set({
       signInSuccess: true,
     })
@@ -115,7 +115,7 @@ class GiveSignInModel extends ATVModel {
   error(model, resp, options) {
     console.log('GiveSignInModel error')
     console.log(model, resp, options)
-    debugger
+    // debugger
     let message = ''
     /* eslint function-paren-newline: 0 */
     resp

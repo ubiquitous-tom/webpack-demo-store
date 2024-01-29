@@ -16,7 +16,6 @@ class EditBillingInformationBillingModel extends Model {
   //       NameOnAccount: 'Tom Test',
   //       StripeToken: 'tok_1ObAtP2hcBjtiCUZldDfXCkN',
   //     },
-  //     Ammount: '6.99',
   //   }
   // }
 
@@ -48,14 +47,15 @@ class EditBillingInformationBillingModel extends Model {
     //     "NameOnAccount": "Tom Test",
     //     "StripeToken": "tok_1ObAtP2hcBjtiCUZldDfXCkN"
     //   },
-    //   "Ammount": "6.99"
     // }
   }
 
-  submit(attributes) {
+  submit() {
     console.log('EditBillingInformationBillingModel submit')
     console.log(this)
 
+    const attributes = this.get('paymentInformation')
+    debugger
     const options = {
       dataType: 'json',
       ajaxSync: true,
@@ -64,7 +64,7 @@ class EditBillingInformationBillingModel extends Model {
       error: this.error,
     }
     console.log(attributes, options)
-    // debugger
+    debugger
     this.save(attributes, options)
   }
 

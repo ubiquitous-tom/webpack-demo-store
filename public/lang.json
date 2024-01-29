@@ -4230,6 +4230,14 @@
                     "uk": "1 Gift: ${var1} (regular price)"
                 }
             },
+            "BLACK-FRIDAY-PROMO-LIST-1-2024": {
+                "type": "text",
+                "content": {
+                    "en": "1 Gift: %{giftPrice} (regular price)",
+                    "es": "1 regalo: %{giftPrice} (precio regular)",
+                    "uk": "1 Gift: %{giftPrice} (regular price)"
+                }
+            },
             "BLACK-FRIDAY-PROMO-LIST-2-2019": {
                 "type": "text",
                 "content": {
@@ -4238,12 +4246,28 @@
                     "uk": "2nd Gift: ${var1} (50% off)"
                 }
             },
+            "BLACK-FRIDAY-PROMO-LIST-2-2024": {
+                "type": "text",
+                "content": {
+                    "en": "2nd Gift: %{giftPrice} (%{percentOff}% off)",
+                    "es": "2\u00ba regalo: %{giftPrice} (%{percentOff}% de descuento)",
+                    "uk": "2nd Gift: %{giftPrice} (%{percentOff}% off)"
+                }
+            },
             "BLACK-FRIDAY-PROMO-LIST-3-2019": {
                 "type": "text",
                 "content": {
                     "en": "3rd Gift: ${var1} (50% off)",
                     "es": "3\u00ba regalo: ${var1} (50% de descuento)",
                     "uk": "3rd Gift: ${var1} (50% off)"
+                }
+            },
+            "BLACK-FRIDAY-PROMO-LIST-3-2024": {
+                "type": "text",
+                "content": {
+                    "en": "3rd Gift: %{giftPrice} (%{percentOff}% off)",
+                    "es": "3\u00ba regalo: %{giftPrice} (%{percentOff}% de descuento)",
+                    "uk": "3rd Gift: %{giftPrice} (%{percentOff}% off)"
                 }
             },
             "BLACK-FRIDAY-PROMO-CHECKOUT-2019": {

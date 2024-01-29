@@ -24,7 +24,6 @@ class MembershipSignUpModal extends View {
   }
 
   render() {
-    this.removeLoader()
     console.log(this.model.attributes)
     const attributes = {
       message: this.i18n.t('ACCOUNT-EXISTS'),
@@ -50,46 +49,6 @@ class MembershipSignUpModal extends View {
   remove() {
     this.$el.find('#signInModal').remove()
   }
-
-  displayLoader() {
-    const loader = `<i class="icon-spinner icon-spin icon-large"></i> ${this.i18n.t('CHECKING-FOR-ACCOUNT')}`
-    const modal = $('<div>')
-      .attr({ id: 'signInAlert' })
-      .addClass('alert alert-info')
-      .html(loader)
-    // debugger
-    this.$el
-      .find('#signUpForm')
-      .after(modal)
-      .slideDown()
-  }
-
-  removeLoader() {
-    this.$el
-      .find('#signInAlert')
-      .slideUp()
-      .remove()
-  }
-
-  // displayModal() {
-  //   this.removeLoader()
-  //   const modal = this.modalTemplate(modalTemplate)
-  //   this.$el
-  //     .find('#signUpForm')
-  //     .after(modal)
-
-  //   this.$el
-  //     .find('#SignInStatus')
-  //     .html(this.i18n.t('ACCOUNT-EXISTS'))
-
-  //   this.$el.find('#signInModal').on('hidden.bs.modal', () => {
-  //     this.$el.find('#signInModal').remove()
-  //   })
-
-  //   this.$el
-  //     .find('#signInModal')
-  //     .modal()
-  // }
 }
 
 export default MembershipSignUpModal
