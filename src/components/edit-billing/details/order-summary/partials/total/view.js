@@ -40,7 +40,12 @@ class EditBillingDetailsOrderSummaryTotal extends View {
   }
 
   orderTotal() {
-    const total = this.cart.getTotalAmount()
+    const isGiftStore = (this.model.get('storeType') === 'Gift')
+    const isDiscountRate = this.model.has('DiscountRate')
+    const total = (isGiftStore && isDiscountRate)
+      ? this.cart.getTotalTimelinePromomotionAmount(this.model.get('DiscountRate'))
+      : this.cart.getTotalAmount()
+    // debugger
     return [
       this.gifting.get('gift').CurrencyDesc,
       this.gifting.get('gift').CurrSymbol,

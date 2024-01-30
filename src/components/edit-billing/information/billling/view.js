@@ -1,4 +1,5 @@
 import Backbone, { View } from 'backbone'
+import _ from 'underscore'
 
 import './stylesheet.scss'
 import template from './index.hbs'
@@ -48,20 +49,16 @@ class EditBillingInformationBilling extends View {
     this.model.unset('paymentInfo')
 
     this.listenTo(this.model, 'membership:editBillingSubmitted', () => {
-      debugger
-      this.$el
-        .find('#updateBillingAlert')
-        .slideUp(400, (e) => {
-          console.log(e)
-          this.$el
-            .find('#updateBillingAlert')
-            .remove()
-          debugger
-          this.editBillingInformationBillingModel.submit()
-        })
+      // debugger
+      Backbone.history.navigate('reviewPurchase', { trigger: true })
     })
 
-    this.listenToOnce(this.model, 'editBillingValidation:stripeCardToken', (paymentInfo, context) => {
+    this.listenTo(this.model, 'membership:editBillingSignIn', () => {
+      debugger
+      Backbone.history.navigate('give', { trigger: true })
+    })
+
+    this.listenTo(this.model, 'editBillingValidation:stripeCardToken', (paymentInfo, context) => {
       console.log(paymentInfo, context)
       // debugger
       if (paymentInfo) {
@@ -85,81 +82,113 @@ class EditBillingInformationBilling extends View {
       }
     })
 
-    this.listenToOnce(this.editBillingInformationBillingModel, 'change:paymentSuccess', (model, value) => {
+    this.listenTo(this.model, 'editBillingValidation:stripeCardTokenError', (error) => {
+      console.log(error)
+      debugger
+      this.removeLoader()
+    })
+
+    this.listenTo(this.editBillingInformationBillingModel, 'change:paymentSuccess', (model, value) => {
       console.log(model, value)
+      this.editBillingInformationBillingModel.unset('paymentSuccess', { silent: true })
       // debugger
       if (value) {
-        Backbone.history.navigate('reviewPurchase', { trigger: true })
+        this.$el
+          .find('#updateBillingAlert')
+          .slideUp(400, (e) => {
+            console.log(e)
+            this.$el
+              .find('#updateBillingAlert')
+              .remove()
+            this.statusModal.render()
+          })
+        // Backbone.history.navigate('reviewPurchase', { trigger: true })
       } else {
+        debugger
         this.removeLoader()
+        let errorMessage = model.get('message')
         /* eslint no-lonely-if: 0 */
         if (model.get('message').indexOf('Sign In') >= 0) {
-          Backbone.history.navigate('give', { trigger: true })
-
-          //   this.$signInStatus.html(errorMessage)
-
-          //   this.$signInModal.modal()
-          //   this.$signInModal.on('hidden.bs.modal', _.bind(function () {
-          //     Backbone.trigger('navChange', 'give')
-          //   }, this))
-          // } else {
+          debugger
+          // Backbone.history.navigate('give', { trigger: true })
+          // this.$signInStatus.html(errorMessage)
+          // this.$signInModal.modal()
+          // this.$signInModal.on('hidden.bs.modal', _.bind((e) => {
+          //   console.log(e)
+          //   Backbone.history.navigate('give', {trigger: true})
+          // })
+          this.signInModal.render()
+          this.$el
+            .find('#SignInStatus')
+            .html(errorMessage)
+        } else {
           //   var billingAddress = xhr.responseJSON.error.BillingAddress
-          //   if (billingAddress == null) {
-          //     if (errorMessage.indexOf('unable to process this transaction') >= 0) {
-          //       errorMessage = polyglot.t("CREDIT-CARD-NOT-SUPPORTED")
-          //     }
-          //     this.$billingStatus.html(errorMessage)
-          //   } else {
-          //     var emptyData = []
-          //     // if (billingAddress.Address != null && billingAddress.Address == "Empty") {
-          //     //   emptyData.push("Address")
-          //     // }
-          //     // if (billingAddress.City != null && billingAddress.City == "Empty") {
-          //     //   emptyData.push("City")
-          //     // }
-          //     // if (billingAddress.Name != null && billingAddress.Name == "Empty") {
-          //     //   emptyData.push("Name")
-          //     // }
-          //     // if (billingAddress.State != null && billingAddress.State == "Empty") {
-          //     //   emptyData.push("State/Province")
-          //     // }
-          //     if (billingAddress.Country != null && billingAddress.Country == 'Empty') {
-          //       emptyData.push('Country')
-          //     }
-          //     if (billingAddress.Zip != null && billingAddress.Zip == "Empty") {
-          //       emptyData.push("Zip/Postal Code")
-          //     }
+          if (_.isEmpty(errorMessage.BillingAddress)) {
+            debugger
+            //   if (billingAddress == null) {
+            if (errorMessage.indexOf('unable to process this transaction') >= 0) {
+              debugger
+              errorMessage = this.i18n.t('CREDIT-CARD-NOT-SUPPORTED')
+            }
+            //     this.$billingStatus.html(errorMessage)
+          } else {
+            const emptyData = []
+            debugger
+            const billingAddress = errorMessage.BillingAddress
+            // if (!_.isEmpty(billingAddress.Address) && billingAddress.Address == 'Empty') {
+            //   emptyData.push('Address')
+            // }
+            // if (!_.isEmpty(billingAddress.City) && billingAddress.City == 'Empty') {
+            //   emptyData.push('City')
+            // }
+            // if (!_.isEmpty(billingAddress.Name) && billingAddress.Name == 'Empty') {
+            //   emptyData.push('Name')
+            // }
+            // if (!_.isEmpty(billingAddress.State) && billingAddress.State == 'Empty') {
+            //   emptyData.push('State/Province')
+            // }
+            if (!_.isEmpty(billingAddress.Country) && billingAddress.Country === 'Empty') {
+              emptyData.push('Country')
+            }
+            if (!_.isEmpty(billingAddress.Zip) && billingAddress.Zip === 'Empty') {
+              emptyData.push('Zip/Postal Code')
+            }
 
-          //     var message
-          //     if (emptyData.length > 0) {
-          //       message = polyglot.t("ENTER-DATA")
-          //       for (var i = 0 i < emptyData.length i++) {
-          //         message += emptyData[i] + ", "
-          //       }
-          //       message = message.substring(0, message.length - 2) + "."
-          //     } else {
-          //       message = polyglot.t("ERR-PROCESS-REQUEST")
-          //     }
+            if (_.isEmpty(emptyData)) {
+              errorMessage = this.i18n.t('ERR-PROCESS-REQUEST')
+            } else {
+              emptyData.push(this.i18n.t('ENTER-DATA'))
+              errorMessage = `${emptyData.join(', ').trim()}.`
+            }
+            debugger
+            // if (emptyData.length > 0) {
+            //   message = this.i18n.t('ENTER-DATA')
+            //   for (let i = 0; i < emptyData.length; i++) {
+            //     message += emptyData[i] + ', '
+            //   }
+            //   message = message.substring(0, message.length - 2) + '.'
+            // } else {
+            //   message = this.i18n.t('ERR-PROCESS-REQUEST')
+            // }
 
-          //     this.$billingStatus.html(message)
-          //   }
+            // this.$billingStatus.html(message)
+            //   }
 
-          //   this.$billingModal.modal();
+            //   this.$billingModal.modal();
 
-          //      // Clear Stripe Token field and reset Stripe since we
-          //      // have problem processing credit card by Stripe.
-          //     this.paymentMethod.render()
-          //     this.$('#stripe-token').val('')
-          //   }
-          // }
+            //   }
+            // }
+          }
+          this.statusModal.render()
+
+          this.$el
+            .find('#updateBillingStatus')
+            .html(errorMessage)
         }
-
-        this.statusModal.render()
-
-        const errorMessage = model.get('message')
-        this.$el
-          .find('#updateBillingStatus')
-          .html(errorMessage)
+        // // Clear Stripe Token field and reset Stripe since we
+        // // have problem processing credit card by Stripe.
+        // this.paymentMethod.render()
+        // this.$('#stripe-token').val('')
       }
     })
 
@@ -248,7 +277,7 @@ class EditBillingInformationBilling extends View {
       // this.model.set({
       //   paymentInfo,
       // })
-      // debugger
+      debugger
       // this.model.get('paymentInfo')
       // this.model.trigger('editBillingValidation:submit', this.model, this)
       // this.model.trigger('editBillingValidation:address', this.model, this)
@@ -269,16 +298,16 @@ class EditBillingInformationBilling extends View {
       .addClass('alert alert-info')
       .css({ display: 'none' })
       .html(loader)
-    // debugger
+
     this.$el
       .find('.form-trial-signup')
       .after(modal)
-    debugger
+
     this.$el
       .find('#updateBillingAlert')
       .slideDown(400, () => {
-        debugger
-        this.statusModal.render()
+        // debugger
+        this.editBillingInformationBillingModel.submit()
       })
   }
 

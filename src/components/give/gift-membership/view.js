@@ -179,7 +179,7 @@ class GiveGiftMembership extends View {
       //   .find(({ count }) => count === parseInt(quantity, 10))
       // total = (parseInt(quantity, 10) * parseFloat(giftItem.Amount)).toFixed(2)
       total = this.timelinePromotionTotal(quantity, amount)
-      debugger
+      // debugger
     }
 
     return total

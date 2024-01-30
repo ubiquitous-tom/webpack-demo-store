@@ -55,7 +55,7 @@ class EditBillingInformationBillingModel extends Model {
     console.log(this)
 
     const attributes = this.get('paymentInformation')
-    debugger
+    // debugger
     const options = {
       dataType: 'json',
       ajaxSync: true,
@@ -64,7 +64,7 @@ class EditBillingInformationBillingModel extends Model {
       error: this.error,
     }
     console.log(attributes, options)
-    debugger
+    // debugger
     this.save(attributes, options)
   }
 

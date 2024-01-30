@@ -28,7 +28,7 @@ class EditBillingInformationBillingPaymentMethod extends View {
     this.stripeForm = new StripeForm({ parentView: this, i18n: this.i18n })
     this.tempPaymentInfo = {}
 
-    this.listenToOnce(this.model, 'editBillingValidation:paymentMethod', (paymentInfo, context) => {
+    this.listenTo(this.model, 'editBillingValidation:paymentMethod', (paymentInfo, context) => {
       console.log(paymentInfo, context)
       this.tempPaymentInfo = paymentInfo
       // debugger
@@ -36,7 +36,7 @@ class EditBillingInformationBillingPaymentMethod extends View {
       this.stripeForm.generateToken()
     })
 
-    this.listenToOnce(this.model, 'change:stripeCardTokenID', (model, value, options) => {
+    this.listenTo(this.model, 'change:stripeCardTokenID', (model, value, options) => {
       console.log(model, value, options)
       const { context } = options
       // debugger
@@ -63,6 +63,12 @@ class EditBillingInformationBillingPaymentMethod extends View {
       } else {
         this.$el.find('#nameoncard').parent('.form-group').removeClass('has-success').addClass('has-error')
       }
+    })
+
+    this.listenTo(this.model, 'stripeCardTokenIDError', (error) => {
+      console.log(error)
+      debugger
+      this.model.trigger('editBillingValidation:stripeCardTokenError', error)
     })
 
     this.render()

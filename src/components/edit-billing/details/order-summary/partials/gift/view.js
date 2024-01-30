@@ -36,9 +36,12 @@ class EditBillingDetailsOrderSummaryGift extends View {
       this.gifting.get('gift').CurrSymbol,
       this.cart.getItemAmount('gift'),
     ].join('')
+
+    const giftItemSummary = this.timelinePromotion(quantity)
     const attributes = {
       quantity,
       amount,
+      giftItemSummary,
     }
     const html = this.template(attributes)
     this.$el.find('.order-summary table tbody').append(html)
@@ -46,18 +49,30 @@ class EditBillingDetailsOrderSummaryGift extends View {
     return this
   }
 
-  // renderTimelinePromotionHTML() {
-  //   // Timeline Promotion (2020).
-  //   let giftItemSummary = {}
-  //   const seasonalPromotionCart = giveObj.has('SeasonalPromotionCart')
-  //     ? giveObj.get('SeasonalPromotionCart')
-  //     : {}
-  //   if (!_.isEmpty(seasonalPromotionCart)) {
-  //     giftItemSummary = seasonalPromotionCart
-  //   }
+  timelinePromotion(quantity) {
+    // Timeline Promotion (2020).
+    console.log(quantity)
+    const giftItemSummary = []
+    if (this.model.get('storeType') === 'Gift') {
+      if (this.model.has('DiscountRate') && quantity) {
+        const discountRate = this.model.get('DiscountRate')
+        discountRate.forEach((item) => {
+          if (item.count <= quantity) {
+            const giftItem = {}
+            giftItem.quantity = item.count
+            giftItem.amount = [
+              this.gifting.get('gift').CurrencyDesc,
+              this.gifting.get('gift').CurrSymbol,
+              item.Amount,
+            ].join('')
+            giftItemSummary.push(giftItem)
+          }
+        })
+      }
+    }
 
-  //   return giftItemSummary
-  // }
+    return giftItemSummary
+  }
 }
 
 export default EditBillingDetailsOrderSummaryGift

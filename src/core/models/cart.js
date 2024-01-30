@@ -83,17 +83,26 @@ class ShoppingCart extends Model {
       console.log(model, value, options)
       const { context } = options
       const isDiscountRate = context.model.has('DiscountRate')
+      const isGiftStore = (context.model.get('storeType') === 'Gift')
       // debugger
-      if (value && isDiscountRate) {
+      if (value && isDiscountRate && isGiftStore) {
         console.log('apply discountRate gifting')
         const quantity = parseInt(value.quantity, 10)
         const giftItem = context.model.get('DiscountRate').find(({ count }) => count === quantity)
         const amount = parseFloat(giftItem.Amount)
-        const total = parseFloat((quantity * amount).toFixed(2))
+        let total = 0
+        context.model.get('DiscountRate').forEach((item) => {
+          if (item.count <= quantity) {
+            total = parseFloat(total) + parseFloat(item.Amount)
+          }
+        })
+        total = parseFloat(total.toFixed(2))
         const gift = {
-          quantity,
-          amount,
-          total,
+          gift: {
+            quantity,
+            amount,
+            total,
+          },
         }
         this.set(gift, { silent: true })
       }
@@ -254,6 +263,18 @@ class ShoppingCart extends Model {
     _.each(attributes, (value, key, list) => {
       console.log(value, key, list)
       total += value.quantity * value.amount
+    })
+    return parseFloat(total.toFixed(2))
+  }
+
+  getTotalTimelinePromomotionAmount(discountRate) {
+    let total = 0
+    const { quantity } = this.get('gift')
+    _.each(discountRate, (value, key, list) => {
+      console.log(value, key, list)
+      if (value.count <= quantity) {
+        total = parseFloat(total) + parseFloat(value.Amount)
+      }
     })
     return parseFloat(total.toFixed(2))
   }

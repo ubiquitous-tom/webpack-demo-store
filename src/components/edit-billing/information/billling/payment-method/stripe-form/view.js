@@ -340,6 +340,7 @@ class StripeForm extends View {
           gaAction = 'Failed'
           gaLabel = result.error
           this.loadingStop()
+          this.parentView.model.trigger('stripeCardTokenIDError', result.error)
         }
         this.triggerGA(gaAction, gaLabel)
       })

@@ -30,7 +30,7 @@ class EditBillingInformationBillingEmail extends View {
     console.log('EditBillingInformationBillingEmail initialize')
     this.cart = this.model.get('cart')
 
-    this.listenToOnce(this.model, 'editBillingValidation:email', (paymentInfo, context) => {
+    this.listenTo(this.model, 'editBillingValidation:email', (paymentInfo, context) => {
       console.log(paymentInfo, context)
       // debugger
       // Customer is not logged in

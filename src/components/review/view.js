@@ -97,6 +97,9 @@ class Review extends View {
         Backbone.history.navigate('thankYou', { trigger: true })
       } else {
         this.popup.modalError(model.get('message'))
+        this.$el
+          .find('.submit-order')
+          .prop('disabled', false)
       }
     })
 
@@ -262,6 +265,22 @@ class Review extends View {
       total += value.quantity * fullAmount
     })
     return parseFloat(total.toFixed(2))
+  }
+
+  // TODO: need a mockup and how to display the Timeline Promotion pricing here
+  timelinePromotionPrice(giftPrice) {
+    const isGiftStore = (this.model.get('storeType') === 'Gift')
+    const isDiscountRate = this.model.has('DiscountRate')
+    if (isGiftStore && isDiscountRate) {
+      const originalPrice = [
+        this.gifting.get('gift').CurrencyDesc,
+        this.gifting.get('gift').CurrSymbol,
+        this.gifting.get('gift').amount,
+      ]
+      return originalPrice
+    }
+
+    return giftPrice
   }
 }
 

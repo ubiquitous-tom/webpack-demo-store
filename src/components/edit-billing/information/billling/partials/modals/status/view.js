@@ -31,6 +31,8 @@ class EditBillingInformationBillingStatusModal extends View {
         this.$el.find('#updateBillingModal').remove()
         this.model.trigger('membership:editBillingSubmitted')
       })
+
+    return this
   }
 }
 

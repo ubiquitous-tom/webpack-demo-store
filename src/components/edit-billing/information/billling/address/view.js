@@ -44,7 +44,7 @@ class EditBillingInformationBillingAddress extends View {
       this.selectDefaultCountry()
     })
 
-    this.listenToOnce(this.model, 'editBillingValidation:address', (paymentInfo, context) => {
+    this.listenTo(this.model, 'editBillingValidation:address', (paymentInfo, context) => {
       console.log(paymentInfo, context)
       // debugger
       if (
