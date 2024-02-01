@@ -6,7 +6,7 @@ import template from './index.hbs'
 
 class StoreHomeGift extends View {
   get el() {
-    return '#landing'
+    return '#content-section'
   }
 
   get temlate() {
@@ -16,21 +16,24 @@ class StoreHomeGift extends View {
   initialize() {
     console.log('StoreHomeGift initialize')
 
-    this.model.set({ GiftDeviceImg })
-
-    // Hide Gifting when in not allowed groupname
-    const isGroupNameAllowedGifting = true // this.model.get('isGroupNameAllowedGifting')
-    if (isGroupNameAllowedGifting) {
-      this.render()
-    }
+    // // Hide Gifting when in not allowed groupname
+    // const isGroupNameAllowedGifting = true // this.model.get('isGroupNameAllowedGifting')
+    // if (isGroupNameAllowedGifting) {
+    //   this.render()
+    // }
   }
 
   render() {
     console.log('StoreHomeGift render')
     console.log(this.model.attributes)
-    const html = this.temlate(this.model.attributes)
+    const attributes = {
+      GiftDeviceImg,
+    }
+    const html = this.temlate(attributes)
     console.log(this.$el, html)
-    this.$el.append(html)
+    this
+      .$('#landing')
+      .append(html)
 
     return this
   }

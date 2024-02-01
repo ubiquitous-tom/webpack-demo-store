@@ -5,7 +5,7 @@ import template from './index.hbs'
 
 class GiveTagline extends View {
   get el() {
-    return '.give.store.container'
+    return '#content-section'
   }
 
   get template() {
@@ -21,8 +21,10 @@ class GiveTagline extends View {
   render() {
     console.log('GiveTagline render')
     console.log(this.model.attributes)
-    const html = this.template(this.model.attributes)
-    this.$el.append(html)
+    const html = this.template()
+    this
+      .$('.give.store.container')
+      .append(html)
 
     return this
   }

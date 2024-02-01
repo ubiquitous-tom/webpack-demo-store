@@ -138,6 +138,7 @@ class Review extends View {
   render() {
     console.log('Review render')
     console.log(this.model.attributes)
+
     const membershipPromo = this.model.has('membershipPromo')
     const attributes = {
       name: this.model.get('Customer').Name,

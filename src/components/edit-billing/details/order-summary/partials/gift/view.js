@@ -5,7 +5,7 @@ import template from './index.hbs'
 
 class EditBillingDetailsOrderSummaryGift extends View {
   get el() {
-    return '#edit-billing-details'
+    return '#content-section'
   }
 
   get template() {
@@ -22,9 +22,9 @@ class EditBillingDetailsOrderSummaryGift extends View {
     console.log('EditBillingDetailsOrderSummaryGift initialize')
     this.cart = this.model.get('cart')
     this.gifting = this.model.get('gifting')
-    if (this.cart.getItemQuantity('gift')) {
-      this.render()
-    }
+    // if (this.cart.getItemQuantity('gift')) {
+    //   this.render()
+    // }
   }
 
   render() {
@@ -44,7 +44,13 @@ class EditBillingDetailsOrderSummaryGift extends View {
       giftItemSummary,
     }
     const html = this.template(attributes)
-    this.$el.find('.order-summary table tbody').append(html)
+    // this
+    //   .$('.order-summary table tbody')
+    //   .append(html)
+    this.setElement('#edit-billing-details')
+    this
+      .$('.order-summary table tbody')
+      .append(html)
 
     return this
   }

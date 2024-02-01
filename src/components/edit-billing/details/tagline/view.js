@@ -6,7 +6,7 @@ import template from './index.hbs'
 
 class EditBillingDetailsTagline extends View {
   get el() {
-    return '#edit-billing-details'
+    return '#content-section'
   }
 
   get template() {
@@ -16,7 +16,7 @@ class EditBillingDetailsTagline extends View {
   initialize() {
     console.log('EditBillingDetailsTagline initialize')
 
-    this.render()
+    // this.render()
   }
 
   render() {
@@ -26,6 +26,10 @@ class EditBillingDetailsTagline extends View {
       SecurePaymentPoseredStripePng,
     }
     const html = this.template(attributes)
+    // this
+    //   .$('#edit-billing-details')
+    //   .append(html)
+    this.setElement('#edit-billing-details')
     this.$el.append(html)
 
     return this

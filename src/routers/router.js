@@ -38,6 +38,13 @@ class Workspace extends Router {
     this.ga = this.context.getContext('ga')
     // Backbone.history.trigger('route', router, name, args);
 
+    this.storeHome = new StoreHome({ model: this.model, i18n: this.i18n })
+    this.applyGiftCode = new ApplyGiftCode({ model: this.model, i18n: this.i18n })
+    this.give = new Give({ model: this.model, i18n: this.i18n })
+    this.editBilling = new EditBilling({ model: this.model, i18n: this.i18n })
+    this.reviewPurchase = new Review({ model: this.model, i18n: this.i18n })
+    this.thankYou = new ThankYou({ model: this.model, i18n: this.i18n })
+
     this.listenTo(this, 'navChange', (model, value) => {
       console.log(model, value)
       debugger
@@ -72,33 +79,38 @@ class Workspace extends Router {
 
   give() {
     console.log('Router loads give')
-    new Give({ model: this.model, i18n: this.i18n })
+    // new Give({ model: this.model, i18n: this.i18n })
+    this.give.render()
   }
 
   applyGiftCode() {
     console.log('Router loads applyGiftCode')
-    new ApplyGiftCode({ model: this.model, i18n: this.i18n })
+    // new ApplyGiftCode({ model: this.model, i18n: this.i18n })
+    this.applyGiftCode.render()
   }
 
-  applyPromoCode() {
-    console.log('Router loads applyPromoCode')
-    // new ApplyPromoCode({ model: this.model, i18n: this.i18n })
-    new Membership({ model: this.model, i18n: this.i18n })
-  }
+  // applyPromoCode() {
+  //   console.log('Router loads applyPromoCode')
+  //   // new ApplyPromoCode({ model: this.model, i18n: this.i18n })
+  //   new Membership({ model: this.model, i18n: this.i18n })
+  // }
 
   editBilling() {
     console.log('Router loads editBilling')
-    new EditBilling({ model: this.model, i18n: this.i18n })
+    // new EditBilling({ model: this.model, i18n: this.i18n })
+    this.editBilling.render()
   }
 
   reviewPurchase() {
     console.log('Router loads review')
-    new Review({ model: this.model, i18n: this.i18n })
+    // new Review({ model: this.model, i18n: this.i18n })
+    this.reviewPurchase.render()
   }
 
   thankYou() {
     console.log('Router loads thankYou')
-    new ThankYou({ model: this.model, i18n: this.i18n })
+    // new ThankYou({ model: this.model, i18n: this.i18n })
+    this.thankYou.render()
   }
 
   refresh() {
@@ -108,7 +120,8 @@ class Workspace extends Router {
 
   home() {
     console.log('Route loads home')
-    new StoreHome({ model: this.model, i18n: this.i18n })
+    // new StoreHome({ model: this.model, i18n: this.i18n })
+    this.storeHome.render()
   }
 
   // setActiveSidebar() {
@@ -121,7 +134,8 @@ class Workspace extends Router {
 
   setDefaultHome() {
     if (_.isEmpty(window.location.hash)) {
-      window.location.hash = '#home'
+      // window.location.hash = '#home'
+      this.navigate('home')
     }
   }
 }

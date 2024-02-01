@@ -5,7 +5,7 @@ import template from './index.hbs'
 
 class StoreCallout extends View {
   get el() {
-    return '#landing'
+    return '#content-section'
   }
 
   get template() {
@@ -15,14 +15,16 @@ class StoreCallout extends View {
   initialize() {
     console.log('StoreCallout initialize')
 
-    this.render()
+    // this.render()
   }
 
   render() {
     console.log('StoreCallout render')
     console.log(this.model.attributes)
-    const html = this.template(this.model.attributes)
-    this.$el.append(html)
+    const html = this.template()
+    this.$el
+      .find('#landing')
+      .append(html)
 
     return this
   }

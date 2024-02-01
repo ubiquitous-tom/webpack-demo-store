@@ -7,7 +7,7 @@ import GiveCheckoutModal from './modal/view'
 
 class GiveCheckout extends View {
   get el() {
-    return '.give.store.container'
+    return '#content-section'
   }
 
   get template() {
@@ -26,7 +26,7 @@ class GiveCheckout extends View {
     this.cart = this.model.get('cart')
     this.modal = new GiveCheckoutModal({ model: this.model, i18n: this.i18n })
 
-    this.render()
+    // this.render()
   }
 
   render() {
@@ -36,24 +36,11 @@ class GiveCheckout extends View {
       discountRate: this.model.has('DiscountRate'),
     }
     const html = this.template(attributes)
-    this.$el.append(html)
+    this
+      .$('.give.store.container')
+      .append(html)
 
     return this
-  }
-
-  specialDiscount() {
-    // // Timeline Promotion.
-    // const specialDiscount = this.model.has('DiscountRate') ? this.model.get('DiscountRate') : {}
-    // if (!_.isEmpty(specialDiscount)) {
-    //   _.each(specialDiscount, (item) => {
-    //     item.defaultCurrency = this.plans.get('defaultCurrency')
-    //     item.defaultCurrencySymbl = this.plans.get('defaultCurrencySymbl')
-    //     item.displayPrice = item.defaultCurrency + item.defaultCurrencySymbl + item.Amount
-    //     return item
-    //   }, this)
-    //   this.model.set('SeasonalPromotion', specialDiscount)
-    // }
-    return this.model.has('DiscountRate')
   }
 
   checkout(e) {

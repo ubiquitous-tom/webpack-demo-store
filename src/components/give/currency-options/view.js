@@ -6,7 +6,7 @@ import template from './index.hbs'
 
 class GiveCurrencyOptions extends View {
   get el() {
-    return '.give.store.container'
+    return '#content-section'
   }
 
   get template() {
@@ -23,21 +23,23 @@ class GiveCurrencyOptions extends View {
     console.log('GiveCurrencyOptions initialize')
     this.gifting = this.model.get('gifting')
 
-    const stripePlans = this.model.get('stripePlans')
-    const currencies = stripePlans
-      .map((obj) => {
-        let currency = null
-        if (obj.Term === 30 && obj.TermType === 'DAY') {
-          currency = obj
-        }
-        return currency
-      })
-      .filter((item) => (item !== null))
-    console.log(currencies)
-    this.currencies = currencies
-    if (_.size(currencies) > 1) {
-      this.render()
-    }
+    // const stripePlans = this.model.get('stripePlans')
+    // const currencies = stripePlans
+    //   .map((obj) => {
+    //     let currency = null
+    //     if (obj.Term === 30 && obj.TermType === 'DAY') {
+    //       currency = obj
+    //     }
+    //     return currency
+    //   })
+    //   .filter((item) => (item !== null))
+    // console.log(currencies)
+    // this.currencies = currencies
+
+    // if (_.size(this.giveCurrencyOptions.get('lcurrencies')) > 1) {
+    //   this.render()
+    // }
+    this.getCurrencies()
   }
 
   render() {
@@ -47,11 +49,13 @@ class GiveCurrencyOptions extends View {
       optionEls: this.currentOptions(),
     }
     const html = this.template(attributes)
-    this.$el.append(html)
+    this
+      .$('.give.store.container')
+      .append(html)
 
     const currencyDesc = this.gifting.get('gift').CurrencyDesc
-    this.$el
-      .find(`#currency-select option[value="${currencyDesc}"]`)
+    this
+      .$(`.give.store.container #currency-select option[value="${currencyDesc}"]`)
       .prop('select', true)
 
     return this
@@ -74,6 +78,21 @@ class GiveCurrencyOptions extends View {
 
   updateCurrency(currency) {
     console.log(currency)
+  }
+
+  getCurrencies() {
+    const stripePlans = this.model.get('stripePlans')
+    const currencies = stripePlans
+      .map((obj) => {
+        let currency = null
+        if (obj.Term === 30 && obj.TermType === 'DAY') {
+          currency = obj
+        }
+        return currency
+      })
+      .filter((item) => (item !== null))
+    console.log(currencies)
+    this.currencies = currencies
   }
 }
 

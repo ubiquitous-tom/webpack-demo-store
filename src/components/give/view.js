@@ -28,9 +28,17 @@ class Give extends View {
       storeType: 'Gift',
     })
 
+    this.giveTagline = new GiveTagline({ model: this.model, i18n: this.i18n })
+    this.giveSignIn = new GiveSignIn({ model: this.model, i18n: this.i18n })
+    this.giveCurrencyOptions = new GiveCurrencyOptions({ model: this.model, i18n: this.i18n })
+    this.giveGiftMembership = new GiveGiftMembership({ model: this.model, i18n: this.i18n })
+    this.giveAnnualMembership = new GiveAnnualMembership({ model: this.model, i18n: this.i18n })
+    this.giveCheckout = new GiveCheckout({ model: this.model, i18n: this.i18n })
+    this.giveLegal = new GiveLegal({ model: this.model, i18n: this.i18n })
+
     this.listenTo(this.model.get('cart'), 'change:annual', this.render)
 
-    this.render()
+    // this.render()
   }
 
   render() {
@@ -41,13 +49,29 @@ class Give extends View {
 
     this.resetMonthlyMembershipQuantity()
 
-    this.giveTagline = new GiveTagline({ model: this.model, i18n: this.i18n })
-    this.giveSignIn = new GiveSignIn({ model: this.model, i18n: this.i18n })
-    this.giveCurrencyOptions = new GiveCurrencyOptions({ model: this.model, i18n: this.i18n })
-    this.giveGiftMembership = new GiveGiftMembership({ model: this.model, i18n: this.i18n })
-    this.giveAnnualMembership = new GiveAnnualMembership({ model: this.model, i18n: this.i18n })
-    this.giveCheckout = new GiveCheckout({ model: this.model, i18n: this.i18n })
-    this.giveLegal = new GiveLegal({ model: this.model, i18n: this.i18n })
+    const isLoggedIn = (this.model.has('Session') && this.model.get('Session').LoggedIn)
+    const isGroupNameAllowedGifting = this.model.get('isGroupNameAllowedGifting')
+
+    // this.giveTagline = new GiveTagline({ model: this.model, i18n: this.i18n })
+    // this.giveSignIn = new GiveSignIn({ model: this.model, i18n: this.i18n })
+    // this.giveCurrencyOptions = new GiveCurrencyOptions({ model: this.model, i18n: this.i18n })
+    // this.giveGiftMembership = new GiveGiftMembership({ model: this.model, i18n: this.i18n })
+    // this.giveAnnualMembership = new GiveAnnualMembership({ model: this.model, i18n: this.i18n })
+    // this.giveCheckout = new GiveCheckout({ model: this.model, i18n: this.i18n })
+    // this.giveLegal = new GiveLegal({ model: this.model, i18n: this.i18n })
+    this.giveTagline.render()
+    if (!isLoggedIn) {
+      this.giveSignIn.render()
+    }
+    if (this.giveCurrencyOptions.currencies.length > 1) {
+      this.giveCurrencyOptions.render()
+    }
+    if (isGroupNameAllowedGifting) {
+      this.giveGiftMembership.render()
+    }
+    this.giveAnnualMembership.render()
+    this.giveCheckout.render()
+    this.giveLegal.render()
 
     this.model.set({
       giveAnnualMembership: this.giveAnnualMembership,

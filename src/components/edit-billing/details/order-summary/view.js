@@ -13,7 +13,7 @@ import EditBillingDetailsOrderSummaryTotal from './partials/total'
 
 class EditBillingDetailsOrderSummary extends View {
   get el() {
-    return '#edit-billing-details'
+    return '#content-section'
   }
 
   get template() {
@@ -36,6 +36,19 @@ class EditBillingDetailsOrderSummary extends View {
 
     this.orderSumamary.set({
       estimatedTaxPrice: this.i18n.t('TAX-APPLICABLE'),
+    })
+
+    this.editBillingDetailsOrderSummaryMonthly = new EditBillingDetailsOrderSummaryMonthly({
+      model: this.model,
+    })
+    this.editBillingDetailsOrderSummaryAnnual = new EditBillingDetailsOrderSummaryAnnual({
+      model: this.model,
+    })
+    this.editBillingDetailsOrderSummaryGift = new EditBillingDetailsOrderSummaryGift({
+      model: this.model,
+    })
+    this.editBillingDetailsOrderSummaryTotal = new EditBillingDetailsOrderSummaryTotal({
+      model: this.model,
     })
 
     // if the customer is logged in
@@ -83,7 +96,7 @@ class EditBillingDetailsOrderSummary extends View {
       // this.$('.order-summary').find('.tax-placeholder').html(translatedText)
     })
 
-    this.render()
+    // this.render()
   }
 
   render() {
@@ -93,20 +106,22 @@ class EditBillingDetailsOrderSummary extends View {
       estimatedTaxPrice: this.orderSumamary.get('estimatedTaxPrice'),
     }
     const html = this.template(attributes)
+    // this
+    //   .$('#edit-billing-details')
+    //   .append(html)
+    this.setElement('#edit-billing-details')
     this.$el.append(html)
 
-    this.editBillingDetailsOrderSummaryMonthly = new EditBillingDetailsOrderSummaryMonthly({
-      model: this.model,
-    })
-    this.editBillingDetailsOrderSummaryAnnual = new EditBillingDetailsOrderSummaryAnnual({
-      model: this.model,
-    })
-    this.editBillingDetailsOrderSummaryGift = new EditBillingDetailsOrderSummaryGift({
-      model: this.model,
-    })
-    this.editBillingDetailsOrderSummaryTotal = new EditBillingDetailsOrderSummaryTotal({
-      model: this.model,
-    })
+    if (this.cart.getItemQuantity('monthly')) {
+      this.editBillingDetailsOrderSummaryMonthly.render()
+    }
+    if (this.cart.getItemQuantity('annual')) {
+      this.editBillingDetailsOrderSummaryAnnual.render()
+    }
+    if (this.cart.getItemQuantity('gift')) {
+      this.editBillingDetailsOrderSummaryGift.render()
+    }
+    this.editBillingDetailsOrderSummaryTotal.render()
 
     return this
   }

@@ -44,7 +44,7 @@ class GiveAnnualMembership extends View {
         annualPlanPrice,
       })
 
-      this.render()
+      // this.render()
     }
   }
 

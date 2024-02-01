@@ -90,12 +90,20 @@ class ApplyGiftCode extends View {
 
   render() {
     console.log('ApplyGiftCode render')
+
+    // if not logged in the send to the user to Signup service `/createaccount.jsp`
+    if (this.model.has('Session') && !this.model.get('Session').LoggedIn) {
+      // debugger
+      window.location.href = `${this.model.get('signupEnv')}/createaccount.jsp`
+      return this
+    }
+
     console.log(this.model.attributes)
     const html = this.template(this.model.attributes)
     this.$el.html(html)
 
-    this.$applyCodeAlert = this.$el.find('#applyCodeAlert')
-    this.$applyCodeModal = this.$el.find('#applyCodeModal')
+    this.$applyCodeAlert = this.$('#applyCodeAlert')
+    this.$applyCodeModal = this.$('#applyCodeModal')
 
     return this
   }

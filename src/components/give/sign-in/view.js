@@ -9,7 +9,7 @@ import GivesignInModal from './partials'
 
 class GiveSignIn extends View {
   get el() {
-    return '.give.store.container'
+    return '#content-section'
   }
 
   get template() {
@@ -41,8 +41,8 @@ class GiveSignIn extends View {
         window.location.reload()
       } else {
         this.removeLoader()
-        this.$el.find('#email').parent('.form-group').addClass('has-error')
-        this.$el.find('#password').parent('.form-group').addClass('has-error')
+        this.$('#email').parent('.form-group').addClass('has-error')
+        this.$('#password').parent('.form-group').addClass('has-error')
 
         this.popup.render()
 
@@ -54,17 +54,22 @@ class GiveSignIn extends View {
       model.unset('signInSuccess', { silent: true })
     })
 
-    const isLoggedIn = (this.model.has('Session') && this.model.get('Session').LoggedIn)
-    if (!isLoggedIn) {
-      this.render()
-    }
+    // const isLoggedIn = (this.model.has('Session') && this.model.get('Session').LoggedIn)
+    // if (!isLoggedIn) {
+    //   this.render()
+    // }
   }
 
   render() {
     console.log('GiveSignIn render')
     console.log(this.model.attributes)
-    const html = this.template(this.model.attributes)
-    this.$el.append(html)
+    const attributes = {
+      signupEnv: this.model.get('signupEnv'),
+    }
+    const html = this.template(attributes)
+    this
+      .$('.give.store.container')
+      .append(html)
 
     this.subscriptionOptIn()
 
@@ -75,7 +80,7 @@ class GiveSignIn extends View {
     const { id, value } = e.target
     console.log('validate', id, value)
     let isValidated = true
-    const el = this.$el.find(`#${id}`)
+    const el = this.$(`#${id}`)
     if (!this.validateEmailFormat(value) && !el[0].checkValidity()) {
       el.parent('.form-group').removeClass('has-success').addClass('has-error')
       isValidated = false
@@ -90,7 +95,7 @@ class GiveSignIn extends View {
     const { id, value } = e.target
     console.log('validate', id, value)
     let isValidated = true
-    const el = this.$el.find(`#${id}`)
+    const el = this.$(`#${id}`)
     if (_.isEmpty(value) && !el[0].checkValidity()) {
       el.parent('.form-group').removeClass('has-success').addClass('has-error')
       isValidated = false
@@ -110,7 +115,7 @@ class GiveSignIn extends View {
 
   subscriptionOptIn() {
     if (this.model.get('cart')?.get('annual')?.quantity > 0) {
-      this.$el.find('#becomeMember').prop('checked', true)
+      this.$('#becomeMember').prop('checked', true)
     }
   }
 
@@ -143,7 +148,7 @@ class GiveSignIn extends View {
 
   removeAnnualMembership() {
     console.log('GiveTaGiveSignInline removeMember')
-    this.$el.find('#membershipItem').slideUp(500, () => {
+    this.$('#membershipItem').slideUp(500, () => {
       const quantity = 0
       const amount = (this.model.has('membershipPromo'))
         ? this.model.get('cart')?.get('annual')?.amount
@@ -164,11 +169,11 @@ class GiveSignIn extends View {
   signIn(e) {
     console.log('GiveSignIn signIn')
     e.preventDefault()
-    this.$el.find('#email').focus().blur()
-    this.$el.find('#password').focus().blur()
+    this.$('#email').focus().blur()
+    this.$('#password').focus().blur()
     const data = {
-      email: this.$el.find('#email').val(),
-      password: this.$el.find('#password').val(),
+      email: this.$('#email').val(),
+      password: this.$('#password').val(),
     }
 
     this.$el

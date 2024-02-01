@@ -24,21 +24,30 @@ class ThankYou extends View {
     this.context = new BackBoneContext()
     this.ga = this.context.getContext('ga')
 
+    // if (!this.model.has('orderId')) {
+    //   if (this.model.get('storeType') === 'Membership') {
+    //     Backbone.history.navigate('membership', { trigger: true })
+    //   } else {
+    //     Backbone.history.navigate('give', { trigger: true })
+    //   }
+    //   return false
+    // }
+
+    // this.render()
+  }
+
+  render() {
+    console.log('ThankYou render')
+    console.log(this.model.attributes)
+
     if (!this.model.has('orderId')) {
       if (this.model.get('storeType') === 'Membership') {
         Backbone.history.navigate('membership', { trigger: true })
       } else {
         Backbone.history.navigate('give', { trigger: true })
       }
-      return
+      return this
     }
-
-    this.render()
-  }
-
-  render() {
-    console.log('ThankYou render')
-    console.log(this.model.attributes)
 
     let giftStore = false
     let membershipStore = false

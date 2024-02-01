@@ -5,7 +5,7 @@ import template from './index.hbs'
 
 class StoreHomeContent extends View {
   get el() {
-    return '#landing'
+    return '#content-section'
   }
 
   get temlate() {
@@ -15,15 +15,20 @@ class StoreHomeContent extends View {
   initialize() {
     console.log('StoreHomeContent initialize')
 
-    this.render()
+    // this.render()
   }
 
   render() {
     console.log('StoreHomeContent render')
     console.log(this.model.attributes)
-    const html = this.temlate(this.model.attributes)
+    const attributes = {
+      signupEnv: this.model.get('signuEnv'),
+    }
+    const html = this.temlate(attributes)
     console.log(this.$el, html)
-    this.$el.append(html)
+    this
+      .$('#landing')
+      .append(html)
 
     return this
   }

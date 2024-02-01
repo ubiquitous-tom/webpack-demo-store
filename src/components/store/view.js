@@ -28,26 +28,38 @@ class StoreHome extends View {
     console.log('StoreHome initialize')
     console.log(this.model.attributes)
     this.i18n = options.i18n
+
+    // Initialize late in order for all the element to be added to the main dom
+    this.storeHomeHero = new StoreHomeHero({ model: this.model, i18n: this.i18n })
+    // this.storeHomeCalloout = new StoreHomeCallout({ model: this.model, i18n: this.i18n })
+    this.storeHomeContent = new StoreHomeContent({ model: this.model, i18n: this.i18n })
+    this.storeHomeGift = new StoreHomeGift({ model: this.model, i18n: this.i18n })
+
     // this.model = new StoreHomeModel(this.model.attributes)
     // console.log(this.model)
-    // this.render()
+
     // this.listenTo(this.model, 'sync error', this.render)
     // this.listenTo(this.model, 'change', this.render)
-    this.render()
+
+    // this.render()
   }
 
   render() {
     console.log('StoreHome render')
     console.log(this.model.attributes)
-    const html = this.template(this.model.attributes)
+    const html = this.template()
     console.log(this.$el, html)
     this.$el.html(html)
 
-    // Initialize late in order for all the element to be added to the main dom
-    this.storeHomeHero = new StoreHomeHero({ model: this.model, i18n: this.i18n })
-    // this.storeHomeCalloout = new StoreHomeCallout({ model: this.model, i18n: this.i18n })
-    this.storeHomeCotent = new StoreHomeContent({ model: this.model, i18n: this.i18n })
-    this.storeHomeGift = new StoreHomeGift({ model: this.model, i18n: this.i18n })
+    this.storeHomeHero.render()
+    // this.storeHomeCallout.render()
+    this.storeHomeContent.render()
+
+    // Hide Gifting when in not allowed groupname
+    const isGroupNameAllowedGifting = this.model.get('isGroupNameAllowedGifting')
+    if (isGroupNameAllowedGifting) {
+      this.storeHomeGift.render()
+    }
 
     return this
   }
