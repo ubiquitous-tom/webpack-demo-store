@@ -64,16 +64,6 @@ class MembershipSignIn extends View {
     //   && this.model.get('Membership').Store === 'RECORDEDBOOKS'
     // )
 
-    // const isGroupNameAllowedGifting = true // this.model.get('isGroupNameAllowedGifting')
-
-    // this.model.set({
-    //   isMembershipActive: this.isMembershipActive(),
-    //   yourMembershipType: this.yourMembershipType(),
-    //   upgradeToAnnual: this.upgradeToAnnual(),
-    //   renewMembership: this.renewMembership(),
-    //   isGroupNameAllowedGifting,
-    // })
-
     // if (!isLoggedIn) {
     //   this.render()
     // }

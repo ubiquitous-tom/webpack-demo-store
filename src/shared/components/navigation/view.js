@@ -28,13 +28,15 @@ class Navigation extends View {
     this.router = new Router()
     // this.model = new NavigationModel()
 
-    const isWebPaymentEdit = this.model.has('Customer') && this.model.get('Customer').webPaymentEdit
-    const isTigo = this.model.has('Membership') && this.model.get('Membership').Store === 'Tigo'
-    this.model.set({
-      navigation: {
-        emailSection: isWebPaymentEdit || isTigo,
-      },
-    })
+    // const isWebPaymentEdit = (
+    //   this.model.has('Customer') && this.model.get('Customer').webPaymentEdit
+    // )
+    // const isTigo = this.model.has('Membership') && this.model.get('Membership').Store === 'Tigo'
+    // this.model.set({
+    //   navigation: {
+    //     emailSection: isWebPaymentEdit || isTigo,
+    //   },
+    // })
 
     // this.listenTo(this.model, 'change', this.setActive)
     this.render()
@@ -44,7 +46,7 @@ class Navigation extends View {
     console.log('Navigation render')
     // const template = Handlebars.compile(this.template())
 
-    const html = this.template(this.model.attributes)
+    const html = this.template()
     this.$el.html(html)
 
     return this

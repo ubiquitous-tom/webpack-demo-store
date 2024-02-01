@@ -1,4 +1,4 @@
-import { View } from 'backbone'
+import Backbone, { View } from 'backbone'
 
 import './stylesheet.scss'
 import template from './index.hbs'
@@ -23,6 +23,13 @@ class Give extends View {
   initialize(options) {
     console.log('Give initialize')
     this.i18n = options.i18n
+
+    // HACK: to redirect `give` page to home for groupname not in allowed gifting
+    if (!this.model.get('isAllowedGifting')) {
+      // debugger
+      Backbone.history.navigate('home', { trigger: true })
+      return
+    }
 
     this.model.set({
       storeType: 'Gift',

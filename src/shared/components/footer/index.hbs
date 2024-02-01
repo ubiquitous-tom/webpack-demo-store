@@ -32,6 +32,8 @@
     </ul>
   </div>
 
+  {{!-- Hide language dropdown when in Great Britain --}}
+  {{#unless isGroupNameUK}}
   <div class="lang-select">
     <label class="atv-locale" for="atvLocale">{{t 'Language' }}:</label>
     <select name="atv_locale" id="atvLocale">
@@ -40,4 +42,5 @@
       {{/each}}
     </select>
   </div>
+  {{/unless}}
 </div>

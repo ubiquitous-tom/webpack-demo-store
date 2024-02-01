@@ -51,7 +51,6 @@ class MembershipApplyPromoCode extends View {
       console.log(this.model.attributes)
     })
 
-    // const isGroupNameAllowedGifting = true // this.model.get('isGroupNameAllowedGifting')
     const membershipActive = (this.model.get('Membership').Status.toUpperCase() === 'ACTIVE')
     if (!membershipActive) {
       this.render()

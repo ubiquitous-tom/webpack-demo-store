@@ -9,17 +9,15 @@ class StoreHomeGift extends View {
     return '#landing'
   }
 
-  get temlate() {
+  get template() {
     return template
   }
 
   initialize() {
     console.log('StoreHomeGift initialize')
 
-    this.model.set({ GiftDeviceImg })
-
     // Hide Gifting when in not allowed groupname
-    const isGroupNameAllowedGifting = true // this.model.get('isGroupNameAllowedGifting')
+    const isGroupNameAllowedGifting = this.model.get('isGroupNameAllowedGifting')
     if (isGroupNameAllowedGifting) {
       this.render()
     }
@@ -28,7 +26,10 @@ class StoreHomeGift extends View {
   render() {
     console.log('StoreHomeGift render')
     console.log(this.model.attributes)
-    const html = this.temlate(this.model.attributes)
+    const attributes = {
+      GiftDeviceImg,
+    }
+    const html = this.template(attributes)
     console.log(this.$el, html)
     this.$el.append(html)
 

@@ -32,7 +32,7 @@ class MembershipGiftOptions extends View {
     //   && this.model.get('Membership').Store === 'RECORDEDBOOKS'
     // )
 
-    const isGroupNameAllowedGifting = true // this.model.get('isGroupNameAllowedGifting')
+    const isGroupNameAllowedGifting = this.model.get('isGroupNameAllowedGifting')
     // const membershipActive = this.model.get('Membership').Status.toUpperCase() === 'ACTIVE'
     if (isGroupNameAllowedGifting) {
       const giftAmount = this.gifting.get('amount')

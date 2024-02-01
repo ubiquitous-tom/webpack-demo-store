@@ -60,7 +60,7 @@ class MembershipSignedIn extends View {
         isWebPaymentEdit: this.model.get('Customer').webPaymentEdit,
         upgradeToAnnual: this.upgradeToAnnual(),
         renewMembership: this.renewMembership(),
-        isGroupNameAllowedGifting: true, // this.model.get('isGroupNameAllowedGifting'),
+        isGroupNameAllowedGifting: this.model.get('isGroupNameAllowedGifting'),
       }
     } else {
       attributes = {

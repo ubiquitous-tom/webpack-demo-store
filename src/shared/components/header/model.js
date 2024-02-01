@@ -126,22 +126,29 @@ class HeaderModel extends Model {
       env = process.env.ENVIRONMENT
     }
     // console.log(env)
+    if (this.get('isUK')) {
+      env = `uk.${env}`
+    }
+    if (this.get('isAU')) {
+      env = `au.${env}`
+    }
+    // console.log(env)
     return env
   }
 
-  getStorageContent() {
-    console.log('HeaderModel getStorageContent')
-    const id = this.localStorage._getItem(this.get('localStorageID'))
-    // console.log(id)
-    const name = this.localStorage._itemName(id)
-    // console.log(name)
-    const item = this.localStorage._getItem(name)
-    // console.log(item)
-    const storage = this.localStorage.serializer.deserialize(item)
-    // console.log(storage)
+  // getStorageContent() {
+  //   console.log('HeaderModel getStorageContent')
+  //   const id = this.localStorage._getItem(this.get('localStorageID'))
+  //   // console.log(id)
+  //   const name = this.localStorage._itemName(id)
+  //   // console.log(name)
+  //   const item = this.localStorage._getItem(name)
+  //   // console.log(item)
+  //   const storage = this.localStorage.serializer.deserialize(item)
+  //   // console.log(storage)
 
-    return storage
-  }
+  //   return storage
+  // }
 }
 
 export default HeaderModel

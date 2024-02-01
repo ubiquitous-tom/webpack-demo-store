@@ -39,7 +39,7 @@ class StoreHome extends View {
   render() {
     console.log('StoreHome render')
     console.log(this.model.attributes)
-    const html = this.template(this.model.attributes)
+    const html = this.template()
     console.log(this.$el, html)
     this.$el.html(html)
 

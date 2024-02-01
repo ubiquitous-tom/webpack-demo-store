@@ -145,6 +145,13 @@ class FooterModel extends ATVModel {
       env = process.env.ENVIRONMENT
     }
     // console.log(env)
+    if (this.get('isUK')) {
+      env = `uk.${env}`
+    }
+    if (this.get('isAU')) {
+      env = `au.${env}`
+    }
+    // console.log(env)
     return env
   }
 }

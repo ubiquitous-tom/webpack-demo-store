@@ -21,7 +21,7 @@ class StoreHomeHero extends View {
     this.model.set({ isRecordedBook })
 
     // Hide Gifting when not in allowed groupname
-    const isGroupNameAllowedGifting = true // this.model.get('isGroupNameAllowedGifting')
+    const isGroupNameAllowedGifting = this.model.get('isGroupNameAllowedGifting')
     let landingHeroClasses = 'col-sm-6 col-md-4 col-lg-4'
     if (!isGroupNameAllowedGifting) {
       landingHeroClasses = 'col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2'

@@ -29,13 +29,18 @@ class Footer extends View {
     console.log('Footer initialize')
     // this.context = new BackBoneContext()
     this.i18n = options.i18n
-    this.model = new FooterModel(this.model.attributes)
+    this.localeModel = options.localeModel
+    const attributes = {
+      isUK: this.model.get('isUK'),
+      isAU: this.model.get('isAU'),
+    }
+    this.footerModel = new FooterModel(attributes)
 
     // Initialize footer popup
     Fancybox.bind('[data-fancybox]')
 
     // render for sync
-    this.listenTo(this.model, 'change:footerNavSuccess', this.render)
+    this.listenTo(this.footerModel, 'change:footerNavSuccess', this.render)
 
     // render for localStorage
     // console.log('context', this.context)
@@ -46,8 +51,16 @@ class Footer extends View {
   render() {
     console.log('Footer render')
     this.isSelected()
-    console.log(this.model.attributes)
-    const html = this.template(this.model.attributes)
+    console.log(this.model.attributes, this.footerModel.attributes)
+
+    const attributes = {
+      currentYear: this.footerModel.get('currentYear'),
+      currentLanguage: this.footerModel.get('currentLanguage'),
+      navData: this.footerModel.has('navData') ? this.footerModel.get('navData') : null,
+      isGroupNameUK: this.model.get('isGroupNameUK'),
+      languages: this.localeModel.get('languages'),
+    }
+    const html = this.template(attributes)
     // console.log(html)
     this.$el.html(html)
 

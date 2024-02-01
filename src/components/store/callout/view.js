@@ -21,7 +21,7 @@ class StoreCallout extends View {
   render() {
     console.log('StoreCallout render')
     console.log(this.model.attributes)
-    const html = this.template(this.model.attributes)
+    const html = this.template()
     this.$el.append(html)
 
     return this

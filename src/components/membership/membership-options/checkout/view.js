@@ -47,9 +47,6 @@ class MembershipCheckout extends View {
       this.navigateTo()
     })
 
-    // const isGroupNameAllowedGifting = true // this.model.get('isGroupNameAllowedGifting')
-    // const membershipActive = this.model.get('Membership').Status.toUpperCase() === 'ACTIVE'
-
     this.render()
   }
 

@@ -30,7 +30,12 @@ class Header extends View {
     // this.model = new HeaderModel()
     // this.router = new Router()
     this.i18n = options.i18n
-    this.headerModel = new HeaderModel()
+    const attributes = {
+      environment: this.model.get('environment'),
+      isUK: this.model.get('isUK'),
+      isAU: this.model.get('isAU'),
+    }
+    this.headerModel = new HeaderModel(attributes)
     // this.model.set('atvlogo', atvlogo)
     // this.render()
     this.listenTo(this.headerModel, 'change:headerNavSuccess', (model, value) => {
