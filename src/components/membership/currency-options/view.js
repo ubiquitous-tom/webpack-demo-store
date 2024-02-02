@@ -6,7 +6,7 @@ import template from './index.hbs'
 
 class MembershipCurrencyOptions extends View {
   get el() {
-    return '.give.store.container'
+    return '.membership.store.container'
   }
 
   get template() {

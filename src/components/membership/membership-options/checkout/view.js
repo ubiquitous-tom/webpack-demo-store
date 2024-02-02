@@ -5,7 +5,7 @@ import template from './index.hbs'
 
 class MembershipCheckout extends View {
   get el() {
-    return '#membership-options'
+    return '.checkout'
   }
 
   get template() {
@@ -14,32 +14,18 @@ class MembershipCheckout extends View {
 
   get events() {
     return {
-      'click .checkout a': 'checkout',
+      'click a': 'checkout',
     }
   }
 
   initialize() {
     console.log('MembershipCheckout initialize')
 
-    this.listenTo(this.model, 'change:checkoutSuccess', (model, value) => {
-      console.log(model, value)
-      debugger
-      if (value) {
-        // giveObj.set("AllowedToCheckout", true);
-      } else {
-        // this.$el.find('.form-group').addClass('has-error');
-        // this.$signInAlert.slideUp();
-
-        // this.$signInStatus.html(response.responseJSON.error);
-        // this.$signInModal.modal();
-        // giveObj.set("AllowedToCheckout", false);
-      }
+    this.listenTo(this.model, 'membership:undelegateEvents', () => {
+      console.log('MembershipCheckout garbageCollect')
+      this.remove()
+      // debugger
     })
-    // const isLoggedIn = this.model.get('Session').LoggedIn
-    // const isRecordedBook = (
-    //   this.model.has('Membership')
-    //   && this.model.get('Membership').Store === 'RECORDEDBOOKS'
-    // )
 
     this.listenTo(this.model, 'membership:signedInCheckout', (value) => {
       console.log('membership:signedInCheckout', value)
@@ -62,7 +48,7 @@ class MembershipCheckout extends View {
   checkout(e) {
     console.log('MembershipCheckout checkout')
     e.preventDefault()
-    // Router.trigget('isCartEmpty')
+
     this.navigateTo()
   }
 
@@ -73,18 +59,13 @@ class MembershipCheckout extends View {
       if (isStripeEnabled) {
         Backbone.history.navigate('reviewPurchase', { trigger: true })
       } else {
-        // Backbone.history.trigger('navChange', 'editBilling')
         Backbone.history.navigate('editBilling', { trigger: true })
       }
+      this.model.trigger('membership:undelegateEvents')
+      // debugger
     } else {
       this.model.trigger('membership:checkout')
     }
-    // if (stripeCustomer && sessionLoggedIn) {
-    //   Backbone.trigger('navChange', 'reviewPurchase');
-    // } else {
-    //   Backbone.trigger('navChange', 'editBilling');
-    //   this.model.set('Customer', customer);
-    // }
   }
 }
 

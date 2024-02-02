@@ -1,5 +1,6 @@
 import { View } from 'backbone'
 
+import './stylesheet.scss'
 import template from './index.hbs'
 
 import MembershipGiveDetails from './give-details'
@@ -47,6 +48,12 @@ class Membership extends View {
     //   // })
     // })
 
+    this.listenTo(this.model, 'Membership:undelegateEvents', () => {
+      console.log('Membership garbageCollect')
+      this.remove()
+      // debugger
+    })
+
     this.model.set({
       storeType: 'Membership',
     })
@@ -59,6 +66,8 @@ class Membership extends View {
     console.log(this.model.attributes)
     const html = this.template(this.model.attributes)
     this.$el.html(html)
+
+    this.setElement('.membership.store.container')
 
     const isLoggedIn = (this.model.has('Session') && this.model.get('Session').LoggedIn)
     // const isMembershipActive = (

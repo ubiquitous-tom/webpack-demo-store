@@ -5,7 +5,7 @@ import template from './modal.hbs'
 
 class MembershipSignUpModal extends View {
   get el() {
-    return '.give.store.container'
+    return '.membership.store.container'
   }
 
   get template() {

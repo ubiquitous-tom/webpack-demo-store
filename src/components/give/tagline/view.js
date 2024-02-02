@@ -5,7 +5,7 @@ import template from './index.hbs'
 
 class GiveTagline extends View {
   get el() {
-    return '.give.store.container'
+    return '#give-details-section'
   }
 
   get template() {
@@ -14,6 +14,12 @@ class GiveTagline extends View {
 
   initialize() {
     console.log('GiveTagline initialize')
+
+    this.listenTo(this.model, 'give:undelegateEvents', () => {
+      console.log('GiveTagline garbageCollect')
+      this.remove()
+      // debugger
+    })
 
     this.render()
   }

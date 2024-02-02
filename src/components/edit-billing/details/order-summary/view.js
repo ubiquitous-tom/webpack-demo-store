@@ -1,4 +1,4 @@
-import { Model, View } from 'backbone'
+import Backbone, { Model, View } from 'backbone'
 import _ from 'underscore'
 
 import PaymentEstimation from 'core/models/payment-estimation'
@@ -54,6 +54,12 @@ class EditBillingDetailsOrderSummary extends View {
         this.paymentEstimation.getPaymentEstimation(data)
       }
     }
+
+    this.listenTo(this.model, 'editBilling:undelegateEvents', () => {
+      console.log('EditBillingDetailsOrderSummary garbageCollect')
+      this.remove()
+      // debugger
+    })
 
     // this.listenTo(this.model, 'change:editBillingForm', (model, value) => {
     //   const data = {
@@ -119,6 +125,7 @@ class EditBillingDetailsOrderSummary extends View {
       } else {
         Backbone.history.navigate('membership', { trigger: true })
       }
+      this.model.trigger('editBilling:undelegateEvents')
     }
   }
 }

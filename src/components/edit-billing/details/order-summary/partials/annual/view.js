@@ -12,12 +12,6 @@ class EditBillingDetailsOrderSummaryAnnual extends View {
     return template
   }
 
-  get events() {
-    return {
-      'submit .form-trial-signup': 'submit',
-    }
-  }
-
   initialize() {
     console.log('EditBillingDetailsOrderSummaryAnnual initialize')
     this.cart = this.model.get('cart')
@@ -54,16 +48,20 @@ class EditBillingDetailsOrderSummaryAnnual extends View {
 
   applyPromoPrice(originalPrice) {
     if (this.model.has('membershipPromo')) {
-      const oldPrice = [
-        this.gifting.get('gift').CurrSymbol,
-        this.model.get('annualStripePlan').SubscriptionAmount,
-      ].join('')
-      const newPrice = [
-        this.gifting.get('gift').CurrencyDesc,
-        this.gifting.get('gift').CurrSymbol,
-        Intl.NumberFormat(`${this.model.get('stripePlansLang')}-IN`, { maximumFractionDigits: 2, minimumFractionDigits: 2, trailingZeroDisplay: 'stripIfInteger' }).format(this.cart.getItemAmount('annual')),
-      ].join('')
-      return `<span>${newPrice}<del> <span class="old-pricing">${oldPrice}</span></del></span>`
+      const ogPrice = this.model.get('annualStripePlan').SubscriptionAmount
+      const nowPrice = this.cart.getItemAmount('annual')
+      if (ogPrice !== nowPrice) {
+        const oldPrice = [
+          this.gifting.get('gift').CurrSymbol,
+          ogPrice,
+        ].join('')
+        const newPrice = [
+          this.gifting.get('gift').CurrencyDesc,
+          this.gifting.get('gift').CurrSymbol,
+          Intl.NumberFormat(`${this.model.get('stripePlansLang')}-IN`, { maximumFractionDigits: 2, minimumFractionDigits: 2, trailingZeroDisplay: 'stripIfInteger' }).format(nowPrice),
+        ].join('')
+        return `<span>${newPrice}<del> <span class="old-pricing">${oldPrice}</span></del></span>`
+      }
     }
 
     return originalPrice

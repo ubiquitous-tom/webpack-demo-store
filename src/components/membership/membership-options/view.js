@@ -11,7 +11,7 @@ import MembershipCheckout from './checkout'
 
 class MembershipOptions extends View {
   get el() {
-    return '.give.store.container'
+    return '#membership-options'
   }
 
   get template() {
@@ -31,6 +31,12 @@ class MembershipOptions extends View {
     //   this.model.has('Membership') && this.model.get('Membership').Status === 'ACTIVE'
     // )
 
+    this.listenTo(this.model, 'membership:undelegateEvents', () => {
+      console.log('MembershipOptions garbageCollect')
+      this.remove()
+      // debugger
+    })
+
     // if (isLoggedIn && !isMembershipActive) {
     this.render()
     // }
@@ -39,14 +45,15 @@ class MembershipOptions extends View {
   render() {
     console.log('MembershipOptions render')
     console.log(this.model.attributes)
-    const html = this.template(this.model.attributes)
-    this.$el.append(html)
+    // const html = this.template(this.model.attributes)
+    // this.$el.append(html)
 
     if (!this.model.has('Membership') || this.model.get('Membership').Status !== 'ACTIVE') {
       this.membershipApplyGiftCode = new MembershipApplyGiftCode({
         model: this.model,
         i18n: this.i18n,
       })
+
       this.membershipApplyPromoCode = new MembershipApplyPromoCode({
         model: this.model,
         i18n: this.i18n,

@@ -6,7 +6,7 @@ import template from './index.hbs'
 
 class EditBillingInformationBillingEmail extends View {
   get el() {
-    return 'form.form-trial-signup #billingEmailContainer'
+    return '#billingEmailContainer'
   }
 
   get template() {
@@ -29,6 +29,12 @@ class EditBillingInformationBillingEmail extends View {
   initialize() {
     console.log('EditBillingInformationBillingEmail initialize')
     this.cart = this.model.get('cart')
+
+    this.listenTo(this.model, 'editBilling:undelegateEvents', () => {
+      console.log('EditBillingInformationBillingEmail garbageCollect')
+      this.remove()
+      // debugger
+    })
 
     this.listenTo(this.model, 'editBillingValidation:email', (paymentInfo, context) => {
       console.log(paymentInfo, context)
@@ -89,7 +95,7 @@ class EditBillingInformationBillingEmail extends View {
       this.model.trigger('editBillingValidation:paymentMethod', paymentInfoNew, context)
     })
 
-    const isLoggedIn = this.model.has('Subscription')
+    const isLoggedIn = (this.model.has('Session') && this.model.get('Session').LoggedIn)
     if (!isLoggedIn) {
       this.email = ''
       if (this.model.has('Customer')) {

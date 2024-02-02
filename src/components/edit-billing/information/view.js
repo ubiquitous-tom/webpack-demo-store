@@ -8,7 +8,7 @@ import EditBillingInformationFaq from './faq'
 
 class EditBillingInformation extends View {
   get el() {
-    return '.billing.store.container'
+    return 'h3.formhead'
   }
 
   get template() {
@@ -18,6 +18,12 @@ class EditBillingInformation extends View {
   initialize(options) {
     console.log('EditBillingInformation initialize')
     this.i18n = options.i18n
+
+    this.listenTo(this.model, 'editBilling:undelegateEvents', () => {
+      console.log('EditBillingInformation garbageCollect')
+      this.remove()
+      // debugger
+    })
 
     this.render()
   }

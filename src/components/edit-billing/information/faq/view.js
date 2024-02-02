@@ -5,7 +5,7 @@ import template from './index.hbs'
 
 class EditBillingInformationFaq extends View {
   get el() {
-    return '#edit-billing-information'
+    return '#billingFAQ'
   }
 
   get template() {

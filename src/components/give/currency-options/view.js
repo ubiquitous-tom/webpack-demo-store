@@ -47,7 +47,7 @@ class GiveCurrencyOptions extends View {
       optionEls: this.currentOptions(),
     }
     const html = this.template(attributes)
-    this.$el.append(html)
+    this.$('#give-subscribe-sign-in-section').after(html)
 
     const currencyDesc = this.gifting.get('gift').CurrencyDesc
     this.$el

@@ -8,7 +8,7 @@ import MembershipApplyPromoCodeModel from './model'
 
 class MembershipApplyPromoCode extends View {
   get el() {
-    return '#membership-options'
+    return '#membership-info-promo'
   }
 
   get template() {
@@ -29,6 +29,12 @@ class MembershipApplyPromoCode extends View {
     this.gifting = this.model.get('gifting')
     this.membershipApplyPromoCodeModel = new MembershipApplyPromoCodeModel()
 
+    this.listenTo(this.model, 'membership:undelegateEvents', () => {
+      console.log('MembershipApplyPromoCode garbageCollect')
+      this.remove()
+      // debugger
+    })
+
     /* eslint no-shadow: 0 */
     this.listenTo(this.membershipApplyPromoCodeModel, 'change:promoCodeSuccess', (model, value) => {
       console.log(model, value)
@@ -36,18 +42,18 @@ class MembershipApplyPromoCode extends View {
       // debugger
       model.unset('promoCodeSuccess', { silent: true })
       // this.loadingStop()
+      let { message } = model.get('flashMessage')
+      let type = false
       if (value) {
-        let { message } = model.get('flashMessage')
-        let type = true
+        type = true
         const membershipPromo = this.membershipApplyPromoCodeModel.get('promo')
         if (!_.isEmpty(membershipPromo.SourceCodeMapping)) {
           this.model.set({ membershipPromo }, { context: this })
         } else {
           message = this.i18n.t('PROMOCODE-NOT-FOUND')
-          type = false
         }
-        this.updatePromoMessage(message, type)
       }
+      this.updatePromoMessage(message, type)
       console.log(this.model.attributes)
     })
 

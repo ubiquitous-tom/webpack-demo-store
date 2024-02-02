@@ -5,7 +5,7 @@ import template from './index.hbs'
 
 class MembershipLegal extends View {
   get el() {
-    return '.give.store.container'
+    return '.legal'
   }
 
   get template() {

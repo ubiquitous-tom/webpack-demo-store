@@ -1,60 +1,60 @@
-<div class="order-item" id="membershipItem">
+{{! <div class="order-item" id="membershipItem"> }}
 
-  <div class="col-md-8">
-    <h3 class="item-name">{{t "ACORNTV-MEMBERSHIP"}}</h3>
-    <p>{{t "UNLIMITED-ACCESS"}}</p>
-  </div>
+<div class="col-md-8">
+  <h3 class="item-name">{{t "ACORNTV-MEMBERSHIP"}}</h3>
+  <p>{{t "UNLIMITED-ACCESS"}}</p>
+</div>
 
-  <div class="col-md-4">
+<div class="col-md-4">
 
-    <section
-      class="plan monthly"
-      data-price="{{monthlyAmount}}"
-      data-plan-id="{{monthlyPlanID}}"
-    >
-      <input
-        id="becomeMonthlyMember"
-        name="membership"
-        type="radio"
-        value="monthly"
-      />
-      <label for="becomeMonthlyMember" class="text-right">
-        <div class="h4">
-          <strong>{{t "MONTHLY"}}</strong>
-          <span class="plans-price">
-            {{{monthlyPlanPrice}}}
-          </span>
-        </div>
-        <p class="text-right">
-          {{t "AUTOMATIC-MONTHLY-BILLING"}}
-        </p>
-      </label>
-    </section>
+  <section
+    class="plan monthly"
+    data-price="{{monthlyAmount}}"
+    data-plan-id="{{monthlyPlanID}}"
+  >
+    <input
+      id="becomeMonthlyMember"
+      name="membership"
+      type="radio"
+      value="monthly"
+    />
+    <label for="becomeMonthlyMember" class="text-right">
+      <div class="h4">
+        <strong>{{t "MONTHLY"}}</strong>
+        <span class="plans-price">
+          {{{monthlyPlanPrice}}}
+        </span>
+      </div>
+      <p class="text-right">
+        {{t "AUTOMATIC-MONTHLY-BILLING"}}
+      </p>
+    </label>
+  </section>
 
-    <section
-      class="plan yearly"
-      data-price="{{annualAmount}}"
-      data-plan-id="{{annualPlanID}}"
-    >
-      <input
-        id="becomeAnnualRenewingMember"
-        name="membership"
-        type="radio"
-        value="annual"
-      />
-      <label for="becomeAnnualRenewingMember" class="text-right">
-        <div class="h4">
-          <strong>{{t "ANNUAL"}}</strong>
-          <span class="plan-price">
-            {{{annualPlanPrice}}}
-          </span>
-        </div>
-        <p class="text-right">
-          {{t "ANNUAL-PRICE-DEAL"}}
-        </p>
-      </label>
-    </section>
-
-  </div>
+  <section
+    class="plan yearly"
+    data-price="{{annualAmount}}"
+    data-plan-id="{{annualPlanID}}"
+  >
+    <input
+      id="becomeAnnualRenewingMember"
+      name="membership"
+      type="radio"
+      value="annual"
+    />
+    <label for="becomeAnnualRenewingMember" class="text-right">
+      <div class="h4">
+        <strong>{{t "ANNUAL"}}</strong>
+        <span class="plan-price">
+          {{{annualPlanPrice}}}
+        </span>
+      </div>
+      <p class="text-right">
+        {{t "ANNUAL-PRICE-DEAL"}}
+      </p>
+    </label>
+  </section>
 
 </div>
+
+{{! </div> }}

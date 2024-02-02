@@ -28,6 +28,7 @@ class Give extends View {
     if (!this.model.get('isAllowedGifting')) {
       // debugger
       Backbone.history.navigate('home', { trigger: true })
+      this.model.trigger('give:undelegateEvents')
       return
     }
 
@@ -35,7 +36,13 @@ class Give extends View {
       storeType: 'Gift',
     })
 
-    this.listenTo(this.model.get('cart'), 'change:annual', this.render)
+    // this.listenTo(this.model.get('cart'), 'change:annual', this.render)
+
+    this.listenTo(this.model, 'give:undelegateEvents', () => {
+      console.log('Give garbageCollect')
+      this.remove()
+      // debugger
+    })
 
     this.render()
   }
@@ -45,6 +52,8 @@ class Give extends View {
     console.log(this.model.attributes)
     const html = this.template(this.model.attributes)
     this.$el.html(html)
+
+    this.setElement('.give.store.container')
 
     this.resetMonthlyMembershipQuantity()
 

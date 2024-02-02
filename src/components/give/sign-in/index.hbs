@@ -1,75 +1,75 @@
-<div class="row">
+{{! <div class="row"> }}
 
-  <article class="col-md-7">
+<article class="col-md-7">
 
-    <section class="memberOptIn">
-      <h4>{{t "SUBSCRIBE-TO-ACORNTV"}}</h4>
-      <span>{{t "EASY-TO-SUBSCRIBE"}}</span>
+  <section class="memberOptIn">
+    <h4>{{t "SUBSCRIBE-TO-ACORNTV"}}</h4>
+    <span>{{t "EASY-TO-SUBSCRIBE"}}</span>
 
-      <label for="becomeMember" class="control-label">
-        <input id="becomeMember" name="becomeMember" type="checkbox" />
-        {{t "LIKE-TO-SUBSCRIBE"}}
-      </label>
+    <label for="becomeMember" class="control-label">
+      <input id="becomeMember" name="becomeMember" type="checkbox" />
+      {{t "LIKE-TO-SUBSCRIBE"}}
+    </label>
 
-      <p>{{t "NON-MEMBER-ORDER"}}</p>
-    </section>
+    <p>{{t "NON-MEMBER-ORDER"}}</p>
+  </section>
 
-  </article>
+</article>
 
-  <div class="col-md-5">
+<div class="col-md-5">
 
-    <aside class="sign-in">
+  <aside class="sign-in">
 
-      <form>
+    <form>
 
-        <h4>{{t "MEMBER-SIGNIN"}}</h4>
+      <h4>{{t "MEMBER-SIGNIN"}}</h4>
 
-        <div class="form-group">
-          <label for="email" class="control-label">
-            {{t "EMAIL-ADDRESS"}}
-            <small>{{t "REQUIRED"}}</small>
-          </label>
-          <input
-            class="form-control"
-            id="email"
-            name="email"
-            type="email"
-            pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
-            required
-          />
-        </div>
+      <div class="form-group">
+        <label for="email" class="control-label">
+          {{t "EMAIL-ADDRESS"}}
+          <small>{{t "REQUIRED"}}</small>
+        </label>
+        <input
+          class="form-control"
+          id="email"
+          name="email"
+          type="email"
+          pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+          required
+        />
+      </div>
 
-        <div class="form-group">
-          <label for="password" class="control-label">
-            {{t "PASSWORD"}}
-            <small>{{t "REQUIRED"}}</small>
-          </label>
-          <input
-            class="form-control"
-            id="password"
-            name="password"
-            type="password"
-            minlength="6"
-            required
-          />
-        </div>
+      <div class="form-group">
+        <label for="password" class="control-label">
+          {{t "PASSWORD"}}
+          <small>{{t "REQUIRED"}}</small>
+        </label>
+        <input
+          class="form-control"
+          id="password"
+          name="password"
+          type="password"
+          minlength="6"
+          required
+        />
+      </div>
 
-        <button type="submit" class="btn btn-success">
-          {{t "SIGN-IN"}}
-        </button>
+      <button type="submit" class="btn btn-success">
+        {{t "SIGN-IN"}}
+      </button>
 
-        <div>
-          <a href="{{signupEnv}}/forgotpassword.jsp" target="_blank">
-            {{t "FORGOT-PASSWORD"}}
-          </a>
-        </div>
+      <div>
+        <a href="{{signupEnv}}/forgotpassword.jsp" target="_blank">
+          {{t "FORGOT-PASSWORD"}}
+        </a>
+      </div>
 
-      </form>
+    </form>
 
-    </aside>
+  </aside>
 
-  </div>
 </div>
+{{! </div> }}
 
 {{! <div id="signInAlert" class="alert" style="display: none"></div> }}
 

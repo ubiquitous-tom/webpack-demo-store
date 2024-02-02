@@ -12,12 +12,6 @@ class EditBillingDetailsOrderSummaryGift extends View {
     return template
   }
 
-  get events() {
-    return {
-      'submit .form-trial-signup': 'submit',
-    }
-  }
-
   initialize() {
     console.log('EditBillingDetailsOrderSummaryGift initialize')
     this.cart = this.model.get('cart')

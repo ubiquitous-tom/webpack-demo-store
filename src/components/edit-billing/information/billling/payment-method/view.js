@@ -8,7 +8,7 @@ import StripeForm from './stripe-form'
 
 class EditBillingInformationBillingPaymentMethod extends View {
   get el() {
-    return 'form.form-trial-signup #paymentMethodContainer'
+    return '#paymentMethodContainer'
   }
 
   get template() {
@@ -27,6 +27,12 @@ class EditBillingInformationBillingPaymentMethod extends View {
 
     this.stripeForm = new StripeForm({ parentView: this, i18n: this.i18n })
     this.tempPaymentInfo = {}
+
+    this.listenTo(this.model, 'editBilling:undelegateEvents', () => {
+      console.log('EditBillingInformationBillingPaymentMethod garbageCollect')
+      this.remove()
+      // debugger
+    })
 
     this.listenTo(this.model, 'editBillingValidation:paymentMethod', (paymentInfo, context) => {
       console.log(paymentInfo, context)

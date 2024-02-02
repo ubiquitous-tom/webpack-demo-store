@@ -136,8 +136,8 @@ class ShoppingCart extends Model {
   applyPromoPricing(value, options) {
     console.log('ShoppingCart applyPromoPricing')
     console.log(value, options)
-    const { context } = options
-    // debugger
+    // const { context } = options
+    debugger
     let type = 'monthly'
     const {
       // PromotionCode,
@@ -159,12 +159,12 @@ class ShoppingCart extends Model {
       }
     }
 
-    if (context.cart.has(type)) {
+    if (this.has(type)) {
       const {
         quantity,
         amount,
         // total,
-      } = context.cart.get(type)
+      } = this.get(type)
 
       const discountedAmount = amount - (amount * (StripePercentOff / 100))
       const discountedTotal = quantity * discountedAmount
@@ -175,7 +175,7 @@ class ShoppingCart extends Model {
         amount: parseFloat(discountedAmount.toFixed(2)),
         total: parseFloat(discountedTotal.toFixed(2)),
       }
-      context.cart.set(discountedMembership)
+      this.set(discountedMembership)
     }
   }
 
@@ -184,13 +184,13 @@ class ShoppingCart extends Model {
     console.log(value, options)
     const { context } = options
     // debugger
-    if (context.cart.has('monthly')) {
-      const { quantity } = context.cart.get('monthly')
+    if (this.has('monthly')) {
+      const { quantity } = this.get('monthly')
       if (quantity) {
         const amount = context.model.get('monthlyStripePlan').SubscriptionAmount
         const total = parseFloat((quantity * amount).toFixed(2))
         // debugger
-        context.cart.set({
+        this.set({
           monthly: {
             quantity,
             amount,
@@ -200,13 +200,13 @@ class ShoppingCart extends Model {
       }
     }
     // debugger
-    if (context.cart.has('annual')) {
-      const { quantity } = context.cart.get('annual')
+    if (this.has('annual')) {
+      const { quantity } = this.get('annual')
       if (quantity) {
         const amount = context.model.get('annualStripePlan').SubscriptionAmount
         const total = parseFloat((quantity * amount).toFixed(2))
         // debugger
-        context.cart.set({
+        this.set({
           monthly: {
             quantity,
             amount,

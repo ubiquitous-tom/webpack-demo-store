@@ -6,7 +6,7 @@ import template from './index.hbs'
 
 class MembershipGiftOptions extends View {
   get el() {
-    return '#membership-options'
+    return '.gift-item'
   }
 
   get template() {
@@ -26,14 +26,14 @@ class MembershipGiftOptions extends View {
     this.cart = this.model.get('cart')
 
     this.giftOptionsModel = new Model()
-    // const isLoggedIn = this.model.get('Session').LoggedIn
-    // const isRecordedBook = (
-    //   this.model.has('Membership')
-    //   && this.model.get('Membership').Store === 'RECORDEDBOOKS'
-    // )
+
+    this.listenTo(this.model, 'membership:undelegateEvents', () => {
+      console.log('MembershipGiftOptions garbageCollect')
+      this.remove()
+      // debugger
+    })
 
     const isGroupNameAllowedGifting = this.model.get('isGroupNameAllowedGifting')
-    // const membershipActive = this.model.get('Membership').Status.toUpperCase() === 'ACTIVE'
     if (isGroupNameAllowedGifting) {
       const giftAmount = this.gifting.get('amount')
       const giftPrice = [

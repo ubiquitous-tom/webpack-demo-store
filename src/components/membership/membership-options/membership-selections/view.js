@@ -5,7 +5,7 @@ import template from './index.hbs'
 
 class MembershipSelections extends View {
   get el() {
-    return '#membership-options'
+    return '#membershipItem'
   }
 
   get template() {
@@ -27,6 +27,12 @@ class MembershipSelections extends View {
     //   this.model.has('Membership')
     //   && this.model.get('Membership').Store === 'RECORDEDBOOKS'
     // )
+
+    this.listenTo(this.model, 'membership:undelegateEvents', () => {
+      console.log('MembershipSelections garbageCollect')
+      this.remove()
+      // debugger
+    })
 
     this.listenTo(this.model, 'change:membershipPromo', (model, value, options) => {
       console.log(model, value, options)
@@ -103,7 +109,7 @@ class MembershipSelections extends View {
       }
     }
 
-    this.$el.find(`#membershipItem input[type="radio"][value="${this.membershipType}"]`).prop('checked', true)
+    this.$(`input[type="radio"][value="${this.membershipType}"]`).prop('checked', true)
 
     this.updateCart()
   }
@@ -114,7 +120,7 @@ class MembershipSelections extends View {
     console.log(e.target.value)
     this.membershipType = e.target.value
     // debugger
-    this.$el.find(`#membershipItem input[type="radio"][value="${this.membershipType}"]`).prop('checked', true)
+    this.$(`input[type="radio"][value="${this.membershipType}"]`).prop('checked', true)
 
     this.updateCart()
   }
@@ -167,7 +173,7 @@ class MembershipSelections extends View {
 
   updateMonthlyPricing(total) {
     if (this.model.has('membershipPromo')) {
-      if (total > 0) {
+      if (total > 0 && (total !== this.model.get('monthlyStripePlan').SubscriptionAmount)) {
         // const subscriptionAmount = this.plans.getMonthly().price
         // const discountedPrice = subscriptionAmount - ((value * subscriptionAmount) / 100)
         // const promoAppliedAmount = (Math.floor(discountedPrice * 100) / 100).toFixed(2)
@@ -195,7 +201,7 @@ class MembershipSelections extends View {
 
   updateAnnualPricing(total) {
     if (this.model.has('membershipPromo')) {
-      if (total > 0) {
+      if (total > 0 && (total !== this.model.get('annualStripePlan').SubscriptionAmount)) {
         // const subscriptionAmount = this.plans.getMonthly().price
         // const discountedPrice = subscriptionAmount - ((value * subscriptionAmount) / 100)
         // const promoAppliedAmount = (Math.floor(discountedPrice * 100) / 100).toFixed(2)
@@ -223,16 +229,20 @@ class MembershipSelections extends View {
 
   applyPromoPrice(originalPrice, type) {
     if (this.model.has('membershipPromo')) {
-      const oldPrice = [
-        this.gifting.get('gift').CurrSymbol,
-        this.model.get(`${type}StripePlan`).SubscriptionAmount,
-      ].join('')
-      const newPrice = [
-        this.gifting.get('gift').CurrencyDesc,
-        this.gifting.get('gift').CurrSymbol,
-        this.cart.getItemAmount(type),
-      ].join('')
-      return `<span>${newPrice}<del> <span class="old-pricing">${oldPrice}</span></del></span>`
+      const ogPrice = this.model.get(`${type}StripePlan`).SubscriptionAmount
+      const nowPrice = this.cart.getItemAmount(type)
+      if (ogPrice !== nowPrice) {
+        const oldPrice = [
+          this.gifting.get('gift').CurrSymbol,
+          this.model.get(`${type}StripePlan`).SubscriptionAmount,
+        ].join('')
+        const newPrice = [
+          this.gifting.get('gift').CurrencyDesc,
+          this.gifting.get('gift').CurrSymbol,
+          this.cart.getItemAmount(type),
+        ].join('')
+        return `<span>${newPrice}<del> <span class="old-pricing">${oldPrice}</span></del></span>`
+      }
     }
 
     return originalPrice
@@ -240,8 +250,7 @@ class MembershipSelections extends View {
 
   resetMonthlyPricing() {
     console.log('MembershipGiftOptions resetMonthlyPricing')
-    const container = this.$el.find('#membershipItem')
-    const monthlyPlanContainer = container.find('.plan.monthly')
+    const monthlyPlanContainer = this.$('.plan.monthly')
     const monthlyAmount = [
       this.model.get('monthlyStripePlan').CurrencyDesc,
       this.model.get('monthlyStripePlan').CurrSymbol,
@@ -255,8 +264,7 @@ class MembershipSelections extends View {
 
   resetAnnualPricing() {
     console.log('MembershipGiftOptions resetAnnualPricing')
-    const container = this.$el.find('#membershipItem')
-    const annualPlanContainer = container.find('.plan.yearly')
+    const annualPlanContainer = this.$('.plan.yearly')
     const annualAmount = [
       this.model.get('annualStripePlan').CurrencyDesc,
       this.model.get('annualStripePlan').CurrSymbol,

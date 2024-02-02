@@ -48,6 +48,7 @@ class Review extends View {
       } else {
         Backbone.history.navigate('membership', { trigger: true })
       }
+      this.model.trigger('reviewPurchase:undelegateEvents')
       return
     }
 
@@ -58,6 +59,7 @@ class Review extends View {
       } else {
         Backbone.history.navigate('membership', { trigger: true })
       }
+      this.model.trigger('reviewPurchase:undelegateEvents')
       return
     }
     // debugger
@@ -78,6 +80,12 @@ class Review extends View {
     // debugger
     this.paymentEstimation.getPaymentEstimation(attributes)
 
+    this.listenTo(this.model, 'reviewPurchase:undelegateEvents', () => {
+      console.log('Review garbageCollect')
+      this.remove()
+      // debugger
+    })
+
     this.listenTo(this.model, 'review:clearPurchase', () => {
       console.log('Review review:clearPurchase')
       if (this.model.get('storeType') === 'Gift') {
@@ -85,6 +93,7 @@ class Review extends View {
       } else {
         Backbone.history.navigate('membership', { trigger: true })
       }
+      this.model.trigger('reviewPurchase:undelegateEvents')
     })
 
     this.listenTo(this.reviewModel, 'change:purchaseSuccess', (model, value) => {
@@ -95,10 +104,11 @@ class Review extends View {
           orderId: model.get('OrderID'),
         })
         Backbone.history.navigate('thankYou', { trigger: true })
+        this.model.trigger('reviewPurchase:undelegateEvents')
       } else {
         this.popup.modalError(model.get('message'))
-        this.$el
-          .find('.submit-order')
+        this
+          .$('.submit-order')
           .prop('disabled', false)
       }
     })
@@ -117,22 +127,19 @@ class Review extends View {
           ].join('')
           // translatedText = this.i18n.t('TAX-ESTIMATED-TAXES-POLYGLOT', { var1: estimatedTax })
           estimatedTaxPrice = this.i18n.t('TAX-ESTIMATED-TAXES-HANDLEBARS', { estimatedTax })
-          // this.$el
-          //   .find('.tax-placeholder')
+          // this
+          //   .$('.tax-placeholder')
           //   .html(estimatedTaxPrice)
         }
-      } else {
-        // this.$el
-        //   .find('.tax-placeholder')
-        //   .html(estimatedTaxPrice)
-      }
-      // this.$('.order-summary').find('.tax-placeholder').html(translatedText)
-      this.model.set({
-        estimatedTaxPrice,
-      })
+        this.model.set({
+          estimatedTaxPrice,
+        })
 
-      this.render()
+        this.render()
+      }
     })
+
+    this.render()
   }
 
   render() {
@@ -168,11 +175,12 @@ class Review extends View {
         this.gifting.get('gift').CurrSymbol,
         this.cart.getTotalAmount(),
       ].join('')),
-      estimatedTaxPrice: this.model.get('estimatedTaxPrice'),
+      estimatedTaxPrice: this.i18n.t('TAX-APPLICABLE'), // this.model.get('estimatedTaxPrice'),
     }
     const html = this.template(attributes)
     this.$el.html(html)
 
+    this.setElement('.review.store.container')
     // this.popup.render()
 
     return this
@@ -182,6 +190,7 @@ class Review extends View {
     console.log('Review editBilling')
     e.preventDefault()
     Backbone.history.navigate('editBilling', { trigger: true })
+    this.model.trigger('reviewPurchase:undelegateEvents')
   }
 
   // editQuantity(e) {
@@ -194,8 +203,8 @@ class Review extends View {
     console.log('Review submitPurchase')
     e.preventDefault()
 
-    this.$el
-      .find('.submit-order')
+    this
+      .$('.submit-order')
       .prop('disabled', true)
 
     this.reviewModel.submit(this.model)

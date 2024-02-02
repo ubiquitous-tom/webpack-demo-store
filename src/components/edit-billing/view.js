@@ -18,6 +18,12 @@ class EditBilling extends View {
     console.log('EditBilling initialize')
     this.i18n = options.i18n
 
+    this.listenTo(this.model, 'editBilling:undelegateEvents', () => {
+      console.log('EditBilling garbageCollect')
+      this.remove()
+      // debugger
+    })
+
     this.render()
   }
 
@@ -26,6 +32,8 @@ class EditBilling extends View {
     console.log(this.model.attributes)
     const html = this.template(this.model.attributes)
     this.$el.html(html)
+
+    this.setElement('.billing.store.container')
 
     this.editBillingDetails = new EditBillingDetails({
       model: this.model,

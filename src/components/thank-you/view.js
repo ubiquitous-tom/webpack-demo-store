@@ -24,12 +24,19 @@ class ThankYou extends View {
     this.context = new BackBoneContext()
     this.ga = this.context.getContext('ga')
 
+    this.listenTo(this.model, 'thankYou:undelegateEvents', () => {
+      console.log('ThankYou garbageCollect')
+      this.remove()
+      // debugger
+    })
+
     if (!this.model.has('orderId')) {
       if (this.model.get('storeType') === 'Membership') {
         Backbone.history.navigate('membership', { trigger: true })
       } else {
         Backbone.history.navigate('give', { trigger: true })
       }
+      this.model.trigger('thankYou:undelegateEvents')
       return
     }
 

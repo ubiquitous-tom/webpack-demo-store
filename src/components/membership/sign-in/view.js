@@ -9,7 +9,7 @@ import MembershipSignInModal from './partials'
 
 class MembershipSignIn extends View {
   get el() {
-    return '.give.store.container'
+    return '.membership.store.container'
   }
 
   get template() {

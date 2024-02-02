@@ -33,6 +33,12 @@ class EditBillingInformationBillingAddress extends View {
     this.i18n = options.i18n
     this.editBillingInformationBillingAddressModel = new EditBillingInformationBillingAddressModel()
 
+    this.listenTo(this.model, 'editBilling:undelegateEvents', () => {
+      console.log('EditBillingInformationBillingAddress garbageCollect')
+      this.remove()
+      // debugger
+    })
+
     this.listenTo(this.editBillingInformationBillingAddressModel, 'change:countries', (model, value) => {
       console.log(model, value)
       // debugger

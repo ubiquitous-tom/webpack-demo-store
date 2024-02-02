@@ -13,12 +13,6 @@ class EditBillingDetailsOrderSummaryTotal extends View {
     return template
   }
 
-  get events() {
-    return {
-      'submit .form-trial-signup': 'submit',
-    }
-  }
-
   initialize() {
     console.log('EditBillingDetailsOrderSummaryTotal initialize')
     this.cart = this.model.get('cart')

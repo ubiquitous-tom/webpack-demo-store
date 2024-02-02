@@ -48,14 +48,22 @@ class EditBillingInformationBilling extends View {
     // this will prevent using same `Stripe token` issue
     this.model.unset('paymentInfo')
 
+    this.listenTo(this.model, 'editBilling:undelegateEvents', () => {
+      console.log('EditBillingInformationBilling garbageCollect')
+      this.remove()
+      // debugger
+    })
+
     this.listenTo(this.model, 'membership:editBillingSubmitted', () => {
       // debugger
       Backbone.history.navigate('reviewPurchase', { trigger: true })
+      this.model.trigger('editBilling:undelegateEvents')
     })
 
     this.listenTo(this.model, 'membership:editBillingSignIn', () => {
-      debugger
+      // debugger
       Backbone.history.navigate('give', { trigger: true })
+      this.model.trigger('editBilling:undelegateEvents')
     })
 
     this.listenTo(this.model, 'editBillingValidation:stripeCardToken', (paymentInfo, context) => {
@@ -205,6 +213,7 @@ class EditBillingInformationBilling extends View {
       } else {
         Backbone.history.navigate('membership', { trigger: true })
       }
+      this.model.trigger('editBilling:undelegateEvents')
     } else {
       this.render()
     }
@@ -213,8 +222,8 @@ class EditBillingInformationBilling extends View {
   render() {
     console.log('EditBillingInformationBilling render')
     console.log(this.model.attributes)
-    const html = this.template(this.model.attributes)
-    this.$el.html(html)
+    // const html = this.template(this.model.attributes)
+    // this.$el.html(html)
 
     // this.editBillingAppliedCode = new EditBillingInformationBillingAppliedCode({
     //   model: this.model,

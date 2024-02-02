@@ -1,1 +1,38 @@
-<div class="billing store container"></div>
+<div class="billing store container">
+  <div id="edit-billing-details" class="row"></div>
+  <h3 class="formhead"></h3>
+  <div id="edit-billing-information" class="row">
+    <div class="col-md-8">
+      <div class="form-wrap">
+        <div id="signin-form-insert">
+        </div>
+        <form class="form-trial-signup form-processing">
+          <div id="appliedCodeContainer"></div>
+          <div id="billingAddressContainer"></div>
+          <div id="billingEmailContainer"></div>
+          <div id="paymentMethodContainer"></div>
+          <div class="control-group">
+            <div class="controls">
+              <button
+                id="savePayment"
+                class="btn btn-large btn-primary text-right"
+                disabled
+              >
+                {{t "CONTINUE-TO-REVIEW"}}
+                <i class="icon-circle-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <p class="legal" style="margin-top: 4em">
+          {{t "MEMBERSHIP-EFFECT"}}
+        </p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div id="billingFAQ">
+      </div>
+    </div>
+  </div>
+</div>

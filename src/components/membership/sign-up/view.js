@@ -9,7 +9,7 @@ import MembershipSignUpModel from './model'
 
 class MembershipSignUp extends View {
   get el() {
-    return '.give.store.container'
+    return '#signUpForm'
   }
 
   get template() {
@@ -46,6 +46,7 @@ class MembershipSignUp extends View {
 
         if (stripeEnabled && isLoggedIn) {
           Backbone.history.navigate('reviewPurchase', { trigger: true })
+          this.model.trigger('membership:undelegateEvents')
         } else {
           // const customer = {
           //   Customer: {
@@ -57,6 +58,7 @@ class MembershipSignUp extends View {
           // this.model.set(customer)
           if (this.model.has('Customer') && !_.isEmpty(this.model.get('Customer').Email)) {
             Backbone.history.navigate('editBilling', { trigger: true })
+            this.model.trigger('membership:undelegateEvents')
           }
           // this.popup.displayLoader()
           // this.popup.render()

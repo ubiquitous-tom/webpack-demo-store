@@ -8,7 +8,7 @@ import MembershipNotActiveTemplate from './templates/membership-not-active.hbs'
 
 class MembershipSignedIn extends View {
   get el() {
-    return '.give.store.container'
+    return '.membership.store.container'
   }
 
   get template() {
@@ -42,6 +42,12 @@ class MembershipSignedIn extends View {
     //   && this.model.get('Membership').Store === 'RECORDEDBOOKS'
     // )
 
+    this.listenTo(this.model, 'membership:undelegateEvents', () => {
+      console.log('MembershipSignedIn garbageCollect')
+      this.remove()
+      // debugger
+    })
+
     // if (isMembershipActive && !isRecordedBook) {
 
     this.render()
@@ -70,7 +76,7 @@ class MembershipSignedIn extends View {
       }
     }
     const html = this.template(attributes)
-    this.$el.append(html)
+    this.$('.sign-in').replaceWith(html)
 
     return this
   }
@@ -104,9 +110,9 @@ class MembershipSignedIn extends View {
       if (isStripeEnabled) {
         Backbone.history.navigate('reviewPurchase', { trigger: true })
       } else {
-        // Backbone.history.trigger('navChange', 'editBilling')
         Backbone.history.navigate('editBilling', { trigger: true })
       }
+      this.model.trigger('membership:undelegateEvents')
     } else {
       this.model.trigger('membership:checkout')
     }
@@ -116,6 +122,7 @@ class MembershipSignedIn extends View {
     e.preventDefault()
     this.cart.emptyCart()
     Backbone.history.navigate('give', { trigger: true })
+    this.model.trigger('membership:undelegateEvents')
   }
 
   yourMembershipType() {

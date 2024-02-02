@@ -5,7 +5,7 @@ import template from './index.hbs'
 
 class MembershipApplyGiftCode extends View {
   get el() {
-    return '#membership-options'
+    return '#membership-info-gift'
   }
 
   get template() {
@@ -21,6 +21,11 @@ class MembershipApplyGiftCode extends View {
   initialize() {
     console.log('MembershipApplyGiftCode initialize')
 
+    this.listenTo(this.model, 'membership:undelegateEvents', () => {
+      console.log('MembershipApplyGiftCode garbageCollect')
+      this.remove()
+      // debugger
+    })
     // this.listenTo(this.model, 'change:signInSuccess', (model, value, options) => {
     //   console.log(model, value, options)
     //   debugger
@@ -63,6 +68,7 @@ class MembershipApplyGiftCode extends View {
     if (isLoggedIn) {
       // window.location.hash = '#applyGiftCode'
       Backbone.history.navigate('applyGiftCode', { trigger: true })
+      this.model.trigger('give:undelegateEvents')
     } else {
       window.location.href = `${this.model.get('signupEnv')}/createaccount.jsp`
     }

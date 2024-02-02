@@ -1,43 +1,38 @@
-<div class="row" id="membershipItem" style="display: none;">
-  <div
-    class="order-item yearly-plan slim"
-    data-price="{{annualAmount}}"
-    data-plan-id="{{annualPlanID}}"
-  >
+{{! <div class="row" id="membershipItem" style="display: none;"> }}
+<div
+  class="order-item yearly-plan slim"
+  data-price="{{annualAmount}}"
+  data-plan-id="{{annualPlanID}}"
+>
 
-    <div class="col-md-3">
-      <img
-        src="{{membershipUserImg}}"
-        alt="gift-box"
-        width="185"
-        height="204"
-      />
+  <div class="col-md-3">
+    <img src="{{membershipUserImg}}" alt="gift-box" width="185" height="204" />
+  </div>
+
+  <div class="col-md-7">
+    <h3 class="item-name">{{t "ANNUAL-MEMBERSHIP"}}</h3>
+  </div>
+
+  <div class="col-md-2 text-right">
+    <div>
+      {{annualPlanPrice}}
     </div>
 
-    <div class="col-md-7">
-      <h3 class="item-name">{{t "ANNUAL-MEMBERSHIP"}}</h3>
-    </div>
+    <div class="form-group">
+      <label class="control-label">
+        <strong>Qty: 1</strong>
+      </label>
 
-    <div class="col-md-2 text-right">
-      <div>
-        {{annualPlanPrice}}
+      <div class="controls">
+        <p class="remove">
+          x
+          <a href="#">
+            {{t "REMOVE-THIS-ITEM"}}
+          </a>
+        </p>
       </div>
-
-      <div class="form-group">
-        <label class="control-label">
-          <strong>Qty: 1</strong>
-        </label>
-
-        <div class="controls">
-          <p class="remove">
-            x
-            <a href="#">
-              {{t "REMOVE-THIS-ITEM"}}
-            </a>
-          </p>
-        </div>
-      </div>
-
     </div>
+
   </div>
 </div>
+{{! </div> }}

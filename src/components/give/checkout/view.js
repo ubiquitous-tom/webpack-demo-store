@@ -7,7 +7,7 @@ import GiveCheckoutModal from './modal/view'
 
 class GiveCheckout extends View {
   get el() {
-    return '.give.store.container'
+    return '#checkout-section'
   }
 
   get template() {
@@ -16,7 +16,7 @@ class GiveCheckout extends View {
 
   get events() {
     return {
-      'click .checkout a': 'checkout',
+      'click a': 'checkout',
     }
   }
 
@@ -25,6 +25,12 @@ class GiveCheckout extends View {
     this.i18n = options.i18n
     this.cart = this.model.get('cart')
     this.modal = new GiveCheckoutModal({ model: this.model, i18n: this.i18n })
+
+    this.listenTo(this.model, 'give:undelegateEvents', () => {
+      console.log('GiveCheckout garbageCollect')
+      this.remove()
+      // debugger
+    })
 
     this.render()
   }
@@ -64,6 +70,7 @@ class GiveCheckout extends View {
     // debugger
     if (this.cart.getItemQuantity('gift')) {
       Backbone.history.navigate('editBilling', { trigger: true })
+      this.model.trigger('give:undelegateEvents')
     } else {
       // Error popup here with Gift quantity of at least 1 requirement
       this.modal.render()

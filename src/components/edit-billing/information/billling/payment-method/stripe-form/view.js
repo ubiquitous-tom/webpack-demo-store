@@ -1,4 +1,4 @@
-import Backbone, { View } from 'backbone'
+import { View } from 'backbone'
 import _ from 'underscore'
 
 import CSRFAuthorization from 'core/models/csrf-authorization'
@@ -14,7 +14,7 @@ import StripeFormModel from './model'
 
 class StripeForm extends View {
   get el() {
-    return 'form.form-trial-signup #paymentMethod'
+    return '#paymentMethod'
   }
 
   get template() {
@@ -45,6 +45,12 @@ class StripeForm extends View {
     //   stripeCustomerId: this.parentView.model.get('Customer').StripeCustomerID,
     //   customerId: this.parentView.model.get('Customer').CustomerID,
     // })
+
+    this.listenTo(this.parentView.model, 'editBilling:undelegateEvents', () => {
+      console.log('StripeForm garbageCollect')
+      this.remove()
+      // debugger
+    })
 
     // this.listenTo(this.csrfAuthorization.model, 'change:setCSRFAuthorizationSuccess', (model, value, options) => {
     //   console.log(model, value, options)
@@ -147,6 +153,7 @@ class StripeForm extends View {
         // this.$el.find('#stripe-form').empty()
         // this.parentView.render()
         Backbone.history.navigate('reviewPurchase', { trigger: true })
+        this.parentView.model.trigger('editBilling:undelegateEvents')
       }
       //  else {
       //   this.resetStripeForm()

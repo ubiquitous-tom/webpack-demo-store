@@ -80,11 +80,11 @@ class Workspace extends Router {
     new ApplyGiftCode({ model: this.model, i18n: this.i18n })
   }
 
-  applyPromoCode() {
-    console.log('Router loads applyPromoCode')
-    // new ApplyPromoCode({ model: this.model, i18n: this.i18n })
-    new Membership({ model: this.model, i18n: this.i18n })
-  }
+  // applyPromoCode() {
+  //   console.log('Router loads applyPromoCode')
+  //   // new ApplyPromoCode({ model: this.model, i18n: this.i18n })
+  //   new Membership({ model: this.model, i18n: this.i18n })
+  // }
 
   editBilling() {
     console.log('Router loads editBilling')
@@ -121,7 +121,8 @@ class Workspace extends Router {
 
   setDefaultHome() {
     if (_.isEmpty(window.location.hash)) {
-      window.location.hash = '#home'
+      // window.location.hash = '#home'
+      this.navigate('home')
     }
   }
 }

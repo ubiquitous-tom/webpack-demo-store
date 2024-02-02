@@ -8,7 +8,7 @@ import EditBillingDetailsOrderSummary from './order-summary/view'
 
 class EditBillingDetails extends View {
   get el() {
-    return '.billing.store.container'
+    return '#edit-billing-details'
   }
 
   get template() {
@@ -19,14 +19,20 @@ class EditBillingDetails extends View {
     console.log('EditBillingDetails initialize')
     this.i18n = options.i18n
 
+    this.listenTo(this.model, 'editBilling:undelegateEvents', () => {
+      console.log('EditBilling garbageCollect')
+      this.remove()
+      // debugger
+    })
+
     this.render()
   }
 
   render() {
     console.log('EditBillingDetails render')
     console.log(this.model.attributes)
-    const html = this.template(this.model.attributes)
-    this.$el.append(html)
+    // const html = this.template(this.model.attributes)
+    // this.$el.append(html)
 
     this.editBillingDetailsTagline = new EditBillingDetailsTagline({
       model: this.model,

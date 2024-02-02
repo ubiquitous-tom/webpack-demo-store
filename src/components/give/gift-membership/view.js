@@ -7,7 +7,7 @@ import template from './index.hbs'
 
 class GiveGiftMembership extends View {
   get el() {
-    return '.give.store.container'
+    return '#gift-item-section'
   }
 
   get template() {
@@ -32,6 +32,12 @@ class GiveGiftMembership extends View {
     //   this.model.has('Membership')
     //   && this.model.get('Membership').Store === 'RECORDEDBOOKS'
     // )
+
+    this.listenTo(this.model, 'give:undelegateEvents', () => {
+      console.log('GiveGiftMembership garbageCollect')
+      this.remove()
+      // debugger
+    })
 
     const isGroupNameAllowedGifting = this.model.get('isGroupNameAllowedGifting')
     // const membershipActive = this.model.get('Membership').Status.toUpperCase() === 'ACTIVE'
@@ -100,7 +106,7 @@ class GiveGiftMembership extends View {
   selectDefaultGiftQuantity() {
     if (this.cart.has('gift')) {
       const { quantity } = this.cart.get('gift')
-      this.$el.find(`#qty option[value="${quantity}"]`).prop('selected', true)
+      this.$(`#qty option[value="${quantity}"]`).prop('selected', true)
     }
   }
 
@@ -121,19 +127,19 @@ class GiveGiftMembership extends View {
         // console.log(div[0])
       })
       console.log(div)
-      this.$el.find('#special-discount').append(div)
+      this.$('#special-discount').append(div)
     }
   }
 
   renderTimelinePromotionAccent() {
     // Timeline Promotion styling.
     if (this.model.has('DiscountRate')) {
-      this.$el.find('.order-item.gift-item .item-price').remove()
+      this.$('.order-item.gift-item .item-price').remove()
       if (this.$('.currency').length) {
         this.$('.currency').hide()
       }
 
-      _.each(this.$el.find('.order-item.gift-item .special-discount-listing li'), (li, index) => {
+      _.each(this.$('.order-item.gift-item .special-discount-listing li'), (li, index) => {
         if (index > 0) {
           let text = $(li).html()
           const reg1 = /\(/gi
@@ -165,7 +171,7 @@ class GiveGiftMembership extends View {
     const html = (quantity > 0)
       ? `${this.i18n.t('TOTAL')} <span>${total}</span>`
       : this.i18n.t('NO-GIFT-SELECTED')
-    this.$el.find('#quantityTotal strong').html(html)
+    this.$('#quantityTotal strong').html(html)
 
     this.updateCart(e)
   }
