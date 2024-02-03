@@ -6,7 +6,7 @@ import template from './index.hbs'
 
 class MembershipGiftOptions extends View {
   get el() {
-    return '.gift-item'
+    return '#membership-options'
   }
 
   get template() {
@@ -62,6 +62,8 @@ class MembershipGiftOptions extends View {
 
     this.selectDefaultGiftQuantity()
 
+    this.setElement('.gift-item')
+
     return this
   }
 
@@ -89,7 +91,7 @@ class MembershipGiftOptions extends View {
   selectDefaultGiftQuantity() {
     if (this.cart.has('gift')) {
       const { quantity } = this.cart.get('gift')
-      this.$el.find(`#qty option[value="${quantity}"]`).prop('selected', true)
+      this.$(`#qty option[value="${quantity}"]`).prop('selected', true)
     }
   }
 
@@ -113,7 +115,7 @@ class MembershipGiftOptions extends View {
     const html = (quantity > 0)
       ? `${this.i18n.t('TOTAL')} <span>${total}</span>`
       : this.i18n.t('NO-GIFT-SELECTED')
-    this.$el.find('#quantityTotal strong').html(html)
+    this.$('#quantityTotal strong').html(html)
 
     this.updateCart(e)
   }

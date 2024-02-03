@@ -5,7 +5,7 @@ import template from './index.hbs'
 
 class MembershipCheckout extends View {
   get el() {
-    return '.checkout'
+    return '#membership-options'
   }
 
   get template() {
@@ -41,6 +41,8 @@ class MembershipCheckout extends View {
     console.log(this.model.attributes)
     const html = this.template(this.model.attributes)
     this.$el.append(html)
+
+    this.setElement('.checkout')
 
     return this
   }

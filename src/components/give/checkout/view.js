@@ -3,11 +3,11 @@ import Backbone, { View } from 'backbone'
 
 import template from './index.hbs'
 
-import GiveCheckoutModal from './modal/view'
+import GiveCheckoutModal from './modal'
 
 class GiveCheckout extends View {
   get el() {
-    return '#checkout-section'
+    return '.give.store.container'
   }
 
   get template() {
@@ -24,7 +24,7 @@ class GiveCheckout extends View {
     console.log('GiveCheckout initialize')
     this.i18n = options.i18n
     this.cart = this.model.get('cart')
-    this.modal = new GiveCheckoutModal({ model: this.model, i18n: this.i18n })
+    this.popup = new GiveCheckoutModal({ model: this.model, i18n: this.i18n })
 
     this.listenTo(this.model, 'give:undelegateEvents', () => {
       console.log('GiveCheckout garbageCollect')
@@ -43,6 +43,8 @@ class GiveCheckout extends View {
     }
     const html = this.template(attributes)
     this.$el.append(html)
+
+    this.setElement('#checkout-section')
 
     return this
   }
@@ -73,8 +75,8 @@ class GiveCheckout extends View {
       this.model.trigger('give:undelegateEvents')
     } else {
       // Error popup here with Gift quantity of at least 1 requirement
-      this.modal.render()
-      this.$el.find('.giveDetails')[0].scrollIntoView({ behavior: 'smooth' })
+      this.popup.render()
+      $('body')[0].scrollIntoView({ behavior: 'smooth' })
     }
   }
 }

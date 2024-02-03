@@ -116,7 +116,7 @@ class EditBillingInformationBillingAddress extends View {
     const name = this.model.has('Customer')
       ? this.model.get('Customer')?.Name
       : ''
-    const [firstName, lastName] = name.split(/(?<=^\S+)\s/)
+    const [firstName, lastName] = !_.isEmpty(name) ? name.split(/(?<=^\S+)\s/) : ['', '']
     // const countries = this.countriesDropdown()
     const postalCode = this.model.get('BillingAddress')?.PostalCode
     const attributes = {

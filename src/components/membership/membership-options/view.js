@@ -11,7 +11,7 @@ import MembershipCheckout from './checkout'
 
 class MembershipOptions extends View {
   get el() {
-    return '#membership-options'
+    return '.membership.store.container'
   }
 
   get template() {
@@ -45,8 +45,10 @@ class MembershipOptions extends View {
   render() {
     console.log('MembershipOptions render')
     console.log(this.model.attributes)
-    // const html = this.template(this.model.attributes)
-    // this.$el.append(html)
+    const html = this.template(this.model.attributes)
+    this.$el.append(html)
+
+    this.setElement('#membership-options')
 
     if (!this.model.has('Membership') || this.model.get('Membership').Status !== 'ACTIVE') {
       this.membershipApplyGiftCode = new MembershipApplyGiftCode({

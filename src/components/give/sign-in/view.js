@@ -9,7 +9,7 @@ import GivesignInModal from './partials'
 
 class GiveSignIn extends View {
   get el() {
-    return '#give-subscribe-sign-in-section'
+    return '.give.store.container'
   }
 
   get template() {
@@ -54,9 +54,7 @@ class GiveSignIn extends View {
         this.popup.render()
 
         const errorMessage = model.get('message')
-        this.$el
-          .find('#SignInStatus')
-          .html(errorMessage)
+        this.popup.setModalBody(errorMessage)
       }
       model.unset('signInSuccess', { silent: true })
     })
@@ -81,6 +79,8 @@ class GiveSignIn extends View {
     console.log(this.model.attributes)
     const html = this.template(this.model.attributes)
     this.$el.append(html)
+
+    this.setElement('#give-subscribe-sign-in-section')
 
     this.subscriptionOptIn()
 
@@ -191,12 +191,14 @@ class GiveSignIn extends View {
       password: this.$('#password').val(),
     }
 
-    this.$el
-      .find('.sign-in input')
+    this
+      .$('.sign-in input')
       .prop('disabled', true)
-    this.$el
-      .find('.sign-in button')
+
+    this
+      .$('.sign-in button')
       .prop('disabled', true)
+
     this.displayLoader(data)
     // this.giveSignInModel.signIn(data)
   }
@@ -209,12 +211,12 @@ class GiveSignIn extends View {
       .css({ display: 'none' })
       .html(loader)
     // debugger
-    this.$el
-      .find('.sign-in')
+    this
+      .$('.sign-in')
       .after(modal)
     // debugger
-    this.$el
-      .find('#signInAlert')
+    this
+      .$('#signInAlert')
       .slideDown(400, () => {
         // debugger
         this.giveSignInModel.signIn(data)
@@ -222,16 +224,17 @@ class GiveSignIn extends View {
   }
 
   removeLoader() {
-    this.$el
-      .find('#signInAlert')
-      .slideUp()
-      .remove()
+    $('#signInAlert')
+      .slideUp(400, () => {
+        $(this).remove()
+      })
 
-    this.$el
-      .find('.sign-in input')
+    this
+      .$('.sign-in input')
       .prop('disabled', false)
-    this.$el
-      .find('.sign-in button')
+
+    this
+      .$('.sign-in button')
       .prop('disabled', false)
   }
 }

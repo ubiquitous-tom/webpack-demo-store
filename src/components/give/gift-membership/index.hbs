@@ -1,10 +1,10 @@
-{{! <div class="row"> }}
-<div class="order-item gift-item" data-price="{{giftAmount}}">
+<div id="gift-item-section" class="row">
+  <div class="order-item gift-item" data-price="{{giftAmount}}">
 
-  {{#if discountRate}}
-    <div id="special-discount" class="col-md-12">
-      <div class="accent">{{t "BLACK-FRIDAY-PROMO-TEXT-2019"}}</div>
-      {{!-- <div class="special-discount-listing">
+    {{#if discountRate}}
+      <div id="special-discount" class="col-md-12">
+        <div class="accent">{{t "BLACK-FRIDAY-PROMO-TEXT-2019"}}</div>
+        {{!-- <div class="special-discount-listing">
           <ul>
             <li>{{t "BLACK-FRIDAY-PROMO-LIST-1-2024"}}</li>
             {{! var1=" <%= specialDiscount[0].displayPrice %>" }}
@@ -14,45 +14,49 @@
             {{! var1=" <%= specialDiscount[2].displayPrice %>" }}
           </ul>
         </div> --}}
-    </div>
-  {{/if}}
+      </div>
+    {{/if}}
 
-  <div class="col-md-3">
-    <img src="{{giftBoxImg}}" alt="gift-box" width="185" height="204" />
-  </div>
-
-  <div class="col-md-5">
-    <h3 class="item-name">{{t "GIFT-MEMBERSHIP"}}</h3>
-    <p>{{t "YEAR-UNLIMITED-ACCESS"}}</p>
-  </div>
-
-  <div class="col-md-2">
-
-    <div class="item-price">
-      <span>{{t "GIFT-PRICE"}}</span>
-      {{giftPrice}}
+    <div class="col-md-3">
+      <img src="{{giftBoxImg}}" alt="gift-box" width="185" height="204" />
     </div>
 
-    <div class="form-group">
+    <div class="col-md-5">
+      <h3 class="item-name">{{t "GIFT-MEMBERSHIP"}}</h3>
+      <p>{{t "YEAR-UNLIMITED-ACCESS"}}</p>
+    </div>
 
-      <label for="qty" class="control-label qty">
-        <strong>{{t "QTY"}}</strong>
-      </label>
+    <div class="col-md-2">
 
-      <select id="qty" class="qty form-control inline-form-control" name="qty">
-        {{{optionsEls}}}
-      </select>
+      <div class="item-price">
+        <span>{{t "GIFT-PRICE"}}</span>
+        {{giftPrice}}
+      </div>
+
+      <div class="form-group">
+
+        <label for="qty" class="control-label qty">
+          <strong>{{t "QTY"}}</strong>
+        </label>
+
+        <select
+          id="qty"
+          class="qty form-control inline-form-control"
+          name="qty"
+        >
+          {{{optionsEls}}}
+        </select>
+
+      </div>
 
     </div>
 
-  </div>
+    <div class="col-md-2 text-right" id="quantityTotal">
+      <strong>{{total}}</strong>
+    </div>
 
-  <div class="col-md-2 text-right" id="quantityTotal">
-    <strong>{{total}}</strong>
   </div>
-
 </div>
-{{! </div> }}
 
 {{!-- <div id="selectGiftModal" class="modal fade" tabindex="-1" role="dialog">
 	<div class="modal-dialog" role="document">

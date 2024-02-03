@@ -76,7 +76,10 @@ class MembershipSignedIn extends View {
       }
     }
     const html = this.template(attributes)
-    this.$('.sign-in').replaceWith(html)
+    this.$el
+      .append(html)
+
+    this.setElement('#signedIn')
 
     return this
   }

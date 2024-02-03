@@ -5,7 +5,7 @@ import template from './index.hbs'
 
 class MembershipGiveDetails extends View {
   get el() {
-    return '.giveDetails'
+    return '.membership.store.container'
   }
 
   get template() {
@@ -35,6 +35,8 @@ class MembershipGiveDetails extends View {
     }
     const html = this.template(attributes)
     this.$el.append(html)
+
+    this.setElement('.giveDetails')
 
     return this
   }

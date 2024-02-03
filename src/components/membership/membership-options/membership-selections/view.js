@@ -5,7 +5,7 @@ import template from './index.hbs'
 
 class MembershipSelections extends View {
   get el() {
-    return '#membershipItem'
+    return '#membership-options'
   }
 
   get template() {
@@ -86,6 +86,8 @@ class MembershipSelections extends View {
     }
     const html = this.template(attributes)
     this.$el.append(html)
+
+    this.setElement('#membershipItem')
 
     this.selectDefaultPlan()
 
@@ -190,9 +192,9 @@ class MembershipSelections extends View {
         const oldPricingContainer = $('<del>').append($('<span>').addClass('old-pricing').html(oldPricing))
         const newPricingContainer = $('<span>').html(newPricing).append(oldPricingContainer)
 
-        // this.$el.find('.annual-plan-message span').addClass('applied-success').html(pricing)
-        // this.$el.find('#billing-container .legal-notice span').html(pricing)
-        this.$el.find('.plan.monthly .h4 span').replaceWith(newPricingContainer)
+        // this.$('.annual-plan-message span').addClass('applied-success').html(pricing)
+        // this.$('#billing-container .legal-notice span').html(pricing)
+        this.$('.plan.monthly .h4 span').replaceWith(newPricingContainer)
       }
     } else {
       this.resetMonthlyPricing()
@@ -218,9 +220,9 @@ class MembershipSelections extends View {
         const oldPricingContainer = $('<del>').append($('<span>').addClass('old-pricing').html(oldPricing))
         const newPricingContainer = $('<span>').html(newPricing).append(oldPricingContainer)
 
-        // this.$el.find('.annual-plan-message span').addClass('applied-success').html(pricing)
-        // this.$el.find('#billing-container .legal-notice span').html(pricing)
-        this.$el.find('.plan.annual .h4 span').replaceWith(newPricingContainer)
+        // this.$('.annual-plan-message span').addClass('applied-success').html(pricing)
+        // this.$('#billing-container .legal-notice span').html(pricing)
+        this.$('.plan.annual .h4 span').replaceWith(newPricingContainer)
       }
     } else {
       this.resetAnnualPricing()

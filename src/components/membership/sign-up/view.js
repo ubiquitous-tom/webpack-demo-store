@@ -9,7 +9,7 @@ import MembershipSignUpModel from './model'
 
 class MembershipSignUp extends View {
   get el() {
-    return '#signUpForm'
+    return '.membership.store.container'
   }
 
   get template() {
@@ -50,7 +50,7 @@ class MembershipSignUp extends View {
         } else {
           // const customer = {
           //   Customer: {
-          //     Email: this.$el.find('#signUpForm #email').val().trim(),
+          //     Email: this.$('#signUpForm #email').val().trim(),
           //   },
           // }
           console.log(this.model.has('Customer'))
@@ -86,8 +86,8 @@ class MembershipSignUp extends View {
         // for the a brand NEW customer
         const customer = {
           Customer: {
-            Name: [this.$el.find('#firstName').val(), this.$el.find('#lastName').val()].join(' '),
-            Email: this.$el.find('#email').val(),
+            Name: [this.$('#firstName').val(), this.$('#lastName').val()].join(' '),
+            Email: this.$('#email').val(),
           },
         }
         this.model.set(customer)
@@ -100,6 +100,7 @@ class MembershipSignUp extends View {
     // if (!isLoggedIn) {
     //   this.render()
     // }
+    this.render()
   }
 
   render() {
@@ -115,11 +116,13 @@ class MembershipSignUp extends View {
       email,
     }
     const html = this.template(attributes)
-    if (this.$el.find('#signInForm').length) {
-      this.$el.find('#signInForm').replaceWith(html)
+    if ($('#signInForm').length) {
+      $('#signInForm').replaceWith(html)
     } else {
       this.$el.append(html)
     }
+
+    this.setElement('#signUpForm')
 
     return this
   }
@@ -147,9 +150,9 @@ class MembershipSignUp extends View {
   }
 
   validateSignUpForm() {
-    const firstName = this.$el.find('#firstName')
-    const lastName = this.$el.find('#lastName')
-    const email = this.$el.find('#email')
+    const firstName = this.$('#firstName')
+    const lastName = this.$('#lastName')
+    const email = this.$('#email')
     // reset all errors
     firstName.closest('.form-group').removeClass('has-error')
     lastName.closest('.form-group').removeClass('has-error')
@@ -190,21 +193,19 @@ class MembershipSignUp extends View {
       .html(loader)
     // debugger
     this.$el
-      .find('#signUpForm')
       .after(modal)
     // debugger
-    this.$el
-      .find('#signInAlert')
+    $('#signInAlert')
       .slideDown(400, () => {
         this.membershipSignUpModel.checkEmail(email)
       })
   }
 
   removeLoader() {
-    this.$el
-      .find('#signInAlert')
-      .slideUp()
-      .remove()
+    $('#signInAlert')
+      .slideUp(400, () => {
+        $(this).remove()
+      })
   }
 }
 

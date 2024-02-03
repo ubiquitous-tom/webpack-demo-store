@@ -45,6 +45,8 @@ class EditBilling extends View {
       i18n: this.i18n,
     })
 
+    $('body')[0].scrollIntoView({ behavior: 'smooth' })
+
     return this
   }
 }

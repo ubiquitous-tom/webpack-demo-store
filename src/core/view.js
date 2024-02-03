@@ -55,10 +55,10 @@ class ATVView extends View {
         groupName = ''
     }
 
-    const isGroupNameAllowedGifting = (groupName.length)
+    const isGroupNameAllowedGifting = (groupName.length > 0)
     const isGroupNameUK = (groupName === 'United Kingdom')
     const isGroupNameAU = (groupName === 'Australia')
-    const isAllowedGifting = (groupName.length)
+    const isAllowedGifting = (groupName.length > 0)
     const isUK = (groupName === 'United Kingdom')
     const isAU = (groupName === 'Australia')
 

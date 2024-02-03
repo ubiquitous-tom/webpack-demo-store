@@ -7,7 +7,7 @@ import template from './index.hbs'
 
 class GiveGiftMembership extends View {
   get el() {
-    return '#gift-item-section'
+    return '.give.store.container'
   }
 
   get template() {
@@ -71,6 +71,8 @@ class GiveGiftMembership extends View {
 
     const html = this.template(this.giftMembershipModel.attributes)
     this.$el.append(html)
+
+    this.setElement('#gift-item-section')
 
     this.renderTimelineHTML()
 

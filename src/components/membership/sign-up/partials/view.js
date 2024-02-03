@@ -1,7 +1,7 @@
 import { View } from 'backbone'
 
 // import './stylesheet.scss'
-import template from './modal.hbs'
+import template from './index.hbs'
 
 class MembershipSignUpModal extends View {
   get el() {
@@ -11,12 +11,6 @@ class MembershipSignUpModal extends View {
   get template() {
     return template
   }
-
-  // get events() {
-  //   return {
-  //     'click #signInModal': 'remove',
-  //   }
-  // }
 
   initialize(options) {
     console.log('MembershipSignUpModal initialize')
@@ -29,25 +23,19 @@ class MembershipSignUpModal extends View {
       message: this.i18n.t('ACCOUNT-EXISTS'),
     }
     const html = this.template(attributes)
-    this.$el.find('#signUpForm').after(html)
-    this.$el.find('#signInModal').modal()
+    this
+      .$('#signUpForm')
+      .after(html)
 
-    // this.$el
-    //   .find('#SignInStatus')
-    //   .html(this.i18n.t('ACCOUNT-EXISTS'))
+    this.setElement('#signInModal')
 
-    this.$el.find('#signInModal').on('hidden.bs.modal', () => {
-      this.$el.find('#signInModal').remove()
+    this.$el.on('hidden.bs.modal', () => {
+      this.$el.remove()
       this.model.trigger('membership:accountAlreadyExist')
     })
 
-    // this.$el
-    //   .find('#signInModal')
-    //   .modal()
-  }
-
-  remove() {
-    this.$el.find('#signInModal').remove()
+    this.$el
+      .modal()
   }
 }
 

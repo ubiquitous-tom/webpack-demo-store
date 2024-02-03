@@ -16,17 +16,6 @@ class CheckGiftCodeModel extends Model {
     console.log(resp)
   }
 
-  /* eslint consistent-return: 0 */
-  validate(attributes, options) {
-    console.log('CheckGiftCodeModel validate')
-    console.log(attributes, options)
-
-    if (_.isEmpty(attributes.promoCode)) {
-      console.log('please enter promo code')
-      return 'please enter promo code'
-    }
-  }
-
   checkCode(promoCode) {
     console.log('CheckGiftCodeModel submit')
     const options = {
@@ -39,7 +28,7 @@ class CheckGiftCodeModel extends Model {
       error: this.error,
     }
     console.log(options)
-    debugger
+    // debugger
     this.fetch(options)
   }
 
@@ -47,9 +36,9 @@ class CheckGiftCodeModel extends Model {
     console.log('CheckGiftCodeModel success')
     console.log(model, resp, options)
     console.log(this)
-    debugger
+    // debugger
     this.set({
-      checkPromoCodeSuccess: true,
+      checkCodeSuccess: true,
       promo: resp,
       promoCode: resp.PromotionCode,
       promoName: resp.Name,
@@ -70,7 +59,7 @@ class CheckGiftCodeModel extends Model {
     console.log('CheckGiftCodeModel error')
     console.log(model, resp, options)
     console.log(this)
-    debugger
+    // debugger
     let message = ''
     /* eslint function-paren-newline: 0 */
     resp
@@ -101,7 +90,7 @@ class CheckGiftCodeModel extends Model {
         })
       .always(() => {
         model.set({
-          checkPromoCodeSuccess: false,
+          checkCodeSuccess: false,
           flashMessage: {
             type: 'error',
             message,

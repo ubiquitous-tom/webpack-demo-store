@@ -183,6 +183,8 @@ class Review extends View {
     this.setElement('.review.store.container')
     // this.popup.render()
 
+    $('body')[0].scrollIntoView({ behavior: 'smooth' })
+
     return this
   }
 

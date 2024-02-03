@@ -8,7 +8,7 @@ import MembershipApplyPromoCodeModel from './model'
 
 class MembershipApplyPromoCode extends View {
   get el() {
-    return '#membership-info-promo'
+    return '#membership-options'
   }
 
   get template() {
@@ -41,7 +41,6 @@ class MembershipApplyPromoCode extends View {
       console.log(this, this.model.attributes)
       // debugger
       model.unset('promoCodeSuccess', { silent: true })
-      // this.loadingStop()
       let { message } = model.get('flashMessage')
       let type = false
       if (value) {
@@ -67,18 +66,20 @@ class MembershipApplyPromoCode extends View {
     console.log('MembershipApplyPromoCode render')
     console.log(this.model.attributes)
     const html = this.template()
-    if (this.$el.find('#signUpForm').length) {
-      this.$el.find('#signUpForm').replaceWith(html)
+    if (this.$('#signUpForm').length) {
+      this.$('#signUpForm').replaceWith(html)
     } else {
       this.$el.append(html)
     }
+
+    this.setElement('#membership-info-promo')
 
     if (this.model.has('membershipPromo')) {
       // debugger
       const promoCode = this.model.get('membershipPromo').PromotionCode
       const stripePercentOff = this.model.get('membershipPromo').StripePercentOff
       const message = `${promoCode} applied. Enjoy your ${stripePercentOff}% off!`
-      this.$el.find('#promo-code').val(promoCode)
+      this.$('#promo-code').val(promoCode)
       this.updatePromoMessage(message, 'success')
     }
 
@@ -88,7 +89,7 @@ class MembershipApplyPromoCode extends View {
   applyPromoCode(e) {
     console.log('MembershipApplyPromoCode applyPromoCode')
     e.preventDefault()
-    const promoCode = this.$el.find('#promo-code').val()
+    const promoCode = this.$('#promo-code').val()
     this.membershipApplyPromoCodeModel.submit(promoCode)
   }
 
@@ -97,7 +98,6 @@ class MembershipApplyPromoCode extends View {
     e.preventDefault()
     console.log(e)
     // debugger
-    // this.cart.unset('promoCodeApplied', { context: this })
     this.model.unset('membershipPromo', { context: this })
 
     this.clearPromoMessage(e)
@@ -108,7 +108,7 @@ class MembershipApplyPromoCode extends View {
     e.preventDefault()
     console.log(e)
 
-    const container = this.$el.find('#apply-promo-code')
+    const container = this.$('#apply-promo-code')
     const promoInput = container.find('#promo-code')
     const button = container.find('button')
     const promoMessage = container.find('.promo-message')
@@ -136,9 +136,7 @@ class MembershipApplyPromoCode extends View {
     const promoCodeAppliedType = value ? 'success' : 'error'
     // const i = $('<i>').addClass('glyphicon glyphicon-ok')
 
-    // const { message } = model.get('flashMessage')
-
-    const container = this.$el.find('#apply-promo-code')
+    const container = this.$('#apply-promo-code')
     const promoInput = container.find('#promo-code')
     const button = container.find('button')
     const buttonWidth = button.outerWidth()
@@ -166,7 +164,6 @@ class MembershipApplyPromoCode extends View {
 
     // display new promo message
     container
-      // .empty()
       .find('.form-group')
       .append(
         promoCodeApplied
@@ -174,7 +171,6 @@ class MembershipApplyPromoCode extends View {
           // .append(i)
           .append(message)
       )
-    // .show()
   }
 }
 

@@ -6,6 +6,7 @@ import template from './index.hbs'
 
 import ApplyGiftCodeModel from './model'
 import CheckGiftCodeModel from './models/model'
+import ApplyGiftCodeModal from './partials/view'
 
 class ApplyGiftCode extends View {
   get el() {
@@ -29,63 +30,82 @@ class ApplyGiftCode extends View {
 
     this.checkGiftCodeModel = new CheckGiftCodeModel()
     this.applyGiftCodeModel = new ApplyGiftCodeModel()
-    this.applyGiftCodeModel.set({
-      sessionID: this.model.get('Session').SessionID,
+
+    this.popup = new ApplyGiftCodeModal({ model: this.model, i18n: this.i18n })
+
+    this.listenTo(this.model, 'applyGiftCode:undelegateEvents', () => {
+      console.log('ApplyGiftCode garbageCollect')
+      this.remove()
+      // debugger
     })
 
-    this.listenTo(this.checkGiftCodeModel, 'change:checkPromoCodeSuccess', (model, value) => {
+    this.listenTo(this.checkGiftCodeModel, 'change:checkCodeSuccess', (model, value) => {
       console.log(model, value)
-      debugger
+      // debugger
       if (value) {
-        this.applyCode(model.get('promoCode'))
-      } else {
-        console.log(model, value)
-        this.$applyCodeAlert.slideUp()
+        // debugger
         const promoCode = model.get('promoCode')
+        const sessionID = this.model.get('Session').SessionID
+        this.applyGiftCodeModel.applyCode(promoCode, sessionID)
+      } else {
+        this.removeLoader()
         // const errorRedeemGiftExpired = this.i18n.t('REDEEM-GIFT-EXPIRED')
-        const promoCodeErrorText = ''
+        const promoCode = this.$('#EnterPromoCode').val()
+        const { message } = model.get('flashMessage')
+        const errorMessage = message.toLowerCase().includes('expired')
+          ? this.i18n.t('REDEEM-GIFT-EXPIRED')
+          : message
         const supportLink = $('<a>').attr({
           class: 'divMsgError',
           href: `mailto:support@acorn.tv?Subject=Promo%20Code%20Issue%20with%20code:%20${promoCode}`,
           target: '_top',
         })
-          .html(promoCodeErrorText)
-        this.$applyCodeStatus.html(supportLink)
+          .html(errorMessage)
 
-        this.$applyCodeModal.modal()
+        this.popup.render()
+        this.popup.setModelBody(supportLink)
       }
+      this.checkGiftCodeModel.unset('checkCodeSuccess', { silent: true })
+    })
+
+    this.listenTo(this.applyGiftCodeModel, 'invalid', (model, value) => {
+      console.log(model, value)
+      this.removeLoader()
+      this.popup.render()
+      this.popup.setModelBody(this.i18n.t(value))
     })
 
     this.listenTo(this.applyGiftCodeModel, 'change:applyGiftCodeSuccess', (model, value) => {
       console.log(model, value)
+      this.removeLoader()
+      debugger
       if (value) {
-        this.$applyCodeModal.on('hide.bs.modal', _.bind((e) => {
-          console.log('change:applyPromoCodeSuccess hide.bs.modal', e)
-          this.model.clear({ silent: true })
-          this.model.fetch()
-          Backbone.trigger('navChange', 'accountStatus')
-        }, this))
-
-        this.$applyCodeAlert.slideUp()
-
-        const successApplyCodeInfoMsg = `<strong>${this.i18n.t('PROMOTION-APPLIED')}</strong>`
-        this.$applyCodeStatus.html(successApplyCodeInfoMsg)
-        this.$applyCodeModal.modal()
+        const message = `<strong>${this.i18n.t('PROMOTION-APPLIED')}</strong>`
+        this.popup.renderSuccess()
+        this.popup.setModelBody(message)
       } else {
-        this.$applyCodeAlert.slideUp()
         // const errorRedeemGiftNotAvailable = this.i18n.t('REDEEM-GIFT-NOT-AVAILABLE')
-        const errorMessage = this.i18n.t('ERR-PROCESS-REQUEST')
+        const { message } = model.get('flashMessage')
+        const errorMessage = message.toLowerCase().includes('error')
+          ? this.i18n.t('ERR-PROCESS-REQUEST')
+          : message
         // if (xhr.status == 500) {
         //   errorMessage = errorRedeemGiftNotAvailable
         // } else {
         //   errorMessage = polyglot.t("ERR-PROCESS-REQUEST")
         // }
-        this.$applyCodeStatus.html(errorMessage)
-        this.$applyCodeModal.modal()
+        this.popup.render()
+        this.popup.setModelBody(errorMessage)
       }
+      this.applyGiftCodeModel.unset('applyGiftCodeSuccess', { silent: true })
     })
 
-    // this.render()
+    this.listenTo(this.model, 'applyGiftCode:giftCodeApplied', () => {
+      Backbone.history.navigate('membership', { trigger: true })
+      this.model.trigger('applyGiftCode:undelegateEvents')
+    })
+
+    this.render()
   }
 
   render() {
@@ -94,8 +114,10 @@ class ApplyGiftCode extends View {
     const html = this.template(this.model.attributes)
     this.$el.html(html)
 
-    this.$applyCodeAlert = this.$el.find('#applyCodeAlert')
-    this.$applyCodeModal = this.$el.find('#applyCodeModal')
+    this.setElement('.gift-code.store.container')
+
+    // this.$applyCodeAlert = this.$('#applyCodeAlert')
+    // this.$applyCodeModal = this.$('#applyCodeModal')
 
     return this
   }
@@ -117,28 +139,70 @@ class ApplyGiftCode extends View {
     }
   }
 
+  validateInput() {
+    let isValidated = true
+    const promoCodeEl = this.$('#EnterPromoCode')
+    if (_.isEmpty(promoCodeEl.val())) {
+      promoCodeEl.parent('.form-group').removeClass('has-success').addClass('has-error')
+      isValidated = false
+    } else {
+      promoCodeEl.parent('.form-group').removeClass('has-error')
+    }
+
+    return isValidated
+  }
+
   checkCode(e) {
     console.log('ApplyGiftCode', e)
     e.preventDefault()
-    const giftCode = this.$('#EnterPromoCode').val()
-    this.checkGiftCodeModel.checkCode(giftCode)
+
+    this
+      .$('input')
+      .prop('disabled', true)
+
+    this
+      .$('button')
+      .prop('disabled', true)
+
+    const promoCodeEl = this.$('#EnterPromoCode')
+    if (promoCodeEl[0].checkValidity() && this.validateInput()) {
+      const giftCode = this.$('#EnterPromoCode').val()
+      this.displayLoader(giftCode)
+    }
   }
 
-  applyCode(giftCode) {
-    console.log('ApplyGiftCode')
-    const submitBillingInfoMsg = `<i class="icon-spinner icon-spin icon-large"></i> ${this.i18n.t('SUBMITTING')}...`
-    this.$applyCodeAlert.html(submitBillingInfoMsg).addClass('alert-info').slideDown()
+  displayLoader(giftCode) {
+    const loader = `<i class="icon-spinner icon-spin icon-large"></i> ${this.i18n.t('SUBMITTING')}`
+    const modal = $('<div>')
+      .attr({ id: 'applyCodeAlert' })
+      .addClass('alert alert-info')
+      .css({ display: 'none' })
+      .html(loader)
+    // debugger
+    this
+      .$('button')
+      .before(modal)
+    // debugger
+    $('#applyCodeAlert')
+      .slideDown(400, () => {
+        // debugger
+        this.checkGiftCodeModel.checkCode(giftCode)
+      })
+  }
 
-    // const giftCode = this.$('#EnterPromoCode').val()
+  removeLoader() {
+    $('#applyCodeAlert')
+      .slideUp(400, () => {
+        $(this).remove()
+      })
 
-    if (!_.isEmpty(giftCode)) {
-      this.applyGiftCodeModel.applyCode(giftCode)
-    } else {
-      this.$applyCodeAlert.slideUp()
+    this
+      .$('input')
+      .prop('disabled', false)
 
-      this.$applyCodeStatus.html(this.i18n.t('CODE-INVALID'))
-      this.$applyCodeModal.modal()
-    }
+    this
+      .$('button')
+      .prop('disabled', false)
   }
 }
 

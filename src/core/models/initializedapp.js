@@ -61,7 +61,7 @@ class InitializeApp extends Model {
       console.log(model, value)
       // debugger
       // this.gifting.discountRateGiftPricing(value)
-      this.unset('DiscountRate', { silent: true })
+      // this.unset('DiscountRate', { silent: true })
     })
 
     // this.on('change:monthlyStripePlan', (model, value) => {

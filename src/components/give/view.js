@@ -69,6 +69,8 @@ class Give extends View {
       giveAnnualMembership: this.giveAnnualMembership,
     })
 
+    $('body')[0].scrollIntoView({ behavior: 'smooth' })
+
     return this
   }
 

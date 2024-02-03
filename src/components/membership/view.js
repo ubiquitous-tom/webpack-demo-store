@@ -48,7 +48,7 @@ class Membership extends View {
     //   // })
     // })
 
-    this.listenTo(this.model, 'Membership:undelegateEvents', () => {
+    this.listenTo(this.model, 'membership:undelegateEvents', () => {
       console.log('Membership garbageCollect')
       this.remove()
       // debugger
@@ -85,7 +85,6 @@ class Membership extends View {
         membershipSignUp: this.membershipSignUp,
         membershipSignIn: this.membershipSignIn,
       })
-      this.membershipSignUp.render()
 
       this.membershipCurrencyOptions = new MembershipCurrencyOptions({
         model: this.model,

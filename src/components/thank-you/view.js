@@ -111,6 +111,8 @@ class ThankYou extends View {
     this.googleAnalytics()
     this.endSession()
 
+    $('body')[0].scrollIntoView({ behavior: 'smooth' })
+
     return this
   }
 

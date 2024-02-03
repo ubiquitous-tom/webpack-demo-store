@@ -22,12 +22,13 @@ class GiveCheckoutModal extends View {
     const html = this.template()
     this.$el.append(html)
 
-    this.$el.find('#selectGiftModal').on('hidden.bs.modal', () => {
-      this.$el.find('#selectGiftModal').remove()
+    this.setElement('#selectGiftModal')
+
+    this.$el.on('hidden.bs.modal', () => {
+      this.$el.remove()
     })
 
     this.$el
-      .find('#selectGiftModal')
       .modal()
 
     return this

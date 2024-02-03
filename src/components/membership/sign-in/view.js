@@ -41,19 +41,13 @@ class MembershipSignIn extends View {
         window.location.reload()
       } else {
         this.removeLoader()
-        this.$el.find('#signInEmail').parent('.form-group').addClass('has-error')
-        this.$el.find('#password').parent('.form-group').addClass('has-error')
-        // this.$signInAlert.slideUp();
+        this.$('#signInEmail').parent('.form-group').addClass('has-error')
+        this.$('#password').parent('.form-group').addClass('has-error')
 
         this.popup.render()
 
         const errorMessage = model.get('message')
-        this.$el
-          .find('#SignInStatus')
-          .html(errorMessage)
-        // this.$signInStatus.html(response.responseJSON.error);
-        // this.$signInModal.modal();
-        // giveObj.set("AllowedToCheckout", false);
+        this.popup.setModalBody(errorMessage)
       }
       model.unset('signInSuccess', { silent: true })
     })
@@ -73,11 +67,13 @@ class MembershipSignIn extends View {
     console.log('MembershipSignIn render')
     console.log(this.model.attributes)
     const html = this.template(this.model.attributes)
-    if (this.$el.find('#signUpForm').length) {
-      this.$el.find('#signUpForm').replaceWith(html)
+    if ($('#signUpForm').length) {
+      $('#signUpForm').replaceWith(html)
     } else {
       this.$el.append(html)
     }
+
+    this.setElement('#signInForm')
 
     return this
   }
@@ -86,7 +82,7 @@ class MembershipSignIn extends View {
     const { id, value } = e.target
     console.log('validate', id, value)
     let isValidated = true
-    const el = this.$el.find(`#${id}`)
+    const el = this.$(`#${id}`)
     if (!this.validateEmailFormat(value) && !el[0].checkValidity()) {
       el.parent('.form-group').removeClass('has-success').addClass('has-error')
       isValidated = false
@@ -101,7 +97,7 @@ class MembershipSignIn extends View {
     const { id, value } = e.target
     console.log('validate', id, value)
     let isValidated = true
-    const el = this.$el.find(`#${id}`)
+    const el = this.$(`#${id}`)
     if (_.isEmpty(value) && !el[0].checkValidity()) {
       el.parent('.form-group').removeClass('has-success').addClass('has-error')
       isValidated = false
@@ -128,21 +124,21 @@ class MembershipSignIn extends View {
     console.log('MembershipSignIn signIn')
     e.preventDefault()
     // debugger
-    this.$el.find('#signInEmail').focus().blur()
-    this.$el.find('#password').focus().blur()
+    this.$('#signInEmail').focus().blur()
+    this.$('#password').focus().blur()
     const data = {
-      email: this.$el.find('#signInEmail').val(),
-      password: this.$el.find('#password').val(),
+      email: this.$('#signInEmail').val(),
+      password: this.$('#password').val(),
     }
     // debugger
-    this.$el
-      .find('#signInForm input')
+    this
+      .$('input')
       .prop('disabled', true)
-    this.$el
-      .find('#signInForm button')
+    this
+      .$('button')
       .prop('disabled', true)
+
     this.displayLoader(data)
-    // this.membershipSignInModel.signIn(data)
   }
 
   displayLoader(data) {
@@ -154,11 +150,9 @@ class MembershipSignIn extends View {
       .html(loader)
     // debugger
     this.$el
-      .find('#signInForm')
       .after(modal)
     // debugger
-    this.$el
-      .find('#signInAlert')
+    $('#signInAlert')
       .slideDown(400, () => {
         // debugger
         this.membershipSignInModel.signIn(data)
@@ -166,16 +160,16 @@ class MembershipSignIn extends View {
   }
 
   removeLoader() {
-    this.$el
-      .find('#signInAlert')
-      .slideUp()
-      .remove()
+    $('#signInAlert')
+      .slideUp(400, () => {
+        $('#signInAlert').remove()
+      })
 
-    this.$el
-      .find('#signInForm input')
+    this
+      .$('input')
       .prop('disabled', false)
-    this.$el
-      .find('#signInForm button')
+    this
+      .$('button')
       .prop('disabled', false)
   }
 }

@@ -3,7 +3,7 @@ import template from './index.hbs'
 
 class GiveLegal extends View {
   get el() {
-    return '.legal'
+    return '.give.store.container'
   }
 
   get template() {
@@ -25,6 +25,8 @@ class GiveLegal extends View {
     console.log(this.model.attributes)
     const html = this.template(this.model.attributes)
     this.$el.append(html)
+
+    this.setElement('.legal')
 
     return this
   }

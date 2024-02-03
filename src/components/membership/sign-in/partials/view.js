@@ -1,7 +1,7 @@
 import { View } from 'backbone'
 
 // import './stylesheet.scss'
-import template from './modal.hbs'
+import template from './index.hbs'
 
 class MembershipSignInModal extends View {
   get el() {
@@ -19,18 +19,26 @@ class MembershipSignInModal extends View {
 
   render() {
     const html = this.template()
-    this.$el
-      .find('#signInForm')
+
+    this
+      .$('#signInForm')
       .after(html)
-    this.$el
-      .find('#signInModal')
-      .modal()
+
+    this.setElement('#signInModal')
     // debugger
     this.$el
-      .find('#signInModal')
       .on('hidden.bs.modal', () => {
-        this.$el.find('#signInModal').remove()
+        this.$el.remove()
       })
+
+    this.$el
+      .modal()
+  }
+
+  setModalBody(message) {
+    this
+      .$('.modal-body')
+      .html(message)
   }
 }
 

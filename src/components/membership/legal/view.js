@@ -5,7 +5,7 @@ import template from './index.hbs'
 
 class MembershipLegal extends View {
   get el() {
-    return '.legal'
+    return '.membership.store.container'
   }
 
   get template() {
@@ -41,6 +41,8 @@ class MembershipLegal extends View {
     console.log(this.model.attributes)
     const html = this.template(this.model.attributes)
     this.$el.append(html)
+
+    this.setElement('.legal')
 
     return this
   }

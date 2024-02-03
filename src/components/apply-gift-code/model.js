@@ -20,34 +20,18 @@ class ApplyGiftCodeModel extends Model {
     console.log('ApplyGiftCodeModel validate')
     console.log(attributes, options)
 
-    if (_.isEmpty(attributes.promoCode)) {
+    if (_.isEmpty(attributes.PromoCode.Code)) {
       console.log('please enter promo code')
-      return 'please enter promo code'
+      return 'CODE-INVALID' // 'please enter promo code'
     }
   }
 
-  // submit(promoCode) {
-  //   console.log('ApplyGiftCodeModel submit')
-  //   const options = {
-  //     url: [this.url, $.param({ Code: promoCode })].join('?'),
-  //     context: this,
-  //     dataType: 'json',
-  //     ajaxSync: true,
-  //     wait: true,
-  //     success: this.success,
-  //     error: this.error,
-  //   }
-  //   console.log(options)
-  //   debugger
-  //   this.fetch(options)
-  // }
-
-  applyCode(code) {
+  applyCode(sessionID, code) {
     console.log('ApplyPromoCodeModel applyCode')
     console.log(this)
     const attributes = {
       Session: {
-        SessionID: this.model.get('sessionID'),
+        SessionID: sessionID,
       },
       PromoCode: {
         Code: code,
@@ -61,14 +45,14 @@ class ApplyGiftCodeModel extends Model {
       error: this.error,
     }
     console.log(attributes, options)
-    debugger
+    // debugger
     this.save(attributes, options)
   }
 
   success(model, resp, options) {
     console.log('ApplyPromoCodeModel success')
     console.log(model, resp, options)
-
+    // debugger
     const { message } = resp // Your Promotion Code has been applied!
     // If `TrialEnabled` is `false`, it is a gift code
     // Or
@@ -86,29 +70,47 @@ class ApplyGiftCodeModel extends Model {
   error(model, resp, options) {
     console.log('ApplyPromoCodeModel error')
     console.log(model, resp, options)
+    console.log(this)
+    // debugger
+    let message = ''
     /* eslint function-paren-newline: 0 */
     resp
       .then(
         (response) => {
-          console.log(response.responseJSON)
+          console.log(response.responseJSON, response.responseText)
           if (!_.isEmpty(response.responseJSON)) {
-            model.set({
-              applyGiftCodeSuccess: false,
-              type: 'error',
-              message: response.responseJSON.message,
-            })
+            message = response.responseJSON.message
+            return message
           }
+          if (!_.isEmpty(response.responseText)) {
+            message = response.responseText
+            return message
+          }
+          return message
         },
         (error) => {
-          console.log(error.responseJSON)
+          console.log(error.responseJSON, error.responseText)
           if (!_.isEmpty(error.responseJSON)) {
-            model.set({
-              applyGiftCodeSuccess: false,
-              type: 'error',
-              message: error.responseJSON.error,
-            })
+            message = error.responseJSON.error
+            return message
           }
+          if (!_.isEmpty(error.responseText)) {
+            message = error.responseText
+            return message
+          }
+          return message
         })
+      .always(() => {
+        model.set({
+          applyGiftCodeSuccess: false,
+          flashMessage: {
+            type: 'error',
+            message,
+            interpolationOptions: {},
+          },
+        })
+        console.log(model.get('flashMessage').message, model.get('flashMessage').type)
+      })
   }
 }
 

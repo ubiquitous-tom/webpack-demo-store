@@ -6,7 +6,7 @@ import template from './index.hbs'
 
 class GiveAnnualMembership extends View {
   get el() {
-    return '#membershipItem'
+    return '.give.store.container'
   }
 
   get template() {
@@ -67,13 +67,19 @@ class GiveAnnualMembership extends View {
     console.log('GiveAnnualMembership render')
     console.log(this.model.attributes, this.giveAnnualMembership.attributes)
     const html = this.template(this.giveAnnualMembership.attributes)
-    this.$el
-      .css({ display: 'none' })
-      .append(html)
+    this.$el.append(html)
 
-    // this.$('#membershipItem').slideDown()
+    this.setElement('#membershipItem')
+
+    this.setDefaultAnnualMembership()
 
     return this
+  }
+
+  setDefaultAnnualMembership() {
+    if (this.cart.get('annual').quantity) {
+      this.addAnnualSubscription()
+    }
   }
 
   removeAnnualMembership(e) {
@@ -81,6 +87,22 @@ class GiveAnnualMembership extends View {
     e.preventDefault()
 
     this.hideAnnualSubscription()
+  }
+
+  addAnnualSubscription() {
+    const quantity = 1
+    const amount = (this.model.has('membershipPromo'))
+      ? this.cart?.get('annual')?.amount
+      : this.model.get('annualStripePlan')?.SubscriptionAmount
+    const total = parseFloat((quantity * amount).toFixed(2))
+    const membership = {
+      annual: {
+        quantity,
+        amount,
+        total,
+      },
+    }
+    this.cart.set(membership)
   }
 
   hideAnnualSubscription() {

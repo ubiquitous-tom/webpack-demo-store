@@ -47,11 +47,13 @@ class GiveCurrencyOptions extends View {
       optionEls: this.currentOptions(),
     }
     const html = this.template(attributes)
-    this.$('#give-subscribe-sign-in-section').after(html)
+    this.$el.append(html)
+
+    this.setElement('section.currency')
 
     const currencyDesc = this.gifting.get('gift').CurrencyDesc
-    this.$el
-      .find(`#currency-select option[value="${currencyDesc}"]`)
+    this
+      .$(`#currency-select option[value="${currencyDesc}"]`)
       .prop('select', true)
 
     return this
