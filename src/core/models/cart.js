@@ -287,9 +287,9 @@ class ShoppingCart extends Model {
         total: model.get('monthlyStripePlan').SubscriptionAmount,
       },
       annual: {
-        amount: model.get('annualtripePlan').SubscriptionAmount,
+        amount: model.get('annualStripePlan').SubscriptionAmount,
         quantity: 0,
-        total: model.get('annualtripePlan').SubscriptionAmount,
+        total: model.get('annualStripePlan').SubscriptionAmount,
       },
     })
     model.get('cart').unset('gift')
