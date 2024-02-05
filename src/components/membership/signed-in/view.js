@@ -123,7 +123,7 @@ class MembershipSignedIn extends View {
 
   giveGift(e) {
     e.preventDefault()
-    this.cart.emptyCart(this.model)
+    this.cart.emptyCart(this.model, this)
     Backbone.history.navigate('give', { trigger: true })
     this.model.trigger('membership:undelegateEvents')
   }

@@ -279,7 +279,7 @@ class ShoppingCart extends Model {
     return parseFloat(total.toFixed(2))
   }
 
-  emptyCart(model) {
+  emptyCart(model, context) {
     this.set({
       monthly: {
         amount: model.get('monthlyStripePlan').SubscriptionAmount,
@@ -292,7 +292,7 @@ class ShoppingCart extends Model {
         total: model.get('annualStripePlan').SubscriptionAmount,
       },
     })
-    model.get('cart').unset('gift')
+    model.get('cart').unset('gift', { context })
     model.unset('membershipPromo')
   }
 }

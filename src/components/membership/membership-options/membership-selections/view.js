@@ -243,7 +243,7 @@ class MembershipSelections extends View {
           this.gifting.get('gift').CurrSymbol,
           this.cart.getItemAmount(type),
         ].join('')
-        return `<span>${newPrice}<del> <span class="old-pricing">${oldPrice}</span></del></span>`
+        return `<span>${newPrice}<del><span class="old-pricing">${oldPrice}</span></del></span>`
       }
     }
 

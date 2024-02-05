@@ -215,7 +215,7 @@ class Review extends View {
   clearPurchase(e) {
     console.log('Review clearPurchase')
     e.preventDefault()
-    this.cart.emptyCart(this.model)
+    this.cart.emptyCart(this.model, this)
     this.popup.modalClear()
   }
 

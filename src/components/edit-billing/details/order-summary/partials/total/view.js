@@ -55,12 +55,16 @@ class EditBillingDetailsOrderSummaryTotal extends View {
         this.gifting.get('gift').CurrSymbol,
         Intl.NumberFormat(`${this.model.get('stripePlansLang')}-IN`, { maximumFractionDigits: 2, minimumFractionDigits: 2, trailingZeroDisplay: 'stripIfInteger' }).format(oldTotal),
       ].join('')
+
       const newTotal = this.cart.getTotalAmount()
       const newPrice = [
         this.gifting.get('gift').CurrSymbol,
         Intl.NumberFormat(`${this.model.get('stripePlansLang')}-IN`, { maximumFractionDigits: 2, minimumFractionDigits: 2, trailingZeroDisplay: 'stripIfInteger' }).format(newTotal),
       ].join('')
-      return `<span>${newPrice}<del> <span class="old-pricing">${oldPrice}</span></del></span>`
+
+      return (oldTotal !== newTotal)
+        ? `<span>${newPrice}<del> <span class="old-pricing">${oldPrice}</span></del></span>`
+        : originalPrice
     }
 
     return originalPrice
