@@ -27,8 +27,8 @@
         name="firstname"
         id="firstname"
         class="form-control domain"
-        minlength="2"
         required
+        data-message="ENTER-YR-FIRST-NAME"
       />
     </div>
 
@@ -48,8 +48,8 @@
         name="lastname"
         id="lastname"
         class="form-control"
-        minlength="2"
         required
+        data-message="ENTER-YR-LAST-NAME"
       />
     </div>
   </div>
@@ -69,6 +69,7 @@
         id="billingcountry"
         class="form-control"
         required
+        data-message="SELECT-YR-COUNTRY"
       >
         <option value="">{{t "DROPDOWN-COUNTRY"}}</option>
         {{! <\% _.each(address.countries, function(country) { %>
@@ -96,8 +97,8 @@
         name="billingzip"
         id="billingzip"
         maxlength="10"
-        minlength="2"
         required
+        data-message="ENTER-YR-ZIP"
       />
 
     </div>

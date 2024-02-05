@@ -14,6 +14,7 @@
     placeholder=""
     pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
     required
+    data-message="ENTER-AN-EMAIL"
   />
 </div>
 
@@ -32,6 +33,7 @@
     placeholder=""
     pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
     required
+    data-message="EMAILS-DONT-MATCH"
   />
 </div>
 
@@ -50,6 +52,7 @@
       placeholder=""
       minlength="6"
       required
+      data-message="ENTER-A-PASSWORD"
     />
   </div>
 
@@ -66,11 +69,18 @@
       placeholder=""
       minlength="6"
       required
+      data-message="PASSWORDS-DONT-MATCH"
     />
   </div>
   <div class="checkbox tos">
     <label for="agree" class="control-label">
-      <input type="checkbox" id="agree" name="agree" required />
+      <input
+        type="checkbox"
+        id="agree"
+        name="agree"
+        required
+        data-message="AGREE-TO-TERMS"
+      />
       {{t "I-AGREE"}}
       <a href="https://www.amcnetworks.com/terms-of-use/" target="_blank">
         {{t "TERMS-OF-SERVICE"}}

@@ -44,8 +44,8 @@ class ReviewModel extends Model {
     if (annual > 0) {
       membershipType = 'annual'
     }
-    // debugger
-    let attributes = {
+    debugger
+    const attributes = {
       Session: {
         SessionID: model.get('Session').SessionID,
       },
@@ -64,7 +64,7 @@ class ReviewModel extends Model {
       },
     }
 
-    attributes = this.timelinePromotion(attributes, model)
+    // attributes = this.timelinePromotion(attributes, model)
 
     const options = {
       dataType: 'json',
@@ -136,7 +136,7 @@ class ReviewModel extends Model {
     // debugger
     // Timeline Promotion (2020).
     if (model.has('DiscountRate')) {
-      debugger
+      // debugger
       const specialDiscount = model.get('DiscountRate')
       // attributes.Gift = []
       const qty = cart.getItemQuantity('gift')

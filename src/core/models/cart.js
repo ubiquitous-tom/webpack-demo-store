@@ -279,19 +279,21 @@ class ShoppingCart extends Model {
     return parseFloat(total.toFixed(2))
   }
 
-  emptyCart() {
+  emptyCart(model) {
     this.set({
       monthly: {
-        amount: 0,
+        amount: model.get('monthlyStripePlan').SubscriptionAmount,
         quantity: 0,
-        total: 0,
+        total: model.get('monthlyStripePlan').SubscriptionAmount,
       },
       annual: {
-        amount: 0,
+        amount: model.get('annualtripePlan').SubscriptionAmount,
         quantity: 0,
-        total: 0,
+        total: model.get('annualtripePlan').SubscriptionAmount,
       },
     })
+    model.get('cart').unset('gift')
+    model.unset('membershipPromo')
   }
 }
 

@@ -1,6 +1,8 @@
 import { View } from 'backbone'
 import _ from 'underscore'
 
+import Popup from 'shared/elements/popup'
+
 import './stylesheet.scss'
 import template from './index.hbs'
 
@@ -33,6 +35,8 @@ class EditBillingInformationBillingAddress extends View {
     this.i18n = options.i18n
     this.editBillingInformationBillingAddressModel = new EditBillingInformationBillingAddressModel()
 
+    this.popup = new Popup({ model: this.model, i18n: this.i18n })
+
     this.listenTo(this.model, 'editBilling:undelegateEvents', () => {
       console.log('EditBillingInformationBillingAddress garbageCollect')
       this.remove()
@@ -43,67 +47,78 @@ class EditBillingInformationBillingAddress extends View {
       console.log(model, value)
       // debugger
       const optionsEls = this.countriesDropdown()
-      this.$el
-        .find('#billingcountry')
+      this
+        .$('#billingcountry')
         .html(optionsEls)
 
       this.selectDefaultCountry()
     })
 
-    this.listenTo(this.model, 'editBillingValidation:address', (paymentInfo, context) => {
-      console.log(paymentInfo, context)
+    this.listenTo(this.model, 'editBillingValidation:address', (paymentInfo) => {
+      console.log(paymentInfo)
       // debugger
-      if (
-        this.$el.find('#firstname')[0].checkValidity()
-        && this.$el.find('#lastname')[0].checkValidity()
-        && this.$el.find('#billingcountry')[0].checkValidity()
-        && this.$el.find('#billingzip')[0].checkValidity()
-      ) {
-        this.model.set({
-          editBillingForm: {
-            address_zip: this.$el.find('#billingzip').val(),
-            address_country: this.$el.find('#billingcountry').val(),
-          },
-        })
-        // let paymentInfo = model.get('paymentInfo')
-        const billingAddress = {
-          BillingAddress: {
-            Name: [this.$el.find('#firstname').val(), this.$el.find('#lastname').val()].join(' '),
-            Country: this.$el.find('#billingcountry').val(),
-            Zip: this.$el.find('#billingzip').val(),
-          },
-        }
-        const paymentInfoNew = { ...paymentInfo, ...billingAddress }
-        // debugger
-        // model.set({
-        //   paymentInfo,
-        // })
-        // debugger
-        const isLoggedIn = (this.model.has('Session') ? this.model.get('Session').LoggedIn : false)
-        if (!isLoggedIn) {
-          this.model.trigger('editBillingValidation:email', paymentInfoNew, context)
-        } else {
-          this.model.trigger('editBillingValidation:paymentMethod', paymentInfoNew, context)
-        }
+      const firstNameEl = this.$('#firstname')
+      firstNameEl.focus().blur()
+      if (_.isEmpty(firstNameEl.val()) || firstNameEl[0].checkValidity() === false) {
+        this.popup.render()
+        this.popup.setModelBody(this.i18n.t(firstNameEl.data('message')))
+        this.model.trigger('editBillingValidation:formError', firstNameEl.data('message'))
+        return
       }
-      // else {
-      //   context.$el.find('#firstname')[0].addEventListener('invalid', (e) => {
-      //     console.log(e)
-      //     context.$el.find('#firstname')[0].closest('.form-group').classList.add('has-error')
-      //   }, false)
-      //   context.$el.find('#lastname')[0].addEventListener('invalid', (e) => {
-      //     console.log(e)
-      //     context.$el.find('#firstname')[0].closest('.form-group').classList.add('has-error')
-      //   }, false)
-      //   context.$el.find('#billingcountry')[0].addEventListener('invalid', (e) => {
-      //     console.log(e)
-      //     context.$el.find('#firstname')[0].closest('.form-group').classList.add('has-error')
-      //   }, false)
-      //   context.$el.find('#billingzip')[0].addEventListener('invalid', (e) => {
-      //     console.log(e)
-      //     context.$el.find('#firstname')[0].closest('.form-group').classList.add('has-error')
-      //   }, false)
-      // }
+
+      const lastNameEl = this.$('#lastname')
+      lastNameEl.focus().blur()
+      if (_.isEmpty(lastNameEl.val()) || lastNameEl[0].checkValidity() === false) {
+        this.popup.render()
+        this.setModelBody(this.i18n.t(lastNameEl.data('message')))
+        this.model.trigger('editBillingValidation:formError', lastNameEl.data('message'))
+        return
+      }
+
+      const countryEl = this.$('#billingcountry')
+      countryEl.focus().blur()
+      if (_.isEmpty(countryEl.val()) || countryEl[0].checkValidity() === false) {
+        this.popup.render()
+        this.setModelBody(this.i18n.t(countryEl.data('message')))
+        this.model.trigger('editBillingValidation:formError', countryEl.data('message'))
+        return
+      }
+
+      const zipEl = this.$('#billingzip')
+      zipEl.focus().blur()
+      if (_.isEmpty(zipEl.val()) || zipEl[0].checkValidity() === false) {
+        this.popup.render()
+        this.setModelBody(this.i18n.t(zipEl.data('message')))
+        this.model.trigger('editBillingValidation:formError', zipEl.data('message'))
+        return
+      }
+      // debugger
+      // We need to set this to use later for not Guest account and No account customers
+      this.model.set({
+        editBillingForm: {
+          address_zip: zipEl.val(),
+          address_country: countryEl.val(),
+        },
+      })
+
+      const billingAddress = {
+        BillingAddress: {
+          Name: [
+            firstNameEl.val(),
+            lastNameEl.val(),
+          ].join(' '),
+          Country: countryEl.val(),
+          Zip: zipEl.val(),
+        },
+      }
+      const paymentInfoNew = { ...paymentInfo, ...billingAddress }
+      // debugger
+      const isLoggedIn = this.model.has('Session') ? this.model.get('Session').LoggedIn : false
+      if (!isLoggedIn) {
+        this.model.trigger('editBillingValidation:email', paymentInfoNew)
+      } else {
+        this.model.trigger('editBillingValidation:paymentMethod', paymentInfoNew)
+      }
     })
 
     this.render()
@@ -142,11 +157,14 @@ class EditBillingInformationBillingAddress extends View {
     } = e.target
     console.log('validate', id, value, validity, validationMessage)
     let isValidated = true
+    const el = this.$(`#${id}`)
     if (_.isEmpty(value) || validationMessage) {
-      this.$el.find(`#${id}`).parent('.form-group').removeClass('has-success').addClass('has-error')
+      el.parent('.form-group').removeClass('has-success').addClass('has-error')
+      this.popup.render()
+      this.popup.setBodyContent(this.i18n.t(el.data('message')))
       isValidated = false
     } else {
-      this.$el.find(`#${id}`).parent('.form-group').removeClass('has-error')
+      el.parent('.form-group').removeClass('has-error')
     }
 
     return isValidated
@@ -164,7 +182,7 @@ class EditBillingInformationBillingAddress extends View {
 
   selectDefaultCountry() {
     const billingCountry = this.model.get('BillingAddress')?.Country
-    this.$el.find(`#billingcountry option[value="${billingCountry}"]`).prop('selected', true)
+    this.$(`#billingcountry option[value="${billingCountry}"]`).prop('selected', true)
   }
 }
 

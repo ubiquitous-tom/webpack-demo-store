@@ -44,9 +44,9 @@ class MembershipApplyPromoCode extends View {
       let { message } = model.get('flashMessage')
       let type = false
       if (value) {
-        type = true
         const membershipPromo = this.membershipApplyPromoCodeModel.get('promo')
         if (!_.isEmpty(membershipPromo.SourceCodeMapping)) {
+          type = true
           this.model.set({ membershipPromo }, { context: this })
         } else {
           message = this.i18n.t('PROMOCODE-NOT-FOUND')

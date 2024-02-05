@@ -1,7 +1,8 @@
-import { Model, LocalStorage } from 'backbone'
+import { Model } from 'backbone'
 import _ from 'underscore'
 
-import { getLocalStorage } from 'backbone.localstorage/src/utils'
+// import { LocalStorage } from 'backbone'
+// import { getLocalStorage } from 'backbone.localstorage/src/utils'
 
 class EditBillingInformationBillingAddressModel extends Model {
   get defaults() {
@@ -311,9 +312,9 @@ class EditBillingInformationBillingAddressModel extends Model {
 
   initialize() {
     console.log('EditBillingInformationBillingAddressModel initialize')
-    this.localStorage = new LocalStorage(this.get('localStorageID'))
-    const storage = getLocalStorage(this)
-    console.log(storage, this)
+    // this.localStorage = new LocalStorage(this.get('localStorageID'))
+    // const storage = getLocalStorage(this)
+    // console.log(storage, this)
     // if (_.isEmpty(this.getStorageContent(this.localStorageID))) {
     this.fetch({
       ajaxSync: true,

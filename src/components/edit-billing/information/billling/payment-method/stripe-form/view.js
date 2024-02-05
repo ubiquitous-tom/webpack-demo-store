@@ -328,7 +328,7 @@ class StripeForm extends View {
           const updatedStripeCard = _.extend(stripeCard, { token: stripeCardTokenID })
           console.log(updatedStripeCard)
           this.parentView.model.set('newStripeCardInfo', updatedStripeCard)
-          this.parentView.model.set('stripeCardTokenID', stripeCardTokenID, { context: this.parentView })
+          this.parentView.model.set('stripeCardTokenID', stripeCardTokenID)
           this.model.set('stripeCardTokenID', stripeCardTokenID)
           // console.log(this, this.parentView)
           this.loadingStop()

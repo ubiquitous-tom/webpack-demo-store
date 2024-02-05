@@ -61,7 +61,7 @@ class InitializeApp extends Model {
       console.log(model, value)
       // debugger
       // this.gifting.discountRateGiftPricing(value)
-      // this.unset('DiscountRate', { silent: true })
+      this.unset('DiscountRate', { silent: true })
     })
 
     // this.on('change:monthlyStripePlan', (model, value) => {
@@ -112,8 +112,10 @@ class InitializeApp extends Model {
 
     // A Hack for local developement to mimic Java servlet
     // if (!docCookies.getItem('ATVSessionCookie')) {
-    //   docCookies.setItem('ATVSessionCookie', response.Session.SessionID)
-    // }
+    if (process.env.NODE_ENV === 'development') {
+      // debugger
+      docCookies.setItem('ATVSessionCookie', response.Session.SessionID)
+    }
 
     return data
   }

@@ -1,6 +1,8 @@
 import { View } from 'backbone'
 import _ from 'underscore'
 
+import Popup from 'shared/elements/popup'
+
 import './stylesheet.scss'
 import template from './index.hbs'
 
@@ -15,20 +17,24 @@ class EditBillingInformationBillingEmail extends View {
 
   get events() {
     return {
-      'input input#billingEmail': 'validateEmail',
+      // 'input input#billingEmail': 'validateEmail',
       'blur input#billingEmail': 'validateEmail',
-      'input input#billingEmailConfirm': 'validateEmail',
+      // 'input input#billingEmailConfirm': 'validateEmail',
       'blur input#billingEmailConfirm': 'validateEmail',
-      'input input#membershipPassword': 'validate',
+      // 'input input#membershipPassword': 'validate',
       'blur input#membershipPassword': 'validate',
-      'input input#membershipPasswordConfirm': 'validate',
+      // 'input input#membershipPasswordConfirm': 'validate',
       'blur input#membershipPasswordConfirm': 'validate',
+      'blur input#agree': 'validateCheckbox',
     }
   }
 
-  initialize() {
+  initialize(options) {
     console.log('EditBillingInformationBillingEmail initialize')
+    this.i18n = options.i18n
     this.cart = this.model.get('cart')
+
+    this.popup = new Popup({ model: this.model, i18n: this.i18n })
 
     this.listenTo(this.model, 'editBilling:undelegateEvents', () => {
       console.log('EditBillingInformationBillingEmail garbageCollect')
@@ -36,8 +42,8 @@ class EditBillingInformationBillingEmail extends View {
       // debugger
     })
 
-    this.listenTo(this.model, 'editBillingValidation:email', (paymentInfo, context) => {
-      console.log(paymentInfo, context)
+    this.listenTo(this.model, 'editBillingValidation:email', (paymentInfo) => {
+      console.log(paymentInfo)
       // debugger
       // Customer is not logged in
       // which means `billingEmail input exists
@@ -52,47 +58,83 @@ class EditBillingInformationBillingEmail extends View {
       // },
       //
       // in `paymentInfo` object
-      let paymentInfoNew = paymentInfo// model.get('paymentInfo')
-
-      if (this.$el.find('#billingEmail').length) {
-        // let paymentInfo = model.get('paymentInfo')
-        const emailEl = this.$el.find('#billingEmail')
-        const emailConfirmEl = this.$el.find('#billingEmailConfirm')
-        const passwordEl = this.$el.find('#membershipPassword')
-        const passwordConfirmEl = this.$el.find('#membershipPasswordConfirm')
+      if (this.$('#billingEmail').length) {
+        const emailEl = this.$('#billingEmail')
+        emailEl.focus().blur()
         if (
-          (emailEl[0].checkValidity() && this.validateEmailFormat(emailEl.val()))
-          && (emailConfirmEl[0].checkValidity() && this.validateEmailFormat(emailConfirmEl.val()))
-          && (emailEl.val().trim() === emailConfirmEl.val().trim())
+          (emailEl[0].checkValidity() === false)
+          && this.validateEmailFormat(emailEl.val())
         ) {
-          const customer = {
-            Customer: {
-              Email: emailEl.val().trim(),
-              MarketingOptIn: this.$el.find('#marketing-agree').val(),
-            },
-          }
-          paymentInfoNew = { ...paymentInfoNew, ...customer }
+          this.popup.render()
+          this.popup.setBodyContent(this.i18n.t(emailEl.data('message')))
+          this.model.trigger('editBillingValidation:formError', emailEl.data('message'))
+          return
         }
 
+        const emailConfirmEl = this.$('#billingEmailConfirm')
+        emailConfirmEl.focus().blur()
         if (
-          passwordEl[0].checkValidity()
-          && passwordConfirmEl[0].checkValidity()
-          && (passwordEl.val().trim() === passwordConfirmEl.val().trim())
+          (emailConfirmEl[0].checkValidity() === false)
+          && this.validateEmailFormat(emailConfirmEl.val())
         ) {
-          const credentials = {
-            Credentials: {
-              Password: passwordEl.val().trim(),
-            },
-          }
-          paymentInfoNew = { ...paymentInfoNew, ...credentials }
+          this.popup.render()
+          this.popup.setBodyContent(this.i18n.t(emailConfirmEl.data('message')))
+          this.model.trigger('editBillingValidation:formError', emailConfirmEl.data('message'))
+          return
+        }
+
+        const passwordEl = this.$('#membershipPassword')
+        passwordEl.focus().blur()
+        if (
+          (passwordEl[0].checkValidity() === false)
+          && this.validateEmailFormat(passwordEl.val())
+        ) {
+          this.popup.render()
+          this.popup.setBodyContent(this.i18n.t(passwordEl.data('message')))
+          this.model.trigger('editBillingValidation:formError', passwordEl.data('message'))
+          return
+        }
+
+        const passwordConfirmEl = this.$('#membershipPasswordConfirm')
+        passwordConfirmEl.focus().blur()
+        if (
+          (passwordConfirmEl[0].checkValidity() === false)
+          && this.validateEmailFormat(passwordConfirmEl.val())
+        ) {
+          this.popup.render()
+          this.popup.setBodyContent(this.i18n.t(passwordConfirmEl.data('message')))
+          this.model.trigger('editBillingValidation:formError', passwordConfirmEl.data('message'))
+          return
+        }
+
+        if (emailEl.val().trim() !== emailConfirmEl.val().trim()) {
+          this.popup.render()
+          this.popup.setBodyContent(this.i18n.t(emailConfirmEl.data('message')))
+          this.model.trigger('editBillingValidation:formError', emailConfirmEl.data('message'))
+          return
+        }
+
+        if (passwordEl.val().trim() !== passwordConfirmEl.val().trim()) {
+          this.popup.render()
+          this.popup.setBodyContent(this.i18n.t(passwordConfirmEl.data('message')))
+          this.model.trigger('editBillingValidation:formError', passwordConfirmEl.data('message'))
+          return
         }
         // debugger
-        // model.set({
-        //   paymentInfo,
-        // })
+        const paymentInfoNew = {
+          Customer: {
+            Email: emailEl.val().trim(),
+            MarketingOptIn: this.$('#marketing-agree').val(),
+          },
+          Credentials: {
+            Password: passwordEl.val().trim(),
+          },
+        }
+        // debugger
+        _.extend(paymentInfo, paymentInfoNew)
       }
       // debugger
-      this.model.trigger('editBillingValidation:paymentMethod', paymentInfoNew, context)
+      this.model.trigger('editBillingValidation:paymentMethod', paymentInfo)
     })
 
     const isLoggedIn = (this.model.has('Session') && this.model.get('Session').LoggedIn)
@@ -129,25 +171,58 @@ class EditBillingInformationBillingEmail extends View {
     const { id, value } = e.target
     console.log('validate', id, value)
     let isValidated = true
+    const el = this.$(`#${id}`)
     if (!this.validateEmailFormat(value)) {
-      this.$el.find(`#${id}`).parent('.form-group').removeClass('has-success').addClass('has-error')
+      el.parent('.form-group').removeClass('has-success').addClass('has-error')
+      this.popup.render()
+      this.popup.setBodyContent(this.i18n.t(el.data('message')))
       isValidated = false
     } else {
-      this.$el.find(`#${id}`).parent('.form-group').removeClass('has-error')
+      el.parent('.form-group').removeClass('has-error')
     }
 
     return isValidated
   }
 
   validate(e) {
-    const { id, value } = e.target
-    console.log('validate', id, value)
+    const {
+      id,
+      value,
+      validity,
+      validationMessage,
+    } = e.target
+    console.log('validate', id, value, validity, validationMessage)
     let isValidated = true
-    if (_.isEmpty(value)) {
-      this.$el.find(`#${id}`).parent('.form-group').removeClass('has-success').addClass('has-error')
+    const el = this.$(`#${id}`)
+    if (_.isEmpty(value) || validationMessage) {
+      el.parent('.form-group').removeClass('has-success').addClass('has-error')
+      this.popup.render()
+      this.popup.setBodyContent(this.i18n.t(el.data('message')))
       isValidated = false
     } else {
-      this.$el.find(`#${id}`).parent('.form-group').removeClass('has-error')
+      el.parent('.form-group').removeClass('has-error')
+    }
+
+    return isValidated
+  }
+
+  validateCheckbox(e) {
+    const {
+      id,
+      value,
+      validity,
+      validationMessage,
+    } = e.target
+    console.log('validate', id, value, validity, validationMessage)
+    let isValidated = true
+    const el = this.$(`#${id}`)
+    if (_.isEmpty(value) || validationMessage) {
+      el.parent('.form-group').removeClass('has-success').addClass('has-error')
+      this.popup.render()
+      this.popup.setBodyContent(this.i18n.t(el.data('message')))
+      isValidated = false
+    } else {
+      el.parent('.form-group').removeClass('has-error')
     }
 
     return isValidated
@@ -157,7 +232,7 @@ class EditBillingInformationBillingEmail extends View {
     /* eslint no-control-regex: 0 */
     const emailValidation = /^((([a-z]|\d|[!#$%&'*+\-/=?^_`{|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#$%&'*+\-/=?^_`{|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/
     const isEmailValidated = email.match(emailValidation)
-    return isEmailValidated
+    return !_.isEmpty(isEmailValidated)
   }
 }
 

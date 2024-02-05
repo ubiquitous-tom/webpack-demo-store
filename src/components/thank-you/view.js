@@ -211,35 +211,60 @@ class ThankYou extends View {
 
   applyMembershipPromoPrice(originalPrice, type) {
     if (this.model.has('membershipPromo')) {
+      const oldTotal = this.model.get(`${type}StripePlan`).SubscriptionAmount
       const oldPrice = [
         this.gifting.get('gift').CurrSymbol,
-        this.model.get(`${type}StripePlan`).SubscriptionAmount,
+        oldTotal,
       ].join('')
+
+      const newTotal = this.cart.getItemAmount(type)
       const newPrice = [
         this.gifting.get('gift').CurrencyDesc,
         this.gifting.get('gift').CurrSymbol,
-        Intl.NumberFormat(`${this.model.get('stripePlansLang')}-IN`, { maximumFractionDigits: 2, minimumFractionDigits: 2, trailingZeroDisplay: 'stripIfInteger' }).format(this.cart.getItemAmount('monthly')),
+        Intl.NumberFormat(`${this.model.get('stripePlansLang')}-IN`, { maximumFractionDigits: 2, minimumFractionDigits: 2, trailingZeroDisplay: 'stripIfInteger' }).format(newTotal),
       ].join('')
-      return `<span>${newPrice}<del> <span class="old-pricing">${oldPrice}</span></del></span>`
+      return (oldTotal !== newTotal)
+        ? `<span>${newPrice}<del> <span class="old-pricing">${oldPrice}</span></del></span>`
+        : originalPrice
     }
 
     return originalPrice
   }
 
   applyTotalPromoPrice(originalPrice) {
+    const isTimelinePromotion = this.model.has('DiscountRate')
     if (this.model.has('membershipPromo')) {
-      const oldTotal = this.getTotalAmount()
+      const oldTotal = isTimelinePromotion
+        ? this.getTotalAmountWithTimelinePromotion()
+        : this.getTotalAmount()
       const oldPrice = [
         this.gifting.get('gift').CurrencyDesc,
         this.gifting.get('gift').CurrSymbol,
         Intl.NumberFormat(`${this.model.get('stripePlansLang')}-IN`, { maximumFractionDigits: 2, minimumFractionDigits: 2, trailingZeroDisplay: 'stripIfInteger' }).format(oldTotal),
       ].join('')
-      const newTotal = this.cart.getTotalAmount()
+
+      const newTotal = isTimelinePromotion
+        ? this.getTotalAmountWithPromoCodeWithTimelinePromotion()
+        : this.cart.getTotalAmount()
       const newPrice = [
         this.gifting.get('gift').CurrSymbol,
         Intl.NumberFormat(`${this.model.get('stripePlansLang')}-IN`, { maximumFractionDigits: 2, minimumFractionDigits: 2, trailingZeroDisplay: 'stripIfInteger' }).format(newTotal),
       ].join('')
-      return `<span>${newPrice}<del> <span class="old-pricing">${oldPrice}</span></del></span>`
+
+      return (oldTotal !== newTotal)
+        ? `<span>${newPrice}<del> <span class="old-pricing">${oldPrice}</span></del></span>`
+        : originalPrice
+    }
+
+    if (isTimelinePromotion) {
+      const total = this.getTotalAmountWithTimelinePromotion()
+      const timelinePromotionPrice = [
+        this.gifting.get('gift').CurrencyDesc,
+        this.gifting.get('gift').CurrSymbol,
+        Intl.NumberFormat(`${this.model.get('stripePlansLang')}-IN`, { maximumFractionDigits: 2, minimumFractionDigits: 2, trailingZeroDisplay: 'stripIfInteger' }).format(total),
+      ].join('')
+
+      return timelinePromotionPrice
     }
 
     return originalPrice
@@ -257,6 +282,24 @@ class ThankYou extends View {
       total += value.quantity * fullAmount
     })
     return parseFloat(total.toFixed(2))
+  }
+
+  getTotalAmountWithTimelinePromotion() {
+    let total = 0
+    const monthly = this.cart.getItemQuantity('monthly') * this.model.get('monthlyStripePlan').SubscriptionAmount
+    const annual = this.cart.getItemQuantity('annual') * this.model.get('annualStripePlan').SubscriptionAmount
+    const gift = this.cart.get('gift').total
+    total = parseFloat((monthly + annual + gift).toFixed(2))
+    return total
+  }
+
+  getTotalAmountWithPromoCodeWithTimelinePromotion() {
+    let total = 0
+    const monthly = this.cart.getItemTotalAmount('monthly')
+    const annual = this.cart.getItemTotalAmount('annual')
+    const gift = this.cart.get('gift').total
+    total = parseFloat((monthly + annual + gift).toFixed(2))
+    return total
   }
 }
 

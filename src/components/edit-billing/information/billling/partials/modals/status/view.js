@@ -18,17 +18,19 @@ class EditBillingInformationBillingStatusModal extends View {
   render() {
     console.log('EditBillingInformationBillingStatusModal render')
     const html = this.template()
+
     this.$el
       .find('.form-trial-signup')
       .after(html)
+
+    this.setElement('#updateBillingModal')
+
     this.$el
-      .find('#updateBillingModal')
       .modal()
     // debugger
     this.$el
-      .find('#updateBillingModal')
       .on('hidden.bs.modal', () => {
-        this.$el.find('#updateBillingModal').remove()
+        this.$el.remove()
         this.model.trigger('membership:editBillingSubmitted')
       })
 

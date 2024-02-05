@@ -92,6 +92,7 @@ class MembershipSignUp extends View {
         }
         this.model.set(customer)
         // Backbone.history.navigate('editBilling', { trigger: true })
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
       }
       this.membershipSignUpModel.unset('checkProfileEmailSuccess', { silent: true })
       console.log(this.model.attributes)

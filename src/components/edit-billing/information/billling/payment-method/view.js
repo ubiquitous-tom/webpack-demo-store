@@ -1,6 +1,8 @@
 import { View } from 'backbone'
 import _ from 'underscore'
 
+import Popup from 'shared/elements/popup'
+
 import './stylesheet.scss'
 import template from './index.hbs'
 
@@ -22,8 +24,11 @@ class EditBillingInformationBillingPaymentMethod extends View {
     }
   }
 
-  initialize() {
+  initialize(options) {
     console.log('EditBillingInformationBillingPaymentMethod initialize')
+    this.i18n = options.i18n
+
+    this.popup = new Popup({ model: this, i18n: options.i18n })
 
     this.stripeForm = new StripeForm({ parentView: this, i18n: this.i18n })
     this.tempPaymentInfo = {}
@@ -34,47 +39,48 @@ class EditBillingInformationBillingPaymentMethod extends View {
       // debugger
     })
 
-    this.listenTo(this.model, 'editBillingValidation:paymentMethod', (paymentInfo, context) => {
-      console.log(paymentInfo, context)
+    this.listenTo(this.model, 'editBillingValidation:paymentMethod', (paymentInfo) => {
+      console.log(paymentInfo)
       this.tempPaymentInfo = paymentInfo
       // debugger
-      this.$el.find('#nameoncard').focus().blur()
-      this.stripeForm.generateToken()
+      const nameOnCardEl = this.$('#nameoncard')
+      nameOnCardEl.focus().blur()
+      // nameOnCardEl[0].checkValidity()
+      if (_.isEmpty(nameOnCardEl.val()) || nameOnCardEl[0].validationMessage) {
+        this.popup.render()
+        this.popup.setBodyContent(this.i18n.t(nameOnCardEl.data('message')))
+      } else {
+        this.stripeForm.generateToken()
+      }
     })
 
-    this.listenTo(this.model, 'change:stripeCardTokenID', (model, value, options) => {
-      console.log(model, value, options)
-      const { context } = options
+    /* eslint-disabled no-shadow: 0 */
+    this.listenTo(this.model, 'change:stripeCardTokenID', (model, value) => {
+      console.log(model, value)
       // debugger
-      if (
-        !_.isEmpty(this.$el.find('#nameoncard').val())
-        && this.$el.find('#nameoncard')[0].checkValidity()
-      ) {
-        if (value) {
-          let paymentInfo = this.tempPaymentInfo // model.get('paymentInfo')
-          const paymentMethod = {
-            PaymentMethod: {
-              NameOnAccount: this.$el.find('#nameoncard').val().trim(),
-              StripeToken: value,
-            },
-          }
-          paymentInfo = { ...paymentInfo, ...paymentMethod }
-          // debugger
-          // model.set({
-          //   paymentInfo,
-          // })
-          // debugger
-          this.model.trigger('editBillingValidation:stripeCardToken', paymentInfo, context)
+      if (value) {
+        let paymentInfo = this.tempPaymentInfo
+        const paymentMethod = {
+          PaymentMethod: {
+            NameOnAccount: this.$('#nameoncard').val().trim(),
+            StripeToken: value,
+          },
         }
+        paymentInfo = { ...paymentInfo, ...paymentMethod }
+        // debugger
+        this.model.trigger('editBillingValidation:stripeCardToken', paymentInfo)
       } else {
-        this.$el.find('#nameoncard').parent('.form-group').removeClass('has-success').addClass('has-error')
+        this.popup.render()
+        this.popup.setBodyContent(this.i18n.t('ENTER-VALID-CC'))
       }
     })
 
     this.listenTo(this.model, 'stripeCardTokenIDError', (error) => {
       console.log(error)
-      debugger
-      this.model.trigger('editBillingValidation:stripeCardTokenError', error)
+      // debugger
+      this.popup.render()
+      this.popup.setBodyContent(this.i18n.t('ENTER-VALID-CC'))
+      this.model.trigger('editBillingValidation:formError', error)
     })
 
     this.render()
@@ -100,11 +106,14 @@ class EditBillingInformationBillingPaymentMethod extends View {
     } = e.target
     console.log('validate', id, value, validity, validationMessage)
     let isValidated = true
+    const el = this.$(`#${id}`)
     if (_.isEmpty(value) || validationMessage) {
-      this.$el.find(`#${id}`).parent('.form-group').removeClass('has-success').addClass('has-error')
+      el.parent('.form-group').removeClass('has-success').addClass('has-error')
+      this.popup.render()
+      this.popup.setBodyContent(this.i18n.t(el.data('message')))
       isValidated = false
     } else {
-      this.$el.find(`#${id}`).parent('.form-group').removeClass('has-error')
+      el.parent('.form-group').removeClass('has-error')
     }
 
     return isValidated

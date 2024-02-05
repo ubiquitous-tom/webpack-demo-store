@@ -18,17 +18,19 @@ class EditBillingInformationBillingSignInModal extends View {
   render() {
     console.log('EditBillingInformationBillingSignInModal render')
     const html = this.template()
+
     this.$el
       .find('.form-trial-signup')
       .after(html)
+
+    this.setElement('#signInModal')
+
     this.$el
-      .find('#signInModal')
       .modal()
     // debugger
     this.$el
-      .find('#signInModal')
       .on('hidden.bs.modal', () => {
-        this.$el.find('#signInModal').remove()
+        this.$el.remove()
         this.model.trigger('membership:editBillingSignIn')
       })
 
