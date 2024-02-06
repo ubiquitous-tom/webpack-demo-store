@@ -39,6 +39,7 @@ class InitializeApp extends Model {
         stripePlansCountry: model.get('stripePlansCountry'),
         stripePlansLang: model.get('stripePlansLang'),
       })
+      this.setAllowedGifting()
     })
 
     this.stripePlans.on('change:annualStripePlan', (model, value) => {
@@ -171,6 +172,58 @@ class InitializeApp extends Model {
     console.log(this, model)
     debugger
     this.fetchInitializeApp()
+  }
+
+  setAllowedGifting() {
+    const cloudFrontCountryHeader = this.get('stripePlansCountry')
+    let groupName = 'United States' // Set default groupName to the US
+    // debugger
+    switch (cloudFrontCountryHeader) {
+      case 'AU':
+      case 'NZ':
+        groupName = 'Australia'
+        break
+      case 'CA':
+        groupName = 'Canada'
+        break
+      case 'FK':
+      case 'GB':
+      case 'GG':
+      case 'GI':
+      case 'IM':
+      case 'JE':
+      case 'MT':
+        groupName = 'United Kingdom'
+        break
+      case 'AS':
+      case 'GU':
+      case 'MH':
+      case 'PR':
+      case 'UM':
+      case 'US':
+      case 'USMIL':
+      case 'VI':
+        groupName = 'United States'
+        break
+      default:
+        groupName = ''
+    }
+
+    const isGroupNameAllowedGifting = (groupName.length > 0)
+    const isGroupNameUK = (groupName === 'United Kingdom')
+    const isGroupNameAU = (groupName === 'Australia')
+    const isAllowedGifting = (groupName.length > 0)
+    const isUK = (groupName === 'United Kingdom')
+    const isAU = (groupName === 'Australia')
+
+    this.set({
+      isGroupNameAllowedGifting,
+      isGroupNameUK,
+      isGroupNameAU,
+      isAllowedGifting,
+      isUK,
+      isAU,
+    })
   }
 }
 

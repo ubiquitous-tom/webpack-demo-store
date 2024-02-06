@@ -11,7 +11,7 @@ class ATVView extends View {
     this.i18n = options.i18n
     // this.router = new Workspace({ model: this.model, i18n: this.i18n })
 
-    this.setAllowedGifting()
+    // this.setAllowedGifting()
   }
 
   render() {
