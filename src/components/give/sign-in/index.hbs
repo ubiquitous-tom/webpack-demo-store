@@ -1,4 +1,4 @@
-<div id="give-subscribe-sign-in-section" class="row">
+<div id="give-subscribe-sign-in-section">
 
   <article class="col-md-7">
 
@@ -20,7 +20,7 @@
 
     <aside class="sign-in">
 
-      <form>
+      <form id="sign-in-form">
 
         <h4>{{t "MEMBER-SIGNIN"}}</h4>
 
@@ -34,7 +34,7 @@
             id="email"
             name="email"
             type="email"
-            pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+            pattern="[^@\\\s]+@[^@\s]+\.[^@\s]+"
             required
           />
         </div>

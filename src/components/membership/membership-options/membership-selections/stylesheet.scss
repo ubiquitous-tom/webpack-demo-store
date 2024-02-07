@@ -1,0 +1,31 @@
+#membershipItem {
+  .plan {
+    display: flex;
+    flex-direction: row-reverse;
+
+    input {
+      &[type="checkbox"],
+      &[type="radio"] {
+        margin: 4px 0 0;
+        margin-top: 1px\9;
+        line-height: normal;
+      }
+    }
+
+    label {
+      margin: 0;
+      padding: 0 15px;
+      .h4 {
+        margin: 0;
+      }
+    }
+
+    del {
+      color: red;
+      span {
+        color: #000;
+        margin-left: 0.25em;
+      }
+    }
+  }
+}

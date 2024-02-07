@@ -33,9 +33,11 @@ class ReviewModal extends View {
   render() {
     console.log(this.model.attributes)
     const html = this.template()
-    this.$el
-      .find('.review.store.container')
+    this
+      .$('.review.store.container')
       .append(html)
+
+    this.setElement('#reviewPurchaseModal')
 
     return this
   }
@@ -43,47 +45,43 @@ class ReviewModal extends View {
   modalClear() {
     this.render()
     // debugger
-    this.$el
-      .find('#reviewPurchaseModal .modal-header h4')
+    this
+      .$('.modal-header h4')
       .html(`<p>${this.i18n.t('CANCELED-ORDER')}</p>`)
 
-    this.$el
-      .find('#reviewPurchaseModal .modal-body')
+    this
+      .$('.modal-body')
       .html(`<p>${this.i18n.t('NO-ACCOUNT-CHARGES')}</p><p>${this.i18n.t('CAN-EDIT-ORDER')}</p>`)
 
-    this.$el.find('#reviewPurchaseModal').on('hide.bs.modal', (e) => {
+    this.$el.on('hide.bs.modal', (e) => {
       console.log('#reviewPurchaseModal hide.bs.modal', e)
       this.$el
-        .find('#reviewPurchaseModal')
         .remove()
       this.reviewModel.trigger('modalClearClose')
     })
 
     this.$el
-      .find('#reviewPurchaseModal')
       .modal()
   }
 
   modalError(message) {
     this.render()
     // debugger
-    this.$el
-      .find('#reviewPurchaseModal .modal-header h4')
+    this
+      .$('.modal-header h4')
       .html(`<p>${this.i18n.t('ERROR')}</p>`)
 
-    this.$el
-      .find('#reviewPurchaseModal .modal-body')
+    this
+      .$('.modal-body')
       .html(`<p>${message}</p>`)
 
-    this.$el.find('#reviewPurchaseModal').on('hidden.bs.modal', (e) => {
+    this.$el.on('hidden.bs.modal', (e) => {
       console.log('#reviewPurchaseModal hide.bs.modal', e)
       this.$el
-        .find('#reviewPurchaseModal')
         .remove()
     })
 
     this.$el
-      .find('#reviewPurchaseModal')
       .modal()
   }
 }

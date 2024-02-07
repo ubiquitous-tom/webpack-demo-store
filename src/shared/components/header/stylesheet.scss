@@ -1,444 +1,251 @@
 /* NAVBAR */
 .atv-logo {
-    width: 145px;
-    margin-top: 16px;
-    margin-left: 11px;
+  width: 145px;
+  margin-top: 15px;
+  margin-left: 5px;
 }
 
 .navbar {
-    background: #161616;
-    border: none;
-    height: 56px;
-    // box-shadow: 0 0 10px -5px #050505;
-    // -moz-box-shadow: 0 0 10px -5px #000000;
-    // -webkit-box-shadow: 0 0 10px -5px #050505;
-}
+  background: #0b1733;
+  border: none;
+  box-shadow: 0 0 30px -5px #0a132a;
+  height: 56px;
+  margin-bottom: 0;
 
-.navbar-nav {
-    padding: 0px 0px 0px 20px;
-}
-
-.navbar-nav>li>a {
-    padding: 27px 15px 27px;
-    // font-family: futura-pt, sans-serif;
-    // font-family: "Oxygen", sans-serif;
-    font-family: 'source sans pro', sans-serif;
-    letter-spacing: .225rem;
-    font-weight: 700;
-    font-style: normal;
-    display: inline-block;
-    text-transform: uppercase;
-    font-size: 1.4rem;
-    color: #fff;
-}
-
-.nav>li>a:hover {
-    background: none;
-}
-
-.nav>li>a:focus {
-    background: transparent;
-}
-
-.navbar-collapse {
-    margin-top: 5px;
-    box-shadow: none;
-    padding-left: 0px;
-}
-
-.navbar-toggle {
-    display: block;
-    margin-top: 14px;
-    float: left;
-    margin-right: -10px;
-}
-
-// .navbar-right {
-//     display: block;
-//     position: relative;
-//     float: right;
-//     margin-right: 0px;
-// }
-
-// .navbar-right-ul {
-//     float: right;
-//     width: 150px;
-//     margin-top: 0px;
-// }
-
-.navbar-right {
-    display: block;
-    position: relative;
+  .navbar-right-ul {
     float: right;
-    margin-right: 0px;
-}
-
-.navbar-right-ul {
-    float: right;
-    text-align: right;
-    width: auto;
-    margin-top: 0px;
     list-style: none;
-}
-
-.navbar-right-ul {
-    /*width:310px;*/
-    text-transform: uppercase;
-}
-
-.navbar-toggle .icon-bar {
-    border-radius: 0;
-    width: 15px;
-    height: 1px;
-}
-
-.log-in {
-    color: #fff;
-    display: inline-block;
-    // font-family: futura-pt, sans-serif;
-    // font-family: "Oxygen", sans-serif;
-    font-family: 'source sans pro', sans-serif;
-    font-size: 10.3px;
-    font-weight: 400;
-    letter-spacing: 0.17em;
-    margin-top: 20px;
-    text-transform: uppercase;
-    margin-right: 0px;
-    margin-left: 10px;
-}
-
-.free-month {
-    color: #fff;
-    display: inline-block;
-    // font-family: futura-pt, sans-serif;
-    // font-family: "Oxygen", sans-serif;
-    font-family: 'source sans pro', sans-serif;
-    font-size: 13.8px;
-    font-weight: 400;
-    letter-spacing: 0.17em;
-    margin-top: 15px;
-    text-transform: uppercase;
-    padding: 12px;
-    background: rgba(11, 152, 184, 0.85) none repeat scroll 0 0;
-    margin-left: 8px;
-}
-
-#signup {
-    margin-bottom: 0px;
-}
-
-/* ACORN REBRANDING 2019-08-15 */
-.navbar {
-    background: #0b1733;
-    box-shadow: 0 0 30px -5px #0A132A;
-}
-
-/* DROPDOWN */
-.accountIcon {
-    margin-left: 5px;
-}
-
-.menuOptions>span,
-.subnav>li {
-    -moz-user-select: none;
-}
-
-.accountOptions {
-    vertical-align: middle;
-}
-
-#clicker {
-    padding: 0;
-}
-
-.menuOptions {
-    color: #fff;
-    cursor: pointer;
-    display: inline-block;
-    // font-family: futura-pt, sans-serif;
-    // font-family: "Oxygen", sans-serif;
-    font-family: 'source sans pro', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    padding: 19px 15px;
-    text-transform: uppercase;
-    width: 100%;
-}
-
-.menuOptions>span,
-.subnav>li {
-    -moz-user-select: none;
-}
-
-.menuOptions #clicker {
-    border: 0 none;
-    float: none;
     margin: 0;
-}
-
-.drop-select {
-    background: rgba(9, 9, 9, 0.9) none repeat scroll 0 0;
-    border-top: medium none;
-    display: none;
-    margin: 0 0 100%;
-    padding: 10px 0;
-    position: relative;
-    width: 160px;
-    margin-left: -30px;
-}
-
-.drop-select li {
-    color: #fff;
-    // font-family: futura-pt, sans-serif;
-    // font-family: "Oxygen", sans-serif;
-    font-family: 'source sans pro', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    /* padding: 18px 15px; */
-    text-align: left;
-    text-transform: uppercase;
-    list-style: none;
-}
-
-.drop-select li:hover {
-    background: #191919 none repeat scroll 0 0;
-}
-
-.drop-select li a {
-    color: #fff;
-    padding: 25px 30px;
-    display: inline-block;
-}
-
-// .navbar-right-ul.accountUser {
-//   max-width: 155px;
-// }
-.navbar-right-ul.accountUser>li {
     text-align: right;
-    width: 100%;
-}
+    text-transform: uppercase;
+    width: auto;
 
-.navbar-collapse .menuOptions {
-    min-width: 200px;
-    padding: 15px;
-}
+    .navbar-right {
+      display: block;
+      float: right;
+      margin-right: 0px;
+      position: relative;
 
-.navbar-collapse .drop-select {
-    min-width: 190px;
-    width: 100%;
-}
+      &.sign-up {
+        display: none;
+      }
 
-.accountOptions {
-    vertical-align: middle;
-}
+      .log-in {
+        color: #fff;
+        display: inline-block;
+        // font-family: futura-pt, sans-serif;
+        // font-family: "Oxygen", sans-serif;
+        font-family: "source sans pro", sans-serif;
+        font-size: 10.3px;
+        font-weight: 400;
+        letter-spacing: 0.17em;
+        margin: 20px 0;
+        text-transform: uppercase;
+      }
 
-.accountIcon {
-    margin-left: 5px;
+      .free-month {
+        color: #fff;
+        display: inline-block;
+        // font-family: futura-pt, sans-serif;
+        // font-family: "Oxygen", sans-serif;
+        font-family: "source sans pro", sans-serif;
+        font-size: 13.8px;
+        font-weight: 400;
+        letter-spacing: 0.17em;
+        margin-top: 15px;
+        text-transform: uppercase;
+        padding: 12px;
+        background: rgba(11, 152, 184, 0.85) none repeat scroll 0 0;
+        margin-left: 8px;
+      }
+    }
+  }
+
+  .navbar-header {
+    height: 75px;
+
+    .navbar-toggle {
+      display: block;
+      margin: 23px 0;
+      float: left;
+
+      .icon-bar {
+        background: #fff none repeat scroll 0 0;
+        border-radius: 0;
+        width: 15px;
+        height: 1px;
+      }
+    }
+  }
+
+  .navbar-collapse {
+    background: #0b1733;
+    left: 0;
+    max-height: fit-content;
+    position: absolute;
+    top: 56px;
+    width: 290px;
+
+    .navbar-nav {
+      margin: 0;
+      padding: 0px 0px 0px 20px;
+
+      li {
+        border-top: thin solid #141414;
+        display: inline-block;
+        width: 100%;
+
+        a {
+          color: #fff;
+          font-family: "source sans pro", sans-serif;
+          font-weight: 700;
+          font-size: 1rem;
+          font-style: normal;
+          float: left;
+          letter-spacing: 0.225rem;
+          padding: 27px 15px 27px;
+          // font-family: futura-pt, sans-serif;
+          // font-family: "Oxygen", sans-serif;
+          text-transform: uppercase;
+
+          a:hover {
+            background: none;
+          }
+
+          a:focus {
+            background: transparent;
+          }
+        }
+      }
+    }
+  }
 }
 
 /* ACORN REBRANDING 2019-08-15 */
-.drop-select {
-    background: #0b1733;
-}
+// .navbar {
+//   background: #0b1733;
+//   box-shadow: 0 0 30px -5px #0a132a;
+// }
 
-.drop-select li:hover {
-    background: #008989;
+.navbar-right-ul.accountUser > li {
+  text-align: right;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
+  /* NAVBAR */
+  .navbar {
+    height: 75px;
 
-    /* NAVBAR */
-    .navbar {
-        height: 75px;
-    }
-
-    .navbar-nav>li>a {
-        font-size: 1.4rem;
-    }
-
-    .atv-logo {
-        width: 215px;
-        margin-top: 20px;
-        margin-left: 0px;
-    }
-
-    .navbar-collapse {
-        margin-top: 13px;
-    }
-
-    // .navbar-right-ul {
-    //     width: 265px;
-    // }
-
-    .navbar-toggle {
-        margin-top: 22px;
-        margin-right: 0px;
-    }
-
-    .navbar-toggle .icon-bar {
-        width: 22px;
-        height: 1.7px;
-    }
-
-    .log-in {
-        font-size: 1.35rem;
-        margin-top: 27px;
-        margin-left: 20px;
-    }
-
-    /* DROPDOWN */
-    .drop-select {
-        width: 220px;
-        margin-left: 0px;
-    }
-
-    #cover {
-        margin: 15px 0 0 5px;
-    }
-
-    .menuOptions {
-        padding: 10px 15px;
-    }
-
-    .menuOptions,
-    .navbar-collapse .menuOptions {
-        font-size: 13.8px;
-        padding: 27px 0 0;
-        text-align: center;
-        width: 190px;
-    }
-
-    .drop-select {
-        /* left: -15px; */
-        top: 26px;
-    }
-
-    .drop-select li {
-        font-size: 12.5px;
-        /* padding: 25px 30px; */
-    }
-}
-
-@media all and (min-width: 1300px) {
-
-    /* NAVBAR */
-    .navbar-toggle {
-        display: none;
-    }
-
-    .navbar-collapse {
-        margin: 0px;
-    }
-
-    #store-link {
-        display: none;
-    }
-}
-
-@media (min-width: 1300px) {
-    #store-link {
-        display: block;
-    }
-}
-
-@media (max-width: 1300px) {
-
-    /* NAVBAR */
-    .navbar-toggle .icon-bar {
-        background: #fff none repeat scroll 0 0;
+    .navbar-right-ul {
+      .navbar-right {
+        .log-in {
+          font-size: 1.4rem;
+          margin: 26px;
+        }
+      }
     }
 
     .navbar-header {
-        float: none;
-        position: fixed;
-    }
+      .atv-logo {
+        width: 215px;
+        margin-top: 20px;
+        margin-left: 0px;
+      }
 
-    .nav>li {
-        display: inline-block;
-        position: relative;
-        width: 100%;
-        margin-bottom: 8px;
-        padding-left: 15px;
-        padding-top: 8px;
-        border-top: thin solid #141414;
-    }
-
-    .navbar-collapse {
-        border-top: none;
-        background: #0b0b0b none repeat scroll 0 0;
+      .navbar-toggle {
+        margin: 31px 0;
+        .icon-bar {
+          width: 22px;
+          height: 1.7px;
+        }
+      }
     }
 
     .navbar-collapse.collapse {
-        display: none !important;
+      display: none !important;
+      top: 75px;
+      left: 0;
+      width: 290px;
     }
-
-    .navbar-nav {
-        float: none !important;
-        margin: 0 -15px;
-    }
-
-    .navbar-nav>li {
-        float: none;
-    }
-
-    .navbar-nav>li>a {
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-
-    .navbar-text {
-        float: none;
-        margin: 15px 0;
-    }
-
     .navbar-collapse.collapse.in {
-        display: block !important;
+      display: inline-block !important;
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .navbar {
+    .navbar-right-ul {
+      .navbar-right {
+        &.sign-up {
+          display: inline-block;
+        }
+        .log-in {
+          font-size: 1.4rem;
+          margin: 29px 0 24px;
+        }
+      }
     }
 
-    .navbar-fixed-top .navbar-collapse,
-    .navbar-fixed-bottom .navbar-collapse {
-        max-height: none;
+    .navbar-header {
+      .navbar-toggle {
+        display: none;
+      }
     }
 
-    /* NAVBAR-SLIDEOUT */
-    .collapsing {
-        overflow: hidden !important;
+    .navbar-collapse.collapse {
+      display: inline-block !important;
+      width: auto;
+      top: 0;
+      left: 280px;
+      .navbar-nav {
+        li {
+          width: auto;
+          a {
+            font-size: 1.4rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 1300px) {
+  /* NAVBAR */
+  .navbar {
+    .navbar-right-ul {
+      .navbar-right {
+        .log-in {
+          margin: 30px 0;
+        }
+      }
     }
 
-    .side-collapse-container {
-        width: 100%;
-        position: relative;
-        left: 0;
-        transition: left 0.4s;
+    .narvar-header {
+      .navbar-toggle {
+        display: none;
+      }
     }
+  }
+}
 
-    .side-collapse-container.out {
-        right: 320px;
+@media (min-width: 1300px) {
+  .navbar {
+    .navbar-collapse.collapse {
+      left: 315px;
     }
-
-    .side-collapse {
-        top: 60px;
-        bottom: 0;
-        left: 0px;
-        width: 290px;
-        position: fixed;
-        overflow: hidden;
-        transition: width 0.4s;
-        background: #0b1733;
-    }
-
-    .side-collapse.in {
-        width: 0;
-    }
+  }
 }
 
 @media (max-width: 768px) {
-
-    /* NAVBAR-SLIDEOUT */
-    .side-collapse {
-        top: 51px;
-        right: -15px;
+  .narbar {
+    .navbar-right-ul {
+      .log-in {
+        font-size: 1.35rem;
+        margin-top: 27px;
+        margin-left: 20px;
+      }
     }
+  }
 }

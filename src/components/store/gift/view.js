@@ -30,7 +30,7 @@ class StoreHomeGift extends View {
       GiftDeviceImg,
     }
     const html = this.template(attributes)
-    console.log(this.$el, html)
+    // console.log(this.$el, html)
     this.$el.append(html)
 
     return this

@@ -23,7 +23,7 @@ class MembershipSignIn extends View {
       'input input#password': 'validate',
       'blur input#password': 'validate',
       'click #backToSignup': 'signUpTemplate',
-      'submit form': 'signIn',
+      'submit #sign-in-form': 'signIn',
     }
   }
 
@@ -33,6 +33,12 @@ class MembershipSignIn extends View {
 
     this.membershipSignInModel = new MembershipSignInModel()
     this.popup = new MembershipSignInModal({ model: this.model, i18n: this.i18n })
+
+    this.listenTo(this.model, 'membership:undelegateEvents', () => {
+      console.log('MembershipSignIn garbageCollect')
+      this.remove()
+      // debugger
+    })
 
     this.listenTo(this.membershipSignInModel, 'change:signInSuccess', (model, value) => {
       console.log(model, value)

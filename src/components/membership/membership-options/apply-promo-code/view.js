@@ -17,7 +17,7 @@ class MembershipApplyPromoCode extends View {
 
   get events() {
     return {
-      'click #apply-promo-code button': 'applyPromoCode',
+      'submit #apply-promo-code-form': 'applyPromoCode',
       'click #promo-clear': 'clearPromoCode',
     }
   }

@@ -1,9 +1,9 @@
 <div class="navbar navbar-fixed-top" role="navigation">
-  {{!log this level="error"}}
   <div class="container">
-    <ul class="navbar-right-ul">
 
+    <ul class="navbar-right-ul">
       {{#if isLoggedIn}}
+
         <li class="navbar-right">
           <a class="log-in" href="#logout">
             {{t "LOG-OUT"}}
@@ -19,8 +19,9 @@
         {{/if}}
 
       {{else}}
+
         <li class="navbar-right sign-up">
-          <a class="free-month" href="{{signupEnv}}/">
+          <a class="free-month" href="//{{signupEnv}}">
             {{t "START-FREE-TRIAL-LC"}}
           </a>
         </li>
@@ -28,24 +29,25 @@
         <li class="navbar-right">
           <a
             class="log-in"
-            href="{{signupEnv}}/signin.jsp?OperationalScenario=STORE"
+            href="//{{signupEnv}}/signin.jsp?OperationalScenario=STORE"
           >
             {{t "LOG-IN"}}
           </a>
         </li>
-      {{/if}}
 
+      {{/if}}
     </ul>
 
     <div class="navbar-header">
-      <a href="//{{environment}}acorn.tv/">
-        <img src="{{atvlogo}}" class="atv-logo" /></a>
+      <a href="https://{{environment}}acorn.tv">
+        <img src="{{atvlogo}}" class="atv-logo" />
+      </a>
       <button
-        data-toggle="collapse-side"
+        data-toggle="collapse"
         data-target=".side-collapse"
-        data-target-2=".side-collapse-container"
         type="button"
         class="navbar-toggle"
+        aria-expanded="false"
       >
         <div>
           <span class="icon-bar"></span>
@@ -55,7 +57,7 @@
       </button>
     </div>
 
-    <div class="navbar-collapse side-collapse in">
+    <div class="navbar-collapse side-collapse collapse">
       <ul class="nav navbar-nav">
         {{#each navData}}
           <li>

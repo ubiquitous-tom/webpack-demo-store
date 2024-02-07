@@ -20,25 +20,28 @@ class StoreHomeHero extends View {
     )
     this.model.set({ isRecordedBook })
 
+    this.render()
+  }
+
+  render() {
+    console.log('StoreHomeHero render')
+
     // Hide Gifting when not in allowed groupname
     const isGroupNameAllowedGifting = this.model.get('isGroupNameAllowedGifting')
     let landingHeroClasses = 'col-sm-6 col-md-4 col-lg-4'
     if (!isGroupNameAllowedGifting) {
       landingHeroClasses = 'col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2'
     }
-    this.model.set({
+    const attributes = {
       isGroupNameAllowedGifting,
       landingHeroClasses,
-    })
+      signupEnv: this.model.get('signupEnv'),
+      monthlyPrice: this.model.get('monthlyStripePlan').SubscriptionAmount,
+    }
 
-    this.render()
-  }
-
-  render() {
-    console.log('StoreHomeHero render')
-    console.log(this.model.attributes)
-    const html = this.template(this.model.attributes)
-    console.log(this.$el, html)
+    console.log(this.model.attributes, attributes)
+    const html = this.template(attributes)
+    // console.log(this.$el, html)
     this.$el.append(html)
 
     return this

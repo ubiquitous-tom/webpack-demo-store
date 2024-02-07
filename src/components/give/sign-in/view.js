@@ -23,7 +23,7 @@ class GiveSignIn extends View {
       'input input#password': 'validate',
       'blur input#password': 'validate',
       'change #becomeMember': 'getAnnualMembership',
-      'submit form': 'signIn',
+      'submit #sign-in-form': 'signIn',
     }
   }
 

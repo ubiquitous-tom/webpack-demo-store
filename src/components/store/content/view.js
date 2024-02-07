@@ -22,7 +22,7 @@ class StoreHomeContent extends View {
     console.log('StoreHomeContent render')
     console.log(this.model.attributes)
     const html = this.temlate(this.model.attributes)
-    console.log(this.$el, html)
+    // console.log(this.$el, html)
     this.$el.append(html)
 
     return this

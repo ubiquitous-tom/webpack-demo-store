@@ -106,6 +106,12 @@
   display: inline-block;
 }
 
+@media (max-width: 768px) {
+  .thanks.store.container {
+    margin-top: 5.5em;
+  }
+}
+
 @media (max-width: 480px) {
   .thanks .order-items img {
     margin-left: 0;

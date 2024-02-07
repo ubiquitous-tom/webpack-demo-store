@@ -35,6 +35,12 @@ class MembershipSignUp extends View {
     //   && this.model.get('Membership').Store === 'RECORDEDBOOKS'
     // )
 
+    this.listenTo(this.model, 'membership:undelegateEvents', () => {
+      console.log('MembershipSignUp garbageCollect')
+      this.remove()
+      // debugger
+    })
+
     this.listenTo(this.model, 'membership:checkout', (model, value) => {
       console.log(model, value)
       // debugger
@@ -68,6 +74,7 @@ class MembershipSignUp extends View {
 
     this.listenTo(this.model, 'membership:accountAlreadyExist', () => {
       // debugger
+      this.model.unset('membership:accountAlreadyExist', { silent: true })
       this.renderSignInTemplate()
     })
 

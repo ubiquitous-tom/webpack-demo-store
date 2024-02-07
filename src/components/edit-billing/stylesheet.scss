@@ -1,3 +1,28 @@
 .billing.store.container {
-  margin-top: 1.5em;
+  margin-top: 5.5em;
+}
+
+@media (min-width: 768px) {
+  .billing.store.container {
+    margin-top: 1.5em;
+  }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  // Hack to fix base.scss after migration
+  .col-md-12,
+  .col-md-11,
+  .col-md-10,
+  .col-md-9,
+  .col-md-8,
+  .col-md-7,
+  .col-md-6,
+  .col-md-5,
+  .col-md-4,
+  .col-md-3,
+  .col-md-2,
+  .col-md-1 {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 }

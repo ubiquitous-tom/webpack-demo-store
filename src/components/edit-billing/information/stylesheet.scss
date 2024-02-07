@@ -1,0 +1,16 @@
+.help-form {
+  font-size: 0.6em;
+  font-family: inherit;
+  font-weight: normal;
+  position: relative;
+  line-height: 1.5em;
+  color: #424242;
+}
+
+@media (min-width: 768px) {
+  .help-form {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+}

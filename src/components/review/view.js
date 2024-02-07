@@ -135,7 +135,9 @@ class Review extends View {
           estimatedTaxPrice,
         })
 
-        this.render()
+        this
+          .$('.tax-placeholder')
+          .html(estimatedTaxPrice)
       }
     })
 

@@ -1,92 +1,99 @@
-.give.store.container {
-    margin-top: 1.5em;
-}
-
-.give .order-items img {
-    margin-left: -1.75em;
+.give {
+  &.store {
+    &.container {
+      margin-top: 1.5em;
+    }
+  }
+  .order-items {
+    img {
+      margin-left: -1.75em;
+    }
+  }
 }
 
 .giveDetails {
-    margin-bottom: 2em;
-}
-
-.giveDetails img {
+  margin-bottom: 2em;
+  img {
     float: right;
     margin-bottom: 16px;
     width: 110px;
+  }
 }
 
 section.benefits {
-    margin: 1.6em 0 3em 0;
-}
-
-section.benefits h3 {
-    font-size: 1.3em;
-    margin-bottom: .4em;
-}
-
-section.benefits span {
-    width: 92%;
-    display: inline-block;
+  margin: 1.6em 0 3em 0;
+  &.benefits {
+    h3 {
+      font-size: 1.3em;
+      margin-bottom: 0.4em;
+    }
+    span {
+      width: 92%;
+      display: inline-block;
+    }
+  }
 }
 
 .order-item {
-    overflow: hidden;
-    padding: 2.5em 2.1em;
-    background: #fff;
-    border: 0.1em solid rgba(0, 0, 0, 0.075);
-    border-top: none;
-    box-sizing: border-box;
-}
-
-.order-item:first-child {
+  overflow: hidden;
+  padding: 2.5em 2.1em;
+  background: #fff;
+  border: 0.1em solid rgba(0, 0, 0, 0.075);
+  border-top: none;
+  box-sizing: border-box;
+  &:first-child {
     border-radius: 0.1em 0.1em 0 0;
     border-top: 0.1em solid rgba(0, 0, 0, 0.075);
-}
+  }
 
-.order-item:last-child {
+  &:last-child {
     border-radius: 0;
-}
-
-.order-item img {
+  }
+  img {
     margin-left: 2.25em;
     width: 125px;
-}
+  }
 
-.order-item .price {
+  .price {
     color: #424242;
     font-size: 1.5em;
     line-height: 2em;
-}
+  }
 
-.order-item hr {
-    border: .5px solid rgba(0, 0, 0, 0.075);
+  hr {
+    border: 0.5px solid rgba(0, 0, 0, 0.075);
     max-width: 27em;
-}
+  }
 
-.order-item h3 {
+  h3 {
     font-size: 1.8em;
     color: #494949;
     line-height: 1.25em;
     font-weight: lighter;
     font-weight: 400;
+  }
 }
 
 @media (max-width: 768px) {
-    // .give .row-fluid [class*="span"]:first-child {}
-
-    .give {
-        .order-items img {
-            margin-left: 0;
-            margin-bottom: 2em;
-        }
-
-        ul.details {
-            margin-bottom: 2em;
-        }
-
-        select#qty {
-            margin-bottom: 1.5em !important;
-        }
+  .give {
+    &.store {
+      &.container {
+        margin-top: 5.5em;
+      }
     }
+    .order-items {
+      img {
+        margin-left: 0;
+        margin-bottom: 2em;
+      }
+    }
+
+    ul.details {
+      margin-bottom: 2em;
+    }
+
+    select#qty {
+      margin-bottom: 1.5em !important;
+    }
+  }
 }

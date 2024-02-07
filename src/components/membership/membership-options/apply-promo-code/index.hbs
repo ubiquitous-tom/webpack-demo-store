@@ -5,22 +5,24 @@
   </div>
 
   <div class="col-md-5 text-right" id="apply-promo-code">
-    <div class="form-inline">
-      <div class="row">
-        <div class="form-group col-md-12">
-          <label for="promo-code" class="sr-only">{{t "PROMO-CODE"}}</label>
-          <input
-            type="text"
-            id="promo-code"
-            class="form-control"
-            value=""
-            placeholder="{{t 'OPTIONAL'}}"
-          />
-          <button type="button" class="btn btn-primary pull-right">
-            {{t "APPLY-CODE"}}
-          </button>
+    <form id="apply-promo-code-form">
+      <div class="form-inline">
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="promo-code" class="sr-only">{{t "PROMO-CODE"}}</label>
+            <input
+              type="text"
+              id="promo-code"
+              class="form-control"
+              value=""
+              placeholder="{{t 'OPTIONAL'}}"
+            />
+            <button type="submit" class="btn btn-primary">
+              {{t "APPLY-CODE"}}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </form>
   </div>
 </div>

@@ -2462,6 +2462,14 @@
                     "uk": "Stream World-Class TV from Britain and Beyond Always available, always advert free. Just ${var1} a month."
                 }
             },
+            "STREAM-WORLDCLASS-TV-STORE-HANDLEBARS": {
+                "type": "text",
+                "content": {
+                    "en": "Stream World-Class TV from Britain and Beyond Always available, always commercial free. Just %{monthlyPrice} a month.",
+                    "es": "Disfruta de streaming de clase mundial desde Gran Breta\u00f1a y m\u00e1s all\u00e1, siempre disponible y sin anuncios. Solo por ${monthlyPrice} al mes.",
+                    "uk": "Stream World-Class TV from Britain and Beyond Always available, always advert free. Just %{monthlyPrice} a month."
+                }
+            },
             "THIRTY": {
                 "type": "text",
                 "content": {
@@ -3956,6 +3964,14 @@
                     "en": "Watch free for 7 days. Just ${var1}\/month, plus taxes where applicable after that. No commitment: cancel within 7 days to avoid payment.",
                     "es": "Ve gratis durante 7 d\u00edas. Solo por ${var1}\/mes, m\u00e1s impuestos donde apliquen. Sin compromiso: puedes cancelar dentro de los pr\u00f3ximos 7 d\u00edas para evitar cargos.",
                     "uk": "Watch free for 14 days. Just ${var1}\/month, plus taxes where applicable after that. No commitment: cancel within 14 days to avoid payment."
+                }
+            },
+            "MONTHLY-PRICE-STORE-HANDLEBARS": {
+                "type": "text",
+                "content": {
+                    "en": "Watch free for 7 days. Just %{monthlyPrice}\/month, plus taxes where applicable after that. No commitment: cancel within 7 days to avoid payment.",
+                    "es": "Ve gratis durante 7 d\u00edas. Solo por %{monthlyPrice}\/mes, m\u00e1s impuestos donde apliquen. Sin compromiso: puedes cancelar dentro de los pr\u00f3ximos 7 d\u00edas para evitar cargos.",
+                    "uk": "Watch free for 14 days. Just %{monthlyPrice}\/month, plus taxes where applicable after that. No commitment: cancel within 14 days to avoid payment."
                 }
             },
             "FREE-SEVEN-DAYS-DEVICE": {

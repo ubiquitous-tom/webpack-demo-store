@@ -191,6 +191,12 @@
   }
 }
 
+@media (max-width: 768px) {
+  .review.store.container {
+    margin-top: 5.5em;
+  }
+}
+
 @media (max-width: 480px) {
   .review .btn {
     width: 100% !important;

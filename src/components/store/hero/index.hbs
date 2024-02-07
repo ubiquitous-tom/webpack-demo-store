@@ -2,11 +2,11 @@
   <section class="visible-xs" id="landing-hero-mobile">
     <header>
       <h4 class="text-center">
-        {{t "STREAM-WORLDCLASS-TV-STORE"}}
+        {{t "STREAM-WORLDCLASS-TV-STORE-HANDLEBARS"}}
         {{! plans.showMonthly() }}
       </h4>
       <h5 class="text-center">
-        <i>{{t "MONTHLY-PRICE-STORE"}}</i>
+        <i>{{t "MONTHLY-PRICE-STORE-HANDLEBARS"}}</i>
         {{! plans.showMonthly() }}
       </h5>
       <a class="mobile" href="#membership">
@@ -52,7 +52,7 @@
         <div class="image third"></div>
         <div class="hero-item">
           <h3>{{t "START-FREE-TRIAL-LC"}}</h3>
-          <a href="/createaccount.jsp">
+          <a href="{{signupEnv}}/createaccount.jsp">
             <button>{{t "JOIN-NOW"}}</button>
           </a>
         </div>
