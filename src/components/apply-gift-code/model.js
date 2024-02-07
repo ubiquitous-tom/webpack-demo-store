@@ -26,7 +26,7 @@ class ApplyGiftCodeModel extends Model {
     }
   }
 
-  applyCode(sessionID, code) {
+  applyCode(code, sessionID) {
     console.log('ApplyPromoCodeModel applyCode')
     console.log(this)
     const attributes = {

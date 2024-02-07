@@ -39,7 +39,7 @@
         font-size: 10.3px;
         font-weight: 400;
         letter-spacing: 0.17em;
-        margin: 20px 0;
+        margin: 20px 0 20px 8px;
         text-transform: uppercase;
       }
 
@@ -132,6 +132,24 @@
   width: 100%;
 }
 
+@media (max-width: 475px) {
+  .navbar {
+    .navbar-right-ul {
+      .navbar-right {
+        .agc {
+          // text-overflow: ellipsis;
+          // display: inline-block;
+          // max-width: 70%;
+          // width: auto;
+          // white-space: nowrap;
+          // overflow: hidden;
+          display: none;
+        }
+      }
+    }
+  }
+}
+
 @media (min-width: 768px) {
   /* NAVBAR */
   .navbar {
@@ -141,7 +159,7 @@
       .navbar-right {
         .log-in {
           font-size: 1.4rem;
-          margin: 26px;
+          margin: 27px 0 27px 12px;
         }
       }
     }
@@ -183,7 +201,7 @@
         }
         .log-in {
           font-size: 1.4rem;
-          margin: 29px 0 24px;
+          margin: 29px 0 24px 12px;
         }
       }
     }
@@ -217,7 +235,7 @@
     .navbar-right-ul {
       .navbar-right {
         .log-in {
-          margin: 30px 0;
+          margin: 30px 0 24px 12px;
         }
       }
     }

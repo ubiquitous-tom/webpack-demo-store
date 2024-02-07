@@ -37,31 +37,68 @@ class ReviewModel extends Model {
     const monthly = cart.getItemQuantity('monthly')
     const annual = cart.getItemQuantity('annual')
     const promoCode = model.has('membershipPromo') ? model.get('membershipPromo').PromotionCode : ''
-    let membershipType = 'monthly'
-    if (monthly > 0) {
-      membershipType = 'monthly'
-    }
-    if (annual > 0) {
-      membershipType = 'annual'
-    }
-    debugger
+    // debugger
     const attributes = {
       Session: {
         SessionID: model.get('Session').SessionID,
       },
-      Gift: [{
-        Quantity: cart.getItemQuantity('gift'),
-        Amount: cart.getItemAmount('gift'),
-        CurrencyDesc: gifting.get('gift').CurrencyDesc,
-      }],
-      Membership: {
-        Type: membershipType.toUpperCase(),
-        Amount: cart.getItemAmount(membershipType),
-        CurrencyDesc: gifting.get('gift').CurrencyDesc,
-        PlanID: model.get(`${membershipType}StripePlan`).PlanID,
-        // AutoRenew: false,
-        PromoCode: promoCode,
-      },
+      // Gift: [{
+      //   Quantity: cart.getItemQuantity('gift'),
+      //   Amount: cart.getItemAmount('gift'),
+      //   CurrencyDesc: gifting.get('gift').CurrencyDesc,
+      // }],
+      // Membership: {
+      //   Type: membershipType.toUpperCase(),
+      //   Amount: cart.getItemAmount(membershipType),
+      //   CurrencyDesc: gifting.get('gift').CurrencyDesc,
+      //   PlanID: model.get(`${membershipType}StripePlan`).PlanID,
+      //   // AutoRenew: false,
+      //   PromoCode: promoCode,
+      // },
+    }
+    if (cart.getItemQuantity('gift')) {
+      const gift = {
+        Gift: [{
+          Quantity: cart.getItemQuantity('gift'),
+          Amount: cart.getItemAmount('gift'),
+          CurrencyDesc: gifting.get('gift').CurrencyDesc,
+        }],
+      }
+      // debugger
+      _.extend(attributes, gift)
+    }
+
+    let membershipType = 'monthly'
+    if (monthly > 0) {
+      membershipType = 'monthly'
+      const membership = {
+        Membership: {
+          Type: membershipType.toUpperCase(),
+          Amount: cart.getItemAmount(membershipType),
+          CurrencyDesc: gifting.get('gift').CurrencyDesc,
+          PlanID: model.get(`${membershipType}StripePlan`).PlanID,
+          // AutoRenew: false,
+          PromoCode: promoCode,
+        },
+      }
+      // debugger
+      _.extend(attributes, membership)
+    }
+
+    if (annual > 0) {
+      membershipType = 'annual'
+      const membership = {
+        Membership: {
+          Type: membershipType.toUpperCase(),
+          Amount: cart.getItemAmount(membershipType),
+          CurrencyDesc: gifting.get('gift').CurrencyDesc,
+          PlanID: model.get(`${membershipType}StripePlan`).PlanID,
+          // AutoRenew: false,
+          PromoCode: promoCode,
+        },
+      }
+      // debugger
+      _.extend(attributes, membership)
     }
 
     // attributes = this.timelinePromotion(attributes, model)
@@ -74,7 +111,7 @@ class ReviewModel extends Model {
       error: this.error,
     }
     console.log(attributes, options)
-    debugger
+    // debugger
     this.save(attributes, options)
   }
 
