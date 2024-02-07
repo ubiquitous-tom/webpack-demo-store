@@ -233,7 +233,8 @@
 @media (min-width: 1300px) {
   .navbar {
     .navbar-collapse.collapse {
-      left: 315px;
+      position: relative;
+      left: 0;
     }
   }
 }
