@@ -5,7 +5,7 @@ import template from './index.hbs'
 
 import GiveTagline from './tagline'
 import GiveSignIn from './sign-in'
-import GiveCurrencyOptions from './currency-options'
+// import GiveCurrencyOptions from './currency-options'
 import GiveGiftMembership from './gift-membership'
 import GiveAnnualMembership from './annual-membership'
 import GiveCheckout from './checkout'
@@ -59,7 +59,7 @@ class Give extends View {
 
     this.giveTagline = new GiveTagline({ model: this.model, i18n: this.i18n })
     this.giveSignIn = new GiveSignIn({ model: this.model, i18n: this.i18n })
-    this.giveCurrencyOptions = new GiveCurrencyOptions({ model: this.model, i18n: this.i18n })
+    // this.giveCurrencyOptions = new GiveCurrencyOptions({ model: this.model, i18n: this.i18n })
     this.giveGiftMembership = new GiveGiftMembership({ model: this.model, i18n: this.i18n })
     this.giveAnnualMembership = new GiveAnnualMembership({ model: this.model, i18n: this.i18n })
     this.giveCheckout = new GiveCheckout({ model: this.model, i18n: this.i18n })

@@ -6,7 +6,7 @@ import { getLocalStorage } from 'backbone.localstorage/src/utils'
 
 import docCookies from 'doc-cookies'
 
-import StripePlans from 'core/models/stripe-plans'
+// import StripePlans from 'core/models/stripe-plans'
 import Gifting from 'core/models/gifting'
 import ShoppingCart from 'core/models/cart'
 
@@ -23,40 +23,60 @@ class InitializeApp extends Model {
     return `/initializeapp?AppVersion=${this.get('appVersion')}`
   }
 
-  initialize() {
+  initialize(options) {
     console.log('InitializeApp initialize')
     console.log(this)
     this.localStorage = new LocalStorage(this.get('localStorageID'))
-    this.stripePlans = new StripePlans()
+    this.stripePlans = options.stripePlansModel // new StripePlans()
     this.shoppingCart = new ShoppingCart()
     this.gifting = new Gifting()
 
-    this.stripePlans.on('change:stripePlans', (model, value) => {
-      console.log(model, value)
-      // debugger
+    // this.stripePlans.on('change:stripePlans', (model, value) => {
+    //   console.log(model, value)
+    //   // debugger
+    //   this.set({
+    //     stripePlans: value,
+    //     stripePlansCountry: model.get('stripePlansCountry'),
+    //     stripePlansLang: model.get('stripePlansLang'),
+    //   })
+    //   // this.setAllowedGifting()
+    // })
+    if (this.stripePlans.has('stripePlans')) {
       this.set({
-        stripePlans: value,
-        stripePlansCountry: model.get('stripePlansCountry'),
-        stripePlansLang: model.get('stripePlansLang'),
+        stripePlans: this.stripePlans.get('stripePlans'),
+        stripePlansCountry: this.stripePlans.get('stripePlansCountry'),
+        stripePlansLang: this.stripePlans.get('stripePlansLang'),
       })
       // this.setAllowedGifting()
-    })
+    }
 
-    this.stripePlans.on('change:annualStripePlan', (model, value) => {
-      console.log(model, value)
-      // debugger
-      this.shoppingCart.updateDefaultAnnual(value)
-      this.gifting.updateGiftPrice(value)
-      this.set('annualStripePlan', value)
-    })
+    // this.stripePlans.on('change:annualStripePlan', (model, value) => {
+    //   console.log(model, value)
+    //   // debugger
+    //   this.shoppingCart.updateDefaultAnnual(value)
+    //   this.gifting.updateGiftPrice(value)
+    //   this.set('annualStripePlan', value)
+    // })
+    if (this.stripePlans.has('annualStripePlan')) {
+      const annualStripePlan = this.stripePlans.get('annualStripePlan')
+      this.shoppingCart.updateDefaultAnnual(annualStripePlan)
+      this.gifting.updateGiftPrice(annualStripePlan)
+      this.set('annualStripePlan', annualStripePlan)
+    }
 
-    this.stripePlans.on('change:monthlyStripePlan', (model, value) => {
-      console.log(model, value)
-      // debugger
-      this.shoppingCart.updateDefaultMonthly(value)
-      this.gifting.updateGiftCurrency(value)
-      this.set('monthlyStripePlan', value)
-    })
+    // this.stripePlans.on('change:monthlyStripePlan', (model, value) => {
+    //   console.log(model, value)
+    //   // debugger
+    //   this.shoppingCart.updateDefaultMonthly(value)
+    //   this.gifting.updateGiftCurrency(value)
+    //   this.set('monthlyStripePlan', value)
+    // })
+    if (this.stripePlans.has('monthlyStripePlan')) {
+      const monthlyStripePlan = this.stripePlans.get('monthlyStripePlan')
+      this.shoppingCart.updateDefaultMonthly(monthlyStripePlan)
+      this.gifting.updateGiftCurrency(monthlyStripePlan)
+      this.set('monthlyStripePlan', monthlyStripePlan)
+    }
 
     this.on('change:DiscountRate', (model, value) => {
       console.log(model, value)
@@ -64,12 +84,6 @@ class InitializeApp extends Model {
       // this.gifting.discountRateGiftPricing(value)
       this.unset('DiscountRate', { silent: true })
     })
-
-    // this.on('change:monthlyStripePlan', (model, value) => {
-    //   console.log(model, value)
-    //   // debugger
-    //   this.gifting.updateGiftCurrency(value)
-    // })
 
     // console.log(this.localStorage)
     const store = getLocalStorage(this)

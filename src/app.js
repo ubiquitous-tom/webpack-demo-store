@@ -8,6 +8,7 @@ import './app.scss'
 import StorageExpiry from 'core/models/storage-expiry'
 import ATVLocale from 'core/models/locale'
 import ATVView from 'core/view'
+import StripePlans from 'core/models/stripe-plans'
 import InitializeApp from 'core/models/initializedapp'
 import Workspace from 'routers/router'
 import ATVModel from 'core/model'
@@ -33,21 +34,24 @@ $(() => {
     new LocaleContext({ model: localeModel })
     // console.log(localeModel, localeModel.attributes.tr)
     const i18n = new I18n(localeModel.attributes.tr)
-    const initializeApp = new InitializeApp()
-    initializeApp.on('sync', (model) => {
-      // console.log(model)
-      // console.log(model.attributes)
-      new GoogleAnalyticsContext({ model })
-      new ATVModel()
-      new ATVView({ model, i18n })
-      new Workspace({ model, i18n })
+    const stripePlans = new StripePlans()
+    stripePlans.on('sync', (stripePlansModel) => {
+      const initializeApp = new InitializeApp({ stripePlansModel })
+      initializeApp.on('sync', (model) => {
+        // console.log(model)
+        // console.log(model.attributes)
+        new GoogleAnalyticsContext({ model })
+        new ATVModel()
+        new ATVView({ model, i18n })
+        new Workspace({ model, i18n })
 
-      console.log('main entry')
-      new Navigation({ model })
-      new Header({ model, i18n })
-      new Footer({ model, i18n, localeModel })
+        console.log('main entry')
+        new Navigation({ model })
+        new Header({ model, i18n })
+        new Footer({ model, i18n, localeModel })
 
-      Backbone.history.start()
+        Backbone.history.start()
+      })
     })
   })
 })

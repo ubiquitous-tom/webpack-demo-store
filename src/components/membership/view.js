@@ -7,10 +7,9 @@ import MembershipGiveDetails from './give-details'
 import MembershipSignedIn from './signed-in'
 import MembershipSignUp from './sign-up'
 import MembershipSignIn from './sign-in'
-import MembershipCurrencyOptions from './currency-options'
+// import MembershipCurrencyOptions from './currency-options'
 import MembershipOptions from './membership-options'
 import MembershipLegal from './legal'
-// import MembershipModel from './model'
 
 class Membership extends View {
   get el() {
@@ -25,28 +24,6 @@ class Membership extends View {
     console.log('Membership initialize')
     console.log(this.model)
     this.i18n = options.i18n
-    // this.model = new MembershipModel(this.model.attributes)
-
-    // this.giftCart.on('change', (model, value) => {
-    //   console.log(model, value)
-    //   debugger
-    //   this.cart.set({
-    //     gift: model,
-    //   })
-    // })
-
-    // this.listenTo(this.model, 'change:monthlyStripePlan', (model, value) => {
-    //   console.log(model, value)
-    //   // console.log(this.model.get('cart'), this.model.get('cart').get('gift'))
-    //   // console.log(this.model.get('gift'))
-    //   // // debugger
-    //   // this.model.get('cart').set({
-    //   //   gift: {
-    //   //     quantity: this.model.get('gift').quantity,
-    //   //     giftAmount: this.model.get('gift').amount,
-    //   //   },
-    //   // })
-    // })
 
     this.listenTo(this.model, 'membership:undelegateEvents', () => {
       console.log('Membership garbageCollect')
@@ -86,10 +63,10 @@ class Membership extends View {
         membershipSignIn: this.membershipSignIn,
       })
 
-      this.membershipCurrencyOptions = new MembershipCurrencyOptions({
-        model: this.model,
-        i18n: this.i18n,
-      })
+      // this.membershipCurrencyOptions = new MembershipCurrencyOptions({
+      //   model: this.model,
+      //   i18n: this.i18n,
+      // })
     }
     this.membershipOptions = new MembershipOptions({ model: this.model, i18n: this.i18n })
     this.membershipLegal = new MembershipLegal({ model: this.model, i18n: this.i18n })

@@ -26,28 +26,12 @@ class MembershipApplyGiftCode extends View {
       this.remove()
       // debugger
     })
-    // this.listenTo(this.model, 'change:signInSuccess', (model, value, options) => {
-    //   console.log(model, value, options)
-    //   debugger
-    //   if (value) {
-    //     this.signedInTemplate()
-    //     // giveObj.set("AllowedToCheckout", true);
-    //   } else {
-    //     // this.$el.find('.form-group').addClass('has-error');
-    //     // this.$signInAlert.slideUp();
 
-    //     // this.$signInStatus.html(response.responseJSON.error);
-    //     // this.$signInModal.modal();
-    //     // giveObj.set("AllowedToCheckout", false);
-    //   }
-    // })
-    // const isLoggedIn = this.model.get('Session').LoggedIn
-    const membershipActive = this.model.get('Membership').Status.toUpperCase() === 'ACTIVE'
     // const isRecordedBook = (
     //   this.model.has('Membership')
     //   && this.model.get('Membership').Store === 'RECORDEDBOOKS'
     // )
-
+    const membershipActive = this.model.get('Membership').Status.toUpperCase() === 'ACTIVE'
     if (!membershipActive) {
       this.render()
     }
@@ -66,9 +50,8 @@ class MembershipApplyGiftCode extends View {
 
   applyGiftCodeTemplate(e) {
     e.preventDefault()
-    const isLoggedIn = this.model.get('Session').LoggedIn
-    if (isLoggedIn) {
-      // window.location.hash = '#applyGiftCode'
+    const isSubscribed = this.model.has('Subscription') && this.model.get('Subscription').Status !== 'NONE'
+    if (isSubscribed) {
       Backbone.history.navigate('applyGiftCode', { trigger: true })
       this.model.trigger('membership:undelegateEvents')
     } else {
