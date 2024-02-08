@@ -39,7 +39,7 @@ class InitializeApp extends Model {
         stripePlansCountry: model.get('stripePlansCountry'),
         stripePlansLang: model.get('stripePlansLang'),
       })
-      this.setAllowedGifting()
+      // this.setAllowedGifting()
     })
 
     this.stripePlans.on('change:annualStripePlan', (model, value) => {
