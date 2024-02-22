@@ -24,17 +24,20 @@
 
   .promo-message {
     border-radius: 2px;
+    font-weight: 700;
     padding: 0.25em;
     margin-top: 0.5em;
-    width: 77%;
+    width: 77.5%;
 
     &.success {
-      border: 1px solid #082;
+      border: 2px solid #082;
+      border-radius: 2px;
       color: #082;
     }
 
     &.error {
-      border: 1px solid #ca081a;
+      border: 2px solid #ca081a;
+      border-radius: 2px;
       color: #ca081a;
     }
   }

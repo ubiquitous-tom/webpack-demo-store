@@ -44,7 +44,7 @@ class ApplyPromoCode extends View {
       console.log(model, value, options)
       let message
       if (value) {
-        message = this.i18n.t('PROMOTION-APPLIED')
+        message = this.i18n.t('PROMO-APPLIED')
       } else {
         message = this.i18n.t('ERR-PROCESS-REQUEST')
         if (model.get('message').indexOf('Your code is invalid') !== -1) {

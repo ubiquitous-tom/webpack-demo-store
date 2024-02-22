@@ -81,7 +81,11 @@ class MembershipGiftOptions extends View {
     const giftQuantity = this.cart.has('gift') ? this.cart.get('gift').quantity : 0
     const giftPrice = this.cart.has('gift') ? this.cart.get('gift').amount : 0
     if (giftQuantity) {
-      const totalGiftAmount = (giftQuantity * giftPrice).toFixed(2)
+      const totalGiftAmount = [
+        this.gifting.get('gift').CurrencyDesc,
+        this.gifting.get('gift').CurrSymbol,
+        (giftQuantity * giftPrice).toFixed(2),
+      ].join('')
       total = `${this.i18n.t('TOTAL')} <span>${totalGiftAmount}</span>`
     }
 

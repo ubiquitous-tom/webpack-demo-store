@@ -247,6 +247,7 @@ class ThankYou extends View {
         ? this.getTotalAmountWithPromoCodeWithTimelinePromotion()
         : this.cart.getTotalAmount()
       const newPrice = [
+        this.gifting.get('gift').CurrencyDesc,
         this.gifting.get('gift').CurrSymbol,
         Intl.NumberFormat(`${this.model.get('stripePlansLang')}-IN`, { maximumFractionDigits: 2, minimumFractionDigits: 2, trailingZeroDisplay: 'stripIfInteger' }).format(newTotal),
       ].join('')

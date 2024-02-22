@@ -70,7 +70,7 @@ class MembershipApplyPromoCodeModel extends ATVModel {
     console.log(model, resp, options)
     console.log(this)
     // debugger
-    let message = ''
+    let message = 'PROMOCODE-ERROR'
     /* eslint function-paren-newline: 0 */
     resp
       .then(

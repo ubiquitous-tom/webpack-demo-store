@@ -17,11 +17,22 @@
       padding: 0 15px;
       .h4 {
         margin: 0;
+        white-space: nowrap;
       }
     }
 
     del {
-      color: red;
+      color: transparent;
+      position: relative;
+      &::before {
+        content: "";
+        display: inline-block;
+        border-top: 2px solid #ba1d1d;
+        position: absolute;
+        top: 50%;
+        left: 3px;
+        width: 100%;
+      }
       span {
         color: #000;
         margin-left: 0.25em;

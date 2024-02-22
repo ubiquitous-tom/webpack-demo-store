@@ -100,14 +100,11 @@ class MembershipApplyPromoCode extends View {
     // debugger
     this.model.unset('membershipPromo', { context: this })
 
-    this.clearPromoMessage(e)
+    this.clearPromoMessage()
   }
 
-  clearPromoMessage(e) {
+  clearPromoMessage() {
     console.log('MembershipApplyPromoCode clearPromoMessage')
-    e.preventDefault()
-    console.log(e)
-
     const container = this.$('#apply-promo-code')
     const promoInput = container.find('#promo-code')
     const button = container.find('button')
@@ -146,30 +143,58 @@ class MembershipApplyPromoCode extends View {
     // remove old promo message
     container
       .find('.promo-message')
-      .empty()
+      .remove()
+    // remove old promo-clear
+    container
+      .find('#promo-clear')
+      .remove()
 
     // disable promo field and button
+    // if the promo code is good then disable the input
+    // DWT1-1020
+    if (value) {
+      promoInput
+        .prop('disabled', true)
+    }
     promoInput
-      .prop('disabled', true)
       .after(promoClear)
 
-    button
-      .prop('disabled', true)
-      .css({
-        width: buttonWidth,
-        background: '#afafaf',
-        color: '#000'
-      })
-      .html(this.i18n.t('APPLIED-PROMO-CODE'))
+    // if the promo code is good then disable the button
+    // DWT1-1020
+    if (value) {
+      button
+        .prop('disabled', true)
+        .css({
+          width: buttonWidth,
+          background: '#afafaf',
+          color: '#000',
+          fontWeight: 700,
+        })
+        .html(this.i18n.t('APPLIED-PROMO-CODE'))
+    }
 
     // display new promo message
+    let promoMessage = message
+
+    // if the promo code is bad then show customized message required by the Product owner.
+    // DWT1-1020
+    if (!value) {
+      if (message.includes('expired')) {
+        promoMessage = this.i18n.t('EXPIRED-PROMO-CODE-2024')
+      }
+
+      if (message.includes('not exist')) {
+        promoMessage = this.i18n.t('PROMOCODE-ERROR')
+      }
+    }
+
     container
       .find('.form-group')
       .append(
         promoCodeApplied
           .addClass(promoCodeAppliedType)
           // .append(i)
-          .append(message)
+          .append(promoMessage)
       )
   }
 }

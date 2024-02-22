@@ -80,7 +80,7 @@ class ApplyGiftCode extends View {
       this.removeLoader()
       debugger
       if (value) {
-        const message = `<strong>${this.i18n.t('PROMOTION-APPLIED')}</strong>`
+        const message = `<strong>${this.i18n.t('PROMO-APPLIED')}</strong>`
         this.popup.renderSuccess()
         this.popup.setModelBody(message)
       } else {

@@ -790,6 +790,14 @@
                     "uk": "Acorn TV Gift Membership"
                 }
             },
+            "GIFT-MEMBERSHIP-2024": {
+                "type": "text",
+                "content": {
+                    "en": "Gift an Acorn TV Annual Membership",
+                    "es": "Regala una suscripci\u00f3n de Acorn TV",
+                    "uk": "Gift an Acorn TV Annual Membership"
+                }
+            },
             "START-FREE-TRIAL-LC": {
                 "type": "text",
                 "content": {
@@ -3390,6 +3398,14 @@
                     "uk": "Promotion applied!"
                 }
             },
+            "PROMO-APPLIED": {
+                "type": "text",
+                "content": {
+                    "en": "Promo applied",
+                    "es": "\u00a1Promoci\u00f3n aplicada",
+                    "uk": "Promo applied"
+                }
+            },
             "PASSWORD-CHANGED": {
                 "type": "text",
                 "content": {
@@ -3774,6 +3790,14 @@
                     "uk": "We're sorry but the Costco Promo Code you entered invalid. Please check what you typed."
                 }
             },
+            "EXPIRED-PROMO-CODE-2024": {
+                "type": "text",
+                "content": {
+                    "en": "This promo code has expired.",
+                    "es": "Translation Needed",
+                    "uk": "This promo code has expired."
+                }
+            },
             "CHCK-HIGH-FIELDS": {
                 "type": "text",
                 "content": {
@@ -3956,6 +3980,14 @@
                     "en": "The code you have entered is currently not available, please contact our <a href=\"mailto:support@acorn.tv\">customer service<\/a> department for assistance.",
                     "es": "El c\u00f3digo que proporcionaste no est\u00e1 disponible, por favor contacta <a href=\"mailto:support@acorn.tv\">Soporte de Acorn<\/a>.",
                     "uk": "The code you have entered is currently not available, please contact our <a href=\"mailto:support@acorn.tv\">customer service<\/a> department for assistance."
+                }
+            },
+            "PROMOCODE-ERROR": {
+                "type": "text",
+                "content": {
+                    "en": "There was an error with the promo code. Please try again or contact Customer Service.",
+                    "es": "Translation Needed",
+                    "uk": "There was an error with the promo code. Please try again or contact Customer Service."
                 }
             },
             "MONTHLY-PRICE-STORE": {
@@ -4305,17 +4337,25 @@
             "APPLY-CODE-HERE": {
                 "type": "text",
                 "content": {
-                    "en": "Have a Promo Code? Click the 'Apply Code' button to enter you code.",
+                    "en": "Have a Promo Code? Enter your code here.",
                     "es": "\u00bfTienes un c\u00f3digo promocional? Da clic en 'Aplica c\u00f3digo'",
-                    "uk": "Have a Promo Code? Click the 'Apply Code' button to enter you code."
+                    "uk": "Have a Promo Code? Enter your code here."
+                }
+            },
+            "APPLY-CODE-HERE-2024": {
+                "type": "text",
+                "content": {
+                    "en": "Have a Promo Code? Click the 'Apply Code' button to enter your code.",
+                    "es": "\u00bfTienes un c\u00f3digo promocional? Da clic en 'Aplica c\u00f3digo'",
+                    "uk": "Have a Promo Code? Click the 'Apply Code' button to enter your code."
                 }
             },
             "APPLY-GIFT-CODE-HERE": {
                 "type": "text",
                 "content": {
-                    "en": "Have a Gift Code? Click the 'Apply Code' button to enter you code.",
+                    "en": "Have a Gift Code? Click the 'Apply Code' button to enter your code.",
                     "es": "\u00bfTienes un c\u00f3digo regalo? Da clic en 'Aplica c\u00f3digo'",
-                    "uk": "Have a Gift Code? Click the 'Apply Code' button to enter you code."
+                    "uk": "Have a Gift Code? Click the 'Apply Code' button to enter your code."
                 }
             },
             "VISA-REQUIREMENT": {
