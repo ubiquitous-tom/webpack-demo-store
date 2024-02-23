@@ -49,7 +49,7 @@ class MembershipApplyPromoCode extends View {
           type = true
           this.model.set({ membershipPromo }, { context: this })
         } else {
-          message = this.i18n.t('PROMOCODE-NOT-FOUND')
+          message = this.i18n.t('PROMOCODE-ERROR')
         }
       }
       this.updatePromoMessage(message, type)

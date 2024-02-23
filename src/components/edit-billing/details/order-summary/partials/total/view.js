@@ -51,7 +51,6 @@ class EditBillingDetailsOrderSummaryTotal extends View {
     if (this.model.has('membershipPromo')) {
       const oldTotal = this.getTotalAmount()
       const oldPrice = [
-        this.gifting.get('gift').CurrencyDesc,
         this.gifting.get('gift').CurrSymbol,
         Intl.NumberFormat(`${this.model.get('stripePlansLang')}-IN`, { maximumFractionDigits: 2, minimumFractionDigits: 2, trailingZeroDisplay: 'stripIfInteger' }).format(oldTotal),
       ].join('')
