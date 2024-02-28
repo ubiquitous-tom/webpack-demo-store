@@ -83,6 +83,24 @@ class EditBillingInformationBillingEmail extends View {
           return
         }
 
+        if (emailEl.val().trim() !== emailConfirmEl.val().trim()) {
+          this.popup.render()
+          this.popup.setBodyContent(this.i18n.t(emailConfirmEl.data('message')))
+          this.model.trigger('editBillingValidation:formError', emailConfirmEl.data('message'))
+          return
+        }
+        debugger
+        const paymentInfoEmails = {
+          Customer: {
+            Email: emailEl.val().trim(),
+            MarketingOptIn: this.$('#marketing-agree').val(),
+          },
+        }
+        debugger
+        _.extend(paymentInfo, paymentInfoEmails)
+      }
+
+      if (this.$('#membershipPassword').length) {
         const passwordEl = this.$('#membershipPassword')
         passwordEl.focus().blur()
         if (
@@ -107,33 +125,22 @@ class EditBillingInformationBillingEmail extends View {
           return
         }
 
-        if (emailEl.val().trim() !== emailConfirmEl.val().trim()) {
-          this.popup.render()
-          this.popup.setBodyContent(this.i18n.t(emailConfirmEl.data('message')))
-          this.model.trigger('editBillingValidation:formError', emailConfirmEl.data('message'))
-          return
-        }
-
         if (passwordEl.val().trim() !== passwordConfirmEl.val().trim()) {
           this.popup.render()
           this.popup.setBodyContent(this.i18n.t(passwordConfirmEl.data('message')))
           this.model.trigger('editBillingValidation:formError', passwordConfirmEl.data('message'))
           return
         }
-        // debugger
-        const paymentInfoNew = {
-          Customer: {
-            Email: emailEl.val().trim(),
-            MarketingOptIn: this.$('#marketing-agree').val(),
-          },
+        debugger
+        const paymentInfoPasswords = {
           Credentials: {
             Password: passwordEl.val().trim(),
           },
         }
-        // debugger
-        _.extend(paymentInfo, paymentInfoNew)
+        debugger
+        _.extend(paymentInfo, paymentInfoPasswords)
       }
-      // debugger
+      debugger
       this.model.trigger('editBillingValidation:paymentMethod', paymentInfo)
     })
 

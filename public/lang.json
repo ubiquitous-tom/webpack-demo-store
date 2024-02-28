@@ -1025,9 +1025,9 @@
             "YEAR-UNLIMITED-ACCESS": {
                 "type": "text",
                 "content": {
-                    "en": "Give 12 months of unlimited access to the best British TV",
+                    "en": "Give 12 months for the price of 10",
                     "es": "Regala 12 meses de acceso ilimitado a la mejor televisi\u00f3n brit\u00e1nica",
-                    "uk": "Give 12 months of unlimited access to the best British TV"
+                    "uk": "Give 12 months for the price of 10"
                 }
             },
             "GIFT-PRICE": {
@@ -1153,9 +1153,9 @@
             "MEMBERSHIP-EXPIRATION": {
                 "type": "text",
                 "content": {
-                    "en": "Your membership has expired. Renew now to continue watching the best British mysteries, dramas, and comedies.",
+                    "en": "Your membership has expired. Renew now to continue discovering extraordinary mysteries, dramas, and thrillers from around the world.",
                     "es": "Tu suscripci\u00f3n ha vencido. Renu\u00e9vala ahora para seguir disfrutando los mejores misterios, dramas y comedias brit\u00e1nicas.",
-                    "uk": "Your membership has expired. Renew now to continue watching the best British mysteries, dramas, and comedies."
+                    "uk": "Your membership has expired. Renew now to continue discovering extraordinary mysteries, dramas, and thrillers from around the world."
                 }
             },
             "REQUIRED": {
@@ -1281,9 +1281,9 @@
             "UNLIMITED-ACCESS": {
                 "type": "text",
                 "content": {
-                    "en": "Unlimited access to thousands of hours of the best British TV.",
+                    "en": "Select a Monthly or Annual membership. Get 12 months for the price of 10 with Annual",
                     "es": "Acceso ilimitado a miles de horas de la mejor televisi\u00f3n brit\u00e1nica.",
-                    "uk": "Unlimited access to thousands of hours of the best British TV."
+                    "uk": "Select a Monthly or Annual membership. Get 12 months for the price of 10 with Annual"
                 }
             },
             "AUTOMATIC-MONTHLY-BILLING": {
