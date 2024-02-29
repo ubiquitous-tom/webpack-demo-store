@@ -149,7 +149,9 @@ class Review extends View {
     console.log(this.model.attributes)
     const membershipPromo = this.model.has('membershipPromo')
     const attributes = {
-      name: this.model.get('Customer').Name,
+      name: (this.model.get('storeType') === 'Gift')
+        ? this.model.get('editBillingForm').name
+        : this.model.get('Customer').Name,
       membershipUserImg,
       giftBoxImg,
       annualQuantity: this.cart.getItemQuantity('annual'),

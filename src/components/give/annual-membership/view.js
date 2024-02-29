@@ -79,6 +79,9 @@ class GiveAnnualMembership extends View {
   setDefaultAnnualMembership() {
     if (this.cart.get('annual').quantity) {
       this.addAnnualSubscription()
+      if (!this.$el.is(':visible')) {
+        this.$el.show()
+      }
     }
   }
 

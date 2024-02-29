@@ -96,6 +96,12 @@ class EditBillingInformationBillingAddress extends View {
       // We need to set this to use later for not Guest account and No account customers
       this.model.set({
         editBillingForm: {
+          first_name: firstNameEl.val(),
+          last_name: lastNameEl.val(),
+          name: [
+            firstNameEl.val(),
+            lastNameEl.val(),
+          ].join(' '),
           address_zip: zipEl.val(),
           address_country: countryEl.val(),
         },

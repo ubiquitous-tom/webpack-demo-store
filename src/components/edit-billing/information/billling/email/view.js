@@ -89,14 +89,14 @@ class EditBillingInformationBillingEmail extends View {
           this.model.trigger('editBillingValidation:formError', emailConfirmEl.data('message'))
           return
         }
-        debugger
+        // debugger
         const paymentInfoEmails = {
           Customer: {
             Email: emailEl.val().trim(),
             MarketingOptIn: this.$('#marketing-agree').val(),
           },
         }
-        debugger
+        // debugger
         _.extend(paymentInfo, paymentInfoEmails)
       }
 
@@ -131,16 +131,16 @@ class EditBillingInformationBillingEmail extends View {
           this.model.trigger('editBillingValidation:formError', passwordConfirmEl.data('message'))
           return
         }
-        debugger
+        // debugger
         const paymentInfoPasswords = {
           Credentials: {
             Password: passwordEl.val().trim(),
           },
         }
-        debugger
+        // debugger
         _.extend(paymentInfo, paymentInfoPasswords)
       }
-      debugger
+      // debugger
       this.model.trigger('editBillingValidation:paymentMethod', paymentInfo)
     })
 
