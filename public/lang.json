@@ -4209,9 +4209,9 @@
             "TAX-ESTIMATED-TAXES-HANDLEBARS": {
                 "type": "text",
                 "content": {
-                    "en": "plus {{ estimatedTax }} (Estimated taxes)",
-                    "es": "Mas {{ estimatedTax }} (Estimated taxes)",
-                    "uk": "plus {{ estimatedTax }} (Estimated taxes)"
+                    "en": "Plus %{estimatedTax} (Estimated taxes)",
+                    "es": "Mas %{estimatedTax} (Estimated taxes)",
+                    "uk": "Plus %{estimatedTax} (Estimated taxes)"
                 }
             },
             "TAX-SALES-TAX": {

@@ -125,11 +125,7 @@ class Review extends View {
             this.gifting.get('gift').CurrSymbol,
             taxInfo,
           ].join('')
-          // translatedText = this.i18n.t('TAX-ESTIMATED-TAXES-POLYGLOT', { var1: estimatedTax })
           estimatedTaxPrice = this.i18n.t('TAX-ESTIMATED-TAXES-HANDLEBARS', { estimatedTax })
-          // this
-          //   .$('.tax-placeholder')
-          //   .html(estimatedTaxPrice)
         }
         this.model.set({
           estimatedTaxPrice,
@@ -179,7 +175,7 @@ class Review extends View {
         this.gifting.get('gift').CurrSymbol,
         this.cart.getTotalAmount(),
       ].join('')),
-      estimatedTaxPrice: this.i18n.t('TAX-APPLICABLE'), // this.model.get('estimatedTaxPrice'),
+      estimatedTaxPrice: this.i18n.t('TAX-APPLICABLE'),
     }
     const html = this.template(attributes)
     this.$el.html(html)

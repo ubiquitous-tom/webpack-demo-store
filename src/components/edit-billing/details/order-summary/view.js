@@ -80,13 +80,12 @@ class EditBillingDetailsOrderSummary extends View {
           this.gifting.get('gift').CurrSymbol,
           taxInfo,
         ].join('')
-        // translatedText = this.i18n.t('TAX-ESTIMATED-TAXES-POLYGLOT', { var1: estimatedTax })
-        this.orderSumamary.set({
-          estimatedTaxPrice: this.i18n.t('TAX-ESTIMATED-TAXES-HANDLEBARS', { estimatedTax }),
-        })
-        this.render()
+        const translatedText = this.i18n.t('TAX-ESTIMATED-TAXES-HANDLEBARS', { estimatedTax })
+        this
+          .$('.order-summary')
+          .find('.tax-placeholder')
+          .html(translatedText)
       }
-      // this.$('.order-summary').find('.tax-placeholder').html(translatedText)
     })
 
     this.render()
