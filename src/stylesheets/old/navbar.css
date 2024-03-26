@@ -71,7 +71,6 @@
   margin-left: 10px;
 }
 .free-month {
-  color: #fff;
   display: inline-block;
   font-family: futura-pt, sans-serif;
   font-size: 13.8px;
@@ -80,8 +79,9 @@
   margin-top: 15px;
   text-transform: uppercase;
   padding: 12px;
-  background: rgba(11, 152, 184, 0.85) none repeat scroll 0 0;
   margin-left: 8px;
+  background: #EEF0E9;
+  color: #000;
 }
 #signup {
   margin-bottom: 0px;

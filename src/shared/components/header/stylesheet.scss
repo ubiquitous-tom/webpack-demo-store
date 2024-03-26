@@ -6,7 +6,7 @@
 }
 
 .navbar {
-  background: #0b1733;
+  background: #053E3A;
   border: none;
   box-shadow: 0 0 30px -5px #0a132a;
   height: 56px;
@@ -44,7 +44,6 @@
       }
 
       .free-month {
-        color: #fff;
         display: inline-block;
         // font-family: futura-pt, sans-serif;
         // font-family: "Oxygen", sans-serif;
@@ -55,8 +54,9 @@
         margin-top: 15px;
         text-transform: uppercase;
         padding: 12px;
-        background: rgba(11, 152, 184, 0.85) none repeat scroll 0 0;
         margin-left: 8px;
+        background: #EEF0E9;
+        color: #000;
       }
     }
   }
@@ -79,7 +79,7 @@
   }
 
   .navbar-collapse {
-    background: #0b1733;
+    background: #053E3A;
     left: 0;
     max-height: fit-content;
     position: absolute;
