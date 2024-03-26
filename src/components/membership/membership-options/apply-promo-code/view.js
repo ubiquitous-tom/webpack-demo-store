@@ -1,5 +1,5 @@
 import { View } from 'backbone'
-import _ from 'underscore'
+// import _ from 'underscore'
 
 import './stylesheet.scss'
 import template from './index.hbs'
@@ -27,7 +27,7 @@ class MembershipApplyPromoCode extends View {
     this.i18n = options.i18n
     this.cart = this.model.get('cart')
     this.gifting = this.model.get('gifting')
-    this.membershipApplyPromoCodeModel = new MembershipApplyPromoCodeModel()
+    this.membershipApplyPromoCodeModel = new MembershipApplyPromoCodeModel(this.gifting.attributes)
 
     this.listenTo(this.model, 'membership:undelegateEvents', () => {
       console.log('MembershipApplyPromoCode garbageCollect')
@@ -45,7 +45,10 @@ class MembershipApplyPromoCode extends View {
       let type = false
       if (value) {
         const membershipPromo = this.membershipApplyPromoCodeModel.get('promo')
-        if (!_.isEmpty(membershipPromo.SourceCodeMapping)) {
+        if (
+          membershipPromo.SourceCodeMapping
+          && (!membershipPromo.StripeOrg || membershipPromo.StripeOrg === 'ACORN')
+        ) {
           type = true
           this.model.set({ membershipPromo }, { context: this })
         } else {

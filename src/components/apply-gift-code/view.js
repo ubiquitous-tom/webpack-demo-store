@@ -27,8 +27,9 @@ class ApplyGiftCode extends View {
   initialize(options) {
     console.log('ApplyGiftCode initialize')
     this.i18n = options.i18n
+    this.gifting = this.model.get('gifting')
 
-    this.checkGiftCodeModel = new CheckGiftCodeModel()
+    this.checkGiftCodeModel = new CheckGiftCodeModel(this.gifting.attributes)
     this.applyGiftCodeModel = new ApplyGiftCodeModel()
 
     this.popup = new ApplyGiftCodeModal({ model: this.model, i18n: this.i18n })

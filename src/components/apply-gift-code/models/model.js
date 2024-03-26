@@ -7,8 +7,9 @@ class CheckGiftCodeModel extends Model {
     return `https://${env}api.rlje.net/acorn/promo`
   }
 
-  initialize() {
+  initialize(options) {
     console.log('CheckGiftCodeModel CheckGiftCodeModel')
+    this.gifting = options.gift
   }
 
   parse(resp) {
@@ -42,12 +43,13 @@ class CheckGiftCodeModel extends Model {
       promo: resp,
       promoCode: resp.PromotionCode,
       promoName: resp.Name,
-      promoAppliedAmount: resp.StripePercentOff,
+      // promoAppliedAmount: resp.StripePercentOff,
       flashMessage: {
         type: 'success',
         // message: `PROMO APPLIED - ${resp.Name}`,
         // message: 'PROMO-APPLIED-OFF',
-        message: `${resp.PromotionCode} applied. Enjoy your ${resp.StripePercentOff}% off!`,
+        // message: `${resp.PromotionCode} applied. Enjoy your ${resp.StripePercentOff}% off!`,
+        message: this.promoMessageParser(resp),
         interpolationOptions: {
           promoCode: resp.Name,
         },
@@ -99,6 +101,41 @@ class CheckGiftCodeModel extends Model {
         })
         console.log(model.get('flashMessage').message, model.get('flashMessage').type)
       })
+  }
+
+  promoMessageParser(promo) {
+    // 3 types of promo code duration
+    // - forever (through the life time of the subscription)
+    // - repeating (usually each specified duration of the provided month(s))
+    // - once of `empty` (one time thing. usually a gift code)
+    const promoCode = promo.PromotionCode
+    let promoDuration = ''
+    if (promo.StripeDuration) {
+      if (promo.StripeDuration === 'repeating') {
+        if (promo.StripeDurationInMonths) {
+          const months = (promo.StripeDurationInMonths > 1) ? 'months' : 'month'
+          promoDuration = ` for ${promo.StripeDurationInMonths} ${months}`
+        }
+      }
+      if (promo.StripeDuration === 'once') {
+        promoDuration = ' for your next invoice'
+      }
+    }
+
+    // 3 types of promo code
+    // - gift code (free annual subscription code)
+    // - percentage off code
+    // - fixed amount off code
+    let promoMessage = ''
+    if (promo.StripePercentOff) {
+      promoMessage = `Enjoy your ${promo.StripePercentOff}% off${promoDuration}!`
+    }
+    if (promo.StripeAmountOff) {
+      const { CurrSymbol } = this.gifting
+      promoMessage = `Enjoy your ${CurrSymbol}${promo.StripeAmountOff} off${promoDuration}`
+    }
+
+    return `${promoCode} applied. ${promoMessage}`
   }
 
   environment() {

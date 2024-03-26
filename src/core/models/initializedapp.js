@@ -145,7 +145,7 @@ class InitializeApp extends Model {
   environment() {
     let env = ''
     if (window.location.hostname.indexOf('dev') > -1) {
-      env = 'dev.'
+      env = 'dev3.'
     }
     if (window.location.hostname.indexOf('qa') > -1) {
       env = 'qa.'
