@@ -32,14 +32,14 @@ class ShoppingCart extends Model {
     //   })
     // }
 
-    this.on('cart:promoCodeApplied', (value, options) => {
-      console.log(value, options)
+    this.on('cart:promoCodeApplied', (value, type, options) => {
+      console.log(value, type, options)
       // debugger
       // this.unset('promoCodeApplied', { silent: true })
       if (value) {
-        this.applyPromoPricing(value, options)
+        this.applyPromoPricing(value, type, options)
       } else {
-        this.removePromoPricing(value, options)
+        this.removePromoPricing(value, type, options)
       }
     })
 
@@ -133,31 +133,25 @@ class ShoppingCart extends Model {
     this.set(defaultMonthly, { silent: true })
   }
 
-  applyPromoPricing(value, options) {
+  applyPromoPricing(value, type, options) {
     console.log('ShoppingCart applyPromoPricing')
-    console.log(value, options)
+    console.log(value, type, options)
     // const { context } = options
-    debugger
-    let type = 'monthly'
+    // debugger
     const {
       // PromotionCode,
       // Name,
       // StripeDuration,
       // StripeDurationInMonths,
       // StripeOrg,
-      MembershipTerm,
-      MembershipTermType,
+      // MembershipTerm,
+      // MembershipTermType,
+      StripeAmountOff,
       StripePercentOff,
+      // CountryRequirement,
+      // PlanTermRequirement,
+      // PromoCustomerRequirements,
     } = value
-
-    if (MembershipTermType === 'MONTH') {
-      if (MembershipTerm === '1') {
-        type = 'monthly'
-      }
-      if (MembershipTerm === '12') {
-        type = 'annual'
-      }
-    }
 
     if (this.has(type)) {
       const {
@@ -166,9 +160,18 @@ class ShoppingCart extends Model {
         // total,
       } = this.get(type)
 
-      const discountedAmount = amount - (amount * (StripePercentOff / 100))
-      const discountedTotal = quantity * discountedAmount
       const discountedMembership = {}
+      let discountedAmount = amount
+      let discountedTotal = (quantity * amount)
+      if (StripePercentOff) {
+        discountedAmount = amount - (amount * (StripePercentOff / 100))
+        discountedTotal = quantity * discountedAmount
+      }
+
+      if (StripeAmountOff) {
+        discountedAmount = amount - StripeAmountOff
+        discountedTotal = discountedAmount + ((quantity - 1) * discountedAmount)
+      }
 
       discountedMembership[type] = {
         quantity,
@@ -179,41 +182,22 @@ class ShoppingCart extends Model {
     }
   }
 
-  removePromoPricing(value, options) {
+  removePromoPricing(value, type, options) {
     console.log('ShoppingCart removePromoPricing')
-    console.log(value, options)
+    console.log(value, type, options)
     const { context } = options
     // debugger
-    if (this.has('monthly')) {
-      const { quantity } = this.get('monthly')
-      if (quantity) {
-        const amount = context.model.get('monthlyStripePlan').SubscriptionAmount
-        const total = parseFloat((quantity * amount).toFixed(2))
-        // debugger
-        this.set({
-          monthly: {
-            quantity,
-            amount,
-            total,
-          },
-        })
+    if (this.has(type)) {
+      const { quantity } = this.get(type)
+      const amount = context.model.get(`${type}StripePlan`).SubscriptionAmount
+      const total = parseFloat((quantity * amount).toFixed(2))
+      const data = {}
+      data[type] = {
+        quantity,
+        amount,
+        total,
       }
-    }
-    // debugger
-    if (this.has('annual')) {
-      const { quantity } = this.get('annual')
-      if (quantity) {
-        const amount = context.model.get('annualStripePlan').SubscriptionAmount
-        const total = parseFloat((quantity * amount).toFixed(2))
-        // debugger
-        this.set({
-          monthly: {
-            quantity,
-            amount,
-            total,
-          },
-        })
-      }
+      this.set(data)
     }
   }
 

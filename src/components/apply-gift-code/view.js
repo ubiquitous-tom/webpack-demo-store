@@ -1,11 +1,13 @@
 import { View } from 'backbone'
 import _ from 'underscore'
 
+import PromoValidateModel from 'core/models/promo-validate'
+
 import './stylesheet.scss'
 import template from './index.hbs'
 
 import ApplyGiftCodeModel from './model'
-import CheckGiftCodeModel from './models/model'
+// import CheckGiftCodeModel from './models/model'
 import ApplyGiftCodeModal from './partials/view'
 
 class ApplyGiftCode extends View {
@@ -29,7 +31,8 @@ class ApplyGiftCode extends View {
     this.i18n = options.i18n
     this.gifting = this.model.get('gifting')
 
-    this.checkGiftCodeModel = new CheckGiftCodeModel(this.gifting.attributes)
+    // this.checkGiftCodeModel = new CheckGiftCodeModel(this.gifting.attributes)
+    this.promoValidateModel = new PromoValidateModel(this.model.attributes)
     this.applyGiftCodeModel = new ApplyGiftCodeModel()
 
     this.popup = new ApplyGiftCodeModal({ model: this.model, i18n: this.i18n })
@@ -40,7 +43,7 @@ class ApplyGiftCode extends View {
       // debugger
     })
 
-    this.listenTo(this.checkGiftCodeModel, 'change:checkCodeSuccess', (model, value) => {
+    this.listenTo(this.promoValidateModel, 'change:promoCodeSuccess', (model, value) => {
       console.log(model, value)
       // debugger
       if (value) {
@@ -66,7 +69,7 @@ class ApplyGiftCode extends View {
         this.popup.render()
         this.popup.setModelBody(supportLink)
       }
-      this.checkGiftCodeModel.unset('checkCodeSuccess', { silent: true })
+      this.promoValidateModel.unset('promoCodeSuccess', { silent: true })
     })
 
     this.listenTo(this.applyGiftCodeModel, 'invalid', (model, value) => {
@@ -119,6 +122,14 @@ class ApplyGiftCode extends View {
 
     // this.$applyCodeAlert = this.$('#applyCodeAlert')
     // this.$applyCodeModal = this.$('#applyCodeModal')
+
+    const subscription = (this.model.has('Subscription') && this.model.get('Subscription'))
+    if (subscription) {
+      const membershipType = (subscription.Annual) ? 'annual' : 'monthly'
+      this.model.set({
+        currentPlanID: this.model.get(`${membershipType}StripePlan`).PlanID,
+      })
+    }
 
     return this
   }
@@ -187,7 +198,15 @@ class ApplyGiftCode extends View {
     $('#applyCodeAlert')
       .slideDown(400, () => {
         // debugger
-        this.checkGiftCodeModel.checkCode(giftCode)
+        // this.checkGiftCodeModel.checkCode(giftCode)
+        const data = {
+          Code: giftCode,
+          Country: this.model.get('stripePlansCountry'),
+          CustomerID: (this.model.has('Customer') && this.model.get('Customer').CustomerID) || '',
+          PlanID: this.model.get('currentPlanID'),
+        }
+        console.log(data)
+        this.promoValidateModel.submit(data)
       })
   }
 

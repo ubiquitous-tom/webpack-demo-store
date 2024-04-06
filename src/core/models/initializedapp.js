@@ -76,6 +76,8 @@ class InitializeApp extends Model {
       this.shoppingCart.updateDefaultMonthly(monthlyStripePlan)
       this.gifting.updateGiftCurrency(monthlyStripePlan)
       this.set('monthlyStripePlan', monthlyStripePlan)
+      // Set default PlanID for the new promo requirements [DWT1-932]
+      this.set('currentPlanID', monthlyStripePlan.PlanID)
     }
 
     this.on('change:DiscountRate', (model, value) => {

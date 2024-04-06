@@ -1,7 +1,12 @@
 import { View } from 'backbone'
 
+import Promo from 'shared/elements/promo'
+
 import './stylesheet.scss'
 import template from './index.hbs'
+
+import MembershipSelectionsMonthly from './monthly/view'
+import MembershipSelectionsAnnual from './annual/view'
 
 class MembershipSelections extends View {
   get el() {
@@ -12,16 +17,19 @@ class MembershipSelections extends View {
     return template
   }
 
-  get events() {
-    return {
-      'change input[type="radio"]': 'updateMembershipPlan',
-    }
-  }
+  // get events() {
+  //   return {
+  //     'change input[type="radio"]': 'updateMembershipPlan',
+  //   }
+  // }
 
-  initialize() {
+  initialize(options) {
     console.log('MembershipSelections initialize')
+    this.i18n = options.i18n
     this.cart = this.model.get('cart')
     this.gifting = this.model.get('gifting')
+
+    this.promoView = new Promo(this.model.attributes)
     // const isLoggedIn = this.model.get('Session').LoggedIn
     // const isRecordedBook = (
     //   this.model.has('Membership')
@@ -34,14 +42,15 @@ class MembershipSelections extends View {
       // debugger
     })
 
-    this.listenTo(this.model, 'change:membershipPromo', (model, value, options) => {
-      console.log(model, value, options)
-      // debugger
-      this.cart.trigger('cart:promoCodeApplied', value, options)
-      // this.resetMonthlyPricing()
-      // this.resetAnnualPricing()
-    })
+    // this.listenTo(this.model, 'change:membershipPromo', (model, value, options) => {
+    //   console.log(model, value, options)
+    //   // debugger
+    //   this.cart.trigger('cart:promoCodeApplied', value, type, options)
+    //   // this.resetMonthlyPricing()
+    //   // this.resetAnnualPricing()
+    // })
 
+    /*
     this.listenTo(this.cart, 'change:monthly', (model, value, options) => {
       console.log(model, value, options)
       // debugger
@@ -53,6 +62,7 @@ class MembershipSelections extends View {
       // debugger
       this.updateAnnualPricing(value.total)
     })
+    */
 
     this.render()
   }
@@ -60,6 +70,7 @@ class MembershipSelections extends View {
   render() {
     console.log('MembershipSelections render')
     console.log(this.model.attributes)
+    /*
     const monthlyAmount = this.model.get('monthlyStripePlan').SubscriptionAmount
     const monthlyPlanPrice = this.applyPromoPrice([
       this.model.get('monthlyStripePlan').CurrencyDesc,
@@ -84,12 +95,33 @@ class MembershipSelections extends View {
       annualPlanID,
       annualPlanPrice,
     }
-    const html = this.template(attributes)
+    */
+    const html = this.template()
     this.$el.append(html)
 
     this.setElement('#membershipItem')
 
-    this.selectDefaultPlan()
+    // this.selectDefaultPlan()
+
+    this.membershipSelectionsMonthly = new MembershipSelectionsMonthly({
+      model: this.model,
+      i18n: this.i18n,
+      parentView: this,
+    })
+    this.membershipSelectionsAnnual = new MembershipSelectionsAnnual({
+      model: this.model,
+      i18n: this.i18n,
+      parentView: this,
+    })
+
+    // Remove preset options like `promo code` and `plan`
+    // once we already saved the information to the session Storage
+    // for a `GUEST`, `CANCELED`, or `EXPIRED` membership
+    const isValidAccount = (this.model.has('Membership') && this.model.has('Subscription'))
+    if (isValidAccount) {
+      debugger
+      this.promoView.removePresetOptions()
+    }
 
     return this
   }
@@ -112,10 +144,14 @@ class MembershipSelections extends View {
     }
 
     this.$(`input[type="radio"][value="${this.membershipType}"]`).prop('checked', true)
+    this.model.set({
+      currentPlanID: this.model.get(`${this.membershipType}StripePlan`).PlanID,
+    })
 
-    this.updateCart()
+    this.updateCart(this.membershipType)
   }
 
+  /*
   updateMembershipPlan(e) {
     console.log('MembershipSelections updateMembershipPlan')
     e.preventDefault()
@@ -126,10 +162,11 @@ class MembershipSelections extends View {
 
     this.updateCart()
   }
+  */
 
-  updateCart() {
+  updateCart(membershipType) {
     console.log('MembershipGiftOptions updateCart')
-    const otherMembershipType = (this.membershipType === 'monthly') ? 'annual' : 'monthly'
+    const otherMembershipType = (membershipType === 'monthly') ? 'annual' : 'monthly'
     const membership = {}
     const other = {}
     const quantity = 1
@@ -137,10 +174,10 @@ class MembershipSelections extends View {
     let amount = 0
     let otherAmount = 0
     if (this.model.has('membershipPromo')) {
-      amount = this.cart.get(this.membershipType).amount
+      amount = this.cart.get(membershipType).amount
       otherAmount = this.cart.get(otherMembershipType).amount
     } else {
-      amount = this.model.get(`${this.membershipType}StripePlan`).SubscriptionAmount
+      amount = this.model.get(`${membershipType}StripePlan`).SubscriptionAmount
       otherAmount = this.model.get(`${otherMembershipType}StripePlan`).SubscriptionAmount
     }
     const total = parseFloat((quantity * amount).toFixed(2))
@@ -156,7 +193,7 @@ class MembershipSelections extends View {
 
     this.cart.set(other, { context: this })
 
-    membership[this.membershipType] = {
+    membership[membershipType] = {
       quantity,
       amount,
       total,
@@ -173,6 +210,7 @@ class MembershipSelections extends View {
     console.log(this.model.attributes)
   }
 
+  /*
   updateMonthlyPricing(total) {
     if (this.model.has('membershipPromo')) {
       if (total > 0 && (total !== this.model.get('monthlyStripePlan').SubscriptionAmount)) {
@@ -186,11 +224,21 @@ class MembershipSelections extends View {
         const newPricing = [
           this.model.get('monthlyStripePlan').CurrencyDesc,
           this.model.get('monthlyStripePlan').CurrSymbol,
-          Intl.NumberFormat('en-IN', { maximumFractionDigits: 2, minimumFractionDigits: 2, trailingZeroDisplay: 'stripIfInteger' }).format(total),
+          Intl.NumberFormat(
+            'en-IN',
+            {
+              maximumFractionDigits: 2,
+              minimumFractionDigits: 2,
+              trailingZeroDisplay: 'stripIfInteger',
+            },
+          ).format(total),
         ].join('')
 
-        const oldPricingContainer = $('<del>').append($('<span>').addClass('old-pricing').html(oldPricing))
-        const newPricingContainer = $('<span>').html(newPricing).append(oldPricingContainer)
+        const oldPricingContainer = $('<del>')
+          .append($('<span>').addClass('old-pricing').html(oldPricing))
+        const newPricingContainer = $('<span>')
+          .html(newPricing)
+          .append(oldPricingContainer)
 
         // this.$('.annual-plan-message span').addClass('applied-success').html(pricing)
         // this.$('#billing-container .legal-notice span').html(pricing)
@@ -200,7 +248,9 @@ class MembershipSelections extends View {
       this.resetMonthlyPricing()
     }
   }
+  */
 
+  /*
   updateAnnualPricing(total) {
     if (this.model.has('membershipPromo')) {
       if (total > 0 && (total !== this.model.get('annualStripePlan').SubscriptionAmount)) {
@@ -214,10 +264,18 @@ class MembershipSelections extends View {
         const newPricing = [
           this.model.get('annualStripePlan').CurrencyDesc,
           this.model.get('annualStripePlan').CurrSymbol,
-          Intl.NumberFormat(`${this.model.get('stripePlansLang')}-IN`, { maximumFractionDigits: 2, minimumFractionDigits: 2, trailingZeroDisplay: 'stripIfInteger' }).format(total),
+          Intl.NumberFormat(
+            `${this.model.get('stripePlansLang')}-IN`,
+            {
+              maximumFractionDigits: 2,
+              minimumFractionDigits: 2,
+              trailingZeroDisplay: 'stripIfInteger',
+            },
+          ).format(total),
         ].join('')
 
-        const oldPricingContainer = $('<del>').append($('<span>').addClass('old-pricing').html(oldPricing))
+        const oldPricingContainer = $('<del>').append($('<span>')
+          .addClass('old-pricing').html(oldPricing))
         const newPricingContainer = $('<span>').html(newPricing).append(oldPricingContainer)
 
         // this.$('.annual-plan-message span').addClass('applied-success').html(pricing)
@@ -228,6 +286,7 @@ class MembershipSelections extends View {
       this.resetAnnualPricing()
     }
   }
+  */
 
   applyPromoPrice(originalPrice, type) {
     if (this.model.has('membershipPromo')) {
@@ -250,6 +309,7 @@ class MembershipSelections extends View {
     return originalPrice
   }
 
+  /*
   resetMonthlyPricing() {
     console.log('MembershipGiftOptions resetMonthlyPricing')
     const monthlyPlanContainer = this.$('.plan.monthly')
@@ -263,7 +323,9 @@ class MembershipSelections extends View {
       .find('span')
       .html(monthlyAmount)
   }
+  */
 
+  /*
   resetAnnualPricing() {
     console.log('MembershipGiftOptions resetAnnualPricing')
     const annualPlanContainer = this.$('.plan.yearly')
@@ -277,6 +339,7 @@ class MembershipSelections extends View {
       .find('span')
       .html(annualAmount)
   }
+  */
 }
 
 export default MembershipSelections

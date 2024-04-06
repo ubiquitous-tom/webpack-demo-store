@@ -20,7 +20,6 @@ class MembershipOptions extends View {
 
   initialize(options) {
     console.log('MembershipOptions initialize')
-
     this.i18n = options.i18n
     // const isLoggedIn = this.model.get('Session').LoggedIn
     // const isRecordedBook = (

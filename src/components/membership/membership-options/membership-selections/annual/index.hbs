@@ -1,0 +1,23 @@
+{{!-- <section
+  class="plan yearly"
+  data-price="{{annualAmount}}"
+  data-plan-id="{{annualPlanID}}"
+> --}}
+<input
+  id="becomeAnnualRenewingMember"
+  name="membership"
+  type="radio"
+  value="annual"
+/>
+<label for="becomeAnnualRenewingMember" class="text-right">
+  <div class="h4">
+    <strong>{{t "ANNUAL"}}</strong>
+    <span class="plan-price">
+      {{{annualPlanPrice}}}
+    </span>
+  </div>
+  <p class="text-right">
+    {{t "ANNUAL-PRICE-DEAL"}}
+  </p>
+</label>
+{{! </section> }}

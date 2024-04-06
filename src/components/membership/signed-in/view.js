@@ -3,6 +3,8 @@ import _ from 'underscore'
 
 import './stylesheet.scss'
 
+import Promo from 'shared/elements/promo'
+
 import MembershipActiveTemplate from './templates/membership-active.hbs'
 import MembershipNotActiveTemplate from './templates/membership-not-active.hbs'
 
@@ -34,6 +36,8 @@ class MembershipSignedIn extends View {
     console.log('MembershipSignedIn initialize')
     this.i18n = options.i18n
     this.cart = this.model.get('cart')
+
+    this.promoView = new Promo(this.model.attributes)
 
     // const isLoggedIn = this.model.get('Session').LoggedIn
     // const isMembershipActive = this.model.get('Membership').Status === 'ACTIVE'
@@ -80,6 +84,13 @@ class MembershipSignedIn extends View {
       .append(html)
 
     this.setElement('#signedIn')
+
+    // Remove preset options like `promo code` and `plan`
+    // since we already have an `ACTIVE` membership
+    if (isMembershipActive) {
+      debugger
+      this.promoView.removePresetOptions()
+    }
 
     return this
   }

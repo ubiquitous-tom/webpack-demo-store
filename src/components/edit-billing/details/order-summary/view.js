@@ -102,15 +102,23 @@ class EditBillingDetailsOrderSummary extends View {
 
     this.editBillingDetailsOrderSummaryMonthly = new EditBillingDetailsOrderSummaryMonthly({
       model: this.model,
+      i18n: this.i18n,
+      parentView: this,
     })
     this.editBillingDetailsOrderSummaryAnnual = new EditBillingDetailsOrderSummaryAnnual({
       model: this.model,
+      i18n: this.i18n,
+      parentView: this,
     })
     this.editBillingDetailsOrderSummaryGift = new EditBillingDetailsOrderSummaryGift({
       model: this.model,
+      i18n: this.i18n,
+      parentView: this,
     })
     this.editBillingDetailsOrderSummaryTotal = new EditBillingDetailsOrderSummaryTotal({
       model: this.model,
+      i18n: this.i18n,
+      parentView: this,
     })
 
     return this
@@ -126,6 +134,12 @@ class EditBillingDetailsOrderSummary extends View {
       }
       this.model.trigger('editBilling:undelegateEvents')
     }
+  }
+
+  promoMessageFormatter(promoMessage) {
+    const newPromoMessage = promoMessage.split('.')
+
+    return _.isArray(newPromoMessage) ? newPromoMessage[1].trim() : promoMessage
   }
 }
 

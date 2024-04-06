@@ -1,26 +1,42 @@
 import { Model } from 'backbone'
 import _ from 'underscore'
 
-class CheckGiftCodeModel extends Model {
-  get urlRoot() {
+class PromoValidateModel extends Model {
+  get url() {
     const env = this.environment()
-    return `https://${env}api.rlje.net/acorn/promo`
+    return `https://${env}api.rlje.net/acorn/promo/validate`
   }
 
-  initialize(options) {
-    console.log('CheckGiftCodeModel CheckGiftCodeModel')
-    this.gifting = options.gift
+  initialize() {
+    console.log('PromoValidateModel initialize')
+    console.log(this)
   }
 
   parse(resp) {
-    console.log('CheckGiftCodeModel parse')
+    console.log('PromoValidateModel parse')
     console.log(resp)
   }
 
-  checkCode(promoCode) {
-    console.log('CheckGiftCodeModel submit')
+  /* eslint consistent-return: 0 */
+  validate(attributes, options) {
+    console.log('PromoValidateModel validate')
+    console.log(attributes, options)
+
+    if (_.isEmpty(attributes.promoCode)) {
+      console.log('please enter promo code')
+      return 'please enter promo code'
+    }
+  }
+
+  submit(data) {
+    console.log('PromoValidateModel submit')
+    const { PlanID } = data
+    this.set({
+      currentPlanID: PlanID,
+    })
+
     const options = {
-      url: [this.url(), $.param({ Code: promoCode })].join('?'),
+      url: [this.url, $.param(data)].join('?'),
       context: this,
       dataType: 'json',
       ajaxSync: true,
@@ -29,18 +45,18 @@ class CheckGiftCodeModel extends Model {
       error: this.error,
     }
     console.log(options)
-    // debugger
     this.fetch(options)
   }
 
   success(model, resp, options) {
-    console.log('CheckGiftCodeModel success')
+    console.log('PromoValidateModel success')
     console.log(model, resp, options)
     console.log(this)
     // debugger
+    this.set({ promo: resp }, { silent: true })
     this.set({
-      checkCodeSuccess: true,
-      promo: resp,
+      promoCodeSuccess: true,
+      // promo: resp,
       promoCode: resp.PromotionCode,
       promoName: resp.Name,
       // promoAppliedAmount: resp.StripePercentOff,
@@ -49,7 +65,7 @@ class CheckGiftCodeModel extends Model {
         // message: `PROMO APPLIED - ${resp.Name}`,
         // message: 'PROMO-APPLIED-OFF',
         // message: `${resp.PromotionCode} applied. Enjoy your ${resp.StripePercentOff}% off!`,
-        message: this.promoMessageParser(resp),
+        message: this.promoMessageParser(),
         interpolationOptions: {
           promoCode: resp.Name,
         },
@@ -58,11 +74,11 @@ class CheckGiftCodeModel extends Model {
   }
 
   error(model, resp, options) {
-    console.log('CheckGiftCodeModel error')
+    console.log('PromoValidateModel error')
     console.log(model, resp, options)
     console.log(this)
     // debugger
-    let message = ''
+    let message = 'PROMOCODE-ERROR'
     /* eslint function-paren-newline: 0 */
     resp
       .then(
@@ -91,8 +107,12 @@ class CheckGiftCodeModel extends Model {
           return message
         })
       .always(() => {
+        // New Error handing for the update promocode of 2024. [DWT1-932]
+        if (_.isObject(message)) {
+          message = Object.values(message)
+        }
         model.set({
-          checkCodeSuccess: false,
+          promoCodeSuccess: false,
           flashMessage: {
             type: 'error',
             message,
@@ -103,22 +123,24 @@ class CheckGiftCodeModel extends Model {
       })
   }
 
-  promoMessageParser(promo) {
+  promoMessageParser() {
     // 3 types of promo code duration
     // - forever (through the life time of the subscription)
     // - repeating (usually each specified duration of the provided month(s))
     // - once of `empty` (one time thing. usually a gift code)
+    const promo = this.get('promo') || this.get('membershipPromo')
+    const type = (this.get('currentPlanID') === this.get('monthlyStripePlan').PlanID)
+      ? 'monthly'
+      : 'annual'
+    // debugger
     const promoCode = promo.PromotionCode
     let promoDuration = ''
-    if (promo.StripeDuration) {
-      if (promo.StripeDuration === 'repeating') {
+    if (promo.StripeDuration && (type === 'monthly')) {
+      if (promo.StripeDuration === 'repeating' || promo.StripeDuration === 'once') {
         if (promo.StripeDurationInMonths) {
           const months = (promo.StripeDurationInMonths > 1) ? 'months' : 'month'
           promoDuration = ` for ${promo.StripeDurationInMonths} ${months}`
         }
-      }
-      if (promo.StripeDuration === 'once') {
-        promoDuration = ' for 1 month'
       }
     }
 
@@ -131,7 +153,7 @@ class CheckGiftCodeModel extends Model {
       promoMessage = `Enjoy your ${promo.StripePercentOff}% off${promoDuration}!`
     }
     if (promo.StripeAmountOff) {
-      const { CurrSymbol } = this.gifting
+      const { CurrSymbol } = this.get('gifting').get('gift')
       promoMessage = `Enjoy your ${CurrSymbol}${promo.StripeAmountOff} off${promoDuration}`
     }
 
@@ -154,4 +176,4 @@ class CheckGiftCodeModel extends Model {
   }
 }
 
-export default CheckGiftCodeModel
+export default PromoValidateModel

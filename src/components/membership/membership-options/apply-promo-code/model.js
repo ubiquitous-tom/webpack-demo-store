@@ -4,7 +4,7 @@ import _ from 'underscore'
 class MembershipApplyPromoCodeModel extends ATVModel {
   get url() {
     const env = this.environment()
-    return `https://${env}api.rlje.net/promo`
+    return `https://${env}api.rlje.net/acorn/promo/validate`
   }
 
   initialize(options) {
@@ -28,10 +28,10 @@ class MembershipApplyPromoCodeModel extends ATVModel {
     }
   }
 
-  submit(promoCode) {
+  submit(data) {
     console.log('MembershipApplyPromoCodeModel submit')
     const options = {
-      url: [this.url, $.param({ Code: promoCode })].join('?'),
+      url: [this.url, $.param(data)].join('?'),
       context: this,
       dataType: 'json',
       ajaxSync: true,
@@ -101,6 +101,10 @@ class MembershipApplyPromoCodeModel extends ATVModel {
           return message
         })
       .always(() => {
+        // New Error handing for the update promocode of 2024. [DWT1-932]
+        if (_.isObject(message)) {
+          message = Object.values(message)
+        }
         model.set({
           promoCodeSuccess: false,
           flashMessage: {
@@ -143,7 +147,7 @@ class MembershipApplyPromoCodeModel extends ATVModel {
         }
       }
       if (promo.StripeDuration === 'once') {
-        promoDuration = ' for your next invoice'
+        promoDuration = ' for 1 month'
       }
     }
 

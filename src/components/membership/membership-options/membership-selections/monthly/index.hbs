@@ -1,0 +1,23 @@
+{{!-- <section
+  class="plan monthly"
+  data-price="{{monthlyAmount}}"
+  data-plan-id="{{monthlyPlanID}}"
+> --}}
+<input
+  id="becomeMonthlyMember"
+  name="membership"
+  type="radio"
+  value="monthly"
+/>
+<label for="becomeMonthlyMember" class="text-right">
+  <div class="h4">
+    <strong>{{t "MONTHLY"}}</strong>
+    <span class="plans-price">
+      {{{monthlyPlanPrice}}}
+    </span>
+  </div>
+  <p class="text-right">
+    {{t "AUTOMATIC-MONTHLY-BILLING"}}
+  </p>
+</label>
+{{! </section> }}

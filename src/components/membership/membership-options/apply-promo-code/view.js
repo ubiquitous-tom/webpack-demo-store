@@ -1,10 +1,13 @@
 import { View } from 'backbone'
 // import _ from 'underscore'
 
+import PromoValidateModel from 'core/models/promo-validate'
+import Promo from 'shared/elements/promo'
+
 import './stylesheet.scss'
 import template from './index.hbs'
 
-import MembershipApplyPromoCodeModel from './model'
+// import MembershipApplyPromoCodeModel from './model'
 
 class MembershipApplyPromoCode extends View {
   get el() {
@@ -27,7 +30,14 @@ class MembershipApplyPromoCode extends View {
     this.i18n = options.i18n
     this.cart = this.model.get('cart')
     this.gifting = this.model.get('gifting')
-    this.membershipApplyPromoCodeModel = new MembershipApplyPromoCodeModel(this.gifting.attributes)
+    // this.membershipApplyPromoCodeModel = new MembershipApplyPromoCodeModel(
+    //   this.gifting.attributes
+    // )
+    this.promoValidateModel = new PromoValidateModel(this.model.attributes)
+    this.promoView = new Promo({ i18n: options.i18n })
+
+    // this.getPresetOptions()
+    this.promoView.getPresetOptions()
 
     this.listenTo(this.model, 'membership:undelegateEvents', () => {
       console.log('MembershipApplyPromoCode garbageCollect')
@@ -35,8 +45,7 @@ class MembershipApplyPromoCode extends View {
       // debugger
     })
 
-    /* eslint no-shadow: 0 */
-    this.listenTo(this.membershipApplyPromoCodeModel, 'change:promoCodeSuccess', (model, value) => {
+    this.listenTo(this.promoValidateModel, 'change:promoCodeSuccess', (model, value) => {
       console.log(model, value)
       console.log(this, this.model.attributes)
       // debugger
@@ -44,7 +53,7 @@ class MembershipApplyPromoCode extends View {
       let { message } = model.get('flashMessage')
       let type = false
       if (value) {
-        const membershipPromo = this.membershipApplyPromoCodeModel.get('promo')
+        const membershipPromo = model.get('promo')
         if (
           membershipPromo.SourceCodeMapping
           && (!membershipPromo.StripeOrg || membershipPromo.StripeOrg === 'ACORN')
@@ -52,10 +61,12 @@ class MembershipApplyPromoCode extends View {
           type = true
           this.model.set({ membershipPromo }, { context: this })
         } else {
-          message = this.i18n.t('PROMOCODE-ERROR')
+          // message = this.i18n.t('PROMOCODE-ERROR')
+          message = '"Gift Code" provided. Please redeem with the Gift Code form'
         }
       }
-      this.updatePromoMessage(message, type)
+      // this.updatePromoMessage(message, type)
+      this.promoView.updatePromoMessage(this.$('#apply-promo-code'), message, type)
       console.log(this.model.attributes)
     })
 
@@ -79,12 +90,18 @@ class MembershipApplyPromoCode extends View {
 
     if (this.model.has('membershipPromo')) {
       // debugger
-      const promoCode = this.model.get('membershipPromo').PromotionCode
-      const stripePercentOff = this.model.get('membershipPromo').StripePercentOff
-      const message = `${promoCode} applied. Enjoy your ${stripePercentOff}% off!`
+      const promo = this.model.get('membershipPromo')
+      const promoCode = promo.PromotionCode
+      // const stripePercentOff = promo.StripePercentOff
+      // const message = `${promoCode} applied. Enjoy your ${stripePercentOff}% off!`
+      const message = this.promoValidateModel.promoMessageParser()
       this.$('#promo-code').val(promoCode)
-      this.updatePromoMessage(message, 'success')
+      // this.updatePromoMessage(message, 'success')
+      this.promoView.updatePromoMessage(this.$('#apply-promo-code'), message, 'success')
     }
+
+    // this.setPresetOptions()
+    this.promoView.setPresetOptions(this.$el, 'promo')
 
     return this
   }
@@ -92,8 +109,14 @@ class MembershipApplyPromoCode extends View {
   applyPromoCode(e) {
     console.log('MembershipApplyPromoCode applyPromoCode')
     e.preventDefault()
-    const promoCode = this.$('#promo-code').val()
-    this.membershipApplyPromoCodeModel.submit(promoCode)
+    const data = {
+      Code: this.$('#promo-code').val(),
+      Country: this.model.get('stripePlansCountry'),
+      CustomerID: (this.model.has('Customer') && this.model.get('Customer').CustomerID) || '',
+      PlanID: this.model.get('currentPlanID'),
+    }
+    console.log(data)
+    this.promoValidateModel.submit(data)
   }
 
   clearPromoCode(e) {
@@ -103,103 +126,134 @@ class MembershipApplyPromoCode extends View {
     // debugger
     this.model.unset('membershipPromo', { context: this })
 
-    this.clearPromoMessage()
+    // this.clearPromoMessage()
+    this.promoView.clearPromoMessage(this.$('#apply-promo-code'))
   }
 
-  clearPromoMessage() {
-    console.log('MembershipApplyPromoCode clearPromoMessage')
-    const container = this.$('#apply-promo-code')
-    const promoInput = container.find('#promo-code')
-    const button = container.find('button')
-    const promoMessage = container.find('.promo-message')
-    const promoClear = container.find('#promo-clear')
+  // clearPromoMessage() {
+  //   console.log('MembershipApplyPromoCode clearPromoMessage')
+  //   const container = this.$('#apply-promo-code')
+  //   const promoInput = container.find('#promo-code')
+  //   const button = container.find('button')
+  //   const promoMessage = container.find('.promo-message')
+  //   const promoClear = container.find('#promo-clear')
 
-    promoInput
-      .prop('disabled', false)
-      .val('')
+  //   promoInput
+  //     .prop('disabled', false)
+  //     .val('')
 
-    promoClear
-      .remove()
+  //   promoClear
+  //     .remove()
 
-    button
-      .prop('disabled', false)
-      .removeAttr('style')
-      .html(this.i18n.t('APPLY-CODE'))
+  //   button
+  //     .prop('disabled', false)
+  //     .removeAttr('style')
+  //     .html(this.i18n.t('APPLY-CODE'))
 
-    promoMessage.remove()
-  }
+  //   promoMessage.remove()
+  // }
 
-  updatePromoMessage(message, value) {
-    console.log('MembershipApplyPromoCode updatePromoMessage')
-    // debugger
-    const promoCodeApplied = $('<div>').addClass('col-md-9 promo-message text-center pull-right')
-    const promoCodeAppliedType = value ? 'success' : 'error'
-    // const i = $('<i>').addClass('glyphicon glyphicon-ok')
+  // updatePromoMessage(message, value) {
+  //   console.log('MembershipApplyPromoCode updatePromoMessage')
+  //   // debugger
+  //   const promoCodeApplied = $('<div>').addClass('col-md-9 promo-message text-center pull-right')
+  //   const promoCodeAppliedType = value ? 'success' : 'error'
+  //   // const i = $('<i>').addClass('glyphicon glyphicon-ok')
 
-    const container = this.$('#apply-promo-code')
-    const promoInput = container.find('#promo-code')
-    const button = container.find('button')
-    const buttonWidth = button.outerWidth()
-    const xIcon = $('<i>').addClass('fa fa-times-thin fa-2x').attr({ 'aria-hidden': true })
-    const promoClear = $('<a>').attr('id', 'promo-clear').append(xIcon)
-    /* eslint comma-dangle: 0 */
-    // remove old promo message
-    container
-      .find('.promo-message')
-      .remove()
-    // remove old promo-clear
-    container
-      .find('#promo-clear')
-      .remove()
+  //   const container = this.$('#apply-promo-code')
+  //   const promoInput = container.find('#promo-code')
+  //   const button = container.find('button')
+  //   const buttonWidth = button.outerWidth()
+  //   const xIcon = $('<i>').addClass('fa fa-times-thin fa-2x').attr({ 'aria-hidden': true })
+  //   const promoClear = $('<a>').attr('id', 'promo-clear').append(xIcon)
+  //   /* eslint comma-dangle: 0 */
+  //   // remove old promo message
+  //   container
+  //     .find('.promo-message')
+  //     .remove()
+  //   // remove old promo-clear
+  //   container
+  //     .find('#promo-clear')
+  //     .remove()
 
-    // disable promo field and button
-    // if the promo code is good then disable the input
-    // DWT1-1020
-    if (value) {
-      promoInput
-        .prop('disabled', true)
-    }
-    promoInput
-      .after(promoClear)
+  //   // disable promo field and button
+  //   // if the promo code is good then disable the input
+  //   // DWT1-1020
+  //   if (value) {
+  //     promoInput
+  //       .prop('disabled', true)
+  //   }
+  //   promoInput
+  //     .after(promoClear)
 
-    // if the promo code is good then disable the button
-    // DWT1-1020
-    if (value) {
-      button
-        .prop('disabled', true)
-        .css({
-          width: buttonWidth,
-          background: '#afafaf',
-          color: '#000',
-          fontWeight: 700,
-        })
-        .html(this.i18n.t('APPLIED-PROMO-CODE'))
-    }
+  //   // if the promo code is good then disable the button
+  //   // DWT1-1020
+  //   if (value) {
+  //     button
+  //       .prop('disabled', true)
+  //       .css({
+  //         width: buttonWidth,
+  //         background: '#afafaf',
+  //         color: '#000',
+  //         fontWeight: 700,
+  //       })
+  //       .html(this.i18n.t('APPLIED-PROMO-CODE'))
+  //   }
 
-    // display new promo message
-    let promoMessage = message
+  //   // display new promo message
+  //   let promoMessage = message
 
-    // if the promo code is bad then show customized message required by the Product owner.
-    // DWT1-1020
-    if (!value) {
-      if (message.includes('expired')) {
-        promoMessage = this.i18n.t('EXPIRED-PROMO-CODE-2024')
-      }
+  //   // if the promo code is bad then show customized message required by the Product owner.
+  //   // DWT1-1020
+  //   if (!value) {
+  //     if (message.includes('expired')) {
+  //       promoMessage = this.i18n.t('EXPIRED-PROMO-CODE-2024')
+  //     }
 
-      if (message.includes('not exist')) {
-        promoMessage = this.i18n.t('PROMOCODE-ERROR')
-      }
-    }
+  //     if (message.includes('not exist')) {
+  //       promoMessage = this.i18n.t('PROMOCODE-ERROR')
+  //     }
+  //   }
 
-    container
-      .find('.form-group')
-      .append(
-        promoCodeApplied
-          .addClass(promoCodeAppliedType)
-          // .append(i)
-          .append(promoMessage)
-      )
-  }
+  //   container
+  //     .find('.form-group')
+  //     .append(
+  //       promoCodeApplied
+  //         .addClass(promoCodeAppliedType)
+  //         // .append(i)
+  //         .append(promoMessage)
+  //     )
+  // }
+
+  // getPresetOptions() {
+  //   console.log(window.location)
+  //   let queryString = ''
+  //   const { hash, search } = window.location
+  //   console.log(hash, search)
+  //   if (search) {
+  //     queryString = search
+  //     const urlParamsSearch = new URLSearchParams(queryString)
+
+  //     console.log(urlParamsSearch.has('promocode'))
+  //     console.log(urlParamsSearch.get('promocode'))
+  //     if (urlParamsSearch.has('promocode')) {
+  //       this.promocode = urlParamsSearch.get('promocode')
+  //     }
+
+  //     console.log(urlParamsSearch.has('promodisplay'))
+  //     console.log(urlParamsSearch.get('promodisplay'))
+  //     if (urlParamsSearch.has('promodisplay')) {
+  //       this.promocode = urlParamsSearch.get('promodisplay')
+  //     }
+  //   }
+  // }
+
+  // setPresetOptions() {
+  //   if (this.promocode) {
+  //     this.$el.find('#promo-code').val(this.promocode)
+  //     this.$el.find('#apply-promo-code-form button').click()
+  //   }
+  // }
 }
 
 export default MembershipApplyPromoCode
