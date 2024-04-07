@@ -11,14 +11,14 @@ class Promo extends View {
       plan: 'acorntv_st_pmp',
     }
 
-    console.log(window.location)
-    let queryString = ''
-    const { hash, search } = window.location
-    console.log(hash, search)
-    if (search) {
-      queryString = search
-    }
-    this.urlParamsSearch = new URLSearchParams(queryString)
+    // console.log(window.location)
+    // let queryString = ''
+    // const { hash, search } = window.location
+    // console.log(hash, search)
+    // if (search) {
+    //   queryString = search
+    // }
+    // this.urlParamsSearch = new URLSearchParams(queryString)
   }
 
   clearPromoMessage(container) {
