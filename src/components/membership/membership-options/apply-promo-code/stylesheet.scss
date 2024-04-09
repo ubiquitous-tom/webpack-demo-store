@@ -7,14 +7,20 @@
   }
 
   #promo-clear {
-    position: relative;
+    position: absolute;
 
     i {
       &.fa {
         color: #000;
         position: absolute;
         right: 22px;
-        top: -5px;
+        top: 5px;
+        &:hover {
+          cursor: pointer;
+        }
+        &.fa-2x {
+          font-size: 2em;
+        }
         &.fa-times-thin:before {
           content: "\00d7";
         }
@@ -53,7 +59,7 @@
     #promo-clear {
       i.fa {
         right: -86px;
-        top: -55px;
+        top: -44px;
       }
     }
 
