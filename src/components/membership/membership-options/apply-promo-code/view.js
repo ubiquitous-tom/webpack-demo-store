@@ -77,20 +77,20 @@ class MembershipApplyPromoCode extends View {
       // When we have preset options
       if ((plan === 'monthly')) {
         if (promo) {
-          debugger
+          // debugger
           this.promoView.setPresetOptions(this.$el, 'promo')
           this.promoView.removePresetOptions()
         } else {
           /* eslint no-lonely-if: 0 */
           if (this.$('#promo-code').val()) {
-            debugger
+            // debugger
             const data = {
               Code: this.$('#promo-code').val(),
               Country: this.model.get('stripePlansCountry'),
               CustomerID: (this.model.has('Customer') && this.model.get('Customer').CustomerID) || '',
               PlanID: this.model.get('currentPlanID'),
             }
-            debugger
+            // debugger
             console.log(data)
             this.promoValidateModel.submit(data)
           }
@@ -105,7 +105,7 @@ class MembershipApplyPromoCode extends View {
       // When we have preset options
       if ((plan === 'annual')) {
         if (promo) {
-          debugger
+          // debugger
           this.promoView.setPresetOptions(this.$el, 'promo')
           this.promoView.removePresetOptions()
         } else {
@@ -117,7 +117,7 @@ class MembershipApplyPromoCode extends View {
               CustomerID: (this.model.has('Customer') && this.model.get('Customer').CustomerID) || '',
               PlanID: this.model.get('currentPlanID'),
             }
-            debugger
+            // debugger
             console.log(data)
             this.promoValidateModel.submit(data)
           }
