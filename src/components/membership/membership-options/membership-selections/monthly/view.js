@@ -109,7 +109,7 @@ class MembershipSelectionsMonthly extends View {
 
     this.parentView.selectDefaultPlan()
 
-    this.promoView.setPresetOptions(this.$el, 'plan', 'monthly')
+    this.setPresetOptions()
 
     return this
   }
@@ -171,7 +171,7 @@ class MembershipSelectionsMonthly extends View {
   */
 
   updateMembershipPlan(e) {
-    console.log('MembershipSelections updateMembershipPlan')
+    console.log('MembershipSelectionsMonthly updateMembershipPlan')
     e.preventDefault()
     console.log(e.target.value)
     this.membershipType = e.target.value
@@ -181,9 +181,12 @@ class MembershipSelectionsMonthly extends View {
     const currentPlanID = this.model.get(`${this.membershipType}StripePlan`).PlanID
     this.model.set({ currentPlanID })
 
-    if (this.model.has('membershipPromo')) {
+    if (this.model.has('membershipPromo') || $('#promo-code').val()) {
+      const promoCode = this.model.has('membershipPromo')
+        ? this.model.get('membershipPromo').PromotionCode
+        : $('#promo-code').val()
       const data = {
-        Code: this.model.get('membershipPromo').PromotionCode,
+        Code: promoCode,
         Country: this.model.get('stripePlansCountry'),
         CustomerID: (this.model.has('Customer') && this.model.get('Customer').CustomerID) || '',
         PlanID: this.model.get('currentPlanID'),
@@ -286,7 +289,7 @@ class MembershipSelectionsMonthly extends View {
   }
 
   resetMonthlyPricing() {
-    console.log('MembershipGiftOptions resetMonthlyPricing')
+    console.log('MembershipSelectionsMonthly resetMonthlyPricing')
     // const monthlyPlanContainer = this.$('.plan.monthly')
     const monthlyPlanContainer = this.$el
     const monthlyAmount = [
@@ -298,6 +301,11 @@ class MembershipSelectionsMonthly extends View {
     monthlyPlanContainer
       .find('span')
       .html(monthlyAmount)
+  }
+
+  setPresetOptions() {
+    console.log('MembershipSelectionsMonthly setPresetOptions')
+    this.promoView.setPresetOptions(this.$el, 'plan', 'monthly')
   }
 }
 

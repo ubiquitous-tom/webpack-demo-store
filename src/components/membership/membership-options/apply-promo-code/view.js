@@ -70,6 +70,61 @@ class MembershipApplyPromoCode extends View {
       console.log(this.model.attributes)
     })
 
+    this.listenTo(this.cart, 'change:monthly', (model, value) => {
+      console.log(model, value)
+      const promo = this.promoView.getPresetOption('promo')
+      const plan = this.promoView.getPresetOption('plan')
+      // When we have preset options
+      if ((plan === 'monthly')) {
+        if (promo) {
+          debugger
+          this.promoView.setPresetOptions(this.$el, 'promo')
+          this.promoView.removePresetOptions()
+        } else {
+          /* eslint no-lonely-if: 0 */
+          if (this.$('#promo-code').val()) {
+            debugger
+            const data = {
+              Code: this.$('#promo-code').val(),
+              Country: this.model.get('stripePlansCountry'),
+              CustomerID: (this.model.has('Customer') && this.model.get('Customer').CustomerID) || '',
+              PlanID: this.model.get('currentPlanID'),
+            }
+            debugger
+            console.log(data)
+            this.promoValidateModel.submit(data)
+          }
+        }
+      }
+    })
+
+    this.listenTo(this.cart, 'change:annual', (model, value) => {
+      console.log(model, value)
+      const promo = this.promoView.getPresetOption('promo')
+      const plan = this.promoView.getPresetOption('plan')
+      // When we have preset options
+      if ((plan === 'annual')) {
+        if (promo) {
+          debugger
+          this.promoView.setPresetOptions(this.$el, 'promo')
+          this.promoView.removePresetOptions()
+        } else {
+          /* eslint no-lonely-if: 0 */
+          if (this.$('#promo-code').val()) {
+            const data = {
+              Code: this.$('#promo-code').val(),
+              Country: this.model.get('stripePlansCountry'),
+              CustomerID: (this.model.has('Customer') && this.model.get('Customer').CustomerID) || '',
+              PlanID: this.model.get('currentPlanID'),
+            }
+            debugger
+            console.log(data)
+            this.promoValidateModel.submit(data)
+          }
+        }
+      }
+    })
+
     const membershipActive = (this.model.get('Membership').Status.toUpperCase() === 'ACTIVE')
     if (!membershipActive) {
       this.render()
@@ -92,16 +147,16 @@ class MembershipApplyPromoCode extends View {
       // debugger
       const promo = this.model.get('membershipPromo')
       const promoCode = promo.PromotionCode
-      // const stripePercentOff = promo.StripePercentOff
-      // const message = `${promoCode} applied. Enjoy your ${stripePercentOff}% off!`
-      const message = this.promoValidateModel.promoMessageParser()
+      // // const stripePercentOff = promo.StripePercentOff
+      // // const message = `${promoCode} applied. Enjoy your ${stripePercentOff}% off!`
+      // const message = this.promoValidateModel.promoMessageParser()
       this.$('#promo-code').val(promoCode)
-      // this.updatePromoMessage(message, 'success')
-      this.promoView.updatePromoMessage(this.$('#apply-promo-code'), message, 'success')
+      // // this.updatePromoMessage(message, 'success')
+      // this.promoView.updatePromoMessage(this.$('#apply-promo-code'), message, 'success')
+      this.$('#apply-promo-code-form button').click()
     }
 
-    // this.setPresetOptions()
-    this.promoView.setPresetOptions(this.$el, 'promo')
+    this.setPresetOptions()
 
     return this
   }
@@ -248,12 +303,12 @@ class MembershipApplyPromoCode extends View {
   //   }
   // }
 
-  // setPresetOptions() {
-  //   if (this.promocode) {
-  //     this.$el.find('#promo-code').val(this.promocode)
-  //     this.$el.find('#apply-promo-code-form button').click()
-  //   }
-  // }
+  setPresetOptions() {
+    console.log('MembershipApplyPromoCode setPresetOptions')
+    if (this.promoView.getPresetOption('plan') === false) {
+      this.promoView.setPresetOptions(this.$el, 'promo')
+    }
+  }
 }
 
 export default MembershipApplyPromoCode

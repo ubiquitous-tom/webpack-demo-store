@@ -116,6 +116,15 @@ class Promo extends View {
       )
   }
 
+  getPresetOption(preset) {
+    const sessionKey = (preset && this.presetOptions[preset])
+    if (sessionStorage.getItem(sessionKey)) {
+      return sessionStorage.getItem(sessionKey)
+    }
+
+    return false
+  }
+
   getPresetOptions() {
     console.log('Promo getPresetOptions')
     console.log(window.location)

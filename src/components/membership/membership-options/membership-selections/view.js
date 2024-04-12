@@ -119,7 +119,7 @@ class MembershipSelections extends View {
     // for a `GUEST`, `CANCELED`, or `EXPIRED` membership
     const isValidAccount = (this.model.has('Membership') && this.model.has('Subscription'))
     if (isValidAccount) {
-      debugger
+      // debugger
       this.promoView.removePresetOptions()
     }
 
@@ -165,7 +165,7 @@ class MembershipSelections extends View {
   */
 
   updateCart(membershipType) {
-    console.log('MembershipGiftOptions updateCart')
+    console.log('MembershipSelections updateCart')
     const otherMembershipType = (membershipType === 'monthly') ? 'annual' : 'monthly'
     const membership = {}
     const other = {}
