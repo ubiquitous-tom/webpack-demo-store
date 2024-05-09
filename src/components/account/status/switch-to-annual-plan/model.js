@@ -75,19 +75,6 @@ class SwitchToAnnualPlanModel extends ATVModel {
   success(model, resp, options) {
     console.log('SwitchToAnnualPlanModel success')
     console.log(model, resp, options)
-    debugger
-    const annualPricing = this.get('annualStripePlan').CurrSymbol + this.get('annualStripePlan').SubscriptionAmount
-    const currentPeriodEnd = new Date(resp.current_period_end * 1000)
-      .toLocaleDateString(
-        `${this.get('stripePlansLang')}-${this.get('stripePlansCountry')}`,
-        {
-          year: '2-digit',
-          month: '2-digit',
-          day: '2-digit',
-        },
-      )
-    const pricing = (Math.floor((this.get('annualStripePlan').SubscriptionAmount / 12) * 100) / 100).toFixed(2)
-    const perMonthPricing = this.get('annualStripePlan').CurrSymbol + pricing
     this.set({
       upgradeToAnnualWithPromoCode: model.has('promoCode'),
     })
@@ -100,12 +87,10 @@ class SwitchToAnnualPlanModel extends ATVModel {
       upgradeToAnnualSuccess: true,
       flashMessage: {
         type: 'success',
-        message: 'UPGRADED-TO-ANNUAL-BILLED-DATE-PRICE',
-        interpolationOptions: {
-          annualPricing,
-          currentPeriodEnd,
-          perMonthPricing,
-        },
+        // TO DO - Add this message to the translation file
+        // (This is being tracked by Fernando Souza)
+        message: `You've successfully upgraded to the annual plan`,
+        interpolationOptions: {},
       },
     })
   }
@@ -113,7 +98,6 @@ class SwitchToAnnualPlanModel extends ATVModel {
   error(model, resp, options) {
     console.log('SwitchToAnnualPlanModel error')
     console.log(model, resp, options)
-    debugger
     let message = ''
     /* eslint function-paren-newline: 0 */
     resp

@@ -109,7 +109,7 @@ class MembershipApplyPromoCodeModel extends ATVModel {
           promoCodeSuccess: false,
           flashMessage: {
             type: 'error',
-            message,
+            message: this.getPromoMessageError(message),
             interpolationOptions: {},
           },
         })
@@ -130,6 +130,24 @@ class MembershipApplyPromoCodeModel extends ATVModel {
     }
     // console.log(env)
     return env
+  }
+
+  hasText(msg, text) {
+    return JSON.stringify(msg).toLocaleLowerCase().indexOf(text.toLocaleLowerCase()) !== -1
+  }
+
+  getPromoMessageError(error) {
+    let message = error
+    if (this.hasText(message, 'Invalid Promo Code for customer country') || this.hasText(message, 'Invalid customer country')) {
+      message = 'Promo not valid in your country'
+    }
+    if (this.hasText(message, 'Invalid customer segment')) {
+      message = 'Promo is not valid for your subscription status'
+    }
+    if (this.hasText(message, 'Invalid plan term') || this.hasText(message, 'PlanTermRequirement')) {
+      message = 'Promo is not valid for selected plan'
+    }
+    return message
   }
 
   promoMessageParser(promo) {
