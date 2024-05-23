@@ -9,14 +9,14 @@ class ReviewModel extends Model {
   //     },
   //     Gift: [{
   //       Quantity: '1',
-  //       Amount: '66.99',
+  //       Amount: '67.99',
   //       CurrencyDesc: 'USD',
   //     }],
   //     Membership: {
   //       Type: 'MONTHLY',
-  //       Amount: '6.99',
+  //       Amount: '7.99',
   //       CurrencyDesc: 'USD',
-  //       PlanID: 'ATV-MON-USD-699',
+  //       PlanID: 'ATV-MONTHLY-US-799',
   //     },
   //   }
   // }
