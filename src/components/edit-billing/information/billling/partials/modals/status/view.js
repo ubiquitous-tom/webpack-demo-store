@@ -1,4 +1,4 @@
-import { View } from 'backbone'
+import { Model, View } from 'backbone'
 
 import template from './index.hbs'
 
@@ -13,6 +13,7 @@ class EditBillingInformationBillingStatusModal extends View {
 
   initialize() {
     console.log('EditBillingInformationBillingStatusModal initialize')
+    this.statusModalModel = new Model()
   }
 
   render() {
@@ -30,11 +31,29 @@ class EditBillingInformationBillingStatusModal extends View {
     // debugger
     this.$el
       .on('hidden.bs.modal', () => {
-        this.$el.remove()
-        this.model.trigger('membership:editBillingSubmitted')
+        const isPaymentSuccess = this.getData('paymentSuccess')
+        // debugger
+        // this.$el.remove()
+        if (isPaymentSuccess) {
+          this.model.trigger('membership:editBillingSubmitted')
+        } else {
+          this.model.trigger('stripeForm:resetStripeForm')
+        }
       })
 
     return this
+  }
+
+  setBody(content) {
+    this.$('#updateBillingStatus').html(content)
+  }
+
+  setData(key, data) {
+    this.statusModalModel.set(key, data)
+  }
+
+  getData(key) {
+    return this.statusModalModel.get(key)
   }
 }
 
