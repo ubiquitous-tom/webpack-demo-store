@@ -141,7 +141,7 @@ class CheckGiftCodeModel extends Model {
   environment() {
     let env = ''
     if (window.location.hostname.indexOf('dev') > -1) {
-      env = 'dev3-'
+      env = 'dev-'
     }
     if (window.location.hostname.indexOf('qa') > -1) {
       env = 'qa-'

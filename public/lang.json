@@ -281,9 +281,9 @@
             "MINIMUM-CHARACTERS": {
                 "type": "text",
                 "content": {
-                    "en": "If you wish to change your password, please provide the details below. Please enter a minimum of 6 characters.",
-                    "es": "S\u00ed deseas cambiar tu contrase\u00f1a, por favor introduce tus datos a continuaci\u00f3n. Ingresa m\u00ednimo 6 caracteres.",
-                    "uk": "If you wish to change your password, please provide the details below. Please enter a minimum of 6 characters."
+                    "en": "If you wish to change your password, please provide the details below. Please enter a minimum of 8 characters.",
+                    "es": "S\u00ed deseas cambiar tu contrase\u00f1a, por favor introduce tus datos a continuaci\u00f3n. Ingresa m\u00ednimo 8 caracteres.",
+                    "uk": "If you wish to change your password, please provide the details below. Please enter a minimum of 8 characters."
                 }
             },
             "PASSWORD": {
@@ -790,14 +790,6 @@
                     "uk": "Acorn TV Gift Membership"
                 }
             },
-            "GIFT-MEMBERSHIP-2024": {
-                "type": "text",
-                "content": {
-                    "en": "Gift an Acorn TV Annual Membership",
-                    "es": "Regala una suscripci\u00f3n de Acorn TV",
-                    "uk": "Gift an Acorn TV Annual Membership"
-                }
-            },
             "START-FREE-TRIAL-LC": {
                 "type": "text",
                 "content": {
@@ -1022,12 +1014,20 @@
                     "uk": "Sign In"
                 }
             },
+            "GIFT-MEMBERSHIP-2024": {
+                "type": "text",
+                "content": {
+                    "en": "Gift an Acorn TV Gift Membership",
+                    "es": "Regala una suscripci\u00f3n de Acorn TV",
+                    "uk": "Gift an Acorn TV Gift Membership"
+                }
+            },
             "YEAR-UNLIMITED-ACCESS": {
                 "type": "text",
                 "content": {
-                    "en": "Give 12 months for the price of 10",
+                    "en": "Give 12 months of unlimited access to the best British TV",
                     "es": "Regala 12 meses de acceso ilimitado a la mejor televisi\u00f3n brit\u00e1nica",
-                    "uk": "Give 12 months for the price of 10"
+                    "uk": "Give 12 months of unlimited access to the best British TV"
                 }
             },
             "GIFT-PRICE": {
@@ -1153,9 +1153,9 @@
             "MEMBERSHIP-EXPIRATION": {
                 "type": "text",
                 "content": {
-                    "en": "Your membership has expired. Renew now to continue discovering extraordinary mysteries, dramas, and thrillers from around the world.",
+                    "en": "Your membership has expired. Renew now to continue watching the best British mysteries, dramas, and comedies.",
                     "es": "Tu suscripci\u00f3n ha vencido. Renu\u00e9vala ahora para seguir disfrutando los mejores misterios, dramas y comedias brit\u00e1nicas.",
-                    "uk": "Your membership has expired. Renew now to continue discovering extraordinary mysteries, dramas, and thrillers from around the world."
+                    "uk": "Your membership has expired. Renew now to continue watching the best British mysteries, dramas, and comedies."
                 }
             },
             "REQUIRED": {
@@ -1281,9 +1281,9 @@
             "UNLIMITED-ACCESS": {
                 "type": "text",
                 "content": {
-                    "en": "Select a Monthly or Annual membership. Get 12 months for the price of 10 with Annual",
+                    "en": "Unlimited access to thousands of hours of the best British TV.",
                     "es": "Acceso ilimitado a miles de horas de la mejor televisi\u00f3n brit\u00e1nica.",
-                    "uk": "Select a Monthly or Annual membership. Get 12 months for the price of 10 with Annual"
+                    "uk": "Unlimited access to thousands of hours of the best British TV."
                 }
             },
             "AUTOMATIC-MONTHLY-BILLING": {
@@ -1570,7 +1570,7 @@
                 "type": "text",
                 "content": {
                     "en": "Recipient will be asked to provide an email address for membership confirmation.",
-                    "es": "A la persona que le regalaste la suscripci\u00f3n solo se le solicitar\u00e1 un correo electr\u00f3nico.",
+                    "es": "A la persona que le regalaste la suscripci\u00f3n solo se le solicitar\u00e1un correo electr\u00f3nico.",
                     "uk": "Recipient will be asked to provide an email address for membership confirmation."
                 }
             },
@@ -1801,9 +1801,9 @@
             "ENTER-MIN-CHARACTERS": {
                 "type": "text",
                 "content": {
-                    "en": "Please enter a minimum of 6 characters",
-                    "es": "Ingresa m\u00ednimo 6 caracteres",
-                    "uk": "Please enter a minimum of 6 characters"
+                    "en": "Please enter a minimum of 8 characters",
+                    "es": "Ingresa m\u00ednimo 8 caracteres",
+                    "uk": "Please enter a minimum of 8 characters"
                 }
             },
             "CONFIRM-EMAIL-ADDRESS": {
@@ -2105,7 +2105,7 @@
             "ACORNTV-STREAMS-CONTENT": {
                 "type": "text",
                 "content": {
-                    "en": "Acorn TV streams world-class mysteries, dramas, and comedies from Britain and beyond. Hailed as \u201cNetflix for the Anglophile\u201d by NPR, Acorn TV\u2019s catalog includes hundreds of hours of exclusive programming<span class=\"hidden-xs\"> including Agatha Raisin, 800 Words, Loch Ness, Striking Out, Love, Lies & Records, and more. Acorn TV offers the newest seasons of fan favorite shows including Doc Martin, A Place to Call Home, Detectorists, The Brokenwood Mysteries, Midsomer Murders, Murdoch Mysteries, and more. The New York Times raves \u201cAcorn is an absolute must for anyone who wants to spend hours every day touring around quaint villages and gritty British city streets, enjoying gentle comedy and hard-hitting crime stories alike\u201d. <br><br>Start your free trial to binge-watch a classic series or discover your new favorite show. With thousands of hours of commercial-free programming and new shows added weekly, there\u2019s always something to watch! After your trial, the subscription is just $7.99 a month. You can cancel anytime.",
+                    "en": "Acorn TV streams world-class mysteries, dramas, and comedies from Britain and beyond. Hailed as \u201cNetflix for the Anglophile\u201d by NPR, Acorn TV\u2019s catalog includes hundreds of hours of exclusive programming<span class=\"hidden-xs\"> including Agatha Raisin, 800 Words, Loch Ness, Striking Out, Love, Lies & Records, and more. Acorn TV offers the newest seasons of fan favorite shows including Doc Martin, A Place to Call Home, Detectorists, The Brokenwood Mysteries, Midsomer Murders, Murdoch Mysteries, and more. The New York Times raves \u201cAcorn is an absolute must for anyone who wants to spend hours every day touring around quaint villages and gritty British city streets, enjoying gentle comedy and hard-hitting crime stories alike\u201d. <br><br>Start your free trial to binge-watch a classic series or discover your new favorite show. With thousands of hours of commercial-free programming and new shows added weekly, there\u2019s always something to watch! After your trial, the subscription is just $4.99 a month. You can cancel anytime.",
                     "es": "Acorn TV ofrece streaming de misterios, dramas y comedias de clase mundial desde Gran Breta\u00f1a y m\u00e1s all\u00e1. Aclamado como el  \u201cNetflix para los amantes de la cultura brit\u00e1nica\u201d por NPR, el cat\u00e1logo de Acorn TV incluye cientos de horas de programaci\u00f3n exclusiva <span class=\"hidden-xs\"> que incluye Agatha Raisin, 800 Words, Loch Ness, Striking Out, Love, Lies & Records y m\u00e1s. Acorn TV adem\u00e1s ofrece las temporadas m\u00e1s recientes de tus series favoritas como Doc Martin, A Place to Call Home, Detectorists, The Brokenwood Mysteries, Midsomer Murders, Murdoch Mysteries y m\u00e1s. The New York Times considera que \u201cAcorn TV es indispensable para aquellos que quieran pasar sus d\u00edas visitando pintorescos poblados y agitadas calles de ciudades brit\u00e1nicas, ya sea con una gran comedia o con intensos programas policiacos\u201d. <br><br> Comienza tu prueba gratis para empezar un marat\u00f3n de series aclamadas por la cr\u00edtica o descubrir tu nuevo programa favorito. \u00a1Siempre hay algo para ver! Miles de horas de programaci\u00f3n sin anuncios y series nuevas  que se agregan semanalmente. Al finalizar tu prueba gratis, la suscripci\u00f3n tiene un costo de s\u00f3lo $79 pesos por mes y la  puedes cancelar en cualquier momento.\n",
                     "uk": "Acorn TV streams world-class mysteries, dramas, and comedies from Britain and beyond. Hailed as \u201cNetflix for the Anglophile\u201d by NPR, Acorn TV\u2019s catalog includes hundreds of hours of exclusive programming. The New York Times raves \u201cAcorn is an absolute must for anyone who wants to spend hours every day touring around quaint villages and gritty British city streets, enjoying gentle comedy and hard-hitting crime stories alike\u201d. <br><br>Always Something New From exclusive premieres to compelling international dramas and a curated collection of British classics including Foyle\u2019s War, Inspector George Gently and many more. New shows added weekly."
                 }
@@ -2249,9 +2249,9 @@
             "PASSWORD-CHARACTERS": {
                 "type": "text",
                 "content": {
-                    "en": "Password * Please enter a minimum of 6 characters",
-                    "es": "Contrase\u00f1a* Ingresa m\u00ednimo 6 caracteres.",
-                    "uk": "Password * Please enter a minimum of 6 characters"
+                    "en": "Password * Please enter a minimum of 8 characters",
+                    "es": "Contrase\u00f1a* Ingresa m\u00ednimo 8 caracteres.",
+                    "uk": "Password * Please enter a minimum of 8 characters"
                 }
             },
             "SIGN-ME-UP": {
@@ -2569,9 +2569,9 @@
             "PASSWORD-LENGTH": {
                 "type": "text",
                 "content": {
-                    "en": "Hint: The password should be at least six characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! \" ? $ % ^ & ).",
-                    "es": "Sugerencia: La contrase\u00f1a debe tener al menos seis caracteres. Para hacerla m\u00e1s segura, usa may\u00fasculas y min\u00fasculas, n\u00fameros y s\u00edmbolos como ! \" ? $ % ^ & ).",
-                    "uk": "Hint: The password should be at least six characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! \" ? $ % ^ & )."
+                    "en": "Hint: The password should be at least 8-15 characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! \" ? $ % ^ & ).",
+                    "es": "Sugerencia: La contrase\u00f1a debe tener entre 8 y 15 caracteres. Para hacerla m\u00e1s segura, usa may\u00fasculas y min\u00fasculas, n\u00fameros y s\u00edmbolos como ! \" ? $ % ^ & ).",
+                    "uk": "Hint: The password should be at least eight characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! \" ? $ % ^ & )."
                 }
             },
             "ENTER-NEW-PASSWORD": {
@@ -2649,9 +2649,9 @@
             "SET-UP-ACCOUNT": {
                 "type": "text",
                 "content": {
-                    "en": "After clicking this button, you will be asked to set up an account to start your free trial including billing information to be used once your 7-day free trial ends. Once your trial is over, the cost is $7.99\/month. You may cancel at any time before your 7 days are up to avoid charges.",
-                    "es": "Tras dar clic en el bot\u00f3n, se te pedir\u00e1 que des de alta una cuenta para comenzar tu prueba gratis. Se te solicitar\u00e1 la informaci\u00f3n de pago que se utilizar\u00e1 una vez que finalice tu periodo de prueba. Cuando este concluya, el costo de la suscripci\u00f3n es de $7.99\/mes. Puedes cancelar cualquier momento antes de que se terminen los 7 d\u00edas para evitar cargos.",
-                    "uk": "After clicking this button, you will be asked to set up an account to start your free trial including billing information to be used once your 14-day free trial ends. Once your trial is over, the cost is $7.99\/month. You may cancel at any time before your 14 days are up to avoid charges."
+                    "en": "After clicking this button, you will be asked to set up an account to start your free trial including billing information to be used once your 7-day free trial ends. Once your trial is over, the cost is $4.99\/month. You may cancel at any time before your 7 days are up to avoid charges.",
+                    "es": "Tras dar clic en el bot\u00f3n, se te pedir\u00e1 que des de alta una cuenta para comenzar tu prueba gratis. Se te solicitar\u00e1 la informaci\u00f3n de pago que se utilizar\u00e1 una vez que finalice tu periodo de prueba. Cuando este concluya, el costo de la suscripci\u00f3n es de $4.99\/mes. Puedes cancelar cualquier momento antes de que se terminen los 7 d\u00edas para evitar cargos.",
+                    "uk": "After clicking this button, you will be asked to set up an account to start your free trial including billing information to be used once your 14-day free trial ends. Once your trial is over, the cost is $4.99\/month. You may cancel at any time before your 14 days are up to avoid charges."
                 }
             },
             "FOUR-DIGIT-CODE": {
@@ -2713,9 +2713,9 @@
             "SIGNUP-DETAILS": {
                 "type": "text",
                 "content": {
-                    "en": "After clicking \"Sign Up\", you will be asked to set up an account to begin your 30-day free trial. You will be asked for billing information to be used when your free trial period ends. Once your trial is over, your monthly membership cost is $7.99\/mo. You may cancel at any time before your trial expires to avoid any charges.",
-                    "es": "Tras dar clic en \"Reg\u00edstrate\" se te pedir\u00e1 que des de alta una cuenta para comenzar tu prueba de 30 d\u00edas gratis. Se te solicitar\u00e1 la informaci\u00f3n de pago que se utilizar\u00e1 una vez que finalice tu periodo de prueba. Cuando este concluya, el costo de la suscripci\u00f3n es de $7.99\/mes. Puedes cancelar en cualquier momento antes de que se terminen los 30 d\u00edas para evitar cargos.",
-                    "uk": "After clicking \"Sign Up\", you will be asked to set up an account to begin your 14-day free trial. You will be asked for billing information to be used when your free trial period ends. Once your trial is over, your monthly membership cost is $7.99\/mo. You may cancel at any time before your trial expires to avoid any charges."
+                    "en": "After clicking \"Sign Up\", you will be asked to set up an account to begin your 30-day free trial. You will be asked for billing information to be used when your free trial period ends. Once your trial is over, your monthly membership cost is $4.99\/mo. You may cancel at any time before your trial expires to avoid any charges.",
+                    "es": "Tras dar clic en \"Reg\u00edstrate\" se te pedir\u00e1 que des de alta una cuenta para comenzar tu prueba de 30 d\u00edas gratis. Se te solicitar\u00e1 la informaci\u00f3n de pago que se utilizar\u00e1 una vez que finalice tu periodo de prueba. Cuando este concluya, el costo de la suscripci\u00f3n es de $4.99\/mes. Puedes cancelar en cualquier momento antes de que se terminen los 30 d\u00edas para evitar cargos.",
+                    "uk": "After clicking \"Sign Up\", you will be asked to set up an account to begin your 14-day free trial. You will be asked for billing information to be used when your free trial period ends. Once your trial is over, your monthly membership cost is $4.99\/mo. You may cancel at any time before your trial expires to avoid any charges."
                 }
             },
             "SAMSUNG-SINGUP-DETAILS": {
@@ -2937,9 +2937,9 @@
             "OFFER-TRIAL": {
                 "type": "text",
                 "content": {
-                    "en": "Only $7.99\/month after the free trial ends",
+                    "en": "Only $4.99\/month after the free trial ends",
                     "es": "Al finalizar tu prueba gratis solo pagaras  $79 \/ mes",
-                    "uk": "Only \u00a37.99\/month after the free trial ends"
+                    "uk": "Only \u00a34.99\/month after the free trial ends"
                 }
             },
             "COSTCO-MEMBERS-EXCLUSIVE": {
@@ -2953,7 +2953,7 @@
             "ACORNTV-DESC": {
                 "type": "text",
                 "content": {
-                    "en": "Acorn TV streams world-class mysteries, dramas, and comedies from Britain and beyond. Hailed as \u201cNetflix for the Anglophile\u201d by NPR, Acorn TV\u2019s catalog includes hundreds of hours of exclusive programming<span class=\"hidden-xs\"> including Agatha Raisin, 800 Words, Loch Ness, Striking Out, Love, Lies & Records, and more. Acorn TV offers the newest seasons of fan favorite shows including Doc Martin, A Place to Call Home, Detectorists, The Brokenwood Mysteries, Midsomer Murders, Murdoch Mysteries, and more. The New York Times raves \u201cAcorn is an absolute must for anyone who wants to spend hours every day touring around quaint villages and gritty British city streets, enjoying gentle comedy and hard-hitting crime stories alike\u201d. <br><br>Start your free trial to binge-watch a classic series or discover your new favorite show<\/span>. With thousands of hours of commercial-free programming and new shows added weekly, there\u2019s always something to watch! After your trial, the subscription is just $7.99 a month. You can cancel anytime.",
+                    "en": "Acorn TV streams world-class mysteries, dramas, and comedies from Britain and beyond. Hailed as \u201cNetflix for the Anglophile\u201d by NPR, Acorn TV\u2019s catalog includes hundreds of hours of exclusive programming<span class=\"hidden-xs\"> including Agatha Raisin, 800 Words, Loch Ness, Striking Out, Love, Lies & Records, and more. Acorn TV offers the newest seasons of fan favorite shows including Doc Martin, A Place to Call Home, Detectorists, The Brokenwood Mysteries, Midsomer Murders, Murdoch Mysteries, and more. The New York Times raves \u201cAcorn is an absolute must for anyone who wants to spend hours every day touring around quaint villages and gritty British city streets, enjoying gentle comedy and hard-hitting crime stories alike\u201d. <br><br>Start your free trial to binge-watch a classic series or discover your new favorite show<\/span>. With thousands of hours of commercial-free programming and new shows added weekly, there\u2019s always something to watch! After your trial, the subscription is just $4.99 a month. You can cancel anytime.",
                     "es": "Acorn TV ofrece streaming de misterios, dramas y comedias de clase mundial desde Gran Breta\u00f1a y m\u00e1s all\u00e1. Aclamado como el  \u201cNetflix para los amantes de la cultura brit\u00e1nica\u201d por NPR, el cat\u00e1logo de Acorn TV incluye cientos de horas de programaci\u00f3n exclusiva <span class=\"hidden-xs\"> que incluye Agatha Raisin, 800 Words, Loch Ness, Striking Out, Love, Lies & Records y m\u00e1s. Acorn TV adem\u00e1s ofrece las temporadas m\u00e1s recientes de tus series favoritas como Doc Martin, A Place to Call Home, Detectorists, The Brokenwood Mysteries, Midsomer Murders, Murdoch Mysteries y m\u00e1s. The New York Times considera que \u201cAcorn TV es indispensable para aquellos que quieran pasar sus d\u00edas visitando pintorescos poblados y agitadas calles de ciudades brit\u00e1nicas, ya sea con una gran comedia o con intensos programas policiacos\u201d. <br><br> Comienza tu prueba gratis para empezar un marat\u00f3n de series aclamadas por la cr\u00edtica o descubrir tu nuevo programa favorito <\/span>. \u00a1Siempre hay algo para ver! Miles de horas de programaci\u00f3n sin anuncios y series nuevas  que se agregan semanalmente. Al finalizar tu prueba gratis, la suscripci\u00f3n tiene un costo de s\u00f3lo $79 pesos por mes y la  puedes cancelar en cualquier momento.",
                     "uk": "Acorn TV streams world-class mysteries, dramas, and comedies from Britain and beyond. Hailed as \u201cNetflix for the Anglophile\u201d by NPR, Acorn TV\u2019s catalog includes hundreds of hours of exclusive programming.  The New York Times raves \u201cAcorn is an absolute must for anyone who wants to spend hours every day touring around quaint villages and gritty British city streets, enjoying gentle comedy and hard-hitting crime stories alike\u201d. <br><br>Always Something New From exclusive premieres to compelling international dramas and a curated collection of British classics including Foyle\u2019s War, Inspector George Gently and many more. New shows added weekly."
                 }
@@ -4003,7 +4003,7 @@
                 "content": {
                     "en": "Watch free for 7 days. Just %{monthlyPrice}\/month, plus taxes where applicable after that. No commitment: cancel within 7 days to avoid payment.",
                     "es": "Ve gratis durante 7 d\u00edas. Solo por %{monthlyPrice}\/mes, m\u00e1s impuestos donde apliquen. Sin compromiso: puedes cancelar dentro de los pr\u00f3ximos 7 d\u00edas para evitar cargos.",
-                    "uk": "Watch free for 14 days. Just %{monthlyPrice}\/month, plus taxes where applicable after that. No commitment: cancel within 14 days to avoid payment."
+                    "uk": "Watch free for 7 days. Just %{monthlyPrice}\/month, plus taxes where applicable after that. No commitment: cancel within 7 days to avoid payment."
                 }
             },
             "FREE-SEVEN-DAYS-DEVICE": {
@@ -4209,9 +4209,9 @@
             "TAX-ESTIMATED-TAXES-HANDLEBARS": {
                 "type": "text",
                 "content": {
-                    "en": "Plus %{estimatedTax} (Estimated taxes)",
+                    "en": "plus %{estimatedTax} (Estimated taxes)",
                     "es": "Mas %{estimatedTax} (Estimated taxes)",
-                    "uk": "Plus %{estimatedTax} (Estimated taxes)"
+                    "uk": "plus %{estimatedTax} (Estimated taxes)"
                 }
             },
             "TAX-SALES-TAX": {
@@ -4281,9 +4281,9 @@
             "BLACK-FRIDAY-PROMO-LIST-1-2024": {
                 "type": "text",
                 "content": {
-                    "en": "1 Gift: %{giftPrice} (regular price)",
-                    "es": "1 regalo: %{giftPrice} (precio regular)",
-                    "uk": "1 Gift: %{giftPrice} (regular price)"
+                    "en": "2 Gift: %{giftPrice} (regular price)",
+                    "es": "2 regalo: %{giftPrice} (precio regular)",
+                    "uk": "2 Gift: %{giftPrice} (regular price)"
                 }
             },
             "BLACK-FRIDAY-PROMO-LIST-2-2019": {
@@ -4297,7 +4297,7 @@
             "BLACK-FRIDAY-PROMO-LIST-2-2024": {
                 "type": "text",
                 "content": {
-                    "en": "2nd Gift: %{giftPrice} (%{percentOff}% off)",
+                    "en": "2nd Gift: %{var1} (%{percentOff}% off)",
                     "es": "2\u00ba regalo: %{giftPrice} (%{percentOff}% de descuento)",
                     "uk": "2nd Gift: %{giftPrice} (%{percentOff}% off)"
                 }
@@ -4313,7 +4313,7 @@
             "BLACK-FRIDAY-PROMO-LIST-3-2024": {
                 "type": "text",
                 "content": {
-                    "en": "3rd Gift: %{giftPrice} (%{percentOff}% off)",
+                    "en": "3rd Gift: %{var1} (%{percentOff}% off)",
                     "es": "3\u00ba regalo: %{giftPrice} (%{percentOff}% de descuento)",
                     "uk": "3rd Gift: %{giftPrice} (%{percentOff}% off)"
                 }
@@ -4337,17 +4337,17 @@
             "APPLY-CODE-HERE": {
                 "type": "text",
                 "content": {
-                    "en": "Have a Promo Code? Enter your code here.",
+                    "en": "Have a Promo Code? Click the 'Apply Code' button to enter you code.",
                     "es": "\u00bfTienes un c\u00f3digo promocional? Da clic en 'Aplica c\u00f3digo'",
-                    "uk": "Have a Promo Code? Enter your code here."
+                    "uk": "Have a Promo Code? Click the 'Apply Code' button to enter you code."
                 }
             },
             "APPLY-CODE-HERE-2024": {
                 "type": "text",
                 "content": {
-                    "en": "Have a Promo Code? Click the 'Apply Code' button to enter your code.",
+                    "en": "Have a Promo Code? Enter your code here.",
                     "es": "\u00bfTienes un c\u00f3digo promocional? Da clic en 'Aplica c\u00f3digo'",
-                    "uk": "Have a Promo Code? Click the 'Apply Code' button to enter your code."
+                    "uk": "Have a Promo Code? Enter your code here."
                 }
             },
             "APPLY-GIFT-CODE-HERE": {
@@ -4433,9 +4433,9 @@
             "ENTER-MIN-MAX-CHARACTERS": {
                 "type": "text",
                 "content": {
-                    "en": "Enter 6 to 15 characters",
-                    "es": "6 caracteres m\u00ednimo",
-                    "uk": "Enter 6 to 15 characters"
+                    "en": "Enter 8 to 15 characters",
+                    "es": "8 caracteres m\u00ednimo",
+                    "uk": "Enter 8 to 15 characters"
                 }
             },
             "STEP-ONE-TITLE": {
@@ -4777,9 +4777,9 @@
             "INVALID-PASSWORD-ERROR": {
                 "type": "text",
                 "content": {
-                    "en": "Password must be between 6-15 characters.",
-                    "es": "La constrase\u00f1a debe tener entre 6 y 15 caracteres.",
-                    "uk": "Password must be between 6-15 characters."
+                    "en": "Password must be between 8-15 characters.",
+                    "es": "La constrase\u00f1a debe tener entre 8 y 15 caracteres.",
+                    "uk": "Password must be between 8-15 characters."
                 }
             },
             "ATTRIBUTE-REQUIRED": {
@@ -4801,9 +4801,9 @@
             "REQUIRED-PASSWORD-ERROR": {
                 "type": "text",
                 "content": {
-                    "en": "Please enter a password between 6-15 characters.",
-                    "es": "Por favor, ingresa una contrase\u00f1a entre 6 y 15 caracteres.",
-                    "uk": "Please enter a password between 6-15 characters."
+                    "en": "Please enter a password between 8-15 characters.",
+                    "es": "Por favor, ingresa una contrase\u00f1a entre 8 y 15 caracteres.",
+                    "uk": "Please enter a password between 8-15 characters."
                 }
             },
             "REQUIRED-POLICY-ERROR": {
@@ -5081,9 +5081,9 @@
             "LEGAL-CONSENT-INFORMATION-UPGRADE-PRICE": {
                 "type": "text",
                 "content": {
-                    "en": "By clicking the \"Confirm Upgrade\" button, you agree that you will be charged <span>%{currSymbol}%{annualSubscriptionAmount}<\/span> beginning on the date set forth above to your payment method on a recurring basis until you cancel. If you are using a Promo Code that adjusts the price or first billing date, your first charge will be subject to the terms of that promo Code. Your membership will renew at the then current price. To cancel, go to your Account and click \"Cancel Membership\" on the Membership tab. There are no refunds or credits for partial or unused months.",
+                    "en": "By clicking the \"Confirm Upgrade\" button, you agree that you will be charged <span>%{currSymbol}%{annualSubscriptionAmount}<\/span> to your payment method on a recurring basis until you cancel. Your membership will renew at the then current price.  To cancel, go to your Account and click \"Cancel Membership\" on the Membership tab. There are no refunds or credits for partial or unused months.",
                     "es": "Cuando hace clic en el bot\u00f3n \"Confirmar actualizaci\u00f3n\", acepta que se le cobrar\u00e1n <span>%{currSymbol}%{annualSubscriptionAmount}<\/span> a su m\u00e9todo de pago de forma recurrente hasta que cancele. Su membres\u00eda se renovar\u00e1 a este precio actual. Para cancelar, vaya a su cuenta y haga clic en \"Cancelar membres\u00eda\" en la pesta\u00f1a Membres\u00eda. No hay reembolsos ni cr\u00e9ditos por meses parciales o no utilizados.",
-                    "uk": "By clicking the \"Confirm Upgrade\" button, you agree that you will be charged <span>%{currSymbol}%{annualSubscriptionAmount}<\/span> beginning on the date set forth above to your payment method on a recurring basis until you cancel. If you are using a Promo Code that adjusts the price or first billing date, your first charge will be subject to the terms of that promo Code. Your membership will renew at the then current price. To cancel, go to your Account and click \"Cancel Membership\" on the Membership tab. There are no refunds or credits for partial or unused months."
+                    "uk": "By clicking the \"Confirm Upgrade\" button, you agree that you will be charged <span>%{currSymbol}%{annualSubscriptionAmount}<\/span> to your payment method on a recurring basis until you cancel. Your membership will renew at the then current price.  To cancel, go to your Account and click \"Cancel Membership\" on the Membership tab. There are no refunds or credits for partial or unused months."
                 }
             },
             "UPGRADED-TO-ANNUAL-BILLED-DATE-PRICE": {
@@ -5572,6 +5572,46 @@
                     "en": "Discover extraordinary mysteries, dramas, and thrillers from around the world. When ho-hum TV isn't cutting it, stream something brilliant.",
                     "es": "Discover extraordinary mysteries, dramas, and thrillers from around the world. When ho-hum TV isn't cutting it, stream something brilliant.",
                     "uk": "Discover extraordinary mysteries, dramas, and thrillers from around the world. When ho-hum TV isn't cutting it, stream something brilliant."
+                }
+            },
+            "PROMOCODE-INVALID-COUNTRY": {
+                "type": "text",
+                "content": {
+                    "en": "Promo not valid in your country",
+                    "es": "C\u00f3digo promocional no v\u00e1lido en tu pa\u00eds",
+                    "uk": "Promo not valid in your country"
+                }
+            },
+            "PROMOCODE-INVALID-CUSTOMER-SEGMENT": {
+                "type": "text",
+                "content": {
+                    "en": "Promo is not valid for your subscription status",
+                    "es": "El c\u00f3digo promocional no es v\u00e1lido para el estado de su suscripci\u00f3n",
+                    "uk": "Promo is not valid for your subscription status"
+                }
+            },
+            "PROMOCODE-INVALID-PLAN-TERM": {
+                "type": "text",
+                "content": {
+                    "en": "Promo is not valid for selected plan",
+                    "es": "El c\u00f3digo promocional no es v\u00e1lido para el plan seleccionado",
+                    "uk": "Promo is not valid for selected plan"
+                }
+            },
+            "PROMOCODE-APPLIED-AT-CHECKOUT": {
+                "type": "text",
+                "content": {
+                    "en": "Promo code can be applied at checkout",
+                    "es": "El c\u00f3digo promocional se puede aplicar al finalizar la compra",
+                    "uk": "Promo code can be applied at checkout"
+                }
+            },
+            "SUCCESSFULLY-UPGRADED-ANNUAL-PLAN": {
+                "type": "text",
+                "content": {
+                    "en": "You've successfully upgraded to the annual plan",
+                    "es": "Has actualizado correctamente al plan anual",
+                    "uk": "You've successfully upgraded to the annual plan"
                 }
             }
         }
