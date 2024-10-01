@@ -42,7 +42,7 @@
     <label for="membershipPassword" class="control-label">
       {{t "PASSWORD-CS"}}
       <span class="req">*</span>
-      <span class="help-input">Please enter a minimum of 6 characters</span>
+      <span class="help-input">Please enter a minimum of 8 characters</span>
     </label>
     <input
       type="password"
@@ -50,7 +50,8 @@
       name="membershipPassword"
       class="form-control required"
       placeholder=""
-      minlength="6"
+      minlength="8"
+      maxlength="15"
       required
       data-message="ENTER-A-PASSWORD"
     />
@@ -67,7 +68,8 @@
       name="membershipPasswordConfirm"
       class="form-control required"
       placeholder=""
-      minlength="6"
+      minlength="8"
+      maxlength="15"
       required
       data-message="PASSWORDS-DONT-MATCH"
     />
