@@ -55,9 +55,12 @@ class EditBillingInformationBilling extends View {
     })
 
     this.listenTo(this.model, 'membership:editBillingSubmitted', () => {
+      const isPaymentSuccess = this.statusModal.getData('paymentSuccess')
       // debugger
-      Backbone.history.navigate('reviewPurchase', { trigger: true })
-      this.model.trigger('editBilling:undelegateEvents')
+      if (isPaymentSuccess) {
+        Backbone.history.navigate('reviewPurchase', { trigger: true })
+        this.model.trigger('editBilling:undelegateEvents')
+      }
     })
 
     this.listenTo(this.model, 'membership:editBillingSignIn', () => {
@@ -92,6 +95,9 @@ class EditBillingInformationBilling extends View {
 
     this.listenTo(this.editBillingInformationBillingModel, 'change:paymentSuccess', (model, value) => {
       console.log(model, value)
+      // Setting up popup state
+      this.statusModal.setData('paymentSuccess', value)
+
       this.editBillingInformationBillingModel.unset('paymentSuccess', { silent: true })
       // debugger
       if (value) {
@@ -103,6 +109,7 @@ class EditBillingInformationBilling extends View {
               .$('#updateBillingAlert')
               .remove()
             this.statusModal.render()
+            this.statusModal.setBody(this.i18n.t('BILLING-INFO-SUBMITTED'))
           })
         // Backbone.history.navigate('reviewPurchase', { trigger: true })
       } else {
@@ -182,10 +189,7 @@ class EditBillingInformationBilling extends View {
             // }
           }
           this.statusModal.render()
-
-          this
-            .$('#updateBillingStatus')
-            .html(errorMessage)
+          this.statusModal.setBody(errorMessage)
         }
         // // Clear Stripe Token field and reset Stripe since we
         // // have problem processing credit card by Stripe.

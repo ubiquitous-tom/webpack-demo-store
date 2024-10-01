@@ -160,6 +160,11 @@ class StripeForm extends View {
       // }
       this.flashMessage.onFlashMessageShow(message, type)
     })
+
+    this.listenTo(this.parentView.model, 'stripeForm:resetStripeForm', () => {
+      // debugger
+      this.resetStripeForm()
+    })
   }
 
   initializeStripeForm() {

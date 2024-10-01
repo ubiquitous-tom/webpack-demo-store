@@ -37,7 +37,7 @@ class AccountInfo extends View {
       customerJoinedDate: this.model.get('joinedDate'),
       noSubscription: this.model.get('Subscription').NoSubscription,
       isTigo: (this.model.get('Membership').Store === 'Tigo'),
-      showCancelMembership: !this.isGift(),
+      showCancelMembership: !this.isGift() && this.model.get('Customer').StripeEnabled,
     }
     const html = this.template(data)
     this.$el.html(html)
