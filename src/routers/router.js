@@ -12,6 +12,7 @@ import ApplyGiftCode from 'components/apply-gift-code'
 import EditBilling from 'components/edit-billing'
 import Review from 'components/review'
 import ThankYou from 'components/thank-you'
+import MParticle from 'shared/elements/mparticle'
 
 class Workspace extends Router {
   get routes() {
@@ -36,6 +37,7 @@ class Workspace extends Router {
     this.history = new History()
     this.context = new BackBoneContext()
     this.ga = this.context.getContext('ga')
+    this.mParticle = new MParticle({ model: this.model })
     // Backbone.history.trigger('route', router, name, args);
 
     this.listenTo(this, 'navChange', (model, value) => {
@@ -49,6 +51,7 @@ class Workspace extends Router {
     // this.setActiveSidebar()
     this.setDefaultHome()
     this.ga.logPageView(name)
+    this.mParticle.logPageView()
 
     if (callback) {
       callback.apply(this, args)
