@@ -24,8 +24,8 @@ class MParticleModel extends Model {
     console.log('MParticleModel initialize')
     console.log(this.get('model'))
     this.model = this.get('model')
-    this.customerID = this.model.get('Customer').CustomerID || ''
-    this.email = this.model.get('Customer').Email || ''
+    this.customerID = this.model.get('Customer')?.CustomerID || ''
+    this.email = this.model.get('Customer')?.Email || ''
     this.config = {}
 
     if (process.env.MP_KEY) {
@@ -43,13 +43,15 @@ class MParticleModel extends Model {
       this.config.logLevel = process.env.MP_LOG_LEVEL
     }
     if (this.customerID && this.email) {
-      this.config.identifyRequest = {
+      const userIdentities = {
         userIdentities: {
           email: this.email,
           customerid: this.customerID,
         },
         identityCallback: this.identityCallback,
       }
+      this.set({ userIdentities })
+      this.config.identifyRequest = userIdentities
     }
     console.log('MParticleModel config: ', this.config)
     mParticle.init(process.env.MP_KEY, this.config)
