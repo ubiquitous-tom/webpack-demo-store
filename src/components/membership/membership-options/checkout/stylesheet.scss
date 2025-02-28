@@ -1,5 +1,30 @@
 .checkout {
-    .btn {
-        font-size: 14px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  .checkout-content {
+    flex: 2;
+    p {
+      font-size: 1.2rem;
+      line-height: 2rem;
     }
+  }
+  .checkout-btn {
+    flex: 1;
+    .btn {
+      font-size: 14px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .checkout {
+    flex-flow: column nowrap;
+    .checkout-content {
+      flex: 1;
+    }
+    .checkout-btn {
+      flex: 1;
+    }
+  }
 }

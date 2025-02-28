@@ -1,6 +1,7 @@
 import Backbone, { View } from 'backbone'
 // import _ from 'underscore'
 
+import './stylesheet.scss'
 import template from './index.hbs'
 
 import GiveCheckoutModal from './modal'

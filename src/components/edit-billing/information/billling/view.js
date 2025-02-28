@@ -9,6 +9,8 @@ import EditBillingInformationBillingModel from './model'
 import EditBillingInformationBillingAddress from './address'
 import EditBillingInformationBillingEmail from './email'
 import EditBillingInformationBillingPaymentMethod from './payment-method'
+import EditBillingInformationBillingLegal from './legal'
+import EditBillingInformationBillingCheckout from './checkout'
 
 import EditBillingInformationBillingSignInModal from './partials/modals/sign-in'
 import EditBillingInformationBillingStatusModal from './partials/modals/status'
@@ -242,6 +244,16 @@ class EditBillingInformationBilling extends View {
     }
 
     this.editBillingPaymentMethod = new EditBillingInformationBillingPaymentMethod({
+      model: this.model,
+      i18n: this.i18n,
+    })
+
+    this.editBillingLegal = new EditBillingInformationBillingLegal({
+      model: this.model,
+      i18n: this.i18n,
+    })
+
+    this.editBillingCheckout = new EditBillingInformationBillingCheckout({
       model: this.model,
       i18n: this.i18n,
     })
