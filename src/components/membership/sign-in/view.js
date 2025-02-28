@@ -1,8 +1,6 @@
 import { View } from 'backbone'
 import _ from 'underscore'
 
-import MParticle from 'shared/elements/mparticle'
-
 import './stylesheet.scss'
 import template from './index.hbs'
 
@@ -46,9 +44,6 @@ class MembershipSignIn extends View {
       console.log(model, value)
       // debugger
       if (value) {
-        this.mParticle = new MParticle({ model })
-        debugger
-        this.mParticle.login()
         window.location.reload()
       } else {
         this.removeLoader()
