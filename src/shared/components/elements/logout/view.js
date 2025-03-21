@@ -1,16 +1,18 @@
 import { View } from 'backbone'
-import MParticle from 'shared/elements/mparticle'
+import BackBoneContext from 'core/contexts/backbone-context'
 import LogoutModel from './model'
 
 class Logout extends View {
   initialize(options) {
     console.log('Logout initialize')
-    this.mParticle = new MParticle({ model: options.model })
+    this.context = new BackBoneContext()
+    this.mp = this.context.getContext('mp')
+
     this.model = new LogoutModel()
     /* eslint no-unused-vars: 0 */
     this.listenTo(this.model, 'change:isLoggedOut', (model, value) => {
       // console.log(model, value, options)
-      this.mParticle.logout()
+      this.mp.logout(value)
       window.location.assign('/')
     })
   }

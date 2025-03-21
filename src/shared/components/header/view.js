@@ -3,6 +3,7 @@ import _ from 'underscore'
 
 import atvlogo from 'img/atvlogo.png'
 import './stylesheet.scss'
+import BackBoneContext from 'core/contexts/backbone-context'
 import template from './index.hbs'
 
 import HeaderModel from './model'
@@ -22,6 +23,8 @@ class Header extends View {
   initialize(options) {
     console.log('Header initialize')
     this.i18n = options.i18n
+    this.context = new BackBoneContext()
+    this.mp = this.context.getContext('mp')
 
     const attributes = {
       environment: this.model.get('environment'),
@@ -63,16 +66,31 @@ class Header extends View {
     const html = this.template(attributes)
     this.$el.html(html)
 
+    this.$el.find('li.navbar-right').on('click', (e) => this.logClickEvent(e))
+
     return this
   }
 
   renderHeaderLinks() {
     const navData = this.headerModel.get('navData')
-    let html = ''
+    // let html = ''
     _.each(navData, (element) => {
-      html += `<li><a href="${element.headerNavURL}">${this.i18n.t(element.i18nKey)}</a></li>`
+      const li = $('<li />')
+      $('<a />')
+        .attr('href', element.headerNavURL)
+        .text(this.i18n.t(element.i18nKey))
+        .on('click', (e) => this.logClickEvent(e))
+        .appendTo(li)
+      // html += `<li><a href="${element.headerNavURL}">${this.i18n.t(element.i18nKey)}</a></li>`
+      this.$('ul.nav').append(li)
     })
-    this.$('ul.nav').append(html)
+    // this.$('ul.nav').append(html)
+  }
+
+  logClickEvent(e) {
+    console.log('Header logClickEvent', e)
+    debugger
+    this.mp.logClickEvent(e)
   }
 }
 

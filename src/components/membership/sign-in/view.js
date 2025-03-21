@@ -1,7 +1,7 @@
 import { View } from 'backbone'
 import _ from 'underscore'
 
-import MParticle from 'shared/elements/mparticle'
+import BackBoneContext from 'core/contexts/backbone-context'
 
 import './stylesheet.scss'
 import template from './index.hbs'
@@ -33,6 +33,9 @@ class MembershipSignIn extends View {
     console.log('MembershipSignIn initialize')
     this.i18n = options.i18n
 
+    this.context = new BackBoneContext()
+    this.mp = this.context.getContext('mp')
+
     this.membershipSignInModel = new MembershipSignInModel()
     this.popup = new MembershipSignInModal({ model: this.model, i18n: this.i18n })
 
@@ -45,10 +48,8 @@ class MembershipSignIn extends View {
     this.listenTo(this.membershipSignInModel, 'change:signInSuccess', (model, value) => {
       console.log(model, value)
       // debugger
+      this.mp.login(value)
       if (value) {
-        this.mParticle = new MParticle({ model })
-        debugger
-        this.mParticle.login()
         window.location.reload()
       } else {
         this.removeLoader()
