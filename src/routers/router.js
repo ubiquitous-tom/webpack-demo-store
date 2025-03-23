@@ -43,6 +43,19 @@ class Workspace extends Router {
       console.log(model, value)
       debugger
     })
+
+    this.listenTo(this.model, 'global:signInSuccess', (model, value) => {
+      console.log(model, value)
+      const userData = {
+        email: model.get('email'),
+        customerID: model.get('customerID'),
+      }
+      debugger
+      this.mp.login(value, userData)
+      if (value) {
+        window.location.reload()
+      }
+    })
   }
 
   execute(callback, args, name) {

@@ -48,9 +48,8 @@ class MembershipSignIn extends View {
     this.listenTo(this.membershipSignInModel, 'change:signInSuccess', (model, value) => {
       console.log(model, value)
       // debugger
-      this.mp.login(value)
       if (value) {
-        window.location.reload()
+        this.model.trigger('global:signInSuccess', model, value)
       } else {
         this.removeLoader()
         this.$('#signInEmail').parent('.form-group').addClass('has-error')

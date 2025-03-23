@@ -34,7 +34,7 @@ $(() => {
     // context.setContext(localeModel)
     new LocaleContext({ model: localeModel })
     // console.log(localeModel, localeModel.attributes.tr)
-    const i18n = new I18n(localeModel.attributes.tr)
+    const i18n = new I18n(localeModel.get('tr'))
     const stripePlans = new StripePlans()
     stripePlans.on('sync', (stripePlansModel) => {
       const initializeApp = new InitializeApp({ stripePlansModel })

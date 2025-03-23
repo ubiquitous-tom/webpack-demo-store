@@ -108,6 +108,8 @@ class MembershipSignInModel extends ATVModel {
     // debugger
     model.set({
       signInSuccess: true,
+      email: model.get('Customer')?.Email,
+      customerID: model.get('Customer')?.CustomerID,
     })
     console.log(model)
   }
