@@ -1,8 +1,6 @@
 import { View } from 'backbone'
 import _ from 'underscore'
 
-import BackBoneContext from 'core/contexts/backbone-context'
-
 import './stylesheet.scss'
 import template from './index.hbs'
 
@@ -33,9 +31,6 @@ class GiveSignIn extends View {
     console.log('GiveSignIn initialize')
     this.i18n = options.i18n
     this.cart = this.model.get('cart')
-
-    this.context = new BackBoneContext()
-    this.mp = this.context.getContext('mp')
 
     this.giveSignInModel = new GiveSignInModel()
     this.popup = new GivesignInModal({ model: this.model, i18n: this.i18n })

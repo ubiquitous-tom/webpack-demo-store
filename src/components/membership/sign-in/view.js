@@ -1,8 +1,6 @@
 import { View } from 'backbone'
 import _ from 'underscore'
 
-import BackBoneContext from 'core/contexts/backbone-context'
-
 import './stylesheet.scss'
 import template from './index.hbs'
 
@@ -32,9 +30,6 @@ class MembershipSignIn extends View {
   initialize(options) {
     console.log('MembershipSignIn initialize')
     this.i18n = options.i18n
-
-    this.context = new BackBoneContext()
-    this.mp = this.context.getContext('mp')
 
     this.membershipSignInModel = new MembershipSignInModel()
     this.popup = new MembershipSignInModal({ model: this.model, i18n: this.i18n })
