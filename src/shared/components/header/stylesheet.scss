@@ -6,7 +6,7 @@
 }
 
 .navbar {
-  background: #053E3A;
+  background: #053e3a;
   border: none;
   box-shadow: 0 0 30px -5px #0a132a;
   height: 56px;
@@ -30,7 +30,8 @@
         display: none;
       }
 
-      .log-in {
+      .log-in,
+      .log-out {
         color: #fff;
         display: inline-block;
         // font-family: futura-pt, sans-serif;
@@ -55,7 +56,7 @@
         text-transform: uppercase;
         padding: 12px;
         margin-left: 8px;
-        background: #EEF0E9;
+        background: #eef0e9;
         color: #000;
       }
     }
@@ -79,7 +80,7 @@
   }
 
   .navbar-collapse {
-    background: #053E3A;
+    background: #053e3a;
     left: 0;
     max-height: fit-content;
     position: absolute;
@@ -157,7 +158,8 @@
 
     .navbar-right-ul {
       .navbar-right {
-        .log-in {
+        .log-in,
+        .log-out {
           font-size: 1.4rem;
           margin: 27px 0 27px 12px;
         }
@@ -199,7 +201,8 @@
         &.sign-up {
           display: inline-block;
         }
-        .log-in {
+        .log-in,
+        .log-out {
           font-size: 1.4rem;
           margin: 29px 0 24px 12px;
         }
@@ -234,7 +237,8 @@
   .navbar {
     .navbar-right-ul {
       .navbar-right {
-        .log-in {
+        .log-in,
+        .log-out {
           margin: 30px 0 24px 12px;
         }
       }
@@ -260,7 +264,8 @@
 @media (max-width: 768px) {
   .narbar {
     .navbar-right-ul {
-      .log-in {
+      .log-in,
+      .log-out {
         font-size: 1.35rem;
         margin-top: 27px;
         margin-left: 20px;

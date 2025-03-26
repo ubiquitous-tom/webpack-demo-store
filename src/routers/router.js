@@ -46,12 +46,7 @@ class Workspace extends Router {
 
     this.listenTo(this.model, 'global:signInSuccess', (model, value) => {
       console.log(model, value)
-      const userData = {
-        email: model.get('email'),
-        customerID: model.get('customerID'),
-      }
       debugger
-      this.mp.login(value, userData)
       if (value) {
         window.location.reload()
       }
@@ -64,6 +59,18 @@ class Workspace extends Router {
     this.setDefaultHome()
     this.ga.logPageView(name)
     this.mp.logPageView(name)
+
+    // Once the `/initializeApp` API is fully logged in then log into mParticle.
+    if (this.model.get('Session') && this.model.get('Session')?.LoggedIn) {
+      const userData = {
+        email: this.model.get('Customer')?.Email || '',
+        customerID: this.model.get('Customer')?.CustomerID || '',
+      }
+      if (!this.mp.isMParticleLoggedIn()) {
+        debugger
+        this.mp.login(this.model.get('Session').LoggedIn, userData)
+      }
+    }
 
     if (callback) {
       callback.apply(this, args)

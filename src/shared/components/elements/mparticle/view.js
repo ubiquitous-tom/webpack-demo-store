@@ -49,7 +49,7 @@ class MParticle extends View {
     }
   }
 
-  logClickEvent(e) {
+  logClickEvent(e, customEvent, additionalData) {
     if (this.isMParticleLoaded()) {
       let clickedEl = jQuery(e.target)
       console.log('clicked element', clickedEl)
@@ -92,6 +92,11 @@ class MParticle extends View {
       }
       const attributes = { ...this.requiredAttribures, ...data }
       mParticle.logEvent('click_event', mParticle.EventType.Other, attributes)
+
+      if (customEvent) {
+        const customEventAttributes = { ...this.requiredAttribures, ...additionalData }
+        mParticle.logEvent(customEvent, mParticle.EventType.Other, customEventAttributes)
+      }
     }
   }
 
@@ -100,6 +105,7 @@ class MParticle extends View {
       if (isLoggedIn) {
         console.log(this.model)
         debugger
+        mParticle.logEvent('account_sign_in', mParticle.EventType.Other, this.requiredAttribures)
         const identityRequest = {
           userIdentities: {
             email: data.email,
@@ -116,11 +122,23 @@ class MParticle extends View {
   logout(isLoggedOut) {
     if (this.isMParticleLoaded()) {
       if (isLoggedOut) {
+        const logoutAttributes = {
+          ...this.requiredAttribures,
+          category: 'store_page',
+          action: 'active',
+        }
+        mParticle.logEvent('account_sign_out', mParticle.EventType.Other, logoutAttributes)
         mParticle.Identity.logout({}, this.mParticleModel.identityCallback)
       } else {
         mParticle.logError('Logout failed')
       }
     }
+  }
+
+  isMParticleLoggedIn() {
+    const currentUser = mParticle.Identity.getCurrentUser()
+    debugger
+    return (currentUser && currentUser.isLoggedIn()) ? currentUser.isLoggedIn() : false
   }
 
   isMParticleLoaded() {
