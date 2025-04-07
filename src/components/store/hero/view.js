@@ -1,5 +1,7 @@
 import { View } from 'backbone'
 
+import BackBoneContext from 'core/contexts/backbone-context'
+
 import './stylesheet.scss'
 import template from './index.hbs'
 
@@ -14,6 +16,9 @@ class StoreHomeHero extends View {
 
   initialize() {
     console.log('StoreHomeHero initialize')
+    this.context = new BackBoneContext()
+    this.mp = this.context.getContext('mp')
+
     const isRecordedBook = (
       this.model.has('PaymentMethod')
       && this.model.get('PaymentMethod').Store === 'RECORDEDBOOKS'
@@ -44,7 +49,15 @@ class StoreHomeHero extends View {
     // console.log(this.$el, html)
     this.$el.append(html)
 
+    this.$el.find('.hero-item a').on('click', (e) => this.logClickEvent(e))
+
     return this
+  }
+
+  logClickEvent(e) {
+    console.log('StoreHomeHero logClickEvent', e)
+    debugger
+    this.mp.logClickEvent(e)
   }
 }
 
