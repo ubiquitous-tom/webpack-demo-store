@@ -56,7 +56,7 @@ class StoreHomeHero extends View {
 
   logClickEvent(e) {
     console.log('StoreHomeHero logClickEvent', e)
-    debugger
+    // debugger
     this.mp.logClickEvent(e)
   }
 }

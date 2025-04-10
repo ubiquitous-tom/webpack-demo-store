@@ -41,15 +41,26 @@ class Workspace extends Router {
 
     this.listenTo(this, 'navChange', (model, value) => {
       console.log(model, value)
-      debugger
+      // debugger
     })
 
     this.listenTo(this.model, 'global:signInSuccess', (model, value) => {
       console.log(model, value)
-      debugger
+      // debugger
       if (value) {
-        window.location.reload()
+        if (model.has('Session') && model.get('Session')?.LoggedIn) {
+          const userData = {
+            email: model.get('Customer')?.Email || '',
+            customerID: model.get('Customer')?.CustomerID || '',
+          }
+          this.mp.login(model.get('Session').LoggedIn, userData)
+        }
       }
+    })
+
+    this.listenTo(this.model, 'signedin:success', () => {
+      // debugger
+      window.location.reload()
     })
   }
 
@@ -60,6 +71,9 @@ class Workspace extends Router {
     this.ga.logPageView(name)
     this.mp.logPageView(name)
 
+    // Set the current page URL before we load a new page
+    // to be used as a `last_url` for mParticle user attributes
+    sessionStorage.setItem('ATVSessionLastURL', window.location.href)
     this.model.trigger('router:executeRoute', this.model)
 
     if (callback) {

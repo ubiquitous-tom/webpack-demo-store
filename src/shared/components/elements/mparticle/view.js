@@ -12,17 +12,7 @@ class MParticle extends View {
 
       this.listenTo(this.model, 'router:executeRoute', (model) => {
         console.log(model)
-        // Once the `/initializeApp` API is fully logged in then log into mParticle.
-        if (model.has('Session') && model.get('Session')?.LoggedIn) {
-          const userData = {
-            email: model.get('Customer')?.Email || '',
-            customerID: model.get('Customer')?.CustomerID || '',
-          }
-          if (!this.isMParticleLoggedIn()) {
-            // debugger
-            this.login(model.get('Session').LoggedIn, userData)
-          }
-        }
+        this.setLastURL()
       })
     }
   }
@@ -45,15 +35,6 @@ class MParticle extends View {
       service: 'acorn',
       network: 'acorn',
     }
-
-    if (this.model.has('Session') && this.model.get('Session')?.LoggedIn === true) {
-      /* eslint-disable no-undef */
-      const currentUser = mParticle.Identity.getCurrentUser()
-      console.log(currentUser)
-      if (currentUser) {
-        currentUser.setUserAttribute('last_url', document.referrer)
-      }
-    }
   }
 
   getAuthStatus() {
@@ -74,16 +55,8 @@ class MParticle extends View {
     const currentUser = mParticle.Identity.getCurrentUser()
     console.log(currentUser)
     if (currentUser) {
-      currentUser.setUserAttribute('last_url', this.getLastURL())
+      currentUser.setUserAttribute('last_url', this.mParticleModel.getLastURL())
     }
-  }
-
-  getLastURL() {
-    const referringUrlWithHash = sessionStorage.getItem('ATVSessionLastURL') || ''
-    console.log('MParticle getLastURL', referringUrlWithHash)
-    // Optional: Remove the stored URL after use
-    // sessionStorage.removeItem('ATVSessionLastURL')
-    return referringUrlWithHash
   }
 
   logPageView(pageName) {
@@ -168,7 +141,7 @@ class MParticle extends View {
     if (result.getUser()) {
       const user = result.getUser()
       mParticle.logEvent('account_sign_in', mParticle.EventType.Other, this.requiredAttributes)
-      this.mParticleModel.identityCallback(result)
+      this.model.trigger('signedin:success')
       console.log(user)
       return
     }
@@ -196,7 +169,9 @@ class MParticle extends View {
       }
       mParticle.logEvent('account_sign_out', mParticle.EventType.Other, logoutAttributes)
       const user = result.getUser()
+      user.removeAllUserAttributes()
       console.log(user)
+      this.model.trigger('logout:success')
       return
     }
 
