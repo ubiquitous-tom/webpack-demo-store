@@ -55,7 +55,7 @@ class Promo extends View {
     const promoInput = container.find('#promo-code')
     const button = container.find('button')
     const buttonWidth = button.outerWidth()
-    const xIcon = $('<i>').addClass('fa fa-times-circle').attr({ 'aria-hidden': true })
+    const xIcon = $('<i>').addClass('fa fa-times-thin fa-2x').attr({ 'aria-hidden': true })
     const promoClear = $('<a>').attr('id', 'promo-clear').append(xIcon)
     /* eslint comma-dangle: 0 */
     // remove old promo message
