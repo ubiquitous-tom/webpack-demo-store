@@ -7,6 +7,7 @@ class GiveSignInModel extends ATVModel {
   get defaults() {
     return {
       stuff: true,
+      urlHash: 'give',
     }
   }
 
@@ -19,7 +20,7 @@ class GiveSignInModel extends ATVModel {
 
     this.on('change:Session', (model, value, options) => {
       console.log(model, value, options)
-      debugger
+      // debugger
       docCookies.setItem('ATVSessionCookie', value.SessionID)
     })
   }

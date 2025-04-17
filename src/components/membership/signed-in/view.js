@@ -88,7 +88,7 @@ class MembershipSignedIn extends View {
     // Remove preset options like `promo code` and `plan`
     // since we already have an `ACTIVE` membership
     if (isMembershipActive) {
-      debugger
+      // debugger
       this.promoView.removePresetOptions()
     }
 
@@ -115,11 +115,11 @@ class MembershipSignedIn extends View {
       },
     }
     this.cart.set(annualMembership)
-    debugger
+    // debugger
 
     const isLoggedIn = this.model.has('Subscription')
     const isStripeEnabled = this.model.get('Customer')?.StripeEnabled
-    debugger
+    // debugger
     if (isLoggedIn) {
       if (isStripeEnabled) {
         Backbone.history.navigate('reviewPurchase', { trigger: true })

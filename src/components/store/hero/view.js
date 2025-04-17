@@ -41,7 +41,7 @@ class StoreHomeHero extends View {
       isGroupNameAllowedGifting,
       landingHeroClasses,
       signupEnv: this.model.get('signupEnv'),
-      monthlyPrice: this.model.get('monthlyStripePlan').SubscriptionAmount,
+      // monthlyPrice: this.model.get('monthlyStripePlan').SubscriptionAmount,
     }
 
     console.log(this.model.attributes, attributes)

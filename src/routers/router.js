@@ -1,6 +1,8 @@
 import { History, Router } from 'backbone'
 import _ from 'underscore'
 import BackBoneContext from 'core/contexts/backbone-context'
+import StripePlans from 'core/models/stripe-plans'
+import InitializeApp from 'core/models/initializedapp'
 
 import Logout from 'shared/elements/logout'
 
@@ -38,6 +40,7 @@ class Workspace extends Router {
     this.ga = this.context.getContext('ga')
     this.mp = this.context.getContext('mp')
     // Backbone.history.trigger('route', router, name, args);
+    this.stripePlans = new StripePlans()
 
     this.listenTo(this, 'navChange', (model, value) => {
       console.log(model, value)
@@ -47,20 +50,46 @@ class Workspace extends Router {
     this.listenTo(this.model, 'global:signInSuccess', (model, value) => {
       console.log(model, value)
       // debugger
+      // console.log('global:signInSuccess before', this.model)
       if (value) {
         if (model.has('Session') && model.get('Session')?.LoggedIn) {
-          const userData = {
-            email: model.get('Customer')?.Email || '',
-            customerID: model.get('Customer')?.CustomerID || '',
-          }
-          this.mp.login(model.get('Session').LoggedIn, userData)
+          const initializeApp = new InitializeApp({ stripePlansModel: this.stripePlans })
+          initializeApp.on('sync', (initializeAppModel) => {
+            this.model.set(initializeAppModel.attributes, { remove: true })
+            // console.log('global:signInSuccess after', this.model)
+            const userData = {
+              email: model.get('Customer')?.Email || '',
+              customerID: model.get('Customer')?.CustomerID || '',
+            }
+            this.mp.login(model.get('Session').LoggedIn, userData)
+          })
         }
       }
     })
 
     this.listenTo(this.model, 'signedin:success', () => {
       // debugger
-      window.location.reload()
+      // window.location.reload()
+      // Backbone.history.navigate(this.model.get('urlHash'), { trigger: true })
+      Backbone.history.loadUrl(this.model.get('urlHash'))
+    })
+
+    this.listenTo(this.model, 'global:logoutSuccess', (model, value) => {
+      console.log(model, value)
+      // debugger
+      // console.log('global:logoutSuccess before', this.model)
+      const initializeApp = new InitializeApp({ stripePlansModel: this.stripePlans })
+      initializeApp.on('sync', (initializeAppModel) => {
+        this.model.set(initializeAppModel.attributes, { remove: true })
+        // console.log('global:logoutSuccess after', this.model)
+        this.mp.logout(value)
+      })
+    })
+
+    this.listenTo(this.model, 'logout:success', () => {
+      // debugger
+      // window.location.assign('/')
+      Backbone.history.navigate('#', { trigger: true })
     })
   }
 

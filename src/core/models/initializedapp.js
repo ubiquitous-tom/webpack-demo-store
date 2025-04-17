@@ -113,6 +113,8 @@ class InitializeApp extends Model {
       gifting: this.gifting,
     })
 
+    this.setAllowedGifting()
+
     // If this is a brand new account never been created then go to signup
     // if (!this.has('Customer')) {
     //   const signinURL = `${this.get('signinEnv')}/signin.jsp?OperationalScenario=STORE`

@@ -28,7 +28,9 @@ class HeaderModel extends Model {
     // } else {
     //   // go to login
     // }
+  }
 
+  fetchData() {
     const params = {
       slug: this.get('navSlug'),
     }

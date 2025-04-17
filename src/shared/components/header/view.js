@@ -32,6 +32,7 @@ class Header extends View {
       isAU: this.model.get('isAU'),
     }
     this.headerModel = new HeaderModel(attributes)
+    this.headerModel.fetchData()
 
     this.listenTo(this.headerModel, 'change:headerNavSuccess', (model, value) => {
       console.log(model, value)
@@ -40,6 +41,13 @@ class Header extends View {
         // this.render()
         this.renderHeaderLinks()
       }
+    })
+
+    this.listenTo(this.model, 'change:Session', (model, value) => {
+      console.log(model, value)
+      // debugger
+      this.headerModel.fetchData()
+      this.render()
     })
 
     this.render()

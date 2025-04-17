@@ -7,6 +7,7 @@ class MembershipSignInModel extends ATVModel {
   get defaults() {
     return {
       stuff: true,
+      urlHash: 'membership',
     }
   }
 
