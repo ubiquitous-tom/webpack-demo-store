@@ -156,7 +156,7 @@ class MembershipSignedIn extends View {
     const isMonthly = (this.model.get('Membership').Term.toUpperCase() === 'MONTH')
     const isExpirationDate = _.isEmpty(this.model.get('Membership').ExpirationDate)
     if (isMonthly && !isExpirationDate) {
-      return `${this.i18n.t('MEMBERSHIP-SET-EXPIRE')} ${isExpirationDate}`
+      return `${this.i18n.t('MEMBERSHIP-SET-EXPIRE')} ${this.model.get('Membership').ExpirationDate}`
     }
 
     return ''
