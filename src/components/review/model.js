@@ -14,9 +14,9 @@ class ReviewModel extends Model {
   //     }],
   //     Membership: {
   //       Type: 'MONTHLY',
-  //       Amount: '7.99',
+  //       Amount: '8.99',
   //       CurrencyDesc: 'USD',
-  //       PlanID: 'ATV-MONTHLY-US-799',
+  //       PlanID: 'price_1R9rY52hcBjtiCUZrFuCAT03',
   //     },
   //   }
   // }

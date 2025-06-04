@@ -18,8 +18,8 @@ class PaymentEstimation extends Model {
     //   "Type": "SalesInvoice",
     //   "CurrencyCode": "USD",
     //   "CustomerCode": "TaxEstimatorPOC",
-    //   "TotalAmount": 7.99,
-    //   "TotalExempt": 7.99,
+    //   "TotalAmount": 8.99,
+    //   "TotalExempt": 8.99,
     //   "TotalDiscount": 0.0,
     //   "TotalTaxCalculated": 0.0,
     //   "ExchangeRate": 1.0

@@ -12,7 +12,7 @@ class Gifting extends Model {
         CurrHtmlSymbol: '&#36;',
         CurrencyDesc: 'USD',
         CurrencyName: 'Dollars',
-        amount: '79.99',
+        amount: '89.99',
       },
     }
   }
