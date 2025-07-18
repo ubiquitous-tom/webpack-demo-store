@@ -119,7 +119,7 @@ class Header extends View {
           e,
           customEventName,
           {
-            catagory: 'guest_nav',
+            category: 'guest_nav',
             component: 'header',
             label: currentClassLabel,
           },
