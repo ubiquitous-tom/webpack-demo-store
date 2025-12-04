@@ -1,7 +1,7 @@
 import { View } from 'backbone'
 
 import './stylesheet.scss'
-import GiftDeviceImg from 'img/gift-device.png'
+import GiftDeviceImg from './img/gift-device-2025.png'
 import template from './index.hbs'
 
 class StoreHomeGift extends View {
