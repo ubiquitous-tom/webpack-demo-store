@@ -159,6 +159,12 @@ class MParticle extends View {
     }
   }
 
+  initiateCheckout() {
+    if (this.isMParticleLoaded()) {
+      mParticle.logEvent('InitiateCheckout', mParticle.EventType.Other, this.requiredAttributes)
+    }
+  }
+
   identityCallbackLogout(result) {
     if (result.getUser()) {
       // IDSync request succeeded, mutate attributes or query for the MPID as needed
