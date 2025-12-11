@@ -1,9 +1,6 @@
 import { View } from 'backbone'
 
 import './stylesheet.scss'
-
-import BackBoneContext from 'core/contexts/backbone-context'
-
 import template from './index.hbs'
 import EditBillingDetails from './details'
 import EditBillingInformation from './information'
@@ -20,8 +17,6 @@ class EditBilling extends View {
   initialize(options) {
     console.log('EditBilling initialize')
     this.i18n = options.i18n
-    this.context = new BackBoneContext()
-    this.mp = this.context.getContext('mp')
 
     this.listenTo(this.model, 'editBilling:undelegateEvents', () => {
       console.log('EditBilling garbageCollect')
@@ -51,8 +46,6 @@ class EditBilling extends View {
     })
 
     $('body')[0].scrollIntoView({ behavior: 'smooth' })
-
-    this.mp.initiateCheckout()
 
     return this
   }

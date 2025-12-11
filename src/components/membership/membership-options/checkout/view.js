@@ -1,6 +1,9 @@
 import Backbone, { View } from 'backbone'
 
 import './stylesheet.scss'
+
+import BackBoneContext from 'core/contexts/backbone-context'
+
 import template from './index.hbs'
 
 class MembershipCheckout extends View {
@@ -20,6 +23,8 @@ class MembershipCheckout extends View {
 
   initialize() {
     console.log('MembershipCheckout initialize')
+    this.context = new BackBoneContext()
+    this.mp = this.context.getContext('mp')
 
     this.listenTo(this.model, 'membership:undelegateEvents', () => {
       console.log('MembershipCheckout garbageCollect')
@@ -43,6 +48,8 @@ class MembershipCheckout extends View {
     this.$el.append(html)
 
     this.setElement('.checkout')
+
+    this.mp.initiateCheckout()
 
     return this
   }
