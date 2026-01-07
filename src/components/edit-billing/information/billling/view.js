@@ -2,6 +2,9 @@ import Backbone, { View } from 'backbone'
 import _ from 'underscore'
 
 import './stylesheet.scss'
+
+import BackBoneContext from 'core/contexts/backbone-context'
+
 import template from './index.hbs'
 
 import EditBillingInformationBillingModel from './model'
@@ -35,6 +38,9 @@ class EditBillingInformationBilling extends View {
     this.i18n = options.i18n
     this.cart = this.model.get('cart')
 
+    this.context = new BackBoneContext()
+    this.mp = this.context.getContext('mp')
+
     this.editBillingInformationBillingModel = new EditBillingInformationBillingModel()
 
     this.signInModal = new EditBillingInformationBillingSignInModal({
@@ -59,6 +65,8 @@ class EditBillingInformationBilling extends View {
     this.listenTo(this.model, 'membership:editBillingSubmitted', () => {
       const isPaymentSuccess = this.statusModal.getData('paymentSuccess')
       // debugger
+      this.mp.accountSignUp()
+
       if (isPaymentSuccess) {
         Backbone.history.navigate('reviewPurchase', { trigger: true })
         this.model.trigger('editBilling:undelegateEvents')

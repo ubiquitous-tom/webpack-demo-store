@@ -159,12 +159,6 @@ class MParticle extends View {
     }
   }
 
-  initiateCheckout() {
-    if (this.isMParticleLoaded()) {
-      mParticle.logEvent('InitiateCheckout', mParticle.EventType.Other, this.requiredAttributes)
-    }
-  }
-
   identityCallbackLogout(result) {
     if (result.getUser()) {
       // IDSync request succeeded, mutate attributes or query for the MPID as needed
@@ -182,6 +176,18 @@ class MParticle extends View {
     }
 
     this.mParticleModel.callbackErrorCode(result)
+  }
+
+  initiateCheckout() {
+    if (this.isMParticleLoaded()) {
+      mParticle.logEvent('InitiateCheckout', mParticle.EventType.Other, this.requiredAttributes)
+    }
+  }
+
+  accountSignUp() {
+    if (this.isMParticleLoaded()) {
+      mParticle.logEvent('account_sign_up', mParticle.EventType.Other, this.requiredAttributes)
+    }
   }
 
   isMParticleLoggedIn() {
