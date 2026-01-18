@@ -4,6 +4,7 @@ import _ from 'underscore'
 import './stylesheet.scss'
 
 import BackBoneContext from 'core/contexts/backbone-context'
+import ProfileModel from 'core/models/profile'
 
 import template from './index.hbs'
 
@@ -41,6 +42,8 @@ class EditBillingInformationBilling extends View {
     this.context = new BackBoneContext()
     this.mp = this.context.getContext('mp')
 
+    this.profile = new ProfileModel()
+
     this.editBillingInformationBillingModel = new EditBillingInformationBillingModel()
 
     this.signInModal = new EditBillingInformationBillingSignInModal({
@@ -62,10 +65,21 @@ class EditBillingInformationBilling extends View {
       // debugger
     })
 
+    this.listenTo(this.profile, 'change:profileSuccess', (model, value) => {
+      console.log(model, value)
+      // debugger
+      if (!value) {
+        // debugger
+        if (model.get('message').toLocaleLowerCase().includes('no customer found')) {
+          this.mp.accountSignUp()
+        }
+      }
+    })
+
     this.listenTo(this.model, 'membership:editBillingSubmitted', () => {
       const isPaymentSuccess = this.statusModal.getData('paymentSuccess')
       // debugger
-      this.mp.accountSignUp()
+      this.loadProfile()
 
       if (isPaymentSuccess) {
         Backbone.history.navigate('reviewPurchase', { trigger: true })
@@ -312,6 +326,13 @@ class EditBillingInformationBilling extends View {
     return this.cart.getItemQuantity('monthly')
       ? this.cart.getItemAmount('monthly')
       : this.cart.getItemAmount('annual')
+  }
+
+  loadProfile() {
+    const email = this.model.get('Customer')?.Email || ''
+    if (!_.isEmpty(email)) {
+      this.profile.loadProfile(email)
+    }
   }
 
   displayLoader() {
