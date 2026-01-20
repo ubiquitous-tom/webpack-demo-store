@@ -49,7 +49,7 @@ class MembershipCheckout extends View {
 
     this.setElement('.checkout')
 
-    this.mp.initiateCheckout()
+    this.mp.customEvent('InitiateCheckout')
 
     return this
   }

@@ -68,19 +68,12 @@ class EditBillingInformationBilling extends View {
     this.listenTo(this.profile, 'change:profileSuccess', (model, value) => {
       console.log(model, value)
       // debugger
-      if (!value) {
-        // debugger
-        if (model.get('message').toLocaleLowerCase().includes('no customer found')) {
-          this.mp.accountSignUp()
-        }
-      }
+      this.model.set({ isExistingCustomer: value })
     })
 
     this.listenTo(this.model, 'membership:editBillingSubmitted', () => {
       const isPaymentSuccess = this.statusModal.getData('paymentSuccess')
       // debugger
-      this.loadProfile()
-
       if (isPaymentSuccess) {
         Backbone.history.navigate('reviewPurchase', { trigger: true })
         this.model.trigger('editBilling:undelegateEvents')
@@ -280,7 +273,16 @@ class EditBillingInformationBilling extends View {
       i18n: this.i18n,
     })
 
+    this.checkProfile()
+
     return this
+  }
+
+  checkProfile() {
+    const email = this.model.get('Customer')?.Email || ''
+    if (!_.isEmpty(email)) {
+      this.profile.loadProfile(email)
+    }
   }
 
   submit(e) {
@@ -326,13 +328,6 @@ class EditBillingInformationBilling extends View {
     return this.cart.getItemQuantity('monthly')
       ? this.cart.getItemAmount('monthly')
       : this.cart.getItemAmount('annual')
-  }
-
-  loadProfile() {
-    const email = this.model.get('Customer')?.Email || ''
-    if (!_.isEmpty(email)) {
-      this.profile.loadProfile(email)
-    }
   }
 
   displayLoader() {

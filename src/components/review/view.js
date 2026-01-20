@@ -2,6 +2,8 @@ import Backbone, { View } from 'backbone'
 import _ from 'underscore'
 
 import PaymentEstimation from 'core/models/payment-estimation'
+import BackBoneContext from 'core/contexts/backbone-context'
+import ProfileModel from 'core/models/profile'
 
 import './stylesheet.scss'
 
@@ -40,6 +42,11 @@ class Review extends View {
     this.paymentEstimation = new PaymentEstimation()
     this.popup = new ReviewModal({ model: this.model, i18n: this.i18n })
     this.reviewModel = new ReviewModel()
+
+    this.context = new BackBoneContext()
+    this.mp = this.context.getContext('mp')
+
+    this.profile = new ProfileModel()
 
     // // if the cart is empty then send the customer back to their respective first page
     if (this.cart.getTotalQuantity() === 0) {
@@ -84,6 +91,36 @@ class Review extends View {
       console.log('Review garbageCollect')
       this.remove()
       // debugger
+    })
+
+    this.listenTo(this.profile, 'change:profileSuccess', (model, value) => {
+      console.log(model, value)
+      // debugger
+      if (value) {
+        // debugger
+        // If account was created during the submission of edit billing process
+        // then fire `account_sign_up` event
+        const isExistingCustomer = this.model.get('isExistingCustomer')
+        if (model.has('Customer') && !isExistingCustomer) {
+          // debugger
+          if (this.model.get('storeType') === 'Membership') {
+            this.mp.customEvent('account_sign_up')
+            // debugger
+          }
+        }
+        // debugger
+        // if the subscription is active before purchase, set `isSubscribedPreProcess` to true
+        let isSubscribedPreProcess = false
+        if (
+          model.has('Subscription')
+          && model.get('Subscription')?.Status.includes('ACTIVE')
+        ) {
+          isSubscribedPreProcess = true
+          // debugger
+        }
+        // debugger
+        this.model.set({ isSubscribedPreProcess })
+      }
     })
 
     this.listenTo(this.model, 'review:clearPurchase', () => {
@@ -185,7 +222,18 @@ class Review extends View {
 
     $('body')[0].scrollIntoView({ behavior: 'smooth' })
 
+    // load profile to check pre-purchase subscription status
+    this.checkProfile()
+
     return this
+  }
+
+  checkProfile() {
+    const email = this.model.get('Customer')?.Email || ''
+    if (!_.isEmpty(email)) {
+      this.model.set({ purchaseEmail: email })
+      this.profile.loadProfile(email)
+    }
   }
 
   editBilling(e) {

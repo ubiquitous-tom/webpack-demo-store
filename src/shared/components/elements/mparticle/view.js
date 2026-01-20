@@ -178,15 +178,10 @@ class MParticle extends View {
     this.mParticleModel.callbackErrorCode(result)
   }
 
-  initiateCheckout() {
+  customEvent(eventName, additionalData) {
     if (this.isMParticleLoaded()) {
-      mParticle.logEvent('InitiateCheckout', mParticle.EventType.Other, this.requiredAttributes)
-    }
-  }
-
-  accountSignUp() {
-    if (this.isMParticleLoaded()) {
-      mParticle.logEvent('account_sign_up', mParticle.EventType.Other, this.requiredAttributes)
+      const attributes = { ...this.requiredAttributes, ...additionalData }
+      mParticle.logEvent(eventName, mParticle.EventType.Other, attributes)
     }
   }
 

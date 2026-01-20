@@ -2,6 +2,7 @@ import Backbone, { View } from 'backbone'
 import _ from 'underscore'
 
 import BackBoneContext from 'core/contexts/backbone-context'
+import ProfileModel from 'core/models/profile'
 import docCookies from 'doc-cookies'
 
 import './stylesheet.scss'
@@ -23,11 +24,48 @@ class ThankYou extends View {
     this.gifting = this.model.get('gifting')
     this.context = new BackBoneContext()
     this.ga = this.context.getContext('ga')
+    this.mp = this.context.getContext('mp')
+
+    this.profile = new ProfileModel()
 
     this.listenTo(this.model, 'thankYou:undelegateEvents', () => {
       console.log('ThankYou garbageCollect')
       this.remove()
       // debugger
+    })
+
+    this.listenTo(this.profile, 'change:profileSuccess', (model, value) => {
+      console.log(model, value)
+      // debugger
+      console.log(model.has('Subscription'), model.get('Subscription')?.Status)
+      let isSubscribedPostProcess = false
+      if (value) {
+        // debugger
+        if (
+          model.has('Subscription')
+          && model.get('Subscription')?.Status.includes('ACTIVE')
+        ) {
+          isSubscribedPostProcess = true
+        }
+      }
+
+      const isSubscribedPreProcess = this.model.get('isSubscribedPreProcess')
+      // debugger
+      if (
+        isSubscribedPostProcess === true
+        && isSubscribedPreProcess !== isSubscribedPostProcess
+      ) {
+        const annualQuantity = this.cart.getItemQuantity('annual')
+        const membershipType = (annualQuantity > 0) ? 'annualStripePlan' : 'monthlyStripePlan'
+        // debugger
+        const additionalAttr = {
+          category: this.model.get(membershipType).TermType === 'MONTH' ? 'annual' : 'monthly',
+          trial_duration: this.model.get(membershipType).TrialDays,
+          sku: this.model.get(membershipType).PlanID,
+        }
+        // debugger
+        this.mp.customEvent('Subscribe', additionalAttr)
+      }
     })
 
     if (!this.model.has('orderId')) {
@@ -113,7 +151,17 @@ class ThankYou extends View {
 
     $('body')[0].scrollIntoView({ behavior: 'smooth' })
 
+    // load profile to check post-purchase subscription status
+    this.checkProfile()
+
     return this
+  }
+
+  checkProfile() {
+    const email = this.model.get('purchaseEmail') || ''
+    if (!_.isEmpty(email)) {
+      this.profile.loadProfile(email)
+    }
   }
 
   googleAnalytics() {

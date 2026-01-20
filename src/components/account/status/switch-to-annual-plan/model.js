@@ -89,7 +89,7 @@ class SwitchToAnnualPlanModel extends ATVModel {
         type: 'success',
         // TO DO - Add this message to the translation file
         // (This is being tracked by Fernando Souza)
-        message: `You've successfully upgraded to the annual plan`,
+        message: 'SUCCESSFULLY-UPGRADED-ANNUAL-PLAN',
         interpolationOptions: {},
       },
     })
