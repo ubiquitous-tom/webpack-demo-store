@@ -58,9 +58,10 @@ class ThankYou extends View {
         const annualQuantity = this.cart.getItemQuantity('annual')
         const membershipType = (annualQuantity > 0) ? 'annualStripePlan' : 'monthlyStripePlan'
         // debugger
+        // Store service currently does not have trial
         const additionalAttr = {
           category: this.model.get(membershipType).TermType === 'MONTH' ? 'annual' : 'monthly',
-          trial_duration: this.model.get(membershipType).TrialDays,
+          trial_duration: 0, // this.model.get(membershipType).TrialDays,
           sku: this.model.get(membershipType).PlanID,
         }
         // debugger
